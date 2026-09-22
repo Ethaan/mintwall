@@ -11,7 +11,7 @@ When finishing one, tick it and add a short note (what changed / how verified).
 - [x] Load 7.4 real map (loader fix for OTBM v1 stack counts)
 - [x] Fix monster names in spawns (Bone Beast, Demongoblin)
 - [x] Port 306 NPCs with Jiddo NpcSystem + compat layer; verified Cipfried (dialogue) and Al Dee (shop)
-- [x] God account (999999, group God, access 3)
+- [x] God account (9 / 9, group God, access 3)
 - [x] context.md / task.md
 - [x] Automated gameplay test suite (tests/): headless 7.4 client, isolated test server, fresh characters
 - [x] Oracle: fixed undefined CONST_ME_TELEPORT (compat.lua loaded too early) and wrong town ids
@@ -165,6 +165,13 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 - [ ] "Check www.tibia.com" references (login servers offline message, hints) -> our website
 - [ ] If yes: extend tools/patch-client.ps1 with a text table, plus a test that the patched exe still has the original size
 
+## Spells and runes (found while making the Centurion test character)
+
+- [ ] Conjuring makes the wrong items: "adori vita vis" -> 2263, "adura vita" -> 2274 ("spell rune"),
+      but the usable runes are 2268 (sudden death) and 2273 (ultimate healing) - spells.xml conjureId
+- [x] Drinking any fluid failed ("You can not use this object.", Lua error): fluids.lua calls
+      doPlayerSay, a TFS function Avesta lacks -> shim in data/compat.lua. tests/test_accounts.py
+
 ## Walking smoothness
 
 - [x] Measure it: `tools/walk-trace.py` (mise run walk-trace) - logging proxy with the real client.
@@ -181,6 +188,14 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 - [ ] A step pressed while another is queued replaces it (Player::setNextWalkTask) - dropped steps when
       tapping back and forth (seen in the stairs trace); queue one step instead?
 - [ ] Re-trace with the real client on the new server (walk-trace summary: steps more than 50 ms late)
+
+## Stability
+
+- [ ] The test server crashed once, silently (no log line), during a full suite run on 2026-09-22 -
+      between test_accounts.py and the Rookgaard NPC shop tests (first refused: Lee'Delle-2 sell).
+      Not reproduced in the next full run (118 passed) nor in partial runs. Next time: get a crash
+      dump (procdump -e -ma avesta74.exe, or WER LocalDumps) and look for use-after-free - suspects:
+      items in the decay list after their owner logged out (time ring), NPC focus after logout
 
 ## Accounts / security / ops
 

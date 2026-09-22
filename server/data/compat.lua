@@ -52,6 +52,11 @@ doCreatureSetLookDirection = doSetCreatureDirection
 getItemNameById = getItemName
 getPlayerBalance = getPlayerAccountBalance
 
+-- TFS doPlayerSay(cid, text, type): fluids.lua uses it for "Aaaah..." - without it every drink failed
+function doPlayerSay(cid, text, type)
+	return doCreatureSay(cid, text, type or 1)
+end
+
 function getItemInfo(itemid)
 	local d = getItemDescriptions(itemid) or {}
 	return {

@@ -244,6 +244,12 @@ class GameClient:
     def use_item(self, pos: tuple, client_id: int, stackpos: int, index: int = 0):
         self._send(Writer().u8(0x82).position(pos).u16(client_id).u8(stackpos).u8(index))
 
+    def use_item_with(self, pos: tuple, client_id: int, stackpos: int,
+                      to_pos: tuple, to_client_id: int, to_stackpos: int):
+        """'Use with' (0x83): a rune on a target, a fluid on yourself (to_client_id 0x63 = a creature)."""
+        self._send(Writer().u8(0x83).position(pos).u16(client_id).u8(stackpos)
+                   .position(to_pos).u16(to_client_id).u8(to_stackpos))
+
     def move_item(self, from_pos: tuple, client_id: int, stackpos: int, to_pos: tuple, count: int = 1):
         self._send(Writer().u8(0x78).position(from_pos).u16(client_id).u8(stackpos)
                    .position(to_pos).u8(count))

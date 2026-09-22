@@ -70,7 +70,11 @@ SQLite shell: `server\build\vcpkg_installed\x64-windows-static\tools\sqlite3.exe
   (picked in the client's own outfit dialog; set in data/creaturescripts/scripts/login.lua)
 - 222222 / test - "Rook Tester" (level 1, Rookgaard temple) and "Oracle Tester" (level 8, next to
   The Oracle) for manually playing the new-player journey
-- 999999 / (see seed.sql) - "GM Mintwall", group God (access 3), Thais (town 2)
+- 3 / 3 - "Centurion", premium level 171 elite knight, Thais: royal helmet, blue robe, golden legs,
+  boots of haste, magic sword, demon shield, amulet of loss, time ring (~24.8 days of wear), backpack
+  with a self-refilling mana fluid (action id 64000), SD/MW/UH runes (100 charges), rope, shovel,
+  pick, ring of the sky, 100 crystal coins. Magic level 9, sword/shield 90. For exploring the mainland
+- 9 / 9 - "GM Mintwall", group God (access 3), Thais (town 2)
 - Items: `/i <id> [count]`, `/n "<name>" [count]` (max 100). Broadcast `/B text`.
 
 ## Engine changes vs upstream Avesta (keep this list complete)

@@ -95,6 +95,7 @@
     <!-- Fluids -->
 	<action itemid="1775" script="fluids.lua" />
 	<action itemid="2005" script="fluids.lua" />
+	<action actionid="64000" script="infinite_fluid.lua" />
 	<action itemid="2006" script="fluids.lua" />
 	<action itemid="2007" script="fluids.lua" />
 	<action itemid="2008" script="fluids.lua" />
