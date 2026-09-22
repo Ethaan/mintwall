@@ -101,6 +101,20 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [ ] Runes: charges, magic level required, soul (7.4 had none)
 - [ ] Remove leftover warnings: "Unknown command /invisible, /serverdiag", items.otb minor-version warning
 
+## Branding and client texts
+
+Server-side (config.lua) - editable, current values are Avesta defaults:
+- [ ] MOTD shown after entering the account (`MOTD`, bump `MOTD_Num` so clients show it again)
+- [ ] World name in the character list (`WorldName = "OpenTibia"`)
+- [ ] In-game login message (`LoginMsg`, mentions otserv.org) and `ServerName` / `OwnerName`
+- [ ] First-login "Welcome to <ServerName>. Please choose an outfit." (protocolgame.cpp sendAddCreature)
+
+Client-side (Tibia.exe) - only by patching strings in the copy we hand out, never longer than the original:
+- [ ] Decide if we patch client texts at all (it is the only client change besides the IP patch)
+- [ ] Info button text ("Copyright (C) 2002-2004 CipSoft GmbH" - keep CipSoft's copyright)
+- [ ] "Check www.tibia.com" references (login servers offline message, hints) -> our website
+- [ ] If yes: extend tools/patch-client.ps1 with a text table, plus a test that the patched exe still has the original size
+
 ## Accounts / security / ops
 
 - [ ] Change the God account password before anyone else can connect
