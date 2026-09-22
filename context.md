@@ -55,6 +55,8 @@ SQLite shell: `server\build\vcpkg_installed\x64-windows-static\tools\sqlite3.exe
 ## Accounts (local, from sql/seed.sql)
 
 - 111111 / tibia - "Mintwall", player, Rookgaard (town 1)
+- Noob outfit (new characters): looktype 128 male / 136 female, head 78, body 69, legs 58, feet 114
+  (picked in the client's own outfit dialog; set in data/creaturescripts/scripts/login.lua)
 - 222222 / test - "Rook Tester" (level 1, Rookgaard temple) and "Oracle Tester" (level 8, next to
   The Oracle) for manually playing the new-player journey
 - 999999 / (see seed.sql) - "GM Mintwall", group God (access 3), Thais (town 2)

@@ -20,7 +20,7 @@ When finishing one, tick it and add a short note (what changed / how verified).
 ## New player journey (tests/test_rookgaard.py)
 
 - [x] 7.4 beginner set on first login (club, torch, bag with a red apple, jacket/coat) and the
-      classic outfit (yellow hair, blue shirt, brown legs, dark shoes); login creature events
+      "noob outfit" (head 78, body 69, legs 58, feet 114 - picked in the real client); login creature events
       were never called by the engine - fixed
 - [ ] Oracle gives a vocation bag (TFS-era, not 7.4) - keep or remove?
 - [ ] Oracle's "SO BE IT" is never seen (player is teleported first) - delay the teleport slightly?

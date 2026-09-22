@@ -43,11 +43,11 @@ def test_new_player_gets_the_beginner_set(new_player):
     assert inside == ["red apple", "torch"], inside
 
 
-def test_new_player_has_the_classic_outfit(new_player):
+def test_new_player_has_the_noob_outfit(new_player):
     p = new_player(sex=1)
     me = p.wait_for(lambda: p.creatures.get(p.player_id), timeout=5)
-    # looktype, then yellow hair, blue shirt, brown legs, dark shoes
-    assert me.outfit == (128, 79, 69, 116, 114), me.outfit
+    # looktype, then golden hair, blue shirt, brown legs, dark shoes
+    assert me.outfit == (128, 78, 69, 58, 114), me.outfit
 
 
 # ----------------------------------------------------------------------------- first kills

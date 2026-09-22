@@ -6,8 +6,9 @@ local STORAGE_BEGINNER_SET = 30001
 local CLUB, TORCH, BAG, RED_APPLE = 2382, 2050, 1987, 2674
 local JACKET, COAT = 2650, 2651
 
--- Colours from the client's palette: yellow hair, blue shirt, brown legs, dark shoes
-local LOOK = {head = 79, body = 69, legs = 116, feet = 114}
+-- The "noob outfit": golden hair, blue shirt, brown legs, dark shoes
+-- (picked in the real client's outfit dialog: #FFAA00 / #3F3FBF / #BF6A3F / #242424)
+local LOOK = {head = 78, body = 69, legs = 58, feet = 114}
 local LOOKTYPE_MALE, LOOKTYPE_FEMALE = 128, 136
 
 function onLogin(cid)
