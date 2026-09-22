@@ -19,6 +19,7 @@ FLAG_ALWAYSONTOP = 8192
 
 ATTR_SERVERID = 0x10
 ATTR_CLIENTID = 0x11
+ATTR_SPEED = 0x14
 ATTR_TOPORDER = 0x2B
 
 
@@ -30,6 +31,7 @@ class ItemType:
     flags: int
     top_order: int = 0
     name: str = ""
+    speed: int = 0          # ground speed: step duration = 1000 * speed / creature speed
 
     @property
     def has_count(self) -> bool:
@@ -88,7 +90,7 @@ class Items:
             flags = struct.unpack_from("<I", node, 1)[0]
             p = 5
             sid = cid = None
-            top_order = 0
+            top_order = speed = 0
             while p + 3 <= len(node):
                 attr = node[p]
                 length = struct.unpack_from("<H", node, p + 1)[0]
@@ -99,10 +101,12 @@ class Items:
                     cid = struct.unpack_from("<H", node, p)[0]
                 elif attr == ATTR_TOPORDER:
                     top_order = node[p]
+                elif attr == ATTR_SPEED:
+                    speed = struct.unpack_from("<H", node, p)[0]
                 p += length
             if sid is None or cid is None:
                 continue
-            it = ItemType(sid, cid, group, flags, top_order)
+            it = ItemType(sid, cid, group, flags, top_order, speed=speed)
             self.by_server[sid] = it
             self.by_client.setdefault(cid, it)
 

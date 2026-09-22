@@ -12,6 +12,9 @@ Tibia 7.4 server (Avesta74) + the original CipSoft 7.4 client.
     Jiddo's NpcSystem (`data/npc/lib/`) through a compatibility layer (`data/compat.lua`, `data/npc/lib/compat.lua`)
 - `client/Tibia740/` - original 7.4 client (`Tibia740.zip` from https://downloads.ots.me/?dir=data/tibia-clients/windows/zip). Not committed.
 - `tools/patch-client.ps1` - writes `client/Tibia740/Tibia-mintwall.exe`, a copy of the client pointing at a given IP
+  that also loads `mintwall.dll`
+- `client-mod/` - `mintwall.dll`, our client improvements: smooth keyboard walking (no Windows key-repeat
+  delay after pressing or changing a direction). Players get `Tibia-mintwall.exe` + `mintwall.dll`.
 
 ## Requirements
 - Visual Studio 2022 Build Tools (C++), CMake, vcpkg at `C:\vcpkg`
@@ -20,6 +23,7 @@ Tibia 7.4 server (Avesta74) + the original CipSoft 7.4 client.
 ```
 server\build.bat          :: first run builds all dependencies via vcpkg (slow)
 server\init-db.bat        :: creates server\db.db3 (account 111111 / password tibia)
+client-mod\build.bat      :: builds mintwall.dll (32-bit)
 powershell -ExecutionPolicy Bypass -File tools\patch-client.ps1   :: -Ip <addr> for a non-local server
 server\start-server.bat
 ```

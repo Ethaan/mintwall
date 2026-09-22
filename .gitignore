@@ -23,3 +23,6 @@ tests/.run/
 __pycache__/
 .pytest_cache/
 *.otbm.bak
+tools/.run/
+tools/.venv/
+client-mod/build/

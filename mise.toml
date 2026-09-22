@@ -29,6 +29,17 @@ confirm = "Delete server/db.db3 and every character in it?"
 dir = "{{config_root}}/server"
 run = "(if exist db.db3 del db.db3) && init-db.bat"
 
+[tasks.build-client]
+description = "Build mintwall.dll and write client/Tibia740/Tibia-mintwall.exe (close the client first)"
+run = [
+  "client-mod\\build.bat",
+  "powershell -ExecutionPolicy Bypass -File tools\\patch-client.ps1",
+]
+
+[tasks.walk-trace]
+description = "Stop the dev server first. Logging proxy on 7171 that times every step of the real client"
+run = "tests\\.venv\\Scripts\\python.exe tools\\walk-trace.py"
+
 [tasks.test]
 description = "Gameplay tests on an isolated server (port 7181); extra args go to pytest, e.g. -k oracle"
 run = "tests\\run-tests.bat"

@@ -35,8 +35,15 @@ C:\mintwall                 (outside OneDrive on purpose: no syncing of build/db
     build.bat, init-db.bat, start-server.bat
     build\                  (ignored) cmake/vcpkg output
   client\Tibia740\          (ignored, proprietary) original client + Tibia-mintwall.exe
+  client-mod\
+    mintwall.cpp, build.bat mintwall.dll: WH_GETMESSAGE hook on the client's UI thread that drops
+                            Windows' key repeats for movement keys and posts its own (33 ms, no initial
+                            delay; last held key wins). Loaded via an extra import in Tibia-mintwall.exe
   tools\
-    patch-client.ps1        writes Tibia-mintwall.exe pointing at an IP
+    patch-client.ps1        writes Tibia-mintwall.exe: IP patch + new ".mintw" section with an import
+                            table that adds mintwall.dll!MintwallInit; copies mintwall.dll next to it
+    walk-trace.py           proxy on 7171 -> own server on 7172; logs step requests/moves/cancels
+                            with expected step times (mise run walk-trace)
     talk-test.ps1           scripted 7.4 login + chat, prints server text (NPC testing)
     otb-ids.ps1             dumps server->client id pairs from an items.otb
 ```

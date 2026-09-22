@@ -125,10 +125,21 @@ Server-side (config.lua) - editable, current values are Avesta defaults:
 - [ ] First-login "Welcome to <ServerName>. Please choose an outfit." (protocolgame.cpp sendAddCreature)
 
 Client-side (Tibia.exe) - only by patching strings in the copy we hand out, never longer than the original:
-- [ ] Decide if we patch client texts at all (it is the only client change besides the IP patch)
+- [ ] Decide if we patch client texts at all (besides the IP patch and loading mintwall.dll)
 - [ ] Info button text ("Copyright (C) 2002-2004 CipSoft GmbH" - keep CipSoft's copyright)
 - [ ] "Check www.tibia.com" references (login servers offline message, hints) -> our website
 - [ ] If yes: extend tools/patch-client.ps1 with a text table, plus a test that the patched exe still has the original size
+
+## Walking smoothness
+
+- [x] Measure it: `tools/walk-trace.py` (mise run walk-trace) - logging proxy with the real client.
+      Found: after every new direction the client waited Windows' key-repeat delay (~500 ms)
+- [x] Client fix: `client-mod/mintwall.dll` repeats movement keys itself (no initial delay, last held
+      key wins), loaded by Tibia-mintwall.exe through an added import. Confirmed in game
+- [ ] Server: TCP_NODELAY on game sockets (Nagle can hold a step confirmation back)
+- [ ] Server: a step arriving while another is queued replaces it (Player::setNextWalkTask) - queue instead
+- [ ] Server: 1 ms timer resolution (timeBeginPeriod) + precise OTSYS_TIME; steps land +-30 ms today
+- [ ] Re-trace after the server fixes (walk-trace summary: steps more than 50 ms late)
 
 ## Accounts / security / ops
 
