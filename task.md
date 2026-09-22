@@ -51,12 +51,55 @@ When finishing one, tick it and add a short note (what changed / how verified).
 - [ ] Audit the 102 spawned monster types: stats, loot, spells vs 7.4
 - [ ] Check spawn times/radius are sane for 7.4
 
-## Game rules / spells / items
+## Game rules and formulas
 
-- [ ] Verify 7.4 spell list, mana, levels, runes (and remove post-7.4 spells)
-- [ ] Verify vocations, skill rates, exp stages (7.4 had no stages)
+Decide the target for each (real 7.4 or our own choice), write it down here, then add a test.
+Current config: RateExp/RateSkill/RateMag/RateLoot/RateSpawn = 1 (real Tibia speed); the
+experience stages script (`creaturescripts/scripts/stages.lua`) exists but is not registered.
+
+### Experience and levels
+- [ ] Experience per level: confirm `(50*(L-1)^3 - 150*(L-1)^2 + 400*(L-1)) / 3` (Player::getExpForLevel)
+- [ ] Experience rate: keep 1x, pick a multiplier, or enable stages (7.4 had no stages)
+- [ ] Monster experience: exp from each monster matches 7.4, including exp split when several players attack
+- [ ] Level-up gains per vocation: HP / mana / capacity (data/vocations.xml: none 5/5/5, knight 15/5/25...)
+- [ ] Level-down on death: losing enough exp removes levels and their HP/mana/cap
+
+### Magic level
+- [ ] Mana needed per magic level: `1600 * multiplier^mlvl` with vocation multipliers
+      (vocations.xml manamultiplier: sorcerer/druid 1.1, paladin 1.4, knight 3.0, none 4.0)
+- [ ] Mana spent counts toward magic level (spells and runes), RateMag applies
+- [ ] Magic level shown correctly in the client (stats packet mlvl + percent)
+
+### Skills
+- [ ] Skill tries per level: `50 * multiplier^(skill-10)`-style formula per skill and vocation (vocations.xml)
+- [ ] Which actions train which skill: melee hits, shield blocks, distance, fishing; RateSkill applies
+- [ ] Fist fighting when no weapon; skills start at 10
+
+### Combat formulas
+- [ ] Melee damage: attack, skill, level, fight mode (offensive/balanced/defensive)
+- [ ] Defense and armor reduction (the Avesta "revbattlesys" formula - compare with 7.4)
+- [ ] Distance: hit chance, ammo, range
+- [ ] Spell and rune damage formulas (level + magic level) per spell
+- [ ] Attack speed (vocations.xml attackspeed 2000 ms) and exhaustion
+
+### Regeneration, food, soul
+- [ ] HP/mana regeneration per vocation (gainhpticks/gainmanaticks) and food duration
+- [ ] Soul points: did 7.4 have them? (soul came in 7.5 - probably disable)
+- [ ] Capacity: item weights and cap limit
+
+### Death and PvP
+- [ ] Death penalty: exp / mana / skill / item loss percentages (loss_* columns, default 10)
+- [ ] Respawn at home town temple (town_id), bag/items drop rules, blessings do not exist in 7.4
+- [ ] Skulls and PZ: PZLock 60 s, KillsToRedSkull 5, KillsToBan 7 - confirm 7.4 values
+- [ ] Rookgaard: no PvP on the island (non-pvp zone or protection level)
+
+### Premium
+- [ ] What premium unlocks in 7.4 (towns, promotion, spells, houses) and how players get it
+
+### Spells, runes, items
+- [ ] Verify 7.4 spell list, words, mana, level, vocation, premium (remove post-7.4 spells)
+- [ ] Runes: charges, magic level required, soul (7.4 had none)
 - [ ] Remove leftover warnings: "Unknown command /invisible, /serverdiag", items.otb minor-version warning
-- [ ] Death / temple / loss percentages behave like 7.4
 
 ## Accounts / security / ops
 

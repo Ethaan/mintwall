@@ -10,3 +10,10 @@ INSERT INTO "groups" ("id", "name", "flags", "access", "maxdepotitems", "maxvipl
 INSERT INTO "accounts" ("id", "password") VALUES (999999, '833qzdzobz');
 INSERT INTO "players" ("name", "account_id", "group_id", "sex", "vocation", "level", "health", "healthmax", "mana", "manamax", "cap", "looktype", "posx", "posy", "posz", "conditions", "rank_id", "town_id")
 VALUES ('GM Mintwall', 999999, 3, 1, 0, 1, 150, 150, 0, 0, 400, 75, 0, 0, 0, X'', 0, 2);
+
+-- Manual test account 222222 / test: one fresh Rookgaard character, one level 8 next to the Oracle
+INSERT INTO "accounts" ("id", "password") VALUES (222222, 'test');
+INSERT INTO "players" ("name", "account_id", "group_id", "sex", "vocation", "level", "experience", "health", "healthmax", "mana", "manamax", "cap", "posx", "posy", "posz", "conditions", "rank_id", "town_id")
+VALUES ('Rook Tester', 222222, 1, 1, 0, 1, 0, 150, 150, 0, 0, 400, 0, 0, 0, X'', 0, 1);
+INSERT INTO "players" ("name", "account_id", "group_id", "sex", "vocation", "level", "experience", "health", "healthmax", "mana", "manamax", "cap", "posx", "posy", "posz", "conditions", "rank_id", "town_id")
+VALUES ('Oracle Tester', 222222, 1, 1, 0, 8, 4200, 185, 185, 35, 35, 435, 32104, 32192, 6, X'', 0, 1);
