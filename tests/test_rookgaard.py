@@ -184,3 +184,22 @@ def test_gatekeeper_sends_a_premium_level_8_to_ankrahmun(new_player, world, db):
     row = db.character(p.character.guid)
     assert row["vocation"] == 4
     assert row["town_id"] == ANKRAHMUN_TOWN, f"home town {row['town_id']} is not Ankrahmun (respawn temple)"
+
+
+# ----------------------------------------------------------------------------- premium side, locked door
+
+PREMIUM_SIDE_DOOR = (32042, 32205, 6)   # locked door (1209, no key) from the house south of King's Bridge
+LOCKED_DOOR = 1209
+
+
+@pytest.mark.parametrize("premium_days", [0, 30])
+def test_keyless_locked_door_stays_locked(new_player, premium_days):
+    """It used to open for anyone ("impossible to happen") - a way around King's Bridge."""
+    p = new_player(pos=(PREMIUM_SIDE_DOOR[0] + 1, PREMIUM_SIDE_DOOR[1], PREMIUM_SIDE_DOOR[2]),
+                   premium_days=premium_days)
+    assert p.wait_for(lambda: p.tile_items(PREMIUM_SIDE_DOOR), timeout=5)
+    door = p.tile_items(PREMIUM_SIDE_DOOR)[-1]
+    assert door.client_id == LOCKED_DOOR, p.tile_items(PREMIUM_SIDE_DOOR)
+    p.use_item(PREMIUM_SIDE_DOOR, door.client_id, len(p.tile_items(PREMIUM_SIDE_DOOR)) - 1)
+    assert p.wait_for(lambda: p.messages("It is locked"), timeout=3), p.text_messages
+    assert p.tile_items(PREMIUM_SIDE_DOOR)[-1].client_id == LOCKED_DOOR, "the locked door opened"

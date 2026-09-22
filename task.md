@@ -80,6 +80,11 @@ When finishing one, tick it and add a short note (what changed / how verified).
 - [ ] Audit every teleport on the map against 7.4 (only the Rookgaard one was wrong so far)
 - [x] King's Bridge (Rookgaard, 32057,32192-32193,7): action id 50003 = premium-only ground, nothing
       handled it; movements/scripts/premium_tile.lua sends free accounts back. test_rookgaard.py
+- [x] Locked doors without a key (action id 0) opened for anyone (door_locked.lua: "impossible to
+      happen") - e.g. 32042,32205,6, the way onto Rookgaard's premium side around King's Bridge. Now
+      only house doors open that way (the engine checks house access first). Item 1210 (the unlocked
+      closed door) was described as "It is locked." test_rookgaard.py
+- [ ] House doors: test that owners/invited players can open them and others cannot (Houses task)
 - [x] Rookgaard sewer bridge levers (action id 50001, 32098/32104,32204,8): ported upstream's
       rat bridge as `rook_rat_bridge.lua`; covered by test_rookgaard.py
 - [ ] Other map action ids with no script behind them (50001 had none) - list and port them
