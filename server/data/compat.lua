@@ -84,3 +84,11 @@ function doPlayerSetPromotionLevel(cid, level)
 	end
 	return true
 end
+
+-- Constants TFS-era scripts expect
+CONST_ME_TELEPORT = CONST_ME_ENERGYAREA   -- 7.4 has no dedicated teleport effect; energy sparkles were used
+EMPTY_STORAGE = -1
+ITEM_PARCEL = 2595
+ITEM_LABEL = 2599
+MAPMARK_EXCLAMATION = 0                   -- map marks did not exist in 7.4 (doAddMapMark is a no-op)
+MAPMARK_GREENNORTH = 0

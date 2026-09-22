@@ -18,3 +18,7 @@ server/server.log
 server/config.lua.bak
 server/npctest.log
 server/maptest.log
+tests/.venv/
+tests/.run/
+__pycache__/
+.pytest_cache/

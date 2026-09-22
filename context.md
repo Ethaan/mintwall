@@ -73,7 +73,7 @@ SQLite shell: `server\build\vcpkg_installed\x64-windows-static\tools\sqlite3.exe
 ## Script compatibility layer
 
 TFS-era scripts run on Avesta through shims, not rewrites:
-- `data/compat.lua` (loaded by global.lua, every interface): renamed functions
+- `data/compat.lua` (loaded at the END of global.lua - it aliases constants defined there): renamed functions
   (getPlayerName, isPzLocked, getThingPosition...), pure helpers (isInArray...), no-op stubs for
   post-7.4 features (blessings, outfits), 7.4 promotion (voc 1-4 -> 5-8)
 - `data/npc/lib/compat.lua` (NPC state): selfSay drops extra args (TFS passes cid, Avesta
@@ -96,8 +96,26 @@ when the engine is wrong.
 - Full map server uses ~2.5 GB RAM
 - The `server.log` of a running server is locked; the exe is locked while running (stop before rebuild)
 
+## Testing (tests/)
+
+Gameplay is verified by an automated suite, not by hand:
+- `tests
+- `tests\run-tests.bat` (or `-k oracle` for a subset). Starts its **own** server
+  (`-c tests/.run/config.lua`, port **7181**, fresh `tests/.run/test.db3` from sql/), so the dev
+  server on 7171 and db.db3 are never touched. Needs `server\avesta74.exe` built.
+- `tests/tibia74/` is a headless 7.4 client (Python) that mirrors Avesta's `protocolgame.cpp`
+  byte for byte and models position, stats, skills, inventory, containers, tiles, creatures, messages.
+  Camera centre is moved by map slices/floor changes exactly like the real client.
+- Each test creates fresh characters in the DB (`new_player(level=, pos=, inventory=, vocation=)`),
+  logs in, acts (`talk`, `walk_to`, `attack`, `use_item`, `move_item`...) and asserts with `wait_for`.
+- Every test also fails if the server logged any Lua error while it ran.
+- Lua errors in the server log now include the called function and the script line.
+- Spec not implemented yet -> write the test anyway and mark `xfail(strict=True)`; it turns
+  into a failure the moment the feature works, reminding us to remove the marker.
+- Python 3.12 is installed per-user; the venv lives in `tests/.venv` (ignored).
+
 ## Working agreement
 
 - One task at a time from `task.md`; mark it done with a one-line note of what changed
-- Verify with the server log (zero Lua errors) and, for NPCs, `tools\talk-test.ps1`
+- Every fixed behaviour gets a test in `tests/`; run the whole suite before committing
 - Commit after each finished task

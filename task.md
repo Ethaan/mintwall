@@ -13,6 +13,16 @@ When finishing one, tick it and add a short note (what changed / how verified).
 - [x] Port 306 NPCs with Jiddo NpcSystem + compat layer; verified Cipfried (dialogue) and Al Dee (shop)
 - [x] God account (999999, group God, access 3)
 - [x] context.md / task.md
+- [x] Automated gameplay test suite (tests/): headless 7.4 client, isolated test server, fresh characters
+- [x] Oracle: fixed undefined CONST_ME_TELEPORT (compat.lua loaded too early) and wrong town ids
+      (now looked up by name); covered by test_rookgaard.py
+
+## New player journey (tests/test_rookgaard.py)
+
+- [ ] Decide the starter kit (items + slots) and give it on first login; then drop the xfail
+- [ ] Oracle gives a vocation bag (TFS-era, not 7.4) - keep or remove?
+- [ ] Oracle's "SO BE IT" is never seen (player is teleported first) - delay the teleport slightly?
+- [ ] More journey tests: rookgaard shops buy/sell with money, sewers/ladders, death in Rookgaard, reaching level 8 via exp
 
 ## NPCs
 
@@ -59,4 +69,6 @@ When finishing one, tick it and add a short note (what changed / how verified).
 ## Tooling
 
 - [ ] `talk-test.ps1`: support walking/teleporting (GM) so any NPC can be tested without editing the DB
-- [ ] CI-style smoke test: start server, assert zero Lua errors in log, run talk tests, stop
+- [x] Smoke test runner: tests\run-tests.bat
+un-tests.bat
+- [ ] Test every NPC answers "hi" (generated test per NPC)

@@ -37,33 +37,33 @@ npcHandler:unGreet(cid)
 elseif msgcontains(msg, "carlin") and Topic[talkUser] == 1 then
 npcHandler:say("IN CARLIN! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 Topic[talkUser] = 2
-town[talkUser] = 5
+town[talkUser] = getTownIdByName("Carlin")
 destination[talkUser] = {x=32360, y=31782, z=7}
 elseif msgcontains(msg, "ab'dendriel") and Topic[talkUser] == 1 then
 npcHandler:say("IN AB'DENDRIEL! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 Topic[talkUser] = 2
-town[talkUser] = 1
+town[talkUser] = getTownIdByName("Ab'Dendriel")
 destination[talkUser] = {x=32732, y=31634, z=7}
 elseif msgcontains(msg, "kazordoon") and Topic[talkUser] == 1 then
 npcHandler:say("IN KAZORDOON! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 Topic[talkUser] = 2
-town[talkUser] = 2
+town[talkUser] = getTownIdByName("Kazordoon")
 destination[talkUser] = {x=32649, y=31925, z=11}
 elseif msgcontains(msg, "thais") and Topic[talkUser] == 1 then
 npcHandler:say("IN THAIS! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 Topic[talkUser] = 2
-town[talkUser] = 3
+town[talkUser] = getTownIdByName("Thais")
 destination[talkUser] = {x=32369, y=32241, z=7}
 elseif msgcontains(msg, "venore") and Topic[talkUser] == 1 then
 npcHandler:say("IN VENORE! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 Topic[talkUser] = 2
-town[talkUser] = 4
+town[talkUser] = getTownIdByName("Venore")
 destination[talkUser] = {x=32957, y=32076, z=7}
 elseif msgcontains(msg, "darashia") and Topic[talkUser] == 1 then
 if isPremium(cid) == TRUE then
 npcHandler:say("IN DARASHIA! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 Topic[talkUser] = 2
-town[talkUser] = 7
+town[talkUser] = getTownIdByName("Darashia")
 destination[talkUser] = {x=33213, y=32454, z=1}
 else
 npcHandler:say("YOU NEED A PREMIUM ACCOUNT IN ORDER TO GO THERE!", cid)
@@ -73,7 +73,7 @@ elseif msgcontains(msg, "ankrahmun") and Topic[talkUser] == 1 then
 if isPremium(cid) == TRUE then
 npcHandler:say("IN ANKRAHMUN! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 Topic[talkUser] = 2
-town[talkUser] = 6
+town[talkUser] = getTownIdByName("Ankrahmun")
 destination[talkUser] = {x=33194, y=32853, z=8}
 else
 npcHandler:say("YOU NEED A PREMIUM ACCOUNT IN ORDER TO GO THERE!", cid)
@@ -83,7 +83,7 @@ elseif msgcontains(msg, "edron") and Topic[talkUser] == 1 then
 if isPremium(cid) == TRUE then
 npcHandler:say("IN EDRON! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 Topic[talkUser] = 2
-town[talkUser] = 9
+town[talkUser] = getTownIdByName("Edron")
 destination[talkUser] = {x=33217, y=31814, z=8}
 else
 npcHandler:say("YOU NEED A PREMIUM ACCOUNT IN ORDER TO GO THERE!", cid)

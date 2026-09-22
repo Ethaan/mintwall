@@ -3,7 +3,6 @@ FALSE = 0
 
 -- Load Lua-made functions
 dofile(getDataDir() .. 'functions.lua')
-dofile(getDataDir() .. 'compat.lua')
 
 NORTH = 0
 EAST = 1
@@ -537,3 +536,6 @@ function convertIPToInt(str)
 		return ipint, maskint
 	end
 end
+
+-- TFS-era compatibility layer; last, because it aliases constants defined above
+dofile(getDataDir() .. 'compat.lua')

@@ -726,6 +726,20 @@ void LuaScriptInterface::reportError(const char* function, const std::string& er
 	if(function)
 		std::cout << function << "(). ";
 	std::cout << error_desc << std::endl;
+
+	// Where it happened: the Lua function that called into C++ and a few callers above it
+	if(scriptInterface && scriptInterface->getLuaState()){
+		lua_State* L = scriptInterface->getLuaState();
+		lua_Debug ar;
+		if(lua_getstack(L, 0, &ar) && lua_getinfo(L, "n", &ar) && ar.name){
+			std::cout << "  in call to " << ar.name << "()" << std::endl;
+		}
+		for(int level = 1; level <= 4 && lua_getstack(L, level, &ar); ++level){
+			if(lua_getinfo(L, "Sl", &ar) && ar.currentline > 0){
+				std::cout << "  at " << ar.short_src << ":" << ar.currentline << std::endl;
+			}
+		}
+	}
 }
 
 bool LuaScriptInterface::pushFunction(int32_t functionId)
