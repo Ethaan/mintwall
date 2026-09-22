@@ -45,6 +45,9 @@ When finishing one, tick it and add a short note (what changed / how verified).
 - [ ] Depots and mailboxes (mailboxes weren't in 7.4 - check the map)
 - [ ] Teleports, ladders, holes, rope spots, shovel spots work
 - [ ] Reduce server memory (~2.5 GB with full map)
+- [x] Removed the teleport in Rookgaard temple that sent new players to Thais
+      (tools/map-remove-item.py)
+- [ ] Audit every teleport on the map against 7.4 (only the Rookgaard one was wrong so far)
 
 ## Monsters
 
@@ -93,6 +96,12 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [ ] Skulls and PZ: PZLock 60 s, KillsToRedSkull 5, KillsToBan 7 - confirm 7.4 values
 - [ ] Rookgaard: no PvP on the island (non-pvp zone or protection level)
 
+### Idle and session
+- [ ] Idle timeout far too short, warning reads "idle for 0 minutes": IdleTimeWarning 30 s /
+      IdleTimeKick 60 s in config.lua and player.cpp prints whole minutes only.
+      Real Tibia warned at ~14 min and kicked at ~15 min
+- [ ] Idle message wording: "idle for X minutes , you will be" has a stray space
+
 ### Premium
 - [ ] What premium unlocks in 7.4 (towns, promotion, spells, houses) and how players get it
 
@@ -105,7 +114,8 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 
 Server-side (config.lua) - editable, current values are Avesta defaults:
 - [ ] MOTD shown after entering the account (`MOTD`, bump `MOTD_Num` so clients show it again)
-- [ ] World name in the character list (`WorldName = "OpenTibia"`)
+- [ ] Pick the one server/world name and use it everywhere (character list shows "<char> (OpenTibia)",
+      MOTD, login message, website, patched client): `WorldName`, `ServerName`, `OwnerName` in config.lua
 - [ ] In-game login message (`LoginMsg`, mentions otserv.org) and `ServerName` / `OwnerName`
 - [ ] First-login "Welcome to <ServerName>. Please choose an outfit." (protocolgame.cpp sendAddCreature)
 

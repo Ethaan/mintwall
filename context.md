@@ -119,5 +119,6 @@ Gameplay is verified by an automated suite, not by hand:
 ## Working agreement
 
 - One task at a time from `task.md`; mark it done with a one-line note of what changed
-- Every fixed behaviour gets a test in `tests/`; run the whole suite before committing
+- Tests are for behaviour that matters (the player journey, formulas, quests, shops) - not for
+  every small fix. A one-off map or data fix is just fixed; run the suite before committing
 - Commit after each finished task
