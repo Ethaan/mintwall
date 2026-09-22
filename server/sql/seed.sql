@@ -6,7 +6,7 @@ INSERT INTO "players" ("name", "account_id", "group_id", "sex", "vocation", "lev
 VALUES ('Mintwall', 111111, 1, 1, 0, 1, 150, 150, 0, 0, 400, 0, 0, 0, X'', 0, 1);
 
 -- God account for local administration. Change the password before exposing the server to anyone.
-INSERT INTO "groups" ("id", "name", "flags", "access", "maxdepotitems", "maxviplist") VALUES (3, 'God', 1082902159352, 3, 10000, 200);
+INSERT INTO "groups" ("id", "name", "flags", "access", "maxdepotitems", "maxviplist") VALUES (3, 'God', 5480948670456, 3, 10000, 200);
 INSERT INTO "accounts" ("id", "password") VALUES (999999, '833qzdzobz');
 INSERT INTO "players" ("name", "account_id", "group_id", "sex", "vocation", "level", "health", "healthmax", "mana", "manamax", "cap", "looktype", "posx", "posy", "posz", "conditions", "rank_id", "town_id")
 VALUES ('GM Mintwall', 999999, 3, 1, 0, 1, 150, 150, 0, 0, 400, 75, 0, 0, 0, X'', 0, 2);

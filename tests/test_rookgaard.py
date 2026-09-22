@@ -91,3 +91,31 @@ def test_oracle_turns_a_level_8_into_a_knight_of_thais(new_player, world, db):
     row = db.character(p.character.guid)
     assert row["vocation"] == 4
     assert row["town_id"] == TOWN_IDS["thais"], "Oracle set the wrong home town (respawn temple)"
+
+
+# ----------------------------------------------------------------------------- rat sewer bridge
+
+WEST_SWITCH, EAST_SWITCH = (32098, 32204, 8), (32104, 32204, 8)
+BRIDGE = [(32100, 32205, 8), (32101, 32205, 8)]
+DRAWBRIDGE = 1284
+
+
+def _use_switch(p, pos):
+    switch = p.tile_items(pos)[-1]
+    p.use_item(pos, switch.client_id, len(p.tile_items(pos)) - 1)
+
+
+def test_sewer_switch_lowers_the_bridge_and_raises_it_again(new_player):
+    p = new_player(pos=(32099, 32205, 8))
+    assert p.wait_for(lambda: p.tile_items(WEST_SWITCH), timeout=5)
+
+    _use_switch(p, WEST_SWITCH)
+    assert p.wait_for(lambda: all(p.tile_items(b)[0].client_id == DRAWBRIDGE for b in BRIDGE), timeout=5), \
+        [p.tile_items(b) for b in BRIDGE]
+    assert p.walk_to((32103, 32205, 8)), f"could not cross the bridge, stuck at {p.pos}"
+
+    walker = new_player(pos=(32101, 32205, 8))   # standing on the bridge when it is raised
+    assert p.wait_for(lambda: walker.pos == (32101, 32205, 8), timeout=5)
+    _use_switch(p, EAST_SWITCH)
+    assert p.wait_for(lambda: all(p.tile_items(b)[0].client_id != DRAWBRIDGE for b in BRIDGE), timeout=5)
+    assert walker.wait_for(lambda: walker.pos == (32102, 32205, 8), timeout=5), f"left on the water at {walker.pos}"

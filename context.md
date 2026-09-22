@@ -47,6 +47,7 @@ C:\mintwall                 (outside OneDrive on purpose: no syncing of build/db
 server\build.bat                      rebuild (first run compiles all deps via vcpkg, slow)
 server\init-db.bat                    fresh db.db3 from sql\ (delete db.db3 first)
 server\start-server.bat               run the server
+mise run build|seed|reseed|start-server|stop-server|restart-server|test   same via mise.toml
 powershell -ExecutionPolicy Bypass -File tools\talk-test.ps1 -Words "hi,job,bye"
 powershell -ExecutionPolicy Bypass -File tools\patch-client.ps1 -Ip <address>
 ```

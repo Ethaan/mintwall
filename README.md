@@ -25,6 +25,10 @@ server\start-server.bat
 ```
 Then run `client\Tibia740\Tibia-mintwall.exe` and log in with 111111 / tibia.
 
+With [mise](https://mise.jdx.dev/) (`winget install jdx.mise`) the same steps are tasks: `mise run build`,
+`mise run seed`, `mise run start-server`, plus `restart-server`, `stop-server`, `reseed` (wipes the DB) and `test`.
+`mise tasks` lists them.
+
 Port 7171 must be free (the 7.4 client always uses it).
 
 ## Changes to upstream Avesta

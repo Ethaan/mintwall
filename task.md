@@ -50,6 +50,9 @@ When finishing one, tick it and add a short note (what changed / how verified).
 - [x] Removed the teleport in Rookgaard temple that sent new players to Thais
       (tools/map-remove-item.py)
 - [ ] Audit every teleport on the map against 7.4 (only the Rookgaard one was wrong so far)
+- [x] Rookgaard sewer bridge levers (action id 50001, 32098/32104,32204,8): ported upstream's
+      rat bridge as `rook_rat_bridge.lua`; covered by test_rookgaard.py
+- [ ] Other map action ids with no script behind them (50001 had none) - list and port them
 
 ## Monsters
 
@@ -139,5 +142,8 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 
 - [ ] `talk-test.ps1`: support walking/teleporting (GM) so any NPC can be tested without editing the DB
 - [x] Smoke test runner: tests\run-tests.bat
+- [x] mise tasks (`mise.toml`): build, seed, reseed, start/stop/restart-server, test
+- [x] God group sees ID / action id / Position on look (flag bit 42; enable "Show Info Messages
+      in Console" in the client to copy them)
 un-tests.bat
 - [ ] Test every NPC answers "hi" (generated test per NPC)

@@ -251,6 +251,7 @@
 	<action itemid="1875" script="increment.lua"/>
 
 	<action itemid="1876" script="decrement.lua"/>
+	<action actionid="50001" script="rook_rat_bridge.lua"/>
 	<action itemid="1945" script="increment.lua"/>
 	<action itemid="1946" script="decrement.lua"/>
 	<action itemid="2037" script="increment.lua"/>
