@@ -29,13 +29,25 @@ def test_new_player_is_greeted_by_cipfried(new_player):
     assert any("Feel free to ask me for help" in r for r in replies), replies
 
 
-@pytest.mark.xfail(reason="starter kit not implemented yet (task.md: define and add first-login items)", strict=True)
-def test_new_player_starts_with_basic_equipment(new_player):
-    p = new_player()
+def test_new_player_gets_the_beginner_set(new_player):
+    """7.4 beginner set: club, torch, bag with a red apple, jacket (male) / coat (female)."""
+    p = new_player(sex=1)
+    assert p.wait_for(lambda: len(p.inventory) >= 3, timeout=5), p.inventory_names()
     worn = p.inventory_names()
-    assert worn.get("armor") == "leather armor", worn
-    assert worn.get("legs") == "leather legs", worn
-    assert "right" in worn or "left" in worn, f"no weapon: {worn}"
+    assert worn.get("armor") == "jacket", worn
+    assert "club" in worn.values(), worn
+
+    bag = p.open_container(p.slot_of("bag"))
+    assert bag, f"no bag in the inventory: {worn}"
+    inside = sorted(i.name for i in bag.items)
+    assert inside == ["red apple", "torch"], inside
+
+
+def test_new_player_has_the_classic_outfit(new_player):
+    p = new_player(sex=1)
+    me = p.wait_for(lambda: p.creatures.get(p.player_id), timeout=5)
+    # looktype, then yellow hair, blue shirt, brown legs, dark shoes
+    assert me.outfit == (128, 79, 69, 116, 114), me.outfit
 
 
 # ----------------------------------------------------------------------------- first kills

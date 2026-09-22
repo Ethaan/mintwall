@@ -19,7 +19,9 @@ When finishing one, tick it and add a short note (what changed / how verified).
 
 ## New player journey (tests/test_rookgaard.py)
 
-- [ ] Decide the starter kit (items + slots) and give it on first login; then drop the xfail
+- [x] 7.4 beginner set on first login (club, torch, bag with a red apple, jacket/coat) and the
+      classic outfit (yellow hair, blue shirt, brown legs, dark shoes); login creature events
+      were never called by the engine - fixed
 - [ ] Oracle gives a vocation bag (TFS-era, not 7.4) - keep or remove?
 - [ ] Oracle's "SO BE IT" is never seen (player is teleported first) - delay the teleport slightly?
 - [ ] More journey tests: rookgaard shops buy/sell with money, sewers/ladders, death in Rookgaard, reaching level 8 via exp

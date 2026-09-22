@@ -69,6 +69,8 @@ SQLite shell: `server\build\vcpkg_installed\x64-windows-static\tools\sqlite3.exe
 - NPCs: `<parameters>` parsed from NPC XML (`Npc::loadParams`), Lua `getNpcParameter(key)`
 - NPC events call Lua without expecting a boolean return (was an error per NPC per tick)
 - New Lua `isPlayer(cid)`; `getSpectators` 4th arg (multifloor) optional
+- Login creature events are now actually executed (upstream had `playerLogIn()` but never called it),
+  which is what runs `data/creaturescripts/scripts/login.lua` (beginner set + classic outfit)
 - Data: `TRUE`/`FALSE` defined in global.lua; antidote rune constant typo; `Demongoblin` monster;
   spawns: Bonebeast->Bone Beast, Cobra/Demon Skeleton were tagged as NPCs
 

@@ -351,6 +351,12 @@ bool ProtocolGame::login(const std::string& name, bool isSetGM)
 		player->lastLoginSaved = std::max(time(NULL), player->lastLoginSaved + 1);
 		m_acceptPackets = true;
 
+		// Login creature events (data/creaturescripts) - upstream defined playerLogIn() but never called it
+		if(!g_creatureEvents->playerLogIn(player)){
+			disconnectClient(0x14, "Login cancelled.");
+			return false;
+		}
+
 		return true;
 	}
 	else{

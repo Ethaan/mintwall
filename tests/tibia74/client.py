@@ -248,6 +248,20 @@ class GameClient:
         self._send(Writer().u8(0x78).position(from_pos).u16(client_id).u8(stackpos)
                    .position(to_pos).u8(count))
 
+    def open_container(self, slot: int, timeout: float = 3.0):
+        """Open the container worn in `slot` (like right-clicking it) and return it once known."""
+        item = self.inventory.get(slot)
+        if item is None:
+            return None
+        known = set(self.containers)
+        self.use_item(self.inventory_pos(slot), item.client_id, 0)
+        return self.wait_for(lambda: next((self.containers[c] for c in self.containers if c not in known), None),
+                             timeout)
+
+    def slot_of(self, item_name: str):
+        """Inventory slot holding an item with this name, or None."""
+        return next((s for s, i in self.inventory.items() if i.name == item_name), None)
+
     @staticmethod
     def inventory_pos(slot: int) -> tuple:
         return (0xFFFF, slot, 0)
