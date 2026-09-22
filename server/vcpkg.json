@@ -1,0 +1,20 @@
+{
+  "name": "mintwall-server",
+  "version-string": "0.1.0",
+  "dependencies": [
+    "boost-asio",
+    "boost-thread",
+    "boost-regex",
+    "boost-bind",
+    "boost-function",
+    "boost-tokenizer",
+    "boost-algorithm",
+    "boost-pool",
+    "boost-smart-ptr",
+    "boost-utility",
+    "libxml2",
+    "luajit",
+    { "name": "sqlite3", "features": ["tool"] },
+    "gmp"
+  ]
+}

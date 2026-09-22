@@ -1,0 +1,20 @@
+# Original CipSoft client files are proprietary - kept locally, not committed
+client/
+
+# Build output
+build/
+*.obj
+*.pdb
+*.ilk
+
+# Runtime data
+server/*.db
+server/*.log
+server/data/logs/
+server/avesta74.exe
+server/db.db3
+server/build.log
+server/server.log
+server/config.lua.bak
+server/npctest.log
+server/maptest.log
