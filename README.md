@@ -49,6 +49,8 @@ Port 7171 must be free (the 7.4 client always uses it).
 | Account | Password | Character | Notes |
 |---|---|---|---|
 | 111111 | tibia | Mintwall | player, starts in Rookgaard |
+| 1 | 1 | Free Tester | free account, level 1, Rookgaard |
+| 2 | 2 | Premium Tester | premium account (until 2033), level 8, Rookgaard |
 | 999999 | see sql/seed.sql | GM Mintwall | God group (access 3): /B, /goto, /i, /n, /reload, ... |
 
 ## Testing NPCs without the client

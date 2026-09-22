@@ -166,10 +166,16 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       Found: after every new direction the client waited Windows' key-repeat delay (~500 ms)
 - [x] Client fix: `client-mod/mintwall.dll` repeats movement keys itself (no initial delay, last held
       key wins), loaded by Tibia-mintwall.exe through an added import. Confirmed in game
-- [ ] Server: TCP_NODELAY on game sockets (Nagle can hold a step confirmation back)
-- [ ] Server: a step arriving while another is queued replaces it (Player::setNextWalkTask) - queue instead
-- [ ] Server: 1 ms timer resolution (timeBeginPeriod) + precise OTSYS_TIME; steps land +-30 ms today
-- [ ] Re-trace after the server fixes (walk-trace summary: steps more than 50 ms late)
+- [x] Server: TCP_NODELAY on game sockets (Nagle could hold a step confirmation back) - server.cpp
+- [x] Stairs: every floor change doubled the next step (lastStepCost 2): ~900 ms instead of ~450 off
+      each stair while the real client asks after the normal time (walk-trace) - creature.cpp
+- [x] Diagonals: the wait before a step also counted the *next* step's direction, so straight->diagonal
+      waited 2x and diagonal->diagonal 4x (1.7 s) - Creature::getWalkDelay / getStepDuration(dir)
+- [x] 1 ms timer resolution (timeBeginPeriod): steps landed up to ~100 ms early/late - otserv.cpp
+- [x] tests/test_walking.py: pace on a road (straight + diagonals) and up/down stairs
+- [ ] A step pressed while another is queued replaces it (Player::setNextWalkTask) - dropped steps when
+      tapping back and forth (seen in the stairs trace); queue one step instead?
+- [ ] Re-trace with the real client on the new server (walk-trace summary: steps more than 50 ms late)
 
 ## Accounts / security / ops
 

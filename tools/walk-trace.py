@@ -17,7 +17,9 @@ import asyncio
 import csv
 import os
 import re
+import queue
 import subprocess
+import threading
 import sys
 import time
 from pathlib import Path
@@ -41,22 +43,23 @@ t0 = time.perf_counter()
 events = []   # (ms, event, detail, expected step ms)
 
 
-def log(event, detail="", expected=""):
-    ms = round((time.perf_counter() - t0) * 1000, 1)
+def log(event, detail="", expected="", at=None):
+    """at = time.perf_counter() when the packet arrived (packets are parsed later, off the relay path)."""
+    ms = round(((at or time.perf_counter()) - t0) * 1000, 1)
     events.append((ms, event, detail, expected))
     print(f"{ms:10.1f}  {event:14} {detail}" + (f"  (step should take {expected} ms)" if expected else ""))
 
 
-def on_client_packet(body: bytes):
+def on_client_packet(body: bytes, at: float):
     op = body[0]
     if op in STEP_OPS:
-        log("step-request", STEP_OPS[op])
+        log("step-request", STEP_OPS[op], at=at)
     elif op in TURN_OPS:
-        log("turn", TURN_OPS[op])
+        log("turn", TURN_OPS[op], at=at)
     elif op == 0x64:
-        log("autowalk", f"{body[1]} steps")
+        log("autowalk", f"{body[1]} steps", at=at)
     elif op == 0x69:
-        log("stop-autowalk")
+        log("stop-autowalk", at=at)
 
 
 def server_packet_handler():
@@ -73,7 +76,7 @@ def server_packet_handler():
         ms = 1000 * ITEMS.client(ground.client_id).speed // me.speed
         return ms * 2 if frm[0] != to[0] and frm[1] != to[1] else ms
 
-    def handle(body: bytes):
+    def handle(body: bytes, at: float):
         if broken:
             return
         pos, cancels, texts = view.pos, view.cancel_walks, len(view.text_messages)
@@ -81,17 +84,20 @@ def server_packet_handler():
             view._parse_packet(Reader(body))
         except Exception as e:  # never break the relay because of the parser
             broken.append(e)
-            log("parser-error", repr(e))
+            log("parser-error", repr(e), at=at)
             return
         if pos and view.pos != pos:
-            if view.pos[2] == pos[2] and max(abs(view.pos[0] - pos[0]), abs(view.pos[1] - pos[1])) == 1:
-                log("step-ok", f"{pos} -> {view.pos}", step_ms(pos, view.pos))
+            dist = max(abs(view.pos[0] - pos[0]), abs(view.pos[1] - pos[1]))
+            if view.pos[2] == pos[2] and dist == 1:
+                log("step-ok", f"{pos} -> {view.pos}", step_ms(pos, view.pos), at=at)
+            elif abs(view.pos[2] - pos[2]) == 1 and dist <= 2:   # stairs, ramps, holes
+                log("floor-change", f"{pos} -> {view.pos} ({len(body)} bytes)", step_ms(pos, view.pos), at=at)
             else:
-                log("teleport", f"{pos} -> {view.pos}")
+                log("teleport", f"{pos} -> {view.pos}", at=at)
         if view.cancel_walks != cancels:
-            log("cancel-walk")
+            log("cancel-walk", at=at)
         for _, text in view.text_messages[texts:]:
-            log("text", text)
+            log("text", text, at=at)
 
     return handle
 
@@ -122,16 +128,25 @@ async def read_packet(reader):
     return head, await reader.readexactly(int.from_bytes(head, "little"))
 
 
-async def pump(reader, writer, on_packet, transform=None):
+_work = queue.Queue()   # (handler, body, arrival time): parsed on a worker thread, not in the relay
+
+
+def _worker():
+    while True:
+        handler, body, at = _work.get()
+        handler(body, at)
+
+
+async def pump(reader, writer, on_packet=None, transform=None):
     try:
         while True:
             head, body = await read_packet(reader)
-            if body:
-                on_packet(body)
-                if transform:
-                    body = transform(body)
-            writer.write(head + body)
+            at = time.perf_counter()
+            out = transform(body) if (body and transform) else body
+            writer.write(head + out)       # forward first: the proxy must not slow the game down
             await writer.drain()
+            if body and on_packet:
+                _work.put((on_packet, body, at))
     except (asyncio.IncompleteReadError, ConnectionError):
         pass
     finally:
@@ -155,8 +170,8 @@ async def handle(c_reader, c_writer):
     if not is_login:
         log("game-connect")
     await asyncio.gather(
-        pump(c_reader, s_writer, on_client_packet if not is_login else lambda b: None),
-        pump(s_reader, c_writer, server_packet_handler() if not is_login else lambda b: None,
+        pump(c_reader, s_writer, None if is_login else on_client_packet),
+        pump(s_reader, c_writer, None if is_login else server_packet_handler(),
              rewrite_charlist if is_login else None),
     )
 
@@ -206,10 +221,15 @@ if __name__ == "__main__":
     if len(sys.argv) == 3:            # other ports, e.g. to try it while the dev server runs
         PROXY_PORT, SERVER_PORT = int(sys.argv[1]), int(sys.argv[2])
     proc = start_server()
+    threading.Thread(target=_worker, daemon=True).start()
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
         pass
     finally:
+        for _ in range(50):            # let the worker parse what is still queued
+            if _work.empty():
+                break
+            time.sleep(0.1)
         summary()
         proc.terminate()

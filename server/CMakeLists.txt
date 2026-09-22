@@ -36,7 +36,7 @@ target_link_libraries(avesta74 PRIVATE
   unofficial::sqlite3::sqlite3
   ${LUAJIT_LIBRARY}
   ${GMP_LIBRARY}
-  ws2_32 mswsock
+  ws2_32 mswsock winmm
 )
 
 # Put the exe next to config.lua and data/

@@ -167,13 +167,11 @@ int64_t Creature::getTimeSinceLastMove() const
 
 int32_t Creature::getWalkDelay(Direction dir) const
 {
-	if(lastStep != 0){
-		int64_t ct = OTSYS_TIME();
-		int64_t stepDuration = getStepDuration(dir);
-		return stepDuration - (ct - lastStep);
-	}
-
-	return 0;
+	// The next step may start once the previous one is over. How long that took is already in
+	// getStepDuration() (lastStepCost doubles it after a diagonal step); the direction of the step
+	// being asked for does not matter - counting it made straight->diagonal 2x and diagonal->diagonal
+	// 4x too slow.
+	return getWalkDelay();
 }
 
 int32_t Creature::getWalkDelay() const
@@ -543,11 +541,10 @@ void Creature::onCreatureMove(const Creature* creature, const Tile* newTile, con
 			stopEventWalk();
 		}
 		else{
-			if(oldPos.z != newPos.z){
-				//floor change extra cost
-				lastStepCost = 2;
-			}
-			else if(std::abs(newPos.x - oldPos.x) >=1 && std::abs(newPos.y - oldPos.y) >= 1){
+			// A floor change (stairs, ramps) costs a normal step: the 7.4 client asks for the next
+			// step after the usual time, and a double cost here held every step off the stairs for
+			// ~900 ms instead of ~450 (measured with tools/walk-trace.py)
+			if(oldPos.z == newPos.z && std::abs(newPos.x - oldPos.x) >=1 && std::abs(newPos.y - oldPos.y) >= 1){
 				//diagonal extra cost
 				lastStepCost = 2;
 			}
@@ -1434,9 +1431,11 @@ std::string Creature::getXRayDescription() const
 	return ret.str();
 }
 
+// How long a step in dir from the current tile takes. getStepDuration() is the previous step's
+// duration (it includes that step's lastStepCost), so take that cost out again.
 int32_t Creature::getStepDuration(Direction dir) const
 {
-	int32_t stepDuration = getStepDuration();
+	int32_t stepDuration = getStepDuration() / (lastStepCost ? lastStepCost : 1);
 
 	if(dir == NORTHWEST || dir == NORTHEAST || dir == SOUTHWEST || dir == SOUTHEAST){
 		stepDuration *= 2;

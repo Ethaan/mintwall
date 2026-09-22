@@ -63,6 +63,9 @@ SQLite shell: `server\build\vcpkg_installed\x64-windows-static\tools\sqlite3.exe
 ## Accounts (local, from sql/seed.sql)
 
 - 111111 / tibia - "Mintwall", player, Rookgaard (town 1)
+- 1 / 1 - "Free Tester", free account, level 1, Rookgaard
+- 2 / 2 - "Premium Tester", premium account (premend 2000000000 = May 2033; premend is read as
+  32-bit, so no later date), level 8, Rookgaard - for King's Bridge and the Gatekeeper
 - Noob outfit (new characters): looktype 128 male / 136 female, head 78, body 69, legs 58, feet 114
   (picked in the client's own outfit dialog; set in data/creaturescripts/scripts/login.lua)
 - 222222 / test - "Rook Tester" (level 1, Rookgaard temple) and "Oracle Tester" (level 8, next to

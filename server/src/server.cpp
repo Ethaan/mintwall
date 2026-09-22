@@ -89,6 +89,10 @@ void Server::openListenSocket()
 void Server::onAccept(Connection* connection, const boost::system::error_code& error)
 {
 	if(!error){
+		// Send small packets (a step, a move) at once: with Nagle's algorithm on, one could wait for
+		// the ACK of the previous packet, which Windows may delay by up to 200 ms
+		boost::system::error_code ignored;
+		connection->getHandle().set_option(boost::asio::ip::tcp::no_delay(true), ignored);
 		connection->acceptConnection();
 		#ifdef __DEBUG_NET_DETAIL__
 		std::cout << "accept - OK" << std::endl;

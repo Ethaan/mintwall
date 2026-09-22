@@ -35,6 +35,10 @@
 #include <boost/thread.hpp>
 #include <boost/asio.hpp>
 
+#if defined(__WINDOWS__)
+#include <mmsystem.h>   // timeBeginPeriod
+#endif
+
 #if !defined(__WINDOWS__)
     #include <unistd.h> // for access()
 #endif
@@ -139,6 +143,12 @@ int main(int argc, char *argv[])
 	if(parseCommandLine(g_command_opts, std::vector<std::string>(argv, argv + argc)) == false){
 		return 0;
 	}
+
+	#if defined(__WINDOWS__)
+	// Windows ticks every ~15.6 ms by default; the game clock (OTSYS_TIME) and the scheduler follow
+	// that tick, so steps started up to ~100 ms early or late. 1 ms makes walking pace even.
+	timeBeginPeriod(1);
+	#endif
 
 	#if !defined(__WINDOWS__)
 	if(g_command_opts.runfile != ""){
