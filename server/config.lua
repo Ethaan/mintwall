@@ -217,8 +217,8 @@
     UseAccBalance = false
 
     -- Time after player will be warned and kicked, in miliseconds
-    IdleTimeKick = 60000
-	IdleTimeWarning = 30000
+    IdleTimeKick = 900000       -- 15 minutes, like real Tibia
+	IdleTimeWarning = 840000    -- warned at 14 minutes
 
     -- Level on which player will get rooked
     LevelToRook = 5

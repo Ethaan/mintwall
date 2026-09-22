@@ -2,6 +2,23 @@
 -- Modified by TheForgottenServer Team,
 -- Modified by The OTX Server Team.
 
+-- True if keyword occurs in message as whole words ("sell" is not in "counsellor").
+-- Both are lowercase; keyword is a plain string, not a pattern.
+function containsWord(message, keyword)
+	local init = 1
+	while true do
+		local a, b = string.find(message, keyword, init, true)
+		if(a == nil) then
+			return false
+		end
+		local before, after = string.sub(message, a - 1, a - 1), string.sub(message, b + 1, b + 1)
+		if(not string.find(before, '%w') and not string.find(after, '%w')) then
+			return true
+		end
+		init = a + 1
+	end
+end
+
 if(KeywordHandler == nil) then
 	BEHAVIOR_SIMPLE = 1 -- Does not support nested keywords. If you choose this setting you must use a variable such as 'talkState' to keep track of how to handle keywords.
 	BEHAVIOR_NORMAL = 2 -- Default behvaior. If a sub-keyword is not found, then the root is searched, not the parent hierarchy,
@@ -49,15 +66,23 @@ if(KeywordHandler == nil) then
 		end
 
 		for i,v in ipairs(self.keywords) do
-			if(type(v) == 'string') then
-				local a, b = string.find(message, v)
-				if(a == nil or b == nil) then
-					return false
-				end
+			if(type(v) == 'string' and not containsWord(message, string.lower(v))) then
+				return false
 			end
 		end
 
 		return true
+	end
+
+	-- How specific this node's keywords are: "hand axe" (8) wins over "axe" (3) for "buy hand axe".
+	function KeywordNode:specificity()
+		local n = 0
+		for i,v in ipairs(self.keywords) do
+			if(type(v) == 'string') then
+				n = n + string.len(v)
+			end
+		end
+		return n
 	end
 
 	-- Returns the parent of this node or nil if no such node exists.
@@ -168,8 +193,16 @@ if(KeywordHandler == nil) then
 	--	Returns the childNode which processed the message or nil if no such node was found.
 	function KeywordHandler:processNodeMessage(node, cid, message)
 		local messageLower = string.lower(message)
+		local matches = {}
 		for i, childNode in pairs(node.children) do
 			if(childNode:checkMessage(messageLower)) then
+				table.insert(matches, childNode)
+			end
+		end
+		-- Most specific match first; pairs() order is random, so "axe" could answer "buy hand axe"
+		table.sort(matches, function(a, b) return a:specificity() > b:specificity() end)
+		for i, childNode in ipairs(matches) do
+			do
 				local oldLast = self.lastNode[cid]
 				self.lastNode[cid] = childNode
 

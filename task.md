@@ -28,6 +28,34 @@ When finishing one, tick it and add a short note (what changed / how verified).
 
 ## NPCs
 
+- [x] Tom: selling lost the item and paid nothing on every NPC (broken shop helpers in global.lua);
+      dead rabbit id 2992 -> 3119 (the corpse rabbits leave). test_rookgaard.py
+- [x] Rookgaard NPC tests - all 19 NPCs, 107 tests pass (full suite ~6 min)
+  - [x] 1. tests/test_npcs_rookgaard.py, generated from each NPC's XML/script (tibia74/npcs.py): every
+        keyword gets its reply, every item can be bought / sold for its listed price (checked in the
+        saved character). Test characters are in a test-only unmutable group (fast talk gets muted)
+  - [x] 2. tests/test_npc_data.py: shop item ids exist and match their names; what an NPC buys can be
+        obtained (monster corpse/loot or a shop)
+  - [x] 3. hand-written: quest trades (Al Dee pick, Billy pan, Amber book, Lee'Delle honey flower,
+        Seymour present), Seymour's Key to Adventure (action id 4600), Blind Orc, healers (heal to 65)
+  - Bugs found and fixed on the way:
+    - default.lua (121 NPCs) bought and sold a sample axe
+    - keyword matching (all NPCs): capitalised keywords never matched; substrings matched ("sell" in
+      "counsellor"); random order let "axe" answer "buy hand axe" -> whole words, most specific first
+    - NPC texts: 8.x {keyword} braces stripped in selfSay (Oracle: "{CARLIN}")
+    - Norma: buy/sell dialogue keywords hijacked her shop; egg was a phoenix egg (2328 -> 2695)
+    - Al Dee/Dixi/Obi: sold "axe" paid for a hand axe (2380 -> 2386); "sttuded shield"; Dixi/Obi sold
+      worms (item 3976 does not exist in 7.4)
+    - Blind Orc: <interaction> XML is not supported by Avesta - he never spoke; ported to blind_orc.lua
+- [x] The Gatekeeper (Rookgaard premium side, 32035,32183,6 - the map's blackboards describe him): the
+      premium Oracle (Ankrahmun, Darashia, Edron). Ankrahmun and Edron had swapped town ids (respawn in
+      the wrong city) - now looked up by name, destination = the town's temple. test_rookgaard.py
+- [ ] Gatekeeper and Oracle hand out vocation starter kits (TFS-era) - 7.4 had none? (reference task)
+- [ ] Questions for the 7.4 reference: did Lee'Delle sell footballs (111 gp)? Seymour buys dead rats?
+      Norma's lines are 8.x ("ask me for a trade"); NPC muting when talking fast to NPCs
+- [ ] After the Rookgaard NPC tests: gather a 7.4-era reference (prices, NPC dialogue, spell lists)
+      from a source like TibiaWiki's history/archived pages, store it in the repo and compare our NPCs
+      against it (then the same for the other towns)
 - [ ] Write real dialogue for The Queen of the Banshees (placeholder greets only)
 - [ ] Replace Donald McRonald placeholder with his real 7.4 NPC
 - [ ] Talk-test every NPC once; log the ones that error or don't answer
@@ -50,6 +78,8 @@ When finishing one, tick it and add a short note (what changed / how verified).
 - [x] Removed the teleport in Rookgaard temple that sent new players to Thais
       (tools/map-remove-item.py)
 - [ ] Audit every teleport on the map against 7.4 (only the Rookgaard one was wrong so far)
+- [x] King's Bridge (Rookgaard, 32057,32192-32193,7): action id 50003 = premium-only ground, nothing
+      handled it; movements/scripts/premium_tile.lua sends free accounts back. test_rookgaard.py
 - [x] Rookgaard sewer bridge levers (action id 50001, 32098/32104,32204,8): ported upstream's
       rat bridge as `rook_rat_bridge.lua`; covered by test_rookgaard.py
 - [ ] Other map action ids with no script behind them (50001 had none) - list and port them
@@ -102,10 +132,10 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [ ] Rookgaard: no PvP on the island (non-pvp zone or protection level)
 
 ### Idle and session
-- [ ] Idle timeout far too short, warning reads "idle for 0 minutes": IdleTimeWarning 30 s /
-      IdleTimeKick 60 s in config.lua and player.cpp prints whole minutes only.
-      Real Tibia warned at ~14 min and kicked at ~15 min
-- [ ] Idle message wording: "idle for X minutes , you will be" has a stray space
+- [x] Idle timeout: warned at 30 s and kicked at 60 s, so the warning read "idle for 0 minutes"
+      (whole minutes only) -> config.lua IdleTimeWarning 14 min, IdleTimeKick 15 min, like real Tibia
+- [x] Idle message wording: "...idle for 14 minutes. You will be disconnected in 1 minute if you are
+      still idle." (was "minutes , you will be"; player.cpp, needs a rebuild)
 
 ### Premium
 - [ ] What premium unlocks in 7.4 (towns, promotion, spells, houses) and how players get it

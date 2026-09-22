@@ -2,6 +2,7 @@
 import pytest
 
 from tibia74 import Item, RIGHT
+from tibia74.server import TESTER_GROUP
 
 ROOKGAARD_TEMPLE = (32097, 32219, 7)
 THAIS_TEMPLE = (32369, 32241, 7)
@@ -84,6 +85,8 @@ def test_oracle_turns_a_level_8_into_a_knight_of_thais(new_player, world, db):
     p = _near_oracle(new_player, world, level=8)
     replies = p.talk("hi", "yes", "thais", "knight", npc="The Oracle")
     assert any("ARE YOU SURE" in r for r in replies), replies
+    assert any("IN WHICH TOWN" in r for r in replies), replies
+    assert not any("{" in r or "}" in r for r in replies), f"8.x {{keyword}} braces in 7.4 text: {replies}"
     p.say("yes")   # the Oracle teleports us at once, so its "SO BE IT" is said after we're gone
     assert p.wait_for(lambda: p.pos == THAIS_TEMPLE, timeout=5), f"not teleported to Thais: {p.pos}"
 
@@ -119,3 +122,65 @@ def test_sewer_switch_lowers_the_bridge_and_raises_it_again(new_player):
     _use_switch(p, EAST_SWITCH)
     assert p.wait_for(lambda: all(p.tile_items(b)[0].client_id != DRAWBRIDGE for b in BRIDGE), timeout=5)
     assert walker.wait_for(lambda: walker.pos == (32102, 32205, 8), timeout=5), f"left on the water at {walker.pos}"
+
+
+# ----------------------------------------------------------------------------- Tom the tanner
+
+TOM = (32085, 32199, 7)
+BAG = 1988
+DEAD_RAT, DEAD_RABBIT = 2813, 3119   # the corpses rats and rabbits really leave
+
+
+def _gold(p):
+    return sum(i.count for i in p.all_items() if i.name == "gold coin")
+
+
+@pytest.mark.parametrize("corpse, name", [(DEAD_RAT, "dead rat"), (DEAD_RABBIT, "dead rabbit")])
+def test_tom_buys_fresh_corpses_for_2_gold(new_player, corpse, name):
+    from tibia74 import BACKPACK
+    p = new_player(pos=(TOM[0] + 1, TOM[1] + 1, TOM[2]), inventory={BACKPACK: Item(BAG, contents=[Item(corpse)])})
+    assert p.open_container(BACKPACK), "no backpack"
+
+    replies = p.talk("hi", f"sell {name}", "yes", npc="Tom")
+    assert p.wait_for(lambda: _gold(p) == 2, timeout=5), f"no gold; Tom said {replies}"
+    assert not any(i.name == name for i in p.all_items()), "corpse still in the backpack"
+
+
+# ----------------------------------------------------------------------------- King's Bridge
+
+KINGS_BRIDGE_EAST, KINGS_BRIDGE_WEST = (32059, 32192, 7), (32055, 32192, 7)   # premium planks at x 32057
+
+
+def test_kings_bridge_turns_back_free_accounts(new_player):
+    p = new_player(pos=KINGS_BRIDGE_EAST)
+    p.walk_to(KINGS_BRIDGE_WEST, max_steps=6)
+    assert p.pos[0] > 32057, f"a free account crossed King's Bridge: {p.pos}"
+    assert p.messages("Only premium citizens may pass"), p.text_messages
+
+
+def test_kings_bridge_lets_premium_accounts_cross(new_player):
+    p = new_player(pos=KINGS_BRIDGE_EAST, premium_days=30)
+    assert p.walk_to(KINGS_BRIDGE_WEST, max_steps=6), f"premium account stopped at {p.pos}"
+
+
+# ----------------------------------------------------------------------------- the Gatekeeper (premium side)
+
+ANKRAHMUN_TEMPLE, ANKRAHMUN_TOWN = (33194, 32853, 8), 9   # from Tibia74.otbm
+
+
+def test_gatekeeper_sends_a_premium_level_8_to_ankrahmun(new_player, world, db):
+    """The premium side's Oracle (west of King's Bridge): Ankrahmun, Darashia or Edron."""
+    keeper = world.npcs["The Gatekeeper"]
+    # snakes roam the (unprotected) room; an attacked player cannot log out, so use the unattackable group
+    p = new_player(level=8, premium_days=30, pos=(keeper[0], keeper[1] + 1, keeper[2]),   # +2 is a trapdoor
+                   group_id=TESTER_GROUP)
+    assert distance(p.pos, keeper) <= 3, f"could not place the player near the Gatekeeper: {p.pos}"
+    replies = p.talk("hi", "yes", "ankrahmun", "knight", npc="The Gatekeeper")
+    assert any("Are you sure" in r for r in replies), replies
+    p.say("yes")
+    assert p.wait_for(lambda: p.pos == ANKRAHMUN_TEMPLE, timeout=5), f"not teleported to Ankrahmun: {p.pos}"
+
+    p.logout()
+    row = db.character(p.character.guid)
+    assert row["vocation"] == 4
+    assert row["town_id"] == ANKRAHMUN_TOWN, f"home town {row['town_id']} is not Ankrahmun (respawn temple)"

@@ -199,6 +199,7 @@
         <movevent event="StepOut" itemid="417" script="switch_tile.lua" />
         <movevent event="StepOut" itemid="425" script="switch_tile.lua" />
         <movevent event="StepIn"  itemid="426" script="switch_tile.lua" />
+        <movevent event="StepIn"  actionid="50003" script="premium_tile.lua" />
         <movevent event="StepIn"  itemid="446" script="switch_tile.lua" />
         <movevent event="StepOut" itemid="447" script="switch_tile.lua" />
 

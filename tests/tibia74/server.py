@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SERVER_DIR = ROOT / "server"
 RUN_DIR = ROOT / "tests" / ".run"
 TEST_PORT = 7181
+TESTER_GROUP = 2   # see prepare()
 
 
 class ServerProcess:
@@ -30,6 +31,11 @@ class ServerProcess:
         con = sqlite3.connect(self.db_path)
         con.executescript((SERVER_DIR / "sql" / "schema.sqlite").read_text(encoding="latin-1"))
         con.executescript((SERVER_DIR / "sql" / "seed.sql").read_text(encoding="latin-1"))
+        # Test-only group for scripted NPC visits: talks fast without being muted, and roaming monsters
+        # cannot attack it (a fight blocks the logout that saves the character the test then checks)
+        flags = 1 << 36 | 1 << 3   # PlayerFlag_CannotBeMuted, PlayerFlag_CannotBeAttacked
+        con.execute('INSERT INTO groups (id, name, flags, access, maxdepotitems, maxviplist)'
+                    ' VALUES (?, ?, ?, 0, 1000, 50)', (TESTER_GROUP, "Tester", flags))
         con.commit()
         con.close()
 

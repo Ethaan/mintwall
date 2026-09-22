@@ -43,6 +43,7 @@ end
 -- keyword is supposed to be lowercase without lowering it
 function msgcontains(message, keyword)
 	message = string.lower(message)
+	keyword = string.lower(keyword)   -- keywords like "Norma" in an NPC's XML must match too
 	return (string.find(message, keyword) and 
 			not string.find(message, '(%w+)' .. keyword) and 
 			not string.find(message, keyword .. '(%w+)'))
@@ -96,3 +97,13 @@ end
 -- TFS-era NPC scripts: compatibility layer + Jiddo NpcSystem
 dofile(getDataDir() .. 'npc/lib/compat.lua')
 dofile(getDataDir() .. 'npc/lib/_npcsystem.lua')
+
+-- Many NPC texts come from 8.x+ datapacks that mark keywords as {trade}; that highlighting does not
+-- exist in the 7.4 client, which would print the braces. Every NPC line goes through selfSay.
+local rawSelfSay = selfSay
+function selfSay(message, ...)
+	if(type(message) == 'string') then
+		message = string.gsub(message, '[{}]', '')
+	end
+	return rawSelfSay(message, ...)
+end

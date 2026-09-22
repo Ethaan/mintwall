@@ -3923,7 +3923,7 @@ void Player::checkIdleTime(uint32_t ticks)
 			std::stringstream message;
 			message << "You have been idle for " << alreadyIdleTime
 				<< (alreadyIdleTime == 1 ? " minute" : " minutes")
-				<< " , you will be disconnected in " << remainingTime
+				<< ". You will be disconnected in " << remainingTime
 				<< (remainingTime == 1 ? " minute" : " minutes")
 				<< " if you are still idle.";
 			sendTextMessage(MSG_STATUS_WARNING, message.str());

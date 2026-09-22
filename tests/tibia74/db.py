@@ -1,6 +1,7 @@
 """Creates test characters directly in the test database (the 7.4 client has no character creation)."""
 import itertools
 import sqlite3
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -41,6 +42,9 @@ class Character:
     password: str
 
 
+BEGINNER_SET_GIVEN = 30001   # storage login.lua sets once it handed out the beginner set
+
+
 class TestDatabase:
     def __init__(self, path: Path):
         self.path = Path(path)
@@ -53,8 +57,10 @@ class TestDatabase:
     def create_character(self, name: str = None, *, level: int = 1, vocation: int = 0,
                          town_id: int = 1, pos: tuple = None, sex: int = 1,
                          inventory: dict = None, group_id: int = 1,
-                         health: int = None, mana: int = None) -> Character:
-        """New character on its own account. pos=None means 'spawn at the town temple'."""
+                         health: int = None, mana: int = None, storage: dict = None,
+                         premium_days: int = 0) -> Character:
+        """New character on its own account. pos=None means 'spawn at the town temple'.
+        storage: {key: value} player storage, e.g. {BEGINNER_SET_GIVEN: 1} to skip the first-login set."""
         n = next(_counter)
         name = name or f"Test{n:04d}"
         account = TEST_ACCOUNT_BASE + n
@@ -67,7 +73,9 @@ class TestDatabase:
 
         con = self._connect()
         try:
-            con.execute('INSERT OR REPLACE INTO accounts (id, password) VALUES (?, ?)', (account, password))
+            premend = int(time.time()) + premium_days * 86400 if premium_days else 0
+            con.execute('INSERT OR REPLACE INTO accounts (id, password, premend) VALUES (?, ?, ?)',
+                        (account, password, premend))
             cur = con.execute(
                 'INSERT INTO players (name, account_id, group_id, sex, vocation, experience, level,'
                 ' health, healthmax, mana, manamax, cap, posx, posy, posz, conditions, rank_id, town_id)'
@@ -78,6 +86,8 @@ class TestDatabase:
             guid = cur.lastrowid
             if inventory:
                 self._insert_items(con, guid, inventory)
+            for key, value in (storage or {}).items():
+                con.execute('INSERT INTO player_storage (player_id, key, value) VALUES (?, ?, ?)', (guid, key, value))
             con.commit()
         finally:
             con.close()

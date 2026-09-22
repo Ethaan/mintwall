@@ -110,7 +110,7 @@ local node1 = keywordHandler:addKeyword({'yes'}, StdModule.say, {npcHandler = np
 
 -----------------
 -----------------
-    local node2 = node1:addChildKeyword({'ankrahmun'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, townid = 6, destination = {x=33195, y=32853, z=8}, text = 'Ankrahmun will be your home-town! So what vocation do you wish to become? Sorcerer, druid, paladin or knight?'})
+    local node2 = node1:addChildKeyword({'ankrahmun'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, townid = getTownIdByName("Ankrahmun"), destination = getTownTemplePosition(getTownIdByName("Ankrahmun")), text = 'Ankrahmun will be your home-town! So what vocation do you wish to become? Sorcerer, druid, paladin or knight?'})
         local node3 = node2:addChildKeyword({'sorcerer'}, StdModule.say, {npcHandler = npcHandler, voc = 1, onlyFocus = true, text = 'So, you wish to be a powerful magician? Are you sure about that? This decision is irreversible!'})
             node3:addChildKeywordNode(yesNode)
             node3:addChildKeywordNode(noNode)
@@ -125,7 +125,7 @@ local node1 = keywordHandler:addKeyword({'yes'}, StdModule.say, {npcHandler = np
             node3:addChildKeywordNode(noNode)
 -----------------
 -----------------
-        local node2 = node1:addChildKeyword({'darashia'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, townid = 7, destination = {x=33213, y=32454, z=1}, text = 'Darashia will be your home-town! So what vocation do you wish to become? Sorcerer, druid, paladin or knight?'})
+        local node2 = node1:addChildKeyword({'darashia'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, townid = getTownIdByName("Darashia"), destination = getTownTemplePosition(getTownIdByName("Darashia")), text = 'Darashia will be your home-town! So what vocation do you wish to become? Sorcerer, druid, paladin or knight?'})
         local node3 = node2:addChildKeyword({'sorcerer'}, StdModule.say, {npcHandler = npcHandler, voc = 1, onlyFocus = true, text = 'So, you wish to be a powerful magician? Are you sure about that? This decision is irreversible!'})
             node3:addChildKeywordNode(yesNode)
             node3:addChildKeywordNode(noNode)
@@ -140,7 +140,7 @@ local node1 = keywordHandler:addKeyword({'yes'}, StdModule.say, {npcHandler = np
             node3:addChildKeywordNode(noNode)
 -----------------
 -----------------
-    local node2 = node1:addChildKeyword({'edron'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, townid = 9, destination = {x=33217, y=31814, z=8}, text = 'Edron will be your home-town! So what vocation do you wish to become? Sorcerer, druid, paladin or knight?'})
+    local node2 = node1:addChildKeyword({'edron'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, townid = getTownIdByName("Edron"), destination = getTownTemplePosition(getTownIdByName("Edron")), text = 'Edron will be your home-town! So what vocation do you wish to become? Sorcerer, druid, paladin or knight?'})
         local node3 = node2:addChildKeyword({'sorcerer'}, StdModule.say, {npcHandler = npcHandler, voc = 1, onlyFocus = true, text = 'So, you wish to be a powerful magician? Are you sure about that? This decision is irreversible!'})
             node3:addChildKeywordNode(yesNode)
             node3:addChildKeywordNode(noNode)
