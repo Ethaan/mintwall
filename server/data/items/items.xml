@@ -5412,7 +5412,6 @@
 	<item id="2543" article="a" name="bolt" plural="bolts">
 		<attribute key="weight" value="80"/>
 		<attribute key="attack" value="30"/>
-                <attribute key="hitChance" value="80"/>
 		<attribute key="weaponType" value="ammunition"/>
 		<attribute key="ammoType" value="bolt"/>
 		<attribute key="shootType" value="bolt"/>
@@ -5420,7 +5419,6 @@
 	<item id="2544" article="an" name="arrow" plural="arrows">
 		<attribute key="weight" value="70"/>
 		<attribute key="attack" value="25"/>
-        <attribute key="hitChance" value="90"/>
 		<attribute key="weaponType" value="ammunition"/>
 		<attribute key="ammoType" value="arrow"/>
 		<attribute key="shootType" value="arrow"/>
@@ -5428,14 +5426,12 @@
 	<item id="2545" article="a" name="poison arrow" plural="poison arrows">
 		<attribute key="weight" value="80"/>
 		<attribute key="attack" value="20"/>
-                <attribute key="hitChance" value="80"/>
 		<attribute key="weaponType" value="ammunition"/>
 		<attribute key="ammoType" value="arrow"/>
 		<attribute key="shootType" value="poisonarrow"/>
 	</item>
 	<item id="2546" article="a" name="burst arrow" plural="burst arrows">
 		<attribute key="weight" value="90"/>
-                <attribute key="hitChance" value="80"/>
 		<attribute key="weaponType" value="ammunition"/>
 		<attribute key="ammoType" value="arrow"/>
 		<attribute key="shootType" value="burstarrow"/>

@@ -69,3 +69,26 @@ def test_monster_melee_follows_the_7_4_formula(new_player):
         hits += [int(t) for pos, _, t in victim.animated_texts[n:] if pos == victim.pos and t.isdigit()]
     assert len(hits) >= 5, f"too few hits to judge: {hits}"
     assert max(hits) <= 125, f"hits {sorted(hits)} - above the 7.4 max of 125"
+
+
+def test_bolts_hit_by_skill_and_distance_not_a_fixed_chance(new_player):
+    """7.4: hit chance = 91% x min(skill / (15d - 1), 1) - distance skill 20 at 5 tiles hits ~25%.
+    Bolts and arrows had a fixed hitChance in items.xml (80 / 90) that ignored skill and distance."""
+    import time
+    from tibia74 import AMMO, RIGHT
+    spot = (32031, 32138, 7)          # open grass, 12+ tiles from any spawn
+    shooter = new_player(pos=spot, level=100, vocation=3, skills={4: 20},
+                         inventory={RIGHT: Item(2455), AMMO: Item(2543, 100)})          # crossbow, bolts
+    target = new_player(pos=(spot[0] + 5, spot[1], spot[2]), level=100, storage={30001: 1})
+    assert shooter.pos == spot and target.pos == (spot[0] + 5, spot[1], spot[2]), (shooter.pos, target.pos)
+    shooter.set_fight_modes(fight=1, chase=0, safe=0)
+    start = len(target.animated_texts)
+    shooter.attack(target.player_id)
+    deadline = time.time() + 60
+    while time.time() < deadline and 100 - shooter.inventory[AMMO].count < 20:
+        shooter.sleep(0.5)
+    shooter.attack(0)
+    shots = 100 - shooter.inventory[AMMO].count
+    hits = sum(1 for pos, _, t in target.animated_texts[start:] if pos == target.pos and t.isdigit())
+    assert shots >= 15, f"only {shots} shots"
+    assert hits / shots < 0.55, f"{hits} of {shots} bolts hit - skill 20 at 5 tiles should hit ~25%, not a fixed 80%"

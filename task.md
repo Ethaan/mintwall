@@ -303,7 +303,16 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
         UH rune fixed 250 (%P). test_formulas.py (IH rune at level 8)
   - [x] 5. Regeneration: Elite Knight 4/12, Paladin 8/8, Royal Paladin 6/6, MS/ED hp 12 (vocations.xml,
         test_formulas.py); promoted characters lose 7% instead of 10% on death (Player::getDeathLossFactor)
-  - [ ] 5b. Distance hit chance min(skill/(15d-1), 1) - only one source, sources conflict on the minimum
+  - [x] 5b. Distance hit chance min(skill/(15d-1), 1) - only one source, sources conflict on the minimum
+        Spike 2026-09-23 (paladin attacks): 7.4 hit chance = projectile x min(skill/(15d-1), 1), adjacent = d 5,
+        projectile 91% arrows/bolts, 76% thrown (TN distance_calculator source). Spears / stars / knives: our
+        TFS table (weapons.cpp:877) is the same model at 75%: within 1% everywhere, adjacent included - OK.
+        Bolts / arrows: items.xml hitChance 80 (bolt, poison/burst arrow) / 90 (arrow) is a FIXED chance
+        that skips skill and distance: skill 30 at 7 tiles hits 80% (7.4: 26%), skill 100 hits 80% (7.4:
+        91%). Fixed: hitChance removed from 2543-2546, they use the ammo table (maxHitChance 90, = 7.4 model).
+        test_formulas.py: skill 20 at 5 tiles hits under 55% of 20 bolts (old: 17 of 20)
+        Melee with sword/club/axe: same formula as knights (vocations.xml multipliers all 1.0) - OK.
+        Open: spear range (ours 5), spears stackable and breaking in 7.4?
   - [ ] Tests for step 3 (melee, distance, stances, shield block): measure damage and blocks in game
         against the 7.4 formulas - the formulas are built but not pinned by any test yet
 - [x] 7.4 formulas research (docs/reference-74/formulas.md): Berserk = level x 4 mana
