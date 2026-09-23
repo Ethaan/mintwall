@@ -50,3 +50,22 @@ def test_regeneration_per_vocation_is_7_4():
     assert {k: v for k, v in ticks.items() if k != "Gamemaster"} == {
         "None": (12, 12), "Sorcerer": (12, 6), "Druid": (12, 6), "Paladin": (8, 8), "Knight": (6, 12),
         "Master Sorcerer": (12, 4), "Elder Druid": (12, 4), "Royal Paladin": (6, 6), "Elite Knight": (4, 12)}
+
+
+def test_monster_melee_follows_the_7_4_formula(new_player):
+    """A dwarf guard (7.4: attack 39, skill 55) hits at most (5*55+50)*39*0.99/100 = 125 - it was 200.
+    The target wears nothing and holds no shield, so every hit shows its full rolled damage."""
+    import time
+    spot = (32107, 32222, 7)                                  # the dirt road east of the Rookgaard temple
+    victim = new_player(pos=spot, level=100, storage={30001: 1})
+    gm = new_player(pos=(spot[0], spot[1] - 3, spot[2]), group_id=3)
+    gm.say("/m Dwarf Guard")
+    guard = victim.wait_for(lambda: victim.nearest("Dwarf Guard"), timeout=5)
+    assert guard, "no dwarf guard"
+    hits, deadline = [], time.time() + 40
+    while time.time() < deadline and len(hits) < 15:
+        n = len(victim.animated_texts)
+        victim.sleep(0.2)
+        hits += [int(t) for pos, _, t in victim.animated_texts[n:] if pos == victim.pos and t.isdigit()]
+    assert len(hits) >= 5, f"too few hits to judge: {hits}"
+    assert max(hits) <= 125, f"hits {sorted(hits)} - above the 7.4 max of 125"

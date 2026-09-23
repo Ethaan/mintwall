@@ -23,7 +23,7 @@
       <attribute key="areaEffect" value="poison"/>
     </attack>
   </attacks>
-  <defenses armor="1" defense="5"/>
+  <defenses armor="1" defense="5" skill="15"/>
   <immunities>
     <immunity physical="0"/>
     <immunity energy="0"/>

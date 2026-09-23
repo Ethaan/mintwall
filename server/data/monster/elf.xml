@@ -23,7 +23,7 @@
       <attribute key="shootEffect" value="arrow"/>
     </attack>
   </attacks>
-  <defenses armor="6" defense="12"/>
+  <defenses armor="6" defense="12" skill="20"/>
   <immunities>
     <immunity physical="0"/>
     <immunity energy="0"/>

@@ -65,7 +65,8 @@ class TestDatabase:
                          town_id: int = 1, pos: tuple = None, sex: int = 1,
                          inventory: dict = None, group_id: int = 1,
                          health: int = None, mana: int = None, storage: dict = None,
-                         premium_days: int = 0, maglevel: int = 0, skills: dict = None) -> Character:
+                         premium_days: int = 0, maglevel: int = 0, skills: dict = None,
+                         experience: int = None) -> Character:
         """New character on its own account. pos=None means 'spawn at the town temple'.
         storage: {key: value} player storage, e.g. {BEGINNER_SET_GIVEN: 1} to skip the first-login set.
         skills: {skill id: level}, 0 fist 1 club 2 sword 3 axe 4 distance 5 shielding 6 fishing."""
@@ -88,7 +89,8 @@ class TestDatabase:
                 'INSERT INTO players (name, account_id, group_id, sex, vocation, experience, level,'
                 ' health, healthmax, mana, manamax, cap, posx, posy, posz, conditions, rank_id, town_id)'
                 ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?)',
-                (name, account, group_id, sex, vocation, exp_for_level(level), level,
+                (name, account, group_id, sex, vocation,
+                 exp_for_level(level) if experience is None else experience, level,
                  health if health is not None else healthmax, healthmax,
                  mana if mana is not None else manamax, manamax, cap, x, y, z, b"", town_id))
             guid = cur.lastrowid

@@ -907,9 +907,10 @@ BlockType_t Creature::blockHit(Creature* attacker, CombatType_t combatType, int3
 
 		if(checkDefense && hasDefense){
 			int32_t maxDefense = getDefense();
-			if(getPlayer()){
-				// 7.4: a player's block is rolled like an attack, 0..max (docs/reference-74 §6.2);
-				// monsters keep def/2..def until their 7.4 attack/defense/skill data is migrated
+			const Monster* monster = getMonster();
+			if(getPlayer() || (monster && monster->blocksLikeAttack())){
+				// 7.4: a block is rolled like an attack, 0..max (docs/reference-74 §6.2); monsters
+				// without 7.4 skill data (<defenses skill=>) keep def/2..def
 				damage -= random_range(0, maxDefense, DISTRO_NORMAL);
 			}
 			else{

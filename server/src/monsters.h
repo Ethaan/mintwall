@@ -98,6 +98,7 @@ public:
 	uint64_t experience;
 
 	int defense;
+	int defenseSkill;   // 7.4 fighting skill for blocking (<defenses skill=>), 0 = old def/2..def block
 	int armor;
 
 	bool canPushItems;

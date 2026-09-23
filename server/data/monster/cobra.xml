@@ -23,7 +23,7 @@
       <attribute key="shooteffect" value="poison"/>
     </attack>
   </attacks>
-  <defenses armor="1" defense="4"/>
+  <defenses armor="1" defense="6" skill="23"/>
   <immunities>
     <immunity physical="0"/>
     <immunity energy="0"/>

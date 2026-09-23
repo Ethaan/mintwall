@@ -27,7 +27,7 @@
       <attribute key="shootEffect" value="fire"/>
     </attack>
   </attacks>
-  <defenses armor="18" defense="20"/>
+  <defenses armor="18" defense="20" skill="38"/>
   <immunities>
     <immunity physical="0"/>
     <immunity energy="0"/>

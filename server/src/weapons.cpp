@@ -157,7 +157,8 @@ bool Weapons::registerEvent(Event* event, xmlNodePtr p)
 //monsters
 int32_t Weapons::getMaxMeleeDamage(int32_t attackSkill, int32_t attackValue)
 {
-	return ((int32_t)std::ceil((attackSkill * (attackValue * 0.05)) + (attackValue * 0.5)));
+	// 7.4: (5 x skill + 50) x attack x 0.99 / 100, monsters in balanced stance (docs/reference-74 §6.3)
+	return (int32_t)std::floor((5.0 * attackSkill + 50) * attackValue * 0.99 / 100);
 }
 
 //players

@@ -20,7 +20,7 @@
   <attacks>
     <attack name="melee" interval="2000" skill="23" attack="14"/>
   </attacks>
-  <defenses armor="8" defense="10"/>
+  <defenses armor="8" defense="14" skill="23"/>
   <immunities>
     <immunity physical="0"/>
     <immunity energy="0"/>

@@ -18,7 +18,7 @@
     <flag runonhealth="0"/>
   </flags>
   <attacks>
-    <attack name="melee" interval="2000" min="-30" max="-180"/>
+    <attack name="melee" interval="2000" skill="65" attack="42"/>
     <attack name="lifedrain" interval="2000" chance="20" range="1" min="-55" max="-105">
       <attribute key="areaEffect" value="redshimmer"/>
     </attack>
@@ -27,7 +27,7 @@
     </attack>
   </attacks>
 
-  <defenses armor="17" defense="23">
+  <defenses armor="27" defense="38" skill="65">
     <defense name="outfit" interval="1500" chance="60" monster="bat" duration="6000">
       <attribute key="areaEffect" value="blueshimmer"/>
     </defense>

@@ -1,0 +1,94 @@
+# 7.4 creature combat values, extracted from https://tibiantis-notes.github.io/js/creature.js
+name,Attack,Defence,Armor,FistFighting,HitPoints
+Amazon,16,11,11,24,110
+Ancient Scarab,50,33,36,80,1000
+Badger,10,3,1,17,23
+Banshee,30,65,25,45,1000
+Bear,17,6,6,15,80
+Behemoth,75,65,50,110,4000
+Beholder,12,20,5,35,260
+Black Knight,60,60,42,88,1800
+Black Sheep,0,2,1,0,20
+Blue Djinn,30,30,20,50,330
+Bonebeast,47,45,40,75,515
+Bug,9,3,2,23,29
+Cave Rat,8,4,1,18,30
+Cobra,15,6,1,23,65
+Crypt Shambler,39,25,30,60,330
+Cyclops,30,24,17,50,260
+Deer,2,2,2,10,25
+Demon,80,65,40,120,8200
+Demon Skeleton,45,35,25,70,400
+Dog,0,2,1,0,20
+Dragon,42,38,25,55,1000
+Dragon Lord,55,48,32,65,1900
+Dwarf,14,14,8,23,90
+Dwarf Geomancer,30,35,15,50,380
+Dwarf Guard,39,37,15,55,245
+Dwarf Soldier,21,20,9,42,135
+Efreet,35,35,24,55,550
+Elder Beholder,16,26,13,45,500
+Elf,12,12,6,20,100
+Elf Arcanist,20,20,15,25,220
+Elf Scout,18,18,7,25,160
+Fire Devil,22,15,13,30,200
+Fire Elemental,38,20,18,38,280
+Frost Troll,11,9,7,19,55
+Gargoyle,24,30,26,45,250
+Gazer,9,15,4,25,120
+Ghost,28,20,10,45,150
+Ghoul,26,17,8,37,100
+Giant Spider,65,40,30,80,1300
+Goblin,10,8,6,15,50
+Green Djinn,30,30,20,50,330
+Hero,58,50,35,80,1400
+Hunter,13,10,8,18,150
+Hyaena,11,5,1,18,60
+Larva,20,11,5,30,70
+Lich,40,60,50,40,880
+Lion,20,13,6,32,80
+Marid,35,35,24,55,550
+Minotaur,15,11,11,25,100
+Minotaur Archer,15,8,7,20,100
+Minotaur Guard,35,32,15,50,185
+Minotaur Mage,15,40,18,18,155
+Monk,42,52,25,55,240
+Mummy,32,23,14,50,240
+Necromancer,40,40,50,30,580
+Orc,13,8,4,22,70
+Orc Berserker,65,12,12,50,210
+Orc Leader,48,45,20,52,450
+Orc Rider,41,20,9,48,180
+Orc Shaman,13,10,8,20,115
+Orc Spearman,17,12,6,19,105
+Orc Warlord,68,55,28,72,950
+Orc Warrior,19,14,8,42,125
+Pig,0,2,2,10,25
+Poison Spider,12,6,2,25,26
+Polar Bear,18,10,7,19,85
+Priestess,20,50,30,25,390
+Rabbit,0,2,1,0,15
+Rat,7,3,1,15,20
+Rotworm,18,11,8,26,65
+Scarab,25,26,21,42,320
+Scorpion,21,5,14,35,45
+Sheep,0,2,1,0,20
+Skeleton,14,9,2,18,50
+Skunk,4,5,1,15,20
+Slime,42,10,3,22,150
+Snake,5,1,0,11,15
+Spider,7,2,2,19,20
+Stalker,30,20,14,40,120
+Stone Golem,38,25,30,52,270
+Swamp Troll,12,10,6,20,55
+Troll,10,8,6,15,50
+Valkyrie,20,14,12,35,190
+Vampire,42,38,27,65,450
+Warlock,40,50,32,50,3200
+War Wolf,24,16,8,39,140
+Wasp,12,8,4,23,35
+Wild Warrior,16,18,9,46,120
+Winter Wolf,13,6,2,21,30
+Witch,18,12,8,18,300
+Wolf,12,4,1,19,25
+Kobold,21,24,8,30,120

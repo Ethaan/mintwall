@@ -74,7 +74,15 @@ public:
 
 	virtual RaceType_t getRace() const { return mType->race; }
 	virtual int32_t getArmor() const { return mType->armor; }
-	virtual int32_t getDefense() const { return mType->defense; }
+	// 7.4: with a fighting skill (<defenses skill=>) the block max follows the attack formula,
+	// (5 x skill + 50) x defense x 0.99 / 100, rolled 0..max; without one, the old def/2..def
+	virtual int32_t getDefense() const {
+		if(mType->defenseSkill > 0){
+			return (int32_t)std::floor((5.0 * mType->defenseSkill + 50) * mType->defense * 0.99 / 100);
+		}
+		return mType->defense;
+	}
+	bool blocksLikeAttack() const { return mType->defenseSkill > 0; }
 	virtual bool isPushable() const { return mType->pushable && (baseSpeed > 0); }
 	virtual bool isAttackable() const { return mType->isAttackable;}
 

@@ -67,6 +67,24 @@ def test_level_1_player_can_kill_a_rat(new_player, world):
     assert p.stats.health > 0
 
 
+def test_killing_a_rat_gives_experience_and_a_level_up(new_player):
+    """A level 1 one experience point short of level 2 (100) kills a rat (5 exp): level 2 and more hp."""
+    spot = (32107, 32224, 7)                                   # the dirt road east of the temple
+    p = new_player(pos=spot, experience=99, inventory={RIGHT: Item(2376)}, skills={2: 50})   # sword
+    gm = new_player(pos=(spot[0], spot[1] - 3, spot[2]), group_id=3)
+    max_hp = p.wait_for(lambda: p.stats.max_health, timeout=5)
+    gm.say("/m Rat")
+    rat = p.wait_for(lambda: p.nearest("Rat"), timeout=5)
+    assert rat, "no rat"
+    p.set_fight_modes(fight=1, chase=1)
+    p.attack(rat.id)
+    assert p.wait_for(lambda: rat.id in p.removed_creatures, timeout=60), f"rat not killed: {rat}"
+    assert p.wait_for(lambda: p.stats.experience >= 104, timeout=3), f"experience {p.stats.experience}"
+    assert p.wait_for(lambda: p.stats.level == 2, timeout=3), f"level {p.stats.level}"
+    assert p.messages("You advanced from Level 1 to Level 2"), p.text_messages[-3:]
+    assert p.stats.max_health > max_hp, f"max hp {max_hp} -> {p.stats.max_health}"
+
+
 def test_killed_monster_dies_at_once(new_player, world):
     """It used to stand at 0 hp until its once-a-second check came round (plus 100-200 ms)."""
     import time

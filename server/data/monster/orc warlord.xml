@@ -18,12 +18,12 @@
     <flag runonhealth="0"/>
   </flags>
   <attacks>
-    <attack name="melee" interval="2000" min="-40" max="-200"/>
+    <attack name="melee" interval="2000" skill="72" attack="68"/>
     <attack name="physical" interval="3000" chance="25" range="7" min="-100" max="-120">
       <attribute key="shootEffect" value="throwingstar"/>
     </attack>
   </attacks>
-  <defenses armor="22" defense="35">
+  <defenses armor="28" defense="55" skill="72">
     <defense name="invisible" interval="1000" chance="4" duration="2000">
       <attribute key="areaEffect" value="blueshimmer"/>
     </defense>

@@ -23,7 +23,7 @@
       <attribute key="shootEffect" value="spear"/>
     </attack>
   </attacks>
-  <defenses armor="6" defense="12"/>
+  <defenses armor="6" defense="12" skill="19"/>
   <immunities>
     <immunity physical="0"/>
     <immunity energy="0"/>

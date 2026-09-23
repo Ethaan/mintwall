@@ -18,7 +18,7 @@
     <flag runonhealth="500"/>
   </flags>
   <attacks>
-    <attack name="melee" interval="2000" min="-0" max="-30" poison="150"/>
+    <attack name="melee" interval="2000" poison="150" skill="45" attack="30"/>
     <attack name="speed" interval="1000" chance="10" range="7" speedchange="-600" duration="20000">
       <attribute key="areaEffect" value="redshimmer"/>
     </attack>
@@ -26,7 +26,7 @@
       <attribute key="areaEffect" value="rednote"/>
     </attack>
   </attacks>
-  <defenses armor="15" defense="20">
+  <defenses armor="25" defense="65" skill="45">
     <defense name="healing" interval="1000" chance="25" min="113" max="187">
       <attribute key="areaEffect" value="blueshimmer"/>
     </defense>

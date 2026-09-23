@@ -23,7 +23,7 @@
       <attribute key="areaEffect" value="redshimmer"/>
   </attack>
   </attacks>
-  <defenses armor="14" defense="10">
+  <defenses armor="14" defense="20" skill="40">
     <defense name="invisible" interval="1000" chance="25" duration="9000">
       <attribute key="areaEffect" value="blueshimmer"/>
     </defense>

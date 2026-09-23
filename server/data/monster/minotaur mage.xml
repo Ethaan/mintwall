@@ -31,7 +31,7 @@
       <attribute key="shootEffect" value="energy"/>
     </attack>
   </attacks>
-  <defenses armor="18" defense="20"/>
+  <defenses armor="18" defense="40" skill="18"/>
   <immunities>
     <immunity physical="0"/>
     <immunity energy="1"/>

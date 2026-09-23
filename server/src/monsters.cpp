@@ -46,6 +46,7 @@ void MonsterType::reset()
 	experience = 0;
 
 	defense = 0;
+	defenseSkill = 0;
 	armor = 0;
 
 	canPushItems = false;
@@ -926,6 +927,10 @@ bool Monsters::loadMonster(const std::string& file, const std::string& monster_n
 
 				if(readXMLInteger(p, "armor", intValue)){
 					mType->armor = intValue;
+				}
+
+				if(readXMLInteger(p, "skill", intValue)){
+					mType->defenseSkill = intValue;
 				}
 
 				xmlNodePtr tmpNode = p->children;

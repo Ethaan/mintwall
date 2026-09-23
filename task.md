@@ -103,9 +103,9 @@ Current config: RateExp/RateSkill/RateMag/RateLoot/RateSpawn = 1 (real Tibia spe
 experience stages script (`creaturescripts/scripts/stages.lua`) exists but is not registered.
 
 ### Experience and levels
-- [ ] BUG (reported 2026-09-22): experience does not seem to work - killing monsters shows no level
-      up / no exp increase. Reproduce with a test (kill a monster, check exp and the level-up message,
-      stats packet), find why, fix
+- [x] Experience works (the 2026-09-22 report was a false alarm). Pinned by
+      test_rookgaard.py::test_killing_a_rat_gives_experience_and_a_level_up: 99 exp + a rat (5) ->
+      level 2, "You advanced from Level 1 to Level 2.", more max hp
 - [ ] Experience per level: confirm `(50*(L-1)^3 - 150*(L-1)^2 + 400*(L-1)) / 3` (Player::getExpForLevel)
 - [ ] Experience rate: keep 1x, pick a multiplier, or enable stages (7.4 had no stages)
 - [ ] Monster experience: exp from each monster matches 7.4, including exp split when several players attack
@@ -241,8 +241,15 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
         def x0.6/1.0/1.8, shield block max (5*shield+50)*def*stance/100 rolled 0..max like an attack
         (weapons.cpp, player.cpp, creature.cpp). Source C1 (tibiantis-notes calculators) - not pinned
         by a test yet (needs a damage-measuring setup)
-  - [ ] 3b. Monster melee and blocking from 7.4 attack/defense/skill per creature (needs the
-        TN-Creature data migrated into our monster XMLs); monsters keep their current values
+  - [x] 3b. Monster melee and blocking from 7.4 attack/defense/armor/skill per creature:
+        tools/import-74-creatures.py (source tibiantis-notes js/creature.js, numbers kept in
+        docs/reference-74/creatures.csv) set <attack name="melee" skill= attack=> and
+        <defenses armor= defense= skill=> on 92 monsters (e.g. dragon lord 250 -> 204, dwarf guard
+        200 -> 125, demon 400 -> 514). Engine: exact 7.4 melee max (Weapons::getMaxMeleeDamage) and a
+        skill-based block rolled 0..max for monsters with <defenses skill=> (Monster::getDefense).
+        test_formulas.py (dwarf guard never above 125)
+  - [ ] 3c. 30 monsters have no 7.4 data in the source (bosses, traps, assassin, bandit, dark monk,
+        smuggler, chicken, yeti) - keep their values or find another 7.4 source
   - [x] 4. Magic power floor P >= 100 (combat.cpp FORMULA_LEVELMAGIC + magicPower() in compat.lua for
         the Lua heal formulas). 7.4 values: energy beam 40-80, fire wave 20-40, poison storm 150-250,
         great energy beam 40-200, mass healing 160-240, exura 10-30, IH rune 40-100, exura vita 200-300,
