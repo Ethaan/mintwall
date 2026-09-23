@@ -4,6 +4,7 @@ import re
 import pytest
 
 from tibia74 import SERVER_DIR
+from tibia74.server import TESTER_GROUP
 
 ROPE_SPOT = (32077, 32151, 8)        # Rookgaard, ground 384; the way up comes out at (x, y+1, z-1)
 
@@ -44,7 +45,8 @@ def test_spell_scripts_return_a_boolean():
 
 
 SD_RUNE = 2268
-FIELD = (32034, 32150, 7)            # open walkable ground x..x+9, y..y+6 (Rookgaard, north-west), no protection zone
+FIELD = (32094, 32165, 7)            # open ground x..x+9, y..y+6 north of Rookgaard town, no protection zone,
+                                     # 12+ tiles from any spawn (the first field was a deer spawn)
 
 
 INFINITE = bytes([4]) + (64000).to_bytes(2, "little")     # action id 64000: a test character's never-ending rune
@@ -83,9 +85,44 @@ def test_sudden_death_reaches_7_tiles_the_edge_of_the_screen(new_player, items, 
 def test_sudden_death_does_not_reach_off_screen(new_player, items, marked, row):
     p = _sd_caster(new_player, row, marked)
     target = new_player(pos=(p.pos[0] + 8, p.pos[1], p.pos[2]), level=100, storage={30001: 1})
-    assert target.pos == (p.pos[0] + 8, p.pos[1], p.pos[2]), target.pos
+    assert target.pos[0] - p.pos[0] >= 8, f"target placed at {target.pos}"    # a busy tile moves it further out
     before = target.wait_for(lambda: target.stats.health, timeout=3)
     _throw_sd(p, items, target)
     hit = target.wait_for(lambda: target.stats.health < before, timeout=3)
     assert not hit, f"an SD hit 8 tiles away ({before} -> {target.stats.health} hp)"
     assert p.messages("too far"), p.text_messages[-3:]
+
+
+def _spells_xml():
+    return (SERVER_DIR / "data" / "spells" / "spells.xml").read_text(encoding="latin-1")
+
+
+def test_every_rune_conjure_makes_the_rune_its_spell_uses():
+    """adori vita vis made 2263 and adura vita 2274: items with the right name but no rune spell behind them."""
+    xml = _spells_xml()
+    runes = {re.search(r'name="([^"]+)"', t).group(1).lower(): int(re.search(r'\bid="(\d+)"', t).group(1))
+             for t in re.findall(r"<rune\b[^>]*>", xml)}
+    bad = []
+    for tag in re.findall(r"<conjure\b[^>]*>", xml):
+        if 'function="conjureRune"' not in tag:
+            continue
+        words = re.search(r'words="([^"]+)"', tag).group(1).lower()
+        made = int(re.search(r'conjureId="(\d+)"', tag).group(1))
+        if runes.get(words) != made:
+            bad.append(f"{words}: makes {made}, the rune spell is {runes.get(words)}")
+    assert not bad, bad
+
+
+BLANK_RUNE = 2260
+
+
+@pytest.mark.parametrize("vocation, words, rune", [(1, "adori vita vis", SD_RUNE), (2, "adura vita", 2273)],
+                         ids=["sudden death", "ultimate healing"])
+def test_conjuring_makes_a_usable_rune(new_player, items, vocation, words, rune):
+    from tibia74 import Item, RIGHT
+    p = new_player(pos=(32369, 32241, 7), level=60, vocation=vocation, maglevel=30, mana=500,
+                   group_id=TESTER_GROUP, inventory={RIGHT: Item(BLANK_RUNE)})
+    p.say(words)
+    made = lambda: items.by_client[p.inventory[RIGHT].client_id].server_id if p.inventory.get(RIGHT) else None
+    assert p.wait_for(lambda: made() == rune, timeout=3), \
+        f"right hand holds {made()} ({items.name(made()) if made() else '-'}), expected {rune}; {p.text_messages[-2:]}"

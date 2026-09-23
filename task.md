@@ -211,6 +211,10 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       (+-7 / +-5 = the 7.4 screen, line of sight - Actions::canUseFar), but Game::playerUseItemEx walked the
       caster towards an out-of-range target and threw from there, so an SD hit 8+ tiles away. Runes now
       fail with "Too far away." tests/test_spells.py: hits at 7, refused at 8
+      The report was really about "Too far away." on screen: the infinite test runes (action id 64000) got
+      infinite_fluid.lua's adjacent-only range. Actions::getAction skips that action id on runes (it only
+      keeps the charges). Tested with normal and infinite SDs. Battle list on players is refused on purpose
+      (7.4: "You are not allowed to shoot directly on players"), on monsters it works
 - [ ] Paralyze rune (adana ani, 2278) formula: confirm the 7.4 values are right - how much it slows (speed
       change, relative or absolute), how long it lasts, whether haste/strong haste cancels it and the other
       way round, that it works on players and monsters (and which monsters are immune), plus the magic level
