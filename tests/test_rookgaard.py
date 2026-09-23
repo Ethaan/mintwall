@@ -240,3 +240,24 @@ def test_keyless_locked_door_stays_locked(new_player, premium_days):
     p.use_item(PREMIUM_SIDE_DOOR, door.client_id, len(p.tile_items(PREMIUM_SIDE_DOOR)) - 1)
     assert p.wait_for(lambda: p.messages("It is locked"), timeout=3), p.text_messages
     assert p.tile_items(PREMIUM_SIDE_DOOR)[-1].client_id == LOCKED_DOOR, "the locked door opened"
+
+
+ROOK_FIELD = (32082, 32210, 7)       # open grass west of the village, not a protection zone
+
+
+@pytest.mark.parametrize("attacker_vocation, target_vocation", [(0, 0), (4, 0), (0, 4)],
+                         ids=["rook vs rook", "knight vs rook", "rook vs knight"])
+def test_rookgaard_is_non_pvp(new_player, attacker_vocation, target_vocation):
+    """No player hurts a player without a vocation, and none of them hurts anyone (Combat::rookgaardForbids)."""
+    from tibia74 import RIGHT, Item
+    attacker = new_player(pos=ROOK_FIELD, level=50, vocation=attacker_vocation, skills={1: 80, 2: 80},
+                          inventory={RIGHT: Item(2382)})                       # club
+    target = new_player(pos=(attacker.pos[0] + 1, attacker.pos[1], attacker.pos[2]), level=50,
+                        vocation=target_vocation, storage={30001: 1})
+    health = target.wait_for(lambda: target.stats.health, timeout=3)
+    attacker.set_fight_modes(fight=1, chase=1, safe=0)
+    attacker.attack(target.player_id)
+    assert attacker.wait_for(lambda: attacker.messages("may not attack this player"), timeout=3), \
+        attacker.text_messages[-3:]
+    attacker.sleep(4)                                                          # two attack turns
+    assert target.stats.health == health, f"the target lost {health - target.stats.health} hp"

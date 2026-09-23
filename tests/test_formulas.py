@@ -79,7 +79,7 @@ def test_bolts_hit_by_skill_and_distance_not_a_fixed_chance(new_player):
     spot = (32031, 32138, 7)          # open grass, 12+ tiles from any spawn
     shooter = new_player(pos=spot, level=100, vocation=3, skills={4: 20},
                          inventory={RIGHT: Item(2455), AMMO: Item(2543, 100)})          # crossbow, bolts
-    target = new_player(pos=(spot[0] + 5, spot[1], spot[2]), level=100, storage={30001: 1})
+    target = new_player(pos=(spot[0] + 5, spot[1], spot[2]), level=100, vocation=4, storage={30001: 1})
     assert shooter.pos == spot and target.pos == (spot[0] + 5, spot[1], spot[2]), (shooter.pos, target.pos)
     shooter.set_fight_modes(fight=1, chase=0, safe=0)
     start = len(target.animated_texts)

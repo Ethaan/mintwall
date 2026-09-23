@@ -31,7 +31,7 @@ def test_red_skull_after_3_unjustified_kills_in_a_day(new_player):
     killer = _killer(new_player, ROAD)
     me = killer.wait_for(lambda: killer.creatures.get(killer.player_id), timeout=5)
     for n in range(3):
-        victim = new_player(pos=(ROAD[0], ROAD[1] + 1, ROAD[2]), storage={30001: 1})
+        victim = new_player(pos=(ROAD[0], ROAD[1] + 1, ROAD[2]), vocation=KNIGHT, storage={30001: 1})   # a vocation: Rookgaard characters (none) cannot be attacked
         _kill(killer, victim)
         if n < 2:
             assert me.skull != RED_SKULL, f"red skull after {n + 1} kill(s)"
@@ -185,7 +185,7 @@ def test_spark_of_the_phoenix_needs_kawill_then_pydar(new_player, server, items,
 
 def test_a_bought_blessing_lowers_the_loss_and_is_lost_on_death(new_player, server, items, db):
     """Buy one blessing from Norf, then die: 9% instead of 10% experience, and the blessing is gone."""
-    p = _buyer(new_player, "Norf", group_id=1, health=100)                    # testers cannot be attacked
+    p = _buyer(new_player, "Norf", group_id=1, health=100, vocation=KNIGHT)   # testers cannot be attacked
     assert any("You have been blessed" in r for r in _chat(p, "Norf", "hi", "spiritual", "yes"))
     character = p.character
     guid = _saved(p, db)

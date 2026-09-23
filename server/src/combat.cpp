@@ -200,9 +200,36 @@ bool Combat::isPlayerCombat(const Creature* target)
 	return false;
 }
 
+// Rookgaard is non-PvP: characters without a vocation only live there (the Oracle gives one when leaving,
+// a death that sends back to Rookgaard takes it), so no player may hurt a player without one - or be hurt
+// by one. By vocation rather than map area: it covers every floor, cave and sewer of the island.
+static bool isRookgaardPlayer(const Creature* creature)
+{
+	const Player* player = creature->getPlayer();
+	if(!player && creature->isSummon()){
+		player = creature->getMaster()->getPlayer();
+	}
+	return player && player->getVocationId() == VOCATION_NONE;
+}
+
+static bool isPlayerOrPlayerSummon(const Creature* creature)
+{
+	return creature->getPlayer() || (creature->isSummon() && creature->getMaster()->getPlayer());
+}
+
+static bool rookgaardForbids(const Creature* attacker, const Creature* target)
+{
+	return isPlayerOrPlayerSummon(attacker) && isPlayerOrPlayerSummon(target)
+		&& (isRookgaardPlayer(attacker) || isRookgaardPlayer(target));
+}
+
 ReturnValue Combat::canTargetCreature(const Player* player, const Creature* target)
 {
 	if(player == target){
+		return RET_YOUMAYNOTATTACKTHISPLAYER;
+	}
+
+	if(rookgaardForbids(player, target)){
 		return RET_YOUMAYNOTATTACKTHISPLAYER;
 	}
 
@@ -322,6 +349,10 @@ bool Combat::isInPvpZone(const Creature* attacker, const Creature* target)
 ReturnValue Combat::canDoCombat(const Creature* attacker, const Creature* target)
 {
 	if(attacker){
+		if(rookgaardForbids(attacker, target)){
+			return RET_YOUMAYNOTATTACKTHISPLAYER;
+		}
+
 		if(const Player* targetPlayer = target->getPlayer()){
 			if(targetPlayer->hasFlag(PlayerFlag_CannotBeAttacked)){
 				return RET_YOUMAYNOTATTACKTHISPLAYER;

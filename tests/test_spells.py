@@ -74,7 +74,7 @@ def test_sudden_death_reaches_7_tiles_the_edge_of_the_screen(new_player, items, 
     """The 7.4 screen shows 7 tiles each side (15 x 11): a rune reaches what you can see. The infinite
     runes (action id 64000) got infinite_fluid.lua's adjacent-only range: "Too far away." past 1 tile."""
     p = _sd_caster(new_player, row, marked)
-    target = new_player(pos=(p.pos[0] + 7, p.pos[1], p.pos[2]), level=100, storage={30001: 1})
+    target = new_player(pos=(p.pos[0] + 7, p.pos[1], p.pos[2]), level=100, vocation=4, storage={30001: 1})
     assert target.pos == (p.pos[0] + 7, p.pos[1], p.pos[2]), target.pos
     before = target.wait_for(lambda: target.stats.health, timeout=3)
     _throw_sd(p, items, target)
@@ -84,7 +84,7 @@ def test_sudden_death_reaches_7_tiles_the_edge_of_the_screen(new_player, items, 
 @pytest.mark.parametrize("marked, row", [(False, 4), (True, 6)], ids=["normal", "infinite"])
 def test_sudden_death_does_not_reach_off_screen(new_player, items, marked, row):
     p = _sd_caster(new_player, row, marked)
-    target = new_player(pos=(p.pos[0] + 8, p.pos[1], p.pos[2]), level=100, storage={30001: 1})
+    target = new_player(pos=(p.pos[0] + 8, p.pos[1], p.pos[2]), level=100, vocation=4, storage={30001: 1})
     assert target.pos[0] - p.pos[0] >= 8, f"target placed at {target.pos}"    # a busy tile moves it further out
     before = target.wait_for(lambda: target.stats.health, timeout=3)
     _throw_sd(p, items, target)

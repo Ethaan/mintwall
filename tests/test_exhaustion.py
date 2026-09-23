@@ -69,7 +69,7 @@ def test_exhaustion_after(new_player, action, low, high):
 
 def test_paralyze_rune_exhausts_1_second(new_player):
     p = _mage(new_player, items=[Item(PARALYZE, 5)])
-    target = new_player(pos=(SPOT[0] + 3, SPOT[1], SPOT[2]), level=50, storage={30001: 1})
+    target = new_player(pos=(SPOT[0] + 3, SPOT[1], SPOT[2]), level=50, vocation=4, storage={30001: 1})
     bag, cid = _bag(p)
     p.set_fight_modes(fight=1, chase=0, safe=0)
     p.wait_for(lambda: p.stats.mana, timeout=3)

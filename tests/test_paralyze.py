@@ -13,6 +13,7 @@ PARALYZE, BOOTS_OF_HASTE = 2278, 2195
 
 
 def _paralyze(new_player, target_level=100, caster_group=TESTER_GROUP, **target_kwargs):
+    target_kwargs.setdefault("vocation", 4)   # a vocation: Rookgaard characters (none) cannot be attacked
     caster = new_player(pos=SPOT, level=100, vocation=2, maglevel=60, mana=2000, group_id=caster_group,
                         inventory={BACKPACK: Item(1988, contents=[Item(PARALYZE, 5)])})
     target = new_player(pos=(caster.pos[0] + 2, caster.pos[1], caster.pos[2]), level=target_level,
@@ -65,7 +66,7 @@ def test_using_the_rune_costs_600_mana(new_player):
     """Tibiantis: 600 mana to use (it was free)."""
     caster = new_player(pos=SPOT, level=100, vocation=2, maglevel=60, mana=2000, group_id=TESTER_GROUP,
                         inventory={BACKPACK: Item(1988, contents=[Item(PARALYZE, 5)])})
-    target = new_player(pos=(caster.pos[0] + 2, caster.pos[1], caster.pos[2]), level=50, storage={30001: 1})
+    target = new_player(pos=(caster.pos[0] + 2, caster.pos[1], caster.pos[2]), level=50, vocation=4, storage={30001: 1})
     bag = caster.open_container(BACKPACK)
     cid = next(k for k, v in caster.containers.items() if v is bag)
     caster.set_fight_modes(fight=1, chase=0, safe=0)
@@ -80,7 +81,7 @@ def test_using_the_rune_costs_600_mana(new_player):
 def test_the_rune_needs_600_mana(new_player):
     caster = new_player(pos=SPOT, level=100, vocation=2, maglevel=60, mana=599, group_id=TESTER_GROUP,
                         inventory={BACKPACK: Item(1988, contents=[Item(PARALYZE, 5)])})
-    target = new_player(pos=(caster.pos[0] + 2, caster.pos[1], caster.pos[2]), level=50, storage={30001: 1})
+    target = new_player(pos=(caster.pos[0] + 2, caster.pos[1], caster.pos[2]), level=50, vocation=4, storage={30001: 1})
     bag = caster.open_container(BACKPACK)
     cid = next(k for k, v in caster.containers.items() if v is bag)
     caster.set_fight_modes(fight=1, chase=0, safe=0)
