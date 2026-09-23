@@ -3,7 +3,7 @@
 <spells>
     <!-- Rune Spells -->
         <rune name="adevo grav pox" id="2285" maglv="0" blocktype="solid" charges="3" script="attack/poison_field.lua" />
-        <rune name="adura gran" id="2265" maglv="1" needtarget="1" aggressive="0" charges="1" script="healing/intense_healing_rune.lua" />
+        <rune name="adura gran" id="2265" maglv="1" needtarget="1" aggressive="0" exhaustion="0" charges="1" script="healing/intense_healing_rune.lua" />
         <rune name="adana pox" id="2266" maglv="0" needtarget="1" aggressive="0" charges="1" script="healing/antidote_rune.lua" />
         <rune name="adori" id="2287" maglv="0" needtarget="1" charges="5" script="attack/light_magic_missile.lua" />
         <rune name="adevo grav flam" id="2301" maglv="1" blocktype="solid" charges="3" script="attack/fire_field.lua" />
@@ -11,7 +11,7 @@
         <rune name="adito grav" id="2261" maglv="3" range="4" blocktype="solid" aggressive="0" charges="3" script="support/destroy_field_rune.lua" />
         <rune name="adevo grav vis" id="2277" maglv="3" blocktype="solid" charges="3" script="attack/energy_field.lua" />
         <rune name="adito tera" id="2310" maglv="4" charges="3" range="1" script="support/desintegrate_rune.lua" />
-        <rune name="adura vita" id="2273" maglv="4" needtarget="1" aggressive="0" charges="1" script="healing/ultimate_healing_rune.lua" />
+        <rune name="adura vita" id="2273" maglv="4" needtarget="1" aggressive="0" exhaustion="0" charges="1" script="healing/ultimate_healing_rune.lua" />
         <rune name="adori gran" id="2311" maglv="1" needtarget="1" charges="5" script="attack/heavy_magic_missile.lua"/>
         <rune name="adevo mas pox" id="2286" maglv="4" blocktype="solid" charges="2" script="attack/poison_bomb.lua" />
         <rune name="adevo mas flam" id="2305" maglv="5" blocktype="solid" charges="2" script="attack/firebomb.lua" />
@@ -28,7 +28,7 @@
         <rune name="adevo mas grav vis" id="2279" maglv="9" blocktype="solid" charges="4" script="attack/energy_wall.lua" />
         <rune name="adori vita vis" id="2268" maglv="15" needtarget="1" charges="1" script="attack/sudden_death.lua" />
         <rune name="adevo res pox" id="2292" maglv="4" needtarget="1" charges="3" script="attack/envenom.lua" />
-        <rune name="adana ani" id="2278" maglv="18" needtarget="1" charges="1" script="support/paralyze_rune.lua">
+        <rune name="adana ani" id="2278" maglv="18" mana="600" needtarget="1" customexhaust="1000" charges="1" script="support/paralyze_rune.lua">
             <vocation name="Druid"/>    <vocation name="Elder Druid"/>
         </rune>
 

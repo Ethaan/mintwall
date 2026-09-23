@@ -202,6 +202,10 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 
 ## Spells and runes (found while making the Centurion test character)
 
+- [x] Exhaustion vs 7.4 (docs/reference-74/formulas.md §9): attack 2 s, strikes 1 s, healing/support 1 s and
+      the 1 s use delay were right. Fixed: UH / IH runes gave 1 s (7.4: none), paralyze rune 2 s (7.4: 1 s),
+      fluids were blocked while exhausted (7.4: drinkable). tests/test_exhaustion.py measures each one
+
 - [x] exani tera never worked, and neither did destroy field, animate dead, traps, house isPlayer checks or
       the healers' fire/poison cure: scripts compared engine booleans with TRUE (= 1), and spell scripts
       returned the undefined LUA_NO_ERROR ("Expected boolean type parameter"). Fixed in 20 scripts;
@@ -215,11 +219,15 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       infinite_fluid.lua's adjacent-only range. Actions::getAction skips that action id on runes (it only
       keeps the charges). Tested with normal and infinite SDs. Battle list on players is refused on purpose
       (7.4: "You are not allowed to shoot directly on players"), on monsters it works
-- [ ] Paralyze rune (adana ani, 2278) formula: confirm the 7.4 values are right - how much it slows (speed
-      change, relative or absolute), how long it lasts, whether haste/strong haste cancels it and the other
-      way round, that it works on players and monsters (and which monsters are immune), plus the magic level
-      and mana to use and to make (ours: 18 to use, 35 to make); research first (Tibiantis), then pin each
-      number with a test; try it in game with Radagast (5 / 5)
+- [x] Paralyze rune (adana ani, 2278) vs 7.4 (Tibiantis-notes speed page, tibiantis.info spell list):
+      speed set to 40 whatever the level for ~10 s - ours was speed 0 (could not walk) for 60 s. Fixed in
+      paralyze_rune.lua. Already right: haste cancelled, healing spells/runes and haste remove it (mass
+      healing now too), speed items still add, no skull for the caster, druids use it at ml 18, make at
+      ml 35. Exhaustion 1 s (§9). tests/test_paralyze.py
+  - [x] Mana to use: 600 (Tibiantis; was 0), making stays 900 (Tibiantis-notes: real 7.4). Chosen 2026-09-23
+  - [ ] Which monsters are immune to paralyze (monster XML immunities vs 7.4) - not checked
+- [ ] Haste durations: Tibiantis-notes utani hur 66 s, utani gran hur 44 s; ours haste 40 s (haste.lua) -
+      check strong haste too, and the speed formulas (Tibiantis-notes speed page)
 - [ ] Royal paladin: bolts / crossbow and arrows / bow distance (range, hit chance - see 5b in the
       formulas list), damage with the 7.4 formula; test with Legolas (6 / 6)
 - [ ] Spears: range, breaking/dropping on the ground, stacking, damage vs 7.4

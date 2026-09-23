@@ -32,10 +32,8 @@ function onUse(cid, item, frompos, item2, topos)
 					doAddCondition(cid, poison)
 				
 				elseif item.type == FLUID.MANA then
-					if hasCondition(cid, CONDITION_EXHAUST_COMBAT) or hasCondition(cid, CONDITION_EXHAUST_HEAL) then
-						doPlayerSendDefaultCancel(cid, RETURNVALUE_YOUAREEXHAUSTED)
-						return true
-					end
+					-- 7.4: drinkable while exhausted (docs/reference-74/formulas.md, exhaustion); the 1 s
+					-- use delay between uses (MinActionExInterval) still applies
 			
 					doPlayerSay(cid, "Aaaah...", 1)
 					doPlayerAddMana(cid, math.random(25, 75))   -- 7.4: 25-75 (docs/reference-74/formulas.md §4)
@@ -43,10 +41,8 @@ function onUse(cid, item, frompos, item2, topos)
 					doAddCondition(cid, exhaust)
 				
 				elseif item.type == FLUID.LIFE then
-					if hasCondition(cid, CONDITION_EXHAUST_COMBAT) or hasCondition(cid, CONDITION_EXHAUST_HEAL) then
-						doPlayerSendDefaultCancel(cid, RETURNVALUE_YOUAREEXHAUSTED)
-						return true
-					end
+					-- 7.4: drinkable while exhausted (docs/reference-74/formulas.md, exhaustion); the 1 s
+					-- use delay between uses (MinActionExInterval) still applies
 				
 					doPlayerSay(cid, "Aaaah...", 1)
 					doPlayerAddHealth(cid, math.random(25, 75)) -- 7.4: 25-75

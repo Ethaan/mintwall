@@ -232,6 +232,29 @@ HP/mana ticks, 7.4 vs ours (`data/vocations.xml` `gainhpticks` / `gainmanaticks`
 
 ---
 
+## 9. Exhaustion
+
+Sources:
+- **OTL-77** (**C1**): Kay in https://otland.net/threads/7-7-damage-and-spell-formulae.252604/ , who says the rules come from CipSoft's files (7.7).
+- **OTL-Exh** (**C2**, player memories of 7.4-7.6): https://otland.net/threads/real-exhaust-formulas-from-7-4-7-6.244452/ and https://otland.net/threads/old-exhaust-system.249822/ .
+
+Tibiantis-notes has nothing on exhaustion. The TibiaWiki "Exhaust" page describes modern Tibia (potions, cooldowns) and was not used.
+
+| Item | 7.4 | Conf. | Ours | Match |
+|---|---|---|---|---|
+| Magic exhaustion | one timer shared by spells and runes: healing and attacking at once is impossible | OTL-77, OTL-Exh | `spells.cpp:645` blocks on CONDITION_EXHAUST_COMBAT or _HEAL | Yes |
+| Attack spells and runes (SD, GFB, HMM, exevo...) | 2 s | OTL-77, OTL-Exh | `FightExhausted = 2000` | Yes |
+| exori vis / flam / mort | 1 s | OTL-77 | `customexhaust="1000"` | Yes |
+| Paralyze rune | 1 s | OTL-77 | was 2 s; now `customexhaust="1000"` | Fixed 2026-09-23 |
+| Other spells and runes (exura, exura vita, haste, fields...) | 1 s | OTL-77, OTL-Exh | `HealExhausted = 1000` | Yes |
+| UH and IH runes | **no magic exhaustion**, only the item-use delay: exura vita right after a UH works | OTL-77 (C1); disputed in OTL-Exh | was 1 s; now `exhaustion="0"` | Fixed 2026-09-23 |
+| UH / IH while exhausted (e.g. after an SD) | blocked | OTL-Exh (andu) | blocked (`spells.cpp:645`) | Yes |
+| Mana / life fluids | drinkable **while** exhausted, and exhaust for 1 s afterwards | OTL-77, OTL-Exh | were blocked while exhausted; now only the 1 s after (`fluids.lua`) | Fixed 2026-09-23 |
+| Item-use delay ("action exhaust") | about 1 s between uses of runes and fluids | OTL-Exh | `MinActionExInterval = 1000` | Yes |
+| PvP-enforced worlds | attack exhaustion 1 s | OTL-77 | n/a (not a PvP-enforced world) | - |
+
+Measured on our server (tests/test_exhaustion.py): exura 1.09 s, exori vis 1.10 s, GFB 2.03 s, UH none, fluid drinkable 1.2 s into a GFB's exhaustion.
+
 ## Mismatches, ranked by player impact
 
 1. **Melee monsters self-heal about 2x faster than in 7.4.** Our heal is rolled every 1 s; 7.4 rolled it every 2 s for melee creatures.
