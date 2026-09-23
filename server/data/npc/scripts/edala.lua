@@ -9,8 +9,7 @@ function onThink() 							npcHandler:onThink() 						end
 function onPlayerEndTrade(cid)				npcHandler:onPlayerEndTrade(cid)			end
 function onPlayerCloseChannel(cid)			npcHandler:onPlayerCloseChannel(cid)		end
 
-local node1 = keywordHandler:addKeyword({'fire of the suns'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want to buy the fire of the suns for 10000 gold?'})
-	node1:addChildKeyword({'yes'}, StdModule.bless, {npcHandler = npcHandler, number = 3, premium = false, cost = 10000})
-	node1:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = 'Too expensive, eh?'})
+-- sells the blessing of fire of the suns; any word of its name works (lib/npc.lua)
+addBlessingKeywords(keywordHandler, npcHandler, 3, 'fire of the suns', false)
 
 npcHandler:addModule(FocusModule:new())

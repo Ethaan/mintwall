@@ -56,7 +56,7 @@ def test_monster_melee_follows_the_7_4_formula(new_player):
     """A dwarf guard (7.4: attack 39, skill 55) hits at most (5*55+50)*39*0.99/100 = 125 - it was 200.
     The target wears nothing and holds no shield, so every hit shows its full rolled damage."""
     import time
-    spot = (32107, 32222, 7)                                  # the dirt road east of the Rookgaard temple
+    spot = (32060, 32200, 7)   # an open field, not the road the walking tests use (the guard stays)
     victim = new_player(pos=spot, level=100, storage={30001: 1})
     gm = new_player(pos=(spot[0], spot[1] - 3, spot[2]), group_id=3)
     gm.say("/m Dwarf Guard")

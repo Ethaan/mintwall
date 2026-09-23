@@ -9,8 +9,7 @@ function onThink() 							npcHandler:onThink() 						end
 function onPlayerEndTrade(cid)				npcHandler:onPlayerEndTrade(cid)			end
 function onPlayerCloseChannel(cid)			npcHandler:onPlayerCloseChannel(cid)		end
 
-local node1 = keywordHandler:addKeyword({'embrace of tibia'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want to buy the embrace of tibia for 10000 gold?'})
-	node1:addChildKeyword({'yes'}, StdModule.bless, {npcHandler = npcHandler, number = 1, premium = true, cost = 10000})
-	node1:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = 'Too expensive, eh?'})
+-- sells the blessing of embrace of tibia; any word of its name works (lib/npc.lua)
+addBlessingKeywords(keywordHandler, npcHandler, 1, 'embrace of tibia', true)
 
 npcHandler:addModule(FocusModule:new())

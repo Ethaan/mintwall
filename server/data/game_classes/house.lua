@@ -43,7 +43,7 @@ end
 	end
 
 	function House.getHouseByOwner(cid)
-		if(isPlayer(cid) == FALSE) then
+		if(not isPlayer(cid)) then
 			error('House.getHouseByOwner(): Player not found!')
 			return nil
 		end
@@ -177,7 +177,7 @@ end
 		end
 
 		local cid = tonumber(cid)
-		if(isPlayer(cid) == FALSE) then
+		if(not isPlayer(cid)) then
 			error('House:buy(): Player does not exist!')
 			return false
 		end

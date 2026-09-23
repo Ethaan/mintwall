@@ -72,6 +72,9 @@ public:
 	//bool loadDepot(Player* player, unsigned long depotId);
 
 	bool getGuidByName(uint32_t& guid, std::string& name);
+	// Unjustified kills, kept with their time for the 7.4 red skull rules (Player::addUnjustifiedDead)
+	void addUnjustifiedKill(uint32_t guid, int64_t when);
+	void getUnjustifiedKills(uint32_t guid, int64_t now, int32_t& day, int32_t& week, int32_t& month);
 	uint32_t getAccountIdByName(std::string& name);
 	bool getGuidByNameEx(uint32_t& guid, bool& specialVip, std::string& name);
 	bool getNameByGuid(uint32_t guid, std::string& name);

@@ -10,7 +10,7 @@
     BanLength = 1 * 24 * 60 * 60
     FinalBanLength = 7 * 24 * 60 * 60
     IPBanishmentLength = 24 * 60 * 60
-    KillsToBan = 7
+    KillsToBan = 7   -- no longer used: 7.4 rules in Player::addUnjustifiedDead (ban at 6 a day / 10 a week / 20 a month)
 
 --- COMBAT ---
 
@@ -37,13 +37,13 @@
     FieldOwnershipDuration = 5000
 
     -- In mili seconds
-    TimeToDecreaseFrags = 24 * 60 * 60 * 1000
+    TimeToDecreaseFrags = 24 * 60 * 60 * 1000   -- no longer used (see KillsToRedSkull)
 
     -- Time white skull will remain after killing a player, in minutes
-    WhiteSkullTime = 3
+    WhiteSkullTime = 15   -- minutes; 7.4: 15 (docs/reference-74/death.md, one source)
 
     -- amount of kills that leads to red skull
-    KillsToRedSkull = 5
+    KillsToRedSkull = 5   -- no longer used: red skull at 3 a day / 5 a week / 10 a month, for 30 days
 
     -- Remove ammunition
     -- If false, ammunition will not be removed when using distance weapons
@@ -222,7 +222,12 @@
 
     -- Test characters whose items with action id 64000 never run out (runes, amulets, fluids).
     -- Comma-separated names, any case. Empty = nobody. Never put a real player here.
-    InfiniteItemPlayers = "Centurion"
+    -- Blessings (7.4 had the five of 7.2, 10000 gp each, each -1 point of death loss). Read by the
+    -- NPC system (StdModule.bless): "yes" to sell them; only-premium lets NPCs mark some as premium.
+    blessings = "yes"
+    blessingsOnlyPremium = "yes"
+
+    InfiniteItemPlayers = "Centurion, Gandalf, Radagast, Legolas"
 
     -- Level on which player will get rooked
     LevelToRook = 5

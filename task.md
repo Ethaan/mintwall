@@ -61,7 +61,7 @@ When finishing one, tick it and add a short note (what changed / how verified).
 - [ ] Talk-test every NPC once; log the ones that error or don't answer
 - [ ] Boat captains: verify travel destinations/prices are 7.4 (no Liberty Bay/Port Hope etc. if not in 7.4)
 - [ ] Guards (Grof, Tim, Kulag, Walter): scripts use `getMonstersfromArea` - implement or rewrite
-- [ ] Remove or neutralize non-7.4 NPC features: banks (bank.lua, evabank.lua, Lokur), marriage, blessings, addon outfits
+- [ ] Remove or neutralize non-7.4 NPC features: banks (bank.lua, evabank.lua, Lokur), marriage, addon outfits
 - [ ] Promotion NPCs: verify 7.4 rules (level 20, 20k gp, premium) and that `doPlayerSetPromotionLevel` shim is right
 - [ ] Bone-collector NPCs use `doPlayerRemoveBones`/`getPlayerBones` - implement or rewrite
 - [ ] Spell-teaching NPCs: check spell lists/prices/levels against 7.4
@@ -137,12 +137,37 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [ ] Capacity: item weights and cap limit
 
 ### Death and PvP
-- [ ] Death loss must be correct (reported 2026-09-22): 10% of exp, magic level mana and skill tries,
-      7% for promoted characters (Player::getDeathLossFactor, not tested yet); level loss removes
-      HP/mana/cap; items: each equipped item 10%, containers (backpack) always - confirm the 7.4
-      backpack rule; amulet of loss protects everything and is used up. Pin all of it with tests
-- [ ] Death penalty: exp / mana / skill / item loss percentages (loss_* columns, default 10)
-- [ ] Respawn at home town temple (town_id), bag/items drop rules, blessings do not exist in 7.4
+- [ ] Revisit the death rules (not a bug - make sure every 7.4 rule is applied), research first like
+      the formulas (docs/reference-74), then pin each rule with a test:
+  - [ ] Experience / magic level / skills: 10%, promoted characters 7% (Player::getDeathLossFactor)
+  - [ ] Levels lost with their HP / mana / capacity
+  - [ ] Items: which slots can drop and how likely; the backpack/containers; what stays in the corpse
+  - [ ] Amulet of loss: keeps all items, is used up; does it also apply to exp/skills? (7.4: items only?)
+  - [ ] Skulls: red skull (and white?) - does the amulet of loss still work, are all items lost?
+  - [ ] Promotion kept or lost on death; premium ending while promoted
+  - [ ] Where you respawn (home town temple), with what health/mana
+  - Research done: docs/reference-74/death.md. Already right: 10% / 7% promoted, level loss, containers
+    100%, other items 10%, amulet of loss (items only, used up, fails under red skull), respawn full hp/mana.
+    To fix, ranked:
+  - [x] 1. Red skull: 7.4 = 3 kills a day / 5 a week / 10 a month, lasts 30 days, ban at 6/10/20
+        (ours: 5 kills ~a day, fades with the kills, ban at 7 - config.lua, player.cpp:3779-3834)
+  - [x] 2. Promotion is suspended while premium is off (7% loss, regeneration) - ioplayer.cpp:183-187
+        checks an empty Account and never runs
+  - [x] 3. Sent to Rookgaard: sendToRook() gives the starter set before the corpse drops the loot, so the
+        new backpack lands in the mainland corpse
+        Done 2026-09-22: player_kills table + day/week/month counts (Player::addUnjustifiedDead, !frags);
+        IOPlayer::loadPlayer plays a promoted free account as its base vocation and saves the promotion;
+        Player::dropLoot skips the drop on a death that sends to Rookgaard. tests/test_death.py
+  - [x] 4. Blessings existed in 7.4 (since 7.2): 5 x 10k gp, each -1% exp/skill loss (to 5%, promoted 2%),
+        no item protection, all lost on death. Done 2026-09-22: storage 30011-30015, Player::getDeathLossPercent;
+        one word of the name is enough (lib/npc.lua addBlessingKeywords). Norf (Thais) spiritual shielding,
+        Humphrey (Carlin) embrace of tibia, Edala (Ab'Dendriel) fire of the suns, Eremo (via Cormaya)
+        wisdom of solitude, Kazordoon spark of the phoenix in two parts: Kawill (free) then Pydar (10k).
+        Tests: each NPC takes 10000 and blesses once, Pydar refuses without Kawill, bought blessing -> 9%
+        and gone after death, 10/5/7/2% loss
+  - [x] 5. White skull 15 min instead of 3 (WhiteSkullTime = 15)
+  - [x] 6. Per-character loss_* columns are no longer read (IOPlayer::loadPlayer)
+- [ ] Respawn at home town temple (town_id), bag/items drop rules
 - [ ] Skulls and PZ: PZLock 60 s, KillsToRedSkull 5, KillsToBan 7 - confirm 7.4 values
 - [ ] Rookgaard: no PvP on the island (non-pvp zone or protection level)
 
@@ -176,6 +201,19 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 - [ ] If yes: extend tools/patch-client.ps1 with a text table, plus a test that the patched exe still has the original size
 
 ## Spells and runes (found while making the Centurion test character)
+
+- [x] exani tera never worked, and neither did destroy field, animate dead, traps, house isPlayer checks or
+      the healers' fire/poison cure: scripts compared engine booleans with TRUE (= 1), and spell scripts
+      returned the undefined LUA_NO_ERROR ("Expected boolean type parameter"). Fixed in 20 scripts;
+      tests/test_spells.py pins exani tera and both patterns
+
+- [ ] Sudden death rune can be thrown too far away (reported 2026-09-22): check rune range vs 7.4
+      (7.4: a rune reaches what is on screen / in line of sight? find the real limit), test it
+- [ ] Royal paladin: bolts / crossbow and arrows / bow distance (range, hit chance - see 5b in the
+      formulas list), damage with the 7.4 formula; test with Legolas (6 / 6)
+- [ ] Spears: range, breaking/dropping on the ground, stacking, damage vs 7.4
+- [ ] Paralyze rune (adana ani, 2278): 7.4 magic level (ours 18 to use, 35 to make), mana, effect
+      strength and duration vs 7.4; test with Radagast (5 / 5)
 
 - [ ] Spell values the research lists as higher than 7.4 but did not rank: fireball (16-33 vs 15-25 %P),
       great fireball (40+30..70 vs 35-65), force strike (20-50 vs 18..33, one source), exura sio

@@ -1122,15 +1122,12 @@ bool Commands::whoIsOnline(Creature* creature, const std::string &cmd, const std
 bool Commands::playerKills(Creature* creature, const std::string& cmd, const std::string& param)
 {
 	if (Player* player = creature->getPlayer()) {
-		int32_t fragTime = g_config.getNumber(ConfigManager::FRAG_TIME);
-		if (player->redSkullTicks && fragTime > 0) {
-			int32_t frags = (player->redSkullTicks / fragTime) + 1;
-			int32_t remainingTime = player->redSkullTicks - (fragTime * (frags - 1));
-			int32_t hours = ((remainingTime / 1000) / 60) / 60;
-			int32_t minutes = ((remainingTime / 1000) / 60) - (hours * 60);
-
+		int32_t day, week, month;
+		IOPlayer::instance()->getUnjustifiedKills(player->getGUID(), std::time(NULL), day, week, month);
+		if (month > 0) {
 			char buffer[175];
-			sprintf(buffer, "You have %d unjustified kill%s. The amount of unjustified kills will decrease after: %s.", frags, (frags > 1 ? "s" : ""), formatTime(hours, minutes).c_str());
+			sprintf(buffer, "Unjustified kills: %d in the last 24 hours, %d in 7 days, %d in 30 days. "
+				"Red skull at 3 / 5 / 10, banishment at 6 / 10 / 20.", day, week, month);
 			player->sendTextMessage(MSG_STATUS_CONSOLE_BLUE, buffer);
 		}
 		else {

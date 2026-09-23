@@ -52,7 +52,7 @@ function doPlayerAddQuestReward(cid, parameters)
 	
 	if (requiredVocation ~= nil) then
 		if (type(requiredVocation) == "table") then
-			if (isInArray(requiredVocation, getPlayerVocation(cid)) == FALSE) then
+			if (not isInArray(requiredVocation, getPlayerVocation(cid))) then
 				doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Your vocation can not to take this reward.")
 				return true
 			end
@@ -113,7 +113,7 @@ function doPlayerAddQuestReward(cid, parameters)
 
 		local descr = getItemDescriptions(rItem.itemid)
 		local str = "You have found "
-		if(rItem.type > 1 and isItemStackable(rItem.itemid) == TRUE) then
+		if(rItem.type > 1 and isItemStackable(rItem.itemid)) then
 			str = str .. rItem.type .. " " .. descr.plural
 		else
 			str = str .. descr.article .. " " .. descr.name

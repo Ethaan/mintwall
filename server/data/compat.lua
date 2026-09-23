@@ -88,10 +88,18 @@ function getPlayersOnline()
 	return getPlayersOnlineList()
 end
 
+-- Blessings (7.4 had the five of 7.2): storage 30011-30015, read by the engine at death
+-- (Player::getBlessingCount, BLESSING_STORAGE = 30010) - each takes 1 point off the loss
+BLESSING_STORAGE = 30010
+function getPlayerBlessing(cid, blessing)
+	return getPlayerStorageValue(cid, BLESSING_STORAGE + blessing) == 1
+end
+function doPlayerAddBlessing(cid, blessing)
+	return setPlayerStorageValue(cid, BLESSING_STORAGE + blessing, 1)
+end
+
 -- No-ops for features that did not exist in 7.4
 function errors(value) return true end
-function doPlayerAddBlessing(cid, blessing) return false end
-function getPlayerBlessing(cid, blessing) return false end
 function doPlayerSetPVPBlessing(cid, value) return false end
 function canPlayerWearOutfit(cid, looktype, addons) return true end
 function canPlayerWearOutfitId(cid, outfitId, addons) return true end

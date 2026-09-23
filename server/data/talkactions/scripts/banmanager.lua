@@ -230,7 +230,7 @@ function onSay(creature, words, param)
 						end
 					else
 						local ret = removeAccountBan(accno)
-						if ret == TRUE then
+						if ret then
 							doPlayerSendTextMessage(creature, MESSAGE_STATUS_CONSOLE_BLUE, target .. (isname and "'s account" or "") .. " was unbanned.")
 						else
 							doPlayerSendTextMessage(creature, MESSAGE_STATUS_CONSOLE_BLUE, "No account was unbanned.")
@@ -259,7 +259,7 @@ function onSay(creature, words, param)
 						end
 					else
 						local ret = removePlayerBan(target)
-						if ret == TRUE then
+						if ret then
 							doPlayerSendTextMessage(creature, MESSAGE_STATUS_CONSOLE_BLUE, target .. " was unbanned.")
 						else
 							doPlayerSendTextMessage(creature, MESSAGE_STATUS_CONSOLE_BLUE, "No player was unbanned.")
@@ -299,7 +299,7 @@ function onSay(creature, words, param)
 							doPlayerSendTextMessage(creature, MESSAGE_STATUS_CONSOLE_BLUE, "No IP was banned.")
 						end
 					else
-						if removeIPBan(ip, mask) == TRUE then
+						if removeIPBan(ip, mask) then
 							doPlayerSendTextMessage(creature, MESSAGE_STATUS_CONSOLE_BLUE, target .. (isname and "'s IP" or "") .. " was unbanned.")
 						else
 							doPlayerSendTextMessage(creature, MESSAGE_STATUS_CONSOLE_BLUE, "No IP was unbanned.")

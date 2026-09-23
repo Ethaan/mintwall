@@ -158,10 +158,8 @@ bool IOPlayer::loadPlayer(Player* player, const std::string& name, bool preload 
 	player->manaSpent = manaSpent;
 	player->magLevelPercent = Player::getPercentLevel(player->manaSpent, nextManaCount);
 
-	player->setLossPercent(LOSS_EXPERIENCE, result->getDataInt("loss_experience"));
-	player->setLossPercent(LOSS_MANASPENT, result->getDataInt("loss_mana"));
-	player->setLossPercent(LOSS_SKILLTRIES, result->getDataInt("loss_skills"));
-	player->setLossPercent(LOSS_ITEMS, result->getDataInt("loss_items"));
+	// The per-character loss_* columns are not read: death loss follows the 7.4 rules for everybody
+	// (Player::getDeathLossPercent, 10% item drop chance in Player::dropLoot) - docs/reference-74/death.md
 
 	player->loginPosition.x = result->getDataInt("posx");
 	player->loginPosition.y = result->getDataInt("posy");
@@ -214,6 +212,14 @@ bool IOPlayer::loadPlayer(Player* player, const std::string& name, bool preload 
 	player->password = result->getDataString("password");
 	player->premiumDays = Account::getPremiumDaysLeft(result->getDataInt("premend"));
 	db->freeResult(result);
+
+	// 7.4 (docs/reference-74/death.md): a promotion only works with premium. Without it the character plays
+	// as its base vocation (regeneration, spells, 10% death loss); the saved vocation stays promoted, so
+	// it is back at the first login with premium again (savePlayer writes the promoted one).
+	if(player->getVocationId() >= 5 && player->getVocationId() <= 8 && !player->isPremium()){
+		player->setVocation(player->getVocationId() - 4);
+		player->promotionSuspended = true;
+	}
 
 	// we need to find out our skills
 	// so we query the skill table
@@ -473,7 +479,7 @@ bool IOPlayer::savePlayer(Player* player)
 	//First, an UPDATE query to write the player itself
 	query.str("");
 	query << "UPDATE `players` SET `level` = " << player->level
-    << ", `vocation` = " << (int)player->getVocationId()
+    << ", `vocation` = " << (int)(player->getVocationId() + (player->promotionSuspended ? 4 : 0))
 	<< ", `health` = " << player->health
 	<< ", `healthmax` = " << player->healthMax
 	<< ", `direction` = " << (int)player->getDirection()
@@ -719,6 +725,41 @@ bool IOPlayer::getNameByGuid(uint32_t guid, std::string& name)
 	nameCacheMap[guid] = name;
 	db->freeResult(result);
 	return true;
+}
+
+static void ensureKillsTable(Database* db)
+{
+	// created here, so databases made before this table existed need no manual migration
+	db->executeQuery("CREATE TABLE IF NOT EXISTS `player_kills` (`player_id` INTEGER NOT NULL, `time` INTEGER NOT NULL)");
+}
+
+void IOPlayer::addUnjustifiedKill(uint32_t guid, int64_t when)
+{
+	Database* db = Database::instance();
+	ensureKillsTable(db);
+	std::stringstream query;
+	query << "INSERT INTO `player_kills` (`player_id`, `time`) VALUES (" << guid << ", " << when << ")";
+	db->executeQuery(query.str());
+}
+
+void IOPlayer::getUnjustifiedKills(uint32_t guid, int64_t now, int32_t& day, int32_t& week, int32_t& month)
+{
+	day = week = month = 0;
+	Database* db = Database::instance();
+	ensureKillsTable(db);
+	std::stringstream query;
+	query << "SELECT `time` FROM `player_kills` WHERE `player_id` = " << guid << " AND `time` > " << (now - 30 * 86400);
+	DBResult* result = db->storeQuery(query.str());
+	if(!result){
+		return;
+	}
+	do{
+		int64_t t = result->getDataLong("time");
+		month++;
+		if(t > now - 7 * 86400) week++;
+		if(t > now - 86400) day++;
+	} while(result->next());
+	db->freeResult(result);
 }
 
 bool IOPlayer::getGuidByName(uint32_t &guid, std::string& name)

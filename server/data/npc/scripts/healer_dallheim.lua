@@ -12,11 +12,11 @@ function onCreatureSay(cid, type, msg)     npcHandler:onCreatureSay(cid, type, m
 	end
 	
 	if msgcontains(msg, 'heal') then
-		if hasCondition(cid, CONDITION_FIRE) == TRUE then
+		if hasCondition(cid, CONDITION_FIRE) then
 			npcHandler:say('You are burning. I will help you.')
 			doRemoveCondition(cid, CONDITION_FIRE)
 			doSendMagicEffect(getCreaturePosition(cid), 14)
-		elseif hasCondition(cid, CONDITION_POISON) == TRUE then
+		elseif hasCondition(cid, CONDITION_POISON) then
 			npcHandler:say('You are poisoned. I will help you.')
 			doRemoveCondition(cid, CONDITION_POISON)
 			doSendMagicEffect(getCreaturePosition(cid), 13)

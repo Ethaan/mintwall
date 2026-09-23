@@ -107,3 +107,25 @@ function selfSay(message, ...)
 	end
 	return rawSelfSay(message, ...)
 end
+
+-- Blessings (docs/reference-74/death.md). A blessing NPC answers any word of the blessing's name
+-- ("spiritual", "shielding"...), offers it for 10000 gold and on "yes" sells it through StdModule.bless
+-- (storage BLESSING_STORAGE + number, compat.lua). Returns the offer nodes for extra children.
+BLESSING_WORDS_IGNORED = {["of"] = true, ["the"] = true}
+function addBlessingKeywords(keywordHandler, npcHandler, number, name, premium, onYes)
+	local yes = KeywordNode:new({'yes'}, onYes or StdModule.bless,
+		{npcHandler = npcHandler, number = number, premium = premium, cost = 10000})
+	local no = KeywordNode:new({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true,
+		text = 'Too expensive, eh?'})
+	local nodes = {}
+	for word in string.gmatch(name, "%a+") do
+		if(not BLESSING_WORDS_IGNORED[word]) then
+			local node = keywordHandler:addKeyword({word}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true,
+				text = 'Do you want to receive the blessing of ' .. name .. ' for 10000 gold?'})
+			node:addChildKeywordNode(yes)
+			node:addChildKeywordNode(no)
+			table.insert(nodes, node)
+		end
+	end
+	return nodes
+end

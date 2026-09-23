@@ -78,6 +78,12 @@ SQLite shell: `server\build\vcpkg_installed\x64-windows-static\tools\sqlite3.exe
   out. Magic level 9, sword/shield 90. For exploring the mainland. "Never run out" = action id 64000
   on the item AND the name in config.lua InfiniteItemPlayers (Player::isAllowedToUseInfinite); for
   anyone else those items are ordinary
+- 4 / 4 - "Gandalf", premium level 500 master sorcerer, Thais: magic level 100, shielding 100, mystic turban,
+  blue robe, golden legs, boots of haste, mastermind shield, stone skin amulet, time ring; backpack with
+  SD / GFB / UH / explosion / MW runes and a mana fluid that never run out (in InfiniteItemPlayers)
+- 5 / 5 - "Radagast", premium level 500 elder druid (as Gandalf, plus infinite paralyze runes)
+- 6 / 6 - "Legolas", premium level 500 royal paladin: distance 100, shielding 100, ML 25, crossbow + bolts,
+  bow + arrows, 100 spears, infinite SD / GFB / UH / explosion / paralyze runes
 - 9 / 9 - "GM Mintwall", group God (access 3), Thais (town 2)
 - Items: `/i <id> [count]`, `/n "<name>" [count]` (max 100). Broadcast `/B text`.
 
@@ -120,7 +126,8 @@ when the engine is wrong.
 - Items: our items.otb (Avesta, v1.2) and the map's (v1.3) have identical server->client ids
 - Full map server uses ~2.5 GB RAM
 - Edit a character in db.db3 only while it is logged out: the server keeps an online character in
-  memory and its logout save overwrites the DB (lost Centurion's rings once)
+  memory and its logout save overwrites the DB (lost Centurion's rings once). lastlogin/lastlogout in
+  the DB do NOT tell whether a character is online right now - ask the player to log out first
 - The `server.log` of a running server is locked; the exe is locked while running (stop before rebuild)
 
 ## Testing (tests/)

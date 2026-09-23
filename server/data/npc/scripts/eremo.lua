@@ -24,8 +24,7 @@ local keywordHandler = KeywordHandler:new()
         
         keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'I teach some spells, provide one of the five blessings, and sell some amulets.'})
 		
-local node1 = keywordHandler:addKeyword({'wisdom of solitude'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want to buy the wisdom of solitude for 10000 gold?'})
-	node1:addChildKeyword({'yes'}, StdModule.bless, {npcHandler = npcHandler, number = 4, premium = true, cost = 10000})
-	node1:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = 'Too expensive, eh?'})
+-- sells the blessing of wisdom of solitude; any word of its name works (lib/npc.lua)
+addBlessingKeywords(keywordHandler, npcHandler, 4, 'wisdom of solitude', true)
 
 npcHandler:addModule(FocusModule:new())

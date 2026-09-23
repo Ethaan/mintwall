@@ -175,6 +175,9 @@ Creature()
 
 #ifdef __SKULLSYSTEM__
 	redSkullTicks = 0;
+	promotionSuspended = false;
+	sentToRook = false;
+	deathLossPercent = -1;
 	skull = SKULL_NONE;
 #endif
 
@@ -542,6 +545,18 @@ float Player::getAttackFactor() const
 // Test-character items (action id 64000, Item::isInfiniteTestItem) only work for the characters named in
 // config.lua InfiniteItemPlayers (comma-separated, any case). For everybody else they are ordinary items:
 // a marked rune that ends up in another backpack loses charges like any rune.
+int32_t Player::getBlessingCount() const
+{
+	int32_t count = 0;
+	for(uint32_t b = 1; b <= 5; ++b){
+		int32_t value = 0;
+		if(getStorageValue(BLESSING_STORAGE + b, value) && value == 1){
+			count++;
+		}
+	}
+	return count;
+}
+
 bool Player::isAllowedToUseInfinite() const
 {
 	std::string list = g_config.getString(ConfigManager::INFINITE_ITEM_PLAYERS);
@@ -841,6 +856,13 @@ uint16_t Player::getLookCorpse() const
 
 void Player::dropLoot(Container* corpse)
 {
+	// Sent to Rookgaard by this death: sendToRook() already took the old items and handed out the
+	// starter set - dropping "loot" now would put the new bag (containers always drop) into the corpse
+	if(sentToRook){
+		sentToRook = false;
+		return;
+	}
+
 	if(!corpse){
 		return;
 	}
@@ -2014,6 +2036,7 @@ uint32_t Player::getIP() const
 
 void Player::sendToRook()
 {
+    sentToRook = true;   // see dropLoot
     setVocation(VOCATION_NONE);
 
     //Edit stats (level, exp, mana...)
@@ -2110,6 +2133,13 @@ void Player::die()
 
 	loginPosition = masterPos;
 
+	// this death's loss (10 / 7 promoted, minus blessings), before the blessings are used up below;
+	// preSave() applies the experience part with the same percent
+	deathLossPercent = getDeathLossPercent();
+	for(uint32_t b = 1; b <= 5; ++b){
+		addStorageValue(BLESSING_STORAGE + b, 0);   // 7.4: all blessings are lost on death
+	}
+
 	if(skillLoss){
 		//Magic level loss
 		uint32_t sumMana = 0;
@@ -2122,7 +2152,7 @@ void Player::die()
 
 		sumMana += manaSpent;
 
-		lostMana = (int32_t)std::ceil(sumMana * ((double)lossPercent[LOSS_MANASPENT]/100) * getDeathLossFactor());
+		lostMana = (int32_t)std::ceil(sumMana * (deathLossPercent / 100));
 
 		while((uint32_t)lostMana > manaSpent && magLevel > 0){
 			lostMana -= manaSpent;
@@ -2145,7 +2175,7 @@ void Player::die()
 			}
 
 			sumSkillTries += skills[i][SKILL_TRIES];
-			lostSkillTries = (uint32_t)std::ceil(sumSkillTries * ((double)lossPercent[LOSS_SKILLTRIES]/100) * getDeathLossFactor());
+			lostSkillTries = (uint32_t)std::ceil(sumSkillTries * (deathLossPercent / 100));
 
 			while(lostSkillTries > skills[i][SKILL_TRIES]){
 				lostSkillTries -= skills[i][SKILL_TRIES];
@@ -2247,6 +2277,7 @@ void Player::preSave()
 
 		health = healthMax;
 		mana = manaMax;
+		deathLossPercent = -1;
 	}
 }
 
@@ -3785,19 +3816,28 @@ void Player::addUnjustifiedDead(const Player* attacked)
 	std::stringstream Msg;
 	Msg << "Warning! The murder of " << attacked->getName() << " was not justified.";
 	sendTextMessage(MSG_STATUS_WARNING, Msg.str());
-	redSkullTicks += g_config.getNumber(ConfigManager::FRAG_TIME);
-	
+
+	// 7.4 (docs/reference-74/death.md): unjustified kills count per day, week and month. A red skull at
+	// 3 / 5 / 10 of them, for 30 days (redSkullTicks, saved as redskulltime); a banishment at 6 / 10 / 20.
+	// This replaces the single decaying frag counter (KillsToRedSkull / KillsToBan / TimeToDecreaseFrags).
+	int64_t now = std::time(NULL);
+	IOPlayer::instance()->addUnjustifiedKill(getGUID(), now);
+	int32_t day, week, month;
+	IOPlayer::instance()->getUnjustifiedKills(getGUID(), now, day, week, month);
+
 	if (g_bans.isBanished(getAccount())) {
 		return;
 	}
 
-	if(g_config.getNumber(ConfigManager::KILLS_TO_RED) != 0 && getSkull() != SKULL_RED &&
-		redSkullTicks >= ((g_config.getNumber(ConfigManager::KILLS_TO_RED) - 1) * g_config.getNumber(ConfigManager::FRAG_TIME)))
-	{
-		setSkull(SKULL_RED);
-		g_game.updateCreatureSkull(this);
+	bool banned = day >= 6 || week >= 10 || month >= 20;
+	if(!banned && (day >= 3 || week >= 5 || month >= 10)){
+		redSkullTicks = (int64_t)30 * 24 * 60 * 60 * 1000;
+		if(getSkull() != SKULL_RED){
+			setSkull(SKULL_RED);
+			g_game.updateCreatureSkull(this);
+		}
 	}
-	else if(g_config.getNumber(ConfigManager::KILLS_TO_BAN) != 0 && redSkullTicks >= (g_config.getNumber(ConfigManager::KILLS_TO_BAN) - 1) * g_config.getNumber(ConfigManager::FRAG_TIME))
+	else if(banned)
 	{
 		Account account = IOAccount::instance()->loadAccount(getAccount());
 		bool success = false;
@@ -3828,6 +3868,7 @@ void Player::checkRedSkullTicks(int32_t ticks)
 		redSkullTicks = redSkullTicks - ticks;
 
 	if(redSkullTicks < 1000 && !hasCondition(CONDITION_INFIGHT) && skull != SKULL_NONE){
+		// a red skull ends when its 30 days are over (redSkullTicks runs down only then)
 		setSkull(SKULL_NONE);
 		g_game.updateCreatureSkull(this);
 	}

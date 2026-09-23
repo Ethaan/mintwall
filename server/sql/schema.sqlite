@@ -114,6 +114,13 @@ CREATE TABLE "player_skills" (
     FOREIGN KEY ("player_id") REFERENCES "players" ("id")
 );
 
+-- Unjustified kills with their time, for the 7.4 red skull rules (the server also creates it if missing)
+CREATE TABLE "player_kills" (
+    "player_id" INTEGER NOT NULL,
+    "time" INTEGER NOT NULL,
+    FOREIGN KEY ("player_id") REFERENCES "players" ("id")
+);
+
 CREATE TABLE "player_storage" (
     "player_id" INTEGER NOT NULL,
     "key" INTEGER NOT NULL,

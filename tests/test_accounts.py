@@ -10,6 +10,9 @@ CREATURE = 0x63    # client id meaning "the creature on that tile" in a use-with
     (1, "1", "Free Tester"),
     (2, "2", "Premium Tester"),
     (3, "3", "Centurion"),
+    (4, "4", "Gandalf"),
+    (5, "5", "Radagast"),
+    (6, "6", "Legolas"),
     (9, "9", "GM Mintwall"),
 ])
 def test_seeded_account_logs_in(server, items, account, password, name):

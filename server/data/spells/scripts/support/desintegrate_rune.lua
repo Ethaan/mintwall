@@ -3,15 +3,15 @@ local function doRemoveObject(cid, pos, send)
 	local object = getThingfromPos(pos)
 	local playerPos = getPlayerPosition(cid)
 
-	if(object.uid > 0 and isCreature(object.uid) == FALSE and isItemMoveable(object.itemid) == TRUE) then
+	if(object.uid > 0 and not isCreature(object.uid) and isItemMoveable(object.itemid)) then
 		doRemoveItem(object.uid)
 		doSendMagicEffect(pos, CONST_ME_POFF)
 		doRemoveObject(cid, pos, true)
-		return LUA_NO_ERROR
+		return true
 	elseif(not send) then
 		doPlayerSendDefaultCancel(cid, RETURNVALUE_NOTPOSSIBLE)
 		doSendMagicEffect(playerPos, CONST_ME_POFF)
-		return LUA_ERROR
+		return false
 	end
 end
 
@@ -23,5 +23,5 @@ function onCastSpell(cid, var)
 
 	doPlayerSendDefaultCancel(cid, RETURNVALUE_NOTPOSSIBLE)
 	doSendMagicEffect(getPlayerPosition(cid), CONST_ME_POFF)
-	return LUA_ERROR
+	return false
 end

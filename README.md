@@ -52,6 +52,9 @@ Port 7171 must be free (the 7.4 client always uses it).
 | 1 | 1 | Free Tester | free account, level 1, Rookgaard |
 | 2 | 2 | Premium Tester | premium account (until 2033), level 8, Rookgaard |
 | 3 | 3 | Centurion | premium level 171 elite knight in Thais, full gear (see seed.sql) |
+| 4 | 4 | Gandalf | premium level 500 master sorcerer in Thais, ML 100, shielding 100, mage set, infinite runes |
+| 5 | 5 | Radagast | premium level 500 elder druid in Thais, ML 100, shielding 100, mage set, infinite runes incl. paralyze |
+| 6 | 6 | Legolas | premium level 500 royal paladin in Thais, distance 100, shielding 100, ML 25, crossbow, bow, bolts, arrows, spears, infinite runes |
 | 9 | 9 | GM Mintwall | God group (access 3): /B, /goto, /i, /n, /reload, ... |
 
 ## Testing NPCs without the client

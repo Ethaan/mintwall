@@ -114,7 +114,7 @@ function creatureSayCallback(cid, type, msg)
 								local ring = doPlayerAddItem(cid,2121,1)
 								local ring2 = doPlayerAddItem(pid,2121,1)
 if doPlayerRemoveItem(cid, 2121,1) then
-						if isOnline(fid) == TRUE and isOnline(sid) == TRUE then
+						if isOnline(fid) and isOnline(sid) then
 						if getDistanceBetween(tmf, tms) <= 3 then
 										setPlayerStorageValue(cid,3066,2)
 										setPlayerStorageValue(pid,3066,2)
@@ -151,7 +151,7 @@ if doPlayerRemoveItem(cid, 2121,1) then
 						local sid = getMarryStatus(fid)
 						local marryname = getPlayerNameByGUID(sid)
 						local pid = getPlayerByNameWildcard(marryname)
-						if isOnline(sid) == TRUE then
+						if isOnline(sid) then
 								setPlayerStorageValue(pid,3066,-1)
 						end
 						doCancelMarryStatus(sid)
@@ -173,7 +173,7 @@ if doPlayerRemoveItem(cid, 2121,1) then
 						local sid = getPlayerPartner(cid)
 						local marryname = getPlayerNameByGUID(sid)
 						local pid = getPlayerByNameWildcard(marryname)
-						if (isOnline(fid) == TRUE and isOnline(sid) == TRUE) then
+						if (isOnline(fid) and isOnline(sid)) then
 								setPlayerStorageValue(cid,3066,-1)
 								setPlayerStorageValue(pid,3066,-1)
 								setPlayerPartner(cid,0)

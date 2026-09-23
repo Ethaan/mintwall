@@ -6,27 +6,30 @@ function onCreatureAppear(cid)				npcHandler:onCreatureAppear(cid) 			end
 function onCreatureDisappear(cid) 			npcHandler:onCreatureDisappear(cid) 		end
 function onCreatureSay(cid, type, msg) 		npcHandler:onCreatureSay(cid, type, msg) 	end
 function onThink() 							npcHandler:onThink() 						end
-function onPlayerEndTrade(cid)		 		npcHandler:onPlayerEndTrade(cid)			end
+function onPlayerEndTrade(cid)				npcHandler:onPlayerEndTrade(cid)			end
 function onPlayerCloseChannel(cid)			npcHandler:onPlayerCloseChannel(cid)		end
 
-local node1 = keywordHandler:addKeyword({'first bless'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want to buy the first blessing for 2000 (plus level depending amount) gold?'})
-	node1:addChildKeyword({'yes'}, StdModule.bless, {npcHandler = npcHandler, number = 1, premium = true, baseCost = 2000, levelCost = 200, startLevel = 30, endLevel = 120})
-	node1:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = 'Too expensive, eh?'})
+-- Second part of the spark of the phoenix, after Kawill's (see Kawill.lua): only now is it paid,
+-- 10000 gold. (This used to be an 8.x seller of all five blessings at a level-based price.)
+SPARK_FIRST_PART = 30020
 
-local node2 = keywordHandler:addKeyword({'second bless'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want to buy the second blessing for 2000 (plus level depending amount) gold?'})
-	node2:addChildKeyword({'yes'}, StdModule.bless, {npcHandler = npcHandler, number = 2, premium = true, baseCost = 2000, levelCost = 200, startLevel = 30, endLevel = 120})
-	node2:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = 'Too expensive, eh?'})
+local function secondPart(cid, message, keywords, parameters, node)
+	if(not npcHandler:isFocused(cid)) then
+		return false
+	end
+	if(getPlayerStorageValue(cid, SPARK_FIRST_PART) ~= 1 and not getPlayerBlessing(cid, 5)) then
+		npcHandler:say("You must receive the first part of the spark of the phoenix from Kawill first.", cid)
+		npcHandler:resetNpc(cid)
+		return true
+	end
+	local blessedBefore = getPlayerBlessing(cid, 5)
+	StdModule.bless(cid, message, keywords, parameters, node)
+	if(not blessedBefore and getPlayerBlessing(cid, 5)) then
+		setPlayerStorageValue(cid, SPARK_FIRST_PART, 0)
+	end
+	return true
+end
 
-local node3 = keywordHandler:addKeyword({'third bless'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want to buy the third blessing for 2000 (plus level depending amount) gold?'})
-	node3:addChildKeyword({'yes'}, StdModule.bless, {npcHandler = npcHandler, number = 3, premium = true, baseCost = 2000, levelCost = 200, startLevel = 30, endLevel = 120})
-	node3:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = 'Too expensive, eh?'})
-
-local node4 = keywordHandler:addKeyword({'fourth bless'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want to buy the fourth blessing for 2000 (plus level depending amount) gold?'})
-	node4:addChildKeyword({'yes'}, StdModule.bless, {npcHandler = npcHandler, number = 4, premium = true, baseCost = 2000, levelCost = 200, startLevel = 30, endLevel = 120})
-	node4:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = 'Too expensive, eh?'})
-
-local node5 = keywordHandler:addKeyword({'fifth bless'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want to buy the fifth blessing for 2000 (plus level depending amount) gold?'})
-	node5:addChildKeyword({'yes'}, StdModule.bless, {npcHandler = npcHandler, number = 5, premium = true, baseCost = 2000, levelCost = 200, startLevel = 30, endLevel = 120})
-	node5:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = 'Too expensive, eh?'})
+addBlessingKeywords(keywordHandler, npcHandler, 5, 'spark of the phoenix', false, secondPart)
 
 npcHandler:addModule(FocusModule:new())

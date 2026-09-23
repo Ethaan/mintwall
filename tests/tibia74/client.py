@@ -52,6 +52,7 @@ class Creature:
     pos: tuple = None           # None when not on any known tile
     speed: int = 0
     outfit: tuple = ()
+    skull: int = 0              # 0 none, 1 yellow, 2 green, 3 white, 4 red
 
     def __repr__(self):
         return f"<{self.name} #{self.id} {self.health}% at {self.pos}>"
@@ -348,7 +349,8 @@ class GameClient:
         c.outfit = self._read_outfit(r)
         r.u8(); r.u8()          # light level, color
         c.speed = r.u16()
-        r.u8(); r.u8()          # skull, party shield
+        c.skull = r.u8()
+        r.u8()                  # party shield
         self.creatures[cid] = c
         return c
 
@@ -665,6 +667,12 @@ def _h_creature_speed(c, r):
         c.creatures[cid].speed = speed
 
 
+def _h_creature_skull(c, r):
+    cid, skull = r.u32(), r.u8()
+    if cid in c.creatures:
+        c.creatures[cid].skull = skull
+
+
 def _h_creature_u32_u8(c, r):
     r.u32(); r.u8()
 
@@ -763,7 +771,7 @@ _HANDLERS = {
     0x7D: _h_trade, 0x7E: _h_trade, 0x7F: _h_nothing,
     0x82: _h_world_light, 0x83: _h_magic_effect, 0x84: _h_animated_text, 0x85: _h_distance_shot,
     0x86: _h_creature_square, 0x8C: _h_creature_health, 0x8D: _h_creature_light,
-    0x8E: _h_creature_outfit, 0x8F: _h_creature_speed, 0x90: _h_creature_u32_u8,
+    0x8E: _h_creature_outfit, 0x8F: _h_creature_speed, 0x90: _h_creature_skull,
     0x91: _h_creature_u32_u8,
     0x96: _h_text_window, 0x97: _h_house_window,
     0xA0: _h_stats, 0xA1: _h_skills, 0xA2: _h_icons, 0xA3: _h_nothing,

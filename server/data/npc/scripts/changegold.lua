@@ -21,7 +21,7 @@ function creatureSayCallback(cid, type, msg)
 	end
 
 	local function wordEnding(b65alance)
-		if isInArray({ 0, 1 }, balance) == TRUE then ending = "" else ending = "s" end
+		if isInArray({ 0, 1 }, balance) then ending = "" else ending = "s" end
 		return ending
 	end
 
@@ -123,7 +123,7 @@ function creatureSayCallback(cid, type, msg)
 		doPlayerDepositMoney(cid, moneyToDeposit)
 		doPlayerRemoveMoney(cid, moneyToDeposit)
 		talkState = 0
-	elseif msgcontains(msg, 'no') and isInArray({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, talkState) == TRUE then
+	elseif msgcontains(msg, 'no') and isInArray({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, talkState) then
 		selfSay("Then not.")
 		talkState = 0
 	--Transfer

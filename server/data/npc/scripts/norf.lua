@@ -9,8 +9,7 @@ function onThink() 							npcHandler:onThink() 						end
 function onPlayerEndTrade(cid)				npcHandler:onPlayerEndTrade(cid)			end
 function onPlayerCloseChannel(cid)			npcHandler:onPlayerCloseChannel(cid)		end
 
-local node1 = keywordHandler:addKeyword({'spiritual shielding'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want to buy the spiritual shielding for 10000 gold?'})
-	node1:addChildKeyword({'yes'}, StdModule.bless, {npcHandler = npcHandler, number = 2, premium = false, cost = 10000})
-	node1:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = 'Too expensive, eh?'})
+-- sells the blessing of spiritual shielding; any word of its name works (lib/npc.lua)
+addBlessingKeywords(keywordHandler, npcHandler, 2, 'spiritual shielding', false)
 	
 npcHandler:addModule(FocusModule:new())

@@ -331,6 +331,8 @@ public:
 	virtual float getAttackFactor() const;
 	float getAttackMultiplier() const;
 	bool isAllowedToUseInfinite() const;
+	bool promotionSuspended;
+	bool sentToRook;           // this death sent the player to Rookgaard: no loot drop (Player::dropLoot)   // promoted, but without premium: plays as the base vocation (IOPlayer::loadPlayer)
 	float getDefenseMultiplier() const;
 	virtual float getDefenseFactor() const;
 
@@ -776,12 +778,19 @@ protected:
 	}
 
 	static uint32_t getPercentLevel(uint64_t count, uint32_t nextLevelCount);
-	// 7.4: a promoted character (vocations 5-8) loses 30% less on death - 7% instead of 10%
-	double getDeathLossFactor() const {
-		return (getVocationId() >= 5 && getVocationId() <= 8) ? 0.7 : 1.0;
+	// 7.4 death loss of experience, magic level and skills (docs/reference-74/death.md): 10%, 7% for a
+	// promoted character, minus 1 point per blessing (storage BLESSING_STORAGE + 1..5): 5% / 2% with all
+	// five. die() fixes it for the death (deathLossPercent) and then takes the blessings away.
+	static const uint32_t BLESSING_STORAGE = 30010;
+	int32_t getBlessingCount() const;
+	double getDeathLossPercent() const {
+		double base = (getVocationId() >= 5 && getVocationId() <= 8) ? 7.0 : 10.0;
+		return std::max(0.0, base - getBlessingCount());
 	}
+	double deathLossPercent;   // this death's percent, -1 when not dying
+	double currentDeathLossPercent() const { return deathLossPercent >= 0 ? deathLossPercent : getDeathLossPercent(); }
 	virtual uint64_t getLostExperience() const {
-		return (skillLoss ? (uint64_t)(experience * lossPercent[LOSS_EXPERIENCE] / 100 * getDeathLossFactor()) : 0);
+		return (skillLoss ? (uint64_t)(experience * currentDeathLossPercent() / 100) : 0);
 	}
 
 	virtual void dropLoot(Container* corpse);
