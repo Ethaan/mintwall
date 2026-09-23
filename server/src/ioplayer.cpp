@@ -20,6 +20,7 @@
 #include "otpch.h"
 
 #include "ioplayer.h"
+#include "dbwriter.h"
 #include "ioaccount.h"
 #include "item.h"
 #include "town.h"
@@ -38,6 +39,15 @@ extern ConfigManager g_config;
 
 bool IOPlayer::loadPlayer(Player* player, const std::string& name, bool preload /*= false*/)
 {
+	if(!preload){
+		// a save of this character may still be on its way to the database (dbwriter.h)
+		uint32_t guid;
+		std::string lookup = name;
+		if(getGuidByName(guid, lookup)){
+			dbwriter::waitFor(guid);
+		}
+	}
+
 	Database* db = Database::instance();
 	DBQuery query;
 	DBResult* result;
@@ -49,7 +59,7 @@ bool IOPlayer::loadPlayer(Player* player, const std::string& name, bool preload 
 			 `direction`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, \
 			 `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, \
 			 `redskulltime`, `redskull`, `guildnick`, `loss_experience`, `loss_mana`, \
-			 `loss_skills`, `loss_items`, `rank_id`, `town_id`, `balance` \
+			 `loss_skills`, `loss_items`, `rank_id`, `town_id`, `balance`, `players`.`save` AS `save` \
 			 FROM `players` LEFT JOIN `accounts` ON `account_id` = `accounts`.`id` \
 			 WHERE `players`.`name` = " + db->escapeString(name);
 #else
@@ -59,7 +69,7 @@ bool IOPlayer::loadPlayer(Player* player, const std::string& name, bool preload 
 			 `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `posx`, `posy`, \
 			 `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `redskulltime`, \
 			 `redskull`, `guildnick`, `loss_experience`, `loss_mana`, `loss_skills`, \
-			 `loss_items`, `rank_id`, `town_id`, `balance` \
+			 `loss_items`, `rank_id`, `town_id`, `balance`, `players`.`save` AS `save` \
 			 FROM `players` LEFT JOIN `accounts` ON `account_id` = `accounts`.`id` \
 			 WHERE `players`.`name` = " + db->escapeString(name);
 #endif // __PROTOCOL_76__
@@ -71,6 +81,7 @@ bool IOPlayer::loadPlayer(Player* player, const std::string& name, bool preload 
 
 	player->setGUID(result->getDataInt("id"));
 	player->accountNumber = result->getDataInt("account_id");
+	player->saveEnabled = (result->getDataInt("save") != 0);   // read once: every save used to query it
 	//player->groupName = result->getDataString("groupname"); fix me
 
 	const PlayerGroup* group = getPlayerGroup(result->getDataInt("group_id"));
@@ -427,20 +438,40 @@ bool IOPlayer::saveItems(Player* player, const ItemBlockList& itemList, DBInsert
 
 bool IOPlayer::savePlayer(Player* player)
 {
+	// captured as SQL on this (game) thread and written by the save writer (dbwriter.h): into the running
+	// server save if there is one, else as a batch of its own. A player is captured whole or not at all.
+	int64_t start = OTSYS_TIME();
+	DBBatch* batch = new DBBatch();
+	DBBatch* outer = Database::beginCapture(batch);
+	bool captured = captureSavePlayer(player);
+	Database::endCapture(outer);
+	if(!captured){
+		delete batch;
+		return false;
+	}
+
+	if(outer){
+		outer->queries.insert(outer->queries.end(), batch->queries.begin(), batch->queries.end());
+		outer->guids.push_back(player->getGUID());
+		delete batch;
+	}
+	else{
+		batch->guids.push_back(player->getGUID());
+		batch->captureMs = OTSYS_TIME() - start;
+		dbwriter::post(batch);
+	}
+	return true;
+}
+
+bool IOPlayer::captureSavePlayer(Player* player)
+{
 	player->preSave();
 
 	Database* db = Database::instance();
 	DBQuery query;
-	DBResult* result;
 
-	//check if the player have to be saved or not
-	query << "SELECT `save` FROM `players` WHERE `id` = " << player->getGUID();
-	if(!(result = db->storeQuery(query.str()))){
-		return false;
-	}
-
-	const uint32_t save = result->getDataInt("save");
-	db->freeResult(result);
+	//check if the player have to be saved or not (loaded with the player: no query on the game thread)
+	const uint32_t save = player->saveEnabled ? 1 : 0;
 	if(save == 0){
 
 		query.str("");

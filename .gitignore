@@ -12,7 +12,7 @@ server/*.db
 server/*.log
 server/data/logs/
 server/avesta74.exe
-server/db.db3
+server/db.db3*
 server/build.log
 server/server.log
 server/config.lua.bak

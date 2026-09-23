@@ -162,3 +162,24 @@ bool DBInsert::execute()
 		return true;
 	}
 }
+
+namespace {
+	thread_local DBBatch* t_capture = NULL;
+}
+
+DBBatch* _Database::beginCapture(DBBatch* batch)
+{
+	DBBatch* previous = t_capture;
+	t_capture = batch;
+	return previous;
+}
+
+void _Database::endCapture(DBBatch* previous)
+{
+	t_capture = previous;
+}
+
+DBBatch* _Database::capture()
+{
+	return t_capture;
+}

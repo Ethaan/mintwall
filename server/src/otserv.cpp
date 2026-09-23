@@ -555,6 +555,10 @@ void mainLoader(const CommandLineOptions& command_opts)
 		g_config.setNumber(ConfigManager::PASSWORD_TYPE, PASSWORD_TYPE_SHA1);
 		std::cout << ":: Use SHA1 passwords" << std::endl;
 	}
+	else if(asLowerCaseString(passwordType) == "pbkdf2"){
+		g_config.setNumber(ConfigManager::PASSWORD_TYPE, PASSWORD_TYPE_PBKDF2);
+		std::cout << ":: Use PBKDF2 passwords" << std::endl;
+	}
 	else{
 		ErrorMessage("Unknown password type!");
 		exit(-1);

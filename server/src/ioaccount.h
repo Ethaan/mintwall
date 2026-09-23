@@ -41,6 +41,7 @@ class IOAccount {
     Account loadAccount(uint32_t accno);
 	bool saveAccount(Account acc);
     bool getPassword(uint32_t accno, const std::string& name, std::string& password);
+	bool setPassword(uint32_t accno, const std::string& stored);   // stored = the hashed entry
            
 };
 

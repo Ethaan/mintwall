@@ -67,6 +67,7 @@ Creature()
 {
 	client = p;
 	isConnecting = false;
+	saveEnabled = true;
 	if(client){
 		client->setPlayer(this);
 	}

@@ -54,7 +54,8 @@
 enum passwordType_t{
 	PASSWORD_TYPE_PLAIN = 0,
 	PASSWORD_TYPE_MD5,
-	PASSWORD_TYPE_SHA1
+	PASSWORD_TYPE_SHA1,
+	PASSWORD_TYPE_PBKDF2   // salted PBKDF2 (passwords.cpp); legacy rows compare as plain until rehashed
 };
 
 #ifndef __FUNCTION__

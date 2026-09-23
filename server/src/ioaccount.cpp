@@ -91,3 +91,11 @@ bool IOAccount::getPassword(uint32_t accno, const std::string &name, std::string
 
 	return false;
 }
+
+bool IOAccount::setPassword(uint32_t accno, const std::string& stored)
+{
+	Database* db = Database::instance();
+	DBQuery query;
+	query << "UPDATE `accounts` SET `password` = " << db->escapeString(stored) << " WHERE `id` = " << accno;
+	return db->executeQuery(query.str());
+}

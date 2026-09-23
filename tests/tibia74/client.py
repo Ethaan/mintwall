@@ -785,3 +785,41 @@ _HANDLERS = {
     0xBE: _h_floor_up, 0xBF: _h_floor_down,
     0xC8: _h_outfit_window, 0xD2: _h_vip, 0xD3: _h_u32, 0xD4: _h_u32,
 }
+
+
+def character_list(account: int, password: str, host: str = "127.0.0.1", port: int = 7171,
+                   timeout: float = 10.0) -> dict:
+    """The 7.4 login-server exchange (protocol 0x01): what the client shows before choosing a character.
+    Returns {"error": text} or {"motd": text, "characters": [(name, world)], "premium_days": n}."""
+    w = Writer().u8(0x01).u16(2).u16(740)
+    w.buf += bytes(12)                                  # dat / spr / pic signatures, not checked
+    w.u32(account).string(password)
+    with socket.create_connection((host, port), timeout=timeout) as s:
+        s.settimeout(timeout)
+        s.sendall(w.packet())
+        data = b""
+        while True:                                     # the server closes the connection after replying
+            chunk = s.recv(4096)
+            if not chunk:
+                break
+            data += chunk
+    if len(data) < 2:
+        return {"error": "no reply"}
+    r = Reader(data[2:2 + int.from_bytes(data[:2], "little")])
+    out = {}
+    while r.remaining() > 0:
+        op = r.u8()
+        if op == 0x0A:
+            return {"error": r.string()}
+        if op == 0x14:
+            out["motd"] = r.string()
+        elif op == 0x64:
+            out["characters"] = []
+            for _ in range(r.u8()):
+                name, world = r.string(), r.string()
+                r.u32(), r.u16()                        # world ip, port
+                out["characters"].append((name, world))
+            out["premium_days"] = r.u16()
+        else:
+            break
+    return out

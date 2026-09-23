@@ -27,6 +27,9 @@
 #include "tools.h"
 #include "ioaccount.h"
 #include "ban.h"
+#include "authpool.h"
+#include "passwords.h"
+#include "tasks.h"
 #include "game.h"
 #ifdef __PROTOCOL_77__
 #include "rsa.h"
@@ -138,16 +141,51 @@ bool ProtocolLogin::parseFirstPacket(NetworkMessage& msg)
 	}
 	
 	Account account = IOAccount::instance()->loadAccount(accnumber);
-	if(!(accnumber != 0 && account.accnumber == accnumber &&
-			passwordTest(password, account.password))){
-
+	if(account.accnumber != accnumber){
 		g_bans.addLoginAttempt(clientip, false);
 		disconnectClient(0x0A, "Please enter a valid account number and password.");
 		return false;
 	}
 
+	// PBKDF2 costs a few hundred ms: not on this (network) thread - docs/production-plan.md §2
+	Connection* connection = getConnection();
+	connection->addRef();
+	if(!authpool::post(boost::bind(&ProtocolLogin::checkPassword, this, account, password, clientip, serverip))){
+		connection->unRef();
+		disconnectClient(0x0A, "The server is busy. Please try again in a moment.");
+		return false;
+	}
+	return true;
+}
+
+void ProtocolLogin::checkPassword(Account account, std::string password, uint32_t clientip, uint32_t serverip)
+{
+	// worker thread: only the hashing
+	bool ok = passwordTest(password, account.password);
+	std::string rehash;
+	if(ok && g_config.getNumber(ConfigManager::PASSWORD_TYPE) == PASSWORD_TYPE_PBKDF2
+		&& passwords::needsRehash(account.password)){
+		rehash = passwords::hash(password);
+	}
+	Dispatcher::getDispatcher().addTask(createTask(
+		boost::bind(&ProtocolLogin::onPasswordChecked, this, account, ok, rehash, clientip, serverip)));
+}
+
+void ProtocolLogin::onPasswordChecked(Account account, bool ok, std::string rehash, uint32_t clientip, uint32_t serverip)
+{
+	// dispatcher thread
+	if(!ok){
+		g_bans.addLoginAttempt(clientip, false);
+		disconnectClient(0x0A, "Please enter a valid account number and password.");
+		getConnection()->unRef();
+		return;
+	}
+
 	g_bans.addLoginAttempt(clientip, true);
-	
+	if(!rehash.empty()){
+		IOAccount::instance()->setPassword(account.accnumber, rehash);   // legacy entry -> PBKDF2
+	}
+
 	OutputMessage_ptr output = OutputMessagePool::getInstance()->getOutputMessage(this, false);
 	if(output){
 		TRACK_MESSAGE(output);
@@ -174,8 +212,7 @@ bool ProtocolLogin::parseFirstPacket(NetworkMessage& msg)
 	}
 
 	getConnection()->closeConnection();
-
-	return true;
+	getConnection()->unRef();
 }
 
 void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)

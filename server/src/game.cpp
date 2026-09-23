@@ -28,6 +28,8 @@
 #include "player.h"
 #include "monster.h"
 #include "game.h"
+#include "dbwriter.h"
+#include "database.h"
 #include "tile.h"
 #include "house.h"
 #include "actions.h"
@@ -179,6 +181,12 @@ void Game::saveGameState()
 
 bool Game::saveServer(bool globalSave)
 {
+	// captured here (memory only), written by the save writer thread (dbwriter.h) as one transaction;
+	// it logs "> Server saved in N ms" (N = game thread time) once the batch is on disk
+	int64_t start = OTSYS_TIME();
+	DBBatch* batch = new DBBatch();
+	batch->serverSave = true;
+	DBBatch* outer = Database::beginCapture(batch);
 	saveGameState();
 
 	for(AutoList<Player>::listiterator it = Player::listPlayer.list.begin();
@@ -194,7 +202,18 @@ bool Game::saveServer(bool globalSave)
 		g_bans.clearTemporaryBans();
 	}
 
-	return map->saveMap();
+	int64_t mapStart = OTSYS_TIME();
+	bool saved = map->saveMap();
+	batch->mapMs = OTSYS_TIME() - mapStart;
+	Database::endCapture(outer);
+	batch->captureMs = OTSYS_TIME() - start;
+	if(!saved){
+		std::cout << "> Server save FAILED: the map could not be captured" << std::endl;
+		delete batch;
+		return false;
+	}
+	dbwriter::post(batch);
+	return true;
 }
 
 void Game::loadGameState()
@@ -4265,6 +4284,7 @@ void Game::resetCommandTag()
 
 void Game::shutdown()
 {
+	dbwriter::flush();   // the players just kicked are queued for writing
 	std::cout << "Shutting down server...";
 	
 	Scheduler::getScheduler().shutdown();

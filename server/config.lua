@@ -205,7 +205,15 @@
 
     -- Accounts password type
     -- options: plain, md5, sha1
-    PasswordType = "plain"
+    -- pbkdf2: salted PBKDF2-HMAC-SHA256 (docs/production-plan.md §2). Rows still stored as typed (seed.sql,
+    -- tests) log in and are rehashed on their first login. plain / md5 / sha1 are the old unsalted modes.
+    PasswordType = "pbkdf2"
+    -- PBKDF2 iterations for new hashes (OWASP 2023: 600000); older entries are rehashed on login
+    PasswordIterations = 600000
+
+    -- Seconds between timed saves of players, houses and the map (data/globalevents/scripts/save.lua).
+    -- Without it a crash lost everything since each player logged in.
+    SaveInterval = 600
 
     -- Max number of messages a player can say before getting muted (default 4), set to 0 to disable muting
     MaxMessageBuffer = 4

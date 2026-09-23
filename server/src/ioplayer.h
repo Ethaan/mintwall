@@ -68,6 +68,7 @@ public:
 	  * \return true if the player was successfully saved
 	  */
 	bool savePlayer(Player* player);
+	bool captureSavePlayer(Player* player);   // the SQL of savePlayer (run while capturing)
 
 	//bool loadDepot(Player* player, unsigned long depotId);
 

@@ -43,6 +43,8 @@ class ServerProcess:
         db = self.db_path.as_posix()
         cfg = re.sub(r'(\bSQL_DB\s*=\s*)"[^"]*"', lambda m: f'{m.group(1)}"{db}"', cfg)
         cfg = re.sub(r'(\bPort\s*=\s*)"[^"]*"', lambda m: f'{m.group(1)}"{self.port}"', cfg)
+        cfg = re.sub(r'(\bSaveInterval\s*=\s*)\d+', lambda m: f'{m.group(1)}15', cfg)   # test_save.py waits for it
+        cfg = re.sub(r'(\bMaxPlayers\s*=\s*)"\d+"', lambda m: f'{m.group(1)}"500"', cfg)  # test_save_load.py: 100+
         self.config_path.write_text(cfg, encoding="latin-1")
 
     # --- lifecycle ---------------------------------------------------------

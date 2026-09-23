@@ -60,6 +60,11 @@ DatabaseSQLite::DatabaseSQLite()
 	}
 	else{
 		m_connected = true;
+		// WAL: readers and the writer do not block each other, and a commit no longer waits for the disk
+		// (synchronous NORMAL: a killed server loses nothing committed; only a power cut can lose the last
+		// commits). busy_timeout: wait for another connection's write lock instead of failing the query.
+		sqlite3_exec(m_handle, "PRAGMA journal_mode = WAL; PRAGMA synchronous = NORMAL;", NULL, NULL, NULL);
+		sqlite3_busy_timeout(m_handle, 5000);
 	}
 }
 
@@ -123,6 +128,14 @@ std::string DatabaseSQLite::_parse(const std::string &s)
 
 bool DatabaseSQLite::executeQuery(const std::string &query)
 {
+	if(DBBatch* batch = capture()){
+		// recording a save for the writer thread; it wraps the batch in its own transaction
+		if(query != "BEGIN" && query != "COMMIT" && query != "ROLLBACK"){
+			batch->queries.push_back(query);
+		}
+		return true;
+	}
+
 	boost::recursive_mutex::scoped_lock lockClass(sqliteLock);
 
 	if(!m_connected)

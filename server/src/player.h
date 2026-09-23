@@ -686,6 +686,7 @@ protected:
 
 	//account variables
 	uint32_t accountNumber;
+	bool saveEnabled;   // players.save, read at login (IOPlayer::loadPlayer)
 	std::string password;
 	time_t lastLoginSaved;
 	time_t lastLogout;

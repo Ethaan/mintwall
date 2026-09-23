@@ -24,6 +24,8 @@
 #include "definitions.h"
 
 #include <sstream>
+#include <string>
+#include <vector>
 
 #include <boost/thread.hpp>
 
@@ -72,9 +74,30 @@ enum DBParam_t{
 	DBPARAM_MULTIINSERT = 1
 };
 
+/**
+ * A save captured on the game thread (docs/production-plan.md §3c): while a DBBatch is being captured,
+ * executeQuery() records the SQL instead of running it (BEGIN/COMMIT are dropped: the writer runs the
+ * whole batch as one transaction on its own connection - dbwriter.h). Reads still run.
+ */
+struct DBBatch
+{
+	DBBatch() : captureMs(0), mapMs(0), serverSave(false) {}
+	std::vector<std::string> queries;
+	std::vector<uint32_t> guids;     // players in it: their next login waits for this write
+	int64_t captureMs;               // how long the game thread spent building it
+	int64_t mapMs;                   // of which the houses / map part
+	bool serverSave;                 // the timed / GM save (logged), not a single logout
+};
+
 class _Database
 {
 public:
+	// the batch this thread records into (NULL: queries run as usual). Nestable: beginCapture returns
+	// the batch it replaces, endCapture puts it back
+	static DBBatch* beginCapture(DBBatch* batch);
+	static void endCapture(DBBatch* previous);
+	static DBBatch* capture();
+
 	/**
 	* Singleton implementation.
 	*

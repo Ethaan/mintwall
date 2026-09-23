@@ -81,6 +81,10 @@ private:
 	virtual void onRecvFirstMessage(NetworkMessage& msg);
 	bool parseFirstPacket(NetworkMessage& msg);
 
+	// the PBKDF2 check runs on a worker (authpool.h), the login continues on the dispatcher
+	void checkPassword(uint32_t accnumber, std::string name, std::string password, std::string stored, bool isSetGM);
+	void onPasswordChecked(bool ok, std::string rehash, uint32_t accnumber, std::string name, bool isSetGM);
+
 	//Parse methods
 	void parseLogout(NetworkMessage& msg);
 	void parseCancelMove(NetworkMessage& msg);

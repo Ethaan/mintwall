@@ -129,7 +129,7 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [ ] Defense and armor reduction (the Avesta "revbattlesys" formula - compare with 7.4)
 - [ ] Distance: hit chance, ammo, range
 - [ ] Spell and rune damage formulas (level + magic level) per spell
-- [ ] Attack speed (vocations.xml attackspeed 2000 ms) and exhaustion
+- [x] Attack speed (vocations.xml attackspeed 2000 ms) and exhaustion (exhaustion done 2026-09-23, §9)
 
 ### Regeneration, food, soul
 - [ ] HP/mana regeneration per vocation (gainhpticks/gainmanaticks) and food duration
@@ -244,7 +244,7 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 - [ ] Life ring / ring of healing regeneration not checked against 7.4 (1 per 3 s for 20 min / 1 per 1 s
       for 7.5 min)
 
-- [ ] Conjuring makes the wrong items: "adori vita vis" -> 2263, "adura vita" -> 2274 ("spell rune"),
+- [x] Conjuring makes the wrong items: "adori vita vis" -> 2263 (done 2026-09-23), "adura vita" -> 2274 ("spell rune"),
       but the usable runes are 2268 (sudden death) and 2273 (ultimate healing) - spells.xml conjureId
 - [x] Drinking any fluid failed ("You can not use this object.", Lua error): fluids.lua calls
       doPlayerSay, a TFS function Avesta lacks -> shim in data/compat.lua. tests/test_accounts.py
@@ -347,6 +347,37 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       exit code (0xC0000005 would be a real crash)
 
 ## Accounts / security / ops
+
+- [ ] Production plan: docs/production-plan.md (accounts, PBKDF2, saves/backups, restart, observability, Terraform)
+  - [x] 1. Accounts A-D (God / balance testers / Rook premium / Rook free), random 7-digit numbers, 24-char
+        passwords: tools/provision-accounts.py (credentials file outside the repo, backup first, refuses while
+        the server runs, idempotent); seed.sql stays dev/test only. tests/test_provision.py
+        - [ ] Run it on the local db.db3 (you) and check a 24-character password can be typed in the real client
+  - [x] 2. Salted PBKDF2 (PasswordType = "pbkdf2", 600000 iterations, OpenSSL via vcpkg - passwords.cpp):
+        checked on 2 worker threads (authpool.cpp), not the network thread; legacy rows rehash on first login;
+        the existing LoginTries / RetryTimeout throttle per IP stays. tests/test_passwords.py (the stall test
+        fails when the check runs inline: 0.15 s vs 0.02 s per step answer)
+  - [x] 3a. Timed save: every SaveInterval s (config, 600) via data/globalevents/scripts/save.lua; every save
+        logs "> Server saved in N ms" (Game::saveServer). tests/test_save.py (test server: 15 s)
+  - [x] 3c. Async save (must have). 100 players online (tests/test_save_load.py, ~29 items each):
+        before: the game froze ~570 ms per save (per-player transactions, a disk sync each)
+        + SQLite WAL / synchronous NORMAL / busy timeout (databasesqlite.cpp): ~145 ms
+        + capture on the game thread, write on a background thread with its own connection, one transaction
+          (DBBatch capture in executeQuery, dbwriter.cpp): game thread 34 ms (players ~12, map ~22), written
+          in ~65 ms off-thread; slowest step answer 54-75 ms (normal median ~23). Budget in the test: 150 ms
+        Logout saves go through the same writer; a login waits for that player's pending write
+        (dbwriter::waitFor); shutdown flushes the writer. players.save is read at login, not per save.
+        Log: "> Server saved in N ms (P players, map M ms; written in W ms)"
+    - [ ] Map part (~22 ms, constant): save only houses that changed since the last save
+    - [ ] A hard kill (closing the console) skips the shutdown flush: loses what is queued (ms) plus
+          progress since the last timed save - by design (SaveInterval)
+  - [ ] 3b. Backups (hourly SQLite snapshot to S3, daily EBS, restore drill) and restart supervision - at deploy
+  - [ ] 4. Observability (CloudWatch agent, status-protocol health check, alarms to Slack) - at deploy
+- [ ] Passwords travel unencrypted (7.4 protocol, encryption came in 7.7):
+  - [ ] Tell players: MOTD / login message / website - use a password you use nowhere else
+  - [ ] TLS through mintwall.dll (hook connect/send/recv, SChannel) + TLS terminator in front of the server
+        (stunnel locally, AWS NLB TLS listener in production); spike first: does hooking the 7.4 client's
+        Winsock calls from the DLL work, and what latency does it add
 
 - [ ] Change the God account password before anyone else can connect
 - [ ] Switch `PasswordType` from plain to sha1 (and seed accordingly)

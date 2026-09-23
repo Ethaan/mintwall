@@ -25,6 +25,7 @@
 #include "configmanager.h"
 #include "md5.h"
 #include "sha1.h"
+#include "passwords.h"
 
 #include <sstream>
 #include <iomanip>
@@ -333,7 +334,13 @@ std::string urlEncode(const char* str)
 
 bool passwordTest(const std::string &plain, std::string &hash)
 {
+	// a salted PBKDF2 entry is checked as such whatever PasswordType says (docs/production-plan.md §2)
+	if(passwords::isPbkdf2(hash)){
+		return passwords::verify(plain, hash);
+	}
+
 	switch(g_config.getNumber(ConfigManager::PASSWORD_TYPE)){
+	case PASSWORD_TYPE_PBKDF2:   // a legacy row not rehashed yet (stored as typed)
 	case PASSWORD_TYPE_PLAIN:
 	{
 		if(plain == hash){

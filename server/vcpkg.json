@@ -14,7 +14,13 @@
     "boost-utility",
     "libxml2",
     "luajit",
-    { "name": "sqlite3", "features": ["tool"] },
-    "gmp"
+    {
+      "name": "sqlite3",
+      "features": [
+        "tool"
+      ]
+    },
+    "gmp",
+    "openssl"
   ]
 }

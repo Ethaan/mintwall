@@ -23,6 +23,7 @@
 
 #include "definitions.h"
 #include "protocol.h"
+#include "account.h"
 
 class NetworkMessage;
 class OutputMessage;
@@ -52,6 +53,10 @@ protected:
 	void disconnectClient(uint8_t error, const char* message);
 	
 	bool parseFirstPacket(NetworkMessage& msg);
+
+	// the PBKDF2 check runs on a worker (authpool.h), the reply is sent from the dispatcher
+	void checkPassword(Account account, std::string password, uint32_t clientip, uint32_t serverip);
+	void onPasswordChecked(Account account, bool ok, std::string rehash, uint32_t clientip, uint32_t serverip);
 
 	#ifdef __DEBUG_NET_DETAIL__
 	virtual void deleteProtocolTask();

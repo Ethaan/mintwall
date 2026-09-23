@@ -104,6 +104,7 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confInteger[LOGIN_TRIES] = getGlobalNumber(L, "LoginTries", 3);
 	m_confInteger[RETRY_TIMEOUT] = getGlobalNumber(L, "RetryTimeout", 30 * 1000);
 	m_confInteger[LOGIN_TIMEOUT] = getGlobalNumber(L, "LoginTimeout", 5 * 1000);
+	m_confInteger[PASSWORD_ITERATIONS] = getGlobalNumber(L, "PasswordIterations", 600000);
 	m_confString[MOTD] = getGlobalString(L, "MOTD");
 	m_confInteger[MOTD_NUM] = getGlobalNumber(L, "MOTD_Num");
 	m_confInteger[MAX_PLAYERS] = getGlobalNumber(L, "MaxPlayers");

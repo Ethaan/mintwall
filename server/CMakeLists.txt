@@ -8,6 +8,7 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 find_package(Boost REQUIRED COMPONENTS thread regex)
 find_package(LibXml2 REQUIRED)
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
+find_package(OpenSSL REQUIRED)   # PBKDF2 password hashes (passwords.cpp)
 find_path(GMP_INCLUDE_DIR gmp.h REQUIRED)
 find_library(GMP_LIBRARY NAMES gmp libgmp REQUIRED)
 find_path(LUAJIT_INCLUDE_DIR luajit.h PATH_SUFFIXES luajit REQUIRED)
@@ -34,9 +35,10 @@ target_link_libraries(avesta74 PRIVATE
   Boost::thread Boost::regex
   LibXml2::LibXml2
   unofficial::sqlite3::sqlite3
+  OpenSSL::Crypto
   ${LUAJIT_LIBRARY}
   ${GMP_LIBRARY}
-  ws2_32 mswsock winmm
+  ws2_32 mswsock winmm crypt32
 )
 
 # Put the exe next to config.lua and data/

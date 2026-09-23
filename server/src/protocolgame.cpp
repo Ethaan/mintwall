@@ -35,6 +35,8 @@
 #include "waitlist.h"
 #include "ban.h"
 #include "ioaccount.h"
+#include "authpool.h"
+#include "passwords.h"
 #include "connection.h"
 #include "creatureevent.h"
 
@@ -494,17 +496,51 @@ bool ProtocolGame::parseFirstPacket(NetworkMessage& msg)
 	}
 	
 	std::string acc_pass;
-	if(!(IOAccount::instance()->getPassword(accnumber, name, acc_pass) && passwordTest(password,acc_pass))){
+	if(!IOAccount::instance()->getPassword(accnumber, name, acc_pass)){
 		g_bans.addLoginAttempt(getIP(), false);
 		getConnection()->closeConnection();
 		return false;
 	}
-	
-	g_bans.addLoginAttempt(getIP(), true);
-	Dispatcher::getDispatcher().addTask(
-		createTask(boost::bind(&ProtocolGame::login, this, name, isSetGM)));
 
+	// PBKDF2 costs a few hundred ms: not on this (network) thread - docs/production-plan.md §2
+	Connection* connection = getConnection();
+	connection->addRef();
+	if(!authpool::post(boost::bind(&ProtocolGame::checkPassword, this, accnumber, name, password, acc_pass, isSetGM))){
+		connection->unRef();
+		disconnectClient(0x14, "The server is busy. Please try again in a moment.");
+		return false;
+	}
 	return true;
+}
+
+void ProtocolGame::checkPassword(uint32_t accnumber, std::string name, std::string password, std::string stored, bool isSetGM)
+{
+	// worker thread: only the hashing
+	bool ok = passwordTest(password, stored);
+	std::string rehash;
+	if(ok && g_config.getNumber(ConfigManager::PASSWORD_TYPE) == PASSWORD_TYPE_PBKDF2 && passwords::needsRehash(stored)){
+		rehash = passwords::hash(password);
+	}
+	Dispatcher::getDispatcher().addTask(createTask(
+		boost::bind(&ProtocolGame::onPasswordChecked, this, ok, rehash, accnumber, name, isSetGM)));
+}
+
+void ProtocolGame::onPasswordChecked(bool ok, std::string rehash, uint32_t accnumber, std::string name, bool isSetGM)
+{
+	// dispatcher thread
+	if(!ok){
+		g_bans.addLoginAttempt(getIP(), false);
+		getConnection()->closeConnection();
+		getConnection()->unRef();
+		return;
+	}
+
+	g_bans.addLoginAttempt(getIP(), true);
+	if(!rehash.empty()){
+		IOAccount::instance()->setPassword(accnumber, rehash);   // legacy entry -> PBKDF2
+	}
+	login(name, isSetGM);
+	getConnection()->unRef();
 }
 
 void ProtocolGame::onRecvFirstMessage(NetworkMessage& msg)

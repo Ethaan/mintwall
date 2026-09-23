@@ -60,8 +60,10 @@ public:
 	DATABASE_VIRTUAL std::string getStringComparer() {return "LIKE ";}
 	DATABASE_VIRTUAL std::string getUpdateLimiter() {return ";";}
 
+	// backticks -> double quotes (also used by the save writer, dbwriter.cpp)
+	static std::string _parse(const std::string &s);
+
 protected:
-	std::string _parse(const std::string &s);
 
 	boost::recursive_mutex sqliteLock;
 	sqlite3* m_handle;
