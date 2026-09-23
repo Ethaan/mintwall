@@ -207,13 +207,18 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       returned the undefined LUA_NO_ERROR ("Expected boolean type parameter"). Fixed in 20 scripts;
       tests/test_spells.py pins exani tera and both patterns
 
-- [ ] Sudden death rune can be thrown too far away (reported 2026-09-22): check rune range vs 7.4
-      (7.4: a rune reaches what is on screen / in line of sight? find the real limit), test it
+- [x] Sudden death rune could be thrown too far away (reported 2026-09-22): the rune range check was right
+      (+-7 / +-5 = the 7.4 screen, line of sight - Actions::canUseFar), but Game::playerUseItemEx walked the
+      caster towards an out-of-range target and threw from there, so an SD hit 8+ tiles away. Runes now
+      fail with "Too far away." tests/test_spells.py: hits at 7, refused at 8
+- [ ] Paralyze rune (adana ani, 2278) formula: confirm the 7.4 values are right - how much it slows (speed
+      change, relative or absolute), how long it lasts, whether haste/strong haste cancels it and the other
+      way round, that it works on players and monsters (and which monsters are immune), plus the magic level
+      and mana to use and to make (ours: 18 to use, 35 to make); research first (Tibiantis), then pin each
+      number with a test; try it in game with Radagast (5 / 5)
 - [ ] Royal paladin: bolts / crossbow and arrows / bow distance (range, hit chance - see 5b in the
       formulas list), damage with the 7.4 formula; test with Legolas (6 / 6)
 - [ ] Spears: range, breaking/dropping on the ground, stacking, damage vs 7.4
-- [ ] Paralyze rune (adana ani, 2278): 7.4 magic level (ours 18 to use, 35 to make), mana, effect
-      strength and duration vs 7.4; test with Radagast (5 / 5)
 
 - [ ] Spell values the research lists as higher than 7.4 but did not rank: fireball (16-33 vs 15-25 %P),
       great fireball (40+30..70 vs 35-65), force strike (20-50 vs 18..33, one source), exura sio

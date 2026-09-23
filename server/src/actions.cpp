@@ -228,7 +228,10 @@ Action* Actions::getAction(const Item* item, ActionType_t type /* = ACTION_ANY*/
 			return it->second;
 		}
 	}
-	if(item->getActionId() != 0 && (type == ACTION_ANY || type == ACTION_ACTIONID)){
+	// on a rune the test-item action id only keeps the charges (spells.cpp): its use and range are the
+	// rune's, else infinite_fluid.lua's adjacent-only check made every SD "too far away"
+	if(item->getActionId() != 0 && (type == ACTION_ANY || type == ACTION_ACTIONID) &&
+		!(item->isInfiniteTestItem() && g_spells->getRuneSpell(item->getID()))){
 		ActionUseMap::const_iterator it = actionItemMap.find(item->getActionId());
 		if (it != actionItemMap.end()){
 			return it->second;

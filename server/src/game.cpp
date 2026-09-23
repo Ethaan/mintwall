@@ -2205,6 +2205,12 @@ bool Game::playerUseItemEx(uint32_t playerId, const Position& fromPos, uint8_t f
 	if(ret == RET_NOERROR){
 		ret = g_actions->canUse(player, toPos, item);
 		if(ret == RET_TOOFARAWAY){
+			// a rune is thrown: out of range (7.4: off screen, +-7 / +-5) it fails. Walking closer
+			// and throwing let an SD hit targets beyond the screen
+			if(g_spells->getRuneSpell(item->getID())){
+				player->sendCancelMessage(ret);
+				return false;
+			}
 			walkToPos = toPos;
 		}
 	}
