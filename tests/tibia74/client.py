@@ -229,6 +229,10 @@ class GameClient:
                 return False
         return self.pos[:2] == (tx, ty)
 
+    def turn(self, direction: int):
+        """Turn without stepping (0x6F-0x72, like ctrl + arrow): direction spells go the way you face."""
+        self._send(Writer().u8(0x6F + direction))
+
     def set_fight_modes(self, fight: int = 1, chase: int = 1, safe: int = 1):
         """fight 1=offensive 2=balanced 3=defensive; chase 1 = follow the target."""
         self._send(Writer().u8(0xA0).u8(fight).u8(chase).u8(safe))

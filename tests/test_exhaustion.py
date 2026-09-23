@@ -7,7 +7,8 @@ import pytest
 from tibia74 import BACKPACK, Item
 from tibia74.server import TESTER_GROUP
 
-SPOT = (32031, 32136, 7)             # open grass, no protection zone, 12+ tiles from any spawn
+SPOT = (32139, 32136, 7)             # open ground, no protection zone, 12+ tiles from any spawn and other test
+                                     # fields (it was 2 tiles from the bolt test: GFBs and in-fight casters)
 CREATURE = 0x63
 GFB, UH, PARALYZE, MANA_FLUID = 2304, 2273, 2278, 7
 

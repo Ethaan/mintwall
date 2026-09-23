@@ -225,9 +225,15 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       healing now too), speed items still add, no skull for the caster, druids use it at ml 18, make at
       ml 35. Exhaustion 1 s (§9). tests/test_paralyze.py
   - [x] Mana to use: 600 (Tibiantis; was 0), making stays 900 (Tibiantis-notes: real 7.4). Chosen 2026-09-23
-  - [ ] Which monsters are immune to paralyze (monster XML immunities vs 7.4) - not checked
-- [ ] Haste durations: Tibiantis-notes utani hur 66 s, utani gran hur 44 s; ours haste 40 s (haste.lua) -
-      check strong haste too, and the speed formulas (Tibiantis-notes speed page)
+  - [x] Monsters immune to paralyze vs 7.4 (Tibiantis-notes creature data, NoParalyze): all match except
+        Dwarf Geomancer, which was immune - fixed. The 30 monsters without 7.4 data are not checked
+- [x] Haste (Tibiantis-notes speed): utani hur base x 1.3 - 24 for 66 s, utani gran hur base x 1.7 - 56 for
+      44 s, rounded DOWN to an even number. Ours was 40 s / 45 s and rounded up (level 100: 520 vs 518).
+      Fixed: haste.lua / strong_haste.lua ticks, ConditionSpeed::formulaSpeedDelta. tests/test_haste.py
+- [x] Wild growth: 7.4 has the instant spell exevo grav vita, not a rune (the rune came later). Druids only
+      and one per tile were already right; the machete could not cut anything (machete.lua called an
+      undefined isIntegerInArray with undefined tables) - rewritten: cuts rush wood and jungle grass.
+      Mana: kept at 220 (Tibiantis charges 150) - decided 2026-09-23
 - [ ] Royal paladin: bolts / crossbow and arrows / bow distance (range, hit chance - see 5b in the
       formulas list), damage with the 7.4 formula; test with Legolas (6 / 6)
 - [ ] Spears: range, breaking/dropping on the ground, stacking, damage vs 7.4

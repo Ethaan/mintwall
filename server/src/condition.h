@@ -337,6 +337,7 @@ public:
 
 protected:
 	void getFormulaValues(int32_t var, int32_t& min, int32_t& max) const;
+	int32_t formulaSpeedDelta(Creature* creature) const;
 
 	int32_t speedDelta;
 

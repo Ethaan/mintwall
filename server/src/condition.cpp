@@ -1490,6 +1490,23 @@ void ConditionSpeed::getFormulaValues(int32_t var, int32_t& min, int32_t& max) c
 	max = (int32_t)std::ceil(var * 1.f * maxa + maxb);
 }
 
+int32_t ConditionSpeed::formulaSpeedDelta(Creature* creature) const
+{
+	int32_t base = creature->getBaseSpeed();
+	if(conditionType == CONDITION_HASTE){
+		// 7.4 (Tibiantis-notes, speed): hasted speed = base x a + b, rounded DOWN to an even number
+		// (utani hur 1.3 / -24, utani gran hur 1.7 / -56). The generic formula rounded up, never to even
+		int32_t total = (int32_t)std::floor(base + base * mina + minb);
+		total -= total % 2;
+		return total - base;
+	}
+
+	int32_t min;
+	int32_t max;
+	getFormulaValues(base, min, max);
+	return random_range(min, max);
+}
+
 bool ConditionSpeed::setParam(ConditionParam_t param, int32_t value)
 {
 	bool ret = Condition::setParam(param, value);
@@ -1598,10 +1615,7 @@ bool ConditionSpeed::startCondition(Creature* creature)
 	}
 
 	if(speedDelta == 0){
-		int32_t min;
-		int32_t max;
-		getFormulaValues(creature->getBaseSpeed(), min, max);
-		speedDelta = random_range(min, max);
+		speedDelta = formulaSpeedDelta(creature);
 	}
 
 	g_game.changeSpeed(creature, speedDelta);
@@ -1640,10 +1654,7 @@ void ConditionSpeed::addCondition(Creature* creature, const Condition* addCondit
 	maxb = conditionSpeed.maxb;
 
 	if(speedDelta == 0){
-		int32_t min;
-		int32_t max;
-		getFormulaValues(creature->getBaseSpeed(), min, max);
-		speedDelta = random_range(min, max);
+		speedDelta = formulaSpeedDelta(creature);
 	}
 
 	int32_t newSpeedChange = (speedDelta - oldSpeedDelta);
