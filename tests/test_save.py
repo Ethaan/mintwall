@@ -43,3 +43,46 @@ def test_logging_back_in_right_away_keeps_the_newest_state(new_player, server, i
         assert again.pos == moved, f"logged back in at {again.pos}, logged out at {moved}"
     finally:
         again.logout()
+
+
+HOUSE_ID, HOUSE_TILE = 4, (32391, 32150, 7)       # a Thais house (Tibia74.otbm): clear marble floor
+SAVE_LINE = re.compile(r"> Server saved in \d+ ms \(\d+ players, (\d+) (changed houses|houses \(all\))")
+
+
+def _next_save(server, since, timeout=40):
+    """(houses written, full?) of the first timed save logged after the log offset `since`."""
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        m = SAVE_LINE.search(server.log()[since:])
+        if m:
+            return int(m.group(1)), m.group(2) != "changed houses", since + m.end()
+        time.sleep(0.5)
+    raise AssertionError("no timed save logged")
+
+
+def test_a_timed_save_writes_only_houses_that_changed(new_player, server, db, items):
+    """The timed save used to rewrite every house (~22 ms of game thread each time); now only changed ones,
+    with a full save every 6th time as a safety net."""
+    from tibia74 import RIGHT, Item
+    sword = 2376
+    gm = new_player(pos=HOUSE_TILE, group_id=3, inventory={RIGHT: Item(sword)})   # a GM may drop items anywhere
+    assert gm.pos == HOUSE_TILE, gm.pos
+    gm.move_item(gm.inventory_pos(RIGHT), gm.inventory[RIGHT].client_id, 0, gm.pos, 1)
+    assert gm.wait_for(lambda: RIGHT not in gm.inventory, timeout=3), gm.text_messages[-2:]
+    since = server.log_offset()
+
+    houses, full, since = _next_save(server, since)
+    while full:                                      # the hourly full save: look at the next one
+        houses, full, since = _next_save(server, since)
+    assert houses >= 1, "the house with the dropped sword was not saved"
+
+    houses, full, since = _next_save(server, since)
+    if not full:
+        assert houses == 0, f"{houses} houses written although nothing changed"
+
+    con = db._connect()
+    try:
+        blob = con.execute("SELECT data FROM map_store WHERE house_id = ?", (HOUSE_ID,)).fetchone()[0]
+    finally:
+        con.close()
+    assert sword.to_bytes(2, "little") in bytes(blob), "the sword is not in the house's saved items"

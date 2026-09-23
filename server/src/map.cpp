@@ -95,12 +95,12 @@ bool Map::loadMap(const std::string& identifier, const std::string& type)
 }
 
 
-bool Map::saveMap()
+bool Map::saveMap(bool full /*= true*/, uint32_t* housesSaved /*= NULL*/)
 {
 	IOMapSerialize* IOMapSerialize = IOMapSerialize::getInstance();
 	bool saved = false;
 	for(uint32_t tries = 0; tries < 3; tries++){
-		if(IOMapSerialize->saveMap(this)){
+		if(IOMapSerialize->saveMap(this, full, housesSaved)){
 			saved = true;
 			break;
 		}

@@ -38,6 +38,7 @@ extern Game g_game;
 House::House(uint32_t _houseid) :
 transfer_container(ITEM_LOCKER1)
 {
+	itemsChanged = false;
 	isLoaded = false;
 	houseName = "OTServ headquarter (Flat 1, Area 42)";
 	houseOwner = 0;

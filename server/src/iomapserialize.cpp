@@ -46,7 +46,7 @@ bool IOMapSerialize::loadMap(Map* map)
 	return s;
 }
 
-bool IOMapSerialize::saveMap(Map* map)
+bool IOMapSerialize::saveMap(Map* map, bool full /*= true*/, uint32_t* housesSaved /*= NULL*/)
 {
 	
 	int64_t start = OTSYS_TIME();
@@ -55,7 +55,7 @@ bool IOMapSerialize::saveMap(Map* map)
 	if(g_config.getString(ConfigManager::MAP_STORAGE_TYPE) == "relational")
 		s = saveMapRelational(map);
 	else if(g_config.getString(ConfigManager::MAP_STORAGE_TYPE) == "binary")
-		s = saveMapBinary(map);
+		s = saveMapBinary(map, full, housesSaved);
 	else
 		std::cout << "[IOMapSerialize::saveMap] Unknown map storage type" << std::endl;
 
@@ -555,29 +555,40 @@ bool IOMapSerialize::loadItem(PropStream& propStream, Cylinder* parent)
 	return true;
 }
 
-bool IOMapSerialize::saveMapBinary(Map* map)
+bool IOMapSerialize::saveMapBinary(Map* map, bool full, uint32_t* housesSaved)
 {
  	Database* db = Database::instance();
  	DBQuery query;
  	DBTransaction transaction(db);
 	DBInsert stmt(db);
 	stmt.setQuery("INSERT INTO `map_store` (`house_id`, `data`) VALUES ");
- 
+	uint32_t saved = 0;
 
 	//Start the transaction
  	if(!transaction.begin())
  		return false;
- 
-	if(!db->executeQuery("DELETE FROM `map_store`;"))
+
+	if(full && !db->executeQuery("DELETE FROM `map_store`;"))
  		return false;
-		
-	//clear old tile data
+
  	for(HouseMap::iterator it = Houses::getInstance().getHouseBegin();
 		it != Houses::getInstance().getHouseEnd();
 		++it)
 	{
- 		//save house items
  		House* house = it->second;
+		// a timed save writes only houses whose items changed; a full one writes all (and clears the marks)
+		bool changed = house->takeItemsChanged();
+		if(!full){
+			if(!changed){
+				continue;
+			}
+			query << "DELETE FROM `map_store` WHERE `house_id` = " << house->getHouseId();
+			if(!db->executeQuery(query.str())){
+				return false;
+			}
+			query.str("");
+		}
+
 		PropWriteStream stream;
 		for(HouseTileList::iterator tile_iter = house->getHouseTileBegin();
 			tile_iter != house->getHouseTileEnd();
@@ -590,16 +601,18 @@ bool IOMapSerialize::saveMapBinary(Map* map)
 
 		uint32_t attributesSize;
 		const char* attributes = stream.getStream(attributesSize);
-		query << it->second->getHouseId() << ", " <<
-			db->escapeBlob(attributes, attributesSize);
-
+		query << house->getHouseId() << ", " << db->escapeBlob(attributes, attributesSize);
 		if(!stmt.addRow(query))
 			return false;
+		saved++;
  	}
- 
+
 	if(!stmt.execute())
 		return false;
 
+	if(housesSaved){
+		*housesSaved = saved;
+	}
  	//End the transaction
  	return transaction.commit();
 }

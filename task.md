@@ -368,7 +368,11 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
         Logout saves go through the same writer; a login waits for that player's pending write
         (dbwriter::waitFor); shutdown flushes the writer. players.save is read at login, not per save.
         Log: "> Server saved in N ms (P players, map M ms; written in W ms)"
-    - [ ] Map part (~22 ms, constant): save only houses that changed since the last save
+    - [x] Map part (~22 ms, constant): the timed save writes only houses whose items changed (HouseTile marks
+          the House on any item change, container contents included; text writes too); every 6th timed save,
+          GM saves and shutdown write all. Now 2-7 ms. A clean shutdown did not save houses at all - fixed.
+          tests/test_save.py (1 changed house after a drop, 0 when nothing changed, the item in map_store)
+    - [ ] House info (owner, rent, access lists) is still rewritten for every house each save (the 2-7 ms)
     - [ ] A hard kill (closing the console) skips the shutdown flush: loses what is queued (ms) plus
           progress since the last timed save - by design (SaveInterval)
   - [ ] 3b. Backups (hourly SQLite snapshot to S3, daily EBS, restore drill) and restart supervision - at deploy

@@ -28,6 +28,8 @@
 #include "player.h"
 #include "monster.h"
 #include "game.h"
+#include "housetile.h"
+#include "house.h"
 #include "dbwriter.h"
 #include "database.h"
 #include "tile.h"
@@ -154,7 +156,7 @@ void Game::setGameState(GameState_t newState)
 					it = Player::listPlayer.list.begin();
 				}
 
-				saveGameState();
+				saveServer(false);   // houses too: a clean shutdown did not save them
 
 				Dispatcher::getDispatcher().addTask(createTask(
 					boost::bind(&Game::shutdown, this)));
@@ -179,7 +181,7 @@ void Game::saveGameState()
 	ScriptEnviroment::saveGameState();
 }
 
-bool Game::saveServer(bool globalSave)
+bool Game::saveServer(bool globalSave, bool changedHousesOnly /*= false*/)
 {
 	// captured here (memory only), written by the save writer thread (dbwriter.h) as one transaction;
 	// it logs "> Server saved in N ms" (N = game thread time) once the batch is on disk
@@ -203,7 +205,14 @@ bool Game::saveServer(bool globalSave)
 	}
 
 	int64_t mapStart = OTSYS_TIME();
-	bool saved = map->saveMap();
+	// safety net: every 6th timed save (hourly at SaveInterval 600) writes every house anyway, in case a change
+	// was not marked (e.g. an item decaying inside a chest does not reach the tile)
+	static uint32_t timedSaves = 0;
+	bool full = !changedHousesOnly || (++timedSaves % 6 == 0);
+	uint32_t houses = 0;
+	bool saved = map->saveMap(full, &houses);
+	batch->houses = houses;
+	batch->allHouses = full;
 	batch->mapMs = OTSYS_TIME() - mapStart;
 	Database::endCapture(outer);
 	batch->captureMs = OTSYS_TIME() - start;
@@ -2560,6 +2569,13 @@ bool Game::playerWriteItem(uint32_t playerId, uint32_t windowTextId, const std::
 	else{
 		writeItem->resetText();
 		writeItem->resetWriter();
+	}
+
+	// text is no tile change: mark the house for the next save by hand
+	if(Tile* tile = writeItem->getTile()){
+		if(HouseTile* houseTile = tile->getHouseTile()){
+			houseTile->getHouse()->markItemsChanged();
+		}
 	}
 
 	uint16_t newId = Item::items[writeItem->getID()].writeOnceItemId;

@@ -181,6 +181,11 @@ public:
 
 	uint32_t getHouseId() const {return houseid;}
 
+	// items on its tiles changed since the last save (HouseTile marks it; the save takes it) - only changed
+	// houses are written by the timed save (IOMapSerialize::saveMapBinary)
+	void markItemsChanged() {itemsChanged = true;}
+	bool takeItemsChanged() {bool changed = itemsChanged; itemsChanged = false; return changed;}
+
 	void addDoor(Door* door);
 	void removeDoor(Door* door);
 	Door* getDoorByNumber(uint32_t doorId);
@@ -206,6 +211,7 @@ public:
 	void cleanHouse();
 
 private:
+	bool itemsChanged;
 	void updateDoorDescription();
 	bool transferToDepot();
 

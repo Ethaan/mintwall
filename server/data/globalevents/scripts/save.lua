@@ -8,6 +8,6 @@ function onThink(interval)
 		return true
 	end
 	lastSave = os.time()
-	doSaveServer(0)                           -- 0: no house rent (that is the global save's job);
+	doSaveServer(0, 1)                        -- 0: no house rent (the global save's job); 1: changed houses only
 	return true                               -- Game::saveServer logs "> Server saved in N ms"
 end

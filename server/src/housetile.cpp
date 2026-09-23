@@ -40,6 +40,9 @@ HouseTile::~HouseTile()
 void HouseTile::__addThing(int32_t index, Thing* thing)
 {
 	Tile::__addThing(index, thing);
+	if(thing->getItem()){
+		house->markItemsChanged();
+	}
 
 	if(Item* item = thing->getItem()){
 		updateHouse(item);
@@ -123,4 +126,41 @@ Cylinder* HouseTile::__queryDestination(int32_t& index, const Thing* thing, Item
 	}
 
 	return Tile::__queryDestination(index, thing, destItem, flags);
+}
+
+void HouseTile::__updateThing(Thing* thing, uint16_t itemId, uint32_t count)
+{
+	Tile::__updateThing(thing, itemId, count);
+	house->markItemsChanged();
+}
+
+void HouseTile::__replaceThing(uint32_t index, Thing* thing)
+{
+	Tile::__replaceThing(index, thing);
+	house->markItemsChanged();
+}
+
+void HouseTile::__removeThing(Thing* thing, uint32_t count)
+{
+	if(thing->getItem()){
+		house->markItemsChanged();
+	}
+	Tile::__removeThing(thing, count);
+}
+
+void HouseTile::postAddNotification(Thing* thing, const Cylinder* oldParent, int32_t index, cylinderlink_t link /*= LINK_OWNER*/)
+{
+	if(thing->getItem()){
+		house->markItemsChanged();
+	}
+	Tile::postAddNotification(thing, oldParent, index, link);
+}
+
+void HouseTile::postRemoveNotification(Thing* thing, const Cylinder* newParent, int32_t index, bool isCompleteRemoval,
+	cylinderlink_t link /*= LINK_OWNER*/)
+{
+	if(thing->getItem()){
+		house->markItemsChanged();
+	}
+	Tile::postRemoveNotification(thing, newParent, index, isCompleteRemoval, link);
 }

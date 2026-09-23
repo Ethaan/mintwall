@@ -51,8 +51,9 @@ namespace {
 			std::cout << "> Server save FAILED: " << batch->guids.size() << " player(s) not written" << std::endl;
 		}
 		else if(batch->serverSave){
-			std::cout << "> Server saved in " << batch->captureMs << " ms (" << batch->guids.size() << " players, map "
-				<< batch->mapMs << " ms; written in " << (OTSYS_TIME() - start) << " ms)" << std::endl;
+			std::cout << "> Server saved in " << batch->captureMs << " ms (" << batch->guids.size() << " players, "
+				<< batch->houses << (batch->allHouses ? " houses (all)" : " changed houses") << " in " << batch->mapMs
+				<< " ms; written in " << (OTSYS_TIME() - start) << " ms)" << std::endl;
 		}
 	}
 

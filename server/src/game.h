@@ -453,7 +453,8 @@ public:
 
 	GameState_t getGameState();
 	void setGameState(GameState_t newState);
-	bool saveServer(bool globalSave);
+	// changedHousesOnly: the timed save writes only houses whose items changed (every 6th time all of them)
+	bool saveServer(bool globalSave, bool changedHousesOnly = false);
 	void saveGameState();
 	void loadGameState();
 	void refreshMap(Map::TileMap::iterator* begin = NULL, int clean_max = 0);

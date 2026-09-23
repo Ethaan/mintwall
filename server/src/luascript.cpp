@@ -7689,9 +7689,13 @@ int LuaScriptInterface::luaDoPlayerSetDepotLimit(lua_State *L)
 
 int LuaScriptInterface::luaDoSaveServer(lua_State *L)
 {
-	//doSaveServer(payHouses)
+	//doSaveServer(payHouses, <optional> changedHousesOnly)
+	bool changedHousesOnly = false;
+	if(lua_gettop(L) > 1){
+		changedHousesOnly = (int32_t(popNumber(L, true)) > 0);
+	}
 	bool payHouses = (int32_t(popNumber(L, true)) > 0);
-	if(!g_game.saveServer(payHouses)){
+	if(!g_game.saveServer(payHouses, changedHousesOnly)){
 		lua_pushboolean(L, false);
 		return 1;
 	}

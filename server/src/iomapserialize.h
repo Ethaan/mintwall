@@ -52,7 +52,8 @@ public:
 	  * \param map pointer to the Map class
 	  * \return Returns true if the map was saved successfully
 	*/
-	bool saveMap(Map* map);
+	// full: every house; else only houses whose items changed (House::takeItemsChanged)
+	bool saveMap(Map* map, bool full = true, uint32_t* housesSaved = NULL);
 
 	/** Load the house access list to a file/database
 	  * \param map pointer to the Map class
@@ -76,7 +77,7 @@ protected:
 
 	// Binary storage uses a giant BLOB field for storing everything
 	bool loadMapBinary(Map* map);
-	bool saveMapBinary(Map* map);
+	bool saveMapBinary(Map* map, bool full, uint32_t* housesSaved);
 
 	bool saveItem(PropWriteStream& stream, const Item* item);
 	bool saveTile(PropWriteStream& stream, const Tile* tile);

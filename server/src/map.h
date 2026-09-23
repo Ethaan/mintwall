@@ -183,7 +183,7 @@ public:
 	* \param identifier file/database to save to
 	* \return true if the map was saved successfully
 	*/
-	bool saveMap();
+	bool saveMap(bool full = true, uint32_t* housesSaved = NULL);
 
 	/**
 	* Get a single tile.
