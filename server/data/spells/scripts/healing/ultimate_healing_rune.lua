@@ -7,14 +7,9 @@ setCombatParam(combat, COMBAT_PARAM_DISPEL, CONDITION_PARALYZE)
 --setCombatFormula(combat, COMBAT_FORMULA_LEVELMAGIC, 2.5, -30, 2.5, 0)
 
 function onGetFormulaValues(cid, level, maglevel)
-	min = (level * 2 + maglevel * 3) * 2.1
-	max = (level * 2 + maglevel * 3) * 2.5
-	
-	if min < 250 then
-		min = 250
-	end
-
-	return min, max
+	-- 7.4 UH rune: a fixed 250 %P; magicPower() is level*2 + mlvl*3, at least 100 (compat.lua)
+	local power = magicPower(level, maglevel)
+	return power * 2.5, power * 2.5
 end
 
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")

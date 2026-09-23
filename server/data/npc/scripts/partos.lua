@@ -47,7 +47,7 @@ function PartosSayCallback (cid, type, msg)
                 npcHandler:say("Do you have any grapes with you?",cid)
                 npcHandler:doTopic(cid, 2)
         elseif(msgcontains(msg:lower(),"yes")) and (npcHandler.Topic == 2) then
-             if (doPlayerRemoveItem(cid,2681,1) == TRUE) then 
+             if (doPlayerRemoveItem(cid,2681,1)) then 
                 npcHandler:say("What do you want for that ...ohhh... tasty ...uhm... sweet ...drool... delicous ...hmm... grapes?",cid)
                 npcHandler:doTopic(cid, 3)
              else

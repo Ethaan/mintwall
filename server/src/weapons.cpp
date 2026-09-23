@@ -163,10 +163,9 @@ int32_t Weapons::getMaxMeleeDamage(int32_t attackSkill, int32_t attackValue)
 //players
 int32_t Weapons::getMaxMeleeWeaponDamage(int32_t attackSkill, int32_t attackValue, float attackFactor)
 {
-	//Damage = (Skill/20) * WAtk + WAtk;
-	//Damage = (attackSkill/20)*attackValue+attackValue
- 
-    return (int32_t)std::ceil((float)(((attackSkill / 20.0) * attackValue + attackValue / attackFactor)));
+	// 7.4: (5 x skill + 50) x attack x stance x 0.99 / 100; attackFactor is the stance multiplier
+	// (Player::getAttackMultiplier). docs/reference-74/formulas.md §6.1
+	return (int32_t)std::floor((5.0 * attackSkill + 50) * attackValue * attackFactor * 0.99 / 100);
 }
 
 int32_t Weapons::getMaxDistanceWeaponDamage(int32_t attackSkill, int32_t attackValue, float attackFactor)
@@ -177,7 +176,8 @@ int32_t Weapons::getMaxDistanceWeaponDamage(int32_t attackSkill, int32_t attackV
 
 	//Damage = (Skill * Dist)/20 + Weapon
 
-	return (int32_t)std::ceil((float)(((( attackSkill * attackValue)/20.0) + attackSkill) / attackFactor));
+	// 7.4: the melee formula with the bow + ammunition attack (it used to add the skill instead)
+	return getMaxMeleeWeaponDamage(attackSkill, attackValue, attackFactor);
 }
 
 Weapon::Weapon(LuaScriptInterface* _interface) :
@@ -442,7 +442,7 @@ bool Weapon::useFist(Player* player, Creature* target)
 	const Position& targetPos = target->getPosition();
 
 	if(Position::areInRange<1,1>(playerPos, targetPos)){
-		float attackFactor = player->getAttackFactor();
+		float attackFactor = player->getAttackMultiplier();
 		int32_t attackSkill = player->getSkill(SKILL_FIST, SKILL_LEVEL);
 		int32_t attackValue = 7;
 
@@ -722,7 +722,7 @@ bool WeaponMelee::getSkillType(const Player* player, const Item* item,
 int32_t WeaponMelee::getElementDamage(const Player* player, const Item* item) const
 {
 	int32_t attackSkill = player->getWeaponSkill(item);
-	float attackFactor = player->getAttackFactor();
+	float attackFactor = player->getAttackMultiplier();
 	int32_t maxValue = Weapons::getMaxMeleeWeaponDamage(attackSkill, elementDamage, attackFactor);
 
 	Vocation* vocation = player->getVocation();
@@ -736,7 +736,7 @@ int32_t WeaponMelee::getWeaponDamage(const Player* player, const Creature* targe
 {
 	int32_t attackSkill = player->getWeaponSkill(item);
 	int32_t attackValue = std::max((int32_t)0, ((int32_t)item->getAttack() - elementDamage));
-	float attackFactor = player->getAttackFactor();
+	float attackFactor = player->getAttackMultiplier();
 	int32_t maxValue = Weapons::getMaxMeleeWeaponDamage(attackSkill, attackValue, attackFactor);
 
 	Vocation* vocation = player->getVocation();
@@ -989,7 +989,7 @@ int32_t WeaponDistance::getWeaponDamage(const Player* player, const Creature* ta
 	}
 
 	int32_t attackSkill = player->getSkill(SKILL_DIST, SKILL_LEVEL);
-	float attackFactor = player->getAttackFactor();
+	float attackFactor = player->getAttackMultiplier();
 	int32_t maxValue = Weapons::getMaxDistanceWeaponDamage(attackSkill, attackValue, attackFactor);
 
 	Vocation* vocation = player->getVocation();

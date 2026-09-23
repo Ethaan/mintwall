@@ -329,6 +329,8 @@ public:
 	virtual int32_t getArmor() const;
 	virtual int32_t getDefense() const;
 	virtual float getAttackFactor() const;
+	float getAttackMultiplier() const;
+	float getDefenseMultiplier() const;
 	virtual float getDefenseFactor() const;
 
 	void addCombatExhaust(uint32_t ticks);
@@ -773,8 +775,12 @@ protected:
 	}
 
 	static uint32_t getPercentLevel(uint64_t count, uint32_t nextLevelCount);
+	// 7.4: a promoted character (vocations 5-8) loses 30% less on death - 7% instead of 10%
+	double getDeathLossFactor() const {
+		return (getVocationId() >= 5 && getVocationId() <= 8) ? 0.7 : 1.0;
+	}
 	virtual uint64_t getLostExperience() const {
-		return (skillLoss ? (experience * lossPercent[LOSS_EXPERIENCE]/100) : 0);
+		return (skillLoss ? (uint64_t)(experience * lossPercent[LOSS_EXPERIENCE] / 100 * getDeathLossFactor()) : 0);
 	}
 
 	virtual void dropLoot(Container* corpse);

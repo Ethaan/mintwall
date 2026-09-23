@@ -1,7 +1,7 @@
 local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_POISONDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, CONST_ME_GREEN_RINGS)
-setCombatFormula(combat, COMBAT_FORMULA_LEVELMAGIC, -0.9, -0, -1.5, -0)
+setCombatFormula(combat, COMBAT_FORMULA_LEVELMAGIC, -1.5, 0, -2.5, 0)   -- 7.4: 150-250 %P
 
 local condition = createConditionObject(CONDITION_POISON)
 setConditionParam(condition, CONDITION_PARAM_DELAYED, 1)

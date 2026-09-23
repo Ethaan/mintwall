@@ -28,6 +28,7 @@
 #include "configmanager.h"  
 
 #include <sstream>
+#include <boost/algorithm/string.hpp>
 
 extern Game g_game;
 extern ConfigManager g_config;
@@ -45,8 +46,10 @@ Mailbox::~Mailbox()
 ReturnValue Mailbox::__queryAdd(int32_t index, const Thing* thing, uint32_t count,
 	uint32_t flags) const
 {
+	// Only take what can be delivered: a parcel or letter that was accepted and then could not be
+	// sent used to vanish (with everything in it) - a wrong or lowercase name on the label was enough
 	if(const Item* item = thing->getItem()){
-		if(canSend(item)){
+		if(canSend(item) && canDeliver(item)){
 			return RET_NOERROR;
 		}
 	}
@@ -180,14 +183,22 @@ bool Mailbox::sendItem(Item* item)
 	return false;
 }
 
-bool Mailbox::getReceiver(Item* item, std::string& name, uint32_t& dp)
+bool Mailbox::canDeliver(const Item* item) const
+{
+	std::string receiver;
+	uint32_t dp = 0, guid = 0;
+	return getReceiver(item, receiver, dp) && receiver != "" && dp != 0
+		&& IOPlayer::instance()->getGuidByName(guid, receiver);
+}
+
+bool Mailbox::getReceiver(const Item* item, std::string& name, uint32_t& dp) const
 {
 	if(!item){
 		return false;
 	}
 
 	if(item->getID() == ITEM_PARCEL){ /**We need to get the text from the label incase its a parcel**/
-		Container* parcel = item->getContainer();
+		const Container* parcel = const_cast<Item*>(item)->getContainer();
 
 		for(ItemList::const_iterator cit = parcel->getItems(); cit != parcel->getEnd(); cit++){
 			if((*cit)->getID() == ITEM_LABEL){
@@ -215,6 +226,7 @@ bool Mailbox::getReceiver(Item* item, std::string& name, uint32_t& dp)
 	uint32_t curLine = 1;
 
 	while(getline(iss, temp, '\n')){
+		boost::algorithm::trim(temp);   // stray spaces or a CR line ending made the name or town unknown
 		if(curLine == 1){
 			name = temp;
 		}

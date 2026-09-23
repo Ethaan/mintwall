@@ -55,6 +55,7 @@ server\build.bat                      rebuild (first run compiles all deps via v
 server\init-db.bat                    fresh db.db3 from sql\ (delete db.db3 first)
 server\start-server.bat               run the server
 mise run build|seed|reseed|start-server|stop-server|restart-server|test   same via mise.toml
+                                      (stop/restart touch only the dev server: tools/dev-server.ps1)
 powershell -ExecutionPolicy Bypass -File tools\talk-test.ps1 -Words "hi,job,bye"
 powershell -ExecutionPolicy Bypass -File tools\patch-client.ps1 -Ip <address>
 ```
@@ -115,6 +116,8 @@ when the engine is wrong.
 - The 7.4 client has no RSA/XTEA; login hosts are 4 fixed strings in Tibia.exe (max 16 chars)
 - Items: our items.otb (Avesta, v1.2) and the map's (v1.3) have identical server->client ids
 - Full map server uses ~2.5 GB RAM
+- Edit a character in db.db3 only while it is logged out: the server keeps an online character in
+  memory and its logout save overwrites the DB (lost Centurion's rings once)
 - The `server.log` of a running server is locked; the exe is locked while running (stop before rebuild)
 
 ## Testing (tests/)

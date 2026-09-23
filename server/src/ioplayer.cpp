@@ -734,7 +734,7 @@ bool IOPlayer::getGuidByName(uint32_t &guid, std::string& name)
 	DBResult* result;
 	DBQuery query;
 
-	if(!(result = db->storeQuery("SELECT `name`, `id` FROM `players` WHERE `name` = " + db->escapeString(name))))
+	if(!(result = db->storeQuery("SELECT `name`, `id` FROM `players` WHERE LOWER(`name`) = LOWER(" + db->escapeString(name) + ")")))
 		return false;
 
 	name = result->getDataString("name");
@@ -766,7 +766,7 @@ bool IOPlayer::getGuidByNameEx(uint32_t &guid, bool &specialVip, std::string& na
 	DBResult* result;
 	DBQuery query;
 
-	if(!(result = db->storeQuery("SELECT `name`, `id`, `group_id` FROM `players` WHERE `name`= " + db->escapeString(name))))
+	if(!(result = db->storeQuery("SELECT `name`, `id`, `group_id` FROM `players` WHERE LOWER(`name`) = LOWER(" + db->escapeString(name) + ")")))
 		return false;
 
 	name = result->getDataString("name");
@@ -804,7 +804,7 @@ bool IOPlayer::playerExists(std::string name)
 	DBResult* result;
 	DBQuery query;
 
-	if(!(result = db->storeQuery("SELECT `id` FROM `players` WHERE `name`= " + db->escapeString(name))))
+	if(!(result = db->storeQuery("SELECT `id` FROM `players` WHERE LOWER(`name`) = LOWER(" + db->escapeString(name) + ")")))
 		return false;
 
 	db->freeResult(result);

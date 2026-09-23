@@ -702,18 +702,36 @@ bool Monster::canUseAttack(const Position& pos, const Creature* target) const
 	return true;
 }
 
+// 7.4: a creature standing next to its target rolls its spells every 2 seconds, one keeping its
+// distance every second (tibiantis-notes, OTLand "Game mechanics through time"; see
+// docs/reference-74/formulas.md). Our monster files give most spells - self-healing included -
+// a 1 s interval, so melee creatures healed and cast twice as often as in 7.4. The melee attack
+// itself keeps its own interval.
+uint32_t Monster::getSpellInterval(const spellBlock_t& sb) const
+{
+	if(sb.isMelee || !attackedCreature){
+		return sb.speed;
+	}
+	const Position& myPos = getPosition();
+	const Position& targetPos = attackedCreature->getPosition();
+	bool adjacent = myPos.z == targetPos.z
+		&& std::max(std::abs(myPos.x - targetPos.x), std::abs(myPos.y - targetPos.y)) <= 1;
+	return adjacent ? std::max<uint32_t>(sb.speed, 2000) : sb.speed;
+}
+
 bool Monster::canUseSpell(const Position& pos, const Position& targetPos,
 	const spellBlock_t& sb, uint32_t interval, bool& inRange)
 {
 	inRange = true;
 
 	if(!sb.isMelee || !extraMeleeAttack){
-		if(sb.speed > attackTicks){
+		uint32_t speed = getSpellInterval(sb);
+		if(speed > attackTicks){
 			resetTicks = false;
 			return false;
 		}
 
-		if(attackTicks % sb.speed >= interval){
+		if(attackTicks % speed >= interval){
 			//already used this spell for this round
 			return false;
 		}
@@ -771,12 +789,13 @@ void Monster::onThinkDefense(uint32_t interval)
 	for(SpellList::iterator it = mType->spellDefenseList.begin();
 		it != mType->spellDefenseList.end(); ++it)
 	{
-		if(it->speed > defenseTicks){
+		uint32_t speed = getSpellInterval(*it);   // healing too: every 2 s next to the target
+		if(speed > defenseTicks){
 			resetTicks = false;
 			continue;
 		}
 
-		if(defenseTicks % it->speed >= interval){
+		if(defenseTicks % speed >= interval){
 			//already used this spell for this round
 			continue;
 		}

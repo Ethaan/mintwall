@@ -59,6 +59,10 @@ def no_lua_errors(request, server):
     """Every test fails if the server logged a Lua error while it ran."""
     start = server.log_offset()
     yield
+    code = server.proc.poll() if server.proc else None
+    if code is not None:   # a crash: name the test it happened in (exit code 0xC0000005 = access violation)
+        pytest.fail(f"the server died during this test, exit code 0x{code & 0xFFFFFFFF:08X}\n"
+                    + server.log_tail(15), pytrace=False)
     errors = server.lua_errors(since=start)
     if errors:
         pytest.fail("server logged Lua errors during the test:\n\n" + "\n\n".join(errors[:5]), pytrace=False)

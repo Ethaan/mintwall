@@ -1,7 +1,7 @@
 local combat = createCombatObject()
 setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_ENERGYDAMAGE)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, CONST_ME_EXPLOSIONHIT)
-setCombatFormula(combat, COMBAT_FORMULA_LEVELMAGIC, -0.68, -0, -1.3, 0)
+setCombatFormula(combat, COMBAT_FORMULA_LEVELMAGIC, -0.4, 0, -0.8, 0)   -- 7.4: 40-80 %P
 
 local arr = {
 {0, 1, 0},

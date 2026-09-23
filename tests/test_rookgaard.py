@@ -67,6 +67,23 @@ def test_level_1_player_can_kill_a_rat(new_player, world):
     assert p.stats.health > 0
 
 
+def test_killed_monster_dies_at_once(new_player, world):
+    """It used to stand at 0 hp until its once-a-second check came round (plus 100-200 ms)."""
+    import time
+    # the sewer rats below the temple: not the spawn test_level_1_player_can_kill_a_rat empties
+    spawn = world.nearest_spawn("Rat", (ROOKGAARD_TEMPLE[0], ROOKGAARD_TEMPLE[1], 8))
+    p = new_player(pos=spawn, level=50, vocation=4, inventory={RIGHT: Item(2400)})   # magic sword
+    rat = p.wait_for(lambda: p.nearest("Rat"), timeout=30)
+    assert rat, f"no rat visible near spawn {spawn}"
+    p.set_fight_modes(fight=1, chase=1)
+    p.attack(rat.id)
+    assert p.wait_for(lambda: rat.health == 0 or rat.id in p.removed_creatures, timeout=60), f"rat not killed: {rat}"
+    at_zero = time.perf_counter()
+    assert p.wait_for(lambda: rat.id in p.removed_creatures, timeout=3), "the dead rat never went away"
+    stood = (time.perf_counter() - at_zero) * 1000
+    assert stood < 100, f"the rat stood at 0 hp for {stood:.0f} ms"   # old build: 106-1199 ms
+
+
 # ----------------------------------------------------------------------------- the Oracle
 
 def _near_oracle(new_player, world, level):

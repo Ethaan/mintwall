@@ -89,7 +89,7 @@ if msgcontains(msg, 'job') then
 	bozo_talk_state = 1
 			
 elseif bozo_talk_state == 1 and msgcontains(msg, 'yes') then
-	if doPlayerRemoveMoney(cid, 50) == TRUE then
+	if doPlayerRemoveMoney(cid, 50) then
 	NPCSay("Thank you very much. I will have a drink or two on your health!", 1)
 	else
 	NPCSay("Come back, when you have enough money.", 1)
@@ -110,7 +110,7 @@ elseif msgcontains(msg, 'weapon') then
 	NPCSay("Do you want to buy a 'mace of the fury' for 250 gold?", 1)
 	bozo_talk_state = 3
 elseif bozo_talk_state == 3 and msgcontains(msg, 'yes') then	
-	if doPlayerRemoveMoney(cid, 250) == TRUE then
+	if doPlayerRemoveMoney(cid, 250) then
 	doPlayerAddItem(cid, Cfrollingpin)
 	NPCSay("And here it is, it suits you well!", 1)
 	else
@@ -126,7 +126,7 @@ elseif msgcontains(msg, 'magic') or msgcontains(msg, 'spell') then
 	bozo_talk_state = 2	
 	
 elseif bozo_talk_state == 2 and msgcontains(msg, 'yes') then	
-	if doPlayerRemoveMoney(cid, 200) == TRUE then
+	if doPlayerRemoveMoney(cid, 200) then
 	NPCSay("Here you are, I already lessened your load.", 1)
 	else
 	NPCSay("Come back, when you have enough money.", 1)

@@ -79,8 +79,11 @@ bool Combat::getMinMaxValues(Creature* creature, Creature* target, int32_t& min,
 			switch(formulaType){
 				case FORMULA_LEVELMAGIC:
 				{
-					max = (int32_t)((player->getLevel() * 2 + player->getMagicLevel() * 3) * 1. * mina + minb);
-					min = (int32_t)((player->getLevel() * 2 + player->getMagicLevel() * 3) * 1. * maxa + maxb);
+					// 7.4 magic power: level*2 + mlvl*3, never below 100 - without that floor a level 8
+					// light magic missile did 1-3 instead of 10-20 (docs/reference-74/formulas.md §5)
+					int32_t power = std::max<int32_t>(100, player->getLevel() * 2 + player->getMagicLevel() * 3);
+					max = (int32_t)(power * 1. * mina + minb);
+					min = (int32_t)(power * 1. * maxa + maxb);
 					return true;
 				}
 

@@ -18,29 +18,29 @@ local function creatureSayCallback(cid, type, msg)
 	local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
 	
 	if (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'darashia') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 100) == TRUE then
+		if doPlayerRemoveMoney(cid, 100) then
 		doTeleportThing(cid,{x=33290, y=32481, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
         end
 	elseif (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'venore') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 150) == TRUE then
+		if doPlayerRemoveMoney(cid, 150) then
 		doTeleportThing(cid,{x=32954, y=32022, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
         end
 	elseif (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'edron') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 160) == TRUE then
+		if doPlayerRemoveMoney(cid, 160) then
 		doTeleportThing(cid,{x=33176, y=31764, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
         end
 	elseif (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'port') and msgcontains(msg, 'hope') and (not npcHandler:isFocused(cid))) then
-	if isPremium(cid) == TRUE then
-		if doPlayerRemoveMoney(cid, 70) == TRUE then
+	if isPremium(cid) then
+		if doPlayerRemoveMoney(cid, 70) then
 		doTeleportThing(cid,{x=32532, y=32784, z=7})
 		npcHandler:addFocus(cid)
 		else 

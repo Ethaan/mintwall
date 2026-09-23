@@ -504,6 +504,8 @@ public:
 	bool closeRuleViolation(Player* player);
 
 	void doDeathDelay(Creature* creature);
+	void checkCreatureDeath(Creature* creature);
+	void doCreatureDeath(uint32_t creatureId);
 	void loadPlayersRecord();
 	void reloadInfo(ReloadTypes_t info);
 

@@ -28,7 +28,7 @@ if(msgcontains(msg, 'key') or msgcontains(msg, 'door')) then
 npcHandler:say("Do you want to buy the dungeon key for 2000 gold?",cid)
 talkState[talkUser] = 1
 elseif(msgcontains(msg, "yes") and talkState[talkUser] == 1) then
-if doPlayerRemoveMoney(cid, 2000) == TRUE then -- edit the amount of gold here
+if doPlayerRemoveMoney(cid, 2000) then -- edit the amount of gold here
 key = doPlayerAddItem(cid,2089,1)
 doSetItemActionId(key, 3940)
 npcHandler:say("Here you go.",cid)

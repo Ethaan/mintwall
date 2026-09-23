@@ -50,3 +50,22 @@ def test_stairs_cost_a_normal_step(new_player, items):
     wrong = _check_pace(p, items, NORTH, [NORTH, SOUTH, NORTH, SOUTH, SOUTH])
     assert p.pos[2] == 7, f"ended on the wrong floor: {p.pos}"
     assert not wrong, "\n".join(wrong)
+
+
+def test_fluid_used_while_walking_works_without_stopping(new_player, items):
+    """7.4 lets you use runes and fluids on the move. It used to wait for the step to end, and the
+    next step cancelled it, so nothing happened until the player stopped."""
+    from tibia74 import BACKPACK, Item
+    p = new_player(pos=ROAD, level=20, vocation=4, mana=0, group_id=TESTER_GROUP,
+                   inventory={BACKPACK: Item(1988, contents=[Item(2006, 7)])})   # mana fluid
+    bag = p.open_container(BACKPACK)
+    cid = next(k for k, v in p.containers.items() if v is bag)
+    assert p.step(SOUTH)
+    p.use_item_with(p.container_pos(cid, 0), bag.items[0].client_id, 0, p.pos, 0x63, 1)   # drink, keep walking
+    drank_at = None
+    for n in range(1, 6):
+        assert p.step(SOUTH), f"step {n} refused"
+        if drank_at is None and any(t == "Aaaah..." for _, _, t in p.speech):
+            drank_at = n
+    assert drank_at is not None, f"never drank while walking; mana {p.stats.mana}, {p.text_messages[-2:]}"
+    assert drank_at <= 2, f"drank only after {drank_at} more steps"

@@ -6,10 +6,9 @@ setCombatParam(combat, COMBAT_PARAM_AGGRESSIVE, 0)
 setCombatParam(combat, COMBAT_PARAM_DISPEL, CONDITION_PARALYZE)
 
 function onGetFormulaValues(cid, level, maglevel)
-	min = (level * 2 + maglevel * 3) * 0.4
-	max = (level * 2 + maglevel * 3) * 0.75
-
-	return min, max
+	-- 7.4 IH rune: 40-100 %P; magicPower() is level*2 + mlvl*3, at least 100 (compat.lua)
+	local power = magicPower(level, maglevel)
+	return power * 0.4, power * 1.0
 end
 
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")

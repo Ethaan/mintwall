@@ -61,7 +61,7 @@ elseif adrenius_talk_state == 1 and msgcontains(msg, '') then
 	npcHandler:resetNpc()	
 	
 elseif adrenius_talk_state == 2 and msgcontains(msg, 'yes') or adrenius_talk_state == 2 and msgcontains(msg, 'Yes') then
-	if doPlayerRemoveMoney(cid, 500) == TRUE then
+	if doPlayerRemoveMoney(cid, 500) then
 	NPCSay("Thank you very much. Now, name me the first person in alphabetical order, his age, his fate, and how long he was on his journeys!", 1)
 	adrenius_talk_state = 4	
 	else

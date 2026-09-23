@@ -32,6 +32,13 @@ class Item:
     item_id: int
     count: int = 1
     contents: list = field(default_factory=list)  # items inside, if this is a container
+    attributes: bytes = b""                        # serialized item attributes (e.g. text())
+
+    @staticmethod
+    def text(value: str) -> bytes:
+        """Attributes for an item with writing on it (a label, a letter): ATTR_TEXT, u16 length, text."""
+        raw = value.encode("latin-1")
+        return bytes([6]) + len(raw).to_bytes(2, "little") + raw   # 6 = ATTR_TEXT
 
 
 @dataclass
@@ -58,9 +65,10 @@ class TestDatabase:
                          town_id: int = 1, pos: tuple = None, sex: int = 1,
                          inventory: dict = None, group_id: int = 1,
                          health: int = None, mana: int = None, storage: dict = None,
-                         premium_days: int = 0) -> Character:
+                         premium_days: int = 0, maglevel: int = 0, skills: dict = None) -> Character:
         """New character on its own account. pos=None means 'spawn at the town temple'.
-        storage: {key: value} player storage, e.g. {BEGINNER_SET_GIVEN: 1} to skip the first-login set."""
+        storage: {key: value} player storage, e.g. {BEGINNER_SET_GIVEN: 1} to skip the first-login set.
+        skills: {skill id: level}, 0 fist 1 club 2 sword 3 axe 4 distance 5 shielding 6 fishing."""
         n = next(_counter)
         name = name or f"Test{n:04d}"
         account = TEST_ACCOUNT_BASE + n
@@ -86,6 +94,10 @@ class TestDatabase:
             guid = cur.lastrowid
             if inventory:
                 self._insert_items(con, guid, inventory)
+            if maglevel:
+                con.execute('UPDATE players SET maglevel = ? WHERE id = ?', (maglevel, guid))
+            for skill, value in (skills or {}).items():
+                con.execute('UPDATE player_skills SET value = ? WHERE player_id = ? AND skillid = ?', (value, guid, skill))
             for key, value in (storage or {}).items():
                 con.execute('INSERT INTO player_storage (player_id, key, value) VALUES (?, ?, ?)', (guid, key, value))
             con.commit()
@@ -99,7 +111,7 @@ class TestDatabase:
         def add(pid: int, item: Item):
             my_sid = next(sid)
             con.execute('INSERT INTO player_items (player_id, pid, sid, itemtype, count, attributes)'
-                        ' VALUES (?, ?, ?, ?, ?, ?)', (guid, pid, my_sid, item.item_id, item.count, b""))
+                        ' VALUES (?, ?, ?, ?, ?, ?)', (guid, pid, my_sid, item.item_id, item.count, item.attributes))
             for child in item.contents:
                 add(my_sid, child)
 

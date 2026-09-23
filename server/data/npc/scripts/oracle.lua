@@ -30,7 +30,7 @@ local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
 if(not npcHandler:isFocused(cid)) then
 return false
 elseif msgcontains(msg, "yes") and Topic[talkUser] == 0 then
-npcHandler:say(islandOfDestinyEnabled and "I WILL BRING YOU TO THE ISLAND OF DESTINY AND YOU WILL BE UNABLE TO RETURN HERE! ARE YOU SURE?" or "IN WHICH TOWN DO YOU WANT TO LIVE: {CARLIN}, {VENORE} " .. (isPremium(cid) == TRUE and ", {THAIS}, {DARASHIA}, {ANKRAHMUN} OR {EDRON}?" or " OR {THAIS}?"), cid)
+npcHandler:say(islandOfDestinyEnabled and "I WILL BRING YOU TO THE ISLAND OF DESTINY AND YOU WILL BE UNABLE TO RETURN HERE! ARE YOU SURE?" or "IN WHICH TOWN DO YOU WANT TO LIVE: {CARLIN}, {VENORE} " .. (isPremium(cid) and ", {THAIS}, {DARASHIA}, {ANKRAHMUN} OR {EDRON}?" or " OR {THAIS}?"), cid)
 Topic[talkUser] = islandOfDestinyEnabled and 4 or 1
 elseif Topic[talkUser] == 0 then
 npcHandler:unGreet(cid)
@@ -60,7 +60,7 @@ Topic[talkUser] = 2
 town[talkUser] = getTownIdByName("Venore")
 destination[talkUser] = {x=32957, y=32076, z=7}
 elseif msgcontains(msg, "darashia") and Topic[talkUser] == 1 then
-if isPremium(cid) == TRUE then
+if isPremium(cid) then
 npcHandler:say("IN DARASHIA! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 Topic[talkUser] = 2
 town[talkUser] = getTownIdByName("Darashia")
@@ -70,7 +70,7 @@ npcHandler:say("YOU NEED A PREMIUM ACCOUNT IN ORDER TO GO THERE!", cid)
 Topic[talkUser] = 1
 end
 elseif msgcontains(msg, "ankrahmun") and Topic[talkUser] == 1 then
-if isPremium(cid) == TRUE then
+if isPremium(cid) then
 npcHandler:say("IN ANKRAHMUN! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 Topic[talkUser] = 2
 town[talkUser] = getTownIdByName("Ankrahmun")
@@ -80,7 +80,7 @@ npcHandler:say("YOU NEED A PREMIUM ACCOUNT IN ORDER TO GO THERE!", cid)
 Topic[talkUser] = 1
 end
 elseif msgcontains(msg, "edron") and Topic[talkUser] == 1 then
-if isPremium(cid) == TRUE then
+if isPremium(cid) then
 npcHandler:say("IN EDRON! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 Topic[talkUser] = 2
 town[talkUser] = getTownIdByName("Edron")
@@ -90,7 +90,7 @@ npcHandler:say("YOU NEED A PREMIUM ACCOUNT IN ORDER TO GO THERE!", cid)
 Topic[talkUser] = 1
 end
 elseif msgcontains(msg, "portaa11") and msgcontains(msg, "hopaa11e") and Topic[talkUser] == 1 then
-if isPremium(cid) == TRUE then
+if isPremium(cid) then
 npcHandler:say("IN PORT HOPE! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 Topic[talkUser] = 2
 town[talkUser] = 10
@@ -100,7 +100,7 @@ npcHandler:say("YOU NEED A PREMIUM ACCOUNT IN ORDER TO GO THERE!", cid)
 Topic[talkUser] = 1
 end
 elseif Topic[talkUser] == 1 then
-npcHandler:say("{CARLIN}, {VENORE}" .. (isPremium(cid) == TRUE and ", {THAIS}, {DARASHIA}, {ANKRAHMUN} OR {EDRON}?" or " OR {THAIS}?"), cid)
+npcHandler:say("{CARLIN}, {VENORE}" .. (isPremium(cid) and ", {THAIS}, {DARASHIA}, {ANKRAHMUN} OR {EDRON}?" or " OR {THAIS}?"), cid)
 Topic[talkUser] = 1
 elseif msgcontains(msg, "sorcerer") and Topic[talkUser] == 2 then
 npcHandler:say("A SORCERER! ARE YOU SURE? THIS DECISION IS IRREVERSIBLE!", cid)

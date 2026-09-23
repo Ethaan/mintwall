@@ -473,7 +473,7 @@ elseif marvik_talk_state == 8754 and msgcontains(msg, 'yes') then
 	if isInArray(spellvoc, getPlayerVocation(cid)) == 1 then
 		if getPlayerMagLevel(cid) >= spellmagiclevel then
 			if getPlayerLearnedInstantSpell(cid, spellname) < 1 then
-				if doPlayerRemoveMoney(cid, spellprice) == TRUE then
+				if doPlayerRemoveMoney(cid, spellprice) then
 				playerLearnInstantSpell(cid, spellname)
 				doSendMagicEffect(getPlayerPosition(cid), 14)
 				NPCSay("Here you are. Look in your spellbook for the pronounciation of this spell.", 1)

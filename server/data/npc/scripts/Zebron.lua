@@ -56,7 +56,7 @@ elseif zebron_talk_state == 2 then
 TEXTMSG = msg
 local amount = getCount(msg)
 if amount >= 1 and amount <= 99 then
-	if doPlayerRemoveMoney(cid, amount) == TRUE then
+	if doPlayerRemoveMoney(cid, amount) then
 		if CHANCE == 6 then
 		doPlayerAddMoney(cid, amount*5)
 		npcHandler:say('Ok, here we go ... 6! You have won ".. amount*5 ..", congratulations. One more game?')

@@ -843,6 +843,9 @@ void Creature::changeHealth(int32_t healthChange)
 	}
 
 	g_game.addCreatureHealth(this);
+	if(health <= 0){
+		g_game.checkCreatureDeath(this);
+	}
 }
 
 void Creature::changeMana(int32_t manaChange)
@@ -904,8 +907,14 @@ BlockType_t Creature::blockHit(Creature* attacker, CombatType_t combatType, int3
 
 		if(checkDefense && hasDefense){
 			int32_t maxDefense = getDefense();
-			int32_t minDefense = maxDefense / 2;
-			damage -= random_range(minDefense, maxDefense);
+			if(getPlayer()){
+				// 7.4: a player's block is rolled like an attack, 0..max (docs/reference-74 §6.2);
+				// monsters keep def/2..def until their 7.4 attack/defense/skill data is migrated
+				damage -= random_range(0, maxDefense, DISTRO_NORMAL);
+			}
+			else{
+				damage -= random_range(maxDefense / 2, maxDefense);
+			}
 			if(damage <= 0){
 				damage = 0;
 				blockType = BLOCK_DEFENSE;

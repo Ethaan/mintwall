@@ -53,7 +53,7 @@ elseif hagor_talk_state == 1 and msgcontains(msg, 'key') or hagor_talk_state == 
 	hagor_talk_state = 2	
 
 elseif hagor_talk_state == 2 and msgcontains(msg, 'yes') or hagor_talk_state == 1 and  msgcontains(msg, 'Yes') then
-	if doPlayerRemoveItem(cid, Cfroll, 1) == TRUE then 
+	if doPlayerRemoveItem(cid, Cfroll, 1) then 
 		npcHandler:say('Oh, fine! Here you are.')
 	KEY = doPlayerAddItem(cid, 2088, 1)
 	doSetItemActionId(KEY, 2010)

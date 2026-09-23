@@ -77,7 +77,9 @@ When finishing one, tick it and add a short note (what changed / how verified).
 - [ ] Reduce server memory (~2.5 GB with full map)
 - [x] Removed the teleport in Rookgaard temple that sent new players to Thais
       (tools/map-remove-item.py)
-- [ ] Audit every teleport on the map against 7.4 (only the Rookgaard one was wrong so far)
+- [x] Removed the teleport next to the Thais temple (32366,32235,7) that sent players to the
+      Rookgaard temple; a full-map scan found no other mainland teleport into Rookgaard. test_travel.py
+- [ ] Audit every teleport on the map against 7.4 (two wrong ones so far, both to/from Rookgaard)
 - [x] King's Bridge (Rookgaard, 32057,32192-32193,7): action id 50003 = premium-only ground, nothing
       handled it; movements/scripts/premium_tile.lua sends free accounts back. test_rookgaard.py
 - [x] Locked doors without a key (action id 0) opened for anyone (door_locked.lua: "impossible to
@@ -101,6 +103,9 @@ Current config: RateExp/RateSkill/RateMag/RateLoot/RateSpawn = 1 (real Tibia spe
 experience stages script (`creaturescripts/scripts/stages.lua`) exists but is not registered.
 
 ### Experience and levels
+- [ ] BUG (reported 2026-09-22): experience does not seem to work - killing monsters shows no level
+      up / no exp increase. Reproduce with a test (kill a monster, check exp and the level-up message,
+      stats packet), find why, fix
 - [ ] Experience per level: confirm `(50*(L-1)^3 - 150*(L-1)^2 + 400*(L-1)) / 3` (Player::getExpForLevel)
 - [ ] Experience rate: keep 1x, pick a multiplier, or enable stages (7.4 had no stages)
 - [ ] Monster experience: exp from each monster matches 7.4, including exp split when several players attack
@@ -108,6 +113,7 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [ ] Level-down on death: losing enough exp removes levels and their HP/mana/cap
 
 ### Magic level
+- [ ] Rookie (no vocation) magic level multiplier is 4.0; 7.4 used 3.0 (TW-Formulae, one source)
 - [ ] Mana needed per magic level: `1600 * multiplier^mlvl` with vocation multipliers
       (vocations.xml manamultiplier: sorcerer/druid 1.1, paladin 1.4, knight 3.0, none 4.0)
 - [ ] Mana spent counts toward magic level (spells and runes), RateMag applies
@@ -131,6 +137,10 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [ ] Capacity: item weights and cap limit
 
 ### Death and PvP
+- [ ] Death loss must be correct (reported 2026-09-22): 10% of exp, magic level mana and skill tries,
+      7% for promoted characters (Player::getDeathLossFactor, not tested yet); level loss removes
+      HP/mana/cap; items: each equipped item 10%, containers (backpack) always - confirm the 7.4
+      backpack rule; amulet of loss protects everything and is used up. Pin all of it with tests
 - [ ] Death penalty: exp / mana / skill / item loss percentages (loss_* columns, default 10)
 - [ ] Respawn at home town temple (town_id), bag/items drop rules, blessings do not exist in 7.4
 - [ ] Skulls and PZ: PZLock 60 s, KillsToRedSkull 5, KillsToBan 7 - confirm 7.4 values
@@ -167,6 +177,12 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 
 ## Spells and runes (found while making the Centurion test character)
 
+- [ ] Spell values the research lists as higher than 7.4 but did not rank: fireball (16-33 vs 15-25 %P),
+      great fireball (40+30..70 vs 35-65), force strike (20-50 vs 18..33, one source), exura sio
+      (100+30..135 vs 80-160, one source). docs/reference-74/formulas.md §5
+- [ ] Life ring / ring of healing regeneration not checked against 7.4 (1 per 3 s for 20 min / 1 per 1 s
+      for 7.5 min)
+
 - [ ] Conjuring makes the wrong items: "adori vita vis" -> 2263, "adura vita" -> 2274 ("spell rune"),
       but the usable runes are 2268 (sudden death) and 2273 (ultimate healing) - spells.xml conjureId
 - [x] Drinking any fluid failed ("You can not use this object.", Lua error): fluids.lua calls
@@ -185,17 +201,73 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       waited 2x and diagonal->diagonal 4x (1.7 s) - Creature::getWalkDelay / getStepDuration(dir)
 - [x] 1 ms timer resolution (timeBeginPeriod): steps landed up to ~100 ms early/late - otserv.cpp
 - [x] tests/test_walking.py: pace on a road (straight + diagonals) and up/down stairs
+- [~] Overshoot: holding a key for 2 squares walked 3. The client remembers a key-down that arrives
+      mid-step and walks it when the step ends; our 33 ms repeats always filled that memory.
+      mintwall.dll now hooks the client's send(), learns step times from its walk packets and gives
+      exactly one repeat per step, ~60 ms before the step ends (built; waiting for a try in game)
+- [~] Using runes/fluids while walking never happened until you stopped: every step set the next
+      action to the step's end and cancelled a pending one (Player::onWalk, Game::playerMove).
+      Removed; actions keep their own delays. test_walking.py (fails on the old build; rebuild pending)
+- [ ] Target box: clicking a monster mid-step misses (the client picks by tile, the monster is
+      already on its new tile while drawn sliding from the old one). Plan: measure misses with
+      walk-trace, then a click assist in mintwall.dll (move a right-click onto the creature drawn
+      under the cursor; needs the game view rect and the client's creature list in memory)
 - [ ] A step pressed while another is queued replaces it (Player::setNextWalkTask) - dropped steps when
       tapping back and forth (seen in the stairs trace); queue one step instead?
 - [ ] Re-trace with the real client on the new server (walk-trace summary: steps more than 50 ms late)
 
+## Travel and combat feel
+
+- [x] Boats took the fare but never sailed: StdModule.travel called doTeleportThing(cid, pos, false);
+      Avesta takes (uid, pos) and read the 'false' as the position -> shim in both compat layers.
+      "bring me to <town>" compared doPlayerRemoveMoney(...) == TRUE, but Avesta returns booleans:
+      money taken, "you don't have enough money", no trip. 64 such comparisons in 20 scripts rewritten
+      (also: house purchase ignored needPremium; premium-only choices never offered). test_travel.py
+- [x] A killed monster stood at 0 hp for 0.1-1.2 s: deaths waited for the creature's once-a-second
+      check plus 100-200 ms. Now handled right after the killing blow (Creature::changeHealth ->
+      Game::checkCreatureDeath). test_rookgaard.py (needs the rebuild)
+- [x] Mail: a parcel the mailbox could not deliver was left lying on the mailbox tile (lost at the
+      next restart). Receiver names were matched case-sensitively and label lines were not trimmed,
+      so "centurion" or a trailing space was enough. Now: names case-insensitive (IOPlayer, LOWER()),
+      lines trimmed, undeliverable mail refused on the tile ("Sorry, not possible."). test_mail.py
+- [~] 7.4 formulas, step by step from docs/reference-74/formulas.md ("Mismatches, ranked"):
+  - [x] 1. Monster spells every 2 s next to the target, 1 s at a distance (Monster::getSpellInterval,
+        attack and defense spells; the melee attack keeps its own interval). Measured with a test
+        dragon lord healing on every roll: 9 heals in 11 s before, 5-6 in 12 s after. Dwarf
+        geomancer heal 75-325 -> 75-125, hero 200-350 -> 200-250
+  - [x] 2. Mana / life fluids 40-80 -> 25-75; life fluids were broken (doPlayerAddHealth missing ->
+        compat alias). test_formulas.py
+  - [x] 3. Player melee/distance max (5*skill+50)*atk*stance*0.99/100, stances atk x1.2/1.0/0.6 and
+        def x0.6/1.0/1.8, shield block max (5*shield+50)*def*stance/100 rolled 0..max like an attack
+        (weapons.cpp, player.cpp, creature.cpp). Source C1 (tibiantis-notes calculators) - not pinned
+        by a test yet (needs a damage-measuring setup)
+  - [ ] 3b. Monster melee and blocking from 7.4 attack/defense/skill per creature (needs the
+        TN-Creature data migrated into our monster XMLs); monsters keep their current values
+  - [x] 4. Magic power floor P >= 100 (combat.cpp FORMULA_LEVELMAGIC + magicPower() in compat.lua for
+        the Lua heal formulas). 7.4 values: energy beam 40-80, fire wave 20-40, poison storm 150-250,
+        great energy beam 40-200, mass healing 160-240, exura 10-30, IH rune 40-100, exura vita 200-300,
+        UH rune fixed 250 (%P). test_formulas.py (IH rune at level 8)
+  - [x] 5. Regeneration: Elite Knight 4/12, Paladin 8/8, Royal Paladin 6/6, MS/ED hp 12 (vocations.xml,
+        test_formulas.py); promoted characters lose 7% instead of 10% on death (Player::getDeathLossFactor)
+  - [ ] 5b. Distance hit chance min(skill/(15d-1), 1) - only one source, sources conflict on the minimum
+  - [ ] Tests for step 3 (melee, distance, stances, shield block): measure damage and blocks in game
+        against the 7.4 formulas - the formulas are built but not pinned by any test yet
+- [x] 7.4 formulas research (docs/reference-74/formulas.md): Berserk = level x 4 mana
+      is the real 7.4 cost (TibiaWiki: until the 2007 summer update); monster healing rates; mana
+      fluid 25-75 in 7.4 (ours 40-80); magic formula base x (mlv*3 + lv*2)/100 (tibiantis-notes).
+      No hydras exist on our server (post-7.4 creature?)
+- [ ] Travel questions for the 7.4 reference: Edron premium-only? which captains went where, prices
+- [ ] Oracle: premium players are now offered Darashia/Ankrahmun/Edron too (the script's intent; it
+      never worked before) - overlaps with the Gatekeeper, check against 7.4
+
 ## Stability
 
-- [ ] The test server crashed once, silently (no log line), during a full suite run on 2026-09-22 -
-      between test_accounts.py and the Rookgaard NPC shop tests (first refused: Lee'Delle-2 sell).
-      Not reproduced in the next full run (118 passed) nor in partial runs. Next time: get a crash
-      dump (procdump -e -ma avesta74.exe, or WER LocalDumps) and look for use-after-free - suspects:
-      items in the decay list after their owner logged out (time ring), NPC focus after logout
+- [x] "Test server crashed silently" (twice, 2026-09-22) was not a crash: exit code 1 = killed from
+      outside. mise stop-server/restart-server ran `taskkill /IM avesta74.exe /F`, which also killed the
+      test suite's server (7181) - the second time at 18:51:25, exactly when the dev server was
+      restarted. Now tools/dev-server.ps1 stops only the dev server (the one without -c) and
+      start-server checks port 7171. conftest names the test during which the server died, with its
+      exit code (0xC0000005 would be a real crash)
 
 ## Accounts / security / ops
 
@@ -206,6 +278,12 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 - [ ] Hosting: public IP, patched client for players (`patch-client.ps1 -Ip ...`)
 
 ## Tooling
+
+- [ ] Commit today's work (nothing from 2026-09-22 is committed yet): client walking DLL, server walking /
+      stairs / diagonals / runes-while-walking, NPC fixes and tests, King's Bridge, doors, Gatekeeper,
+      travel, mail, monster death, formulas, test accounts, idle, mise/dev-server
+- [ ] walk-trace and the test suite both write tools/.run/walk-trace.config.lua / tests/.run - two
+      parallel walk-trace runs overwrite each other's config
 
 - [ ] `talk-test.ps1`: support walking/teleporting (GM) so any NPC can be tested without editing the DB
 - [x] Smoke test runner: tests\run-tests.bat

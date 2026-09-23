@@ -1936,7 +1936,7 @@ bool Game::playerMove(uint32_t playerId, Direction dir)
 	int32_t delay = player->getWalkDelay(dir);
 
 	if(delay > 0){
-		player->setNextAction(OTSYS_TIME() + player->getStepDuration(dir) - 1);
+		// (a waiting step no longer blocks actions - see Player::onWalk)
 		SchedulerTask* task = createSchedulerTask( ((uint32_t)delay), boost::bind(&Game::playerMove, this,
 			playerId, dir));
 		player->setNextWalkTask(task);
@@ -3627,11 +3627,8 @@ void Game::checkCreatures()
 			creature->onAttacking(EVENT_CREATURE_THINK_INTERVAL);
 			creature->executeConditions(EVENT_CREATURE_THINK_INTERVAL);
 		}
-		else if(!creature->isDying){
-			creature->isDying = true;
-			int random = random_range(100, 200);
-			Scheduler::getScheduler().addEvent(createSchedulerTask(
-				random, boost::bind(&Game::doDeathDelay, this, creature)));
+		else{
+			checkCreatureDeath(creature);   // normally already done when its health hit 0
 		}
 	}
 
@@ -4340,6 +4337,28 @@ void Game::loadPlayersRecord()
 	db->freeResult(result);
 }
 
+
+// A creature at 0 health dies as the next task, right after the hit that killed it. It used to wait
+// for its turn in checkCreatures (each creature is looked at once a second) plus 100-200 ms, so a
+// killed monster stood at 0 hp for up to ~1.2 s. Not done on the spot: the attack or area spell
+// that killed it may still be working through its targets.
+void Game::checkCreatureDeath(Creature* creature)
+{
+	if(!creature || creature->isRemoved() || creature->getHealth() > 0 || creature->isDying){
+		return;
+	}
+	creature->isDying = true;
+	Dispatcher::getDispatcher().addTask(createTask(
+		boost::bind(&Game::doCreatureDeath, this, creature->getID())));
+}
+
+void Game::doCreatureDeath(uint32_t creatureId)
+{
+	Creature* creature = getCreatureByID(creatureId);
+	if(creature){
+		doDeathDelay(creature);
+	}
+}
 
 void Game::doDeathDelay(Creature* creature)
 {

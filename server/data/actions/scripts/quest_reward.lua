@@ -88,7 +88,7 @@ function doPlayerAddQuestReward(cid, parameters)
 		end
 	end
 	
-	if (premiumRequired ~= false and isPremium(cid) == false) then
+	if (premiumRequired ~= false and not isPremium(cid)) then
 		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "A premium account is required to take this reward.")
 		return false
 	end

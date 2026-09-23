@@ -21,6 +21,15 @@ function doSteerCreature(cid, position)
 	return selfMoveTo(position.x, position.y, position.z)
 end
 
+-- TFS doTeleportThing(uid, pos, pushMove): Avesta takes (uid, pos) and reads the position off the
+-- top of the stack, so a third argument made every boat trip fail - after taking the fare.
+if _nativeTeleportThing == nil then
+	_nativeTeleportThing = doTeleportThing
+end
+function doTeleportThing(uid, pos)
+	return _nativeTeleportThing(uid, pos)
+end
+
 -- No trade window in 7.4, only talk-based shopping
 function getShopOwner(cid) return nil end
 function openShopWindow() return false end

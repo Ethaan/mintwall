@@ -38,7 +38,7 @@ function onUse(cid, item, frompos, item2, topos)
 					end
 			
 					doPlayerSay(cid, "Aaaah...", 1)
-					doPlayerAddMana(cid, math.random(40, 80))
+					doPlayerAddMana(cid, math.random(25, 75))   -- 7.4: 25-75 (docs/reference-74/formulas.md §4)
 					doSendMagicEffect(topos, 12)
 					doAddCondition(cid, exhaust)
 				
@@ -49,7 +49,7 @@ function onUse(cid, item, frompos, item2, topos)
 					end
 				
 					doPlayerSay(cid, "Aaaah...", 1)
-					doPlayerAddHealth(cid, math.random(40, 80))
+					doPlayerAddHealth(cid, math.random(25, 75)) -- 7.4: 25-75
 					doSendMagicEffect(topos, 12)
 					doAddCondition(cid, exhaust)
 				else

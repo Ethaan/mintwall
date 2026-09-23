@@ -191,12 +191,12 @@ end
 			return false
 		end
 
-		if(HOUSE_CONFIG.needPremium and isPremium(cid) == FALSE) then
+		if(HOUSE_CONFIG.needPremium and not isPremium(cid)) then
 			doPlayerSendCancel(cid, 'Only premium players are able to buy a house.')
 			return false
 		end
 
-		if(doPlayerRemoveMoney(cid, housePrice) == FALSE) then
+		if(not doPlayerRemoveMoney(cid, housePrice)) then
 			doPlayerSendCancel(cid, 'You do not have enough money.')
 			doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, 'Price: ' .. housePrice .. '.')
 			return false

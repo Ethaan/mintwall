@@ -37,7 +37,7 @@ function selfGotoIdle()
 end
 
 function isPlayerPremiumCallback(cid)
-	return isPremium(cid) == TRUE and true or false
+	return isPremium(cid) and true or false
 end
 
 -- keyword is supposed to be lowercase without lowering it

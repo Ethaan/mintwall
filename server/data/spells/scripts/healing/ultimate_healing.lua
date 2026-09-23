@@ -6,10 +6,9 @@ setCombatParam(combat, COMBAT_PARAM_AGGRESSIVE, 0)
 setCombatParam(combat, COMBAT_PARAM_DISPEL, CONDITION_PARALYZE)
 
 function onGetFormulaValues(cid, level, maglevel)
-	min = (level * 2 + maglevel * 3) * 2.2
-	max = (level * 2 + maglevel * 3) * 2.6	
-
-	return min, max
+	-- 7.4 exura vita: 200-300 %P; magicPower() is level*2 + mlvl*3, at least 100 (compat.lua)
+	local power = magicPower(level, maglevel)
+	return power * 2.0, power * 3.0
 end
 
 setCombatCallback(combat, CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")

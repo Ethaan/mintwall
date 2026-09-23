@@ -3,7 +3,7 @@ setCombatParam(combat, COMBAT_PARAM_TYPE, COMBAT_HEALING)
 setCombatParam(combat, COMBAT_PARAM_EFFECT, CONST_ME_MAGIC_BLUE)
 setCombatParam(combat, COMBAT_PARAM_AGGRESSIVE, 0)
 setCombatParam(combat, COMBAT_PARAM_TARGETCASTERORTOPMOST, 1)
-setCombatFormula(combat, COMBAT_FORMULA_LEVELMAGIC, 1.2, -30, 1.5, 0)
+setCombatFormula(combat, COMBAT_FORMULA_LEVELMAGIC, 1.6, 0, 2.4, 0)   -- 7.4: 160-240 %P
 
 local arr = {
  {0, 0, 0, 0, 0, 0, 0},

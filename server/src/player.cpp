@@ -496,11 +496,11 @@ void Player::getShieldAndWeapon(const Item* &shield, const Item* &weapon) const
 
 int32_t Player::getDefense() const
 {
-	int32_t baseDefense = 5;
+	int32_t baseDefense = 0;   // 7.4: no base defense on top of the item's
 	int32_t defenseSkill = 0;
 	int32_t defenseValue = 0;
 	int32_t extraDef = 0;
-	float defenseFactor = getDefenseFactor();
+	float defenseFactor = getDefenseMultiplier();
 	const Item* weapon = NULL;
 	const Item* shield = NULL;
 	getShieldAndWeapon(shield, weapon);
@@ -523,7 +523,9 @@ int32_t Player::getDefense() const
 	if(vocation->defenseMultiplier != 1.0)
 		defenseValue = int32_t(defenseValue * vocation->defenseMultiplier);
 
-	return ((int32_t)std::ceil(((float)(defenseSkill * (defenseValue * 0.015)) + (defenseValue * 0.1)) * defenseFactor));
+	// 7.4 block max: (5 x skill + 50) x def x stance / 100 - the same shape as the attack formula
+	// (docs/reference-74/formulas.md §6.2). Ours blocked about 3x less.
+	return (int32_t)std::floor((5.0 * defenseSkill + 50) * defenseValue * defenseFactor / 100);
 }
 
 float Player::getAttackFactor() const
@@ -532,6 +534,27 @@ float Player::getAttackFactor() const
 		case FIGHTMODE_ATTACK:	return 1.0f;
 		case FIGHTMODE_BALANCED: return 1.2f;
 		case FIGHTMODE_DEFENSE: return 2.0f;
+		default: return 1.0f;
+	}
+}
+
+// 7.4 fight stances (docs/reference-74/formulas.md §6): offensive attack x1.2 and defense x0.6,
+// balanced x1.0, defensive attack x0.6 and defense x1.8. getAttackFactor() keeps its old meaning
+// for the Lua weapon/spell callbacks.
+float Player::getAttackMultiplier() const
+{
+	switch(fightMode){
+		case FIGHTMODE_ATTACK: return 1.2f;
+		case FIGHTMODE_DEFENSE: return 0.6f;
+		default: return 1.0f;
+	}
+}
+
+float Player::getDefenseMultiplier() const
+{
+	switch(fightMode){
+		case FIGHTMODE_ATTACK: return 0.6f;
+		case FIGHTMODE_DEFENSE: return 1.8f;
 		default: return 1.0f;
 	}
 }
@@ -1464,9 +1487,11 @@ void Player::onCreatureDisappear(const Creature* creature, uint32_t stackpos, bo
 
 void Player::onWalk(Direction& dir)
 {
+	// Walking does not block actions: in 7.4 you use runes and fluids on the move. This used to set
+	// the next action to the end of the step and cancel a pending one, so a rune used while
+	// walking waited for the step and the next step cancelled it - it never happened until you
+	// stopped. Actions keep their own delays (Actions: MIN_ACTIONTIME / MIN_ACTIONEXTIME).
 	Creature::onWalk(dir);
-	setNextActionTask(NULL);
-	setNextAction(OTSYS_TIME() + getStepDuration(dir));
 }
 
 void Player::onCreatureMove(const Creature* creature, const Tile* newTile, const Position& newPos,
@@ -2079,7 +2104,7 @@ void Player::die()
 
 		sumMana += manaSpent;
 
-		lostMana = (int32_t)std::ceil(sumMana * ((double)lossPercent[LOSS_MANASPENT]/100));
+		lostMana = (int32_t)std::ceil(sumMana * ((double)lossPercent[LOSS_MANASPENT]/100) * getDeathLossFactor());
 
 		while((uint32_t)lostMana > manaSpent && magLevel > 0){
 			lostMana -= manaSpent;
@@ -2102,7 +2127,7 @@ void Player::die()
 			}
 
 			sumSkillTries += skills[i][SKILL_TRIES];
-			lostSkillTries = (uint32_t)std::ceil(sumSkillTries * ((double)lossPercent[LOSS_SKILLTRIES]/100));
+			lostSkillTries = (uint32_t)std::ceil(sumSkillTries * ((double)lossPercent[LOSS_SKILLTRIES]/100) * getDeathLossFactor());
 
 			while(lostSkillTries > skills[i][SKILL_TRIES]){
 				lostSkillTries -= skills[i][SKILL_TRIES];

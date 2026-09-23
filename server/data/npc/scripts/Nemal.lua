@@ -53,7 +53,7 @@ elseif nemal_talk_state == 2 and msgcontains(msg, '') then
 	nemal_talk_state = 0
 	
 elseif nemal_talk_state == 3 and msgcontains(msg, 'yes') or nemal_talk_state == 3 and msgcontains(msg, 'Yes') then
-	if doPlayerRemoveItem(cid, Cfroll, 1) == TRUE and doPlayerRemoveItem(cid, Cfflour, 1) == TRUE and doPlayerRemoveItem(cid, Cfredrose, 1) == TRUE and doPlayerRemoveItem(cid, Cfdough, 1) == TRUE and doPlayerRemoveItem(cid, Cfcherry, 1) == TRUE then
+	if doPlayerRemoveItem(cid, Cfroll, 1) and doPlayerRemoveItem(cid, Cfflour, 1) and doPlayerRemoveItem(cid, Cfredrose, 1) and doPlayerRemoveItem(cid, Cfdough, 1) and doPlayerRemoveItem(cid, Cfcherry, 1) then
 	NPCSay("You seem to have them with you. Can you tell me, how many minutes I have to cook them?", 1)
 	else
 	NPCSay("It doesn't seem to me as if you have the correct ingredients with you, stranger!", 1)

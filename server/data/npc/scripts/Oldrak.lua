@@ -37,7 +37,7 @@ function creatureSayCallback(cid, type, msg)
 		elseif msgcontains(msg, 'yes') and talk_state == 4 then
                 local price = 1000
             if getPlayerItemCount(cid, 2386) >= 1 and getPlayerMoney(cid) >= price then
-                if doPlayerRemoveMoney(cid, price) == true then
+                if doPlayerRemoveMoney(cid, price) then
                     npcHandler:say('Here you are. You can now defeat the demon oak with this axe.', cid)
                     doPlayerRemoveItem(cid, 2386, 1)
                     doPlayerAddItem(cid, 5015, 1)

@@ -566,6 +566,14 @@ ReturnValue Tile::__queryAdd(int32_t index, const Thing* thing, uint32_t count,
 			return RET_NOERROR;
 		}
 
+		// Mail the mailbox cannot deliver (unknown name or town on the label) stays with the sender;
+		// it used to be dropped on the mailbox tile and lost at the next server restart
+		if(const Mailbox* mailbox = getMailbox()){
+			if(mailbox->canSend(item) && !mailbox->canDeliver(item)){
+				return RET_NOTPOSSIBLE;
+			}
+		}
+
 		bool itemIsHangable = item->isHangable();
 
 		if(ground == NULL && !itemIsHangable){

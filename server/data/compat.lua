@@ -51,6 +51,22 @@ getCreatureStorage = getPlayerStorageValue
 doCreatureSetLookDirection = doSetCreatureDirection
 getItemNameById = getItemName
 getPlayerBalance = getPlayerAccountBalance
+doPlayerAddHealth = doCreatureAddHealth   -- life fluids called it and failed
+
+-- 7.4 magic power for spell and rune formulas: level*2 + mlvl*3, but never below 100
+-- (docs/reference-74/formulas.md §5; the engine does the same in Combat::getMinMaxValues)
+function magicPower(level, maglevel)
+	return math.max(100, level * 2 + maglevel * 3)
+end
+
+-- TFS doTeleportThing(uid, pos, pushMove): Avesta takes (uid, pos) and pops the position first,
+-- so a third argument breaks the teleport
+if _nativeTeleportThing == nil then
+	_nativeTeleportThing = doTeleportThing
+end
+function doTeleportThing(uid, pos)
+	return _nativeTeleportThing(uid, pos)
+end
 
 -- TFS doPlayerSay(cid, text, type): fluids.lua uses it for "Aaaah..." - without it every drink failed
 function doPlayerSay(cid, text, type)
