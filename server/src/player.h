@@ -330,6 +330,7 @@ public:
 	virtual int32_t getDefense() const;
 	virtual float getAttackFactor() const;
 	float getAttackMultiplier() const;
+	bool isAllowedToUseInfinite() const;
 	float getDefenseMultiplier() const;
 	virtual float getDefenseFactor() const;
 

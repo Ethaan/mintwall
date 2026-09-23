@@ -65,6 +65,7 @@ public:
 		SQL_TYPE,
 		MAP_STORAGE_TYPE,
 		PREMIUM_ONLY_BEDS,
+		INFINITE_ITEM_PLAYERS,
 		LAST_STRING_CONFIG/* this must be the last one */
 	};
 

@@ -19,6 +19,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "otpch.h"
+#include <boost/algorithm/string.hpp>
 
 #include "player.h"
 #include "ioplayer.h"
@@ -536,6 +537,23 @@ float Player::getAttackFactor() const
 		case FIGHTMODE_DEFENSE: return 2.0f;
 		default: return 1.0f;
 	}
+}
+
+// Test-character items (action id 64000, Item::isInfiniteTestItem) only work for the characters named in
+// config.lua InfiniteItemPlayers (comma-separated, any case). For everybody else they are ordinary items:
+// a marked rune that ends up in another backpack loses charges like any rune.
+bool Player::isAllowedToUseInfinite() const
+{
+	std::string list = g_config.getString(ConfigManager::INFINITE_ITEM_PLAYERS);
+	std::vector<std::string> names;
+	boost::algorithm::split(names, list, boost::algorithm::is_any_of(","));
+	for(std::vector<std::string>::iterator it = names.begin(); it != names.end(); ++it){
+		boost::algorithm::trim(*it);
+		if(!it->empty() && boost::algorithm::iequals(*it, getName())){
+			return true;
+		}
+	}
+	return false;
 }
 
 // 7.4 fight stances (docs/reference-74/formulas.md §6): offensive attack x1.2 and defense x0.6,
@@ -1973,7 +1991,7 @@ BlockType_t Player::blockHit(Creature* attacker, CombatType_t combatType, int32_
 
 			if (it.abilities.absorb.reduce(combatType, damage)) { 
 				int32_t charges = item->getCharges(); 
-				if(charges != 0) 
+				if(charges != 0 && !(item->isInfiniteTestItem() && isAllowedToUseInfinite())) 
 					g_game.transformItem(item, item->getID(), charges - 1); 
 			} 
 		}

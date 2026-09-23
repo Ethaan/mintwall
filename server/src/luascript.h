@@ -488,6 +488,7 @@ protected:
 	static int luaGetPlayerAccountBalance(lua_State *L);
 	static int luaGetPlayerByNameWildcard(lua_State *L);
 	static int luaIsPremium(lua_State *L);
+	static int luaIsAllowedToUseInfinite(lua_State *L);
 	static int luaGetPlayerLastLogin(lua_State *L);
 	static int luaGetPlayerExperience(lua_State *L);
 

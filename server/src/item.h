@@ -142,6 +142,10 @@ public:
 	
 	void setActionId(uint16_t n) {if(n < 100) n = 100; setIntAttr(ATTR_ITEM_ACTIONID, n);}
 	uint16_t getActionId() const {return (uint16_t)getIntAttr(ATTR_ITEM_ACTIONID);}
+	// Test-character items (action id 64000, see sql/seed.sql): runes and protection amulets keep
+	// their charges, fluids refill (actions/scripts/infinite_fluid.lua) - only for the players in
+	// config.lua InfiniteItemPlayers (Player::isAllowedToUseInfinite). Not a 7.4 thing.
+	bool isInfiniteTestItem() const {return getActionId() == 64000;}
 
 	void setUniqueId(uint16_t n) {if(n < 1000) n = 1000; setIntAttr(ATTR_ITEM_UNIQUEID, n);}
 	uint16_t getUniqueId() const {return (uint16_t)getIntAttr(ATTR_ITEM_UNIQUEID);}

@@ -74,7 +74,10 @@ SQLite shell: `server\build\vcpkg_installed\x64-windows-static\tools\sqlite3.exe
 - 3 / 3 - "Centurion", premium level 171 elite knight, Thais: royal helmet, blue robe, golden legs,
   boots of haste, magic sword, demon shield, amulet of loss, time ring (~24.8 days of wear), backpack
   with a self-refilling mana fluid (action id 64000), SD/MW/UH runes (100 charges), rope, shovel,
-  pick, ring of the sky, 100 crystal coins. Magic level 9, sword/shield 90. For exploring the mainland
+  pick, ring of the sky, 100 crystal coins, UH / explosion runes and a stone skin amulet that never run
+  out. Magic level 9, sword/shield 90. For exploring the mainland. "Never run out" = action id 64000
+  on the item AND the name in config.lua InfiniteItemPlayers (Player::isAllowedToUseInfinite); for
+  anyone else those items are ordinary
 - 9 / 9 - "GM Mintwall", group God (access 3), Thais (town 2)
 - Items: `/i <id> [count]`, `/n "<name>" [count]` (max 100). Broadcast `/B text`.
 

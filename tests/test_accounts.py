@@ -35,7 +35,8 @@ def test_centurion_is_fully_equipped_and_his_mana_fluid_refills(server, items):
         assert bag, "backpack does not open"
         names = sorted(i.name for i in bag.items)
         assert names == sorted(["vial", "sudden death rune", "magic wall rune", "ultimate healing rune",
-                                "rope", "shovel", "pick", "ring of the sky", "crystal coin"]), names
+                                "rope", "shovel", "pick", "ring of the sky", "crystal coin",
+                                "ultimate healing rune", "explosion rune", "stone skin amulet"]), names
         assert next(i for i in bag.items if i.name == "crystal coin").count == 100
 
         slot = next(n for n, i in enumerate(bag.items) if i.name == "vial")
@@ -75,3 +76,53 @@ def test_centurion_time_ring_speeds_him_up(server, items):
         assert slow == me.speed, f"the ring was not already working at login: {slow} vs {me.speed}"
     finally:
         c.logout()
+
+
+def _rune_charges(db, guid, itemtype):
+    """Charges of the marked runes, as saved on logout (the 7.4 protocol does not send rune charges)."""
+    marked = bytes([4]) + (64000).to_bytes(2, "little")
+    return [r["count"] for r in db.items(guid) if r["itemtype"] == itemtype and marked in bytes(r["attributes"] or b"")]
+
+
+def _use_rune_on_self(c, bag, cid, slot, times):
+    for _ in range(times):
+        start = len(c.effects)
+        c.use_item_with(c.container_pos(cid, slot), bag.items[slot].client_id, slot, c.pos, CREATURE, 1)
+        assert c.wait_for(lambda: len(c.effects) > start, timeout=3), f"rune not used: {c.text_messages[-2:]}"
+        c.sleep(1.1)
+
+
+def test_centurion_supply_runes_never_run_out(server, items, db):
+    """The UH rune with action id 64000 keeps its charges - Centurion is in config InfiniteItemPlayers."""
+    c = GameClient(items, port=server.port)
+    try:
+        c.login(3, "3", "Centurion")
+        bag = c.open_container(BACKPACK)
+        assert bag, "backpack does not open"
+        cid = next(k for k, v in c.containers.items() if v is bag)
+        slot = [n for n, i in enumerate(bag.items) if i.name == "ultimate healing rune"][-1]   # the supply one
+        _use_rune_on_self(c, bag, cid, slot, 2)
+    finally:
+        c.logout()
+    con = db._connect()
+    guid = con.execute("SELECT id FROM players WHERE name = 'Centurion'").fetchone()[0]
+    con.close()
+    assert _rune_charges(db, guid, 2273) == [100], _rune_charges(db, guid, 2273)
+
+
+def test_infinite_items_are_ordinary_for_everyone_else(new_player, db):
+    """Marked items only never run out for config InfiniteItemPlayers (Player::isAllowedToUseInfinite)."""
+    from tibia74 import Item
+    marked = bytes([4]) + (64000).to_bytes(2, "little")          # action id 64000
+    p = new_player(level=50, vocation=1, maglevel=4, health=100, pos=(32369, 32241, 7),
+                   inventory={BACKPACK: Item(1988, contents=[Item(2273, 5, attributes=marked),     # UH rune
+                                                             Item(2006, 7, attributes=marked)])})  # mana fluid
+    bag = p.open_container(BACKPACK)
+    cid = next(k for k, v in p.containers.items() if v is bag)
+    _use_rune_on_self(p, bag, cid, next(n for n, i in enumerate(bag.items) if i.name == "ultimate healing rune"), 1)
+    vial = next(n for n, i in enumerate(bag.items) if i.name == "vial")
+    p.use_item_with(p.container_pos(cid, vial), bag.items[vial].client_id, vial, p.pos, CREATURE, 1)
+    assert p.wait_for(lambda: bag.items[vial].count == 0, timeout=3), f"vial still holds {bag.items[vial].count}"
+    guid = p.character.guid
+    p.logout()
+    assert _rune_charges(db, guid, 2273) == [4], f"rune charges {_rune_charges(db, guid, 2273)}, expected 5 -> 4"

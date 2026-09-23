@@ -1317,6 +1317,8 @@ void LuaScriptInterface::registerFunctions()
 
 	//isPremium(cid)
 	lua_register(m_luaState, "isPremium", LuaScriptInterface::luaIsPremium);
+	//isAllowedToUseInfinite(cid) - may this player use the never-ending test items (config InfiniteItemPlayers)
+	lua_register(m_luaState, "isAllowedToUseInfinite", LuaScriptInterface::luaIsAllowedToUseInfinite);
 
 	//getPlayerLastLogin(cid)
 	lua_register(m_luaState, "getPlayerLastLogin", LuaScriptInterface::luaGetPlayerLastLogin);
@@ -2368,6 +2370,15 @@ int LuaScriptInterface::luaGetPlayerAccountBalance(lua_State *L)
 int LuaScriptInterface::luaIsPzLocked(lua_State *L)
 {
 	return internalGetPlayerInfo(L, PlayerInfoPzLock);
+}
+
+int LuaScriptInterface::luaIsAllowedToUseInfinite(lua_State *L)
+{
+	//isAllowedToUseInfinite(cid)
+	uint32_t cid = popNumber(L);
+	const Player* player = getScriptEnv()->getPlayerByUID(cid);
+	lua_pushboolean(L, player && player->isAllowedToUseInfinite());
+	return 1;
 }
 
 int LuaScriptInterface::luaIsPremium(lua_State *L)

@@ -63,3 +63,11 @@ SELECT p."id", i.pid, i.sid, i.itemtype, i.count, i.attributes FROM "players" p,
 -- ...and 100 crystal coins (1,000,000 gp) in the backpack
 INSERT INTO "player_items" ("player_id", "pid", "sid", "itemtype", "count", "attributes")
 SELECT "id", 102, 118, 2160, 100, X'' FROM "players" WHERE "name" = 'Centurion';
+-- ...and never-ending supplies (action id 64000: charges are never used up, Item::isInfiniteTestItem):
+-- an ultimate healing rune, an explosion rune and a stone skin amulet, in the backpack
+INSERT INTO "player_items" ("player_id", "pid", "sid", "itemtype", "count", "attributes")
+SELECT p."id", 102, i.sid, i.itemtype, i.count, X'0400FA' FROM "players" p, (
+          SELECT 119 AS sid, 2273 AS itemtype, 100 AS count    -- ultimate healing rune
+    UNION ALL SELECT 120, 2313, 100                            -- explosion rune
+    UNION ALL SELECT 121, 2197, 5                              -- stone skin amulet
+) i WHERE p."name" = 'Centurion';

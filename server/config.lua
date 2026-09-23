@@ -220,6 +220,10 @@
     IdleTimeKick = 900000       -- 15 minutes, like real Tibia
 	IdleTimeWarning = 840000    -- warned at 14 minutes
 
+    -- Test characters whose items with action id 64000 never run out (runes, amulets, fluids).
+    -- Comma-separated names, any case. Empty = nobody. Never put a real player here.
+    InfiniteItemPlayers = "Centurion"
+
     -- Level on which player will get rooked
     LevelToRook = 5
 
