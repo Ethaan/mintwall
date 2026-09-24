@@ -1,4 +1,5 @@
 """Starts an isolated test server: own config, own SQLite database, own port."""
+import os
 import re
 import socket
 import sqlite3
@@ -9,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SERVER_DIR = ROOT / "server"
 RUN_DIR = ROOT / "tests" / ".run"
-TEST_PORT = 7181
+TEST_PORT = int(os.environ.get("MINTWALL_TEST_PORT", "7181"))   # 7171: watch in your client (tibia74/watch.py)
 TESTER_GROUP = 2   # see prepare()
 
 

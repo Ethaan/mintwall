@@ -13,6 +13,8 @@ actions.xml change). Every rule comes from the server, not from guesses:
   a key with the door's action id opens it (key.lua), questdoor_closed.lua = storage (action id) must be 1,
   gateofexp_closed.lua = level (action id - 1000) or vocation (2001-2008)
 - teleports: items with a destination (OTBM teleport attribute)
+- tools: grown wheat (2739) is passable after a scythe cuts it; a stone pile (closed hole) becomes a way
+  down after a shovel opens it (hole: down, like any hole)
 """
 import pickle
 import re
@@ -30,7 +32,9 @@ UP_SHIFT = {"N": (0, -1), "S": (0, 1), "E": (1, 0), "W": (-1, 0)}
 DOWN_SHIFT = {"N": (0, 1), "S": (0, -1), "E": (-1, 0), "W": (1, 0)}   # moved off a ramp you arrive on
 DOOR_SCRIPTS = {"increment.lua": "closed", "doors/door_locked.lua": "locked",
                 "doors/questdoor_closed.lua": "quest", "doors/gateofexp_closed.lua": "level"}
-CACHE_VERSION = 2
+CACHE_VERSION = 3
+GROWN_WHEAT = 2739                   # solid; a scythe cuts it (actions/scripts/scythe.lua)
+STONE_PILES = {468, 481, 483}        # closed holes (CLOSED_HOLE, actions/lib/actions.lua): a shovel opens them
 
 
 def _xml_floor_changes(server_dir: Path) -> dict:
@@ -164,6 +168,11 @@ class WorldMap:
                 info["ladder"] = True
             if m.id in ROPE_SPOTS:
                 info["rope"] = True
+            if m.id == GROWN_WHEAT:
+                info["wheat"] = True
+                continue                  # blocking only until cut
+            if m.id in STONE_PILES:
+                info["dig"] = True        # a shovel opens a hole: a way down
             if m.attrs.get("teleport"):
                 info["teleport"] = tuple(m.attrs["teleport"])
             if t.flags & BLOCK_SOLID:
@@ -171,8 +180,8 @@ class WorldMap:
         if info.get("down") or info.get("up") or "teleport" in info:
             info["stand"] = True          # you walk onto it (and are moved)
             return SPECIAL, info
-        if "door" in info:
-            return SPECIAL, info          # blocking until opened
+        if "door" in info or info.get("wheat") or info.get("dig"):
+            return SPECIAL, info          # blocking / a way down only with the right tool
         if info:                          # ladder / rope spot: used from next to it
             info["stand"] = not blocked
             return SPECIAL, info

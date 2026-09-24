@@ -3,7 +3,9 @@ player takes on the way - use things on the map, open quest containers, check wh
 
 Walking itself is tibia74/route.py (plan on the real map + follow it, re-planning on surprises).
 """
-from . import BACKPACK, RIGHT, Item
+import re
+
+from . import BACKPACK, RIGHT, Item, watch
 
 ROPE = 2120
 
@@ -13,9 +15,11 @@ def strong(new_player, pos, *, level=2000, vocation=4, items=(), **kwargs):
     tests that check a quest's level door use a character of exactly that level."""
     kwargs.setdefault("storage", {})
     kwargs["storage"] = {30001: 1, **kwargs["storage"]}           # no beginner-set chat on login
-    return new_player(pos=pos, level=level, vocation=vocation, skills={1: 150, 2: 150, 3: 150, 5: 150},
-                      inventory={RIGHT: Item(2400),                               # magic sword
-                                 BACKPACK: Item(1988, contents=[Item(ROPE), *items])}, **kwargs)
+    p = new_player(pos=pos, level=level, vocation=vocation, skills={1: 150, 2: 150, 3: 150, 5: 150},
+                   inventory={RIGHT: Item(2400),                                  # magic sword
+                              BACKPACK: Item(1988, contents=[Item(ROPE), *items])}, **kwargs)
+    watch.wait_for_viewer(p)
+    return p
 
 
 def next_to(new_player, target, **kwargs):
@@ -40,9 +44,11 @@ def _find(p, items, pos, what):
 
 def _above(p, items, pos, target_stackpos):
     """Movable items lying on top of the target (the server uses the topmost item: Game::internalGetThing,
-    STACKPOS_USE -> getTopDownItem), highest first. Ground, always-on-top items and creatures don't count."""
+    STACKPOS_USE -> getTopDownItem), highest first. Ground, always-on-top items and creatures don't count.
+    The target itself may be the ground (a loose board): then every item lying on the tile is on top of it."""
     out = []
-    for stackpos, thing in enumerate(p.tiles.get(pos, [])[:target_stackpos]):
+    things = p.tiles.get(pos, [])
+    for stackpos, thing in enumerate(things if target_stackpos == 0 else things[:target_stackpos]):
         cid = getattr(thing, "client_id", None)
         if stackpos == 0 or not cid:
             continue
@@ -51,7 +57,7 @@ def _above(p, items, pos, target_stackpos):
     return out
 
 
-def use_map_item(p, items, pos, what):
+def use_map_item(p, items, pos, what, window=0):
     """Use (right-click) an item lying at pos. `what` is its server id or its name ("box", "chest"), never "any
     container". The server uses the topmost item on the tile, whatever the client points at - so, like a
     player would, first move whatever lies on top of it (a corpse left by a fight, say) onto our own tile."""
@@ -64,7 +70,7 @@ def use_map_item(p, items, pos, what):
         stackpos, thing, sid = found
         above = _above(p, items, pos, stackpos)
         if not above:
-            p.use_item(pos, thing.client_id, stackpos)
+            p.use_item(pos, thing.client_id, stackpos, window)   # window: where a container opens
             return sid
         top_pos, top = above[0]
         before = len(p.tiles.get(pos, []))
@@ -93,9 +99,16 @@ def talk_to(p, npc, *lines):
     p.wait_for(lambda: target.pos and p.pos and target.pos[2] == p.pos[2]
                and max(abs(target.pos[0] - p.pos[0]), abs(target.pos[1] - p.pos[1])) <= 1, timeout=8)
     try:
-        return p.talk(*lines, npc=npc)
+        replies = []
+        for line in lines:
+            replies += _say_unmuted(p, line, npc)
+        return replies
     finally:
         p.follow(0)
+        if lines and lines[-1] != "bye":
+            # like a player: an NPC talks to one player at a time and would keep us. Wait for its goodbye,
+            # or it arrives late and is taken for the answer to the next conversation's first line
+            _say_unmuted(p, "bye", npc)
 
 
 def open_carried(p, items, name):
@@ -112,3 +125,55 @@ def open_carried(p, items, name):
             assert p.wait_for(lambda: window in p.containers, timeout=3), f"{name} did not open"
             return p.containers[window]
     raise AssertionError(f"no {name} carried: {p.inventory_names()}, {[c.items for c in p.containers.values()]}")
+
+
+def _say_unmuted(p, line, npc):
+    """Say one line to an NPC like a player: a moment between lines (the anti-spam mute counts fast talk), and
+    if the mute swallowed it ("You are muted for N seconds." and no answer) wait that long and say it again.
+    A line the NPC answered counts as heard, mute message or not."""
+    replies = []
+    for _ in range(4):
+        before = len(p.text_messages)
+        replies += p.talk(line, npc=npc)
+        if replies:
+            p.sleep(0.7)
+            return replies
+        muted = [t for _, t in p.text_messages[before:] if "muted for" in t]
+        if not muted:
+            return replies
+        found = re.search(r"(\d+) second", muted[-1])
+        p.sleep((int(found.group(1)) if found else 5) + 0.5)
+    raise AssertionError(f"still muted after 4 tries saying {line!r}: {p.text_messages[-3:]}")
+
+
+_NPC_POSITIONS = None
+
+
+def npc_pos(name):
+    """Where an NPC spawns (the map's spawns file) - never a position copied from a guide."""
+    global _NPC_POSITIONS
+    if _NPC_POSITIONS is None:
+        from . import SERVER_DIR
+        from .npcs import load_npcs
+        _NPC_POSITIONS = {n: npc.pos for n, npc in load_npcs(SERVER_DIR).items()}
+    assert _NPC_POSITIONS.get(name), f"no spawn for NPC {name!r}"
+    return _NPC_POSITIONS[name]
+
+
+def open_map_container(p, items, pos, what):
+    """Open a container lying on the map (a box, a body) in a new window, like right-clicking it."""
+    window = max(p.containers, default=-1) + 1
+    before = set(p.containers)
+    use_map_item(p, items, pos, what, window)
+    assert p.wait_for(lambda: set(p.containers) - before, timeout=3), f"the {what} at {pos} did not open"
+    return p.containers[(set(p.containers) - before).pop()]
+
+
+def take(p, items, container, name, into=3):
+    """Move an item out of an open container into the backpack worn in slot `into` (it must be open too)."""
+    source = next(cid for cid, c in p.containers.items() if c is container)
+    target = next(cid for cid, c in p.containers.items() if c is not container and c.item_id == p.inventory[into].client_id)
+    n, item = next((n, i) for n, i in enumerate(container.items) if i.name == name)
+    p.move_item(p.container_pos(source, n), item.client_id, n, p.container_pos(target, 0), max(item.count, 1))
+    bag = p.containers[target]
+    assert p.wait_for(lambda: any(i.name == name for i in bag.items), timeout=3),         f"{name} not taken: {p.text_messages[-2:]}"

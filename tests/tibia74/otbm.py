@@ -88,6 +88,15 @@ def _parse_nodes(raw: bytes):
 
 
 def _item_attrs(props: bytes, p: int) -> dict:
+    """Attributes of one item. Tolerant: an attribute cut short (other OTBM versions, e.g. tibiaot74's map)
+    ends the item's attributes instead of failing the whole map."""
+    try:
+        return _item_attrs_strict(props, p)
+    except (struct.error, IndexError):
+        return {"truncated": True}
+
+
+def _item_attrs_strict(props: bytes, p: int) -> dict:
     attrs = {}
     while p < len(props):
         a = props[p]

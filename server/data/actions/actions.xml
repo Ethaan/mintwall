@@ -162,6 +162,12 @@
     <!-- Quest chests: action id 2000, unique id = storage / reward (docs/reference-74/quests.md) -->
     <action actionid="2000" script="quests/system.lua"/>
     <action actionid="52413" script="quests/rook_bear_room.lua"/>   <!-- Bear Room stone switch -->
+    <action actionid="50004" script="quests/rook_academy_lever.lua"/>   <!-- Torch Quest: opens the academy wall -->
+    <action actionid="52412" script="quests/rook_katana_lever.lua"/>   <!-- Katana Quest: the room door -->
+    <action actionid="50005" script="quests/rook_academy_arena.lua"/>   <!-- Academy arena lever: bug gate -->
+    <action actionid="50006" script="quests/rook_academy_arena.lua"/>   <!-- Academy arena lever: wolf gate -->
+    <action actionid="50007" script="quests/rook_academy_arena.lua"/>   <!-- Academy arena lever: troll gate -->
+    <action actionid="50008" script="quests/rook_academy_arena.lua"/>   <!-- Academy arena lever: spider gate -->
 
     <!-- Doors -->
 	<action itemid="1209" script="doors/door_locked.lua"/>

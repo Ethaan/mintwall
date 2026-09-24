@@ -88,6 +88,14 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       may pass; walks it, kills blockers, re-plans), tibia74/quest.py (strong character, use map items like a
       player - the server uses the TOP item, so things lying on top are moved off first). tests/test_route.py
   - [ ] Parallel runs later (pytest-xdist, one server per worker)
+- [x] Rookgaard Academy training arena: four levers (aid 50005-50008, 32088-32094,32148,9) under the sign "Pull a
+      lever to fight a monster of your choice" had no script. Done 2026-09-23: quests/rook_academy_arena.lua opens
+      the cage gate (1037 at x,32149,10; tibiaot74's train monster1-4.lua) and, as the sign says, only one gate at
+      a time ("Sorry, not possible." - no source for the message). test_quests.py::test_academy_training_arena
+      (buys Seymour's key 4600 for the Academy door). Map fix: the field into the arena (32089,32171,9) sent you
+      onto the field beside it, which sent you straight back out - nobody could get in (the JS engine's map has the
+      same data). Destination now (32081,32172,9) as on tibiaot74's map; test_route.py checks no teleport lands on
+      another (the only such case of 168)
 - [ ] Quest log: the 7.4 client has none (TibiaWiki: added in 7.9) - revisit later (e.g. a !quests command or the website)
 - [ ] Settle reward / level conflicts per quest (Tibiantis vs TibiaWiki, see quests.md) as each one is done
 
@@ -102,20 +110,58 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       per-player conversation state (was global), box talk from level 6 (TibiaWiki 2006; was 4), mission/quest
       precedence fixed. test_quests.py::test_present_box_quest (+ level 5/6 test). Found: seymour.lua did not
       load after an edit and Seymour vanished silently - test_spells.py now fails on any script load error
-- [ ] Captain Iglues Treasure Quest - Rookgaard, under the poison spider tower (N) (level none known (listed as 2); 1 player)
-- [ ] Combat Knife Quest - Rookgaard town sewer (no level; 1 player)
-- [ ] Doublet Quest - cellar under stable north of Tom's shop (no level; 1 player)
-- [ ] Dragon Corpse Quest - bear cave east of town (level none known (listed as 2); 1 player)
-- [ ] Goblin Temple Quest - premium side: troll cave to goblin temple (no level; 1 player; premium)
-- [ ] Antidote Rune Quest (modern: Small Health Potion Quest) - NPC Billy, premium side (no level; 1 player; premium)
-- [ ] Katana Quest - graves then rotworm/skeleton cave (level none known (listed as 2); 1 player)
-- [ ] Minotaur Hell Quest - main cave north of town, bottom floor (level none known (listed as 2); 1 (group advised) player(s))
-- [ ] Small Axe Quest + Pick Quest - skeleton cave (premium) or respawn spots; Al Dee (level none (Pick listed as 2); 1 player)
-- [ ] Rapier Quest - town sewer, west, one floor down (no level; 1 player)
-- [ ] Amber's Notebook Quest + Short Sword Quest - chest on east dock; Amber (Academy) (level none (trade listed as 2); 1 player)
-- [ ] Honey Flower Quest + Studded Legs Quest - wasp tower NW; Lee'Delle (premium side) (level none (trade listed as 2); 1 player)
-- [ ] Banana Quest + Studded Shield Quest - banana palm NE (free) or premium wolf hill; Willie (level none (trade listed as 2); 1 player)
-- [ ] Torch Quest - Rookgaard Academy basement (no level; 1 player)
+- [x] Captain Iglues Treasure Quest - Rookgaard, under the poison spider tower (N) (level none known (listed as 2); 1 player)
+      Done 2026-09-23: quest chest 52171 = 2 salmon (reward table; the left chest on our map is the daily one with
+      the stamped letter + 12 salmon, as the current wiki says); Amber takes a salmon for 'pixo'.
+      test_quests.py::test_captain_iglues_treasure_quest. Framework: planner widens its search box (the way
+      down left the old 60-tile box); talk_to says bye and waits out the anti-spam mute like a player
+- [x] Combat Knife Quest - Rookgaard town sewer (no level; 1 player)
+      Done 2026-09-23: box uid 2404 (= the knife). test_quests.py::test_combat_knife_quest
+- [x] Doublet Quest - cellar under stable north of Tom's shop (no level; 1 player)
+      Done 2026-09-23: 7.4 has no loose-board item - the board is the wooden flooring west of the sewer grate
+      (32084,32181,8) under a barrel, as on tibiaot74's map (uid 7014 there). New tools/map-set-attrs.py gave it
+      aid 2000 uid 2485 (= the doublet). test_quests.py::test_doublet_quest pushes the barrel off and uses the floor
+      Engine fix: using a tile with nothing on it now uses its ground (game.cpp internalGetThing STACKPOS_USEITEM
+      fell through to "Sorry, not possible.")
+- [x] Dragon Corpse Quest - bear cave east of town (level none known (listed as 2); 1 player)
+      Done 2026-09-23: dead dragon uid 54322 = bag (copper shield, legion helmet) in the reward table; the router now
+      digs stone piles (shovel) and cuts wheat (scythe). test_quests.py::test_dragon_corpse_quest
+- [x] Goblin Temple Quest - premium side: troll cave to goblin temple (no level; 1 player; premium)
+      Done 2026-09-23: chests 52169 (sandals, 5 small stones, 50 gp) / 52170 (pan, 4 snowballs, milk) in the reward
+      table - wiki 2005/2006/current + Tibiantis say 50 gp, the real-map table 100 (4 against 1).
+      test_quests.py::test_goblin_temple_and_antidote_rune_quests (premium, shovel)
+- [x] Antidote Rune Quest (modern: Small Health Potion Quest) - NPC Billy, premium side (no level; 1 player; premium)
+      Done 2026-09-23: the goblin temple pan -> Billy (hi, pan, yes) -> antidote rune, in the same test
+- [x] Katana Quest - graves then rotworm/skeleton cave (level none known (listed as 2); 1 player)
+      Done 2026-09-23: body uid 20002 = silver key 4603 (reward table); hidden lever aid 52412 unlocks the room door
+      (1209 <-> 1210) and puts an escape teleport inside while locked (quests/rook_katana_lever.lua, positions from
+      tibiaot74); corpses 2412 katana / 2473 viking helmet. The key body lies under two others: uncover it first.
+      test_quests.py::test_katana_quest
+- [x] Minotaur Hell Quest - main cave north of town, bottom floor (level none known (listed as 2); 1 (group advised) player(s))
+      Done 2026-09-23: boxes 2395 carlin sword, 52159 = 4 poison arrows + 10 arrows (reward table), 2580 fishing rod.
+      test_quests.py::test_minotaur_hell_quest
+- [x] Small Axe Quest + Pick Quest - skeleton cave (premium) or respawn spots; Al Dee (level none (Pick listed as 2); 1 player)
+      Pick trade: test_quests.py::test_pick_quest (small axe from the daily orc-cave box -> Al Dee).
+      Done 2026-09-23: the once-only coffin is 1742 at 31984,32246,10 (tibiaot74's map: uid 7026 on it); now aid
+      2000 uid 2559 (= the small axe). test_quests.py::test_small_axe_quest (premium)
+- [x] Rapier Quest - town sewer, west, one floor down (no level; 1 player)
+      Done 2026-09-23: box uid 2384 (= the rapier). test_route.py walks from the temple and opens it
+- [x] Amber's Notebook Quest + Short Sword Quest - chest on east dock; Amber (Academy) (level none (trade listed as 2); 1 player)
+      Done 2026-09-23: dock chest 20001 holds black book 1972 (our map) - Amber accepts it and tibiaot74's 1955 (same
+      sprite; the real-map table's 1950 is a brown book). test_rookgaard_trade_quest[amber's notebook]
+- [x] Honey Flower Quest + Studded Legs Quest - wasp tower NW; Lee'Delle (premium side) (level none (trade listed as 2); 1 player)
+      Done 2026-09-23: flower uid 2103 on the wasp tower (rope; the router drags corpses off the rope spot),
+      Lee'Delle across her counter (premium). test_rookgaard_trade_quest[honey flower]
+- [x] Banana Quest + Studded Shield Quest - banana palm NE (free) or premium wolf hill; Willie (level none (trade listed as 2); 1 player)
+      Done 2026-09-23: palm uid 2676 = banana, Willie (free account). test_rookgaard_trade_quest[banana]
+      Wolf hill palm: it IS on our map, on the plateau at 31983,32193,5 (floor 6 is the "flat part"); now aid 2000
+      uid 52414, which quests/system.lua (SAME_QUEST) maps to the first palm's storage 2676.
+      test_quests.py::test_banana_quest_wolf_hill_palm stacks 3 boxes, climbs, and the NE palm is then empty.
+      QUESTION for the user: no movable boxes lie anywhere near the hill on our map - where do players get the 3
+      boxes? (the test brings its own)
+- [x] Torch Quest - Rookgaard Academy basement (no level; 1 player)
+      Done 2026-09-23: academy lever aid 50004 opens the brick wall at 32095,32173,8 (quests/rook_academy_lever.lua;
+      wall position from tibiaot74's academy switch); chest uid 2050 = torch. test_quests.py::test_torch_quest
 - [ ] Battle Axe Quest - Thais sewers (SW) (no level; 1 player)
 - [ ] Dead Archer Quest - Thais Troll Cave (E of Thais) (no level; 1 player)
 - [ ] Deeper Fibula Quest - Fibula dungeon (level 50 (door); 1 player)

@@ -385,6 +385,10 @@ Thing* Game::internalGetThing(Player* player, const Position& pos, int32_t index
 						//then last we check items with topOrder 3 (doors etc)
 						thing = tile->getTopTopItem();
 					}
+					if(thing == NULL){
+						//and the ground itself (the Doublet Quest's loose board is the floor)
+						thing = tile->ground;
+					}
 				}
 			}
 			else{

@@ -21,10 +21,36 @@ local REWARDS = {
 	-- 32038-32039,32121,13. TibiaWiki (current) and Tibiantis: 2 salmon; the left chest (not a quest chest)
 	-- holds the stamped letter "Treasure of captain Iglue" and 12 salmon, refilled daily - as on our map.
 	[52171] = {{2668, 2}},
+	-- Dragon Corpse Quest (Rookgaard, bear cave, below the stone pile and the wheat): the dead dragon at
+	-- 32179,32224,9. All sources: a bag with a copper shield and a legion helmet (real-map table: "You have
+	-- found a bag.").
+	[54322] = {{1987, 1, nil, {{2530}, {2480}}}},
+	-- Katana Quest (Rookgaard): the body north of the poison fields holds key 4603 for the door down to the
+	-- katana room (real-map table: silver key 4603; Tibiantis lists Key 4603 as a reward).
+	[20002] = {{2088, 1, 4603}},
+	-- Minotaur Hell Quest (Rookgaard): the middle of the three boxes west of the stairs (the others are uid 2395
+	-- carlin sword and 2580 fishing rod). All sources: 4 poison arrows + 10 arrows (real-map table too).
+	[52159] = {{2545, 4}, {2544, 10}},
+	-- Goblin Temple Quest (Rookgaard premium side): the two chests up the stairs past the goblin room (32209,12).
+	-- TibiaWiki (2005, 2006, current) and Tibiantis: 50 gp, 5 small stones, sandals / pan, 4 snowballs, milk. The
+	-- real-map table has the same split but 100 gp - four sources against one: 50. The pan is for Billy.
+	[52169] = {{2642, 1}, {1294, 5}, {2148, 50}},
+	[52170] = {{2563, 1}, {2111, 4}, {2006, 6}},
+}
+
+-- Map objects that are the same quest as another (one reward per character between them): unique id -> the
+-- quest's unique id, used as storage and reward.
+local SAME_QUEST = {
+	-- Banana Quest (Rookgaard): the palm on the premium wolf hill (31983,32193,5; TibiaWiki: 3 boxes to climb)
+	-- shares the quest id of the north-east palm, uid 2676 = the banana (Tibiantis.life).
+	[52414] = 2676,
 }
 
 local function describe(itemid, count)
 	local info = getItemDescriptions(itemid) or {}
+	if count > 1 and not isItemStackable(itemid) then
+		count = 1            -- for a vial the "count" is its fluid (milk = 6), for a rune its charges
+	end
 	if count > 1 then
 		return count .. " " .. (info.plural ~= nil and info.plural ~= "" and info.plural or getItemName(itemid))
 	end
@@ -71,7 +97,7 @@ local function give(cid, reward)
 end
 
 function onUse(cid, item, frompos, item2, topos)
-	local storage = item.uid
+	local storage = SAME_QUEST[item.uid] or item.uid
 	local name = getItemName(item.itemid)
 	if getPlayerStorageValue(cid, storage) > 0 then
 		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "The " .. name .. " is empty.")

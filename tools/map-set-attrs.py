@@ -1,0 +1,167 @@
+"""Gives an item on a tile of an OTBM map file an action id and/or unique id, or a teleport a new destination
+(--teleport x,y,z), in place (keeps a .bak the first time).
+
+    python tools\\map-set-attrs.py server\\data\\world\\Tibia74.otbm 32084,32181,8 --id 405 --aid 2000 --uid 2485
+
+The item may be a full item node or the tile's inline ground (then it becomes an item node, the way RME saves a
+ground with attributes). Only that tile's bytes change. Refuses a unique id already used elsewhere on the map.
+"""
+import argparse
+import shutil
+import struct
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tests"))
+
+from tibia74.otbm import (ATTR_ACTION_ID, ATTR_ITEM, ATTR_TELE_DEST, ATTR_TILE_FLAGS, ATTR_UNIQUE_ID,  # noqa: E402
+                          OTBM_HOUSETILE, OTBM_ITEM, OTBM_TILE, OTBM_TILE_AREA, read_tiles)
+
+NODE_START, NODE_END, ESCAPE = 0xFE, 0xFF, 0xFD
+
+
+def escape(data: bytes) -> bytes:
+    out = bytearray()
+    for b in data:
+        if b in (NODE_START, NODE_END, ESCAPE):
+            out.append(ESCAPE)
+        out.append(b)
+    return bytes(out)
+
+
+def find_tile(raw: bytes, target: tuple):
+    """The target tile: {"start", "props_end", "type", "props", "items": [{"start", "props_end", "props"}]}
+    (offsets into raw; props_end = where the node's own props stop: its first child or its end)."""
+    i, n = 4, len(raw)
+    base = (0, 0, 0)
+    stack = []            # [type, props, start, props_end]
+    tile = None
+    while i < n:
+        b = raw[i]
+        if b == NODE_START:
+            if stack and stack[-1][3] is None:
+                stack[-1][3] = i
+            stack.append([raw[i + 1], bytearray(), i, None])
+            i += 2
+        elif b == NODE_END:
+            ntype, props, start, props_end = stack.pop()
+            props_end = i if props_end is None else props_end
+            if ntype == OTBM_TILE_AREA:
+                base = struct.unpack_from("<HHB", props, 0)
+            elif ntype in (OTBM_TILE, OTBM_HOUSETILE):
+                pos = (base[0] + props[0], base[1] + props[1], base[2])
+                if pos == target:
+                    tile["start"], tile["props_end"], tile["type"], tile["props"] = start, props_end, ntype, bytes(props)
+                    return tile
+                tile = None
+            elif ntype == OTBM_ITEM and len(stack) >= 1 and stack[-1][0] in (OTBM_TILE, OTBM_HOUSETILE):
+                if tile is None:
+                    tile = {"items": []}
+                tile["items"].append({"start": start, "props_end": props_end, "props": bytes(props)})
+            i += 1
+        else:
+            if b == ESCAPE:
+                i += 1
+            stack[-1][1].append(raw[i])
+            i += 1
+            node = stack[-1]
+            if node[0] == OTBM_TILE_AREA and len(node[1]) == 5:
+                base = struct.unpack_from("<HHB", node[1], 0)
+            elif node[0] in (OTBM_TILE, OTBM_HOUSETILE) and len(node[1]) == 1:
+                tile = {"items": []}     # a new tile starts: forget the previous tile's items
+    return None
+
+
+def inline_ground(tile: dict):
+    """(offset in tile props of the ATTR_ITEM attribute, ground id) or None."""
+    props = tile["props"]
+    p = 2 + (4 if tile["type"] == OTBM_HOUSETILE else 0)
+    while p < len(props):
+        a = props[p]
+        if a == ATTR_TILE_FLAGS:
+            p += 5
+        elif a == ATTR_ITEM:
+            return p, struct.unpack_from("<H", props, p + 1)[0]
+        else:
+            break
+    return None
+
+
+def with_ids(props: bytes, aid, uid) -> bytes:
+    extra = b""
+    if aid is not None:
+        extra += bytes([ATTR_ACTION_ID]) + struct.pack("<H", aid)
+    if uid is not None:
+        extra += bytes([ATTR_UNIQUE_ID]) + struct.pack("<H", uid)
+    return props + extra
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("map", type=Path)
+    ap.add_argument("pos", help="x,y,z of the tile")
+    ap.add_argument("--id", type=int, required=True, help="the item's id")
+    ap.add_argument("--aid", type=int)
+    ap.add_argument("--uid", type=int)
+    ap.add_argument("--teleport", help="x,y,z: the new destination of the teleport")
+    ap.add_argument("--dry-run", action="store_true")
+    args = ap.parse_args()
+    if args.aid is None and args.uid is None and args.teleport is None:
+        ap.error("give --aid and/or --uid, or --teleport")
+
+    target = tuple(int(v) for v in args.pos.split(","))
+    if args.uid is not None:
+        for t in read_tiles(args.map):
+            for m in t.items:
+                if m.attrs.get("unique_id") == args.uid:
+                    raise SystemExit(f"unique id {args.uid} is already on {t.pos} (item {m.id})")
+
+    raw = args.map.read_bytes()
+    tile = find_tile(raw, target)
+    if tile is None:
+        raise SystemExit(f"no tile at {target}")
+
+    item = next((it for it in tile["items"] if struct.unpack_from("<H", it["props"], 0)[0] == args.id), None)
+    if args.teleport is not None:
+        props = item["props"] if item is not None else b""
+        if len(props) != 8 or props[2] != ATTR_TELE_DEST:
+            raise SystemExit(f"no teleport {args.id} (with only a destination) on {target}")
+        dest = tuple(int(v) for v in args.teleport.split(","))
+        start, end = item["start"] + 2, item["props_end"]
+        new = escape(props[:3] + struct.pack("<HHB", *dest))
+        what = f"teleport {struct.unpack_from('<HHB', props, 3)} -> {dest}"
+    elif item is not None:
+        if len(item["props"]) > 2:
+            raise SystemExit(f"item {args.id} on {target} already has attributes - edit it by hand")
+        start, end = item["start"] + 2, item["props_end"]
+        new = escape(with_ids(item["props"], args.aid, args.uid))
+        what = "item node"
+    else:
+        ground = inline_ground(tile)
+        if ground is None or ground[1] != args.id:
+            raise SystemExit(f"no item {args.id} on {target}")
+        p, _ = ground
+        props = tile["props"]
+        tile_props = props[:p] + props[p + 3:]
+        node = bytes([NODE_START, OTBM_ITEM]) + escape(with_ids(struct.pack("<H", args.id), args.aid, args.uid)) \
+            + bytes([NODE_END])
+        # the ground node goes first among the tile's children (ground is the bottom of the stack)
+        start, end = tile["start"] + 2, tile["props_end"]
+        new = escape(tile_props) + node
+        what = "inline ground -> item node"
+
+    print(f"{target}: item {args.id} ({what})" + ("" if args.teleport else f" gets aid={args.aid} uid={args.uid}"))
+    if args.dry_run:
+        return 0
+    backup = args.map.with_suffix(args.map.suffix + ".bak")
+    if not backup.exists():
+        shutil.copy2(args.map, backup)
+        print(f"backup: {backup}")
+    out = raw[:start] + new + raw[end:]
+    args.map.write_bytes(out)
+    print(f"wrote {args.map} ({len(raw)} -> {len(out)} bytes)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -234,6 +234,8 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - Confidence: high.
 
 ### Captain Iglues Treasure Quest
+- **Status on our server (2026-09-23): works, tested end to end.** Quest chest uid 52171 at 32039,32121,13 = 2 salmon
+  (reward table); the chest beside it (32038) is the daily one (stamped letter "Treasure of captain Iglue" + 12 salmon).
 - Alt names: Orc Language Quest, Salmon Quest.
 - Location: under the poison spider tower in northern Rookgaard. Entrance at about (32058, 32091, 7).
 - Version: the wiki gives no version; the page dates from Aug 2005. On Tibiantis (level 2, free). In 7.4: yes.
@@ -410,7 +412,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 
 ### Banana Quest / Studded Shield Quest
 - Tibiantis.life has two entries: Banana Quest (chest) and Studded Shield Quest (trade).
-- Location: banana palm in north-east Rookgaard at about (32172, 32169, 7). A second palm stands on the premium wolf hill at about (31988, 32199, 7) and needs 3 stacked boxes. Willie is in town at about (32067, 32205, 7).
+- Location: banana palm in north-east Rookgaard at about (32172, 32169, 7). A second palm stands on the premium wolf hill: the hill is at about (31988, 32199, 7), the palm on its plateau at (31983, 32193, 5), reached from the flat part (floor 6) by stacking 3 boxes and stepping up (our map; uid 52414 shares storage 2676). Willie is in town at about (32067, 32205, 7).
 - Version: 6.0; in 7.4: yes.
 - Requirements: none; free; 1 player.
 - Steps:

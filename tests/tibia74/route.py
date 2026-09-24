@@ -14,6 +14,7 @@ import time
 from dataclasses import dataclass
 
 from .client import EAST, NORTH, NORTHEAST, NORTHWEST, SOUTH, SOUTHEAST, SOUTHWEST, WEST, Creature
+from . import watch
 from .worldmap import WorldMap
 
 DIRECTIONS = {(0, -1): NORTH, (1, 0): EAST, (0, 1): SOUTH, (-1, 0): WEST,
@@ -46,7 +47,7 @@ def may_pass(info: dict, level: int, vocation: int, keys: set, storages: set) ->
 
 
 def _neighbours(world: WorldMap, pos, level, vocation, keys, storages, rope, open_tiles=frozenset(),
-                avoid=frozenset()):
+                avoid=frozenset(), scythe=False, shovel=False):
     x, y, z = pos
     for (dx, dy), _ in DIRECTIONS.items():
         m = (x + dx, y + dy, z)
@@ -60,6 +61,10 @@ def _neighbours(world: WorldMap, pos, level, vocation, keys, storages, rope, ope
             continue
         if world.walkable(m) or m in open_tiles:
             yield cost, Step("walk", m, world.arrival(m) or m)
+        elif scythe and info.get("wheat") and not (dx and dy):
+            yield cost + 1, Step("wheat", m, m)
+        elif shovel and info.get("dig") and not (dx and dy):
+            yield cost + 1, Step("dig", m, (m[0], m[1], m[2] + 1))
     for dx in (-1, 0, 1):
         for dy in (-1, 0, 1):
             t = (x + dx, y + dy, z)
@@ -71,9 +76,20 @@ def _neighbours(world: WorldMap, pos, level, vocation, keys, storages, rope, ope
                 yield 2, Step("rope", t, world.arrival(up) or up)
 
 
-def plan(world: WorldMap, start, goal, *, level=1, vocation=0, keys=(), storages=(), rope=False,
-         open_tiles=(), avoid=(), margin=60, floors=4, max_nodes=2_000_000):
-    """Cheapest list of Steps from start to goal (both tuples). Raises if there is none in the search box."""
+def plan(world: WorldMap, start, goal, *, margins=(60, 150, 400), **kwargs):
+    """Cheapest list of Steps from start to goal (both tuples). The search stays in a box around start and
+    goal, widened when there is no route inside it (the way down to a dungeon can leave a small box)."""
+    error = None
+    for margin in margins:
+        try:
+            return _plan(world, start, goal, margin=margin, **kwargs)
+        except RouteError as e:
+            error = e
+    raise error
+
+
+def _plan(world: WorldMap, start, goal, *, level=1, vocation=0, keys=(), storages=(), rope=False,
+          open_tiles=(), avoid=(), scythe=False, shovel=False, margin=60, floors=4, max_nodes=2_000_000):
     start, goal = tuple(start), tuple(goal)
     keys, storages, open_tiles = set(keys), set(storages), frozenset(tuple(t) for t in open_tiles)
     avoid = frozenset(tuple(t) for t in avoid)
@@ -97,7 +113,8 @@ def plan(world: WorldMap, start, goal, *, level=1, vocation=0, keys=(), storages
             return steps[::-1]
         if cost > cost_so_far.get(pos, 1 << 30):
             continue
-        for c, step in _neighbours(world, pos, level, vocation, keys, storages, rope, open_tiles, avoid):
+        for c, step in _neighbours(world, pos, level, vocation, keys, storages, rope, open_tiles, avoid,
+                                   scythe, shovel):
             nxt = step.arrive if step.kind != "door" else step.target
             if not (lo[0] <= nxt[0] <= hi[0] and lo[1] <= nxt[1] <= hi[1] and lo[2] <= nxt[2] <= hi[2]):
                 continue
@@ -157,6 +174,7 @@ def _walk_to(client, target, arrive, timeout=5.0):
         before = client.pos
         client.step(direction, timeout=timeout)
         if client.wait_for(lambda: client.pos == arrive, timeout=1.5):
+            watch.pace()
             return True
         if client.pos != before:                     # moved, but not where the rules say: re-plan
             return False
@@ -185,6 +203,9 @@ def _rope(client, items, spot, arrive, timeout=5.0):
             raise RouteError("the route needs a rope, and the character has none (worn or in an open container)")
         cid, n, i = found
         src, src_cid, src_stack = client.container_pos(cid, n), i.client_id, n
+    if _blocker(client, spot):              # the rope only works on an empty spot (rope.lua): clear it first
+        _clear(client, spot)
+    clear_items(client, items, spot)          # corpses of what was just killed there, say
     ground = client.tiles.get(tuple(spot), [None])[0]
     client.use_item_with(src, src_cid, src_stack, tuple(spot), ground.client_id, 0)
     return client.wait_for(lambda: client.pos == arrive, timeout=timeout)
@@ -208,7 +229,9 @@ def follow(client, items, world: WorldMap, goal, *, replans=6, **ability):
                     avoid.add(step.target)           # it took us to another floor: a hole the map does not know
             elif step.kind == "door":
                 info = world.info(step.target)
-                if info["door"] == "locked":
+                if _stack_item(client, items, step.target, {info["door_id"]})[0] is None:
+                    pass                             # someone left it open (another player, an earlier test)
+                elif info["door"] == "locked":
                     use_tool(client, items, lambda n: n.endswith(" key"), step.target, {info["door_id"]})
                 else:
                     _use(client, items, step.target, {info["door_id"]})
@@ -216,6 +239,14 @@ def follow(client, items, world: WorldMap, goal, *, replans=6, **ability):
                 ok = _walk_to(client, step.target, step.target)
             elif step.kind == "ladder":
                 ok = _use(client, items, step.target, {1386}, arrive=step.arrive)
+            elif step.kind == "wheat":               # cut it with the scythe, then walk through
+                use_tool(client, items, "scythe", step.target, {2739})
+                client.sleep(0.4)
+                ok = _walk_to(client, step.target, step.target)
+            elif step.kind == "dig":                 # open the stone pile with the shovel, then step in
+                use_tool(client, items, "shovel", step.target)
+                client.sleep(0.4)
+                ok = _walk_to(client, step.target, step.arrive)
             else:
                 ok = _rope(client, items, step.target, step.arrive)
             if not ok:
@@ -278,3 +309,43 @@ def walk_next_to(client, items, world: WorldMap, target, **ability):
     if best is None:
         raise RouteError(f"no reachable tile next to {target}")
     follow(client, items, world, best[1], **ability)
+
+
+def clear_items(client, items, pos, tries=12):
+    """Move the movable items (corpses, loot) off a tile, like a player dragging them aside: onto our own tile,
+    else any tile around. Ground, always-on-top items (walls, ladders, pools) and creatures stay."""
+    pos = tuple(pos)
+    for _ in range(tries):
+        stack = client.tiles.get(pos, [])
+        movable = [(n, t) for n, t in enumerate(stack) if n > 0 and getattr(t, "client_id", None)
+                   and not items.by_client[t.client_id].always_on_top
+                   and items.by_client[t.client_id].flags & 64]            # items.otb FLAG_MOVEABLE
+        if not movable:
+            return
+        n, thing = movable[0]
+        before = len(stack)
+        spots = [client.pos] + [(pos[0] + dx, pos[1] + dy, pos[2]) for dx in (-1, 0, 1) for dy in (-1, 0, 1)
+                                if (dx or dy) and (pos[0] + dx, pos[1] + dy, pos[2]) != client.pos]
+        for spot in spots:
+            client.move_item(pos, thing.client_id, n, spot, max(getattr(thing, "count", 1), 1))
+            if client.wait_for(lambda: len(client.tiles.get(pos, [])) < before, timeout=1.0):
+                break
+
+
+def walk_near(client, items, world: WorldMap, target, radius=2, **ability):
+    """Walk to a reachable tile within `radius` of target, closest first - for NPCs, who are often talked to
+    across a counter (the tiles next to them are the counter or their side of it)."""
+    target = tuple(target)
+    candidates = sorted(((max(abs(dx), abs(dy)), (target[0] + dx, target[1] + dy, target[2]))
+                         for dx in range(-radius, radius + 1) for dy in range(-radius, radius + 1) if dx or dy))
+    for _, n in candidates:
+        if world.walkable(n) and not world.arrival(n):
+            if client.pos == n:
+                return
+            try:
+                plan(world, client.pos, n, **ability)
+            except RouteError:
+                continue
+            follow(client, items, world, n, **ability)
+            return
+    raise RouteError(f"no reachable tile within {radius} of {target}")

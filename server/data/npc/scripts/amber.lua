@@ -19,15 +19,19 @@ function creatureSayCallback(cid, type, msg)
 	npcHandler:say('Do you bring me my notebook?')
 	talk_state = 1
 	
-	elseif msgcontains(msg, 'yes') and talk_state == 1 and getPlayerItemCount(cid,1955) >= 1 then
-	npcHandler:say('Excellent. Here, take this short sword, that might serve you well.')
-	doPlayerAddItem(cid, 2406)
-	doPlayerRemoveItem(cid,1955, 1)
-     setPlayerStorageValue(cid,3028,1)
-	talk_state = 0
-	elseif msgcontains(msg, 'yes') and talk_state == 1 and getPlayerItemCount(cid,1955) == 0 then
-	npcHandler:say('Hm, you don\'t have it.')
-	talk_state = 0
+	elseif msgcontains(msg, 'yes') and talk_state == 1 then
+		-- her notebook: the black book from the chest on the east dock. Our map's chest holds book 1972, tibiaot74's
+		-- gave 1955 - the same black book sprite; she accepts any such notebook (docs/reference-74/quests.md)
+		local book = (getPlayerItemCount(cid, 1972) >= 1) and 1972 or ((getPlayerItemCount(cid, 1955) >= 1) and 1955 or nil)
+		if book ~= nil then
+			npcHandler:say('Excellent. Here, take this short sword, that might serve you well.')
+			doPlayerRemoveItem(cid, book, 1)
+			doPlayerAddItem(cid, 2406)
+			setPlayerStorageValue(cid, 3028, 1)
+		else
+			npcHandler:say("Hm, you don't have it.")
+		end
+		talk_state = 0
 	elseif msgcontains(msg, 'no') and talk_state == 1 then
 	npcHandler:say('Too bad.')
 	talk_state = 0

@@ -1,13 +1,14 @@
 """Shared fixtures: one isolated server per test session, fresh characters per test."""
 import re
 import sys
+import time
 from pathlib import Path
 
 import pytest
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from tibia74 import GameClient, Items, ServerProcess, SERVER_DIR, TestDatabase  # noqa: E402
+from tibia74 import GameClient, Items, ServerProcess, SERVER_DIR, TestDatabase, watch  # noqa: E402
 
 DATA_DIR = SERVER_DIR / "data"
 
@@ -57,6 +58,8 @@ def new_player(server, db, items):
         return client
 
     yield make
+    if watch.END_PAUSE and clients:
+        time.sleep(watch.END_PAUSE)               # watch mode: see the end before everyone logs out
     for c in clients:
         c.logout()
 

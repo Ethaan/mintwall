@@ -25,3 +25,13 @@ def test_walking_from_the_temple_to_a_quest_box_and_back(new_player, items, worl
          p.tiles.get(RAPIER_BOX))
     follow(p, items, world_map, ROOKGAARD_TEMPLE, level=2000, vocation=4, rope=True)
     assert p.pos == ROOKGAARD_TEMPLE
+
+
+def test_no_teleport_lands_on_another_teleport(world_map):
+    """The engine teleports again on arrival, so a field whose destination is another field sends you on (or back).
+    The Rookgaard Academy's arena field (32089,32171,9) went to the field beside it and bounced every player back
+    out; its destination is now past that field, as on tibiaot74's map (tools/map-set-attrs.py --teleport)."""
+    teleports = {pos: tuple(info["teleport"]) for pos, info in world_map.special.items() if "teleport" in info}
+    assert len(teleports) > 100
+    onto = {src: dst for src, dst in teleports.items() if dst in teleports}
+    assert not onto, onto
