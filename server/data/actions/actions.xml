@@ -159,6 +159,10 @@
 	<action itemid="2693" script="make_bread.lua"/>
 	<action itemid="2694" script="make_bread.lua"/> 
 
+    <!-- Quest chests: action id 2000, unique id = storage / reward (docs/reference-74/quests.md) -->
+    <action actionid="2000" script="quests/system.lua"/>
+    <action actionid="52413" script="quests/rook_bear_room.lua"/>   <!-- Bear Room stone switch -->
+
     <!-- Doors -->
 	<action itemid="1209" script="doors/door_locked.lua"/>
 	<action itemid="1210" script="increment.lua"/>

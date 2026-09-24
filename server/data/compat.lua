@@ -20,6 +20,19 @@ function isInArray(array, value, caseSensitive)
 	return false
 end
 
+-- TFS-era name: rope, shovel, pick, keys, machete and more called it, and it did not exist (every use failed)
+function isIntegerInArray(array, value)
+	if type(array) ~= "table" then
+		return false
+	end
+	for _, v in ipairs(array) do
+		if v == value then
+			return true
+		end
+	end
+	return false
+end
+
 function getBooleanFromString(input)
 	local s = tostring(input):lower()
 	return s == "yes" or s == "true" or s == "y" or s == "1"

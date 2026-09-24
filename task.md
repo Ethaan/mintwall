@@ -70,6 +70,144 @@ When finishing one, tick it and add a short note (what changed / how verified).
 ## Map / world
 
 - [ ] Quests: chests, quest doors, levers (actions/unique ids on the map vs `data/actions`)
+
+## Quests (each one needs an end-to-end test)
+
+The test for a quest starts a strong character (e.g. level 2000: fast, survives) in a temple and does the whole
+quest the way a player would: walk / travel there, level doors, levers, keys, talk to NPCs, open the reward
+chest, and check the reward is in the backpack (and that the chest cannot be opened twice). Needs test-client
+helpers: route walking across floors (stairs, ladders, holes, rope spots), pulling levers, opening doors.
+
+- [x] Research: 97 quests of 7.4 with rules, steps, rewards and sources - docs/reference-74/quests.md
+      (top: what our map already has - chests use action id 2000 + unique id, none are scripted yet)
+- [x] Quest chest system: data/actions/scripts/quests/system.lua for action id 2000 (unique id = storage; reward =
+      the unique id when it is an item id, else a copy of the chest contents incl. key action ids; once per
+      player; a reward you cannot carry stays). tests/test_quests.py (rapier box, Amber's chest)
+- [x] Quest test framework: tibia74/worldmap.py (walkability + floor changes + doors from the engine's own
+      rules, cached), tibia74/route.py (A* across floors: stairs, holes, ramps, ladders, rope, doors a character
+      may pass; walks it, kills blockers, re-plans), tibia74/quest.py (strong character, use map items like a
+      player - the server uses the TOP item, so things lying on top are moved off first). tests/test_route.py
+  - [ ] Parallel runs later (pytest-xdist, one server per worker)
+- [ ] Quest log: the 7.4 client has none (TibiaWiki: added in 7.9) - revisit later (e.g. a !quests command or the website)
+- [ ] Settle reward / level conflicts per quest (Tibiantis vs TibiaWiki, see quests.md) as each one is done
+
+One per quest (rules from quests.md; each: research check -> map/script work -> end-to-end test):
+- [x] Bear Room Quest - Rookgaard, orc/minotaur cave north of town (level none known (listed as 2); 1 player)
+      Done 2026-09-23: rewards table (52148 arrows + gold, 20003 key 4601) in quests/system.lua, stone switch
+      52413 (quests/rook_bear_room.lua); test_quests.py::test_bear_room_quest does it from the temple. Map quirk:
+      a (daily-loot) chest lies ON the switch tile, so clicking the switch opens the chest - move it off first.
+      Decided 2026-09-23: keep it (part of the map; players can move it)
+- [x] Present Box Quest + Legion Helmet Quest - chest by stone switch on Bear Room level; NPC Seymour (Acad… (level none known (listed as 2); 1 player)
+      Done 2026-09-23: chest 52149 reward (backpack: present, jug, plate, cup) in quests/system.lua; Seymour:
+      per-player conversation state (was global), box talk from level 6 (TibiaWiki 2006; was 4), mission/quest
+      precedence fixed. test_quests.py::test_present_box_quest (+ level 5/6 test). Found: seymour.lua did not
+      load after an edit and Seymour vanished silently - test_spells.py now fails on any script load error
+- [ ] Captain Iglues Treasure Quest - Rookgaard, under the poison spider tower (N) (level none known (listed as 2); 1 player)
+- [ ] Combat Knife Quest - Rookgaard town sewer (no level; 1 player)
+- [ ] Doublet Quest - cellar under stable north of Tom's shop (no level; 1 player)
+- [ ] Dragon Corpse Quest - bear cave east of town (level none known (listed as 2); 1 player)
+- [ ] Goblin Temple Quest - premium side: troll cave to goblin temple (no level; 1 player; premium)
+- [ ] Antidote Rune Quest (modern: Small Health Potion Quest) - NPC Billy, premium side (no level; 1 player; premium)
+- [ ] Katana Quest - graves then rotworm/skeleton cave (level none known (listed as 2); 1 player)
+- [ ] Minotaur Hell Quest - main cave north of town, bottom floor (level none known (listed as 2); 1 (group advised) player(s))
+- [ ] Small Axe Quest + Pick Quest - skeleton cave (premium) or respawn spots; Al Dee (level none (Pick listed as 2); 1 player)
+- [ ] Rapier Quest - town sewer, west, one floor down (no level; 1 player)
+- [ ] Amber's Notebook Quest + Short Sword Quest - chest on east dock; Amber (Academy) (level none (trade listed as 2); 1 player)
+- [ ] Honey Flower Quest + Studded Legs Quest - wasp tower NW; Lee'Delle (premium side) (level none (trade listed as 2); 1 player)
+- [ ] Banana Quest + Studded Shield Quest - banana palm NE (free) or premium wolf hill; Willie (level none (trade listed as 2); 1 player)
+- [ ] Torch Quest - Rookgaard Academy basement (no level; 1 player)
+- [ ] Battle Axe Quest - Thais sewers (SW) (no level; 1 player)
+- [ ] Dead Archer Quest - Thais Troll Cave (E of Thais) (no level; 1 player)
+- [ ] Deeper Fibula Quest - Fibula dungeon (level 50 (door); 1 player)
+- [ ] Devil Helmet Quest - Thais Ancient Temple to Mintwallin (level 30 (door); 2+ (one player holds a floor … player(s))
+- [ ] Geomancer Quest - Mount Sternum undead cave (N of Thais) (no level; 1 player)
+- [ ] Ghoul Room Quest - Thais Ancient Temple (no level; 1 player)
+- [ ] Kingdom of Kormarak Quest (Old Mintwallin) - Thais Ancient Temple (no level; 1 player)
+- [ ] Life Ring Quest - Thais Ancient Temple (S branch) (no level; 1 player)
+- [ ] Mad Mage Room Quest - Thais Ancient Temple, toward Mintwallin (level 40 (door); 1 player)
+- [ ] Mintwallin Cyclops Quest - Thais Ancient Temple, cyclops room (no level; 1 player)
+- [ ] Naginata Quest - Thais Dragon Lair (N of Alatar Lake) (level 40 (door); 1 player)
+- [ ] Noble Armor Quest (Skjaar/DTD) - below Mount Sternum (level 35 (door); 1 player)
+- [ ] Scale Armor Quest - cave W of Ancient Temple entrance (no level; 1 player)
+- [ ] Silver Amulet Quest - Thais Troll Cave cellar (no level; 1 player)
+- [ ] Six Rubies Quest (Double Dragon) - Thais Ancient Temple (no level; 1 player)
+- [ ] Small Ruby Quest - Mintwallin throne room pit (no level; 1 player)
+- [ ] Spike Sword Quest (Fire Devil) - cave E of Mount Sternum / NE of Triangle Tower (no level; 1 player)
+- [ ] Thais Lighthouse Quest (Dark Shield) - Thais lighthouse, SW of Thais (no level; 2 (step switch + lever) player(s))
+- [ ] Throwing Star Quest - Thais Ancient Temple, underground park (no level; 1 player)
+- [ ] Triangle Tower Quest - Triangle Tower (E of Thais, desert edge) (no level; 1 player)
+- [ ] Giant Smithhammer Quest - Plains of Havoc cyclops/minotaur camp (no level; 1 player)
+- [ ] Ornamented Shield Quest - Plains of Havoc Dragon Lair (no level; 1 (part 1); 2 (part 2) player(s))
+- [ ] Alawar's Vault Quest - Senja / Folda (ice islands N of Carlin) (no level; 1 player)
+- [ ] Crystal Wand Quest (Double SD Quest) - Demona, via Maze of Lost Souls (N of Carlin) (level 60 (door); 1 player)
+- [ ] Demona Ring Quest - Demona (level 60 (Demona gate); 1 player)
+- [ ] Fanfare Quest - Carlin graveyard crypt (no level; 1 player)
+- [ ] Griffin Shield Quest (MoLS Quest) - Gates of Demona, Maze of Lost Souls (level 30 (not a door, see notes); 1 player)
+- [ ] Power Ring Quest (Bronze Amulet / Femor Hills Goblin) - Femor Hills goblin cave (no level; 1 player)
+- [ ] Purple Tome Quest (Map Quest) - Demona library (level 60 (Demona gate); 1 player)
+- [ ] The Queen of the Banshees Quest (Banshee Quest) - Under Ghostlands and Isle of the Kings (level 60 (Queen refuses <60); 1+ (easier with a team; seal … player(s))
+- [ ] The White Raven Monastery Quest (Family Brooch Quest / Island of King… - Ghostlands W of Carlin, Isle of the Kings (no level; 1 player)
+- [ ] Draconia Quest - Draconia, via Hellgate under Ab'Dendriel (level 25 (door); 2 minimum (floor switches) player(s))
+- [ ] Elvenbane Quest (Elf Castle Quest) - Elvenbane castle, SW of Ab'Dendriel (no level; 1 player)
+- [ ] Orc Fortress Quest - Orc Fortress, W of Ab'Dendriel (level 40 (door); 1 player)
+- [ ] Circle Room Quest (Dwarven Quest / Dwarf Hell Quest) - Dwarf mines W of Kazordoon (level 32 (door); 1 player)
+- [ ] Crusader Helmet Quest - Deep Dwarf Mines W of Kazordoon (level 35 (door); 1 player)
+- [ ] Emperor's Cookies Quest - Emperor Kruzak's chambers, Kazordoon (no level; 1 player)
+- [ ] Explorer Brooch Quest - Jolly Axeman tavern sewer, Kazordoon (no level; 1 player)
+- [ ] Iron Hammer Quest - Minotaur cave W of Kazordoon (no level; 1 player)
+- [ ] Longsword Quest - Troll cave E of Dwarf Bridge (no level; 1 player)
+- [ ] Steel Helmet Quest (Minotaur Tower Quest) - Minotaur tower W of Kazordoon (no level; 1 player)
+- [ ] The Paradox Tower Quest - Paradox Tower, near Kazordoon (+ PoH, Edron, Carlin, Thais,… (level 30; 1 player; premium)
+- [ ] Black Knight Quest (Crown Set) - Villa Scapula swamp, north of Venore (~32827,31959,7) (level 50 (door); 1+ player(s))
+- [ ] Blood Herb Quest (Witchesbroom) - Greenclaw Swamp, west of Venore (no level; 1 player)
+- [ ] The Desert Dungeon Quest (Desert / Vocation / 10k Quest) - Below Jakundaf Desert (entrance ~32649,32093,7) (level 20 (door); 4, one of each vocation player(s); Knight + Paladin + Druid + Sorcerer)
+- [ ] Dragon Tower Quest - Shadowthorn, south-east of Venore (no level; 1 player)
+- [ ] Heaven Blossom Quest - Shadowthorn underground (no level; 1 player)
+- [ ] Iron Helmet Quest (Muriel's Letter) - Plains of Havoc, west of the cyclops/orc/minotaur camp (~32… (no level; 1 player)
+- [ ] Isle of the Mists Quest (Druid Quest) - Isle of the Mists; teleport in PoH (~32831,32295,7) (no level; 1 player; druid, per the quest legend (the wiki d…)
+- [ ] Orc Shaman Quest - Swamp/orc cave east of Venore (~33055,32030,7) (no level; 1 player)
+- [ ] The Outlaw Camp Quest (Bright Sword Quest) - Outlaw Camp, west of Thais/Venore road (~32615,32253,7) (level 45 (door); 1 (2 recommended) player(s))
+- [ ] Panpipe Quest (Fire Devil Quest) - Desert Dungeon, Jakundaf Desert (no level; 1 player)
+- [ ] Power Bolts Quest - Hole south of the PoH temple (~32815,32280,7) (no level; 1 player)
+- [ ] Silver Brooch Quest (Mummy Quest) - Greenclaw Swamp caves (~32700,31992,7) (no level; 1 player)
+- [ ] Skull of Ratha Quest (incl. Wolf Tooth Chain and Crystal Necklace) - Amazon Camp, north of Venore (~32846,31920,7) (no level; 1 player)
+- [ ] Time Ring Quest (Shadowthorn Quest) - Shadowthorn underground (~33060,32182,7) (no level; 1 player)
+- [ ] Voodoo Doll Quest - Greenclaw Swamp, north side (~32737,31953,7) (no level; 1 player)
+- [ ] Medusa Shield Quest (Star Room / Necromancer Quest) - Drefia, west of Darashia (~32996,32413,7) (level 60 (door); 1+ (team advised) player(s); premium)
+- [ ] Plate Armor Quest (Ghost Ship) - Ghost Ship, random on the Venore to Darashia boat (no level; 1 player; premium)
+- [ ] Stealth Ring Quest (Minotaur Pyramid) - Minotaur (Dark) Pyramid, north-east of Darashia (~33312,322… (no level; 1 player; premium)
+- [ ] The Ancient Tombs Quest (Helmet of the Ancients) - 8 Ankrahmun tombs (level 75 (doors); team advised player(s); premium)
+- [ ] The Djinn War - Efreet Faction (Green Djinn Quest) - Mal'ouquah + Ankrahmun, Carlin, Thais, Ulderek's Rock, Asht… (level 30 (fortress door) / 40 (Orc King door); 1 player; premium)
+- [ ] The Djinn War - Marid Faction (Blue Djinn Quest) - Ashta'daramai + Kazordoon, Mal'ouquah, Ulderek's Rock (level 30 / 40; 1 player; premium)
+- [ ] Serpentine Tower Quest / White Pearl Quest (one quest) - Serpentine Tower (Sorcerer guild), Ankrahmun (~33147,32866,… (no level; 1 player; premium)
+- [ ] Annihilator Quest - Edron, Hero Cave (deepest floors) (level 100 (lever/tiles; level-100 door at que…; exactly 4 player(s); premium)
+- [ ] Behemoth Quest - Edron, Cyclopolis (deep) (level 60 in 2004 (level door; raised to 80 in…; 1+ (team advised) player(s); premium)
+- [ ] Vampire Shield Quest - Edron, Hero Cave (Warlock room / Temple of Xayepocax) (level 70 (level door); 1+ player(s); premium)
+- [ ] Demon Helmet Quest - Edron, Hero Cave → Demon Hell (level 100 (level door); team (4 demons + banshees in … player(s); premium)
+- [ ] Parchment Room Quest - Edron, Hero Cave (no level; 1+ (5 demons) player(s); premium)
+- [ ] Ring Quest - Edron, Hero Cave (no level; 1+ player(s); premium)
+- [ ] Wedding Ring Quest (Hero Cave) - Edron, Hero Cave (no level; 1+ player(s); premium)
+- [ ] Double Hero Quest - Edron, Hero Cave (no level; 1+ player(s); premium)
+- [ ] Triple UH Rune Quest (now "Adorned UH Rune Quest") - Edron, Hero Cave (no level; 1+ player(s); premium)
+- [ ] Barbarian Axe Quest - Edron Orc Cave (bottom) (no level; 1+ player(s); premium)
+- [ ] Berserker Treasure Quest - Edron Orc Cave (no level; 1+ player(s); premium)
+- [ ] Dark Armor Quest - Edron Orc Cave (giant spider pit) (no level; 1+ player(s); premium)
+- [ ] Poison Daggers Quest - Edron Orc Cave (shaman level) (no level; 1+ player(s); premium)
+- [ ] Shaman Treasure Quest - Edron Orc Cave (room with a Sacrificial Stone) (no level; 1+ player(s); premium)
+- [ ] Edron Goblin Quest - Edron Goblin Cave, west of town (no level; 1 player; premium)
+- [ ] Troll Cave Quest - Edron Troll Cave, west of town (no level; 1 player; premium)
+- [ ] Fire Axe Quest - Edron Dragon Lair (level 60 (level door); 1+ player(s); premium)
+- [ ] Postman Missions Quest - starts at Kevin (post office between Thais and Kazordoon), … (no level; 1 player; premium)
+- [ ] Iron Ore Quest - Dwarf Mines near Kazordoon (no level; — player(s); —)
+- [ ] Minotaur Leather Quest - raft south of Thais (no level; — player(s); —)
+
+- [ ] Dalbrect (boat to the Isle of the Kings, west of Carlin, 32206,31756): he only sails for players who
+      brought his family brooch (item 2318), but there is no way to get it - in the Ghostlands there is a spot
+      you click (use) to find it. Make that work + test: brooch -> Dalbrect -> 10 gp -> Isle of the Kings
+  - [ ] dalbrect.lua: the "blood stains" check never blocks (hasCondition(...) ~= 1: the engine returns
+        true/false); talk_state is a global shared by every player talking to him
+  - [ ] Widen tests/test_spells.py's script scan: also `== 1` / `~= 1` / `== 0` on functions that return
+        true/false (the same bug class as isInArray(...) == TRUE)
 - [ ] Houses: confirm `Tibia74-houses.xml` loads, rent, doors, ownership commands
 - [ ] Temples: log in to each of the 47 towns' temple positions, confirm walkable
 - [ ] Depots and mailboxes (mailboxes weren't in 7.4 - check the map)
@@ -201,6 +339,17 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 - [ ] If yes: extend tools/patch-client.ps1 with a text table, plus a test that the patched exe still has the original size
 
 ## Spells and runes (found while making the Centurion test character)
+
+- [x] rope, shovel, pick, keys (key.lua), bread, instruments, decaying items called isIntegerInArray, which did not
+      exist - every use failed. Defined in compat.lua. tests/test_spells.py now fails on any call to a function
+      nothing defines (tibia74/luascan.py), with the known ones listed below (the list may only shrink)
+- [ ] Undefined functions still called (KNOWN_UNDEFINED in tests/test_spells.py):
+  - [ ] getPlayerPromotionLevel - the NPC promotion module: promotion probably fails (see Promotion NPCs)
+  - [ ] broadcastMessage - raid announcements, death/kill broadcast scripts
+  - [ ] GM ban manager: addAccountBan, addPlayerBan, removeAccountBan, removePlayerBan, getAccountBanList,
+        getPlayersByAccountNumber
+  - [ ] doNpcSellItem, getPlayerPVPBlessing, getPlayerLookDir (NPC system / functions.lua leftovers)
+  - [ ] marriage + banks (not 7.4): remove with the "non-7.4 NPC features" task
 
 - [x] Exhaustion vs 7.4 (docs/reference-74/formulas.md §9): attack 2 s, strikes 1 s, healing/support 1 s and
       the 1 s use delay were right. Fixed: UH / IH runes gave 1 s (7.4: none), paralyze rune 2 s (7.4: 1 s),

@@ -31,6 +31,13 @@ def db(server):
 
 
 @pytest.fixture(scope="session")
+def world_map():
+    """Walkability and floor changes of the whole map, for route planning (tibia74/worldmap.py; cached)."""
+    from tibia74.worldmap import WorldMap
+    return WorldMap.load(SERVER_DIR, Path(__file__).parent / ".run")
+
+
+@pytest.fixture(scope="session")
 def world():
     """Map facts parsed from the spawn file: spawns by name, npc positions."""
     return World(DATA_DIR / "world" / "Tibia74-spawns.xml")

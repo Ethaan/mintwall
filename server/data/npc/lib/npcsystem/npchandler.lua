@@ -145,6 +145,9 @@ if(NpcHandler == nil) then
 		end
 
 		self.focuses = newFocus
+		-- 42 old NPC scripts keep their conversation in one global talk_state: a new customer starts clean, or they
+		-- could answer "yes" to the question the previous one walked away from (NPCs talk to one player at a time)
+		talk_state = 0
 		self:updateFocus(true)
 	end
 	NpcHandler.changeFocus = NpcHandler.addFocus -- "changeFocus" looks better for CONVERSATION_DEFAULT

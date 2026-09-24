@@ -126,3 +126,39 @@ def test_conjuring_makes_a_usable_rune(new_player, items, vocation, words, rune)
     made = lambda: items.by_client[p.inventory[RIGHT].client_id].server_id if p.inventory.get(RIGHT) else None
     assert p.wait_for(lambda: made() == rune, timeout=3), \
         f"right hand holds {made()} ({items.name(made()) if made() else '-'}), expected {rune}; {p.text_messages[-2:]}"
+
+
+# Calls to functions nothing defines (tibia74/luascan.py). Each is a task in task.md; this list may only
+# shrink - a new name here is a script that fails when that line runs.
+KNOWN_UNDEFINED = {
+    # promotion module of the NPC system
+    "getPlayerPromotionLevel",
+    # death / kill broadcasts, raid announcements
+    "broadcastMessage",
+    # GM ban manager (talkactions/scripts/banmanager.lua)
+    "addAccountBan", "addPlayerBan", "removeAccountBan", "removePlayerBan", "getAccountBanList",
+    "getPlayersByAccountNumber",
+    # marriage and banks: not 7.4, to be removed
+    "addMarryStatus", "doCancelMarryStatus", "doItemSetAttribute", "getMarryStatus", "getOwnMarryStatus",
+    "getPlayerMarriage", "getPlayerPartner", "setPlayerPartner", "isOnline", "getPlayerByName",
+    # NPC system leftovers
+    "doNpcSellItem", "getPlayerPVPBlessing", "getPlayerLookDir",
+}
+
+
+def test_scripts_call_only_functions_that_exist():
+    """rope, shovel, pick, keys and the machete called isIntegerInArray, which did not exist: every use failed."""
+    from tibia74.luascan import undefined_calls
+    found = undefined_calls(SERVER_DIR)
+    new = {name: files for name, files in found.items() if name not in KNOWN_UNDEFINED}
+    assert not new, "\n".join(f"{name}: {files}" for name, files in sorted(new.items()))
+    fixed = KNOWN_UNDEFINED - set(found)
+    assert not fixed, f"now defined - remove from KNOWN_UNDEFINED: {sorted(fixed)}"
+
+
+def test_every_script_loads(server):
+    """A script with a syntax error is skipped at startup and its NPC / action / spell silently disappears
+    (seymour.lua did: Seymour was just gone). Load errors are logged once, before any test starts."""
+    failed = [line for line in server.log().splitlines()
+              if re.search(r"can ?not load|failed to load|error loading", line, re.I)]
+    assert not failed, "\n".join(failed)
