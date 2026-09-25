@@ -901,6 +901,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes (quest chests).
 - **Sources:** 7.x spoiler https://tibia.fandom.com/index.php?oldid=42078 ; 7.x infobox https://tibia.fandom.com/index.php?oldid=59159 ; current https://tibia.fandom.com/wiki/Alawar%27s_Vault_Quest/Spoiler ; Tibiantis list.
 - **Confidence:** high. The two sources disagree on which key opens what: the current wiki says to bring Key 4502 in advance for the short path.
+- **Our server (2026-09-25):** Nielson (32232,31677,7) sails to Folda / Senja for 20 gp. Folda: chest 32031,31686,8 uid 4503 (key 4503), door 32035,31642,8 aid 4503, pick spot 32040,31636,8 under a fire field onto the hole 32040,31636,9 (two floors), box 32172,31602,10 uid 4501 (key 4501 - its door 32039,31603,10 is the minotaurs' storage room), chest 32201,31571,10 uid 4502 (bag: key 4502, dark helmet, 4 throwing knives, blank rune, 33 gp), vault doors 32107-32108,31568,9 aid 4502, chests 32105/32109,31567,9 uid 4504 (3 white pearls) / 4505 (broad sword). Senja: switch 32180,31633,8 aid 51025 under a fire field opens the walls 32186-32189,31626,8 for 2 minutes (the switch vanishes meanwhile) - decided with the user; the vault portal 32107,31566,9 goes to the castle roof 32189,31625,4 (decided with the user). tests/quests/carlin/test_alawars_vault.py.
 
 ### Crystal Wand Quest
 - **Other names:** Double SD Quest (its 7.x name), Demona Quest.
@@ -947,6 +948,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=23969 ; https://tibia.fandom.com/index.php?oldid=29966 ; https://tibia.fandom.com/wiki/Fanfare_Quest/Spoiler ; Tibiantis list.
 - **Confidence:** medium-high.
+- **Our server (2026-09-25):** key box 32376,31802,7 uid 3520 (bone key, aid 3520); crypt door 32400,31788-31789,8 aid 3520; hole 32392,31787,8 onto a rope spot; chest 32390,31769,9 uid 4507 (fanfare, placed - our map had none). Carlin temple 32360,31782,7. tests/quests/carlin/test_fanfare.py.
 
 ### Griffin Shield Quest
 - **Other names:** MoLS Quest.
@@ -977,6 +979,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=66277 ; https://tibia.fandom.com/index.php?oldid=66278 ; Tibiantis list.
 - **Confidence:** medium-high.
+- **Our server (2026-09-25):** chests 32599,31776,9 uid 4511 (power ring 2166) and 32601,31776,9 uid 4512 (bronze amulet); rope up at 32576,31797,7. tests/quests/carlin/test_power_ring.py.
 
 ### Purple Tome Quest
 - **Other names:** Map Quest.
@@ -1053,6 +1056,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
   - Current spoiler with transcripts: https://tibia.fandom.com/wiki/The_White_Raven_Monastery_Quest/Spoiler
   - Tibiantis list: Blessed Ankh, Family Brooch, access to the Isle.
 - **Confidence:** high for part 1. Medium for part 2: the pre-8.0 spoiler covers only the brooch. The diary and ankh part comes from the current wiki, but the item and NPC versions (7.24 and 7.2) and Tibiantis's reward list support it being in 7.4.
+- **Our server (2026-09-25):** part 1 works. Brooch coffin 32248,31866,8 uid 4506 (family brooch). Way: shovel hole 32218,31767,7 under the wall, rope spot 32221,31779,8 up, the house stairs 32246,31837,7, the stairs 32241-32242,31850,8, the coffin room's stairs 32251,31866-31867,9. Dalbrect (npc/scripts/dalbrect.lua, transcripts): friendship = storage 99999, 10 gp to the Isle deck 32188,31958,7; Captain Jack (7.2) sails back for 20 gp to 32205,31756,7 (decided with the user: a way back by boat). Part 2 (Costello, diary, ankh) is to be done with the Banshee Quest. tests/quests/carlin/test_white_raven.py.
 
 ### Draconia Quest
 - **Location:**

@@ -332,15 +332,45 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       table: garlic necklace, dwarven ring, 2 small sapphires). quests/thais/test_triangle_tower.py
 - [ ] Giant Smithhammer Quest - Plains of Havoc cyclops/minotaur camp (no level; 1 player)
 - [ ] Ornamented Shield Quest - Plains of Havoc Dragon Lair (no level; 1 (part 1); 2 (part 2) player(s))
-- [ ] Alawar's Vault Quest - Senja / Folda (ice islands N of Carlin) (no level; 1 player)
+- [x] Alawar's Vault Quest - Senja / Folda (ice islands N of Carlin) (no level; 1 player)
+      Done 2026-09-25: the three keys lay loose on the floor where their containers had been (our map and the JS engine's):
+      chest 32031,31686,8 uid 4503 (key 4503), box 32172,31602,10 uid 4501 (key 4501), chest on the counter 32201,31571,10
+      uid 4502 (bag: key 4502, dark helmet, 4 throwing knives, blank rune, 33 gp); the vault chests 32105/32109,31567,9 were
+      missing: uid 4504 (3 white pearls), 4505 (broad sword). Doors got their key numbers (4503 Protected Area
+      32035,31642,8; 4501 storage room 32039,31603,10; 4502 vault 32107-32108,31568,9). Senja cellar switch
+      32180,31633,8 (aid 51025, quests/senja_vault_lever.lua): the walls 32186-32189,31626,8 and the switch vanish, back
+      after 2 minutes (decided with the user). The vault portal goes to the castle roof 32189,31625,4 (decided with the
+      user; 2006 wiki, tibiaot74 - the map sent you back behind the walls). pick.lua works through a field on the spot
+      ("use pick on the fire field"); the router follows a pick / shovel hole onto a second hole ("fall two levels").
+      tests/quests/carlin/test_alawars_vault.py (long path from Folda, short path from Senja, walls back, rules)
 - [ ] Crystal Wand Quest (Double SD Quest) - Demona, via Maze of Lost Souls (N of Carlin) (level 60 (door); 1 player)
 - [ ] Demona Ring Quest - Demona (level 60 (Demona gate); 1 player)
-- [ ] Fanfare Quest - Carlin graveyard crypt (no level; 1 player)
+- [x] Fanfare Quest - Carlin graveyard crypt (no level; 1 player)
+      Done 2026-09-25: the key box 32376,31802,7 = uid 3520 (bone key 3520, real-map table), the crypt's west double
+      door 32400,31788-31789,8 now needs key 3520 (it had no key number), the chest 32390,31769,9 was missing - placed at
+      tibiaot74's spot, uid 4507 (fanfare). Way out: rope up the hole. tests/quests/carlin/test_fanfare.py
 - [ ] Griffin Shield Quest (MoLS Quest) - Gates of Demona, Maze of Lost Souls (level 30 (not a door, see notes); 1 player)
-- [ ] Power Ring Quest (Bronze Amulet / Femor Hills Goblin) - Femor Hills goblin cave (no level; 1 player)
+- [x] Power Ring Quest (Bronze Amulet / Femor Hills Goblin) - Femor Hills goblin cave (no level; 1 player)
+      Done 2026-09-25: the two chests 32599/32601,31776,9 got the real-map table's uids 4511 (power ring, 2166 - the
+      unworn one; the table says 2203, the worn one) / 4512 (bronze amulet). tests/quests/carlin/test_power_ring.py
 - [ ] Purple Tome Quest (Map Quest) - Demona library (level 60 (Demona gate); 1 player)
 - [ ] The Queen of the Banshees Quest (Banshee Quest) - Under Ghostlands and Isle of the Kings (level 60 (Queen refuses <60); 1+ (easier with a team; seal … player(s))
 - [ ] The White Raven Monastery Quest (Family Brooch Quest / Island of King… - Ghostlands W of Carlin, Isle of the Kings (no level; 1 player)
+  - [x] Part 1 done 2026-09-25: the brooch coffin 32248,31866,8 = uid 4506 (family brooch; real-map table), Dalbrect
+        rewritten from the wiki transcripts (brooch/yes/yes = friend, storage 99999; passage/yes = 10 gp to the Isle deck
+        32188,31958,7; per-player state; pz-lock check that works), Captain Jack (7.2, already on the Isle boat) sails back for
+        20 gp - decided with the user: a way back by boat (the 7.x wiki's "20gp to return"; I first asked about a second
+        Dalbrect, then found Jack). tests/quests/carlin/test_white_raven.py
+  - [ ] Part 2 with the Banshee Quest (decided with the user 2026-09-25): Costello's dialogue (fugio -> warded catacomb
+        doors; diary -> Blessed Ankh; crime/absolution clears Captain Jack's storage 99998), the two switches + magic walls
+        + reset tile in the Banshee entry cave, the dead human with the Monk's Diary ("They Are Coming")
+- [x] NPC keyword handler (2026-09-25): every NPC shared one per-player "last conversation node" table
+      (KeywordHandler.lastNode on the class), so a player a captain teleported mid-conversation got the old NPC's
+      conversation from the next NPC (Captain Jack greeted with Dalbrect's words and ignored "tibia"). Each handler has its
+      own now (npc/lib/npcsystem/keywordhandler.lua). Covered by test_white_raven.py (Dalbrect, then Jack)
+- [ ] NPC travel lines are never seen: selfSay is scheduled (Npc::doSay, SCHEDULER_MINTICKS) and the captain teleports
+      the player in the same call, so "Have a nice trip!" / "Set the sails!" is said after the player left. Teleport a
+      moment later (addEvent) or say it at the destination - check what 7.4 showed
 - [ ] Draconia Quest - Draconia, via Hellgate under Ab'Dendriel (level 25 (door); 2 minimum (floor switches) player(s))
 - [ ] Elvenbane Quest (Elf Castle Quest) - Elvenbane castle, SW of Ab'Dendriel (no level; 1 player)
 - [ ] Orc Fortress Quest - Orc Fortress, W of Ab'Dendriel (level 40 (door); 1 player)
@@ -455,11 +485,12 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
 - [x] Minotaur Leather Quest - raft south of Thais - NOT 7.4 (checked 2026-09-24): the item "minotaur leather" is not
       in our 7.4 item list at all; the wiki page is from 2011 with no version; not on Tibiantis. Nothing to do
 
-- [ ] Dalbrect (boat to the Isle of the Kings, west of Carlin, 32206,31756): he only sails for players who
+- [x] Dalbrect (boat to the Isle of the Kings, west of Carlin, 32206,31756): he only sails for players who
       brought his family brooch (item 2318), but there is no way to get it - in the Ghostlands there is a spot
       you click (use) to find it. Make that work + test: brooch -> Dalbrect -> 10 gp -> Isle of the Kings
-  - [ ] dalbrect.lua: the "blood stains" check never blocks (hasCondition(...) ~= 1: the engine returns
+  - [x] dalbrect.lua: the "blood stains" check never blocks (hasCondition(...) ~= 1: the engine returns
         true/false); talk_state is a global shared by every player talking to him
+        Done 2026-09-25 with the White Raven Monastery Quest part 1 (see there); Captain Jack had the same two bugs
   - [ ] Widen tests/test_spells.py's script scan: also `== 1` / `~= 1` / `== 0` on functions that return
         true/false (the same bug class as isInArray(...) == TRUE)
 - [ ] Houses: confirm `Tibia74-houses.xml` loads, rent, doors, ownership commands

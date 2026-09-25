@@ -22,6 +22,7 @@ class ServerProcess:
         self.config_path = RUN_DIR / "config.lua"
         self.log_path = RUN_DIR / "server.log"
         self.proc = None
+        self.started_at = None
         self._log_file = None
 
     # --- setup -------------------------------------------------------------
@@ -67,6 +68,7 @@ class ServerProcess:
             if self.proc.poll() is not None:
                 raise RuntimeError(f"server exited during startup:\n{self.log_tail()}")
             if "Server Running" in self.log() and _port_open(self.port):
+                self.started_at = time.time()      # the map is loaded: its items' timers start from here
                 return
             time.sleep(0.5)
         raise RuntimeError(f"server did not start within {timeout}s:\n{self.log_tail()}")

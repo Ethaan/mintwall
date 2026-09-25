@@ -177,6 +177,8 @@
     <action actionid="51020" script="quests/triangle_tower_lever.lua"/>   <!-- Triangle Tower: the desert lever -->
     <action actionid="51021" script="quests/behemoth_lever.lua"/>   <!-- Behemoth Quest: the lever that moves the stones -->
     <action actionid="51024" script="quests/edron_orc_cave_lever.lua"/>   <!-- Edron Orc Cave: the stone at the entrance -->
+    <action actionid="51025" script="quests/senja_vault_lever.lua"/>   <!-- Alawar's Vault: the Senja cellar switch -->
+    <action actionid="51026" script="quests/mols_entrance_switch.lua"/>   <!-- Maze of Lost Souls: the entrance switch -->
     <action actionid="54545" script="draw_well_down.lua"/>   <!-- wells you climb down (Fibula, Ancient Temple) -->
 
     <!-- Doors -->

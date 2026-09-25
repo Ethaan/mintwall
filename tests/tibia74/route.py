@@ -15,7 +15,7 @@ from dataclasses import dataclass
 
 from .client import EAST, NORTH, NORTHEAST, NORTHWEST, SOUTH, SOUTHEAST, SOUTHWEST, WEST, Creature
 from . import watch
-from .worldmap import WorldMap
+from .worldmap import DOWN_SHIFT, WorldMap
 
 DIRECTIONS = {(0, -1): NORTH, (1, 0): EAST, (0, 1): SOUTH, (-1, 0): WEST,
               (1, -1): NORTHEAST, (1, 1): SOUTHEAST, (-1, 1): SOUTHWEST, (-1, -1): NORTHWEST}
@@ -46,6 +46,19 @@ def may_pass(info: dict, level: int, vocation: int, keys: set, storages: set) ->
     return False
 
 
+def _drop(world: WorldMap, hole):
+    """Where a hole opened at `hole` (a shovel, a pick) takes you: the floor below, moved off a ramp as the server does,
+    and on down when that is a hole too (Alawar's Vault: the pick spot drops onto a one-tile hole, "you fall two
+    levels")."""
+    x, y, z = hole
+    dx, dy = DOWN_SHIFT.get(world.info((x, y, z + 1)).get("up"), (0, 0))
+    land = (x + dx, y + dy, z + 1)
+    s = world.info(land)
+    if s.get("down") or "teleport" in s:
+        return world.arrival(land) or land
+    return land
+
+
 def _neighbours(world: WorldMap, pos, level, vocation, keys, storages, rope, open_tiles=frozenset(),
                 avoid=frozenset(), scythe=False, shovel=False, pick=False):
     x, y, z = pos
@@ -64,11 +77,11 @@ def _neighbours(world: WorldMap, pos, level, vocation, keys, storages, rope, ope
         elif scythe and info.get("wheat") and not (dx and dy):
             yield cost + 1, Step("wheat", m, m)
         elif shovel and info.get("dig") and not (dx and dy):
-            yield cost + 1, Step("dig", m, (m[0], m[1], m[2] + 1))
+            yield cost + 1, Step("dig", m, _drop(world, m))
         elif info.get("push") and not (dx and dy):
             yield cost + 4, Step("push", m, m)
         if pick and info.get("pick") and not (dx and dy):
-            yield cost + 2, Step("pick", m, (m[0], m[1], m[2] + 1))
+            yield cost + 2, Step("pick", m, _drop(world, m))
     for dx in (-1, 0, 1):
         for dy in (-1, 0, 1):
             t = (x + dx, y + dy, z)

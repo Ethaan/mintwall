@@ -7,7 +7,9 @@
 local ITEM_ID_LIMIT = 10000   -- unique ids below this are item ids
 
 -- Rewards the map does not carry (the chest is empty on Tibia74.otbm): unique id -> {{item id, count,
--- action id (keys), contents {{item id, count}, ...}}, ...}. Each entry names its quest and source (docs/reference-74/quests.md).
+-- action id (keys), contents {{item id, count, key, text}, ...}, text (a letter, a map)}, ...}. Lua cannot read an
+-- item's text, so a reward with writing on it carries the text here. Each entry names its quest and source
+-- (docs/reference-74/quests.md).
 local REWARDS = {
 	-- Bear Room Quest (Rookgaard): the third bear-room box, and the chest below the mud south of the big table.
 	-- Real-map chest table (OTLand "Quest System for 7.4 Realots"): "12 arrows and 40 gp"; TibiaWiki Key 4601:
@@ -199,6 +201,58 @@ local REWARDS = {
 	-- {{2214,1},{2201,200},{2145,7}}, -- extra box = roh, dragoneck+7 diamonds" (TibiaWiki pre-8.0 and current too).
 	[1018] = {{2432, 1}},
 	[1019] = {{2214, 1}, {2201, 200}, {2145, 7}},
+	-- Fanfare Quest (Carlin): "get Key 3520 from the box in the north-east corner of the big room" of the building
+	-- north-west of the boat (TibiaWiki 2005) - the box 32376,31802,7; the key opens the crypt's west door
+	-- (32400,31788-31789,8, aid 3520), down the hole and north through the trolls to the chest 32390,31769,9 (missing
+	-- on our map, placed at tibiaot74's spot). Real-map table: "[3520] = {{2092,1,3520}}, -- Carlin graveyard key",
+	-- "[4507] = {{2076,1}}, -- Carlin Fanfare".
+	[3520] = {{2092, 1, 3520}},
+	[4507] = {{2076, 1}},
+	-- White Raven Monastery Quest part 1 (Ghostlands): "Simply use the head of the top coffin to find the Family
+	-- Brooch" (TibiaWiki 2006) - the coffin 32248,31866,8 (tibiaot74 scripts the same one). Real-map table: "[4506] =
+	-- {{2318,1}}, -- carlin Family Brooch Quest". Dalbrect takes it and becomes your friend (npc/scripts/dalbrect.lua).
+	[4506] = {{2318, 1}},
+	-- Alawar's Vault Quest (Senja and Folda). Our map (and the JS engine's copy of the 7.4 map) had the three keys lying
+	-- on the floor where their chests stood - the export kept the contents and lost the containers: chests / box put
+	-- back at tibiaot74's spots, the loose keys taken away. Real-map table: "[4501] = {{2089,1,4501}}, -- Alawar key 2
+	-- minoroom", "[4502] = {{2490},{2410,4},{2260,1},{2160,33},{2089,1,4502}}", "[4503] = {{2088,1,4503}}", "[4504] =
+	-- {{2143,3}}, -- Alawar Chest - 3 white pearl", "[4505] = {{2413,1}}, -- Alawar Chest - 1 broad sword". Key 4503 is
+	-- the copper key our map had (TibiaWiki: "copper key 4503"; the table says silver); the maze bag's 33 are gold coins
+	-- (TibiaWiki "33gp", tibiaot74; the table says crystal).
+	[4503] = {{2089, 1, 4503}},                 -- Folda, behind the fire fields: the "Protected Area" door
+	[4501] = {{2089, 1, 4501}},                 -- the minotaur level's first room: the storage room door
+	[4502] = {{1987, 1, nil, {{2089, 1, 4502}, {2490}, {2410, 4}, {2260}, {2148, 33}}}},   -- the maze: the vault doors
+	[4504] = {{2143, 3}},                       -- the vault, by the portal
+	[4505] = {{2413, 1}},
+	-- Power Ring Quest (Femor Hills goblin cave): "The Quest boxes are on the north end of this room, next to the Beer
+	-- Casks" (TibiaWiki 2006) - the two chests 32599/32601,31776,9 on our map. Real-map table: "[4511] = {{2203,1}},
+	-- -- Femor hills - power ring", "[4512] = {{2172,200}}, -- Femor hills - bronze ammy" (which is which: tibiaot74).
+	-- The ring is 2166, the power ring as it lies in a chest (2203 is the worn one, it runs out).
+	[4511] = {{2166, 1}},
+	[4512] = {{2172, 200}},
+	-- Griffin Shield Quest (the first room of the Maze of Lost Souls, behind the level-30 gates and before Demona's level-60
+	-- gate): "take the reward (Griffin Shield, Dwarven Axe and Obsidian Lance) that is inside 2 slain skeletons and a
+	-- dead body" (TibiaWiki 2006) - missing on our map, placed at tibiaot74's spots 32498,31721 / 32500,31721 /
+	-- 32503,31724,15. Real-map table: "[10062] = {{2533}}, -- griffin shield", "[10063] = {{2435}}, -- dwarven axe",
+	-- "[10064] = {{2425}}, -- obsidian lance".
+	[10062] = {{2533, 1}},
+	[10063] = {{2435, 1}},
+	[10064] = {{2425, 1}},
+	-- Crystal Wand Quest (Double SD Quest; Demona, the throne room): "open the chests for your Double charge SD and
+	-- Crystal Wand" (TibiaWiki 2006); current wiki "chests for your Crystal Wand and a bag with Silver Rune Emblem (SD)
+	-- and Twinkiller Rune (Book)"; Tibiantis: "Crystal Wand, Double SD Rune, Twinkiller Rune (Book)". The two boxes by
+	-- the thrones (32479/32481,31611,15) are on our map; the left one holds Ferumbras's letter about the
+	-- "twinkiller-rune" - so the left one gives the bag with it and the SD (2 charges), the right one the wand (no
+	-- source says which box; tibiaot74 puts the wand left).
+	[51027] = {{2184, 1}},
+	[51028] = {{1987, 1, nil, {{2268, 2}, {1969, 1, nil, "Dear Gelunidas,\nI request that you send me the twinkiller-rune I ordered some months ago immediately. If I am convinced that they work as promised I will order them in greater numbers. They might be handy in my next schemes. As this letter should show you, the tales of my death are wildly exagerated. I hope you and your warlock brethren did not think you get off the hook that easy? If you don't work on the stuff I ordered and I do not receive the stuff I ordered in time, be prepared for a visit. You won't like my new friends that I would introduce to you.\n\nFerumbras"}}}},
+	-- Purple Tome Quest (the Demona library, 32421-32432,31591-31601,15): "In those bookcases you will find the Maps and
+	-- the tome" (current wiki); Tibiantis: "Tibia Map (Book), Fields of Glory Map (Book) and Purple Tome". Our map has the
+	-- two maps in their bookcases (32423 / 32428,31591,15 - the texts below are theirs) and no purple tome: it goes in
+	-- the bookcase 32421,31594,15 (tibiaot74's spot).
+	[51029] = {{1982, 1}},
+	[51030] = {{1956, 1, nil, nil, "*You see a map of our world Tibia*"}},
+	[51031] = {{1957, 1, nil, nil, "*You see a map of the surface of the Fields of Glory. There are many red lines and two golden points on it. You wonder what their meaning is.*"}},
 }
 
 -- Map objects that are the same quest as another (one reward per character between them): unique id -> the
@@ -255,10 +309,18 @@ local function give(cid, reward)
 	if reward.actionid ~= nil and reward.actionid > 0 then
 		doSetItemActionId(uid, reward.actionid)           -- a key: its number is the door it opens
 	end
-	for _, inner in ipairs(reward.contents or {}) do    -- a container that comes filled (REWARDS): {id, count, key}
+	if reward.text ~= nil then
+		doSetItemText(uid, reward.text)
+	end
+	for _, inner in ipairs(reward.contents or {}) do    -- a container that comes filled (REWARDS): {id, count, key, text}
 		local added = doAddContainerItem(uid, inner[1], inner[2] or 1)
-		if inner[3] ~= nil and added ~= nil and added ~= false and added > 0 then
-			doSetItemActionId(added, inner[3])             -- a key inside the bag
+		if added ~= nil and added ~= false and added > 0 then
+			if inner[3] ~= nil then
+				doSetItemActionId(added, inner[3])         -- a key inside the bag
+			end
+			if inner[4] ~= nil then
+				doSetItemText(added, inner[4])
+			end
 		end
 	end
 	if reward.source ~= nil then
@@ -291,7 +353,7 @@ function onUse(cid, item, frompos, item2, topos)
 	local rewardList = REWARDS[item.uid] or REWARDS[storage]
 	if rewardList ~= nil then
 		for _, r in ipairs(rewardList) do
-			table.insert(rewards, {itemid = r[1], count = r[2] or 1, actionid = r[3], contents = r[4]})
+			table.insert(rewards, {itemid = r[1], count = r[2] or 1, actionid = r[3], contents = r[4], text = r[5]})
 		end
 	elseif storage < ITEM_ID_LIMIT then
 		rewards[1] = {itemid = storage, count = 1}

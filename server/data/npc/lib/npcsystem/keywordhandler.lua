@@ -122,6 +122,9 @@ if(KeywordHandler == nil) then
 	function KeywordHandler:new()
 		local obj = {}
 		obj.root = KeywordNode:new(nil, nil, nil)
+		-- each NPC's own: the class table's lastNode was shared by every NPC, so a player a captain sailed away
+		-- mid-conversation (no "bye", no reset) got the old NPC's conversation from the next NPC they greeted
+		obj.lastNode = {}
 
 		setmetatable(obj, self)
 		self.__index = self
