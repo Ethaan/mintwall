@@ -129,6 +129,10 @@ when the engine is wrong.
   memory and its logout save overwrites the DB (lost Centurion's rings once). lastlogin/lastlogout in
   the DB do NOT tell whether a character is online right now - ask the player to log out first
 - The `server.log` of a running server is locked; the exe is locked while running (stop before rebuild)
+- Premium is checked at login only, **by design** (as real Tibia): premium that runs out while you play lasts
+  until you log out (or the daily server save kicks everyone) - e.g. it ends Monday 4 AM, the save is 3 AM:
+  up to ~23 hours more. A lost connection counts as a logout. Promotion suspension follows the same rule
+  (IOPlayer::loadPlayer). Do not "fix" this with an online check
 
 ## Testing (tests/)
 
@@ -143,6 +147,8 @@ Gameplay is verified by an automated suite, not by hand:
 - Each test creates fresh characters in the DB (`new_player(level=, pos=, inventory=, vocation=)`),
   logs in, acts (`talk`, `walk_to`, `attack`, `use_item`, `move_item`...) and asserts with `wait_for`.
 - Every test also fails if the server logged any Lua error while it ran.
+- Quests: one file per quest, `tests/quests/<city>/test_<quest>.py`, shared bits in `tests/quests/common.py`;
+  how to do a quest: `.claude/skills/quest-testing`. `pytest quests/thais` runs one city.
 - Lua errors in the server log now include the called function and the script line.
 - Spec not implemented yet -> write the test anyway and mark `xfail(strict=True)`; it turns
   into a failure the moment the feature works, reminding us to remove the marker.

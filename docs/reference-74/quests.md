@@ -453,6 +453,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Rewards:** Battle Axe. It is not a choice. The pre8 wiki, current wiki and Tibiantis agree.
 - **Once / rules:** unknown for 7.4. The current wiki calls the container a quest container, which suggests once per character.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=70616 (pre8 spoiler) ; https://tibia.fandom.com/index.php?oldid=29946 ; https://tibia.fandom.com/wiki/Battle_Axe_Quest/Spoiler ; https://tibiantis.info/library/quests
+- **Our server (2026-09-24):** pick spot 32302,32257,8 (rope spot below), 4 cave rats, dead skeleton 3103 at 32305,32254,9 (added; tibiaot74's position) aid 2000 uid 1658 = battle axe, once per character.
 - **Confidence:** medium.
 
 ### Dead Archer Quest
@@ -472,6 +473,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
   - Tibiantis: fluids, which matches 7.x.
 - **Once / rules:** unknown.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=73645 ; https://tibia.fandom.com/index.php?oldid=29954 ; https://tibia.fandom.com/wiki/Dead_Archer_Quest/Spoiler ; https://tibiantis.info/library/quests
+- **Our server (2026-09-24):** shovel hole 32493,32259,7; dead human 3129 at 32513,32302,10 (added; tibiaot74's position) aid 2000 uid 1662 = bow, 5 poison arrows, mana fluid, life fluid (real-map table), once per character.
 - **Confidence:** medium.
 
 ### Deeper Fibula Quest
@@ -504,6 +506,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
   - **Conflict:** Tibiantis lists "Elven Amulet, Dwarven Ring, Serpent Sword, 6 Small Diamonds, Time Ring" with level 0. This may reflect Tibiantis's own map data.
 - **Once / rules:** unknown.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=55209 ; https://tibia.fandom.com/index.php?oldid=29955 ; https://tibia.fandom.com/wiki/Deeper_Fibula_Quest/Spoiler ; https://tibiantis.info/library/quests
+- **Our server (2026-09-24):** well 32172,32439,7 (aid 54545) down; door 32190,32432,8 = key 3940 (Dermot, 2000 gp); level-50 gate 32212,32435,10 then teleport 32212,32433 -> 32281,32388,10; key 3980 in the small hole 32219,32401,10 (uid 10014, a crate on it); barrels at 32253/32268,32401,10 to push aside; door 32277,32420,10 = key 3980; bodies (uid 10015-10019): tower shield 32239,32471,10, warrior helmet 32239,32478,10, dwarven ring 32233,32493,10, elven amulet 32245,32492,10, knight axe 32256,32500,10; portal 32234,32502,10 -> 32210,32437,10.
 - **Confidence:** medium. The route is solid, but the rewards and level door conflict with Tibiantis.
 
 ### Devil Helmet Quest
@@ -575,6 +578,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Rewards:** Garlic Necklace, Club Ring. All sources agree.
 - **Once / rules:** unknown.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=24026 ; https://tibia.fandom.com/index.php?oldid=29968 ; https://tibia.fandom.com/wiki/Ghoul_Room_Quest/Spoiler ; https://tibiantis.info/library/quests
+- **Our server (2026-09-24):** dead skeleton 32509,32181,13 uid 3601 = key 3600; well 32508,32176,13 (aid 54545) down; door 32506,32175,14 = key 3600; chest 32500,32176,14 uid 3602 = garlic necklace (150) + club ring, once per character.
 - **Confidence:** high.
 
 ### Kingdom of Kormarak Quest
@@ -608,6 +612,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Rewards:** Life Ring, Dragon Necklace. All sources agree.
 - **Once / rules:** unknown.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=58720 ; https://tibia.fandom.com/index.php?oldid=35324 ; https://tibia.fandom.com/wiki/Life_Ring_Quest/Spoiler ; https://tibiantis.info/library/quests
+- **Our server (2026-09-24):** drawbridges 32410-32412,32231-32232,10 and 32408-32410,32253,10 down (levers unscripted); pick spot 32437,32239,10; box 32443,32238,11 uid 3616 = life ring + dragon necklace (200), once per character; rope up.
 - **Confidence:** medium.
 
 ### Mad Mage Room Quest
@@ -636,6 +641,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
   - The current wiki and Tibiantis say "Mana Potions", which is a modern replacement.
 - **Once / rules:** quest boxes are presumably once per character. The side chest is a daily respawn.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=64426 ; https://tibia.fandom.com/index.php?oldid=41066 ; https://tibia.fandom.com/wiki/Mad_Mage_Room_Quest/Spoiler ; https://tibiantis.info/library/quests
+- **Our server (2026-09-24):** barracks drawer 32411,32155,15 (uid 13620 = key 3620); prison doors 32395,32117,15 and 32393,32136,14 (key 3620); A Prisoner 32393,32137,13, talked to through the bars from 32396,32137,13 (answer + 7 red apples -> key 3666); level-40 gate 32544,32179,14; door 32578,32197,15 (key 3666), ladder up; box 32573,32200,14 = magician hat (10058), top box 32574,32200,14 = stone skin amulet 5 (10059), chest 32577,32200,14 = star amulet (10060).
 - **Confidence:** high. Key 3620 comes only from the current wiki.
 
 ### Mintwallin Cyclops Quest
@@ -657,6 +663,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once / rules:** unknown.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=24200 ; https://tibia.fandom.com/index.php?oldid=29977 ; https://tibia.fandom.com/wiki/Mintwallin_Cyclops_Quest/Spoiler ; https://tibiantis.info/library/quests
 - **Confidence:** medium. The exact 7.4 item list is uncertain.
+- **Our server (2026-09-24):** switch 32602,32104,14 (aid 51016) moves the wall both ways (north 32593-32594,32103,14 open / west 32592,32104-32105,14 shut); key 3667 in the dead human 32576,32216,15 (under rubbish) opens door 32592,32102,14; chests 32589,32097,14 = key 3610 (uid 3610), 32590,32097,14 = small diamond (uid 3611); out by the north hole 32587,32089,14.
 
 ### Naginata Quest
 - **Other names:** none known.
@@ -719,6 +726,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
   - Current wiki and Tibiantis: Scale Armor.
 - **Once / rules:** unknown.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=24179 ; https://tibia.fandom.com/index.php?oldid=56731 ; https://tibia.fandom.com/wiki/Scale_Armor_Quest/Spoiler ; https://tibiantis.info/library/quests
+- **Our server (2026-09-24):** shovel hole 32335,32174,7 (rope spot below; the cave also has a ladder way out at 32347,32123,8); well 32354,32131,8 (aid 54545) down; chest 32357,32130,9 uid 10061 = scale armor, once per character; chest 32357,32131,9 (piece of iron, book) ordinary.
 - **Confidence:** medium.
 
 ### Silver Amulet Quest
@@ -798,6 +806,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
   6. The teleporter leads to the Cyclops room (2–5 Cyclopes). The chests are at the north end.
 - **Rewards:** Dark Shield, Battle Hammer. All sources agree.
 - **Once / rules:** unknown. The pre8 wiki notes the portal can be switched off, trapping players inside.
+- **Our server (2026-09-24):** switch under the crates (32227,32278,8, aid 51001) opens trapdoor 369 at 32225,32276,8; step switch 32225,32268,9 (aid 51002) opens stairs 410 at 32225,32282,9 while occupied; lever 32225,32285,10 (aid 51003) toggles two fields: in 32233,32276,9 -> 32225,32271,10 and out 32225,32276,10 -> 32232,32276,9. No source shows the way out; the two-field lever was decided with the user. Chests once per character.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=61618 ; https://tibia.fandom.com/index.php?oldid=61619 ; https://tibia.fandom.com/wiki/Thais_Lighthouse_Quest/Spoiler ; https://tibiantis.info/library/quests
 - **Confidence:** high.
 
@@ -813,6 +822,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Rewards:** 10 Throwing Stars. All sources agree.
 - **Once / rules:** unknown.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=24062 ; https://tibia.fandom.com/index.php?oldid=34977 ; https://tibia.fandom.com/wiki/Throwing_Star_Quest/Spoiler ; https://tibiantis.info/library/quests
+- **Our server (2026-09-24):** pick spot 32517,32107,14 (ladder below); box 32522,32111,15 uid 3619 = 10 throwing stars, once per character.
 - **Confidence:** medium.
 
 ### Triangle Tower Quest
@@ -1731,6 +1741,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once / rules:** "You can only enter this door once, so choose your reward wisely" (2005 and 2006 wiki). One reward per character.
 - **Sources:** https://tibia.fandom.com/wiki/The_Annihilator_Quest/Spoiler ; 2005 revisions https://tibia.fandom.com/index.php?oldid=10342 and https://tibia.fandom.com/index.php?oldid=10419 ; pre8 revisions https://tibia.fandom.com/index.php?oldid=55815 and https://tibia.fandom.com/index.php?oldid=73171 ; https://tibiantis.info/library/quests ; https://tibiantis.life/
 - **Confidence:** high for the mechanics. The name of the 4th reward (teddy/present) differs between sources.
+- **Our server (2026-09-24):** lever 33226,31671,13 (aid 51011), squares 33222-33225,31671,13, level-100 gate 33214,31671,13; demon room arrival 33219-33222,31659,13, 6 demons (2 N, 2 S, 2 by the door 33225,31659,13); chests 33227/33229/33231/33233,31656,13 = uid 51012-51015 (one per character, storage 51012); 4th = present with the annihilation bear (item 2326); portal 33236,31659,13 -> 33210,31673,13. Lever: once per server save (decided with the user); wrong team: "Sorry, not possible.".
 
 ### Behemoth Quest
 - **Alt names:** Guardian Halberd Quest, Cyclopolis Quest
@@ -1750,6 +1761,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** yes (quest chests). How many boxes one player may open: unknown.
 - **Sources:** https://tibia.fandom.com/wiki/Behemoth_Quest/Spoiler ; https://tibia.fandom.com/index.php?oldid=21249 (2005, lvl 60) ; https://tibia.fandom.com/index.php?oldid=57509 (pre8 spoiler) ; https://tibia.fandom.com/index.php?oldid=70206 ; https://tibiantis.info/library/quests ; https://tibiantis.life/
 - **Confidence:** medium. The route is solid, but the level (60 vs 80) and the rewards conflict. For a Dec-2004 7.4 server, level 60 matches both Tibiantis and the 2005 wiki.
+- **Our server (2026-09-24):** level-60 gate 33297,31670,14 (aid 1060; the map said 80 - decided with the user; tibiaot74 has 60 too). Lever 33293,31718,12 (aid 51021, placed under the fire field and the dead wolf where tibiaot74 has it) removes / puts back the stones 1304 at 33295-33299,31677,15 on the Behemoth floor - the only walking way to the room and out of it. Chests at 33294/33295/33297/33298,31658,13: uid 51023 demon shield, 2466 golden armor, 2427 guardian halberd, 51022 bag (platinum amulet, life ring, crystal ring, 3 small diamonds, 4 small sapphires) - the wiki's list split as tibiaot74 does; each once per character (decided with the user).
 
 ### Vampire Shield Quest
 - **Alt names:** Warlock Room Quest, Dragon Lance Quest, Edron Warlock Quest
@@ -1771,6 +1783,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** yes (chests).
 - **Sources:** https://tibia.fandom.com/wiki/Vampire_Shield_Quest/Spoiler ; https://tibia.fandom.com/index.php?oldid=42285 (pre8 spoiler) ; https://tibia.fandom.com/index.php?oldid=38798 ; https://tibiantis.info/library/quests
 - **Confidence:** medium. The route and door are solid, but the reward set conflicts with Tibiantis.
+- **Our server (2026-09-24):** level-70 gates 33190/33195,31684,14 into one room; chests 33189,31688,14 = uid 1017 dragon lance, 33195,31688,14 = uid 1016 vampire shield (real-map table; which is which: tibiaot74). The box outside the gate was missing: placed at 33188,31682,14, uid 1032 (strange symbol, black pearl, mysterious fetish). Way out needs a rope.
 
 ### Demon Helmet Quest
 - **Alt names:** Demon Quest
@@ -1788,6 +1801,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** yes (chests).
 - **Sources:** https://tibia.fandom.com/wiki/Demon_Helmet_Quest/Spoiler ; https://tibia.fandom.com/index.php?oldid=57772 (pre8 spoiler) ; https://tibia.fandom.com/index.php?oldid=70429 ; Key 6010 2006 rev https://tibia.fandom.com/index.php?oldid=38655 ; https://tibiantis.info/library/quests
 - **Confidence:** medium-high. The Key 6010 gating is not in 7.x-era text.
+- **Our server (2026-09-24):** Gate of the Lost Souls: switch tiles 33190/33191,31629,13 (aid 50665), wall 33210-33212,31630,13, open while both are held. Door 33211,31634,13 = key 6010 (Parchment Room). Quest-room switch 33330,31591,15 (aid 50666) removes the stone 33314,31592,15 and opens the portal 33316,31591,15 -> 33328,31592,14. Route: level-100 gate 33211,31638,13 -> ... -> portal 33278,31592,11 -> hole 33293,31592,12 (two floors) -> portal 33324,31592,14 -> room.
 
 ### Parchment Room Quest
 - **Alt names:** —
@@ -1803,6 +1817,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** yes.
 - **Sources:** https://tibia.fandom.com/wiki/Parchment_Room_Quest/Spoiler ; https://tibia.fandom.com/index.php?oldid=66537 ; https://tibia.fandom.com/index.php?oldid=51239 ; https://tibiantis.info/library/quests
 - **Confidence:** high. The detailed steps come from the current wiki, while the 7.x text is a stub that agrees with it.
+- **Our server (2026-09-24):** pick spot 33094,31626,13 (rope spot below), gravestone 33071,31619,14, teleporter 33070,31620,14 -> 33070,31624,15; coffin 33063,31624,15 uid 10057 under the seal (aid 51010; 4 demons at 33060/33066,31623/31627,15; back after 60 s). Way out: stairs up to 33054,31618,13, sewer grate 33072,31622,13 down, rope up at the pick hole.
 
 ### Ring Quest
 - **Alt names:** —
@@ -1814,6 +1829,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** yes (chests).
 - **Sources:** https://tibia.fandom.com/wiki/Ring_Quest/Spoiler ; https://tibia.fandom.com/wiki/Ring_Quest ; https://tibiantis.info/library/quests
 - **Confidence:** medium.
+- **Our server (2026-09-24):** both chests were missing: placed at 33131/33134,31624,15 (tibiaot74's spots, the empty gaps in the room), uid 2169 time ring, 2207 sword ring. No level; the way out needs a rope.
 
 ### Wedding Ring Quest (Edron Hero Cave)
 - **Alt names:** —. In 2006 the wiki page "Wedding Ring Quest" redirected to the Kazordoon **Longsword Quest**, which also gives a Wedding Ring. Don't confuse the two.
@@ -1825,6 +1841,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** yes.
 - **Sources:** https://tibia.fandom.com/wiki/Wedding_Ring_Quest/Spoiler ; https://tibia.fandom.com/index.php?oldid=73682 (2006 redirect) ; https://tibiantis.info/library/quests
 - **Confidence:** medium-low.
+- **Our server (2026-09-24):** both chests were missing: placed at 33158,31621-31622,15 (tibiaot74's spots), uid 2121 wedding ring, 2201 dragon necklace. No level; rope out.
 
 ### Double Hero Quest
 - **Alt names:** Hero Quest, Red Gem Quest
@@ -1842,6 +1859,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=59244 ; https://tibia.fandom.com/index.php?oldid=32239 ; https://tibia.fandom.com/wiki/Double_Hero_Quest/Spoiler
 - **Confidence:** high.
+- **Our server (2026-09-24):** boxes 33109/33110,31679,13 (on our map) = uid 4522 club ring, 4523 red gem (real-map table). No level; rope out.
 
 ### Triple UH Rune Quest (now "Adorned UH Rune Quest")
 - **Alt names:** Triple UH Rune Quest (7.x name)
@@ -1853,6 +1871,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=54428 ; https://tibia.fandom.com/index.php?oldid=40228 ; https://tibia.fandom.com/wiki/Adorned_UH_Rune_Quest ; https://tibiantis.info/library/quests
 - **Confidence:** medium. The 5 Mana Fluids appear only in the 2006 infobox, and Tibiantis lists only the rune.
+- **Our server (2026-09-24):** the box was missing: placed at 33136,31601,15 (the 5-monk floor; tibiaot74's spot), uid 1015 = 5 mana fluids + UH rune with 3 charges (real-map table and TibiaWiki 2006). No level; rope out.
 
 ### Edron Orc Cave quests (Barbarian Axe, Berserker Treasure, Dark Armor, Poison Daggers, Shaman Treasure)
 All five are in the same cave, and the wiki advises doing them in one trip.
@@ -1877,6 +1896,7 @@ All five are in the same cave, and the wiki advises doing them in one trip.
 - **Once:** yes (each chest/corpse).
 - **Sources:** https://tibia.fandom.com/index.php?oldid=23978 (Dark Armor pre8 spoiler) ; https://tibia.fandom.com/wiki/Barbarian_Axe_Quest/Spoiler ; https://tibia.fandom.com/wiki/Berserker_Treasure_Quest/Spoiler ; https://tibia.fandom.com/wiki/Poison_Daggers_Quest/Spoiler ; https://tibia.fandom.com/wiki/Shaman_Treasure_Quest/Spoiler ; infobox revisions oldid=30000, 30002, 30004, 30018, 30020 ; https://tibiantis.info/library/quests
 - **Confidence:** high for existence and rewards. Only the Dark Armor route is described in 7.x-era text. The other four routes come from current (2009-2023) text.
+- **Our server (2026-09-24):** the entrance hole drops into a pocket closed by a stone (33171,31897,8); the lever on the counter 33172,31896,8 (on the original map, unscripted) now removes it (aid 51024, tibiaot74's script). All five containers were missing, placed at tibiaot74's spots with real-map table uids: Shaman Treasure dead skeleton 33127,31885,9 uid 1033 (3 blank runes); Poison Daggers chest 33155,31880,11 uid 1034 (backpack: 2 poison daggers, 30 poison arrows); Dark Armor dead skeleton 33176,31871,12 uid 4521; Barbarian Axe box 33185,31945,11 uid 1030 (barbarian axe + scimitar in one box, as the real map's single uid); Berserker Treasure box 33199,31923,11 uid 1031 (3 white pearls, 175 gp). Rope and shovel to get out.
 
 ### Edron Goblin Quest
 - **Alt names:** Goblin King's Treasure
@@ -1891,6 +1911,7 @@ All five are in the same cave, and the wiki advises doing them in one trip.
 - **Once:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=23973 ; https://tibia.fandom.com/wiki/Edron_Goblin_Quest/Spoiler
 - **Confidence:** high.
+- **Our server (2026-09-24):** the two chests were missing: placed at 33095,31800-31801,10 next to the throne, uid 1028 steel shield, 1029 silver amulet (real-map table; the Thais Silver Amulet box moved to uid 2170). The grassy area's pitfall (grass 293 at 33128,31810,7) is the way back; pitfall.lua now drops the player through it.
 
 ### Troll Cave Quest
 - **Alt names:** Brass Legs Quest
@@ -1902,6 +1923,7 @@ All five are in the same cave, and the wiki advises doing them in one trip.
 - **Once:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=24006 ; https://tibia.fandom.com/wiki/Troll_Cave_Quest/Spoiler
 - **Confidence:** high.
+- **Our server (2026-09-24):** the two boxes were missing: placed at 33143,31719/31721,10, uid 1026 brass legs, 1027 garlic necklace (150 charges). Way back through the grassy area's pitfall.
 
 ### Fire Axe Quest
 - **Alt names:** Triple DL Quest
@@ -1919,6 +1941,7 @@ All five are in the same cave, and the wiki advises doing them in one trip.
 - **Once:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=56723 ; https://tibia.fandom.com/index.php?oldid=30010 ; https://tibia.fandom.com/wiki/Fire_Axe_Quest/Spoiler ; https://tibiantis.info/library/quests ; https://tibiantis.life/
 - **Confidence:** medium (rewards conflict).
+- **Our server (2026-09-24):** level-60 gate 33085,31650,10 and pick spot 33081,31651,11 on our map; both containers were missing: chest 33078,31656,11 uid 1019 (ring of healing, dragon necklace, 7 small diamonds), dead skeleton 33084,31650,12 uid 1018 (fire axe) - tibiaot74's spots, real-map table contents.
 
 ### Postman Missions Quest
 - **Alt names:** Postman Quest, Postmans Quest

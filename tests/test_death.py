@@ -52,6 +52,36 @@ def test_promotion_only_works_with_premium(new_player, db, premium_days, describ
     assert db.character(p.character.guid)["vocation"] == ELITE_KNIGHT, "the saved promotion was lost"
 
 
+SORCERER, MASTER_SORCERER = 1, 5
+
+
+def _described_as(c):
+    start = len(c.text_messages)
+    c.look(c.pos, 0x63, 1)
+    assert c.wait_for(lambda: any("You see yourself" in t for _, t in c.text_messages[start:]), timeout=3)
+    return next(t for _, t in c.text_messages[start:] if "You see yourself" in t)
+
+
+def test_promotion_is_suspended_without_premium_and_back_with_it(new_player, db, server, items):
+    """A master sorcerer whose premium ran out plays and shows as a sorcerer (TibiaWiki: promotions are
+    "suspended when Premium Time expires [...] if you obtain another Premium Time, you will regain access"); the
+    next login with premium is a master sorcerer again."""
+    p = new_player(pos=ROAD, level=30, vocation=MASTER_SORCERER, premium_days=0, storage={30001: 1})
+    assert "You are a sorcerer." in _described_as(p)
+    character = p.character
+    p.logout()
+    assert db.character(character.guid)["vocation"] == MASTER_SORCERER, "the saved promotion was lost"
+    con = db._connect()
+    con.execute("UPDATE accounts SET premend = strftime('%s', 'now') + 30 * 86400 WHERE id = ?", (character.account,))
+    con.commit()
+    con.close()
+    again = GameClient(items, port=server.port).login(character.account, character.password, character.name)
+    try:
+        assert "You are a master sorcerer." in _described_as(again)
+    finally:
+        again.logout()
+
+
 def test_dying_back_to_rookgaard_keeps_the_new_bag(new_player, db):
     """Sent to Rookgaard by a death: the starter set used to land in the mainland corpse."""
     killer = _killer(new_player, ROAD)

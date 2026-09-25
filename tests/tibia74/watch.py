@@ -6,7 +6,8 @@
 
 Log in with the real client as 9 / 9 (GM Mintwall - the test database is seed.sql) and type the /goto the
 test prints. The quest character waits until it sees you next to it, then walks at a pace you can follow,
-and stays a few seconds after the test before logging out.
+and stays a few seconds after the test before logging out. MINTWALL_WATCH_WAIT=0: no waiting, it only
+prints each character's name (to /goto it yourself).
 """
 import os
 import sys
@@ -16,15 +17,20 @@ WATCH = os.environ.get("MINTWALL_WATCH", "") not in ("", "0")
 STEP_DELAY = float(os.environ.get("MINTWALL_WATCH_STEP", "0.35")) if WATCH else 0.0
 END_PAUSE = float(os.environ.get("MINTWALL_WATCH_END", "6")) if WATCH else 0.0
 VIEWER = os.environ.get("MINTWALL_WATCH_VIEWER", "GM Mintwall")
+WAIT = float(os.environ.get("MINTWALL_WATCH_WAIT", "180"))   # 0: do not wait for the viewer, just say who runs
 
 
 def say(text):
     print(f"\n[watch] {text}", file=sys.stderr, flush=True)
 
 
-def wait_for_viewer(p, timeout=180):
+def wait_for_viewer(p, timeout=None):
     """Hold the test until the viewer (a GM in the real client) stands in view of this character."""
     if not WATCH:
+        return
+    timeout = WAIT if timeout is None else timeout
+    if timeout <= 0:
+        say(f"running: {p.name} at {p.pos}   (/goto {p.name})")
         return
     say(f"log in as 9/9 ({VIEWER}) and type:  /goto {p.name}    (waiting up to {timeout} s)")
     seen = p.wait_for(lambda: any(c.name == VIEWER for c in p.creatures.values()), timeout=timeout)

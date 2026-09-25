@@ -177,3 +177,61 @@ def take(p, items, container, name, into=3):
     p.move_item(p.container_pos(source, n), item.client_id, n, p.container_pos(target, 0), max(item.count, 1))
     bag = p.containers[target]
     assert p.wait_for(lambda: any(i.name == name for i in bag.items), timeout=3),         f"{name} not taken: {p.text_messages[-2:]}"
+
+
+# ------------------------------------------------------------------------------------------ quest rules
+# The questions every quest answers (see .claude/skills/quest-testing): can you get in, what level / vocation /
+# key / storage lets you, can you get out again. These check one rule each, the way a player meets it.
+
+def step_onto(p, pos):
+    """One step from a neighbouring tile onto pos - for a floor change the route planner cannot know (a trapdoor,
+    stairs or a portal a switch has just made)."""
+    from .route import DIRECTIONS
+    d = DIRECTIONS[(pos[0] - p.pos[0], pos[1] - p.pos[1])]
+    before = p.pos
+    p.step(d)
+    assert p.wait_for(lambda: p.pos != before, timeout=3), f"could not step from {before} onto {pos}"
+
+
+def assert_level_door(new_player, items, door, outside, level, *, vocation=4, gate="gate of expertise"):
+    """A level door (gate of expertise, action id 1000 + level): a character of level - 1 standing at `outside`
+    is refused ("Only the worthy may pass.") and stays; one of exactly `level` passes into the doorway.
+    Testers (monsters leave them alone) with no GM access - access skips the check (gateofexp_closed.lua)."""
+    from .server import TESTER_GROUP
+    below = new_player(pos=outside, level=level - 1, vocation=vocation, group_id=TESTER_GROUP, storage={30001: 1})
+    assert below.pos == tuple(outside), f"level {level - 1} did not start at {outside}: {below.pos}"
+    use_map_item(below, items, door, gate)
+    assert below.wait_for(lambda: below.messages("Only the worthy may pass."), timeout=3), \
+        f"level {level - 1} was not refused at {door}: {below.text_messages[-2:]}"
+    below.sleep(0.5)
+    assert below.pos == tuple(outside), f"level {level - 1} got through {door}: {below.pos}"
+    below.logout()
+
+    worthy = new_player(pos=outside, level=level, vocation=vocation, group_id=TESTER_GROUP, storage={30001: 1})
+    use_map_item(worthy, items, door, gate)
+    assert worthy.wait_for(lambda: worthy.pos == tuple(door), timeout=3), \
+        f"level {level} did not pass {door}: at {worthy.pos}, {worthy.text_messages[-2:]}"
+    worthy.logout()
+
+
+def way(world, start, goal, **ability):
+    """The planned route from start to goal (list of steps), or None if the map has no way for this character.
+    A static check on the map as it is at server start (switches and portals a script makes are not in it)."""
+    from .route import RouteError, plan
+    try:
+        return plan(world, start, goal, **ability)
+    except RouteError:
+        return None
+
+
+def assert_way(world, start, goal, **ability):
+    steps = way(world, start, goal, **ability)
+    assert steps is not None, f"no way from {start} to {goal} with {ability}"
+    return steps
+
+
+def assert_no_way(world, start, goal, **ability):
+    """E.g. no way into a quest without its key, or no way out of a room whose exit a switch has to open."""
+    steps = way(world, start, goal, **ability)
+    assert steps is None, f"a way from {start} to {goal} with {ability}: " \
+                          f"{[(s.kind, s.target) for s in steps if s.kind != 'walk']}"

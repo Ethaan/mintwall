@@ -1,5 +1,5 @@
 """Gives an item on a tile of an OTBM map file an action id and/or unique id, or a teleport a new destination
-(--teleport x,y,z), in place (keeps a .bak the first time).
+(--teleport x,y,z), or puts a new item on a tile (--add), in place (keeps a .bak the first time).
 
     python tools\\map-set-attrs.py server\\data\\world\\Tibia74.otbm 32084,32181,8 --id 405 --aid 2000 --uid 2485
 
@@ -14,8 +14,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tests"))
 
-from tibia74.otbm import (ATTR_ACTION_ID, ATTR_ITEM, ATTR_TELE_DEST, ATTR_TILE_FLAGS, ATTR_UNIQUE_ID,  # noqa: E402
-                          OTBM_HOUSETILE, OTBM_ITEM, OTBM_TILE, OTBM_TILE_AREA, read_tiles)
+from tibia74.otbm import (ATTR_ACTION_ID, ATTR_COUNT, ATTR_ITEM, ATTR_TELE_DEST, ATTR_TILE_FLAGS, ATTR_UNIQUE_ID,  # noqa: E402
+                          OTBM_HOUSETILE, OTBM_ITEM, OTBM_TILE, OTBM_TILE_AREA, _item_attrs_strict, read_tiles)
 
 NODE_START, NODE_END, ESCAPE = 0xFE, 0xFF, 0xFD
 
@@ -52,6 +52,7 @@ def find_tile(raw: bytes, target: tuple):
                 pos = (base[0] + props[0], base[1] + props[1], base[2])
                 if pos == target:
                     tile["start"], tile["props_end"], tile["type"], tile["props"] = start, props_end, ntype, bytes(props)
+                    tile["end"] = i                  # its NODE_END: a new item goes right before it (on top)
                     return tile
                 tile = None
             elif ntype == OTBM_ITEM and len(stack) >= 1 and stack[-1][0] in (OTBM_TILE, OTBM_HOUSETILE):
@@ -104,9 +105,20 @@ def main():
     ap.add_argument("--aid", type=int)
     ap.add_argument("--uid", type=int)
     ap.add_argument("--teleport", help="x,y,z: the new destination of the teleport")
+    ap.add_argument("--contents", default="",
+                    help='with --add: items inside the new container, e.g. "2465,2460,2388,2399x4" (id or idxcount)')
+    ap.add_argument("--add", action="store_true",
+                    help="put a new item --id (with --aid/--uid) on top of the tile instead of editing one there")
+    ap.add_argument("--bottom", action="store_true",
+                    help="with --add: put the new item right above the ground, under what lies there (a lever under a "
+                         "fire field and a corpse)")
+    ap.add_argument("--top", action="store_true",
+                    help="two or more of the item on the tile (stacked boxes): take the top one - the one a use opens")
+    ap.add_argument("--replace", action="store_true",
+                    help="the item already has an action / unique id (and nothing else): replace them")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
-    if args.aid is None and args.uid is None and args.teleport is None:
+    if args.aid is None and args.uid is None and args.teleport is None and not args.add:
         ap.error("give --aid and/or --uid, or --teleport")
 
     target = tuple(int(v) for v in args.pos.split(","))
@@ -121,8 +133,26 @@ def main():
     if tile is None:
         raise SystemExit(f"no tile at {target}")
 
-    item = next((it for it in tile["items"] if struct.unpack_from("<H", it["props"], 0)[0] == args.id), None)
-    if args.teleport is not None:
+    matching = [it for it in tile["items"] if struct.unpack_from("<H", it["props"], 0)[0] == args.id]
+    item = (matching[-1] if args.top else matching[0]) if matching else None
+    if args.add:
+        start = end = tile["end"]
+        if args.bottom:
+            if inline_ground(tile) is not None:
+                start = end = tile["props_end"]              # the ground is in the tile's props: first child
+            else:
+                ground = tile["items"][0]                    # the ground's node (no children): right after it
+                if raw[ground["props_end"]] != NODE_END:
+                    raise SystemExit(f"the ground on {target} has children - edit it by hand")
+                start = end = ground["props_end"] + 1
+        children = b""
+        for part in filter(None, args.contents.split(",")):
+            cid, _, count = part.partition("x")
+            props = struct.pack("<H", int(cid)) + (bytes([ATTR_COUNT, int(count)]) if count else b"")
+            children += bytes([NODE_START, OTBM_ITEM]) + escape(props) + bytes([NODE_END])
+        new = bytes([NODE_START, OTBM_ITEM]) + escape(with_ids(struct.pack("<H", args.id), args.aid, args.uid))             + children + bytes([NODE_END])
+        what = "new item above the ground" if args.bottom else "new item on top"
+    elif args.teleport is not None:
         props = item["props"] if item is not None else b""
         if len(props) != 8 or props[2] != ATTR_TELE_DEST:
             raise SystemExit(f"no teleport {args.id} (with only a destination) on {target}")
@@ -132,7 +162,13 @@ def main():
         what = f"teleport {struct.unpack_from('<HHB', props, 3)} -> {dest}"
     elif item is not None:
         if len(item["props"]) > 2:
-            raise SystemExit(f"item {args.id} on {target} already has attributes - edit it by hand")
+            # other attributes (a text, a count): the ids go after them, unless it already has one
+            attrs = _item_attrs_strict(item["props"], 2)
+            if "unknown" in attrs or (("action_id" in attrs or "unique_id" in attrs) and
+                                      not (args.replace and set(attrs) <= {"action_id", "unique_id"})):
+                raise SystemExit(f"item {args.id} on {target} already has {attrs} - edit it by hand (or --replace)")
+            if args.replace:                     # only ids on it: write them anew
+                item["props"] = item["props"][:2]
         start, end = item["start"] + 2, item["props_end"]
         new = escape(with_ids(item["props"], args.aid, args.uid))
         what = "item node"

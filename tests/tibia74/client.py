@@ -229,6 +229,18 @@ class GameClient:
                 return False
         return self.pos[:2] == (tx, ty)
 
+    def auto_walk(self, directions: list):
+        """Walk a whole path in one request (0x64), like clicking on the map in the real client: the server steps
+        it at the character's speed. The 7.4 client numbers directions 1 E, 2 NE, 3 N, 4 NW, 5 W, 6 SW, 7 S, 8 SE."""
+        raw = {EAST: 1, NORTHEAST: 2, NORTH: 3, NORTHWEST: 4, WEST: 5, SOUTHWEST: 6, SOUTH: 7, SOUTHEAST: 8}
+        w = Writer().u8(0x64).u8(len(directions))
+        for d in directions:
+            w.u8(raw[d])
+        self._send(w)
+
+    def stop_auto_walk(self):
+        self._send(Writer().u8(0x69))
+
     def turn(self, direction: int):
         """Turn without stepping (0x6F-0x72, like ctrl + arrow): direction spells go the way you face."""
         self._send(Writer().u8(0x6F + direction))

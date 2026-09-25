@@ -14,26 +14,6 @@ function onCreatureDisappear(cid) 			npcHandler:onCreatureDisappear(cid) end
 function onCreatureSay(cid, type, msg) 	npcHandler:onCreatureSay(cid, type, msg) end
 function onThink() 						npcHandler:onThink() end
 
-	function FocusModule:init(handler)
-	FOCUS_GREETSWORDS = {'hi', 'hello', 'salutations', 'hail'}
-	FOCUS_FAREWELLSWORDS = {'bye', 'farewell', 'see ya'}
-		self.npcHandler = handler
-		for i, word in pairs(FOCUS_GREETSWORDS) do
-			local obj = {}
-			table.insert(obj, word)
-			obj.callback = FOCUS_GREETSWORDS.callback or FocusModule.messageMatcher
-			handler.keywordHandler:addKeyword(obj, FocusModule.onGreet, {module = self})
-		end
-		
-		for i, word in pairs(FOCUS_FAREWELLSWORDS) do
-			local obj = {}
-			table.insert(obj, word)
-			obj.callback = FOCUS_FAREWELLSWORDS.callback or FocusModule.messageMatcher
-			handler.keywordHandler:addKeyword(obj, FocusModule.onFarewell, {module = self})
-		end
-		
-		return true
-	end
 
 local shopModule = ShopModule:new()
 npcHandler:addModule(shopModule)
@@ -200,4 +180,16 @@ end
 
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
-npcHandler:addModule(FocusModule:new())
+-- Wyat also answers "salutations"/"hail" and "see ya" - for himself only (this used to replace
+-- FocusModule:init for every NPC loaded after him; NPCs share one Lua state).
+local focus = FocusModule:new()
+function focus:init(handler)
+	self.npcHandler = handler
+	for _, word in ipairs({'hi', 'hello', 'salutations', 'hail'}) do
+		handler.keywordHandler:addKeyword({word, callback = FocusModule.messageMatcher}, FocusModule.onGreet, {module = self})
+	end
+	for _, word in ipairs({'bye', 'farewell', 'see ya'}) do
+		handler.keywordHandler:addKeyword({word, callback = FocusModule.messageMatcher}, FocusModule.onFarewell, {module = self})
+	end
+end
+npcHandler:addModule(focus)

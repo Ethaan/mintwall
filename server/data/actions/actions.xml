@@ -168,6 +168,16 @@
     <action actionid="50006" script="quests/rook_academy_arena.lua"/>   <!-- Academy arena lever: wolf gate -->
     <action actionid="50007" script="quests/rook_academy_arena.lua"/>   <!-- Academy arena lever: troll gate -->
     <action actionid="50008" script="quests/rook_academy_arena.lua"/>   <!-- Academy arena lever: spider gate -->
+    <action actionid="51001" script="quests/thais_lighthouse.lua"/>   <!-- Thais Lighthouse: switch under the crates -->
+    <action actionid="51003" script="quests/thais_lighthouse.lua"/>   <!-- Thais Lighthouse: portal lever -->
+    <action actionid="50666" script="quests/demon_helmet_switch.lua"/>   <!-- Demon Helmet: opens the boxes and the way out -->
+    <action actionid="51011" script="quests/annihilator_lever.lua"/>   <!-- Annihilator: the lever -->
+    <action actionid="51016" script="quests/mintwallin_cyclops_wall.lua"/>   <!-- Mintwallin Cyclops: moving wall -->
+    <action actionid="51019" script="quests/mintwallin_grate.lua"/>   <!-- Devil Helmet: the shut grate -->
+    <action actionid="51020" script="quests/triangle_tower_lever.lua"/>   <!-- Triangle Tower: the desert lever -->
+    <action actionid="51021" script="quests/behemoth_lever.lua"/>   <!-- Behemoth Quest: the lever that moves the stones -->
+    <action actionid="51024" script="quests/edron_orc_cave_lever.lua"/>   <!-- Edron Orc Cave: the stone at the entrance -->
+    <action actionid="54545" script="draw_well_down.lua"/>   <!-- wells you climb down (Fibula, Ancient Temple) -->
 
     <!-- Doors -->
 	<action itemid="1209" script="doors/door_locked.lua"/>

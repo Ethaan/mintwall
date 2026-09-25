@@ -312,7 +312,8 @@ bool IOMapOTBM::loadMap(Map* map, const std::string& identifier)
 							}
 							else{
 								tile->__internalAddThing(item);
-								item->__startDecaying();
+								// items the map places never decay (7.4: the dead humans and skeletons lying in caves stay; with decay
+								// started here a dead skeleton was gone 10 minutes after each start). Moved later, they decay as usual.
 								item->loadedOnMap = true;
 							}
 							
@@ -350,7 +351,8 @@ bool IOMapOTBM::loadMap(Map* map, const std::string& identifier)
 								}
 								else{
 									tile->__internalAddThing(item);
-									item->__startDecaying();
+									// items the map places never decay (7.4: the dead humans and skeletons lying in caves stay; with decay
+								// started here a dead skeleton was gone 10 minutes after each start). Moved later, they decay as usual.
 									item->loadedOnMap = true;
 
 									if(isHouseTile){

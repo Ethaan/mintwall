@@ -200,6 +200,13 @@
         <movevent event="StepOut" itemid="425" script="switch_tile.lua" />
         <movevent event="StepIn"  itemid="426" script="switch_tile.lua" />
         <movevent event="StepIn"  actionid="50003" script="premium_tile.lua" />
+        <movevent event="StepIn"  actionid="51002" script="thais_lighthouse_step.lua" />   <!-- Thais Lighthouse step switch -->
+        <movevent event="StepOut" actionid="51002" script="thais_lighthouse_step.lua" />
+        <movevent event="StepIn"  actionid="50665" script="lost_souls_gate.lua" />   <!-- Hero Cave: Gate of the Lost Souls switches -->
+        <movevent event="StepOut" actionid="50665" script="lost_souls_gate.lua" />
+        <movevent event="RemoveItem" actionid="51010" script="parchment_room_seal.lua" />   <!-- Parchment Room: the seal on the coffin -->
+        <movevent event="StepIn"  actionid="51018" script="mintwallin_grate_switch.lua" />   <!-- Devil Helmet: opens the grate -->
+        <movevent event="StepOut" actionid="51018" script="mintwallin_grate_switch.lua" />
         <movevent event="StepIn"  itemid="446" script="switch_tile.lua" />
         <movevent event="StepOut" itemid="447" script="switch_tile.lua" />
 

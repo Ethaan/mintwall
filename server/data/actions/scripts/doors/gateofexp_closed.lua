@@ -19,14 +19,17 @@ function onUse(cid, item, frompos, item2, topos)
 		canEnter = false
 	end
 
+	-- A base vocation's door (1-4) lets in that vocation promoted or not: a master sorcerer is a sorcerer. A
+	-- promoted door (5-8) only the promoted one - and a promotion without premium is suspended (IOPlayer::loadPlayer
+	-- plays it as the base vocation), so a free account's master sorcerer passes the sorcerer door only.
+	-- (Was: every door also required the exact vocation id, so no promoted character passed a base door.)
 	if (isVocationDoor) then
 		local doorVoc = item.actionid-2000
-		if (doorVoc == 1 and not(isSorcerer(cid))) or
-		   (doorVoc == 2 and not(isDruid(cid)))    or
-		   (doorVoc == 3 and not(isPaladin(cid)))  or
-		   (doorVoc == 4 and not(isKnight(cid)))   or
-		   (doorVoc ~= getPlayerVocation(cid))     then
-			canEnter = false
+		local voc = getPlayerVocation(cid)
+		if doorVoc <= 4 then
+			canEnter = (voc == doorVoc or voc == doorVoc + 4)
+		else
+			canEnter = (voc == doorVoc)
 		end
 	end
 

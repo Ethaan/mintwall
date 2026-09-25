@@ -60,3 +60,17 @@ def test_everything_the_npc_buys_can_be_obtained(name):
            if item.item_id not in OBTAINABLE]
     assert not bad, "no monster drops these and no NPC sells them: " + ", ".join(bad)
 
+
+
+def test_no_npc_script_changes_the_shared_npc_library():
+    """All NPCs share one Lua state (context.md "Script compatibility layer"): a script that redefines a library
+    function - `function FocusModule:init` - changes it for every NPC set up after it. A Lost Soul made the greeting
+    words gibberish that way and A Prisoner (and others, by load order) could no longer be greeted with "hi".
+    Customise an instance instead: `local focus = FocusModule:new(); function focus:init(handler) ... end`."""
+    offenders = []
+    for path in (SERVER_DIR / "data" / "npc" / "scripts").glob("*.lua"):
+        text = path.read_text(encoding="latin-1")
+        for m in re.finditer(r"^\s*function\s+(FocusModule|NpcHandler|KeywordHandler|ShopModule|StdModule|"
+                             r"TravelModule|NpcSystem)[.:]\w+", text, re.M):
+            offenders.append(f"{path.name}: {m.group(0).strip()}")
+    assert not offenders, "\n".join(offenders)

@@ -96,6 +96,58 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       onto the field beside it, which sent you straight back out - nobody could get in (the JS engine's map has the
       same data). Destination now (32081,32172,9) as on tibiaot74's map; test_route.py checks no teleport lands on
       another (the only such case of 168)
+- [x] Quest tests split (2026-09-24): tests/test_quests.py became tests/quests/<city>/test_<quest>.py (27 files, the
+      same 50 tests) + quests/common.py (temples, item ids, edron_player). "test_quests.py::test_x" below = the test
+      of that name in its quest's file
+- [x] Quest testing skill (.claude/skills/quest-testing): research -> questions -> map -> scripts -> tests -> record.
+      Framework: tibia74/quest.py assert_level_door (level - 1 refused, level passes), way / assert_way /
+      assert_no_way (way in, way out, key needed), step_onto; tools/map-regions.py (why the planner cannot get
+      somewhere), tools/map-set-attrs.py. Rule tests: test_quests.py *_rules, test_demon_helmet_level_door
+- [x] Vocation doors (gateofexp_closed.lua): a promoted character was kept out of its base vocation's door. Fixed
+      2026-09-24: a base door (action id 2001-2004) lets in the vocation promoted or not (a master sorcerer is a
+      sorcerer); a promoted door (2005-2008) only the promoted one. Our map has NO vocation door (no action id
+      2001-2008 anywhere) - so no in-game test yet:
+  - [ ] Test the vocation door rules with the first quest that has one (Desert Dungeon Quest is "one of each
+        vocation" - check how our map does it)
+- [x] Promotion without premium (checked 2026-09-24): suspended - plays and shows as the base vocation, the saved
+      vocation stays promoted, back with premium (current TibiaWiki; the 2005 page only says buying needs premium).
+      test_death.py::test_promotion_only_works_with_premium, test_promotion_is_suspended_without_premium_and_back_with_it
+      (master sorcerer). Premium is checked at login only - by design, as real Tibia (context.md "Gotchas")
+- [ ] Premium runs out -> free (today: only the promotion is suspended; nothing else happens). What the user wants
+      (2026-09-24), to check against sources before building:
+      - at the next login a character standing in a premium area goes to the Thais temple (and Thais becomes its
+        home town?)
+      - the outfit goes back to the free (noob) one
+      - the house is lost; its items go to the Thais depot - but items in the depots of premium cities (Edron,
+        Ankrahmun...) stay there
+      Tibiantis FAQ (scratchpad to_faq.html.txt): "Houses are lost during the next server save, character is moved
+      out of premium area upon the next login, promotion is deactivated [...] The selected premium outfit can still
+      be used until it is changed." Open questions: outfit (noob at once vs kept until changed, as Tibiantis)?
+      moved where exactly (Thais temple, or the nearest free town)? house items: to the depot of the house's town
+      or always Thais (7.4 rule)? which areas count as premium (map premium tiles / towns)? Tests for each rule
+- [ ] Daily server save. Today only the 10-minute background save exists (nobody kicked) - so premium never ends
+      for someone who never logs out (idle kick aside), and "respawns at server save" never happens.
+      Tibiantis (7.4 server, FAQ): every day 9:00 CET, ~10 minutes offline, no login in the last 5 minutes before;
+      never reset the world. Its trivia: only map squares with the "refresh" flag are reset (daily respawns); other
+      squares keep what lies there even across the save (people hide loot bags for days).
+      Our map has NO refresh-flag squares (checked 2026-09-24: 47,244 protection-zone tiles, 81 no-logout, 0
+      refresh) - a refresh-style reset first needs the squares chosen (quest spots, daily chests) and marked.
+      To decide with the user: the hour (3 AM?); warnings before (real Tibia broadcast minutes ahead); kick +
+      restart vs kick + in-place reset; what resets (refresh-flag tiles only, like Tibiantis? quest spots: Small
+      Axe box, Katana cave body, Captain Iglue's daily chest; houses of expired premium); some servers also clean
+      the whole map every 1-2 weeks - wanted?
+      Safety: scheduled by the server itself (config: hour), NOT a GM command (too risky, per the user); if a
+      manual trigger is ever needed, console / admin-only with a confirmation. Tests: kicked at the hour, refresh
+      tiles reset, other tiles untouched, expired premium applied, no login in the last minutes
+- [ ] Quest objects audit (tools/quest-audit.py, 2026-09-24): of tibiaot74's 166 quest objects our map has 8 scripted,
+      62 standing there without a quest id (e.g. the 4 Annihilator chests 33227-33233,31656,13), 96 missing (the
+      Battle Axe skeleton and the Dead Archer body were two of them). Our map (= the JS engine's) lost many quest
+      containers. Work through them quest by quest with the quest-testing skill - each "missing" one needs sources
+      (tibiaot74 also adds its own things)
+- [ ] Map items decay (found 2026-09-24): the OTBM loader started decay on every map item, so the decorative dead
+      humans (15 min) and dead skeletons (10 min, then gone) in caves vanished after each start. Fixed in
+      iomapotbm.cpp (map items don't decay; moved later, they do) - NEEDS A REBUILD (the dev server was running);
+      then a test (a map skeleton is still there after its 10 minutes)
 - [ ] Quest log: the 7.4 client has none (TibiaWiki: added in 7.9) - revisit later (e.g. a !quests command or the website)
 - [ ] Settle reward / level conflicts per quest (Tibiantis vs TibiaWiki, see quests.md) as each one is done
 
@@ -162,26 +214,122 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
 - [x] Torch Quest - Rookgaard Academy basement (no level; 1 player)
       Done 2026-09-23: academy lever aid 50004 opens the brick wall at 32095,32173,8 (quests/rook_academy_lever.lua;
       wall position from tibiaot74's academy switch); chest uid 2050 = torch. test_quests.py::test_torch_quest
-- [ ] Battle Axe Quest - Thais sewers (SW) (no level; 1 player)
-- [ ] Dead Archer Quest - Thais Troll Cave (E of Thais) (no level; 1 player)
-- [ ] Deeper Fibula Quest - Fibula dungeon (level 50 (door); 1 player)
-- [ ] Devil Helmet Quest - Thais Ancient Temple to Mintwallin (level 30 (door); 2+ (one player holds a floor … player(s))
-- [ ] Geomancer Quest - Mount Sternum undead cave (N of Thais) (no level; 1 player)
-- [ ] Ghoul Room Quest - Thais Ancient Temple (no level; 1 player)
-- [ ] Kingdom of Kormarak Quest (Old Mintwallin) - Thais Ancient Temple (no level; 1 player)
-- [ ] Life Ring Quest - Thais Ancient Temple (S branch) (no level; 1 player)
-- [ ] Mad Mage Room Quest - Thais Ancient Temple, toward Mintwallin (level 40 (door); 1 player)
-- [ ] Mintwallin Cyclops Quest - Thais Ancient Temple, cyclops room (no level; 1 player)
-- [ ] Naginata Quest - Thais Dragon Lair (N of Alatar Lake) (level 40 (door); 1 player)
-- [ ] Noble Armor Quest (Skjaar/DTD) - below Mount Sternum (level 35 (door); 1 player)
-- [ ] Scale Armor Quest - cave W of Ancient Temple entrance (no level; 1 player)
-- [ ] Silver Amulet Quest - Thais Troll Cave cellar (no level; 1 player)
-- [ ] Six Rubies Quest (Double Dragon) - Thais Ancient Temple (no level; 1 player)
-- [ ] Small Ruby Quest - Mintwallin throne room pit (no level; 1 player)
-- [ ] Spike Sword Quest (Fire Devil) - cave E of Mount Sternum / NE of Triangle Tower (no level; 1 player)
-- [ ] Thais Lighthouse Quest (Dark Shield) - Thais lighthouse, SW of Thais (no level; 2 (step switch + lever) player(s))
-- [ ] Throwing Star Quest - Thais Ancient Temple, underground park (no level; 1 player)
-- [ ] Triangle Tower Quest - Triangle Tower (E of Thais, desert edge) (no level; 1 player)
+- [x] Battle Axe Quest - Thais sewers (SW) (no level; 1 player)
+      Done 2026-09-24: the reward container was missing from our map (and the JS engine's): dead skeleton 3103
+      ("You will find the Battle Axe in a dead Skeleton", TibiaWiki 2006) placed at 32305,32254,9 (tibiaot74's spot)
+      with aid 2000 uid 1658 (real-map table: battle axe, sewers); REWARDS[1658]. Pick spot 32302,32257,8 and the 4
+      cave rats were already there. tools/map-set-attrs.py --add puts new items on a tile.
+      test_quests.py::test_battle_axe_quest (Thais temple, sewer grate, pick, loot, rope out), test_battle_axe_rules
+- [x] Dead Archer Quest - Thais Troll Cave (E of Thais) (no level; 1 player)
+      Done 2026-09-24: the body was missing from our map (and the JS engine's): dead human 3129 at 32513,32302,10 (north
+      end of the slime room; tibiaot74's spot) with aid 2000 uid 1662 (real-map table); REWARDS[1662] = bow, 5 poison
+      arrows, mana fluid, life fluid (TibiaWiki pre-8.0, Tibiantis, real-map table). Shovel hole 32493,32259,7.
+      test_quests.py::test_dead_archer_quest, test_dead_archer_rules
+  - [ ] Quest messages say "You have found a vial." for any fluid (describe() uses the item name) - check what 7.4
+        said (e.g. "a vial of mana fluid"?)
+- [x] Deeper Fibula Quest - Fibula dungeon (level 50 (door); 1 player)
+      Done 2026-09-24. Nothing worked before: the Fibula well (action id 54545) had no script (now
+      draw_well_down.lua: down to the ladder below; also the Ancient Temple's well at 32508,32176,13); the dungeon
+      door 32190,32432,8 and the dragon-cave door 32277,32420,10 had no key numbers (now 3940 - Dermot sells it,
+      2000 gp - and 3980); key 3980 lies in the small hole 32219,32401,10 under a crate ("found by useing on a
+      hole", TibiaWiki 2006); four of the five reward bodies were missing (placed where tibiaot74 has them).
+      Real-map table ids 10014-10019 (REWARDS). test_quests.py::test_deeper_fibula_quest (from the Thais temple),
+      test_deeper_fibula_level_door (49 refused, 50 passes), test_deeper_fibula_rules.
+      Router: auto-walk (the client's map click, packet 0x64), wells, pushing barrels/crates aside (thrown up
+      to 3 tiles in a one-tile passage), trying each carried key on a locked door, only doors/gates count as doors
+      (ovens and lamps use the same script)
+- [x] Devil Helmet Quest - Thais Ancient Temple to Mintwallin (level 30 (door); 2+ (one player holds a floor … player(s))
+      Done 2026-09-24: the switch tile 32468,32119,14 (aid 51018, movements/mintwallin_grate_switch.lua) turns the
+      grate's ground 32482,32170,14 into a hole while someone stands on it (as tibiaot74); the grate (aid 51019) is
+      shut otherwise - it used to open for anyone, so one player could do it alone (TibiaWiki: at least 2). Lab doors
+      32462,32153,14 and 32462,32151,15 = key 3610; the lab had no container: box 32459,32144,15 uid 3613 (real-map
+      table: devil helmet, halberd, 4 small sapphires). quests/thais/test_devil_helmet.py (hero + friend on the switch,
+      level-30 door, rules). Router: a sewer grate with its own action id is left to its script
+- [x] Geomancer Quest - Mount Sternum undead cave (N of Thais) (no level; 1 player)
+      Done 2026-09-24: the box was missing ("The quest box is on the east side of the room", TibiaWiki 2006): box
+      32456,32008,13 (tibiaot74's spot), uid 3617 = small sapphire, small diamond, dwarven ring (real-map table, one
+      container). quests/thais/test_geomancer.py
+- [x] Ghoul Room Quest - Thais Ancient Temple (no level; 1 player)
+      Done 2026-09-24: key skeleton missing (dead skeleton 32509,32181,13 added at tibiaot74's spot, uid 3601 = key
+      3600), the door 32506,32175,14 had no key number (now 3600), the well 32508,32176,13 is the 54545 one; reward
+      [3602] garlic necklace + club ring in the middle one of the room's three chests (32500,32176,14 - no source says
+      which). test_quests.py::test_ghoul_room_quest, test_ghoul_room_rules
+- [x] Kingdom of Kormarak Quest (Old Mintwallin) - Thais Ancient Temple (no level; 1 player)
+      Done 2026-09-24: "It is a spawn, so you may find the body empty" (TibiaWiki 2006) - not a quest box: a plain dead
+      human by the wooden coffin (32552,32200,11; missing, placed at tibiaot74's spot) holding brass armor, brass
+      helmet, hatchet, 4 throwing stars (real-map table [3618]; the 2011+ wiki / Tibiantis say 13). First come takes
+      it; back at every start (needs the map-decay rebuild, or the body decays 15 min after start).
+      quests/thais/test_kingdom_of_kormarak.py (a second character finds it empty)
+- [x] Life Ring Quest - Thais Ancient Temple (S branch) (no level; 1 player)
+      Done 2026-09-24: the box 32443,32238,11 is now a quest box, uid 3616 (real-map table: life ring + dragon
+      necklace 200); pick spot 32437,32239,10 and the rope spot below were already there.
+      test_quests.py::test_life_ring_quest, test_life_ring_rules
+  - [ ] Drawbridge levers (Ancient Temple 32413,32230,10 and 32417,32254,10): unscripted; the bridges (1284) are
+        down for good. TibiaWiki: "If the bridge is up, pull the lever". Find what a raised bridge becomes (the
+        item under it) before scripting - no source yet
+- [x] Mad Mage Room Quest - Thais Ancient Temple, toward Mintwallin (level 40 (door); 1 player)
+      Done 2026-09-24. A Prisoner's script gave key 3666 to anyone ("key", "yes"), took 1000 gold in the lesson and
+      shared one conversation state: rewritten from his TibiaWiki transcripts (riddle answer, 7 apples, "Really,
+      really?", per-player state, sell rune, mathemagics). Nobody could greet him at all: A Lost Soul.lua (and
+      Wyat.lua) replaced FocusModule:init for every NPC loaded after them (one shared Lua state) - now instance-only;
+      test_npc_data.py::test_no_npc_script_changes_the_shared_npc_library. Map: prison doors 32395,32117,15 and
+      32393,32136,14 = key 3620 (TibiaWiki: all prison doors); the barracks drawer 32411,32155,15 is a quest drawer
+      (uid 13620 = key 3620, one per character; the real-map table's 3620 is the Spike Sword body); door 32578,32197,15 = key 3666; the three rewards (real-map table
+      10058 magician hat, 10059 stone skin amulet 5, 10060 star amulet) in the room's box / top box / chest (west to
+      east; no source says which is which). quests/thais/test_mad_mage_room.py (full run from the Thais temple, the
+      prisoner refuses without the answer / apples, level-40 door, rules). Router: two height items on a tile (two
+      chairs) can't be stepped on; a tile the server keeps refusing is avoided
+- [x] Mintwallin Cyclops Quest - Thais Ancient Temple, cyclops room (no level; 1 player)
+      Done 2026-09-24: the switch 32602,32104,14 (aid 51016, quests/mintwallin_cyclops_wall.lua) moves the wall as
+      tibiaot74 does - north walls 32593-32594,32103,14 go, walls close the way back at 32592,32104-32105,14 - and
+      moves it back when pulled again (decided with the user: both ways). Key 3667: the dead human under rubbish
+      32576,32216,15 (uid 3667); its door 32592,32102,14. Chests: key 3610 (uid 3610, it lay there already) and the
+      small diamond next to it (uid 3611) - real-map table. quests/thais/test_mintwallin_cyclops.py (switch route,
+      key-3667 route, rules)
+- [x] Naginata Quest - Thais Dragon Lair (N of Alatar Lake) (level 40 (door); 1 player)
+      Done 2026-09-24: "The chest is at the north end" (TibiaWiki) - the room below the level-40 gate had no container:
+      a chest at 32346,32063,12, uid 10065 = naginata (real-map table). quests/thais/test_naginata.py (pick, level-40
+      door, rules). Router: house doors are closed to the planner ("You are not invited."); a field on a rope spot is
+      burnt away with a carried destroy field rune (rope.lua refuses a spot with a field)
+- [x] Noble Armor Quest (Skjaar/DTD) - below Mount Sternum (level 35 (door); 1 player)
+      Done 2026-09-24: Skjaar gave tibiaot74's key number 2015 and took the 1000 gold without checking; now key 3142
+      (TibiaWiki), the gold checked, both greetings (warriors / mages, from his transcript) and his small talk. The crypt
+      door 32450,32044,8 had no key number (3142); the chest 32453,32048,8 = noble armor (10043), a box added at
+      32455,32048,8 = crown helmet (10042) - real-map table, two containers. quests/thais/test_noble_armor.py (quiz,
+      no gold no test, level-35 door, rules)
+- [x] Scale Armor Quest - cave W of Ancient Temple entrance (no level; 1 player)
+      Done 2026-09-24: the chest 32357,32130,9 (holding the scale armor on our map) is now a quest chest, uid 10061
+      (real-map table "scale armor -- near AT"); the well 32354,32131,8 ("use the lower-right corner of the well",
+      TibiaWiki) got action id 54545 (down to the ladder below). The next chest (piece of iron, book) stays an
+      ordinary chest. test_quests.py::test_scale_armor_quest, test_scale_armor_rules
+- [x] Silver Amulet Quest - Thais Troll Cave cellar (no level; 1 player)
+      Done 2026-09-24: "a box in the southeast cellar" - TibiaWiki's mapper link 32507,32270,9, no box on our map:
+      placed, uid 2170 (the amulet; the real-map table's 1029 is the Edron Goblin Quest's). quests/thais/test_silver_amulet.py
+- [x] Six Rubies Quest (Double Dragon) - Thais Ancient Temple (no level; 1 player)
+      Done 2026-09-24: the small hole under a fire field 32370,32265,12 (our map) is the quest hole, uid 3614 = 6 small
+      rubies (TibiaWiki 2006 + current + Tibiantis against the real-map table's 2). The test clears the fire with a
+      destroy field rune, as the wiki says. quests/thais/test_six_rubies.py
+- [x] Small Ruby Quest - Mintwallin throne room pit (no level; 1 player)
+      Done 2026-09-24: nothing to change - our map has the small ruby under a fire field at 32437,32174,15 (a daily
+      respawn, as the wiki says: a map item). quests/thais/test_small_ruby.py (destroy field, pick it up)
+- [x] Spike Sword Quest (Fire Devil) - cave E of Mount Sternum / NE of Triangle Tower (no level; 1 player)
+      Done 2026-09-24: "The reward is in a body hidden behind a pillar" - missing on our map: dead human at 32568,32085,12
+      (tibiaot74's spot), uid 3620 = spike sword (real-map table; the Mintwallin prison drawer moved to uid 13620).
+      Shovel + 2 picks + rope. quests/thais/test_spike_sword.py
+- [x] Thais Lighthouse Quest (Dark Shield) - Thais lighthouse, SW of Thais (no level; 2 (step switch + lever) player(s))
+      Done 2026-09-24: none of it was scripted. Action ids 51001 (switch under the crates -> trapdoor 369 above the
+      ladder), 51002 (step switch -> stairs 410 at the south end while someone stands on it; movements), 51003
+      (lever -> portals on/off). The cyclops room has no exit on any map (ours, tibiaot74, JS engine): decided with
+      the user, the lever makes both the way in (32233,32276,9 -> 32225,32271,10) and out (32225,32276,10 ->
+      32232,32276,9), so turning it off traps whoever is inside (TibiaWiki 2006). Chests 2417/2521 as on the map.
+      test_quests.py::test_thais_lighthouse_quest (two players from the Thais temple)
+- [x] Throwing Star Quest - Thais Ancient Temple, underground park (no level; 1 player)
+      Done 2026-09-24: the box 32522,32111,15 is now a quest box, uid 3619 (real-map table: 10 throwing stars);
+      pick spot 32517,32107,14 with the ladder below. test_quests.py::test_throwing_star_quest, _rules
+- [x] Triangle Tower Quest - Triangle Tower (E of Thais, desert edge) (no level; 1 player)
+      Done 2026-09-24: the desert lever 32573,32121,7 had no script (quests/triangle_tower_lever.lua, aid 51020: the
+      wall 32566,32119,7 goes / comes back, as tibiaot74); the top-floor chest 32565,32119,3 = uid 4510 (real-map
+      table: garlic necklace, dwarven ring, 2 small sapphires). quests/thais/test_triangle_tower.py
 - [ ] Giant Smithhammer Quest - Plains of Havoc cyclops/minotaur camp (no level; 1 player)
 - [ ] Ornamented Shield Quest - Plains of Havoc Dragon Lair (no level; 1 (part 1); 2 (part 2) player(s))
 - [ ] Alawar's Vault Quest - Senja / Folda (ice islands N of Carlin) (no level; 1 player)
@@ -226,26 +374,86 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
 - [ ] The Djinn War - Efreet Faction (Green Djinn Quest) - Mal'ouquah + Ankrahmun, Carlin, Thais, Ulderek's Rock, Asht… (level 30 (fortress door) / 40 (Orc King door); 1 player; premium)
 - [ ] The Djinn War - Marid Faction (Blue Djinn Quest) - Ashta'daramai + Kazordoon, Mal'ouquah, Ulderek's Rock (level 30 / 40; 1 player; premium)
 - [ ] Serpentine Tower Quest / White Pearl Quest (one quest) - Serpentine Tower (Sorcerer guild), Ankrahmun (~33147,32866,… (no level; 1 player; premium)
-- [ ] Annihilator Quest - Edron, Hero Cave (deepest floors) (level 100 (lever/tiles; level-100 door at que…; exactly 4 player(s); premium)
-- [ ] Behemoth Quest - Edron, Cyclopolis (deep) (level 60 in 2004 (level door; raised to 80 in…; 1+ (team advised) player(s); premium)
-- [ ] Vampire Shield Quest - Edron, Hero Cave (Warlock room / Temple of Xayepocax) (level 70 (level door); 1+ player(s); premium)
-- [ ] Demon Helmet Quest - Edron, Hero Cave → Demon Hell (level 100 (level door); team (4 demons + banshees in … player(s); premium)
-- [ ] Parchment Room Quest - Edron, Hero Cave (no level; 1+ (5 demons) player(s); premium)
-- [ ] Ring Quest - Edron, Hero Cave (no level; 1+ player(s); premium)
-- [ ] Wedding Ring Quest (Hero Cave) - Edron, Hero Cave (no level; 1+ player(s); premium)
-- [ ] Double Hero Quest - Edron, Hero Cave (no level; 1+ player(s); premium)
-- [ ] Triple UH Rune Quest (now "Adorned UH Rune Quest") - Edron, Hero Cave (no level; 1+ player(s); premium)
-- [ ] Barbarian Axe Quest - Edron Orc Cave (bottom) (no level; 1+ player(s); premium)
-- [ ] Berserker Treasure Quest - Edron Orc Cave (no level; 1+ player(s); premium)
-- [ ] Dark Armor Quest - Edron Orc Cave (giant spider pit) (no level; 1+ player(s); premium)
-- [ ] Poison Daggers Quest - Edron Orc Cave (shaman level) (no level; 1+ player(s); premium)
-- [ ] Shaman Treasure Quest - Edron Orc Cave (room with a Sacrificial Stone) (no level; 1+ player(s); premium)
-- [ ] Edron Goblin Quest - Edron Goblin Cave, west of town (no level; 1 player; premium)
-- [ ] Troll Cave Quest - Edron Troll Cave, west of town (no level; 1 player; premium)
-- [ ] Fire Axe Quest - Edron Dragon Lair (level 60 (level door); 1+ player(s); premium)
+- [x] Annihilator Quest - Edron, Hero Cave (deepest floors) (level 100 (lever/tiles; level-100 door at que…; exactly 4 player(s); premium)
+      Done 2026-09-24: nothing was scripted (lever, squares, chests without ids). quests/annihilator_lever.lua (aid
+      51011 on the lever 33226,31671,13): four players on 33222-33225,31671,13, each level 100+ and without a reward
+      -> 6 demons + teleport (tibiaot74's positions); decided with the user: once per server save (the lever stays
+      down until the restart), "Sorry, not possible." for a wrong team. Chests 51012-51015 (demon armor, magic sword,
+      stonecutter axe, present + annihilation bear) share storage 51012 (system.lua SAME_QUEST; rewards now looked
+      up per object first). test_quests.py::test_annihilator_quest (4 master sorcerers, Ultimate Explosion; team of
+      3 and a veteran refused; the pulled lever refuses the next team), test_annihilator_level_door, _rules
+- [x] Behemoth Quest - Edron, Cyclopolis (deep) (level 60 in 2004 (level door; raised to 80 in…; 1+ (team advised) player(s); premium)
+      Done 2026-09-24: level 60 (decided with the user: TibiaWiki 2005, Tibiantis and tibiaot74's gate; our map's gate
+      said 80 - now aid 1060 at 33297,31670,14). The lever that moves the stones (33295-33299,31677,15) was missing:
+      placed at 33293,31718,12 under the fire field and the dead wolf (tibiaot74's spot; aid 51021,
+      quests/behemoth_lever.lua, both ways). The four chests had no ids: 51023 demon shield (2520 is the Demon
+      Helmet's), 2466 golden armor, 2427 guardian halberd, 51022 bag (platinum amulet, life ring, crystal ring,
+      3 small diamonds, 4 small sapphires) - TibiaWiki 2005 / tibiaot74; one of each per character (decided with the
+      user). The lever lies under the dead wolf and the fire field ("move corpses"). tests/quests/edron/test_behemoth.py.
+      tools/map-set-attrs.py --bottom (an item under what lies there)
+- [x] Vampire Shield Quest - Edron, Hero Cave (Warlock room / Temple of Xayepocax) (level 70 (level door); 1+ player(s); premium)
+      Done 2026-09-25: chests 33189/33195,31688,14 got the real-map table's uids 1017 dragon lance / 1016 vampire shield
+      (which is which: tibiaot74); the box outside the level-70 gate was missing - placed at 33188,31682,14, uid 1032
+      (strange symbol, black pearl, mysterious fetish). tests/quests/edron/test_vampire_shield.py
+- [x] Demon Helmet Quest - Edron, Hero Cave → Demon Hell (level 100 (level door); team (4 demons + banshees in … player(s); premium)
+      Done 2026-09-24. Scripted what the 7.4 map had but nothing ran: the Gate of the Lost Souls (step tiles aid 50665
+      at 33190/33191,31629,13 open the wall 33210-33212,31630,13 only while both are held - decided with the user;
+      current wiki), the quest-room switch aid 50666 (takes the immovable stone 1355 from the boxes and opens the
+      portal out 33316,31591,15 -> 33328,31592,14; tibiaot74's positions). The locked door after the level-100
+      gate (33211,31634,13) had no key number: now key 6010 from the Parchment Room (decided with the user; current
+      wiki + 2006 "Demon key"). Boxes 2493/2520/2645 as on the map.
+      test_quests.py::test_demon_helmet_quest (the hero does the Parchment Room for the key, two friends hold the
+      gate). Router: chained floor changes (the hole onto a hole = "down 2 floors"), gates of expertise put you
+      in the doorway
+- [x] Parchment Room Quest - Edron, Hero Cave (no level; 1+ (5 demons) player(s); premium)
+      Done 2026-09-24: coffin 33063,31624,15 = uid 10057 (real-map table): bag with golden key 6010, bone, stealth
+      ring, 2 talons, skull (system.lua REWARDS; bag contents may now carry a key number). The seal (parchment, aid
+      51010) calls 4 demons when taken off the coffin (movements RemoveItem; tibiaot74's spots) and comes back after
+      60 s (tibiaot74's time, no source); the coffin does not open while sealed (it is always-on-top, so it was
+      usable through the seal). test_quests.py::test_parchment_room_quest. Router: pick holes (mud aid 100) and
+      sewer grates (use -> one floor down: the only way out of the room, then rope up through the pick hole)
+- [x] Ring Quest - Edron, Hero Cave (no level; 1+ player(s); premium)
+      Done 2026-09-25: both chests were missing - placed at 33131/33134,31624,15 (tibiaot74), uid 2169 time ring / 2207
+      sword ring. tests/quests/edron/test_ring.py
+- [x] Wedding Ring Quest (Hero Cave) - Edron, Hero Cave (no level; 1+ player(s); premium)
+      Done 2026-09-25: both chests were missing - placed at 33158,31621-31622,15 (tibiaot74), uid 2121 wedding ring /
+      2201 dragon necklace. tests/quests/edron/test_wedding_ring.py
+- [x] Double Hero Quest - Edron, Hero Cave (no level; 1+ player(s); premium)
+      Done 2026-09-25: boxes 33109/33110,31679,13 got uid 4522 club ring / 4523 red gem (real-map table).
+      tests/quests/edron/test_double_hero.py
+- [x] Triple UH Rune Quest (now "Adorned UH Rune Quest") - Edron, Hero Cave (no level; 1+ player(s); premium)
+      Done 2026-09-25: the box was missing - placed at 33136,31601,15 (5-monk floor), uid 1015: 5 mana fluids + UH rune
+      with 3 charges (real-map table, TibiaWiki 2006). tests/quests/edron/test_triple_uh.py
+- [x] Barbarian Axe Quest - Edron Orc Cave (bottom) (no level; 1+ player(s); premium)
+      Done 2026-09-25 with the other four Orc Cave quests: box 33185,31945,11 uid 1030 (barbarian axe + scimitar in one box -
+      the real-map table's single uid; tibiaot74 and the current wiki's Berserker page have two). The entrance stone
+      (33171,31897,8) had an unscripted lever on the original map: quests/edron_orc_cave_lever.lua (aid 51024).
+      tests/quests/edron/test_orc_cave.py
+- [x] Berserker Treasure Quest - Edron Orc Cave (no level; 1+ player(s); premium)
+      Done 2026-09-25: box 33199,31923,11 uid 1031 (3 white pearls, 175 gp). test_orc_cave.py
+- [x] Dark Armor Quest - Edron Orc Cave (giant spider pit) (no level; 1+ player(s); premium)
+      Done 2026-09-25: dead skeleton 33176,31871,12 uid 4521 (dark armor; the 7.x text says "a dead body", tibiaot74 a
+      skeleton). test_orc_cave.py
+- [x] Poison Daggers Quest - Edron Orc Cave (shaman level) (no level; 1+ player(s); premium)
+      Done 2026-09-25: chest 33155,31880,11 uid 1034 (backpack: 2 poison daggers, 30 poison arrows). test_orc_cave.py
+- [x] Shaman Treasure Quest - Edron Orc Cave (room with a Sacrificial Stone) (no level; 1+ player(s); premium)
+      Done 2026-09-25: dead skeleton 33127,31885,9 uid 1033 (3 blank runes). test_orc_cave.py
+- [x] Edron Goblin Quest - Edron Goblin Cave, west of town (no level; 1 player; premium)
+      Done 2026-09-25: the chests were missing - placed at 33095,31800-31801,10 by the throne, uid 1028 steel shield / 1029
+      silver amulet (real-map table's Edron entries; the Thais Silver Amulet box moved to uid 2170). The way back is the
+      grassy area's pitfall: pitfall.lua now drops the player (it left them standing on the open hole) and the router
+      knows grass 293 as a way down. tests/quests/edron/test_goblin.py
+- [x] Troll Cave Quest - Edron Troll Cave, west of town (no level; 1 player; premium)
+      Done 2026-09-25: the boxes were missing - placed at 33143,31719/31721,10, uid 1026 brass legs / 1027 garlic necklace.
+      tests/quests/edron/test_troll_cave.py
+- [x] Fire Axe Quest - Edron Dragon Lair (level 60 (level door); 1+ player(s); premium)
+      Done 2026-09-25: chest 33078,31656,11 uid 1019 (ring of healing, dragon necklace, 7 small diamonds) and dead skeleton
+      below the pick hole 33084,31650,12 uid 1018 (fire axe) were missing - placed (tibiaot74, real-map table).
+      tests/quests/edron/test_fire_axe.py
 - [ ] Postman Missions Quest - starts at Kevin (post office between Thais and Kazordoon), … (no level; 1 player; premium)
 - [ ] Iron Ore Quest - Dwarf Mines near Kazordoon (no level; — player(s); —)
-- [ ] Minotaur Leather Quest - raft south of Thais (no level; — player(s); —)
+- [x] Minotaur Leather Quest - raft south of Thais - NOT 7.4 (checked 2026-09-24): the item "minotaur leather" is not
+      in our 7.4 item list at all; the wiki page is from 2011 with no version; not on Tibiantis. Nothing to do
 
 - [ ] Dalbrect (boat to the Isle of the Kings, west of Carlin, 32206,31756): he only sails for players who
       brought his family brooch (item 2318), but there is no way to get it - in the Ghostlands there is a spot
