@@ -130,7 +130,7 @@ def main():
     ap.add_argument("--uid", type=int)
     ap.add_argument("--teleport", help="x,y,z: the new destination of the teleport")
     ap.add_argument("--contents", default="",
-                    help='with --add: items inside the new container, e.g. "2465,2460,2388,2399x4" (id or idxcount)')
+                    help='with --add: items inside the new container, e.g. "2465,2460,2399x4,2088a3001" (id, idxcount, ida<action id>)')
     ap.add_argument("--add", action="store_true",
                     help="put a new item --id (with --aid/--uid) on top of the tile instead of editing one there")
     ap.add_argument("--bottom", action="store_true",
@@ -140,12 +140,15 @@ def main():
                     help="two or more of the item on the tile (stacked boxes): take the top one - the one a use opens")
     ap.add_argument("--replace", action="store_true",
                     help="the item already has an action / unique id (and nothing else): replace them")
+    ap.add_argument("--set-ground", type=int, metavar="NEW_ID",
+                    help="the tile's ground --id becomes NEW_ID (a stone pile opened to a hole), nothing else changes")
     ap.add_argument("--new-tile", action="store_true",
                     help="the map has no tile there: make one whose ground is --id (e.g. stairs down over stairs up "
                          "whose floor the map left out)")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
-    if args.aid is None and args.uid is None and args.teleport is None and not args.add and not args.new_tile:
+    if (args.aid is None and args.uid is None and args.teleport is None and not args.add and not args.new_tile
+            and args.set_ground is None):
         ap.error("give --aid and/or --uid, or --teleport")
 
     target = tuple(int(v) for v in args.pos.split(","))
@@ -170,6 +173,22 @@ def main():
         return _write(args, raw, start, end, new)
     if tile is None:
         raise SystemExit(f"no tile at {target}")
+    if args.set_ground is not None:
+        ground = inline_ground(tile)
+        if ground is not None and ground[1] == args.id:
+            p, _ = ground
+            props = tile["props"]
+            new_props = props[:p + 1] + struct.pack("<H", args.set_ground) + props[p + 3:]
+            start, end = tile["start"] + 2, tile["props_end"]
+            new = escape(new_props)
+        elif tile["items"] and struct.unpack_from("<H", tile["items"][0]["props"], 0)[0] == args.id:
+            node = tile["items"][0]
+            start, end = node["start"] + 2, node["props_end"]
+            new = escape(struct.pack("<H", args.set_ground) + node["props"][2:])
+        else:
+            raise SystemExit(f"the ground on {target} is not {args.id}")
+        print(f"{target}: ground {args.id} -> {args.set_ground}")
+        return _write(args, raw, start, end, new)
 
     matching = [it for it in tile["items"] if struct.unpack_from("<H", it["props"], 0)[0] == args.id]
     item = (matching[-1] if args.top else matching[0]) if matching else None
@@ -185,8 +204,11 @@ def main():
                 start = end = ground["props_end"] + 1
         children = b""
         for part in filter(None, args.contents.split(",")):
+            part, _, aid = part.partition("a")                  # "2088a3001": a key with its number
             cid, _, count = part.partition("x")
             props = struct.pack("<H", int(cid)) + (bytes([ATTR_COUNT, int(count)]) if count else b"")
+            if aid:
+                props += bytes([ATTR_ACTION_ID]) + struct.pack("<H", int(aid))
             children += bytes([NODE_START, OTBM_ITEM]) + escape(props) + bytes([NODE_END])
         new = bytes([NODE_START, OTBM_ITEM]) + escape(with_ids(struct.pack("<H", args.id), args.aid, args.uid))             + children + bytes([NODE_END])
         what = "new item above the ground" if args.bottom else "new item on top"

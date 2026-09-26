@@ -224,6 +224,9 @@
         <movevent event="StepIn"  actionid="51059" script="plains_of_havoc.lua" />   <!-- Ornamented Shield: the partner's tile (stalagmites) -->
         <movevent event="StepOut" actionid="51059" script="plains_of_havoc.lua" />
         <movevent event="StepIn"  actionid="51060" script="plains_of_havoc.lua" />   <!-- Isle of the Mists portal: druids only -->
+        <movevent event="StepIn"  actionid="51071" script="draconia.lua" />   <!-- Draconia: the 3rd floor's floor switches -->
+        <movevent event="StepOut" actionid="51071" script="draconia.lua" />
+        <movevent event="StepIn"  actionid="51074" script="draconia.lua" />   <!-- Draconia: the top floor's portal (levers) -->
         <movevent event="StepIn"  itemid="446" script="switch_tile.lua" />
         <movevent event="StepOut" itemid="447" script="switch_tile.lua" />
 

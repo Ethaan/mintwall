@@ -184,6 +184,9 @@
     <action actionid="51052" script="quests/banshee_switches.lua"/>   <!-- Banshee Quest: the Seal of Logic switches -->
     <action actionid="51053" script="quests/banshee_switches.lua"/>   <!-- Banshee Quest: the Seal of Demonrage levers -->
     <action actionid="51058" script="quests/ancient_temple_drawbridges.lua"/>   <!-- Thais Ancient Temple: the two drawbridge levers -->
+    <action actionid="51070" script="quests/draconia.lua"/>   <!-- Draconia: the ground floor's two levers (wall, rock) -->
+    <action actionid="51073" script="quests/draconia.lua"/>   <!-- Draconia: the top floor's four levers -->
+    <action actionid="51077" script="quests/draconia.lua"/>   <!-- Draconia: the coffin with key 3002 -->
     <action actionid="54545" script="draw_well_down.lua"/>   <!-- wells you climb down (Fibula, Ancient Temple) -->
 
     <!-- Doors -->

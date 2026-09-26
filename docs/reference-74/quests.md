@@ -1102,6 +1102,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes for the reward chests. Keys 3001-3007 are a daily respawn: whoever takes them first that day has them. The current wiki says Key 3008 can be taken once per player.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=63102 ; https://tibia.fandom.com/index.php?oldid=45121 ; Hellgate https://tibia.fandom.com/index.php?oldid=66086 ; https://tibia.fandom.com/wiki/Draconia_Quest/Spoiler ; Tibiantis list.
 - **Confidence:** high. The 7.x text writes "use key 3011" once; this is a typo for Key 3001.
+- **Our server (2026-09-26):** key 3012 (Elathriel) opens both Hellgate doors 32675,31671/31649,10; pyramid doors 3001-3008, keys daily (first come; 3001 in the skeleton 32794,31572,7, 3002 from the coffin once per server start, 3008 in the western bookcase 32800,31582,2); floor switches 32810,31595,5 / 32794,31595,5; level-25 gate 32804,31583,2; chests 32803,31582,2 (ice rapier, serpent sword) and 32804,31582,2 (stone skin amulet, energy ring); top levers L-R-L-R, portal 32805,31587,1 -> 32701,31639,6. tests/quests/abdendriel/test_draconia.py.
 
 ### Elvenbane Quest
 - **Other names:** Elf Castle Quest.
@@ -1120,6 +1121,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=69151 ; https://tibia.fandom.com/index.php?oldid=42604 ; Tibiantis list.
 - **Confidence:** medium-high.
+- **Our server (2026-09-26):** entrance hole 32579,31679,7 opened (decided with the user); tower top 32588-32591,31644-31647,3: drawers uid 10055 (morning star) / 10056 (dwarven shield), chests uid 10054 (manafluid, blank rune) / 10053 (bag: spellbook, 2 small diamonds, 100 gp).
 
 ### Orc Fortress Quest
 - **Other names:** OF Quest.
@@ -1139,6 +1141,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=38820 ; https://tibia.fandom.com/index.php?oldid=49459 ; https://tibia.fandom.com/wiki/Orc_Fortress_Quest/Spoiler ; Tibiantis list and tibiantis.life.
 - **Confidence:** high for the route. The rewards conflict: Tibiantis may reflect the original CipSoft data, or its own customisation.
+- **Our server (2026-09-26):** level-40 gate 32981,31760,9; chests 32980/32981/32985,31727,9: knight armor, knight axe, fire sword (decided with the user).
 
 ### Circle Room Quest
 - **Other names:** Dwarven Quest, Dwarf Hell Quest.

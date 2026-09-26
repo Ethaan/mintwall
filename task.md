@@ -436,9 +436,28 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
 - [ ] NPC travel lines are never seen: selfSay is scheduled (Npc::doSay, SCHEDULER_MINTICKS) and the captain teleports
       the player in the same call, so "Have a nice trip!" / "Set the sails!" is said after the player left. Teleport a
       moment later (addEvent) or say it at the destination - check what 7.4 showed
-- [ ] Draconia Quest - Draconia, via Hellgate under Ab'Dendriel (level 25 (door); 2 minimum (floor switches) player(s))
-- [ ] Elvenbane Quest (Elf Castle Quest) - Elvenbane castle, SW of Ab'Dendriel (no level; 1 player)
-- [ ] Orc Fortress Quest - Orc Fortress, W of Ab'Dendriel (level 40 (door); 1 player)
+- [x] Draconia Quest - Draconia, via Hellgate under Ab'Dendriel (level 25 (door); 2 minimum (floor switches) player(s))
+      Done 2026-09-26. Hellgate: both doors (32675,31671,10 / 32675,31649,10) now need key 3012; Elathriel sold a key with
+      tibiaot74's number 2017 - now 3012. Pyramid: the doors got key numbers 3001-3008 (tibiaot74's pairs); the keys stay
+      daily, first come (decided with the user: the 7.x "daily respawn") - the loose ones got their numbers, key 3001 lies
+      in a dead skeleton at 32794,31572,7 (placed), key 3002 comes from the coffin 32802,31576,7 once per server start (a
+      coffin is no container in 7.4; quests/draconia.lua), key 3005 moved off the statue tile it lay on (the server refuses items under a statue) to 32792,31591,6
+      (tibiaot74's spot, "by a pillar or statue"), key 3008 is in the western bookcase. Ground floor levers
+      (aid 51070): wall 32792,31581,7 / rock 32790,31594,7. 3rd floor: floor switches 32810,31595,5 and 32794,31595,5
+      (aid 51071, movements/draconia.lua) hold the walls 32796,31595,5 / 32795,31578,5 open; the portals to key 3007's
+      room got their destinations. Level-25 gate 32804,31583,2; chests 32803/32804,31582,2 uid 51075 (ice rapier, serpent
+      sword) / 51076 (stone skin amulet, energy ring) - decided with the user. Top floor: levers 32802-32805,31584,1 Left,
+      Right, Left, Right and the portal 32805,31587,1 (aid 51074) -> Ab'Dendriel 32701,31639,6, otherwise back.
+      tests/quests/abdendriel/test_draconia.py (the route planner needed floors=9: Hellgate goes down to floor 15); 4 tests pass. take() and pick_up() in tibia74/quest.py now check the carried count goes up (a failed move used to pass when an earlier key of the same name was already in the backpack)
+- [x] Elvenbane Quest (Elf Castle Quest) - Elvenbane castle, SW of Ab'Dendriel (no level; 1 player)
+      Done 2026-09-26: the hole "surrounded by four stones" (32579,31679,7) was a closed stone pile - opened (decided with
+      the user: both wikis' open hole; tools/map-set-attrs.py --set-ground). The tower top's 2 chests and 2 drawers were
+      missing: placed at tibiaot74's spots, real-map uids 10053 (bag: spellbook, 2 small diamonds, 100 gp), 10054
+      (manafluid, blank rune), 10055 (morning star), 10056 (dwarven shield). tests/quests/abdendriel/test_elvenbane.py
+- [x] Orc Fortress Quest - Orc Fortress, W of Ab'Dendriel (level 40 (door); 1 player)
+      Done 2026-09-26: the three chests 32980/32981/32985,31727,9 past the level-40 gate got uids 10031 knight armor /
+      10030 knight axe / 10029 fire sword (decided with the user over Tibiantis' list; west to east as tibiaot74).
+      tests/quests/abdendriel/test_orc_fortress.py
 - [ ] Circle Room Quest (Dwarven Quest / Dwarf Hell Quest) - Dwarf mines W of Kazordoon (level 32 (door); 1 player)
 - [ ] Crusader Helmet Quest - Deep Dwarf Mines W of Kazordoon (level 35 (door); 1 player)
 - [ ] Emperor's Cookies Quest - Emperor Kruzak's chambers, Kazordoon (no level; 1 player)

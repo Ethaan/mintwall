@@ -294,6 +294,25 @@ local REWARDS = {
 	-- and part 2 (current wiki; decided with the user): the chest behind the stalagmites, a red bag. Real-map table:
 	-- "[4516] = {{2169},{2152,5},{2199,150},{2175},{2071}}, -- time ring, 5plat, garlick, spellbook, lyre- add red bag".
 	[4516] = {{1993, 1, nil, {{2169}, {2152, 5}, {2199, 150}, {2175}, {2071}}}},
+	-- Elvenbane Quest (Ab'Dendriel): "The final floor contains 2 quest chests and 2 quest drawers" (TibiaWiki 2006) - missing
+	-- on our map (the tower top 32587-32593,31642-31647,3): placed at tibiaot74's spots. Real-map table: "[10053] =
+	-- {{2175,1},{2145,2},{2148,100}}, -- spellbook, diamond, gps", "[10054] = {{2006,7},{2260,1}}, -- manafluid, blank",
+	-- "[10055] = {{2394}}, -- morning star", "[10056] = {{2525}}, -- dwarven shield" - the 2006 wiki's list.
+	[10053] = {{1987, 1, nil, {{2175}, {2145, 2}, {2148, 100}}}},
+	[10054] = {{2006, 7}, {2260, 1}},
+	[10055] = {{2394, 1}},
+	[10056] = {{2525, 1}},
+	-- Orc Fortress Quest: "The quest boxes are located in the north end of this room" (TibiaWiki 2005) - the three chests
+	-- 32980/32981/32985,31727,9 past the level-40 gate. Knight armor, knight axe, fire sword (both wikis, the real-map table
+	-- [10029] fire sword / [10030] knight axe / [10031] knight armor; decided with the user over Tibiantis' list), west to
+	-- east as tibiaot74.
+	[10029] = {{2392, 1}},
+	[10030] = {{2430, 1}},
+	[10031] = {{2476, 1}},
+	-- Draconia Quest: "the reward chests are behind the level 25 door" (TibiaWiki 2006) - the two chests 32803/32804,31582,2
+	-- on our map; ice rapier, serpent sword, stone skin amulet, energy ring, two each (decided with the user 2026-09-26).
+	[51075] = {{2396, 1}, {2409, 1}},
+	[51076] = {{2197, 5}, {2167, 1}},
 }
 
 -- Map objects that are the same quest as another (one reward per character between them): unique id -> the

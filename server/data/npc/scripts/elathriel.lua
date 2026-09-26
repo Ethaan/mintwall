@@ -25,7 +25,7 @@ function key(cid, message, keywords, parameters, node)
             npcHandler:say('Here it is.', cid)
             local playerID = getPlayerGUID(cid)
                  local item = doPlayerAddItem(cid, 2089, 1)
-             doSetItemActionId(item, 2017)
+             doSetItemActionId(item, 3012)   -- Key 3012: the Hellgate door 32675,31671,10 (Draconia Quest)
         end
         else
             npcHandler:say('Come back when you have enough money.', cid)

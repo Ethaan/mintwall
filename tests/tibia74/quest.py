@@ -170,13 +170,30 @@ def open_map_container(p, items, pos, what):
 
 
 def take(p, items, container, name, into=3):
-    """Move an item out of an open container into the backpack worn in slot `into` (it must be open too)."""
+    """Move an item out of an open container into the backpack worn in slot `into` (dropped on the worn backpack, like
+    a player; its window must be open to see it arrive)."""
     source = next(cid for cid, c in p.containers.items() if c is container)
     target = next(cid for cid, c in p.containers.items() if c is not container and c.item_id == p.inventory[into].client_id)
     n, item = next((n, i) for n, i in enumerate(container.items) if i.name == name)
-    p.move_item(p.container_pos(source, n), item.client_id, n, p.container_pos(target, 0), max(item.count, 1))
     bag = p.containers[target]
-    assert p.wait_for(lambda: any(i.name == name for i in bag.items), timeout=3),         f"{name} not taken: {p.text_messages[-2:]}"
+    before = sum(1 for i in bag.items if i.name == name)
+    p.move_item(p.container_pos(source, n), item.client_id, n, p.inventory_pos(into), max(item.count, 1))
+    assert p.wait_for(lambda: sum(1 for i in bag.items if i.name == name) > before, timeout=3), \
+        f"{name} not taken: {p.text_messages[-2:]}"
+
+
+def pick_up(p, items, pos, name, into=3):
+    """Pick an item lying on the map up into the backpack worn in slot `into` (it must be open), like dragging it -
+    from under a field too (Draconia's keys)."""
+    target = next(cid for cid, c in p.containers.items() if c.item_id == p.inventory[into].client_id)
+    stack = p.tiles.get(tuple(pos), [])
+    n, thing = next((n, t) for n, t in enumerate(stack) if getattr(t, "client_id", None)
+                    and items.name(items.by_client[t.client_id].server_id) == name)
+    before = sum(1 for i in p.containers[target].items if i.name == name)
+    p.move_item(tuple(pos), thing.client_id, n, p.inventory_pos(into), max(getattr(thing, "count", 1), 1))
+    bag = p.containers[target]
+    assert p.wait_for(lambda: sum(1 for i in bag.items if i.name == name) > before, timeout=3), \
+        f"{name} not picked up at {pos}: {stack}, {p.text_messages[-2:]}"
 
 
 # ------------------------------------------------------------------------------------------ quest rules
