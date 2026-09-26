@@ -227,6 +227,13 @@
         <movevent event="StepIn"  actionid="51071" script="draconia.lua" />   <!-- Draconia: the 3rd floor's floor switches -->
         <movevent event="StepOut" actionid="51071" script="draconia.lua" />
         <movevent event="StepIn"  actionid="51074" script="draconia.lua" />   <!-- Draconia: the top floor's portal (levers) -->
+        <movevent event="StepIn"  actionid="51081" script="paradox_tower.lua" />   <!-- Paradox Tower: the carving between the sacrifice stones -->
+        <movevent event="StepIn"  actionid="51082" script="paradox_tower.lua" />   <!-- Paradox Tower: the carvings back -->
+        <movevent event="StepIn"  actionid="51083" script="paradox_tower.lua" />   <!-- Paradox Tower: the plate that makes the stairs -->
+        <movevent event="StepIn"  actionid="51084" script="paradox_tower.lua" />   <!-- Paradox Tower: the doorway (stairs back to stone) -->
+        <movevent event="AddItem" tileitem="1" actionid="51087" script="paradox_tower.lua" />   <!-- Paradox Tower: the ghoul's crate in the corner -->
+        <movevent event="RemoveItem" tileitem="1" actionid="51087" script="paradox_tower.lua" />
+        <movevent event="StepIn"  actionid="51090" script="paradox_tower.lua" />   <!-- Paradox Tower: the treasure room's plates -->
         <movevent event="StepIn"  itemid="446" script="switch_tile.lua" />
         <movevent event="StepOut" itemid="447" script="switch_tile.lua" />
 

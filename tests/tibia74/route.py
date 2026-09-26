@@ -60,7 +60,7 @@ def _drop(world: WorldMap, hole):
 
 
 def _neighbours(world: WorldMap, pos, level, vocation, keys, storages, rope, open_tiles=frozenset(),
-                avoid=frozenset(), scythe=False, shovel=False, pick=False):
+                avoid=frozenset(), scythe=False, shovel=False, pick=False, machete=False):
     x, y, z = pos
     for (dx, dy), _ in DIRECTIONS.items():
         m = (x + dx, y + dy, z)
@@ -76,6 +76,8 @@ def _neighbours(world: WorldMap, pos, level, vocation, keys, storages, rope, ope
             yield cost, Step("walk", m, world.arrival(m) or m)
         elif scythe and info.get("wheat") and not (dx and dy):
             yield cost + 1, Step("wheat", m, m)
+        elif machete and info.get("grass") and not (dx and dy):
+            yield cost + 1, Step("grass", m, m)
         elif shovel and info.get("dig") and not (dx and dy):
             yield cost + 1, Step("dig", m, _drop(world, m))
         elif info.get("push") and not (dx and dy):
@@ -109,7 +111,7 @@ def plan(world: WorldMap, start, goal, *, margins=(60, 150, 400), **kwargs):
 
 
 def _plan(world: WorldMap, start, goal, *, level=1, vocation=0, keys=(), storages=(), rope=False,
-          open_tiles=(), avoid=(), scythe=False, shovel=False, pick=False, margin=60, floors=4,
+          open_tiles=(), avoid=(), scythe=False, shovel=False, pick=False, machete=False, margin=60, floors=4,
           max_nodes=2_000_000):
     start, goal = tuple(start), tuple(goal)
     keys, storages, open_tiles = set(keys), set(storages), frozenset(tuple(t) for t in open_tiles)
@@ -135,7 +137,7 @@ def _plan(world: WorldMap, start, goal, *, level=1, vocation=0, keys=(), storage
         if cost > cost_so_far.get(pos, 1 << 30):
             continue
         for c, step in _neighbours(world, pos, level, vocation, keys, storages, rope, open_tiles, avoid,
-                                   scythe, shovel, pick):
+                                   scythe, shovel, pick, machete):
             nxt = step.arrive if step.kind != "door" else step.target
             if not (lo[0] <= nxt[0] <= hi[0] and lo[1] <= nxt[1] <= hi[1] and lo[2] <= nxt[2] <= hi[2]):
                 continue
@@ -406,6 +408,10 @@ def follow(client, items, world: WorldMap, goal, *, replans=6, **ability):
                 use_tool(client, items, "scythe", step.target, {2739})
                 client.sleep(0.4)
                 ok = _walk_to(client, step.target, step.target)
+            elif step.kind == "grass":               # cut the jungle grass with the machete, then walk through
+                use_tool(client, items, "machete", step.target, {2782})
+                client.sleep(0.4)
+                ok = _walk_to(client, step.target, step.target)
             elif step.kind == "dig":                 # open the stone pile with the shovel, then step in
                 use_tool(client, items, "shovel", step.target)
                 client.sleep(0.4)
@@ -497,7 +503,9 @@ def walk_next_to(client, items, world: WorldMap, target, **ability):
     for dx in (-1, 0, 1):
         for dy in (-1, 0, 1):
             n = (target[0] + dx, target[1] + dy, target[2])
-            if (dx or dy) and (world.walkable(n) or n in open_tiles) and not world.arrival(n):
+            info = world.info(n)
+            cuttable = (ability.get("machete") and info.get("grass")) or (ability.get("scythe") and info.get("wheat"))
+            if (dx or dy) and (world.walkable(n) or n in open_tiles or cuttable) and not world.arrival(n):
                 if client.pos == n:
                     return
                 try:

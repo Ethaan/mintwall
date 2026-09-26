@@ -187,6 +187,11 @@
     <action actionid="51070" script="quests/draconia.lua"/>   <!-- Draconia: the ground floor's two levers (wall, rock) -->
     <action actionid="51073" script="quests/draconia.lua"/>   <!-- Draconia: the top floor's four levers -->
     <action actionid="51077" script="quests/draconia.lua"/>   <!-- Draconia: the coffin with key 3002 -->
+    <action actionid="51080" script="quests/paradox_tower.lua"/>   <!-- Paradox Tower: the dead tree with key 3899 -->
+    <action actionid="51085" script="quests/paradox_tower.lua"/>   <!-- Paradox Tower: the lever room's switch -->
+    <action actionid="51086" script="quests/paradox_tower.lua"/>   <!-- Paradox Tower: the ghoul room's crate switch -->
+    <action actionid="51088" script="quests/paradox_tower.lua"/>   <!-- Paradox Tower: the fruit switch -->
+    <action actionid="51089" script="quests/paradox_tower.lua"/>   <!-- Paradox Tower: the chess switch -->
     <action actionid="54545" script="draw_well_down.lua"/>   <!-- wells you climb down (Fibula, Ancient Temple) -->
 
     <!-- Doors -->

@@ -145,10 +145,13 @@ def main():
     ap.add_argument("--new-tile", action="store_true",
                     help="the map has no tile there: make one whose ground is --id (e.g. stairs down over stairs up "
                          "whose floor the map left out)")
+    ap.add_argument("--tile-flags", type=int, metavar="FLAGS",
+                    help="set the tile's flags (1 protection zone, 4 no-PvP, 8 no-logout; 0 removes them); --id is "
+                         "then only a check of the ground")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
     if (args.aid is None and args.uid is None and args.teleport is None and not args.add and not args.new_tile
-            and args.set_ground is None):
+            and args.set_ground is None and args.tile_flags is None):
         ap.error("give --aid and/or --uid, or --teleport")
 
     target = tuple(int(v) for v in args.pos.split(","))
@@ -173,6 +176,15 @@ def main():
         return _write(args, raw, start, end, new)
     if tile is None:
         raise SystemExit(f"no tile at {target}")
+    if args.tile_flags is not None:
+        props = tile["props"]
+        p = 2 + (4 if tile["type"] == OTBM_HOUSETILE else 0)
+        old = struct.unpack_from("<I", props, p + 1)[0] if p < len(props) and props[p] == ATTR_TILE_FLAGS else 0
+        rest = props[p + 5:] if old or (p < len(props) and props[p] == ATTR_TILE_FLAGS) else props[p:]
+        flags = bytes([ATTR_TILE_FLAGS]) + struct.pack("<I", args.tile_flags) if args.tile_flags else b""
+        new = escape(props[:p] + flags + rest)
+        print(f"{target}: tile flags {old} -> {args.tile_flags}")
+        return _write(args, raw, tile["start"] + 2, tile["props_end"], new)
     if args.set_ground is not None:
         ground = inline_ground(tile)
         if ground is not None and ground[1] == args.id:

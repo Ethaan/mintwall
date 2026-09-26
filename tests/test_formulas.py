@@ -92,3 +92,35 @@ def test_bolts_hit_by_skill_and_distance_not_a_fixed_chance(new_player):
     hits = sum(1 for pos, _, t in target.animated_texts[start:] if pos == target.pos and t.isdigit())
     assert shots >= 15, f"only {shots} shots"
     assert hits / shots < 0.55, f"{hits} of {shots} bolts hit - skill 20 at 5 tiles should hit ~25%, not a fixed 80%"
+
+
+def test_burst_arrows_work_for_mages(new_player):
+    """Burst arrows were a mage's weapon in 7.4: a bow with no distance skill to speak of, and every shot explodes -
+    on the target or, missed, next to it - in a 3x3 area (weapons/scripts/explosive_arrow.lua) for up to 0.55 x the
+    magic power (level*2 + magic level*3; combat.cpp). A sorcerer with distance skill 10 shoots 20 of them at a
+    player standing next to another: most shots hurt the target, the blast reaches the neighbour too, and no hit
+    goes above the formula's maximum."""
+    import time
+    from tibia74 import AMMO, LEFT
+    spot = (32031, 32138, 7)          # open grass, 12+ tiles from any spawn
+    level, maglevel = 50, 30
+    power = max(100, level * 2 + maglevel * 3)
+    shooter = new_player(pos=spot, level=level, vocation=1, maglevel=maglevel, skills={4: 10},
+                         inventory={LEFT: Item(2456), AMMO: Item(2546, 20)})              # bow, burst arrows
+    target = new_player(pos=(spot[0] + 3, spot[1], spot[2]), level=100, vocation=4, storage={30001: 1})
+    neighbour = new_player(pos=(spot[0] + 3, spot[1] + 1, spot[2]), level=100, vocation=4, storage={30001: 1})
+    assert target.pos == (spot[0] + 3, spot[1], spot[2]) and neighbour.pos == (spot[0] + 3, spot[1] + 1, spot[2])
+    shooter.set_fight_modes(fight=1, chase=0, safe=0)
+    t0, n0 = len(target.animated_texts), len(neighbour.animated_texts)
+    shooter.attack(target.player_id)
+    deadline = time.time() + 60
+    while time.time() < deadline and AMMO in shooter.inventory:
+        shooter.sleep(0.5)
+    shooter.attack(0)
+    shots = 20 - (shooter.inventory[AMMO].count if AMMO in shooter.inventory else 0)
+    on_target = [int(t) for pos, _, t in target.animated_texts[t0:] if pos == target.pos and t.isdigit()]
+    on_neighbour = [int(t) for pos, _, t in neighbour.animated_texts[n0:] if pos == neighbour.pos and t.isdigit()]
+    assert shots >= 15, f"only {shots} shots"
+    assert len(on_target) >= shots // 2, f"{len(on_target)} of {shots} burst arrows hurt the target: {on_target}"
+    assert on_neighbour, "the blast never reached the player next to the target"
+    assert max(on_target + on_neighbour) <= int(power * 0.55), (sorted(on_target), sorted(on_neighbour), power)

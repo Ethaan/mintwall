@@ -129,3 +129,43 @@ function addBlessingKeywords(keywordHandler, npcHandler, number, name, premium, 
 	end
 	return nodes
 end
+
+-- A chain of knowledge (the Paradox Tower Quest's Oldrak -> Zoltan -> Padreia -> Lubo): an NPC answers each of its
+-- keywords whenever asked; asked in order in one conversation, the last one sets `storage` - once the chain before it
+-- (another NPC's storage `requires`) is done. steps = {{{words}, text}, ...}. Returns a function(cid, msg) that
+-- answers and returns true when the message was one of the steps.
+function knowledgeChain(npcHandler, steps, storage, requires)
+	local reached = {}
+	return function(cid, msg)
+		for i, step in ipairs(steps) do
+			for _, word in ipairs(step[1]) do
+				if msgcontains(msg, word) then
+					npcHandler:say(step[2], cid)
+					local before = reached[cid] or 0
+					if before >= i - 1 then
+						reached[cid] = math.max(before, i)
+					end
+					if i == #steps and reached[cid] == #steps
+							and (requires == nil or getPlayerStorageValue(cid, requires) == 1) then
+						setPlayerStorageValue(cid, storage, 1)
+					end
+					return true
+				end
+			end
+		end
+		return false
+	end
+end
+
+-- Answers the first entry of `talk` ({{{words}, text}, ...}) one of whose words the message contains; true if one did.
+function answerTalk(npcHandler, talk, cid, msg)
+	for _, entry in ipairs(talk) do
+		for _, word in ipairs(entry[1]) do
+			if msgcontains(msg, word) then
+				npcHandler:say(entry[2], cid)
+				return true
+			end
+		end
+	end
+	return false
+end

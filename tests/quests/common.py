@@ -13,6 +13,7 @@ EDRON_TEMPLE = (33217, 31814, 8)
 CARLIN_TEMPLE = (32360, 31782, 7)
 HAVOC_TEMPLE = (32783, 32243, 6)
 ABDENDRIEL_TEMPLE = (32732, 31634, 7)
+KAZORDOON_TEMPLE = (32649, 31925, 11)
 
 PICK = 2553
 SHOVEL = SHOVEL_ID = 2554
@@ -34,6 +35,16 @@ def edron_player(new_player, items=()):
     from tibia74.quest import strong
     # a tester: monsters do not attack it (the parchment's demons would kill it while the test waits)
     p = strong(new_player, EDRON_TEMPLE, premium_days=30, items=[Item(PICK), *items], group_id=TESTER_GROUP)
+    p.open_container(BACKPACK)
+    p.set_fight_modes(fight=1, chase=0, safe=1)
+    return p
+
+
+def kazordoon_player(new_player, items=(), **kwargs):
+    """A strong tester at the Kazordoon temple, backpack open (the Kazordoon quests)."""
+    from tibia74 import BACKPACK
+    from tibia74.quest import strong
+    p = strong(new_player, KAZORDOON_TEMPLE, items=list(items), group_id=TESTER_GROUP, **kwargs)
     p.open_container(BACKPACK)
     p.set_fight_modes(fight=1, chase=0, safe=1)
     return p

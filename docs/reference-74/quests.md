@@ -1157,6 +1157,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=57512 ; https://tibia.fandom.com/index.php?oldid=29951 ; Tibiantis list and tibiantis.life.
 - **Confidence:** high.
+- **Our server (2026-09-26):** level-32 gate 32510,31956,13, hole 32509,31953,13; the boxes' door 32513,31947,14 was locked (no key number) on lava - a plain door on dirt now (tibiaot74); boxes 32512/32514,31944,14 uid 3812 dwarven axe / 3813 war hammer. tests/quests/kazordoon/test_circle_room.py.
 
 ### Crusader Helmet Quest
 - **Location:** deep Dwarf Mines (Pick 'N Shovel Mine) west of Kazordoon. The mine entrance is around (32548, 31987, 7) and the reward corpse around (32426, 31940, 14). The current wiki also describes an alternative way down from Mount Sternum at (32450, 32070, 7).
@@ -1171,6 +1172,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=63276 ; https://tibia.fandom.com/index.php?oldid=40697 ; https://tibia.fandom.com/wiki/Crusader_Helmet_Quest/Spoiler ; Tibiantis list.
 - **Confidence:** high for the route, medium for the reward.
+- **Our server (2026-09-26):** level-35 gate 32475,31946,13, hole 32477,31943,13; slain skeleton 32427,31943,14 uid 10034: crusader helmet (both wikis and the real-map table over Tibiantis). tests/quests/kazordoon/test_crusader_helmet.py.
 
 ### Emperor's Cookies Quest
 - **Other names:** Kazordoon Cookie Quest, Emperor Kruzak Quest.
@@ -1186,6 +1188,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes (quest chests).
 - **Sources:** https://tibia.fandom.com/index.php?oldid=72569 ; https://tibia.fandom.com/index.php?oldid=45235 ; Tibiantis list.
 - **Confidence:** high.
+- **Our server (2026-09-26):** three keyless locked doors on the way in made plain (32625,31917,3, 32636,31911,3, 32639,31906,3); chest 32605,31908,3 key 3800; door 32645,31906,3 (3800) and chest 32648,31905,3: bag with 20+7 cookies and key 3801; barracks door 32600,31926,6 (3801) and chest 32599,31923,6: key 3802 (uids 3808-3810). tests/quests/kazordoon/test_emperors_cookies.py.
 
 ### Explorer Brooch Quest
 - **Location:** under the sewer grates on the north side of the Jolly Axeman Tavern, Kazordoon, around (32637, 31888, 9).
@@ -1196,6 +1199,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes (quest corpse).
 - **Sources:** https://tibia.fandom.com/index.php?oldid=68474 ; https://tibia.fandom.com/index.php?oldid=64350 ; Tibiantis list.
 - **Confidence:** high.
+- **Our server (2026-09-26):** dead human 32636,31873,10 (placed) uid 51078: an elven brooch, the 7.4 item the 7.6 explorer brooch looks like (decided with the user). tests/quests/kazordoon/test_explorer_brooch.py.
 
 ### Iron Hammer Quest
 - **Location:** minotaur cave west of Kazordoon. The loose stone pile is around (32448, 31993, 7).
@@ -1209,6 +1213,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=24172 ; https://tibia.fandom.com/index.php?oldid=64526 ; Tibiantis list.
 - **Confidence:** high.
+- **Our server (2026-09-26):** box between the beds 32434,31938,8 (placed) uid 3807: iron hammer; in through the loose stone pile (shovel). tests/quests/kazordoon/test_iron_hammer.py.
 
 ### Longsword Quest
 - **Other names:** Wedding Ring Quest (not the Edron Wedding Ring Quest).
@@ -1224,6 +1229,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=53539 ; https://tibia.fandom.com/index.php?oldid=64626 ; Tibiantis list and tibiantis.life.
 - **Confidence:** medium-high.
+- **Our server (2026-09-26):** hidden hole 32663,31962,7 (shovel); chest 32643,31969,8 uid 3804 (longsword, mirror), box 32644,31968,8 uid 3805 (3 blank runes, wooden doll), box 32648,31970,8 uid 3806 (wedding ring, 76 gp). tests/quests/kazordoon/test_longsword.py.
 
 ### Steel Helmet Quest
 - **Other names:** Minotaur Tower Quest.
@@ -1238,6 +1244,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=56432 ; https://tibia.fandom.com/index.php?oldid=43499 ; Tibiantis list.
 - **Confidence:** high. The Horned Fox is a later-added rare boss and should not be assumed for 7.4.
+- **Our server (2026-09-26):** drawers 32460,31951,5 uid 3800 (56 gp), box 32462,31947,4 (placed) uid 3802 (steel helmet), box 32464,31957,5 uid 3801 (47 gp), chest 32467,31962,4 uid 3803 (the Horned Fox's scroll). tests/quests/kazordoon/test_steel_helmet.py.
 
 ### The Paradox Tower Quest
 - **Location:**
@@ -1287,6 +1294,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Other rules:** the tower area is a protection zone with no regeneration. Stepping on all plates destroys all rewards. The lever, fruit and chess puzzles stay solved until the server save or until someone resets them. Skulls, grass and the ghoul are needed on every visit.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=73165 (spoiler, Dec 2006) ; https://tibia.fandom.com/index.php?oldid=73465 (infobox) ; https://tibia.fandom.com/index.php?oldid=14595 (first revision, 15 Aug 2005, reward "Wooden Wand") ; Paradox Tower page https://tibia.fandom.com/index.php?oldid=56289 ; https://tibia.fandom.com/wiki/The_Paradox_Tower_Quest/Spoiler ; Tibiantis list and tibiantis.life.
 - **Confidence:** high for the steps and dialogue, medium for the exact wand item in 7.4.
+- **Our server (2026-09-26):** missions Oldrak 6664 -> Zoltan 6665 -> Padreia 6666 -> Lubo 6667 (in order); key 3899 in the dead tree 32497,31887,7 (trap half the time); sacrifice carving 32566,31957,1 -> 32479,31923,7, carvings back 32486-32487,31927-31928,7 -> 32566,31958,1; plate 32481,31905,7 -> stairs at 32478,31902,7 (doorway undoes it); levers 32476-32481,31900,6 R R L L R L + switch 32479,31905,6; ghoul crate switch 32481,31904,5, corner 32476,31900,5 -> ladder 32478,31904,5; door 32479,31903,4 (3899); fruit counters 32476-32481,31900,4 + switch 32479,31905,4; knights 32478/32479,31903,3 + switch 32478,31904,3; Riddler checks the player's own number (storage 6668); chests 32477-32480,31900,1: phoenix egg, 100 platinum coins, 32 talons, wooden wand (decided with the user); plates x 32476-32481, y 31902 K W T T T K / y 31903 E E E K W W. tests/quests/kazordoon/test_paradox_tower.py.
 
 ## Venore, Darashia, Ankrahmun
 

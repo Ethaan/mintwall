@@ -1,36 +1,37 @@
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
-local npcHandlerfocus = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
-
 NpcSystem.parseParameters(npcHandler)
 
-function onCreatureAppear(cid)                  npcHandler:onCreatureAppear(cid)                        end
-function onCreatureDisappear(cid)               npcHandler:onCreatureDisappear(cid)                     end
-function onCreatureSay(cid, type, msg)  npcHandler:onCreatureSay(cid, type, msg)        end
-function onThink()                                              npcHandler:onThink()    end
+function onCreatureAppear(cid)			npcHandler:onCreatureAppear(cid)			end
+function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
+function onCreatureSay(cid, type, msg)	npcHandler:onCreatureSay(cid, type, msg)	end
+function onThink()						npcHandler:onThink()						end
 
-function PadreiaSayCallback (cid, type, msg)
-if (getPlayerStorageValue(cid, 6665) ~= 1) then
-   return 0
-end
+-- Padreia, grand druid of Carlin. The Paradox Tower Quest's third mission (TibiaWiki spoiler, Dec 2006): "crunor's
+-- caress", "footnote" - storage 6666, once Zoltan's part (6665) is done. General lines: "Padreia/Transcripts".
+local chain = knowledgeChain(npcHandler, {
+	{{"crunor's caress", "crunors caress"}, "Don't ask. They were only an unimportant footnote of history."},
+	{{"footnote"}, "They thought they have to bring Crunor to the people, if people did not find to Crunor of their own. To achieve that they founded the inn Crunor's Cottage, south of Mt. Sternum."},
+}, 6666, 6665)
 
+local TALK = {
+	{{"name"}, "I am Padreia, grand druid of our fine city."},
+	{{"job"}, "I am the grand druid of Carlin. I am responsible for the guild, the fields, and our citizens' health."},
+	{{"magic"}, "Every druid is able to learn the numerous spells of our craft."},
+	{{"time"}, "Time is just a crystal pillar - the centre of creation and life."},
+	{{"druids"}, "We are druids, preservers of life. Our magic is about defence, healing, and nature."},
+	{{"sorcerers"}, "Sorcerers are destructive. Their power lies in destruction and pain."},
+}
 
-		if msgcontains(msg, 'hello') then
-        npcHandler:say('Crunor\'s blessings. I am glad to see you, Jogador! If you\'re looking to learn some new spells, I\'m all yours.')
-        talk_state = 1
-		elseif msgcontains(msg, 'crunor\'s caress') and talk_state == 1 then
-            npcHandler:say('Don\'t ask. They were only an unimportant footnote of history.')
-                talk_state = 2
-		elseif msgcontains(msg, 'footnote') and talk_state == 2 then
-            npcHandler:say('They thought they have to bring Crunor to the people if people did not find to Crunor on their own. To achieve that they founded the inn Crunor\'s Cottage, south of Mt. Sternum.')
-					setPlayerStorageValue(cid,6666,1)
-					talk_state = 3
-		elseif msgcontains(msg, 'bye') and (talk_state >= 1 and talk_state <= 3) then
-			npcHandler:say('Farewell, '.. getPlayerName(cid) ..'. May Crunor be with you, my child.')
-			talk_state = 0
-		end
-	-- Place all your code in here. Remember that hi, bye and all that stuff is already handled by the npcsystem, so you do not have to take care of that yourself.
+function creatureSayCallback(cid, type, msg)
+	if not npcHandler:isFocused(cid) then
+		return false
+	end
+	if not chain(cid, msg) then
+		answerTalk(npcHandler, TALK, cid, msg)
+	end
 	return true
 end
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, PadreiaSayCallback)
+npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
+npcHandler:addModule(FocusModule:new())

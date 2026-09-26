@@ -313,6 +313,62 @@ local REWARDS = {
 	-- on our map; ice rapier, serpent sword, stone skin amulet, energy ring, two each (decided with the user 2026-09-26).
 	[51075] = {{2396, 1}, {2409, 1}},
 	[51076] = {{2197, 5}, {2167, 1}},
+	-- Circle Room Quest (Kazordoon dwarf mines, below the level-32 gate 32510,31956,13 and its hole): "the quest boxes
+	-- are at the far south end", dwarven axe and war hammer (TibiaWiki 2005/2006, Tibiantis). The west and east boxes
+	-- 32512/32514,31944,14 (tibiaot74's), with the real-map table's ids: "[3812] = {{2435}}, -- dwarven axe",
+	-- "[3813] = {{2391}}, -- war hammer".
+	[3812] = {{2435, 1}},
+	[3813] = {{2391, 1}},
+	-- Emperor's Cookies Quest (Kazordoon, Emperor Kruzak's chambers). TibiaWiki 2006: key 3800 "at the end of the
+	-- 'secret passage' exit, in a chest" (32605,31908,3); "open the door of the small room in the emperor's chamber with
+	-- the key. In the chest in the room you opened will be 7 and 20 Cookies and Key 3801" (door 32645,31906,3, chest
+	-- 32648,31905,3; the infobox: "a bag with 20+7 cookies & Key 3801"); "at the barracks you can open the door with
+	-- Key 3801, in the chest will be the key, Key 3802" (door 32600,31926,6, chest 32599,31923,6). Doors and chests are
+	-- tibiaot74's; its keys are 2030/2031, the wiki's 3800/3801. The real-map table's ids ([3808] key 3800, [3809]
+	-- key 3801, [3810] 27 cookies + key 3802) with the wiki's contents - the wiki names the chest of each.
+	[3808] = {{2089, 1, 3800}},
+	[3809] = {{1987, 1, nil, {{2687, 20}, {2687, 7}, {2089, 1, 3801}}}},
+	[3810] = {{2089, 1, 3802}},
+	-- Explorer Brooch Quest (Kazordoon, below the four sewer grates north in the Jolly Axeman tavern): "Go down, kill rat
+	-- and take Explorer Brooch from body" (TibiaWiki). The explorer brooch came with the Explorer Society in 7.6; it "looks
+	-- the same as the Elven Brooch" - the 7.4 item it is here (decided with the user 2026-09-26). The dead human
+	-- 32636,31873,10 is tibiaot74's; our map had lost it.
+	[51078] = {{2122, 1}},
+	-- Iron Hammer Quest (minotaur cave below the loose stone pile west of Kazordoon): "The quest box is between the beds"
+	-- (TibiaWiki 2005/2006) - the box 32434,31938,8 (tibiaot74's; our map had lost it), real-map table "[3807] =
+	-- {{2422}}, -- iron hammer".
+	[3807] = {{2422, 1}},
+	-- Steel Helmet Quest (the minotaur tower west of Kazordoon, roped up into from the cave below the loose stone pile).
+	-- TibiaWiki 2005: steel helmet, 47 gp, 56 gp, a scroll, "in various dressers and chests in the tower"; the current
+	-- spoiler places them: 56 gp in the drawers next to a table (32460,31951,5), the steel helmet in a box next to an
+	-- anvil (32462,31947,4 - our map had lost it, tibiaot74's spot), 47 gp between two beds (32464,31957,5), the Horned
+	-- Fox's scroll in a chest between a bed and a table (32467,31962,4). The real-map table's ids and the scroll's text.
+	[3800] = {{2148, 56}},
+	[3801] = {{2148, 47}},
+	[3802] = {{2457, 1}},
+	[3803] = {{1949, 1, nil, nil, "Looks like the fox is out!\nMore luck next time!\nSigned:\nthe horned fox"}},
+	-- Longsword Quest (troll cave east of the Dwarf Bridge, down the hidden hole behind a tree): "The quest boxes are on
+	-- the north end of the large room" (TibiaWiki 2006) - the chest and two boxes 32643,31969 / 32644,31968 /
+	-- 32648,31970,8. Longsword, mirror, 3 blank runes, wooden doll, wedding ring, 76 gp (all sources), split as the
+	-- real-map table's three ids: "[3804] = {{2397},{2560}}, -- long sword, mirror", "[3805] = {{2260,3},{2108}}",
+	-- "[3806] = {{2121},{2148,76}}" (which container holds which is not written anywhere: west to east). Blank runes
+	-- do not stack in 7.4: three of them.
+	[3804] = {{2397, 1}, {2560, 1}},
+	[3805] = {{2260, 1}, {2260, 1}, {2260, 1}, {2108, 1}},
+	[3806] = {{2121, 1}, {2148, 76}},
+	-- Crusader Helmet Quest (deep Kazordoon mines, through the level-35 gate 32475,31946,13 and down its hole): "The
+	-- reward is in a skeleton body at the far west end of the tunnel" - the slain skeleton 32427,31943,14. Crusader
+	-- helmet: TibiaWiki 2005 and 2006 and the real-map table ("[10034] = {{2947}}, -- crusader helmet" - its item id is a
+	-- dead elf, the comment is the reward); only Tibiantis says dwarven helmet.
+	[10034] = {{2497, 1}},
+	-- The Paradox Tower Quest: the treasure room's four chests 32477-32480,31900,1 (tibiaot74's order: phoenix egg, 10k,
+	-- 32 talons, wand). Two of the four: the switch plates in front of them destroy the others (their storage is set,
+	-- movements/scripts/paradox_tower.lua). The wand is the wooden wand (TibiaWiki 2005 and Tibiantis; the 2006 wiki's
+	-- wand of cosmic energy is later) and the 10k 100 platinum coins - both decided with the user 2026-09-26.
+	[51091] = {{2328, 1}},
+	[51092] = {{2152, 100}},
+	[51093] = {{2151, 32}},
+	[51094] = {{2181, 1}},
 }
 
 -- Map objects that are the same quest as another (one reward per character between them): unique id -> the

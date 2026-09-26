@@ -37,8 +37,9 @@ against 7.4-era sources and covered by automated tests.
 | Edron | Done |
 | Carlin, Ghostlands, Isle of the Kings (incl. the Banshee Quest) | Done |
 | Plains of Havoc | Done |
-| Ab'Dendriel (Elvenbane, Orc Fortress, Draconia done) | In progress |
-| Kazordoon, Venore, Darashia, Ankrahmun | Next |
+| Ab'Dendriel | Done |
+| Kazordoon | Done |
+| Venore, Darashia, Ankrahmun | Next |
 | The Postman Missions | Deferred (spans many cities) |
 
 The full list, with what was fixed in each quest, is in `task.md` and `docs/reference-74/quests.md`.

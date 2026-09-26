@@ -458,14 +458,64 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       Done 2026-09-26: the three chests 32980/32981/32985,31727,9 past the level-40 gate got uids 10031 knight armor /
       10030 knight axe / 10029 fire sword (decided with the user over Tibiantis' list; west to east as tibiaot74).
       tests/quests/abdendriel/test_orc_fortress.py
-- [ ] Circle Room Quest (Dwarven Quest / Dwarf Hell Quest) - Dwarf mines W of Kazordoon (level 32 (door); 1 player)
-- [ ] Crusader Helmet Quest - Deep Dwarf Mines W of Kazordoon (level 35 (door); 1 player)
-- [ ] Emperor's Cookies Quest - Emperor Kruzak's chambers, Kazordoon (no level; 1 player)
-- [ ] Explorer Brooch Quest - Jolly Axeman tavern sewer, Kazordoon (no level; 1 player)
-- [ ] Iron Hammer Quest - Minotaur cave W of Kazordoon (no level; 1 player)
-- [ ] Longsword Quest - Troll cave E of Dwarf Bridge (no level; 1 player)
-- [ ] Steel Helmet Quest (Minotaur Tower Quest) - Minotaur tower W of Kazordoon (no level; 1 player)
-- [ ] The Paradox Tower Quest - Paradox Tower, near Kazordoon (+ PoH, Edron, Carlin, Thais,… (level 30; 1 player; premium)
+- [x] Circle Room Quest (Dwarven Quest / Dwarf Hell Quest) - Dwarf mines W of Kazordoon (level 32 (door); 1 player)
+      Done 2026-09-26: the boxes' room 32511-32514,31944-31946,14 was shut by a locked door with no key number standing on
+      lava (ours and the JS engine's map) - now a plain door 1213 on dirt at 32513,31947,14 (tibiaot74). Boxes 32512 /
+      32514,31944,14 uid 3812 dwarven axe / 3813 war hammer (real-map table). Level-32 gate 32510,31956,13.
+      tests/quests/kazordoon/test_circle_room.py
+- [x] Crusader Helmet Quest - Deep Dwarf Mines W of Kazordoon (level 35 (door); 1 player)
+      Done 2026-09-26: the slain skeleton 32427,31943,14 uid 10034 gives the crusader helmet (both wikis and the real-map
+      table; Tibiantis alone says dwarven helmet). Level-35 gate 32475,31946,13, the hole behind it.
+      tests/quests/kazordoon/test_crusader_helmet.py
+- [x] Emperor's Cookies Quest - Emperor Kruzak's chambers, Kazordoon (no level; 1 player)
+      Done 2026-09-26: the way into the chambers had three locked doors with no key number (32625,31917,3, 32636,31911,3,
+      32639,31906,3) - plain doors now (tibiaot74). Chest 32605,31908,3 uid 3808 key 3800; door 32645,31906,3 key 3800;
+      chest 32648,31905,3 uid 3809 bag with 20+7 cookies and key 3801; barracks door 32600,31926,6 key 3801; chest
+      32599,31923,6 uid 3810 key 3802 (the 7.x wiki names each chest's contents; the real-map table's ids).
+      Key 3802 opens the Dwacatra prison cells 32602-32603,31962/31966/31975,14 (tibiaot74's doors); the Mine Hub room's
+      door is not found yet. tests/quests/kazordoon/test_emperors_cookies.py
+- [x] Explorer Brooch Quest - Jolly Axeman tavern sewer, Kazordoon (no level; 1 player)
+      Done 2026-09-26: the dead human 32636,31873,10 below the four grates (our map had lost it) uid 51078 gives an elven
+      brooch - the explorer brooch is a 7.6 item that looks the same (decided with the user).
+      tests/quests/kazordoon/test_explorer_brooch.py
+- [x] Iron Hammer Quest - Minotaur cave W of Kazordoon (no level; 1 player)
+      Done 2026-09-26: the box between the beds 32434,31938,8 (lost on our map; tibiaot74's) uid 3807 iron hammer. Way in:
+      the loose stone pile (shovel). tests/quests/kazordoon/test_iron_hammer.py
+- [x] Longsword Quest - Troll cave E of Dwarf Bridge (no level; 1 player)
+      Done 2026-09-26: the chest and two boxes at the large room's north end 32643,31969 / 32644,31968 / 32648,31970,8 uid
+      3804 longsword + mirror / 3805 3 blank runes + wooden doll / 3806 wedding ring + 76 gp (real-map table; which
+      container holds which is written nowhere: west to east). Way in: the hidden hole 32663,31962,7 (shovel).
+      tests/quests/kazordoon/test_longsword.py
+- [x] Steel Helmet Quest (Minotaur Tower Quest) - Minotaur tower W of Kazordoon (no level; 1 player)
+      Done 2026-09-26: the current spoiler's four spots - drawers 32460,31951,5 uid 3800 56 gp, box 32462,31947,4 (lost on
+      our map) uid 3802 steel helmet, box 32464,31957,5 uid 3801 47 gp, chest 32467,31962,4 uid 3803 the Horned Fox's
+      scroll (real-map table's ids and text). tests/quests/kazordoon/test_steel_helmet.py
+- [x] The Paradox Tower Quest - Paradox Tower, near Kazordoon (+ PoH, Edron, Carlin, Thais,… (level 30; 1 player; premium)
+      Done 2026-09-26. NPCs (npc/scripts/lib/npc.lua knowledgeChain): Oldrak 6664, Zoltan 6665, Padreia 6666, Lubo 6667 -
+      each answers "hi" now (Zoltan, Padreia, Lubo only knew "hello"), per-player state (one talk_state was shared by every
+      NPC and player), the storage only after the NPC before; Oldrak lost the 8.x hallowed axe, Padreia and Zoltan got
+      their transcript lines back, Lubo keeps his shop. The Riddler (rewritten): the three seals word for word, a wrong
+      answer or another player's number -> Hellgate 32725,31589,12, the player's own number (A Prisoner's SUMS[6668]) ->
+      the treasure room; the old one let any digit through and knew one answer of four. Map + scripts
+      (actions/quests/paradox_tower.lua, movements/paradox_tower.lua): dead tree 32497,31887,7 key 3899 once per
+      character, the trap half the time (up to 200 hp, never the last one; poison fields); the carving 32566,31957,1 takes
+      a skull from each of the four stones (poison fields instead) -> 32479,31923,7, the carvings back
+      32486-32487,31927-31928,7; the plate 32481,31905,7 (under grass) turns the stone 32478,31902,7 into stairs, the
+      doorway 32478-32479,31907,7 back; levers R R L L R L + switch 32479,31905,6 -> ladder 32479,31903,6; the ghoul
+      room's switch 32481,31904,5 makes a crate, a crate in the corner 32476,31900,5 makes the ladder 32478,31904,5 and
+      taking it away removes it (our map had the crate and ladder saved in the solved state - removed); door
+      32479,31903,4 key 3899; fruit on the counters + switch 32479,31905,4 -> ladder 32476,31904,4; knights + switch
+      32478,31904,3 -> ladder 32479,31904,3; the five forcefields got their destinations; treasure chests
+      32477-32480,31900,1 uids 51091 phoenix egg / 51092 100 platinum coins / 51093 32 talons / 51094 wooden wand (both
+      decided with the user), the plates x 32476-32481, y 31902/31903 destroy them (K W T T T K / E E E K W W).
+      Tests: tests/quests/kazordoon/test_paradox_tower.py (the missions and their order, the tree, the sacrifice, the whole
+      climb to two rewards, another player's number). Planner: machete + jungle grass.
+      Also tested 2026-09-26: the climb to the stones with Levitate (premium) and with parcels (free: three parcels on
+      the ledge, a step north); a free account's Levitate is refused. The ghoul could never spawn nor move - its room
+      was protection zone (tools/map-set-attrs.py --tile-flags 0 on 32476-32481,31900-31901,5; the room stays walled
+      in) - now it pushes the crate into the corner by itself (test_paradox_tower_the_ghoul_pushes_the_crate, ~4 min).
+      Premium: the quest is premium (TibiaWiki 2006, Tibiantis); on our server only Zoltan (Edron) could make it so,
+      and the boats take free accounts (see "Boats: premium only?"). A Prisoner always asks the colour.
 - [ ] Black Knight Quest (Crown Set) - Villa Scapula swamp, north of Venore (~32827,31959,7) (level 50 (door); 1+ player(s))
 - [ ] Blood Herb Quest (Witchesbroom) - Greenclaw Swamp, west of Venore (no level; 1 player)
 - [ ] The Desert Dungeon Quest (Desert / Vocation / 10k Quest) - Below Jakundaf Desert (entrance ~32649,32093,7) (level 20 (door); 4, one of each vocation player(s); Knight + Paladin + Druid + Sorcerer)
@@ -576,6 +626,7 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       DEFERRED (decided with the user 2026-09-25): a big multi-city quest (Kevin's post office, missions across Thais,
       Kazordoon, Venore, Carlin, Edron, ...) - its own piece of work after the city-by-city quests
 - [ ] Iron Ore Quest - Dwarf Mines near Kazordoon (no level; — player(s); —)
+      Probably not 7.4 (wiki page from 2011, no version, not on Tibiantis) - left out unless a 7.4 source turns up
 - [x] Minotaur Leather Quest - raft south of Thais - NOT 7.4 (checked 2026-09-24): the item "minotaur leather" is not
       in our 7.4 item list at all; the wiki page is from 2011 with no version; not on Tibiantis. Nothing to do
 
@@ -609,6 +660,10 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
 - [ ] Other map action ids with no script behind them (50001 had none) - list and port them
 
 ## Monsters
+
+- [ ] Loot spike (asked 2026-09-26): is every monster's loot the 7.4 loot - items, counts, chances - and is the gold
+      and item value per kill balanced like 7.4? Compare monster/*.xml with a 7.4-era source (TibiaWiki pre-8.0
+      creature pages, Tibiantis creature data), list the differences ranked by how much they change the economy.
 
 - [ ] Audit the 102 spawned monster types: stats, loot, spells vs 7.4
 - [ ] Check spawn times/radius are sane for 7.4
@@ -719,6 +774,9 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 
 ## Spells and runes (found while making the Centurion test character)
 
+- [x] Levitate (exani hur): premium and level 12 (TibiaWiki 2005 and 2006) - it had neither. 2026-09-26,
+      test_paradox_tower_levitate_is_premium. The other premium spells still carry no prem="1" (see the premium task).
+
 - [x] rope, shovel, pick, keys (key.lua), bread, instruments, decaying items called isIntegerInArray, which did not
       exist - every use failed. Defined in compat.lua. tests/test_spells.py now fails on any call to a function
       nothing defines (tibia74/luascan.py), with the known ones listed below (the list may only shrink)
@@ -806,6 +864,10 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 - [ ] Re-trace with the real client on the new server (walk-trace summary: steps more than 50 ms late)
 
 ## Travel and combat feel
+
+- [ ] Boats: premium only? Captain Bluebear's script (barco_thais.lua) has premium = false for every destination
+      (Carlin, Venore, Kazordoon, Thais, Ab'Dendriel, Edron, Darashia); only his "bring me to edron" shortcut checks
+      premium. In 7.4 ship travel was, as far as we know, premium only - decide with the user, then every captain.
 
 - [x] Boats took the fare but never sailed: StdModule.travel called doTeleportThing(cid, pos, false);
       Avesta takes (uid, pos) and read the 'false' as the position -> shim in both compat layers.
