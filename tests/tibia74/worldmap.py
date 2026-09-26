@@ -38,12 +38,14 @@ UP_SHIFT = {"N": (0, -1), "S": (0, 1), "E": (1, 0), "W": (-1, 0)}
 DOWN_SHIFT = {"N": (0, 1), "S": (0, -1), "E": (-1, 0), "W": (1, 0)}   # moved off a ramp you arrive on
 DOOR_SCRIPTS = {"increment.lua": "closed", "doors/door_locked.lua": "locked",
                 "doors/questdoor_closed.lua": "quest", "doors/gateofexp_closed.lua": "level"}
-CACHE_VERSION = 12
+CACHE_VERSION = 14
 GROWN_WHEAT = 2739                   # solid; a scythe cuts it (actions/scripts/scythe.lua)
 STONE_PILES = {468, 481, 483}        # closed holes (CLOSED_HOLE, actions/lib/actions.lua): a shovel opens them
 MUD = {103, 351, 352, 353, 354, 355}  # actions/lib/actions.lua: with action id 100 a pick opens a hole (pick.lua)
 PICK_SPOT = 100
 PITFALL_GRASS = 293                  # movements/scripts/pitfall.lua: opens under a player, who falls one floor down
+# tiles a movement script teleports you from (no teleport item): action id -> destination
+SCRIPTED_TELEPORTS = {51056: (32266, 31864, 12)}   # the Banshee Quest's secret teleporter (movements/banshee_seals.lua)
 
 
 def _xml_floor_changes(server_dir: Path) -> dict:
@@ -209,6 +211,8 @@ class WorldMap:
                 info["pick"] = True       # a pick opens a hole in it: a way down (and a floor to walk until then)
             if m.attrs.get("teleport"):
                 info["teleport"] = tuple(m.attrs["teleport"])
+            if m.attrs.get("action_id") in SCRIPTED_TELEPORTS:
+                info["teleport"] = SCRIPTED_TELEPORTS[m.attrs["action_id"]]
             if t.flags & HAS_HEIGHT and m is not tile.items[0]:
                 high.append(m)
             if t.flags & BLOCK_SOLID:
@@ -227,7 +231,9 @@ class WorldMap:
         if blocked and not fixed and pushable and not info:
             return SPECIAL, {"push": pushable}
         if info.get("down") or info.get("up") or "teleport" in info:
-            info["stand"] = True          # you walk onto it (and are moved)
+            # you walk onto it (and are moved) - unless something fixed blocks it: a magic wall on a trapdoor (the
+            # Banshee Quest's, until its switch) is a wall
+            info["stand"] = not (blocked and fixed)
             return SPECIAL, info
         if "door" in info or info.get("wheat") or info.get("dig"):
             return SPECIAL, info          # blocking / a way down only with the right tool

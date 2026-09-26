@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<npc name="Costello" script="default.lua" walkinterval="2000" floorchange="0">
+<!-- TibiaWiki "Costello/Transcripts" and the White Raven Monastery Quest spoiler; the talk is in scripts/costello.lua -->
+<npc name="Costello" script="costello.lua" walkinterval="2000" floorchange="0">
   <health now="100" max="100" />
   <look type="57" head="0" body="0" legs="0" feet="0" addons="0" />
+  <parameters>
+    <parameter key="message_greet" value="Welcome, |PLAYERNAME|! Feel free to tell me what brings you here." />
+    <parameter key="message_farewell" value="Good bye, |PLAYERNAME|!" />
+    <parameter key="message_walkaway" value="Good bye, |PLAYERNAME|!" />
+  </parameters>
 </npc>

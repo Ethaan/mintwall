@@ -181,9 +181,25 @@ def _clear(client, pos, timeout=30):
     if c is None or c.id == client.player_id:
         return
     if 0x40000000 <= c.id < 0x80000000:              # monsters (Creature::idRange: players 0x10000000, NPCs 0x80000000)
+        gone = lambda: c.id in client.removed_creatures or _blocker(client, pos) is not c   # noqa: E731
         client.attack(c.id)
-        client.wait_for(lambda: c.id in client.removed_creatures or _blocker(client, pos) is not c, timeout)
+        client.wait_for(gone, timeout)
         client.attack(0)
+        # a monster the weapon cannot hurt (a ghost is immune to physical damage): runes, like a player - heavy
+        # magic missiles (energy) first: a sudden death rune is physical damage in 7.4
+        runes = lambda n: n in ("heavy magic missile rune", "sudden death rune")   # noqa: E731
+        rune = None if gone() else carried(client, client.items, runes)
+        for _ in range(20):
+            if gone() or rune is None:
+                break
+            stack = client.tiles.get(tuple(pos), [])
+            at = next((n for n, t in enumerate(stack) if (t if isinstance(t, int) else getattr(t, "id", None)) == c.id),
+                      None)
+            if at is None:
+                break
+            client.use_item_with(*rune, tuple(pos), 0x63, at)
+            client.wait_for(gone, 2.1)               # rune exhaustion
+            rune = carried(client, client.items, runes)
     else:
         client.sleep(1)
 

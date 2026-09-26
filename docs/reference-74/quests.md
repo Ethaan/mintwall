@@ -857,6 +857,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once / rules:** unknown.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=34890 ; https://tibia.fandom.com/index.php?oldid=34008 ; https://tibia.fandom.com/wiki/Giant_Smithhammer_Quest/Spoiler ; https://tibiantis.info/library/quests
 - **Confidence:** high.
+- **Our server (2026-09-25):** the west chest 32775,32253,8 (of two, below the Plains of Havoc temple) uid 4520: giant smithhammer, talon, 100 gp (decided with the user). tests/quests/havoc/test_havoc_quests.py.
 
 ### Ornamented Shield Quest
 - **Other names:** Might Ring Quest.
@@ -877,6 +878,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once / rules:** unknown.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=53190 ; https://tibia.fandom.com/index.php?oldid=43513 ; https://tibia.fandom.com/wiki/Ornamented_Shield_Quest/Spoiler ; https://tibiantis.info/library/quests
 - **Confidence:** medium. It is unconfirmed whether the red-bag part existed in 7.4.
+- **Our server (2026-09-25):** both parts (decided with the user). The cave under the pick spot 32774,32289,10 copied from tibiaot74's map (ours had earth); Krendorak's body 32778,32282,11 under a fire field, uid 51068 (bag: crystal key 3702, spike sword, dragon necklace, might ring, Krendorak's journal; + ornamented shield, steel helmet). Part 2: the tile 32770,32282,10 holds the stalagmites 32771,32297,10 away; chest 32771,32299,10 uid 4516 (red bag). tests/quests/havoc/test_havoc_quests.py.
 
 ## Carlin, Ghostlands, Isle of the Kings, Ab'Dendriel, Kazordoon
 
@@ -919,6 +921,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=43217 ; https://tibia.fandom.com/index.php?oldid=34471 ; https://tibia.fandom.com/wiki/Crystal_Wand_Quest/Spoiler ; Tibiantis list and tibiantis.life.
 - **Confidence:** medium-high for the route and reward. The version it was added is unknown.
+- **Our server (2026-09-25):** the maze's entrance switch 32528,31724,10 (aid 51026) opens the hole 32483,31633,9 onto the ladder inside the level-30 gates (32479-32486,31630-31635,10); Demona's gate 32483,31722,15 is level 60. Boxes 32481,31611,15 uid 51027 (crystal wand) and 32479,31611,15 uid 51028 (bag: SD 2 charges + Ferumbras' letter). Surface teleport 32400,31656,15 -> 32493,31697,7. tests/quests/carlin/test_maze_of_lost_souls.py.
 
 ### Demona Ring Quest
 - **Location:** Demona. From the main pentagram room, take the north-easternmost staircase down, follow the long hall to the big Elf Arcanist and Warlock room, then go up either staircase.
@@ -933,6 +936,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** unknown (probably yes).
 - **Sources:** https://tibia.fandom.com/wiki/Demona_Ring_Quest/Spoiler (2016) ; Tibiantis list.
 - **Confidence:** low-medium. There is no 7.x-era documentation.
+- **Our server (2026-09-25):** not 7.4 - no chests on our map or tibiaot74's, first wiki page 2016 (decided with the user). Not added.
 
 ### Fanfare Quest
 - **Other names:** Carlin Troll Quest.
@@ -963,6 +967,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** yes (quest corpses).
 - **Sources:** https://tibia.fandom.com/index.php?oldid=71210 ; https://tibia.fandom.com/index.php?oldid=43219 ; https://tibia.fandom.com/wiki/Griffin_Shield_Quest/Spoiler ; Tibiantis list.
 - **Confidence:** medium. The level 30 requirement is unclear.
+- **Our server (2026-09-25):** the level 30 is the maze's gates (aid 1030). Bodies placed: 32498,31721,15 slain skeleton uid 10062 (griffin shield), 32500,31721,15 dead human uid 10063 (dwarven axe), 32503,31724,15 slain skeleton uid 10064 (obsidian lance).
 
 ### Power Ring Quest
 - **Other names:** Bronze Amulet Quest, Femor Hills Goblin Quest.
@@ -996,6 +1001,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once per player:** unknown.
 - **Sources:** https://tibia.fandom.com/wiki/Purple_Tome_Quest/Spoiler ; Tibiantis list.
 - **Confidence:** low-medium.
+- **Our server (2026-09-25):** bookcases 32421,31594,15 uid 51029 (purple tome, placed), 32423,31591,15 uid 51030 and 32428,31591,15 uid 51031 (the two maps our map had in them, with their texts).
 
 ### The Queen of the Banshees Quest
 - **Other names:** Banshee Quest, BQ.
@@ -1019,6 +1025,8 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Other rules:** do not enter the 3rd floor of the Isle of the Kings monastery (restricted; you must pay a gold sacrifice).
 - **Sources:** https://tibia.fandom.com/index.php?oldid=71882 (spoiler, Dec 2006) ; https://tibia.fandom.com/index.php?oldid=71869 (infobox) ; https://tibia.fandom.com/wiki/The_Queen_of_the_Banshees_Quest/Spoiler ; Tibiantis list and tibiantis.life.
 - **Confidence:** high for the steps. Rewards conflict between Tibiantis and TibiaWiki (Amulet of Loss vs Giant Sword/Tower Shield/10k). The seal numbering also differs: the current wiki renumbers the seals (for example "Sixth Seal: Seal of Logic" is done second).
+- **Our server (2026-09-25):** everything scripted (task.md has the details). Seal storages 51101-51107; flames 32278,31903,13 (Hidden), 32311,31978,13 (Logic), 32192,31938,14 (True Path), 32250,31892,14 (Sacrifice), 32215,31849,15 (Demonrage), 32171,31853,15 (Plague); chambers on floor 15 around 32259-32274,31847-31858; seven seal doors 32223,31872-31890,14; the Queen at 32260,31863,14 (level 60); grave room 32202,31812,8; final room chests 32212/32226,31896/31910,15 (7.x wiki rewards); exit 32219,31913,15 -> 32199,31834,7. Walls close by the hidden buttons and after 1 minute (decided with the user). tests/quests/carlin/test_banshee.py.
+- **Our server, also (2026-09-25):** the long hall's secret teleporter is the row 32265-32267,31893,12 (right south of the pick spot) -> 32266,31864,12; the final room's ramp back up has fences (no way back up).
 
 ### The White Raven Monastery Quest (Family Brooch / Ghostlands / Dalbrect / Isle of the Kings)
 - **Other names:** Family Brooch Quest (its 7.x name), Island of Kings Quest.
@@ -1057,6 +1065,8 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
   - Tibiantis list: Blessed Ankh, Family Brooch, access to the Isle.
 - **Confidence:** high for part 1. Medium for part 2: the pre-8.0 spoiler covers only the brooch. The diary and ankh part comes from the current wiki, but the item and NPC versions (7.24 and 7.2) and Tibiantis's reward list support it being in 7.4.
 - **Our server (2026-09-25):** part 1 works. Brooch coffin 32248,31866,8 uid 4506 (family brooch). Way: shovel hole 32218,31767,7 under the wall, rope spot 32221,31779,8 up, the house stairs 32246,31837,7, the stairs 32241-32242,31850,8, the coffin room's stairs 32251,31866-31867,9. Dalbrect (npc/scripts/dalbrect.lua, transcripts): friendship = storage 99999, 10 gp to the Isle deck 32188,31958,7; Captain Jack (7.2) sails back for 20 gp to 32205,31756,7 (decided with the user: a way back by boat). Part 2 (Costello, diary, ankh) is to be done with the Banshee Quest. tests/quests/carlin/test_white_raven.py.
+- **Our server, part 2 (2026-09-25):** the dead monk 32262,31861,11 (uid 51065: backpack, the diary with its text); Costello: fugio -> storage 51110 for the warded doors 32169,31933,7 and 32171,31936,7; diary -> Blessed Ankh (2327). Trespassing on the restricted floor: not yet.
+- **Our server, the restricted floor (2026-09-25):** key 3350 from the bookcase in Costello's room (32180,31934,7, uid 51066, once per character); the stairs behind its door put you on 32180,31925,5 = trespasser (storage 99998); Costello's crime / absolution costs 500 / 1,000 / 5,000 / 10,000 gp by level; Captain Jack and Dalbrect refuse trespassers.
 
 ### Draconia Quest
 - **Location:**
@@ -1397,6 +1407,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** unknown.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=44102 ; https://tibia.fandom.com/index.php?oldid=38856 ; https://tibia.fandom.com/wiki/Iron_Helmet_Quest/Spoiler
 - **Confidence:** medium.
+- **Our server (2026-09-25):** dead human 32769,32225,7 (placed, by a sycamore) uid 4518: backpack with iron helmet, SD rune, leather armor, Muriel's letter, worn leather boots, longsword (decided with the user).
 
 ### Isle of the Mists Quest
 - **Alt names:** Druid Quest.
@@ -1410,6 +1421,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** unknown.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=43081 ; https://tibia.fandom.com/wiki/Isle_of_the_Mists_Quest/Spoiler
 - **Confidence:** medium. The vocation restriction is unconfirmed.
+- **Our server (2026-09-25):** druids only (decided with the user): the portal 32831,32294,7 refuses other vocations; box 32852,32332,7 uid 51067: 3 small emeralds (decided with the user).
 
 ### Orc Shaman Quest
 - **Location:** Small orc outpost/cave in the swamp east of Venore's south gate. Shovel hole ~(33055,32030,7).
@@ -1490,6 +1502,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** assumed.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=43300 ; https://tibia.fandom.com/wiki/Power_Bolts_Quest/Spoiler
 - **Confidence:** medium. The legend mentions a Nightmare Knight (7.9 lore), so the book's text may be later.
+- **Our server (2026-09-25):** dead human 32818,32284,8 uid 4514: bag (5 power bolts, 12 burst arrows) + two handed sword; the Dreammaster book lies beside it.
 
 ### Silver Brooch Quest
 - **Alt names:** Mummy Quest.

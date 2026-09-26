@@ -207,6 +207,23 @@
         <movevent event="RemoveItem" actionid="51010" script="parchment_room_seal.lua" />   <!-- Parchment Room: the seal on the coffin -->
         <movevent event="StepIn"  actionid="51018" script="mintwallin_grate_switch.lua" />   <!-- Devil Helmet: opens the grate -->
         <movevent event="StepOut" actionid="51018" script="mintwallin_grate_switch.lua" />
+        <!-- The Queen of the Banshees Quest: seal flames, True Path traps, the hidden buttons, warlock tiles, pearl portals, the way out -->
+        <movevent event="StepIn"  actionid="51040" script="banshee_seals.lua" />   <!-- flame: Hidden Seal -->
+        <movevent event="StepIn"  actionid="51041" script="banshee_seals.lua" />   <!-- flame: Plague Seal -->
+        <movevent event="StepIn"  actionid="51042" script="banshee_seals.lua" />   <!-- flame: Seal of Demonrage -->
+        <movevent event="StepIn"  actionid="51043" script="banshee_seals.lua" />   <!-- flame: Seal of Sacrifice -->
+        <movevent event="StepIn"  actionid="51044" script="banshee_seals.lua" />   <!-- flame: Seal of the True Path -->
+        <movevent event="StepIn"  actionid="51045" script="banshee_seals.lua" />   <!-- flame: Seal of Logic -->
+        <movevent event="StepIn"  actionid="51046" script="banshee_seals.lua" />   <!-- True Path: tiles off the path -->
+        <movevent event="StepIn"  actionid="51047" script="banshee_seals.lua" />   <!-- hidden buttons behind the magic walls -->
+        <movevent event="StepIn"  actionid="51048" script="banshee_seals.lua" />   <!-- warlock tiles -->
+        <movevent event="StepIn"  actionid="51049" script="banshee_seals.lua" />   <!-- pearl portals -->
+        <movevent event="StepIn"  actionid="51055" script="banshee_seals.lua" />   <!-- final room: the way out -->
+        <movevent event="StepIn"  actionid="51056" script="banshee_seals.lua" />   <!-- the long hall's secret teleporter -->
+        <movevent event="StepIn"  actionid="51057" script="isle_restricted.lua" />   <!-- Isle of the Kings: onto the monks' restricted floor -->
+        <movevent event="StepIn"  actionid="51059" script="plains_of_havoc.lua" />   <!-- Ornamented Shield: the partner's tile (stalagmites) -->
+        <movevent event="StepOut" actionid="51059" script="plains_of_havoc.lua" />
+        <movevent event="StepIn"  actionid="51060" script="plains_of_havoc.lua" />   <!-- Isle of the Mists portal: druids only -->
         <movevent event="StepIn"  itemid="446" script="switch_tile.lua" />
         <movevent event="StepOut" itemid="447" script="switch_tile.lua" />
 

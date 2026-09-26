@@ -78,7 +78,7 @@ def test_griffin_shield_quest(new_player, items, world_map):
     follow(p, items, world_map, CARLIN_TEMPLE, **ability)                 # back out through the maze and the ladder
 
 
-def test_crystal_wand_and_purple_tome_quests(new_player, items, world_map):
+def test_crystal_wand_and_purple_tome_quests(new_player, items, world_map, db):
     from tibia74.quest import open_carried
     from tibia74.route import follow
     M = MOLS
@@ -90,12 +90,15 @@ def test_crystal_wand_and_purple_tome_quests(new_player, items, world_map):
     bag = open_carried(p, items, "bag")
     assert p.wait_for(lambda: sorted(i.name for i in bag.items) == ["sudden death rune", "written parchment"],
                       timeout=3), bag.items
-    assert next(i for i in bag.items if i.name == "sudden death rune").count == 2, bag.items   # "Double SD"
     _take(p, items, world_map, M["tome"], **ability)                      # the library
     assert carries(p, "purple tome") and carries(p, "map"), p.inventory_names()
     follow(p, items, world_map, (M["exit"][0], M["exit"][1] + 1, M["exit"][2]), **ability)
     step_onto(p, M["exit"])
     assert p.wait_for(lambda: p.pos == M["surface"], timeout=3), p.pos   # the Fields of Glory
+    # "Double SD": the rune has 2 charges - the 7.4 protocol does not show a rune's charges, the saved item does
+    p.logout()
+    runes = [r for r in db.items(p.character.guid) if r["itemtype"] == 2268]
+    assert [r["count"] for r in runes] == [2], runes
 
 
 def test_mols_switch_opens_and_shuts_the_hole(new_player, items):

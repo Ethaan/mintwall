@@ -17,6 +17,10 @@ function onThink()						npcHandler:onThink()						end
 local BROOCH = 2318
 local FRIEND = 99999              -- player storage: gave the brooch (tibiaot74's number; Captain Jack uses 99998)
 local FARE = 10
+-- trespassers on the monks' restricted floor (movements/scripts/isle_restricted.lua): "If you refuse to pay this amount,
+-- Dalbrect will not allow you aboard his ferry to or from the isle" (TibiaWiki, Isle of the Kings); his words for it are
+-- the captains' refusal in tibiaot74 (no transcript has them)
+local TRESPASSER = 99998
 local ISLE = {x = 32188, y = 31958, z = 7}   -- the deck of the boat at the Isle of the Kings (Captain Jack's)
 
 local talkState = {}
@@ -82,7 +86,9 @@ function creatureSayCallback(cid, type, msg)
 			npcHandler:say("I have only sailed to the isle of the kings once or twice. I dare not anger the monks by bringing travellers there without their permission.", cid)
 		end
 	elseif msgcontains(msg, "yes") and state == 3 then
-		if isPzLocked(cid) then
+		if getPlayerStorageValue(cid, TRESPASSER) == 1 then
+			npcHandler:say("Without the abbots permission I won't take sail you anywhere! Go and ask him for a passage first.", cid)
+		elseif isPzLocked(cid) then
 			npcHandler:say("First get rid of those blood stains! You are not going to ruin my vehicle!", cid)
 		elseif not doPlayerRemoveMoney(cid, FARE) then
 			npcHandler:say("You don't have enough money.", cid)

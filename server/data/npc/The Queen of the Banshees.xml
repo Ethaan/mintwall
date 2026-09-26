@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Placeholder: no upstream definition. Greets only; quest dialogue still to be written. -->
-<npc name="The Queen of the Banshees" script="default.lua" walkinterval="0" floorchange="0">
+<!-- TibiaWiki "The Queen Of The Banshees/Transcripts"; the quest talk is in scripts/banshee_queen.lua -->
+<npc name="The Queen of the Banshees" script="banshee_queen.lua" walkinterval="0" floorchange="0">
 	<health now="100" max="100"/>
 	<look type="78"/>
 	<parameters>
-		<parameter key="message_greet" value="Be greeted, dear visitor."/>
-		<parameter key="message_farewell" value="Farewell."/>
+		<parameter key="message_greet" value="Be greeted, dear visitor. Come and stay ... a while."/>
+		<parameter key="message_farewell" value="We will meet again, |PLAYERNAME|."/>
+		<parameter key="message_walkaway" value="Yes, flee from death. But know it will always be only one step behind you."/>
 	</parameters>
 </npc>

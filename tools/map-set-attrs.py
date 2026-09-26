@@ -1,5 +1,6 @@
 """Gives an item on a tile of an OTBM map file an action id and/or unique id, or a teleport a new destination
-(--teleport x,y,z), or puts a new item on a tile (--add), in place (keeps a .bak the first time).
+(--teleport x,y,z), or puts a new item on a tile (--add), or makes a tile where the map has none (--new-tile, the item
+is its ground), in place (keeps a .bak the first time).
 
     python tools\\map-set-attrs.py server\\data\\world\\Tibia74.otbm 32084,32181,8 --id 405 --aid 2000 --uid 2485
 
@@ -73,6 +74,29 @@ def find_tile(raw: bytes, target: tuple):
     return None
 
 
+def find_area_end(raw: bytes, base: tuple):
+    """Offset of the NODE_END of the tile area (x & 0xFF00, y & 0xFF00, z) - a new tile goes right before it."""
+    i, n = 4, len(raw)
+    stack = []            # [type, props]
+    while i < n:
+        b = raw[i]
+        if b == NODE_START:
+            stack.append([raw[i + 1], bytearray()])
+            i += 2
+        elif b == NODE_END:
+            ntype, props = stack.pop()
+            if ntype == OTBM_TILE_AREA and tuple(struct.unpack_from("<HHB", props, 0)) == base:
+                return i
+            i += 1
+        else:
+            if b == ESCAPE:
+                i += 1
+            if stack and len(stack[-1][1]) < 16:
+                stack[-1][1].append(raw[i])
+            i += 1
+    return None
+
+
 def inline_ground(tile: dict):
     """(offset in tile props of the ATTR_ITEM attribute, ground id) or None."""
     props = tile["props"]
@@ -116,9 +140,12 @@ def main():
                     help="two or more of the item on the tile (stacked boxes): take the top one - the one a use opens")
     ap.add_argument("--replace", action="store_true",
                     help="the item already has an action / unique id (and nothing else): replace them")
+    ap.add_argument("--new-tile", action="store_true",
+                    help="the map has no tile there: make one whose ground is --id (e.g. stairs down over stairs up "
+                         "whose floor the map left out)")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
-    if args.aid is None and args.uid is None and args.teleport is None and not args.add:
+    if args.aid is None and args.uid is None and args.teleport is None and not args.add and not args.new_tile:
         ap.error("give --aid and/or --uid, or --teleport")
 
     target = tuple(int(v) for v in args.pos.split(","))
@@ -130,6 +157,17 @@ def main():
 
     raw = args.map.read_bytes()
     tile = find_tile(raw, target)
+    if args.new_tile:
+        if tile is not None:
+            raise SystemExit(f"{target} already has a tile")
+        area = (target[0] & 0xFF00, target[1] & 0xFF00, target[2])
+        start = end = find_area_end(raw, area)
+        if start is None:
+            raise SystemExit(f"no tile area {area} in the map - add the tile with a map editor")
+        props = bytes([target[0] & 0xFF, target[1] & 0xFF, ATTR_ITEM]) + struct.pack("<H", args.id)
+        new = bytes([NODE_START, OTBM_TILE]) + escape(props) + bytes([NODE_END])
+        print(f"{target}: new tile, ground {args.id}")
+        return _write(args, raw, start, end, new)
     if tile is None:
         raise SystemExit(f"no tile at {target}")
 
@@ -187,6 +225,10 @@ def main():
         what = "inline ground -> item node"
 
     print(f"{target}: item {args.id} ({what})" + ("" if args.teleport else f" gets aid={args.aid} uid={args.uid}"))
+    return _write(args, raw, start, end, new)
+
+
+def _write(args, raw, start, end, new):
     if args.dry_run:
         return 0
     backup = args.map.with_suffix(args.map.suffix + ".bak")

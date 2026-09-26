@@ -5,4 +5,5 @@ function onAddItem(item, tile, pos)
 	end
 
 	doSetItemSpecialDescription(item.uid, "The door is sealed against unwanted intruders.")
+	return true
 end

@@ -135,3 +135,24 @@ class TestDatabase:
             return [dict(r) for r in con.execute('SELECT * FROM player_items WHERE player_id = ?', (guid,))]
         finally:
             con.close()
+
+    def storage(self, guid: int, key: int):
+        """A player storage value as saved (None if the character has none)."""
+        con = self._connect()
+        try:
+            row = con.execute('SELECT value FROM player_storage WHERE player_id = ? AND key = ?', (guid, key)).fetchone()
+            return None if row is None else row[0]
+        finally:
+            con.close()
+
+    def storage_after_logout(self, guid: int, key: int, expected, timeout: float = 90.0):
+        """The storage once the server has written the character: logout returns at the disconnect, the save follows -
+        and a character that fought (the router kills monsters in its way) stays in the game until its fight
+        condition ends (about a minute), and is saved only then."""
+        import time
+        deadline = time.time() + timeout
+        value = self.storage(guid, key)
+        while value != expected and time.time() < deadline:
+            time.sleep(0.2)
+            value = self.storage(guid, key)
+        return value

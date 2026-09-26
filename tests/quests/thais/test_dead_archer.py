@@ -23,9 +23,10 @@ def test_dead_archer_quest(new_player, items, world_map):
     before = len(p.text_messages)
     use_map_item(p, items, DEAD_ARCHER["body"], "dead human")
     found = lambda: [t for _, t in p.text_messages[before:] if t.startswith("You have found")]  # noqa: E731
-    # the mana and the life fluid are both announced as "a vial" (quests/system.lua describe(), as the milk)
+    # a vial is named as its look text names it: "a vial of manafluid" (quests/system.lua describe(), items.xml 200xx)
     assert p.wait_for(lambda: sorted(found()) == sorted(["You have found a bow.", "You have found 5 poison arrows.",
-                                                          "You have found a vial.", "You have found a vial."]),
+                                                          "You have found a vial of manafluid.",
+                                                          "You have found a vial of lifefluid."]),
                       timeout=3), found()
     assert p.wait_for(lambda: carries(p, "bow"), timeout=3), p.inventory_names()
     p.sleep(1.1)

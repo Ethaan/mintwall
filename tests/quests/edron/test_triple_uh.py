@@ -16,7 +16,7 @@ def test_triple_uh_quest(new_player, items, world_map):
     walk_next_to(p, items, world_map, TRIPLE_UH["box"], **ability)
     use_map_item(p, items, TRIPLE_UH["box"], "box")
     assert p.wait_for(lambda: p.messages("You have found an ultimate healing rune."), timeout=3), p.text_messages[-7:]
-    assert len(p.messages("You have found a vial.")) == 5, p.text_messages[-7:]
+    assert len(p.messages("You have found a vial of manafluid.")) == 5, p.text_messages[-7:]
     # 7.4 sends no charges for a rune (it is not stackable): the look text tells them
     cid, n = next((cid, n) for cid, c in p.containers.items() for n, i in enumerate(c.items)
                   if i.name == "ultimate healing rune")

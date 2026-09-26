@@ -253,6 +253,47 @@ local REWARDS = {
 	[51029] = {{1982, 1}},
 	[51030] = {{1956, 1, nil, nil, "*You see a map of our world Tibia*"}},
 	[51031] = {{1957, 1, nil, nil, "*You see a map of the surface of the Fields of Glory. There are many red lines and two golden points on it. You wonder what their meaning is.*"}},
+	-- The Queen of the Banshees Quest, the final room (floor 15, past the seven seal doors): TibiaWiki (Dec 2006):
+	-- "Boots of Haste, Giant Sword, Tower Shield, Stealth Ring, Stone Skin Amulet and 10k gp" - all of them (decided with
+	-- the user 2026-09-25 over Tibiantis' list); split over the four chests as tibiaot74 does (the last one a bag).
+	[51061] = {{2195, 1}},
+	[51062] = {{2393, 1}},
+	[51063] = {{2528, 1}},
+	[51064] = {{1987, 1, nil, {{2165}, {2197, 5}, {2152, 100}}}},
+	-- White Raven Monastery Quest part 2: the dead monk in the Banshee dungeon (32262,31861,11) - "Use the Dead Human to
+	-- get a Backpack containing the Monk's Diary" (current wiki). What our map has in him, for every character: the
+	-- backpack, the diary (Costello takes it for the Blessed Ankh) and the rest.
+	[51065] = {{1988, 1, nil, {{1972, 1, nil, "<the text seems to be a mostly ruined diary of some sort, found on the body of a dead monk. Most passages make no sense at all to you>\n... abbot still clueless abour my ...\n...\nAfter all those perils and puzzels I have located the throne of darkness at last. I will lead ...\n...\n... crypts and monsters ... found one of the caged demons that seem to be leached as a powersupply of some sort ...\n...\n... switches on the end of the scorpion path and the lair of the wicked web ... \n... died but I could make it to the throne. My wards are holding the howling ghosts and spectres at bay for now and I prepare to unleash the powers of the throne ... \n...\n... still impossible! My wards are fading and the ancient spirits feel that they will soon claim another victory. I failed the brotherhood and will soon join the howling hords in their eternal torment and madness. ...\n...\nhas stoped. I KNOW they are coming after me now. I can see the flickering of the shadows as they aproach. THEY ARE COMING"}, {2236}, {2237}, {2238}}}},
+	-- White Raven Monastery (Isle of the Kings): Key 3350 to the monks' restricted floor, "Found in a Bookcase in the room of
+	-- Costello" (TibiaWiki Key 3350) - our map has it there (32180,31934,7) in a bag with the abbot's scroll, as loot for
+	-- the first comer: now for every character. Going up with it makes a trespasser (movements/scripts/isle_restricted.lua).
+	[51066] = {{1987, 1, nil, {{1949, 1, nil, "I have to hide that key better. One of that greedy adventurers that came here seemingly out of nowhere and refused to tell me how he got here stole it and disturbed the contemplation of the brothers upstairs. Gladly they could defeat him. When will those people learn some respect. How could they think there would anything valuable? The next intruders will pay a bitter price for such an act of evil!"}, {2088, 1, 3350}}}},
+	-- Plains of Havoc (docs/reference-74/quests.md). Giant Smithhammer Quest: "The quest box is located in the room directly to
+	-- the south" of the north building's stairs (TibiaWiki 2006) - our map has two chests there; the west one gives it all
+	-- (decided with the user 2026-09-25). Real-map table: "[4520] = {{2151},{2321},{2148,100}}" - talon, giant smithhammer, 100 gp.
+	[4520] = {{2321, 1}, {2151, 1}, {2148, 100}},
+	-- Iron Helmet Quest: "a dead body partially obscured by a tree" west of the camp - missing on our map, placed at
+	-- tibiaot74's spot (32769,32225,7, by a sycamore). Decided with the user 2026-09-25: the 2006 wiki's list (iron helmet,
+	-- SD rune, leather armor, letter, worn leather boots) and the longsword the real-map table, tibiaot74 and Tibiantis give;
+	-- in a backpack (tibiaot74). The letter is the real-map table's "Dear Muriel!".
+	[4518] = {{1988, 1, nil, {{2459}, {2268, 1}, {2467}, {2598, 1, nil, "Dear Muriel!\nMy apprentice behaves strangely lately.\nI fear he has something evil in mind.\nHe must have stolen the books about\nnecromancy you were missing after\nour last visit but I have no proof yet.\nThank the gods he does not know about\nthe fountain of life and the caves of\ninferno yet. I will send Laira to town in\nsome days. I think she's in danger\nif I'm right about Porgol.\n \nYour friend,\nArcian"}, {2238}, {2397}}}},
+	-- Power Bolts Quest: "The reward is in a dead body under some other items on the floor" (TibiaWiki 2006) - the dead
+	-- human 32818,32284,8 of the cave below the hole south of the temple. Real-map table: "[4514] = {{2547,5},{2546,12}},
+	-- -- power bolt, burst arrow -- add brown bag" and "[4513] = {{2377}}, -- two handed sword" (one body on our map: both);
+	-- the Dreammaster book lies beside it on our map.
+	[4514] = {{1987, 1, nil, {{2547, 5}, {2546, 12}}}, {2377, 1}},
+	-- Isle of the Mists Quest (druids only, decided with the user): "a box and a drawer in the groundfloor, where you will find
+	-- the items" (TibiaWiki 2006) - our map has the box 32852,32332,7 and the book in the bookcase beside it; 3 small emeralds
+	-- (the 2006 wiki; decided with the user over the current wiki's and Tibiantis' 2).
+	[51067] = {{2149, 3}},
+	-- Ornamented Shield Quest: Krendorak's body under the fire field in the NE corner of the cave below the pick hole (the
+	-- cave our map had lost - copied from tibiaot74's map, tools/map-copy-tiles.py). 2006 wiki: "The body has a bag with the
+	-- loot, including Crystal Key #3702", the steel helmet and ornamented shield under the junk by it; quests.md: key 3702,
+	-- spike sword, dragon necklace, might ring, Krendorak's journal.
+	[51068] = {{1987, 1, nil, {{2090, 1, 3702}, {2383}, {2201, 200}, {2164}, {1955, 1, nil, "Krendorak's journal"}}}, {2524, 1}, {2457, 1}},
+	-- and part 2 (current wiki; decided with the user): the chest behind the stalagmites, a red bag. Real-map table:
+	-- "[4516] = {{2169},{2152,5},{2199,150},{2175},{2071}}, -- time ring, 5plat, garlick, spellbook, lyre- add red bag".
+	[4516] = {{1993, 1, nil, {{2169}, {2152, 5}, {2199, 150}, {2175}, {2071}}}},
 }
 
 -- Map objects that are the same quest as another (one reward per character between them): unique id -> the
@@ -275,8 +316,13 @@ local SEALED_BY = {
 
 local function describe(itemid, count)
 	local info = getItemDescriptions(itemid) or {}
+	if isItemFluidContainer(itemid) and count > 0 then
+		-- as the look text says it (item.cpp: "a vial of mana fluid"): the fluid is the name of item id = its type
+		local article = (info.article ~= nil and info.article ~= "") and (info.article .. " ") or ""
+		return article .. getItemName(itemid) .. " of " .. getItemName(count)
+	end
 	if count > 1 and not isItemStackable(itemid) then
-		count = 1            -- for a vial the "count" is its fluid (milk = 6), for a rune its charges
+		count = 1            -- for a rune the "count" is its charges
 	end
 	if count > 1 then
 		return count .. " " .. (info.plural ~= nil and info.plural ~= "" and info.plural or getItemName(itemid))

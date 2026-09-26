@@ -225,8 +225,11 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       end of the slime room; tibiaot74's spot) with aid 2000 uid 1662 (real-map table); REWARDS[1662] = bow, 5 poison
       arrows, mana fluid, life fluid (TibiaWiki pre-8.0, Tibiantis, real-map table). Shovel hole 32493,32259,7.
       test_quests.py::test_dead_archer_quest, test_dead_archer_rules
-  - [ ] Quest messages say "You have found a vial." for any fluid (describe() uses the item name) - check what 7.4
-        said (e.g. "a vial of mana fluid"?)
+  - [x] Quest messages said "You have found a vial." for any fluid. Done 2026-09-25: named as the look text names it -
+        "a vial of manafluid" (quests/system.lua describe()). items.xml had no fluid names at all (ids 20001-20028 name
+        the fluid types, items.cpp), so the look text itself read "a vial of ." - added the 7.4 fluids with the 7.x
+        spellings (TibiaWiki 2006 titled the page "Manafluid"): water, blood, beer, slime, lemonade, milk, manafluid,
+        lifefluid, oil, urine, wine, mud, lava, swamp
 - [x] Deeper Fibula Quest - Fibula dungeon (level 50 (door); 1 player)
       Done 2026-09-24. Nothing worked before: the Fibula well (action id 54545) had no script (now
       draw_well_down.lua: down to the ladder below; also the Ancient Temple's well at 32508,32176,13); the dungeon
@@ -264,9 +267,10 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       Done 2026-09-24: the box 32443,32238,11 is now a quest box, uid 3616 (real-map table: life ring + dragon
       necklace 200); pick spot 32437,32239,10 and the rope spot below were already there.
       test_quests.py::test_life_ring_quest, test_life_ring_rules
-  - [ ] Drawbridge levers (Ancient Temple 32413,32230,10 and 32417,32254,10): unscripted; the bridges (1284) are
-        down for good. TibiaWiki: "If the bridge is up, pull the lever". Find what a raised bridge becomes (the
-        item under it) before scripting - no source yet
+  - [x] Drawbridge levers (Ancient Temple 32413,32230,10 and 32417,32254,10). Done 2026-09-25: aid 51058,
+        quests/ancient_temple_drawbridges.lua - a pull raises a lowered bridge (each tile back to its column's water on
+        the map: 508 / 493 / 509) and lowers a raised one, like Rookgaard's sewer bridge; things on it go to the lever's
+        bank. The bridges start down. tests/quests/thais/test_ancient_temple_drawbridges.py
 - [x] Mad Mage Room Quest - Thais Ancient Temple, toward Mintwallin (level 40 (door); 1 player)
       Done 2026-09-24. A Prisoner's script gave key 3666 to anyone ("key", "yes"), took 1000 gold in the lesson and
       shared one conversation state: rewritten from his TibiaWiki transcripts (riddle answer, 7 apples, "Really,
@@ -330,8 +334,17 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       Done 2026-09-24: the desert lever 32573,32121,7 had no script (quests/triangle_tower_lever.lua, aid 51020: the
       wall 32566,32119,7 goes / comes back, as tibiaot74); the top-floor chest 32565,32119,3 = uid 4510 (real-map
       table: garlic necklace, dwarven ring, 2 small sapphires). quests/thais/test_triangle_tower.py
-- [ ] Giant Smithhammer Quest - Plains of Havoc cyclops/minotaur camp (no level; 1 player)
-- [ ] Ornamented Shield Quest - Plains of Havoc Dragon Lair (no level; 1 (part 1); 2 (part 2) player(s))
+- [x] Giant Smithhammer Quest - Plains of Havoc cyclops/minotaur camp (no level; 1 player)
+      Done 2026-09-25: our map has two chests in the room below the temple; the west one (32775,32253,8) is the quest box,
+      uid 4520 (giant smithhammer, talon, 100 gp - real-map table; decided with the user: one box). tests/quests/havoc/
+- [x] Ornamented Shield Quest - Plains of Havoc Dragon Lair (no level; 1 (part 1); 2 (part 2) player(s))
+      Done 2026-09-25 (both parts, decided with the user). The cave under the treasure room's pick spot (32774,32289,10) was
+      missing from our map (and the JS engine's: solid earth) - copied from tibiaot74's map (tools/map-copy-tiles.py, new:
+      32771-32779,32281-32291,11, its 7.7 lava borders left out). Krendorak's body under the fire field in its NE corner
+      (32778,32282,11) uid 51068: bag (crystal key 3702, spike sword, dragon necklace, might ring, Krendorak's journal) +
+      ornamented shield + steel helmet. Part 2: the partner's tile 32770,32282,10 (aid 51059, movements/plains_of_havoc.lua)
+      holds the stalagmites 32771,32297,10 away; the chest behind them 32771,32299,10 uid 4516 (red bag: time ring, 5
+      platinum, garlic necklace, spellbook, lyre - real-map table); the rope hole there leads out.
 - [x] Alawar's Vault Quest - Senja / Folda (ice islands N of Carlin) (no level; 1 player)
       Done 2026-09-25: the three keys lay loose on the floor where their containers had been (our map and the JS engine's):
       chest 32031,31686,8 uid 4503 (key 4503), box 32172,31602,10 uid 4501 (key 4501), chest on the counter 32201,31571,10
@@ -343,27 +356,79 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       user; 2006 wiki, tibiaot74 - the map sent you back behind the walls). pick.lua works through a field on the spot
       ("use pick on the fire field"); the router follows a pick / shovel hole onto a second hole ("fall two levels").
       tests/quests/carlin/test_alawars_vault.py (long path from Folda, short path from Senja, walls back, rules)
-- [ ] Crystal Wand Quest (Double SD Quest) - Demona, via Maze of Lost Souls (N of Carlin) (level 60 (door); 1 player)
-- [ ] Demona Ring Quest - Demona (level 60 (Demona gate); 1 player)
+- [x] Crystal Wand Quest (Double SD Quest) - Demona, via Maze of Lost Souls (N of Carlin) (level 60 (door); 1 player)
+      Done 2026-09-25: the two boxes by the thrones 32479/32481,31611,15 are on our map, the left one holds Ferumbras'
+      twinkiller letter: left = uid 51028 (bag: SD rune with 2 charges + the letter), right = uid 51027 (crystal wand); no
+      source says which box - tibiaot74 puts the wand left. quests/system.lua can now give an item's text (a letter, a map).
+      The Maze of Lost Souls (done 2026-09-25): the entrance switch 32528,31724,10 (aid 51026, quests/mols_entrance_switch.lua)
+      turned right opens the hole 32483,31633,9 (current wiki's coordinates) into the ring of level-30 gates, left shuts it;
+      a ladder under it leads back up. tests/quests/carlin/test_maze_of_lost_souls.py
+- [x] Demona Ring Quest - NOT 7.4 (decided with the user 2026-09-25): no chests on our map (nor tibiaot74's), first wiki page 2016;
+      only Tibiantis lists it. Nothing to do
 - [x] Fanfare Quest - Carlin graveyard crypt (no level; 1 player)
       Done 2026-09-25: the key box 32376,31802,7 = uid 3520 (bone key 3520, real-map table), the crypt's west double
       door 32400,31788-31789,8 now needs key 3520 (it had no key number), the chest 32390,31769,9 was missing - placed at
       tibiaot74's spot, uid 4507 (fanfare). Way out: rope up the hole. tests/quests/carlin/test_fanfare.py
-- [ ] Griffin Shield Quest (MoLS Quest) - Gates of Demona, Maze of Lost Souls (level 30 (not a door, see notes); 1 player)
+- [x] Griffin Shield Quest (MoLS Quest) - Gates of Demona, Maze of Lost Souls (level 30 (the maze's gates); 1 player)
+      Done 2026-09-25: the "level 30" is the four level-30 gates around the maze's landing (our map, aid 1030). The two slain
+      skeletons and the dead body were missing: placed at tibiaot74's spots, uids 10062 griffin shield / 10063 dwarven axe /
+      10064 obsidian lance (real-map table).
 - [x] Power Ring Quest (Bronze Amulet / Femor Hills Goblin) - Femor Hills goblin cave (no level; 1 player)
       Done 2026-09-25: the two chests 32599/32601,31776,9 got the real-map table's uids 4511 (power ring, 2166 - the
       unworn one; the table says 2203, the worn one) / 4512 (bronze amulet). tests/quests/carlin/test_power_ring.py
-- [ ] Purple Tome Quest (Map Quest) - Demona library (level 60 (Demona gate); 1 player)
-- [ ] The Queen of the Banshees Quest (Banshee Quest) - Under Ghostlands and Isle of the Kings (level 60 (Queen refuses <60); 1+ (easier with a team; seal … player(s))
-- [ ] The White Raven Monastery Quest (Family Brooch Quest / Island of King… - Ghostlands W of Carlin, Isle of the Kings (no level; 1 player)
+- [x] Purple Tome Quest (Map Quest) - Demona library (level 60 (Demona gate); 1 player)
+      Done 2026-09-25: the library's two maps lay in their bookcases as loot for the first comer (32423/32428,31591,15): now
+      quest bookcases uid 51030 / 51031 (the maps with their texts); the purple tome was missing: bookcase 32421,31594,15 uid
+      51029 (tibiaot74's spot). Out: the teleport "to the surface" 32400,31656,15.
+- [x] The Queen of the Banshees Quest (Banshee Quest) - Under Ghostlands and Isle of the Kings (level 60 (Queen refuses <60); 1+ (easier with a team; seal … player(s))
+      Done 2026-09-25. Our map had every piece and nothing ran. Seals = player storages 51101-51107 (Hidden, Plague,
+      Demonrage, Sacrifice, True Path, Logic, the kiss); the seven doors 32223,31872-31890,14 (after the level-60 gate) carry
+      them as action ids (quest doors). movements/scripts/banshee_seals.lua: the six blue flames (aids 51040-51045) mark
+      their seal when their task is done and send you to its chamber on floor 15, whose portal now leads back (tibiaot74's
+      pairs, confirmed by the chambers' monuments). Hidden: 2 ghosts + a demon skeleton per pass. Logic: the six switches
+      32310-32314,31975-31976,13 as the wiki picture (western four right). True Path: the 15 floor tiles off the drawn path
+      send you back (aid 51046). Sacrifice: a blood pool on 32243,31892,14 (spilled per player). Demonrage: a warlock tile
+      (2 warlocks per player, once) and the levers 32220,31842-31846,15 in the order the wiki's coins show (2nd, 4th, 3rd,
+      1st, 5th). Plague: white pearl on 32173,31871, black on 32180,31871, then the portals 32176/32177,31869. Way in:
+      the two switches (aid 51050) each open one magic wall 32259,31890-31891,10; the hidden buttons behind them and a
+      one-minute timer close them (decided with the user); the portal beside them leads back out. Floor 11: the switch
+      32266,31861 (aid 51051) takes the magic wall off the trapdoor. The round chamber had no floor over its stairs down to
+      the Seal of Logic: stairs 410 at 32252-32254,31942,12 (tibiaot74 has stairs there too; tools/map-set-attrs.py
+      --new-tile). The Queen (npc/scripts/banshee_queen.lua, the transcripts): level 60, the six seals, the kiss ->
+      the grave room 32202,31812,8. Final room: chests uid 51061-51064 (boots of haste, giant sword, tower shield, bag with
+      stealth ring, stone skin amulet, 100 platinum - the 7.x wiki's set, decided with the user); the way out 32219,31913,15
+      (to the Ghostlands) shuts the seventh door for good (kiss storage 2). tests/quests/carlin/test_banshee.py (the whole
+      quest from the Carlin temple, the final room, the doors, the Queen, the flames, the walls, the planner rules)
+  - [x] "Once you went downstairs you can't go up again": the ramp back up (32218-32220,31894,15) has fences (1547,
+        block solid) - the map already does it; the route planner wrongly let a floor change with a fixed blocker on it
+        be walked (fixed 2026-09-25). test_banshee_doors_need_every_seal
+  - [x] The long hall's secret teleporter (done 2026-09-25, asked by the user): the row right south of the pick spot,
+        32265-32267,31893,12 (aid 51056), sends you back to the hall's start 32266,31864,12 - between the pick spot and
+        where the first seal's rope comes back up (the wiki's picture), so the hall's south end is reached only through
+        the Hidden Seal. The route planner knows it (worldmap.SCRIPTED_TELEPORTS). test_banshee_hidden_teleporter
+  - [ ] "walk over the poison fields and a switch will appear" (floor 11) - our map shows the switch from the start
+  - [ ] Explorer Society's Spectral Dress behind a quest door on the way (7.6) - not 7.4
+- [x] Engine: a portal with both a map destination and a movement script crashed the server (0xC0000005: the engine
+      moved the player and the script moved them again). The Banshee exit portal is scripted only; no other such portal
+      on the map (checked 2026-09-25)
+- [x] movements/scripts/onadd_questdoor.lua returned nothing for a numbered quest door (a Lua error each time one
+      closed) - fixed 2026-09-25
+- [x] The White Raven Monastery Quest (Family Brooch Quest / Island of King… - Ghostlands W of Carlin, Isle of the Kings (no level; 1 player)
   - [x] Part 1 done 2026-09-25: the brooch coffin 32248,31866,8 = uid 4506 (family brooch; real-map table), Dalbrect
         rewritten from the wiki transcripts (brooch/yes/yes = friend, storage 99999; passage/yes = 10 gp to the Isle deck
         32188,31958,7; per-player state; pz-lock check that works), Captain Jack (7.2, already on the Isle boat) sails back for
         20 gp - decided with the user: a way back by boat (the 7.x wiki's "20gp to return"; I first asked about a second
         Dalbrect, then found Jack). tests/quests/carlin/test_white_raven.py
-  - [ ] Part 2 with the Banshee Quest (decided with the user 2026-09-25): Costello's dialogue (fugio -> warded catacomb
-        doors; diary -> Blessed Ankh; crime/absolution clears Captain Jack's storage 99998), the two switches + magic walls
-        + reset tile in the Banshee entry cave, the dead human with the Monk's Diary ("They Are Coming")
+  - [x] Part 2 done 2026-09-25 (with the Banshee Quest): the dead monk 32262,31861,11 = uid 51065 (backpack with the diary
+        and its text, and the junk our map has in him - once per character). Costello (npc/scripts/costello.lua, transcripts):
+        "fugio", "yes" -> storage 51110 opens the warded doors 32169,31933,7 / 32171,31936,7 (quest doors); "diary", "yes"
+        takes the diary (item 1972) -> Blessed Ankh (2327, the "ankh" among the 7.2-7.24 quest items). test_banshee.py
+  - [x] The Isle's restricted floor (done 2026-09-25, asked by the user): the stairs behind the key-3350 door put you
+        on 32180,31925,5 (aid 51057, movements/scripts/isle_restricted.lua) = trespasser (storage 99998). Costello greets
+        them "WHAT? ...", "crime"/"absolution": 500 / 1,000 / 5,000 / 10,000 gp by level (TibiaWiki), "Be gone!"
+        otherwise; Captain Jack: "By the gods! You must be that intruder ... Begone!"; Dalbrect won't sail them either.
+        Key 3350's bookcase in Costello's room (32180,31934,7) was plain loot: now uid 51066, once per character (the
+        bag with the abbot's scroll and the key). test_isle_key_3350_bookcase, test_isle_trespass_and_absolution
 - [x] NPC keyword handler (2026-09-25): every NPC shared one per-player "last conversation node" table
       (KeywordHandler.lastNode on the class), so a player a captain teleported mid-conversation got the old NPC's
       conversation from the next NPC (Captain Jack greeted with Dalbrect's words and ignored "tibia"). Each handler has its
@@ -387,12 +452,20 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
 - [ ] The Desert Dungeon Quest (Desert / Vocation / 10k Quest) - Below Jakundaf Desert (entrance ~32649,32093,7) (level 20 (door); 4, one of each vocation player(s); Knight + Paladin + Druid + Sorcerer)
 - [ ] Dragon Tower Quest - Shadowthorn, south-east of Venore (no level; 1 player)
 - [ ] Heaven Blossom Quest - Shadowthorn underground (no level; 1 player)
-- [ ] Iron Helmet Quest (Muriel's Letter) - Plains of Havoc, west of the cyclops/orc/minotaur camp (~32… (no level; 1 player)
-- [ ] Isle of the Mists Quest (Druid Quest) - Isle of the Mists; teleport in PoH (~32831,32295,7) (no level; 1 player; druid, per the quest legend (the wiki d…)
+- [x] Iron Helmet Quest (Muriel's Letter) - Plains of Havoc, west of the cyclops/orc/minotaur camp (~32… (no level; 1 player)
+      Done 2026-09-25: the body was missing - dead human at 32769,32225,7 by the sycamore (tibiaot74's spot), uid 4518:
+      backpack with iron helmet, SD rune, leather armor, Muriel's letter (real-map table's text), worn leather boots,
+      longsword (decided with the user: the 2006 wiki's list + the longsword of the other sources).
+- [x] Isle of the Mists Quest (Druid Quest) - Isle of the Mists; teleport in PoH (~32831,32295,7) (no level; 1 player; druid, per the quest legend (the wiki d…)
+      Done 2026-09-25: druids only (decided with the user): the portal 32831,32294,7 is scripted (aid 51060) and puts others
+      back; the box 32852,32332,7 uid 51067 = 3 small emeralds (the 2006 wiki; decided with the user); the book is in the
+      bookcase beside it on our map.
 - [ ] Orc Shaman Quest - Swamp/orc cave east of Venore (~33055,32030,7) (no level; 1 player)
 - [ ] The Outlaw Camp Quest (Bright Sword Quest) - Outlaw Camp, west of Thais/Venore road (~32615,32253,7) (level 45 (door); 1 (2 recommended) player(s))
 - [ ] Panpipe Quest (Fire Devil Quest) - Desert Dungeon, Jakundaf Desert (no level; 1 player)
-- [ ] Power Bolts Quest - Hole south of the PoH temple (~32815,32280,7) (no level; 1 player)
+- [x] Power Bolts Quest - Hole south of the PoH temple (~32815,32280,7) (no level; 1 player)
+      Done 2026-09-25: the dead human 32818,32284,8 uid 4514: bag (5 power bolts, 12 burst arrows) + two handed sword (the
+      real-map table's 4514 + 4513); the Dreammaster book lies beside it on our map.
 - [ ] Silver Brooch Quest (Mummy Quest) - Greenclaw Swamp caves (~32700,31992,7) (no level; 1 player)
 - [ ] Skull of Ratha Quest (incl. Wolf Tooth Chain and Crystal Necklace) - Amazon Camp, north of Venore (~32846,31920,7) (no level; 1 player)
 - [ ] Time Ring Quest (Shadowthorn Quest) - Shadowthorn underground (~33060,32182,7) (no level; 1 player)
@@ -481,6 +554,8 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       below the pick hole 33084,31650,12 uid 1018 (fire axe) were missing - placed (tibiaot74, real-map table).
       tests/quests/edron/test_fire_axe.py
 - [ ] Postman Missions Quest - starts at Kevin (post office between Thais and Kazordoon), … (no level; 1 player; premium)
+      DEFERRED (decided with the user 2026-09-25): a big multi-city quest (Kevin's post office, missions across Thais,
+      Kazordoon, Venore, Carlin, Edron, ...) - its own piece of work after the city-by-city quests
 - [ ] Iron Ore Quest - Dwarf Mines near Kazordoon (no level; — player(s); —)
 - [x] Minotaur Leather Quest - raft south of Thais - NOT 7.4 (checked 2026-09-24): the item "minotaur leather" is not
       in our 7.4 item list at all; the wiki page is from 2011 with no version; not on Tibiantis. Nothing to do

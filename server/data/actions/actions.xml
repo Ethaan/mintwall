@@ -179,6 +179,11 @@
     <action actionid="51024" script="quests/edron_orc_cave_lever.lua"/>   <!-- Edron Orc Cave: the stone at the entrance -->
     <action actionid="51025" script="quests/senja_vault_lever.lua"/>   <!-- Alawar's Vault: the Senja cellar switch -->
     <action actionid="51026" script="quests/mols_entrance_switch.lua"/>   <!-- Maze of Lost Souls: the entrance switch -->
+    <action actionid="51050" script="quests/banshee_switches.lua"/>   <!-- Banshee Quest: the two magic-wall switches -->
+    <action actionid="51051" script="quests/banshee_switches.lua"/>   <!-- Banshee Quest: the switch over the trapdoor (floor 11) -->
+    <action actionid="51052" script="quests/banshee_switches.lua"/>   <!-- Banshee Quest: the Seal of Logic switches -->
+    <action actionid="51053" script="quests/banshee_switches.lua"/>   <!-- Banshee Quest: the Seal of Demonrage levers -->
+    <action actionid="51058" script="quests/ancient_temple_drawbridges.lua"/>   <!-- Thais Ancient Temple: the two drawbridge levers -->
     <action actionid="54545" script="draw_well_down.lua"/>   <!-- wells you climb down (Fibula, Ancient Temple) -->
 
     <!-- Doors -->
