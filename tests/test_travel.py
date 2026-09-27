@@ -49,3 +49,13 @@ def test_ships_take_premium_players_only(new_player, lines):
     p.sleep(1.5)
     assert p.pos == start, f"a free account sailed to {p.pos}"
     assert any("premium account" in s for s in said) or p.messages("premium account"), said
+
+
+def test_the_captain_is_heard_before_the_ship_sails(new_player):
+    """"Set the sails!" is spoken through the scheduler; the trip used to start first and the passenger never saw it."""
+    p = new_player(pos=(BLUEBEAR[0], BLUEBEAR[1] + 1, BLUEBEAR[2]), level=50, premium_days=30,
+                   group_id=TESTER_GROUP, storage={BEGINNER_SET_GIVEN: 1},
+                   inventory={BACKPACK: Item(1988, contents=[Item(2152, 2)])})
+    said = p.talk("hi", "edron", "yes", npc="Captain Bluebear")
+    assert "Set the sails!" in said, said
+    assert p.wait_for(lambda: p.pos == EDRON_HARBOUR, timeout=5), p.pos

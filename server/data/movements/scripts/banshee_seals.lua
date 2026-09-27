@@ -95,11 +95,29 @@ local function closeWalls()
 	end
 end
 
+-- 51112: floor 11, the room with the dead monk: "You will see a stone surrounded by poison fields. Walk over the poison
+-- fields and a switch will appear beneath it. Use the switch to reveal some stairs" (current wiki) - the poison fields
+-- 32265,31862-31863,11 under the east sacrificial stone; the switch 32266,31861,11 (aid 51051, actions/quests/
+-- banshee_switches.lua) appears the first time after a server start and stays.
+local HIDDEN_SWITCH = {x=32266, y=31861, z=11}
+
+local function revealSwitch()
+	if getTileItemById(HIDDEN_SWITCH, 1945).uid == 0 and getTileItemById(HIDDEN_SWITCH, 1946).uid == 0 then
+		local switch = doCreateItem(1945, 1, HIDDEN_SWITCH)
+		doSetItemActionId(switch, 51051)
+		doSendMagicEffect(HIDDEN_SWITCH, CONST_ME_POFF)
+	end
+end
+
 function onStepIn(cid, item, topos, frompos)
 	if not isPlayer(cid) then
 		return true
 	end
 	local aid = item.actionid
+	if aid == 51112 then
+		revealSwitch()
+		return true
+	end
 	local flame = FLAMES[aid]
 	if flame ~= nil then
 		if not ready(cid, aid) then

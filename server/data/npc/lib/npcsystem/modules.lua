@@ -206,8 +206,7 @@ if(Modules == nil) then
 			npcHandler:say('Set the sails!', cid)
 			npcHandler:releaseFocus(cid)
 
-			doTeleportThing(cid, parameters.destination, false)
-			doSendMagicEffect(parameters.destination, CONST_ME_TELEPORT)
+			teleportAfterWords(cid, parameters.destination)
 		end
 
 		npcHandler:resetNpc(cid)
@@ -451,8 +450,7 @@ if(Modules == nil) then
 					module.npcHandler:say('Set the sails!', cid)
 					module.npcHandler:releaseFocus(cid)
 
-					doTeleportThing(cid, parent.destination, true)
-					doSendMagicEffect(parent.destination, CONST_ME_TELEPORT)
+					teleportAfterWords(cid, parent.destination)
 				else
 					module.npcHandler:say('You don\'t have enough money.', cid)
 				end
@@ -489,8 +487,7 @@ if(Modules == nil) then
 			module.npcHandler:say('Set the sails!', cid)
 			module.npcHandler:releaseFocus(cid)
 
-			doTeleportThing(cid, parameters.destination, false)
-			doSendMagicEffect(parameters.destination, CONST_ME_TELEPORT)
+			teleportAfterWords(cid, parameters.destination)
 		end
 
 		module.npcHandler:releaseFocus(cid)

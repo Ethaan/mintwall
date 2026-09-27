@@ -107,8 +107,8 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       2026-09-24: a base door (action id 2001-2004) lets in the vocation promoted or not (a master sorcerer is a
       sorcerer); a promoted door (2005-2008) only the promoted one. Our map has NO vocation door (no action id
       2001-2008 anywhere) - so no in-game test yet:
-  - [ ] Test the vocation door rules with the first quest that has one (Desert Dungeon Quest is "one of each
-        vocation" - check how our map does it)
+  - [-] Test the vocation door rules with the first quest that has one - checked 2026-09-26 through Darashia: no quest
+        on our map has a vocation door (the Desert Dungeon checks vocations on its switches and lever)
 - [x] Promotion without premium (checked 2026-09-24): suspended - plays and shows as the base vocation, the saved
       vocation stays promoted, back with premium (current TibiaWiki; the 2005 page only says buying needs premium).
       test_death.py::test_promotion_only_works_with_premium, test_promotion_is_suspended_without_premium_and_back_with_it
@@ -144,7 +144,7 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       Battle Axe skeleton and the Dead Archer body were two of them). Our map (= the JS engine's) lost many quest
       containers. Work through them quest by quest with the quest-testing skill - each "missing" one needs sources
       (tibiaot74 also adds its own things)
-- [ ] Map items decay (found 2026-09-24): the OTBM loader started decay on every map item, so the decorative dead
+- [x] Map items decay (found 2026-09-24; built 2026-09-25, tests/test_map_items.py): the OTBM loader started decay on every map item, so the decorative dead
       humans (15 min) and dead skeletons (10 min, then gone) in caves vanished after each start. Fixed in
       iomapotbm.cpp (map items don't decay; moved later, they do) - NEEDS A REBUILD (the dev server was running);
       then a test (a map skeleton is still there after its 10 minutes)
@@ -406,8 +406,11 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
         32265-32267,31893,12 (aid 51056), sends you back to the hall's start 32266,31864,12 - between the pick spot and
         where the first seal's rope comes back up (the wiki's picture), so the hall's south end is reached only through
         the Hidden Seal. The route planner knows it (worldmap.SCRIPTED_TELEPORTS). test_banshee_hidden_teleporter
-  - [ ] "walk over the poison fields and a switch will appear" (floor 11) - our map shows the switch from the start
-  - [ ] Explorer Society's Spectral Dress behind a quest door on the way (7.6) - not 7.4
+  - [x] "walk over the poison fields and a switch will appear" (floor 11; current wiki) - done 2026-09-26: the switch
+        32266,31861,11 is off the map; the ground under the poison fields 32265,31862-31863,11 (aid 51112,
+        movements/banshee_seals.lua) brings it back (aid 51051) until the next server start.
+        test_banshee_switch_appears_on_the_poison_fields and the whole quest
+  - [-] Explorer Society's Spectral Dress behind a quest door on the way (7.6) - not 7.4
 - [x] Engine: a portal with both a map destination and a movement script crashed the server (0xC0000005: the engine
       moved the player and the script moved them again). The Banshee exit portal is scripted only; no other such portal
       on the map (checked 2026-09-25)
@@ -433,7 +436,9 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       (KeywordHandler.lastNode on the class), so a player a captain teleported mid-conversation got the old NPC's
       conversation from the next NPC (Captain Jack greeted with Dalbrect's words and ignored "tibia"). Each handler has its
       own now (npc/lib/npcsystem/keywordhandler.lua). Covered by test_white_raven.py (Dalbrect, then Jack)
-- [ ] NPC travel lines are never seen: selfSay is scheduled (Npc::doSay, SCHEDULER_MINTICKS) and the captain teleports
+- [x] NPC travel lines are never seen: selfSay is scheduled (Npc::doSay, SCHEDULER_MINTICKS) and the captain teleports
+      Done 2026-09-26: the travel modules teleport 300 ms after the words (teleportAfterWords, npc/scripts/lib/npc.lua).
+      test_travel.py test_the_captain_is_heard_before_the_ship_sails
       the player in the same call, so "Have a nice trip!" / "Set the sails!" is said after the player left. Teleport a
       moment later (addEvent) or say it at the destination - check what 7.4 showed
 - [x] Draconia Quest - Draconia, via Hellgate under Ab'Dendriel (level 25 (door); 2 minimum (floor switches) player(s))
@@ -676,7 +681,7 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
 - [ ] Postman Missions Quest - starts at Kevin (post office between Thais and Kazordoon), … (no level; 1 player; premium)
       DEFERRED (decided with the user 2026-09-25): a big multi-city quest (Kevin's post office, missions across Thais,
       Kazordoon, Venore, Carlin, Edron, ...) - its own piece of work after the city-by-city quests
-- [ ] Iron Ore Quest - Dwarf Mines near Kazordoon (no level; — player(s); —)
+- [-] Iron Ore Quest - Dwarf Mines near Kazordoon (no level; — player(s); —)
       Probably not 7.4 (wiki page from 2011, no version, not on Tibiantis) - left out unless a 7.4 source turns up
 - [x] Minotaur Leather Quest - raft south of Thais - NOT 7.4 (checked 2026-09-24): the item "minotaur leather" is not
       in our 7.4 item list at all; the wiki page is from 2011 with no version; not on Tibiantis. Nothing to do

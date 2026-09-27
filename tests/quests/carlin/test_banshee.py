@@ -41,6 +41,21 @@ BQ = dict(
 VIAL, BLOOD, WHITE_PEARL, BLACK_PEARL, HEAVY_MISSILE = 2006, 2, 2143, 2144, 2311
 SWITCH_RIGHT, MAGIC_WALL = 1946, 1497
 ALL_SEALS = {v: 1 for v in SEAL.values()}
+POISON_FIELDS = [(32265, 31862, 11), (32265, 31863, 11)]   # under the east sacrificial stone: they reveal the switch
+
+
+def _walk_over_the_poison_fields(p, items, world_map, **ability):
+    """Onto one of the two poison fields (a monster may stand on the other)."""
+    from tibia74.route import walk_next_to
+    for _ in range(3):
+        for field in POISON_FIELDS:
+            walk_next_to(p, items, world_map, field, **ability)
+            try:
+                step_onto(p, field)
+                return
+            except AssertionError:
+                p.sleep(1)
+    raise AssertionError("could not step onto the poison fields")
 
 
 def _has(p, pos, sid):
@@ -98,6 +113,9 @@ def test_banshee_quest(new_player, items, world_map, db):
     use_map_item(p, items, B["monk"], "dead human")
     assert p.wait_for(lambda: p.messages("You have found a backpack."), timeout=3), p.text_messages[-3:]
     p.sleep(1.1)
+    # "Walk over the poison fields and a switch will appear" (current wiki)
+    _walk_over_the_poison_fields(p, items, world_map, **ability)
+    assert p.wait_for(lambda: _has(p, B["trap_switch"], 1945), timeout=3), p.tiles.get(B["trap_switch"])
     walk_next_to(p, items, world_map, B["trap_switch"], **ability)
     use_map_item(p, items, B["trap_switch"], "switch")
     assert p.wait_for(lambda: not _has(p, B["trapdoor"], MAGIC_WALL), timeout=3), p.tiles.get(B["trapdoor"])
@@ -389,3 +407,12 @@ def test_isle_trespass_and_absolution(new_player, items, world_map, db):
     assert any("You don't have enough money." in s for s in said), said
     said = talk_to(poor, "Costello", "hi", "name")
     assert any(s == "Be gone!" for s in said), said
+
+
+def test_banshee_switch_appears_on_the_poison_fields(new_player, items, world_map):
+    """Floor 11: walking over the poison fields under the east sacrificial stone brings the switch (after a server start
+    it is not there; the whole quest may have revealed it already in this session - then it stays)."""
+    B = BQ
+    p = next_to(new_player, POISON_FIELDS[1], level=100, group_id=TESTER_GROUP, storage={30001: 1})
+    _walk_over_the_poison_fields(p, items, world_map, level=100)
+    assert p.wait_for(lambda: _has(p, B["trap_switch"], 1945) or _has(p, B["trap_switch"], 1946), timeout=3),         p.tiles.get(B["trap_switch"])

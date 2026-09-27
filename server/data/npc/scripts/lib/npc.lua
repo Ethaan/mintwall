@@ -169,3 +169,14 @@ function answerTalk(npcHandler, talk, cid, msg)
 	end
 	return false
 end
+
+-- Travel NPCs: "Set the sails!" is spoken through the scheduler (selfSay), a teleport in the same call went first and
+-- the passenger never saw the words. The trip starts a moment after them.
+function teleportAfterWords(cid, destination)
+	addEvent(function()
+		if isPlayer(cid) then
+			doTeleportThing(cid, destination, false)
+			doSendMagicEffect(destination, CONST_ME_TELEPORT)
+		end
+	end, 300)
+end

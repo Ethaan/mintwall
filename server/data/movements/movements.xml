@@ -208,6 +208,7 @@
         <movevent event="StepIn"  actionid="51018" script="mintwallin_grate_switch.lua" />   <!-- Devil Helmet: opens the grate -->
         <movevent event="StepOut" actionid="51018" script="mintwallin_grate_switch.lua" />
         <!-- The Queen of the Banshees Quest: seal flames, True Path traps, the hidden buttons, warlock tiles, pearl portals, the way out -->
+        <movevent event="StepIn"  actionid="51112" script="banshee_seals.lua" />   <!-- Banshee: the poison fields that reveal the floor-11 switch -->
         <movevent event="StepIn"  actionid="51040" script="banshee_seals.lua" />   <!-- flame: Hidden Seal -->
         <movevent event="StepIn"  actionid="51041" script="banshee_seals.lua" />   <!-- flame: Plague Seal -->
         <movevent event="StepIn"  actionid="51042" script="banshee_seals.lua" />   <!-- flame: Seal of Demonrage -->
