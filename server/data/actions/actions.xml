@@ -192,6 +192,10 @@
     <action actionid="51086" script="quests/paradox_tower.lua"/>   <!-- Paradox Tower: the ghoul room's crate switch -->
     <action actionid="51088" script="quests/paradox_tower.lua"/>   <!-- Paradox Tower: the fruit switch -->
     <action actionid="51089" script="quests/paradox_tower.lua"/>   <!-- Paradox Tower: the chess switch -->
+    <action actionid="51035" script="quests/outlaw_camp.lua"/>   <!-- Outlaw Camp: the oven switch -->
+    <action actionid="51036" script="quests/outlaw_camp.lua"/>   <!-- Outlaw Camp: the power-ring switch -->
+    <action actionid="51037" script="quests/outlaw_camp.lua"/>   <!-- Outlaw Camp: the mill's switch -->
+    <action actionid="51096" script="quests/desert_dungeon.lua"/>   <!-- Desert Dungeon: the paladin's lever -->
     <action actionid="54545" script="draw_well_down.lua"/>   <!-- wells you climb down (Fibula, Ancient Temple) -->
 
     <!-- Doors -->

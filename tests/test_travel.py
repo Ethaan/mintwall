@@ -36,3 +36,16 @@ def test_no_teleport_from_thais_back_to_rookgaard(new_player):
     assert p.wait_for(lambda: p.pos == spot, timeout=3), f"could not step onto {spot}: {p.pos}"
     p.sleep(1)
     assert p.pos == spot, f"teleported to {p.pos}"
+
+
+@pytest.mark.parametrize("lines", [["hi", "carlin", "yes"], ["bring me to carlin"]], ids=["conversation", "bring-me-to"])
+def test_ships_take_premium_players_only(new_player, lines):
+    """TibiaWiki 2006: "Captain Bluebear will transport any premium players by ship" - a free account stays."""
+    p = new_player(pos=(BLUEBEAR[0], BLUEBEAR[1] + 1, BLUEBEAR[2]), level=50, premium_days=0,
+                   group_id=TESTER_GROUP, storage={BEGINNER_SET_GIVEN: 1},
+                   inventory={BACKPACK: Item(1988, contents=[Item(2152, 2)])})
+    start = p.pos
+    said = p.talk(*lines, npc="Captain Bluebear")
+    p.sleep(1.5)
+    assert p.pos == start, f"a free account sailed to {p.pos}"
+    assert any("premium account" in s for s in said) or p.messages("premium account"), said

@@ -234,6 +234,8 @@
         <movevent event="AddItem" tileitem="1" actionid="51087" script="paradox_tower.lua" />   <!-- Paradox Tower: the ghoul's crate in the corner -->
         <movevent event="RemoveItem" tileitem="1" actionid="51087" script="paradox_tower.lua" />
         <movevent event="StepIn"  actionid="51090" script="paradox_tower.lua" />   <!-- Paradox Tower: the treasure room's plates -->
+        <movevent event="StepIn"  actionid="51095" script="desert_dungeon.lua" />   <!-- Desert Dungeon: the four vocations' switches -->
+        <movevent event="StepOut" actionid="51095" script="desert_dungeon.lua" />
         <movevent event="StepIn"  itemid="446" script="switch_tile.lua" />
         <movevent event="StepOut" itemid="447" script="switch_tile.lua" />
 

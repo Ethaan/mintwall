@@ -1,7 +1,27 @@
 --------------------By Jpkulik!---------------------------- 
 local keywordHandler = KeywordHandler:new() 
 local npcHandler = NpcHandler:new(keywordHandler) 
-NpcSystem.parseParameters(npcHandler) 
+NpcSystem.parseParameters(npcHandler)
+
+-- The Ghost Ship (Plate Armor Quest): "When travelling with Captain Fearless from Venore to Darashia you may be randomly
+-- hijacked [...] before you reach Darashia" (TibiaWiki 2005) - one trip in ten (decided with the user 2026-09-26), onto
+-- the deck by the steering wheel (33319,32172,6); the ship's forcefield then takes you on to Darashia.
+local GHOST_SHIP = {x=33319, y=32172, z=6}
+local GHOST_SHIP_CHANCE = 10
+local function toDarashia(destination)
+	if math.random(1, GHOST_SHIP_CHANCE) == 1 then
+		return GHOST_SHIP
+	end
+	return destination
+end
+local function travelToDarashia(cid, message, keywords, parameters, node)
+	local trip = {}
+	for k, v in pairs(parameters) do
+		trip[k] = v
+	end
+	trip.destination = toDarashia(parameters.destination)
+	return StdModule.travel(cid, message, keywords, trip, node)
+end
 
 
 
@@ -14,12 +34,19 @@ npcHandler:setMessage(MESSAGE_GREET, HelloText)
 function onThink()                         npcHandler:onThink() end 
 -- OTServ event handling functions end 
 local function creatureSayCallback(cid, type, msg)
+	-- 7.4: "Captain Bluebear will transport any premium players by ship" (TibiaWiki 2006) - the "bring me to" shortcuts
+	-- below skipped the travel module's premium check
+	if msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and not npcHandler:isFocused(cid)
+			and not isPremium(cid) then
+		selfSay("I'm sorry, but you need a premium account in order to travel onboard our ships.")
+		return true
+	end
 	
 	local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
 	
 	if (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'darashia') and (not npcHandler:isFocused(cid))) then
 		if doPlayerRemoveMoney(cid, 60) then
-		doTeleportThing(cid,{x=33290, y=32481, z=7})
+		doTeleportThing(cid, toDarashia({x=33290, y=32481, z=7}))
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
@@ -147,7 +174,7 @@ local CarlinText = 'Do you want to Travel to Carlin for 130 gold coins?'
 local CarlinTextNo = 'Ok, come back when you want then!' 
 local NoTravel = 'Sorry, i do not travel to this city..' 
 local CarlinLvl = 8 
-local CarlinPremium = false --True/false 
+local CarlinPremium = true --True/false 
 
 --Carlin-- 
 if carlin == true then 
@@ -170,7 +197,7 @@ local VenoreText = 'Do you want to Travel to Venore for 10 gold coins?'
 local VenoreTextNo = 'Ok, come back when you want then!' 
 local NoTravel = 'Sorry, i do not travel to this city..' 
 local VenoreLvl = 8 
-local VenorePremium = false --True/false 
+local VenorePremium = true --True/false 
 
 --Venore-- 
 if Venore == true then 
@@ -192,7 +219,7 @@ local KazordoonText = 'Do you want to Travel to Kazordoon for 10 gold coins?'
 local KazordoonTextNo = 'Ok, come back when you want then!' 
 local NoTravel = 'Sorry, i do not travel to this city..' 
 local KazordoonLvl = 8 
-local KazordoonPremium = false --True/false 
+local KazordoonPremium = true --True/false 
 
 --Kazordoon-- 
 if Kazordoon == true then 
@@ -214,7 +241,7 @@ local ThaisText = 'Do you want to Travel to Thais for 170 gold coins?'
 local ThaisTextNo = 'Ok, come back when you want then!' 
 local NoTravel = 'Sorry, i do not travel to this city..' 
 local ThaisLvl = 8 
-local ThaisPremium = false --True/false 
+local ThaisPremium = true --True/false 
 
 --Thais-- 
 if Thais == true then 
@@ -236,7 +263,7 @@ local AbDendrielText = 'Do you want to Travel to Ab\'Dendriel for 90 gold coins?
 local AbDendrielTextNo = 'Ok, come back when you want then!' 
 local NoTravel = 'Sorry, i do not travel to this city..' 
 local AbDendrielLvl = 8 
-local AbDendrielPremium = false --True/false 
+local AbDendrielPremium = true --True/false 
 
 --AbDendriel-- 
 if AbDendriel == true then 
@@ -258,7 +285,7 @@ local EdronText = 'Do you want to Travel to Edron for 40 gold coins?'
 local EdronTextNo = 'Ok, come back when you want then!' 
 local NoTravel = 'Sorry, i do not travel to this city..' 
 local EdronLvl = 8 
-local EdronPremium = false --True/false 
+local EdronPremium = true --True/false 
 
 --Edron-- 
 if Edron == true then 
@@ -280,13 +307,13 @@ local DarashiaText = 'Do you want to Travel to Darashia for 60 gold coins?'
 local DarashiaTextNo = 'Ok, come back when you want then!' 
 local NoTravel = 'Sorry, i do not travel to this city..' 
 local DarashiaLvl = 8 
-local DarashiaPremium = false --True/false 
+local DarashiaPremium = true --True/false 
 
 --Darashia-- 
 if Darashia == true then 
 local travelNode = keywordHandler:addKeyword({'darashia'},  
 StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = DarashiaText }) 
-travelNode:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = DarashiaPremium, level = DarashiaLvl, cost = DarashiaCost, destination = DarashiaPosition }) 
+travelNode:addChildKeyword({'yes'}, travelToDarashia, {npcHandler = npcHandler, premium = DarashiaPremium, level = DarashiaLvl, cost = DarashiaCost, destination = DarashiaPosition }) 
 travelNode:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = DarashiaTextNo }) 
 else 
 local travelNode = keywordHandler:addKeyword({'darashia'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = NoTravel }) 
@@ -302,7 +329,7 @@ local PortHopeText = 'Do you want to Travel to Port Hope for 160 gold coins?'
 local PortHopeTextNo = 'Ok, come back when you want then!' 
 local NoTravel = 'Sorry, i do not travel to this city..' 
 local PortHopeLvl = 8 
-local PortHopePremium = false --True/false 
+local PortHopePremium = true --True/false 
 
 --Port Hope-- 
 if PortHope == true then 
@@ -324,7 +351,7 @@ local LibertyBayText = 'Do you want to Travel to Liberty Bay for 10 gold coins?'
 local LibertyBayTextNo = 'Ok, come back when you want then!' 
 local NoTravel = 'Sorry, i do not travel to this city..' 
 local LibertyBayLvl = 8 
-local LibertyBayPremium = false --True/false 
+local LibertyBayPremium = true --True/false 
 
 --Liberty Bay-- 
 if LibertyBay == true then 
@@ -346,7 +373,7 @@ local AnkText = 'Do you want to Travel to Ankrahmun for 150 gold coins?'
 local AnkTextNo = 'Ok, come back when you want then!' 
 local NoTravel = 'Sorry, i do not travel to this city..' 
 local AnkLvl = 8 
-local AnkPremium = false --True/false 
+local AnkPremium = true --True/false 
 
 --Ankrahmun-- 
 if Ank == true then 
@@ -368,7 +395,7 @@ local SvargrondText = 'Do you want to Travel to Svargrond for 10 gold coins?'
 local SvargrondTextNo = 'Ok, come back when you want then!' 
 local NoTravel = 'Sorry, i do not travel to this city..' 
 local SvargrondCost = 10 
-local SvargrondPremium = false --True/false 
+local SvargrondPremium = true --True/false 
 
 --Svargrond-- 
 if Svargrond == true then 

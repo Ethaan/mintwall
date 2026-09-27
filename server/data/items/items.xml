@@ -4246,8 +4246,9 @@
 		<attribute key="magicpoints" value="1"/>
 		<attribute key="slotType" value="head"/>
 	</item>
-	<item id="2324" article="a" name="broom">
+	<item id="2324" article="a" name="witchesbroom">   <!-- TibiaWiki 2006: weight 11.00, Wyda's, for a blood herb -->
 		<attribute key="weight" value="1100"/>
+		<attribute key="description" value="Don't use it without flying license. Not suitable for minors."/>
 	</item>
 	<item id="2325" article="a" name="book">
 		<attribute key="weight" value="1300"/>

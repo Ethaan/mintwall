@@ -1317,6 +1317,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once / rules:** Sources do not say. The trees are probably quest containers, once per character.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=70179 (spoiler, Dec 2006); https://tibia.fandom.com/index.php?oldid=70176; https://tibia.fandom.com/wiki/Black_Knight_Quest/Spoiler; https://tibiantis.info/library/quests
 - **Confidence:** High for the route and rewards on real Tibia 7.x. Low for what Tibiantis actually does.
+- **Our server (2026-09-26):** key 5010 in the trees 32813,31964,7 / 32800,31959,7 (one per character); door 32824,31969,8 (5010); level-50 gate 32874,31974,12; crown shield tree 32868,31955,11, crown armor tree 32880,31955,11 (decided with the user). tests/quests/venore/test_black_knight.py.
 
 ### Blood Herb Quest
 - **Alt names:** Witchesbroom Quest.
@@ -1336,6 +1337,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** The quest tree is presumably once per player.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=70614 ; https://tibia.fandom.com/wiki/Blood_Herb_Quest/Spoiler ; TI.
 - **Confidence:** high.
+- **Our server (2026-09-26):** dead tree 32769,31968,7 uid 10032: blood herb. Wyda's witchesbroom trade not scripted yet. tests/quests/venore/test_blood_herb.py.
 
 ### The Desert Dungeon Quest
 - **Alt names:** Desert Quest, Vocation Quest, 10K Quest.
@@ -1374,6 +1376,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** Rewards once per character. The quest can be repeated to help others.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=67986 ; https://tibia.fandom.com/index.php?oldid=63223 ; https://tibia.fandom.com/wiki/The_Desert_Dungeon_Quest/Spoiler ; TI; TL.
 - **Confidence:** high.
+- **Our server (2026-09-26):** the middle forcefield 32673,32089,8 removed (decided with the user); switches 32677,32089 (sorcerer, spellbook on 32679,32089) / 32669,32089 (druid, apple on 32667,32089) / 32673,32085 (paladin, crossbow on 32673,32083) / 32673,32093 (knight, sword on 32673,32094); lever 32673,32086,8; chests 32668,32069,8 (100 platinum) and 32675,32069,8 (green bag). tests/quests/desert/test_desert_dungeon.py.
 
 ### Dragon Tower Quest
 - **Location:** Shadowthorn (elf town in the swamps south-east of Venore), central tower.
@@ -1391,6 +1394,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** unknown (boxes).
 - **Sources:** https://tibia.fandom.com/index.php?oldid=65460 ; https://tibia.fandom.com/index.php?oldid=65017 ; https://tibia.fandom.com/wiki/Dragon_Tower_Quest/Spoiler
 - **Confidence:** medium on the exact rewards.
+- **Our server (2026-09-26):** machete into Shadowthorn; boxes 33072,32169,2 uid 3505 (2 small sapphires, 30 burst arrows, 60 poison arrows, 100 gp) and 33079,32169,2 uid 3506 (bow, mana fluid, life fluid) - decided with the user. tests/quests/venore/test_dragon_tower.py.
 
 ### Heaven Blossom Quest
 - **Location:** Shadowthorn, underground (go down the ladder closest to the entrance).
@@ -1404,6 +1408,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** unknown.
 - **Sources:** https://tibia.fandom.com/wiki/Heaven_Blossom_Quest/Spoiler ; TI; TL.
 - **Confidence:** low.
+- **Our server (2026-09-26):** not 7.4 (decided with the user): the pickupable heaven blossom is a 7.8 item; nothing scripted.
 
 ### Iron Helmet Quest
 - **Alt names:** Muriel's Letter Quest.
@@ -1447,6 +1452,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** assumed.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=24076 ; https://tibia.fandom.com/wiki/Orc_Shaman_Quest/Spoiler
 - **Confidence:** high.
+- **Our server (2026-09-26):** box 33089,32030,9 (placed) uid 3504: bag with magic lightwand, axe ring, blank rune. tests/quests/venore/test_orc_shaman.py.
 
 ### The Outlaw Camp Quest
 - **Alt names:** Bright Sword Quest.
@@ -1481,6 +1487,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** yes (chest).
 - **Sources:** https://tibia.fandom.com/index.php?oldid=66655 ; https://tibia.fandom.com/index.php?oldid=29950 ; https://tibia.fandom.com/wiki/The_Outlaw_Camp_Quest/Spoiler ; TI; TL.
 - **Confidence:** high for the mechanics. Medium for the reward.
+- **Our server (2026-09-26):** trees 32617,32250 / 32609,32244 / 32651,32244,7 keys 3301-3303; oven switch 32614,32173,9, oven 32623,32188,9, box 32623,32187,9 key 3304; ring counter 32594,32214,9 + switch 32594,32212,9; mill switch 32616,32222,10 (once per server start), barrel notch 32614,32209,10, stone 32614,32206,10; level-45 gate 32602,32207,10; door 32620,32199,10 (3304); chest 32620,32198,10: bright sword + red gem. tests/quests/venore/test_outlaw_camp.py.
 
 ### Panpipe Quest
 - **Alt names:** Fire Devil Quest.
@@ -1499,6 +1506,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** assumed.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=23951 ; https://tibia.fandom.com/wiki/Panpipe_Quest/Spoiler
 - **Confidence:** high.
+- **Our server (2026-09-26):** rock 32652,32107,7 uid 3621 key 4055; door 32643,32128,8 (4055); chest 32644,32131,8 (placed) uid 3622: bag with panpipes, 2 small amethysts, power ring. tests/quests/desert/test_panpipe.py.
 
 ### Power Bolts Quest
 - **Location:** Hole just south of the Plains of Havoc temple, ~(32815,32280,7).
@@ -1530,6 +1538,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** assumed.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=73566 ; https://tibia.fandom.com/wiki/Silver_Brooch_Quest/Spoiler
 - **Confidence:** high.
+- **Our server (2026-09-26):** pick spot 32775,32012,10; coffin 32775,32006,11 uid 3503: bag with silver brooch, 2 small rubies, 3 small diamonds. tests/quests/venore/test_silver_brooch.py.
 
 ### Skull of Ratha Quest (includes Wolf Tooth Chain)
 - **Location:** Amazon Camp north of Venore; "Witch Hill" ~(32846,31920,7).
@@ -1546,6 +1555,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** assumed.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=61958 ; https://tibia.fandom.com/index.php?oldid=64839 (Wolf Tooth Chain); https://tibia.fandom.com/wiki/Skull_of_Ratha_Quest/Spoiler
 - **Confidence:** high.
+- **Our server (2026-09-26):** boxes 32847,31917,6 uid 3501 (white pearl, skull) and 32845,31917,6 uid 51032 (wolf tooth chain, dwarven ring); chest 32867,31909,8 uid 3502 (100 gp, crystal necklace, 2 black pearls). tests/quests/venore/test_skull_of_ratha.py.
 
 ### Time Ring Quest
 - **Alt names:** Shadowthorn Quest.
@@ -1560,6 +1570,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** assumed.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=71065 ; https://tibia.fandom.com/wiki/Time_Ring_Quest/Spoiler
 - **Confidence:** high.
+- **Our server (2026-09-26):** machete into Shadowthorn; hole 33059,32181,7; chests 33038/33039/33040,32171,9 uid 10039 time ring / 10040 elven amulet / 10041 crystal ball. tests/quests/venore/test_time_ring.py.
 
 ### Voodoo Doll Quest
 - **Location:** Greenclaw Swamp, a hole on the north side, ~(32737,31953,7).
@@ -1573,6 +1584,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** assumed.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=38903 ; https://tibia.fandom.com/wiki/Voodoo_Doll_Quest/Spoiler
 - **Confidence:** high.
+- **Our server (2026-09-26):** boxes 32757,31957,9 (placed) uid 3500 voodoo doll and 32758,31952,9 (placed) uid 2162 magic lightwand. tests/quests/venore/test_voodoo_doll.py.
 
 ### Medusa Shield Quest
 - **Alt names:** Star Room Quest, Necromancer Quest.
@@ -1592,6 +1604,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** assumed.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=61332 ; https://tibia.fandom.com/index.php?oldid=66825 ; https://tibia.fandom.com/wiki/Medusa_Shield_Quest/Spoiler ; TI; TL.
 - **Confidence:** high for the route. Medium for the rewards.
+- **Our server (2026-09-26):** level-60 gates 33032/33037,32398,11; stone coffin 33049,32399-32400,10 (placed; decided with the user) uid 10033: medusa shield, skull staff, blue robe. tests/quests/darashia/test_medusa_shield.py.
 
 ### Plate Armor Quest
 - **Alt names:** Ghost Ship (Ghostship) Quest.
@@ -1609,6 +1622,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Implementation note:** You need a random-hijack travel script on the Venore to Darashia boat.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=24797 ; https://tibia.fandom.com/wiki/Plate_Armor_Quest/Spoiler
 - **Confidence:** high.
+- **Our server (2026-09-26):** Captain Fearless hijacks 1 in 10 Venore-Darashia trips to 33319,32172,6 (decided with the user); coffin 33327,32180,8 uid 10066: plate armor; exit forcefield 33328,32181,6 -> Darashia 33290,32481,7. tests/quests/darashia/test_ghost_ship.py.
 
 ### Stealth Ring Quest
 - **Alt names:** Minotaur Pyramid Quest.
@@ -1624,6 +1638,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** assumed.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=36335 ; https://tibia.fandom.com/wiki/Stealth_Ring_Quest/Spoiler
 - **Confidence:** high.
+- **Our server (2026-09-26):** coffins 33315,32282,11 uid 3900 stealth ring and 33315,32277,11 uid 3901 protection amulet. tests/quests/darashia/test_stealth_ring.py.
 
 ### The Ancient Tombs Quest
 - **Alt names:** Helmet of the Ancients Quest, Pharaohs Quest.

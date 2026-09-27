@@ -516,11 +516,29 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       in) - now it pushes the crate into the corner by itself (test_paradox_tower_the_ghoul_pushes_the_crate, ~4 min).
       Premium: the quest is premium (TibiaWiki 2006, Tibiantis); on our server only Zoltan (Edron) could make it so,
       and the boats take free accounts (see "Boats: premium only?"). A Prisoner always asks the colour.
-- [ ] Black Knight Quest (Crown Set) - Villa Scapula swamp, north of Venore (~32827,31959,7) (level 50 (door); 1+ player(s))
-- [ ] Blood Herb Quest (Witchesbroom) - Greenclaw Swamp, west of Venore (no level; 1 player)
-- [ ] The Desert Dungeon Quest (Desert / Vocation / 10k Quest) - Below Jakundaf Desert (entrance ~32649,32093,7) (level 20 (door); 4, one of each vocation player(s); Knight + Paladin + Druid + Sorcerer)
-- [ ] Dragon Tower Quest - Shadowthorn, south-east of Venore (no level; 1 player)
-- [ ] Heaven Blossom Quest - Shadowthorn underground (no level; 1 player)
+- [x] Black Knight Quest (Crown Set) - Villa Scapula swamp, north of Venore (~32827,31959,7) (level 50 (door); 1+ player(s))
+      Done 2026-09-26: key 5010 in the dead trees 32813,31964,7 (uid 51033) and 32800,31959,7 (uid 51034, SAME_QUEST: one
+      key per character); the basement door 32824,31969,8 got key number 5010; past the level-50 gate 32874,31974,12 the
+      southern trees give uid 2519 crown shield (32868,31955,11) and 2487 crown armor (32880,31955,11) - decided with the
+      user over Tibiantis. tests/quests/venore/test_black_knight.py
+- [x] Blood Herb Quest (Witchesbroom) - Greenclaw Swamp, west of Venore (no level; 1 player)
+      Done 2026-09-26: the dead tree 32769,31968,7 uid 10032 gives the blood herb (real-map table). Wyda (npc/scripts/wyda.lua, her transcript lines)
+      trades the herb for her witchesbroom (item 2324, "broom" before - the wiki's weight 11.00 and flavor text); the
+      trade's own lines are not written down anywhere (ours). tests/quests/venore/test_blood_herb.py
+- [x] The Desert Dungeon Quest (Desert / Vocation / 10k Quest) - Below Jakundaf Desert (entrance ~32649,32093,7) (level 20 (door); 4, one of each vocation player(s); Knight + Paladin + Druid + Sorcerer)
+      Done 2026-09-26: the forcefield in the middle of the vocation room (32673,32089,8) took anyone into the reward
+      room - removed (decided with the user); the four switches (aid 51095, movements/desert_dungeon.lua) go down only for
+      their vocation with the sacrifice on the basin behind (sorcerer spellbook E, druid red apple W, paladin crossbow N,
+      knight sword S); the paladin's lever 32673,32086,8 (aid 51096) wants all four at level 20+, takes the sacrifices and
+      teleports them into the reward room; chests 32668,32069,8 uid 51097 100 platinum coins and 32675,32069,8 uid 51098
+      green bag (protection amulet, ring of healing, magic lightwand, ankh). tests/quests/desert/test_desert_dungeon.py
+- [x] Dragon Tower Quest - Shadowthorn, south-east of Venore (no level; 1 player)
+      Done 2026-09-26: the two boxes 33072,32169,2 (uid 3505: 2 small sapphires, 30 burst arrows, 60 poison arrows,
+      100 gp) and 33079,32169,2 (uid 3506: bow, mana fluid, life fluid) - the real-map table's split, decided with the
+      user. Needs a machete (Shadowthorn). tests/quests/venore/test_dragon_tower.py
+- [-] Heaven Blossom Quest - Shadowthorn underground (no level; 1 player)
+      Not 7.4 (decided with the user 2026-09-26): the wiki page is from 2014 and the pickupable heaven blossom came
+      with 7.8; our 7.4 one is an immovable plant. Nothing scripted.
 - [x] Iron Helmet Quest (Muriel's Letter) - Plains of Havoc, west of the cyclops/orc/minotaur camp (~32… (no level; 1 player)
       Done 2026-09-25: the body was missing - dead human at 32769,32225,7 by the sycamore (tibiaot74's spot), uid 4518:
       backpack with iron helmet, SD rune, leather armor, Muriel's letter (real-map table's text), worn leather boots,
@@ -529,19 +547,52 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       Done 2026-09-25: druids only (decided with the user): the portal 32831,32294,7 is scripted (aid 51060) and puts others
       back; the box 32852,32332,7 uid 51067 = 3 small emeralds (the 2006 wiki; decided with the user); the book is in the
       bookcase beside it on our map.
-- [ ] Orc Shaman Quest - Swamp/orc cave east of Venore (~33055,32030,7) (no level; 1 player)
-- [ ] The Outlaw Camp Quest (Bright Sword Quest) - Outlaw Camp, west of Thais/Venore road (~32615,32253,7) (level 45 (door); 1 (2 recommended) player(s))
-- [ ] Panpipe Quest (Fire Devil Quest) - Desert Dungeon, Jakundaf Desert (no level; 1 player)
+- [x] Orc Shaman Quest - Swamp/orc cave east of Venore (~33055,32030,7) (no level; 1 player)
+      Done 2026-09-26: the box in the south-east corner (lost on our map) placed at tibiaot74's 33089,32030,9, uid 3504:
+      a bag with a magic lightwand, an axe ring, a blank rune. tests/quests/venore/test_orc_shaman.py
+- [x] The Outlaw Camp Quest (Bright Sword Quest) - Outlaw Camp, west of Thais/Venore road (~32615,32253,7) (level 45 (door); 1 (2 recommended) player(s))
+      Done 2026-09-26 (the full mechanism, decided with the user): keys 3301/3302/3303 in the trees 32617,32250 /
+      32609,32244 / 32651,32244,7; key doors 32614,32175,9 (3303), 32619,32241,8 (3301), 32619,32240,8 (3302),
+      32620,32199,10 (3304) got their numbers; actions/quests/outlaw_camp.lua: the switch 32614,32173,9 moves the oven
+      32623,32188,9 (lost on our map) in front of the key-3304 box 32623,32187,9; the power ring on the counter
+      32594,32214,9 + switch 32594,32212,9 opens the right passage (32603-32604,32216,9) and puts the ring behind the mill
+      room's wall (32613,32220,10 - it lay there already, removed); the mill switch 32616,32222,10 (placed) once per server
+      start: the ring into a fire field, and with a barrel in the notch 32614,32209,10 the stone 32614,32206,10 (placed)
+      goes for 5 minutes. Chest 32620,32198,10 uid 2407: bright sword + red gem (decided with the user).
+      tests/quests/venore/test_outlaw_camp.py
+- [x] Panpipe Quest (Fire Devil Quest) - Desert Dungeon, Jakundaf Desert (no level; 1 player)
+      Done 2026-09-26: the hollow rock 32652,32107,7 uid 3621 gives key 4055; its door 32643,32128,8 got the number;
+      the box behind the fire devil (lost on our map) placed at 32644,32131,8 uid 3622: a bag with panpipes, 2 small
+      amethysts, a power ring. tests/quests/desert/test_panpipe.py
 - [x] Power Bolts Quest - Hole south of the PoH temple (~32815,32280,7) (no level; 1 player)
       Done 2026-09-25: the dead human 32818,32284,8 uid 4514: bag (5 power bolts, 12 burst arrows) + two handed sword (the
       real-map table's 4514 + 4513); the Dreammaster book lies beside it on our map.
-- [ ] Silver Brooch Quest (Mummy Quest) - Greenclaw Swamp caves (~32700,31992,7) (no level; 1 player)
-- [ ] Skull of Ratha Quest (incl. Wolf Tooth Chain and Crystal Necklace) - Amazon Camp, north of Venore (~32846,31920,7) (no level; 1 player)
-- [ ] Time Ring Quest (Shadowthorn Quest) - Shadowthorn underground (~33060,32182,7) (no level; 1 player)
-- [ ] Voodoo Doll Quest - Greenclaw Swamp, north side (~32737,31953,7) (no level; 1 player)
-- [ ] Medusa Shield Quest (Star Room / Necromancer Quest) - Drefia, west of Darashia (~32996,32413,7) (level 60 (door); 1+ (team advised) player(s); premium)
-- [ ] Plate Armor Quest (Ghost Ship) - Ghost Ship, random on the Venore to Darashia boat (no level; 1 player; premium)
-- [ ] Stealth Ring Quest (Minotaur Pyramid) - Minotaur (Dark) Pyramid, north-east of Darashia (~33312,322… (no level; 1 player; premium)
+- [x] Silver Brooch Quest (Mummy Quest) - Greenclaw Swamp caves (~32700,31992,7) (no level; 1 player)
+      Done 2026-09-26: the north coffin 32775,32006,11 uid 3503: a bag with the silver brooch, 2 small rubies, 3 small
+      diamonds. tests/quests/venore/test_silver_brooch.py
+- [x] Skull of Ratha Quest (incl. Wolf Tooth Chain and Crystal Necklace) - Amazon Camp, north of Venore (~32846,31920,7) (no level; 1 player)
+      Done 2026-09-26: Witch Hill boxes 32847,31917,6 (uid 3501: bag, white pearl + skull of Ratha) and
+      32845,31917,6 (uid 51032: bag, wolf tooth chain + dwarven ring); basement chest 32867,31909,8 (uid 3502: bag, 100 gp,
+      crystal necklace, 2 black pearls). tests/quests/venore/test_skull_of_ratha.py
+- [x] Time Ring Quest (Shadowthorn Quest) - Shadowthorn underground (~33060,32182,7) (no level; 1 player)
+      Done 2026-09-26: the chests 33038-33040,32171,9 uid 10039 time ring / 10040 elven amulet (50 charges) / 10041 crystal
+      ball (real-map table; west to east as tibiaot74). Shadowthorn needs a machete (jungle grass at 33020-33021,32145,7).
+      tests/quests/venore/test_time_ring.py
+- [x] Voodoo Doll Quest - Greenclaw Swamp, north side (~32737,31953,7) (no level; 1 player)
+      Done 2026-09-26: the two boxes against the east wall (lost on our map) placed at tibiaot74's 32757,31957,9 (uid
+      3500 voodoo doll) and 32758,31952,9 (uid 2162 magic lightwand). tests/quests/venore/test_voodoo_doll.py
+- [x] Medusa Shield Quest (Star Room / Necromancer Quest) - Drefia, west of Darashia (~32996,32413,7) (level 60 (door); 1+ (team advised) player(s); premium)
+      Done 2026-09-26: our map had no reward coffin - a stone coffin at 33049,32399-32400,10 (tibiaot74's spot; decided
+      with the user), uid 10033: medusa shield, skull staff, blue robe (real-map table). Level-60 gates 33032/33037,32398,11.
+      tests/quests/darashia/test_medusa_shield.py
+- [x] Plate Armor Quest (Ghost Ship) - Ghost Ship, random on the Venore to Darashia boat (no level; 1 player; premium)
+      Done 2026-09-26: nothing sent players to the Ghost Ship - Captain Fearless (barco_venore.lua) now hijacks one
+      Venore-Darashia trip in ten onto its deck 33319,32172,6 (conversation and "bring me to"; decided with the user);
+      the coffin 33327,32180,8 uid 10066 gives the plate armor; the ship's forcefield 33328,32181,6 goes on to Darashia
+      33290,32481,7 (it went to Venore; decided with the user). tests/quests/darashia/test_ghost_ship.py
+- [x] Stealth Ring Quest (Minotaur Pyramid) - Minotaur (Dark) Pyramid, north-east of Darashia (~33312,322… (no level; 1 player; premium)
+      Done 2026-09-26: the Minotaur Pyramid's bottom-floor coffins 33315,32282,11 uid 3900 stealth ring (SE) and
+      33315,32277,11 uid 3901 protection amulet (NE). tests/quests/darashia/test_stealth_ring.py
 - [ ] The Ancient Tombs Quest (Helmet of the Ancients) - 8 Ankrahmun tombs (level 75 (doors); team advised player(s); premium)
 - [ ] The Djinn War - Efreet Faction (Green Djinn Quest) - Mal'ouquah + Ankrahmun, Carlin, Thais, Ulderek's Rock, Asht… (level 30 (fortress door) / 40 (Orc King door); 1 player; premium)
 - [ ] The Djinn War - Marid Faction (Blue Djinn Quest) - Ashta'daramai + Kazordoon, Mal'ouquah, Ulderek's Rock (level 30 / 40; 1 player; premium)
@@ -865,9 +916,13 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 
 ## Travel and combat feel
 
-- [ ] Boats: premium only? Captain Bluebear's script (barco_thais.lua) has premium = false for every destination
-      (Carlin, Venore, Kazordoon, Thais, Ab'Dendriel, Edron, Darashia); only his "bring me to edron" shortcut checks
-      premium. In 7.4 ship travel was, as far as we know, premium only - decide with the user, then every captain.
+- [x] Boats premium only (2026-09-26): TibiaWiki 2006 "Captain Bluebear will transport any premium players by ship",
+      "Only characters on a Premium Account can go to Edron / Darashia, using the boat or the magic carpet". Premium on
+      for every destination of the captains (barco_*.lua), the Edron and Cormaya boats, Eremo and the carpets (Chemar,
+      Pino, Uzon); the "bring me to" shortcuts skipped the check - a guard now refuses free accounts ("I'm sorry, but
+      you need a premium account in order to travel onboard our ships."). The ice-island boats (Nielson and the
+      islands' ferrymen) stay free: no source calls them premium. test_travel.py test_ships_take_premium_players_only.
+      Open: the captains' fares are the 8.x ones of the scripts - check them against 7.4.
 
 - [x] Boats took the fare but never sailed: StdModule.travel called doTeleportThing(cid, pos, false);
       Avesta takes (uid, pos) and read the 'false' as the position -> shim in both compat layers.

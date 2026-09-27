@@ -369,6 +369,77 @@ local REWARDS = {
 	[51092] = {{2152, 100}},
 	[51093] = {{2151, 32}},
 	[51094] = {{2181, 1}},
+	-- Time Ring Quest (Shadowthorn, down the hole 33059,32181,7, west and down the ramp): "three quest boxes in the north
+	-- end of this room" (TibiaWiki 2006) - the chests 33038-33040,32171,9. Time ring, elven amulet, crystal ball (all
+	-- sources); the real-map table's ids "[10039] = {{2169}}", "[10040] = {{2198,50}}", "[10041] = {{2192}}", west to
+	-- east as tibiaot74 (uid 2169 = the time ring is the Edron Ring Quest's chest).
+	[10039] = {{2169, 1}},
+	[10040] = {{2198, 50}},
+	[10041] = {{2192, 1}},
+	-- Skull of Ratha Quest (Witch Hill, north of Venore): "two boxes" on the hill (TibiaWiki 2006) - 32847,31917,6 a bag
+	-- with a white pearl and the skull of Ratha, 32845,31917,6 a bag with a wolf tooth chain and a dwarven ring (the
+	-- real-map table puts both bags under [3501]; two boxes as the wiki and tibiaot74); in the basement's north-east
+	-- corner the chest 32867,31909,8 a bag with 100 gp, a crystal necklace and 2 black pearls ([3502]).
+	[3501] = {{1987, 1, nil, {{2143}, {2320}}}},
+	[51032] = {{1987, 1, nil, {{2129}, {2213}}}},
+	[3502] = {{1987, 1, nil, {{2148, 100}, {2125}, {2144, 2}}}},
+	-- Voodoo Doll Quest (Greenclaw Swamp, down the north hole, west and down again): the boxes against the east wall of
+	-- the big east room (TibiaWiki 2005) - lost on our map, placed at tibiaot74's 32757,31957,9 (voodoo doll, [3500] of
+	-- the real-map table) and 32758,31952,9 (uid 2162 = the magic lightwand).
+	[3500] = {{2322, 1}},
+	-- Blood Herb Quest (Greenclaw Swamp): "the dead tree by the water" 32769,31968,7 - a blood herb (real-map [10032]).
+	-- Wyda's trade (the herb for her witchesbroom) is not scripted yet (task.md).
+	[10032] = {{2798, 1}},
+	-- Silver Brooch Quest (Mummy Quest, below the pick spot 32775,32012,10): "Use a coffin on the north end of this
+	-- room" - the coffin 32775,32006,11, a bag (tibiaot74) with the silver brooch, 2 small rubies, 3 small diamonds
+	-- (real-map [3503], all sources).
+	[3503] = {{1987, 1, nil, {{2134}, {2147, 2}, {2145, 3}}}},
+	-- Orc Shaman Quest (the shovel hole east of Venore's south gate, east and down): "The quest box is in the south-east
+	-- corner of the room" - lost on our map, placed at tibiaot74's 33089,32030,9: a bag with a magic lightwand, an axe
+	-- ring, a blank rune (real-map [3504], all sources).
+	[3504] = {{1987, 1, nil, {{2162}, {2208}, {2260}}}},
+	-- Black Knight Quest (Villa Scapula, north of Venore): key 5010 in the dead trees west of the villa (32813,31964,7 -
+	-- TibiaWiki 2006 - and 32800,31959,7 - the current wiki; one key per character between them, SAME_QUEST); it opens
+	-- the basement door 32824,31969,8. Past the level-50 gate the circular room's two southern trees: uid 2519 crown
+	-- shield (west, 32868,31955,11) and 2487 crown armor (east, 32880,31955,11) - decided with the user over Tibiantis.
+	[51033] = {{2088, 1, 5010}},
+	-- Dragon Tower Quest (Shadowthorn): "two boxes near the top of the tower" - 33072,32169,2 and 33079,32169,2, the
+	-- real-map table's split (decided with the user): [3505] 2 small sapphires, 30 burst arrows, 60 poison arrows, 100 gp;
+	-- [3506] a bow, a mana fluid, a life fluid.
+	[3505] = {{2146, 2}, {2546, 30}, {2545, 60}, {2148, 100}},
+	[3506] = {{2456, 1}, {2006, 7}, {2006, 10}},
+	-- The Outlaw Camp Quest (Bright Sword Quest). TibiaWiki 2006: copper key 3301 in the dead tree north of the minotaur
+	-- tower (32617,32250,7), silver key 3302 in the one next to it (32609,32244,7), copper key 3303 in the campsite's
+	-- (32651,32244,7) - the current wiki's and tibiaot74's trees; golden key 3304 in the chest behind the oven
+	-- (32623,32187,9, a box on our map). The real-map table's key kinds. The chest behind the 3304 door (32620,32198,10):
+	-- "your Bright Sword and Red Gem" (every TibiaWiki revision; decided with the user over Tibiantis).
+	[3301] = {{2089, 1, 3301}},
+	[3302] = {{2088, 1, 3302}},
+	[3303] = {{2089, 1, 3303}},
+	[3304] = {{2091, 1, 3304}},
+	[2407] = {{2407, 1}, {2156, 1}},
+	-- Panpipe Quest (Jakundaf Desert): "the hollow rock just south of the entrance" 32652,32107,7 holds key 4055 (silver,
+	-- real-map "[3621] = {{2088,1,4055}}"); its door 32643,32128,8 and the box behind the fire devil - lost on our map,
+	-- placed at tibiaot74's 32644,32131,8: a bag with panpipes, 2 small amethysts and a power ring ([3622], all sources).
+	[3621] = {{2088, 1, 4055}},
+	[3622] = {{1987, 1, nil, {{2074}, {2150, 2}, {2166}}}},
+	-- Stealth Ring Quest (the Minotaur Pyramid north-east of Darashia, the bottom floor with the mummy): "the SE coffin
+	-- holds the Stealth Ring", the NE one the protection amulet (TibiaWiki 2006, Tibiantis) - 33315,32282,11 and
+	-- 33315,32277,11, the real-map table's "[3900] = {{2165,1}}" and "[3901] = {{2200,250}}".
+	[3900] = {{2165, 1}},
+	[3901] = {{2200, 250}},
+	-- Medusa Shield Quest (Drefia, past the level-60 gates and up the hole): "The rewards are located in a coffin in the
+	-- east part of the room" (TibiaWiki 2005/2006) - our map had none: the stone coffin 33049,32399-32400,10
+	-- (tibiaot74's spot; decided with the user), the real-map table's "[10033] = {{2536},{2436},{2656}}".
+	[10033] = {{2536, 1}, {2436, 1}, {2656, 1}},
+	-- Plate Armor Quest (the Ghost Ship): "Use the head of the coffin against the far wall" (TibiaWiki 2005) - the
+	-- wooden coffin 33327,32180,8, real-map "[10066] = {{2463}}".
+	[10066] = {{2463, 1}},
+	-- The Desert Dungeon Quest: the reward room's two chests (TibiaWiki 2006, Tibiantis): 100 platinum coins (west,
+	-- 32668,32069,8) and a green bag with a protection amulet, a ring of healing, a magic lightwand and an ankh (east,
+	-- 32675,32069,8) - tibiaot74's order.
+	[51097] = {{2152, 100}},
+	[51098] = {{1991, 1, nil, {{2200, 250}, {2214}, {2162}, {2193}}}},
 }
 
 -- Map objects that are the same quest as another (one reward per character between them): unique id -> the
@@ -380,6 +451,8 @@ local SAME_QUEST = {
 	-- Banana Quest (Rookgaard): the palm on the premium wolf hill (31983,32193,5; TibiaWiki: 3 boxes to climb)
 	-- shares the quest id of the north-east palm, uid 2676 = the banana (Tibiantis.life).
 	[52414] = 2676,
+	-- Black Knight Quest: key 5010 lies in two dead trees (the 2006 wiki names one, the current wiki both).
+	[51034] = 51033,
 }
 
 -- Map objects that open only when nothing lies on them: unique id -> {item id, position}. The Parchment Room coffin
