@@ -74,7 +74,7 @@
 	<spawn centerx="32885" centery="32032" centerz="6" radius="2"><npc name="Christoph" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="33174" centery="31811" centerz="7" radius="2"><npc name="Chrystal" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32097" centery="32217" centerz="7" radius="1"><npc name="Cipfried" x="0" y="0" z="7" spawntime="60"/></spawn>
-	<spawn centerx="33366" centery="32855" centerz="14" radius="1"><monster name="Cobra" x="0" y="0" z="14" spawntime="60"/></spawn>
+	<spawn centerx="33366" centery="32855" centerz="14" radius="1"><npc name="Cobra" x="0" y="0" z="14" spawntime="60"/></spawn>
 	<spawn centerx="32334" centery="31796" centerz="7" radius="3"><npc name="Cornelia" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32180" centery="31936" centerz="7" radius="3"><npc name="Costello" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="33229" centery="32409" centerz="7" radius="1"><npc name="Dabui" x="0" y="0" z="7" spawntime="60"/></spawn>

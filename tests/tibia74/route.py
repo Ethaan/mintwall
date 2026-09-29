@@ -37,6 +37,8 @@ def may_pass(info: dict, level: int, vocation: int, keys: set, storages: set) ->
         return aid in keys
     if kind == "quest":
         return aid == 0 or aid in storages
+    if kind == "puzzle":
+        return aid in storages
     if kind == "level":
         if 1001 <= aid <= 1999:
             return level >= aid - 1000
@@ -69,7 +71,8 @@ def _neighbours(world: WorldMap, pos, level, vocation, keys, storages, rope, ope
         cost = 3 if dx and dy else 1
         info = world.info(m)
         if "door" in info and m not in open_tiles:
-            if may_pass(info, level, vocation, keys, storages) and not (dx and dy):
+            # a door that sends you away (a wrong word door) is never on the way
+            if "teleport" not in info and may_pass(info, level, vocation, keys, storages) and not (dx and dy):
                 yield cost + 1, Step("door", m, m)
             continue
         if world.walkable(m) or m in open_tiles:

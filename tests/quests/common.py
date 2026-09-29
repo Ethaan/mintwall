@@ -117,3 +117,15 @@ def drop_on(p, items, item_id, pos):
                 assert p.wait_for(lambda: count() > before, timeout=3), (pos, p.text_messages[-2:])
                 return
     raise AssertionError(f"no {item_id} carried")
+
+
+def ankrahmun_player(new_player, items=(), **kwargs):
+    """A strong premium tester at the Ankrahmun temple, backpack open (the Ankrahmun quests; Ankrahmun is premium)."""
+    from tibia74 import BACKPACK
+    from tibia74.quest import strong
+    kwargs.setdefault("premium_days", 30)
+    kwargs.setdefault("group_id", TESTER_GROUP)
+    p = strong(new_player, ANKRAHMUN_TEMPLE, items=list(items), **kwargs)
+    p.open_container(BACKPACK)
+    p.set_fight_modes(fight=1, chase=0, safe=1)
+    return p

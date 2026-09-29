@@ -1761,6 +1761,7 @@ Key version dates (TibiaWiki `Updates/*`): 7.1 = 2003, 7.2 = 16 Dec 2003, **7.24
 - **Once:** assumed.
 - **Sources:** https://tibia.fandom.com/index.php?oldid=36597 ; https://tibia.fandom.com/index.php?oldid=62614 ; https://tibia.fandom.com/wiki/Serpentine_Tower_Quest/Spoiler ; TI.
 - **Confidence:** Medium. Implementing the pearl part is enough; the cages are an unsolved puzzle.
+- **Our server (2026-09-27):** the open fire 33145,32862,7 (aid 51100) takes a pot (the map's lies at 33147,32867,7) and becomes the campfire with a pot (1428) until the restart; then the forcefield 33148,32864,7 (aid 51101) leads to 33151,32864,7. The way out 33150,32864,7 -> 33147,32864,7 is always open (tibiaot74). Chest 33150,32862,7 uid 3700 (white pearl; tibiaot74's spot, real-map uid). Continuation: the lamp above the barrel 33151,32861,7 (placed, aid 51102; push the barrel aside to reach it) removes the fire elemental's cage front 33151,32866,8; the switch in that cage 33152,32866,8 (aid 51103) removes the magic walls 33148-33149,32867-32868,9 before the green djinn's hall (the display hall with the legendary items behind lava). Both close after 5 minutes once no player is inside. Decisions with the user 2026-09-27: pot until restart, way out always open, continuation scripted, 5-minute resets, the other switches do nothing. tests/quests/ankrahmun/test_serpentine_tower.py.
 
 ## Edron, Postman, and excluded (post-7.4) quests
 

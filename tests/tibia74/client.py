@@ -89,6 +89,7 @@ class GameClient:
         self.player_id = None
         self.pos = None
         self.stats = Stats()
+        self.icons = 0                                 # condition icons (0xA2): 1 = poisoned
         self.skills = {}
         self.inventory: dict[int, Item] = {}
         self.containers: dict[int, Container] = {}
@@ -716,7 +717,7 @@ def _h_skills(c, r):
 
 
 def _h_icons(c, r):
-    r.u8()
+    c.icons = r.u8()             # 1 poisoned, 2 burning, 4 electrified, 8 drunk, 16 mana shield, 32 paralysed, 64 haste
 
 
 def _h_nothing(c, r):

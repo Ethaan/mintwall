@@ -40,6 +40,26 @@ typedef uint8_t attribute_t;
 typedef uint32_t flags_t;
 
 extern Game g_game;
+
+// A map item whose decay comes back round to itself never goes away - the searing fires of the Ancient Tombs (flame,
+// smaller flame, ashes, flame; the "purple fire" players cross on cold squares). Those keep decaying from the start;
+// every other map item stays as the map placed it (see the loader below).
+static bool decaysInACycle(uint16_t id)
+{
+	int32_t current = id;
+	for(int i = 0; i < 8; ++i){
+		const ItemType& type = Item::items[current];
+		if(type.decayTime == 0 || type.decayTo <= 0){
+			return false;
+		}
+		current = type.decayTo;
+		if(current == id){
+			return true;
+		}
+	}
+	return false;
+}
+
 /*
 	OTBM_ROOTV1
 	|
@@ -315,6 +335,9 @@ bool IOMapOTBM::loadMap(Map* map, const std::string& identifier)
 								// items the map places never decay (7.4: the dead humans and skeletons lying in caves stay; with decay
 								// started here a dead skeleton was gone 10 minutes after each start). Moved later, they decay as usual.
 								item->loadedOnMap = true;
+								if(decaysInACycle(item->getID())){
+									item->__startDecaying();
+								}
 							}
 							
 							break;
@@ -352,8 +375,11 @@ bool IOMapOTBM::loadMap(Map* map, const std::string& identifier)
 								else{
 									tile->__internalAddThing(item);
 									// items the map places never decay (7.4: the dead humans and skeletons lying in caves stay; with decay
-								// started here a dead skeleton was gone 10 minutes after each start). Moved later, they decay as usual.
+									// started here a dead skeleton was gone 10 minutes after each start). Moved later, they decay as usual.
 									item->loadedOnMap = true;
+									if(decaysInACycle(item->getID())){
+										item->__startDecaying();
+									}
 
 									if(isHouseTile){
 										Door* door = item->getDoor();

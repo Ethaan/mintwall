@@ -440,6 +440,20 @@ local REWARDS = {
 	-- 32675,32069,8) - tibiaot74's order.
 	[51097] = {{2152, 100}},
 	[51098] = {{1991, 1, nil, {{2200, 250}, {2214}, {2162}, {2193}}}},
+	-- Serpentine Tower Quest / White Pearl Quest (Ankrahmun): "Go through the teleport and get the White Pearl from the
+	-- chest" (TibiaWiki 2005) - our map had no chest: 33150,32862,7 (tibiaot74's), real-map "[3700] = {{2143,1}}, --
+	-- white pearl -- sepertine tower".
+	[3700] = {{2143, 1}},
+	-- The Ancient Tombs Quest: each pharaoh's sarcophagus, reached through the portal in its room with the pass item
+	-- (movements/scripts/ancient_tombs.lua). Pieces as the current wiki's table (TibiaWiki 2005: Mahrdis the helmet
+	-- ornament, Vashresamun the left horn, Rahemos the helmet piece); unique ids tibiaot74's (no real-map entry).
+	[8206] = {{2341, 1}},   -- Omruc: helmet adornment
+	[8207] = {{2336, 1}},   -- Thalas: gem holder
+	[8208] = {{2339, 1}},   -- Dipthrah: damaged helmet
+	[8209] = {{2335, 1}},   -- Mahrdis: helmet ornament
+	[8210] = {{2338, 1}},   -- Vashresamun: left horn
+	[8211] = {{2337, 1}},   -- Morguthis: right horn
+	[8212] = {{2340, 1}},   -- Rahemos: helmet piece
 }
 
 -- Map objects that are the same quest as another (one reward per character between them): unique id -> the

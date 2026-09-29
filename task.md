@@ -599,9 +599,35 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       Done 2026-09-26: the Minotaur Pyramid's bottom-floor coffins 33315,32282,11 uid 3900 stealth ring (SE) and
       33315,32277,11 uid 3901 protection amulet (NE). tests/quests/darashia/test_stealth_ring.py
 - [ ] The Ancient Tombs Quest (Helmet of the Ancients) - 8 Ankrahmun tombs (level 75 (doors); team advised player(s); premium)
+      In progress (2026-09-28). Shared (movements/ancient_tombs.lua, decided with the user): level-75 gates (aid 1075,
+      10 gates); the mystic flames lost their free map destinations - a scarab coin on the basin beside (aid 51120)
+      takes whoever stands on the flame down, the coin is used up; the pharaohs' portals (aid 51121) lead to the
+      sarcophagus room only with the pass item, which they take, else to the start of the tomb; every pharaoh drops his
+      pass item every kill (loot 100%, names fixed to "Omruc" etc.); sarcophagi uid 8206-8212 (tibiaot74's) with the
+      current wiki's pieces. Tests: tests/quests/ankrahmun/tombs.py + test_tomb_<pharaoh>.py.
+      Vashresamun: done - instruments (aid 51122, uids 51130-51137) drum, panpipes, lute, lyre, cornucopia (wiki picture
+      + tibiaot74), per player (storage 51122), open the door 33184,32665,15 (aid 51123); our map's arrival was on the
+      door's side: teleports swapped to the wiki's order (decided with the user).
+      Rahemos: done - entrance pile 33133,32640,7 restored (tibiaot74); hat switches (aid 51124, hats uid 51140-51142):
+      random carrot, 200 hp a wrong one, per player storage 51125 = the quest door placed at 33122,32765,14 (decided with
+      the user); a counter on the switches' only reachable tile 33119,32762,14 removed (tibiaot74 + wiki picture); the
+      bridge's middle rows turned to lava (tibiaot74 + "broken bridge"; decided with the user).
+      Dipthrah: done - entrance pile 33133,32568,7 restored; the 16 wrong word doors (aid 51126) send you back to the
+      first room 33072,32640,15 (decided with the user); the gauntlet's exit teleport pointed into rock: now tibiaot74's
+      33095,32590,15. The current wiki's switches before the 7th floor are not on the 7.4 map.
+      Left: Omruc, Thalas, Mahrdis, Morguthis, Ashmunrah + the stone table.
 - [ ] The Djinn War - Efreet Faction (Green Djinn Quest) - Mal'ouquah + Ankrahmun, Carlin, Thais, Ulderek's Rock, Asht… (level 30 (fortress door) / 40 (Orc King door); 1 player; premium)
 - [ ] The Djinn War - Marid Faction (Blue Djinn Quest) - Ashta'daramai + Kazordoon, Mal'ouquah, Ulderek's Rock (level 30 / 40; 1 player; premium)
-- [ ] Serpentine Tower Quest / White Pearl Quest (one quest) - Serpentine Tower (Sorcerer guild), Ankrahmun (~33147,32866,… (no level; 1 player; premium)
+- [x] Serpentine Tower Quest / White Pearl Quest (one quest) - Serpentine Tower (Sorcerer guild), Ankrahmun (~33147,32866,… (no level; 1 player; premium)
+      Done 2026-09-27: the open fire 33145,32862,7 (aid 51100, movements/serpentine_tower.lua): a pot put on it becomes
+      the campfire with a pot (1428) until the restart (decided with the user); the forcefield 33148,32864,7 (aid 51101)
+      then goes into the pearl room 33151,32864,7; the way out 33150,32864,7 -> 33147,32864,7 always (tibiaot74; decided
+      with the user). Chest 33150,32862,7 (lost on our map) uid 3700: white pearl (real-map table). The continuation
+      (scripted on the user's wish): the wall lamp above the barrel 33151,32861,7 (placed, aid 51102) opens the fire
+      elemental's cage 33151,32866,8; its switch 33152,32866,8 (aid 51103) takes the magic walls 33148-33149,32867-32868,9
+      from the green djinn's hall; both close after 5 minutes once no player is inside (decided with the user). The
+      djinn's and vampire's switches do nothing. tests/quests/ankrahmun/test_serpentine_tower.py
+- [ ] Serpentine Tower: the 5-minute close of the fire elemental's cage and the djinn hall's magic walls is untested
 - [x] Annihilator Quest - Edron, Hero Cave (deepest floors) (level 100 (lever/tiles; level-100 door at que…; exactly 4 player(s); premium)
       Done 2026-09-24: nothing was scripted (lever, squares, chests without ids). quests/annihilator_lever.lua (aid
       51011 on the lever 33226,31671,13): four players on 33222-33225,31671,13, each level 100+ and without a reward

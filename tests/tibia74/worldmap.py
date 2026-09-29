@@ -38,15 +38,23 @@ UP_SHIFT = {"N": (0, -1), "S": (0, 1), "E": (1, 0), "W": (-1, 0)}
 DOWN_SHIFT = {"N": (0, 1), "S": (0, -1), "E": (-1, 0), "W": (1, 0)}   # moved off a ramp you arrive on
 DOOR_SCRIPTS = {"increment.lua": "closed", "doors/door_locked.lua": "locked",
                 "doors/questdoor_closed.lua": "quest", "doors/gateofexp_closed.lua": "level"}
-CACHE_VERSION = 15
+CACHE_VERSION = 19
 GROWN_WHEAT = 2739                   # solid; a scythe cuts it (actions/scripts/scythe.lua)
 JUNGLE_GRASS = 2782                  # solid; a machete cuts it (actions/scripts/machete.lua) - the Paradox Tower
 STONE_PILES = {468, 481, 483}        # closed holes (CLOSED_HOLE, actions/lib/actions.lua): a shovel opens them
 MUD = {103, 351, 352, 353, 354, 355}  # actions/lib/actions.lua: with action id 100 a pick opens a hole (pick.lua)
 PICK_SPOT = 100
 PITFALL_GRASS = 293                  # movements/scripts/pitfall.lua: opens under a player, who falls one floor down
+# plain doors a quest script keeps shut until its puzzle is solved (action id): the route passes them only with the
+# action id among its `storages` (solved) or the door among `open_tiles`
+PUZZLE_DOORS = {51123}                  # Ancient Tombs, Vashresamun: the door behind the instruments
+
+# closed trapdoors a movement script opens under you: one floor down
+SCRIPTED_TRAPDOORS = {51129}           # Ancient Tombs, Morguthis's arena (movements/ancient_tombs_morguthis.lua)
+
 # tiles a movement script teleports you from (no teleport item): action id -> destination
 SCRIPTED_TELEPORTS = {51056: (32266, 31864, 12),   # the Banshee Quest's secret teleporter (movements/banshee_seals.lua)
+                      51126: (33072, 32640, 15),   # Dipthrah's wrong word doors: back to the first room
                       51082: (32566, 31958, 1)}    # the Paradox Tower's carvings back (movements/paradox_tower.lua)
 
 
@@ -188,8 +196,13 @@ class WorldMap:
                 info["door"] = doors[m.id]
                 info["door_id"] = m.id
                 info["aid"] = m.attrs.get("action_id", 0)
+                if info["aid"] in PUZZLE_DOORS:
+                    info["door"] = "puzzle"
+                if info["aid"] in SCRIPTED_TELEPORTS:
+                    info["teleport"] = SCRIPTED_TELEPORTS[info["aid"]]      # a door that sends you away
                 continue
-            if t.flags & FLOOR_DOWN or changes.get(m.id) == "down" or m.id == PITFALL_GRASS:
+            if (t.flags & FLOOR_DOWN or changes.get(m.id) == "down" or m.id == PITFALL_GRASS
+                    or m.attrs.get("action_id") in SCRIPTED_TRAPDOORS):
                 info["down"] = True
             if changes.get(m.id) in UP_SHIFT:
                 info["up"] = changes[m.id]
@@ -214,7 +227,9 @@ class WorldMap:
                 info["dig"] = True        # a shovel opens a hole: a way down
             if m.id in MUD and m.attrs.get("action_id") == PICK_SPOT:
                 info["pick"] = True       # a pick opens a hole in it: a way down (and a floor to walk until then)
-            if m.attrs.get("teleport"):
+            if m.attrs.get("teleport") and tuple(m.attrs["teleport"]) != (0, 0, 0):
+                # (0, 0, 0): no destination - a forcefield a movement script moves you from (a pharaoh's portal)
+                # or not at all (a mystic flame until the scarab coin)
                 info["teleport"] = tuple(m.attrs["teleport"])
             if m.attrs.get("action_id") in SCRIPTED_TELEPORTS:
                 info["teleport"] = SCRIPTED_TELEPORTS[m.attrs["action_id"]]

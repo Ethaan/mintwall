@@ -196,6 +196,13 @@
     <action actionid="51036" script="quests/outlaw_camp.lua"/>   <!-- Outlaw Camp: the power-ring switch -->
     <action actionid="51037" script="quests/outlaw_camp.lua"/>   <!-- Outlaw Camp: the mill's switch -->
     <action actionid="51096" script="quests/desert_dungeon.lua"/>   <!-- Desert Dungeon: the paladin's lever -->
+    <action actionid="51102" script="quests/serpentine_tower.lua"/>   <!-- Serpentine Tower: the wall lamp that opens the fire elemental's cage -->
+    <action actionid="51103" script="quests/serpentine_tower.lua"/>   <!-- Serpentine Tower: the switch in that cage (the magic walls below) -->
+    <action actionid="51122" script="quests/ancient_tombs_vashresamun.lua"/>   <!-- Ancient Tombs, Vashresamun: the eight instruments -->
+    <action actionid="51123" script="quests/ancient_tombs_vashresamun.lua"/>   <!-- Ancient Tombs, Vashresamun: the door behind them -->
+    <action actionid="51124" script="quests/ancient_tombs_rahemos.lua"/>   <!-- Ancient Tombs, Rahemos: the three hat switches -->
+    <action actionid="51128" script="quests/ancient_tombs_morguthis.lua"/>   <!-- Ancient Tombs, Morguthis: the two paintings (hidden wall) -->
+    <action itemid="2342" script="helmet_of_the_ancients.lua"/>   <!-- the helmet of the ancients on a small ruby: glows for 30 minutes -->
     <action actionid="54545" script="draw_well_down.lua"/>   <!-- wells you climb down (Fibula, Ancient Temple) -->
 
     <!-- Doors -->
