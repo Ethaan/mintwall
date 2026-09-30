@@ -1,51 +1,34 @@
-local keywordHandler = KeywordHandler:new()
-local npcHandler = NpcHandler:new(keywordHandler)
-NpcSystem.parseParameters(npcHandler)
+-- Talphion the technomancer in Kazordoon, hard of hearing (The Postman Missions Quest, mission 6; npc/lib/postman.lua).
+-- TibiaWiki 2006 transcript: "new dress patterns" five times - four mishearings, then "I'LL SENT A COPY TO KEVIN
+-- IMEDIATELY!". The old port had no greeting, heard only "dress pattern" and once per character only.
+dofile(getDataDir() .. 'npc/lib/questnpc.lua')
 
- 
-function onCreatureAppear(cid)			npcHandler:onCreatureAppear(cid)			end
-function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
-function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
-function onThink()				npcHandler:onThink()					end
+local HEARD = {
+	"DRESS FLATTEN? WHO WANTS ME TO FLATTEN A DRESS?",
+	"A PRESS LANTERN? NEVER HEARD ABOUT IT!",
+	"CHESS? I DONT PLAY CHESS!",
+	"A PATTERN IN THIS MESS?? HEY DON'T INSULT MY MACHINEHALL!",
+}
 
-local function getPlayerBones(cid)
-	return getPlayerItemCount(cid, 2230) + getPlayerItemCount(cid, 2231)
-end
-
-local function doPlayerRemoveBones(cid)
-	return doPlayerRemoveItem(cid, 2230, getPlayerItemCount(cid, 2230)) and doPlayerRemoveItem(cid, 2231, getPlayerItemCount(cid, 2231))
-end
-
-function creatureSayCallback(cid, type, msg)
-	if(not npcHandler:isFocused(cid)) then
-		return false
-	end
-	
-
-	if(msgcontains(msg, "dress pattern")) then
-		if(getPlayerStorageValue(cid, 250) == 15) then
-			if(getPlayerStorageValue(cid, 111251) < 1) then
-				npcHandler:say("DRESS FLATTEN? WHO WANTS ME TO FLATTEN A DRESS? ", cid)
-				setPlayerStorageValue(cid, 111251, 1)
-				npcHandlerfocus = 1
-			elseif(npcHandlerfocus == 1) then
-				npcHandler:say("A PRESS LANTERN? NEVER HEARD ABOUT IT! ", cid)
-				npcHandlerfocus = 2
-			elseif(npcHandlerfocus == 2) then
-				npcHandler:say("CHESS? I DONT PLAY CHESS! ", cid)
-				npcHandlerfocus = 3
-			elseif(npcHandlerfocus == 3) then
-				npcHandler:say("A PATTERN IN THIS MESS?? HEY DON'T INSULT MY MACHINEHALL! ", cid)
-				npcHandlerfocus = 4
-			elseif(npcHandlerfocus == 4) then
-				npcHandler:say("AH YES! I WORKED ON THE DRESS PATTERN FOR THOSE UNIFORMS. STAINLESS TROUSERES, STEAM DRIVEN BOOTS! ANOTHERMARVEL TO BEHOLD! I'LL SENT A COPY TO KEVIN IMEDIATELY! ", cid)
-				setPlayerStorageValue(cid, 250, 16)
-				npcHandlerfocus = 0
-			end
+questNpc{
+	farewell = "GOOD BYE!",
+	walkaway = "GOOD BYE!",
+	greet = function(cid)
+		return "HIHOOOO |PLAYERNAME|! <waves his hands>"
+	end,
+	quest = function(cid, msg, state, say)
+		if postmanProgress(cid) ~= POSTMAN_TALPHION or not (containsWord(msg, "dress pattern")
+				or containsWord(msg, "dress patterns")) then
+			return false
 		end
-	end
-	return true
-end
- 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
-npcHandler:addModule(FocusModule:new())
+		if state.topic < #HEARD then
+			state.topic = state.topic + 1
+			say(cid, HEARD[state.topic])
+		else
+			state.topic = 0
+			setPlayerStorageValue(cid, POSTMAN, POSTMAN_TALPHION_DONE)
+			say(cid, "AH YES! I WORKED ON THE DRESS PATTERN FOR THOSE UNIFORMS. STAINLESS TROUSERES, STEAM DRIVEN BOOTS! ANOTHER MARVEL TO BEHOLD! I'LL SENT A COPY TO KEVIN IMEDIATELY!")
+		end
+		return true
+	end,
+}

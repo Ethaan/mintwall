@@ -47,7 +47,8 @@ def test_ashmunrah_tomb_and_the_helmet(new_player, items, world_map):
     assert p.wait_for(lambda: p.pos == ASHMUNRAH_ROOM, timeout=3), p.pos
     kill_pharaoh(p, items, world_map, TOMB, **ability)
 
-    follow(p, items, world_map, (TOMB.portal[0], TOMB.portal[1] - 1, 11), **ability)
+    # from beside the tile the portal sends you back to, or the step would look like no step at all
+    follow(p, items, world_map, (TOMB.portal[0] - 1, TOMB.portal[1] - 1, 11), **ability)
     step_onto(p, TOMB.portal)                                    # switches left: back into the room
     assert p.wait_for(lambda: p.pos == (33179, 32889, 11), timeout=3), p.pos
     _switches_right(p, items, world_map)

@@ -22,51 +22,51 @@ local keywordHandler = KeywordHandler:new()
 	local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
 	
 	if (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'carlin') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 110) then
-		doTeleportThing(cid,{x=32387, y=31820, z=7})
+		if doPlayerRemoveMoney(cid, travelCost(cid, 110)) then
+		travelTo(cid, {x=32387, y=31820, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
         end
 	elseif (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'ab\'dendriel') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 70) then
-		doTeleportThing(cid,{x=32734, y=31669, z=7})
+		if doPlayerRemoveMoney(cid, travelCost(cid, 70)) then
+		travelTo(cid, {x=32734, y=31669, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
         end		
 	elseif (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'thais') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 160) then
-		doTeleportThing(cid,{x=32313, y=32212, z=7})
+		if doPlayerRemoveMoney(cid, travelCost(cid, 160)) then
+		travelTo(cid, {x=32313, y=32212, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
         end
 	elseif (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'venore') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 40) then
-		doTeleportThing(cid,{x=32954, y=32022, z=7})
+		if doPlayerRemoveMoney(cid, travelCost(cid, 40)) then
+		travelTo(cid, {x=32954, y=32022, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
         end
 	elseif (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'ankrahmun') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 160) then
-		doTeleportThing(cid,{x=33092, y=32883, z=7})
+		if doPlayerRemoveMoney(cid, travelCost(cid, 160)) then
+		travelTo(cid, {x=33092, y=32883, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
         end
 	elseif (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'cormaya') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 20) then
-		doTeleportThing(cid,{x=33288, y=31956, z=7})
+		if doPlayerRemoveMoney(cid, travelCost(cid, 20)) then
+		travelTo(cid, {x=33288, y=31956, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
         end		
 	elseif (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'port') and msgcontains(msg, 'hope') and (not npcHandler:isFocused(cid))) then
 	if isPremium(cid) then
-		if doPlayerRemoveMoney(cid, 150) then
-		doTeleportThing(cid,{x=32532, y=32784, z=7})
+		if doPlayerRemoveMoney(cid, travelCost(cid, 150)) then
+		travelTo(cid, {x=32532, y=32784, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 

@@ -20,9 +20,9 @@ local function creatureSayCallback(cid, type, msg)
 		npcHandler:addFocus(cid)
 		talkState[cid] = 0
 elseif msgcontains(msg, "uniforms") then
-		if(getPlayerStorageValue(cid, 250) == 17) then
-			npcHandler:say("I remember about those uniforms, they had a camouflage inlay so they could be worn the inside out too. I will send some color samples via mail to Mr. Postner. ", cid)
-			setPlayerStorageValue(cid, 250, 18)
+		if postmanProgress(cid) == POSTMAN_ELOISE then          -- the Postman Missions, mission 6 (npc/lib/postman.lua)
+			npcHandler:say("I remember about those uniforms, they had a camouflage inlay so they could be worn the inside out too. I will send some color samples via mail to Mr. Postner.", cid)
+			setPlayerStorageValue(cid, POSTMAN, POSTMAN_ELOISE_DONE)
 		else
 			npcHandler:say('The uniforms of our guards and soldiers are of unparraleled quality of course.', cid)
 		end

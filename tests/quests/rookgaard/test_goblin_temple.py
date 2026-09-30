@@ -8,7 +8,7 @@ from quests.common import *  # noqa: F401,F403
 # to Billy (hi, pan, yes) for an antidote rune (Antidote Rune Quest). Premium, no level, 1 player, once.
 
 GOBLIN_CHESTS = {(31973, 32209, 12): ["sandals", "5 small stones", "50 gold coins"],
-                 (31977, 32209, 12): ["a pan", "4 snowballs", "a vial"]}
+                 (31977, 32209, 12): ["a pan", "4 snowballs", "a vial of milk"]}
 
 
 def test_goblin_temple_and_antidote_rune_quests(new_player, items, world_map):

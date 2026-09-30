@@ -75,10 +75,10 @@ def kill_pharaoh(p, items, world_map, tomb, **ability):
     """Go to the pharaoh's lair and kill him; returns where his body lies."""
     from tibia74.route import walk_near
     walk_near(p, items, world_map, tomb.lair, radius=3, **ability)
-    return kill(p, items, tomb.pharaoh)
+    return kill(p, items, tomb.pharaoh, lair=tomb.lair, world_map=world_map, ability=ability)
 
 
-def kill(p, items, name, timeout=120):
+def kill(p, items, name, timeout=120, lair=None, world_map=None, ability=None):
     """Fight the creature named `name` in view - sword and heavy magic missiles, like a player - until its body
     lies there; returns where. Some pharaohs turn invisible now and then (Omruc, Morguthis, Ashmunrah): the client
     loses them - wait until they show again (the fight goes on) or their body appears."""
@@ -90,7 +90,8 @@ def kill(p, items, name, timeout=120):
 
     def body():
         new = [pos for pos in _bodies(p, items) if pos not in bodies_before]
-        return min(new, key=lambda pos: abs(pos[0] - last[0][0]) + abs(pos[1] - last[0][1])) if new else None
+        near = last[0] or p.pos
+        return min(new, key=lambda pos: abs(pos[0] - near[0]) + abs(pos[1] - near[1])) if new else None
 
     def seen():
         c = p.creatures.get(creature.id)          # a creature out of view stays known, without a position
@@ -116,6 +117,12 @@ def kill(p, items, name, timeout=120):
             p.use_item_with(*rune, tuple(c.pos), 0x63, at)
         p.wait_for(body, 2.1)                    # rune exhaustion
     found = p.wait_for(body, 5)
+    if not found and lair and (creature.id in p.removed_creatures or creature.health == 0):
+        # he died where the client no longer saw him (Thalas slips out of view): look where he lived
+        from tibia74.route import walk_near
+        last[0] = last[0] or lair
+        walk_near(p, items, world_map, lair, radius=3, **(ability or {}))
+        found = p.wait_for(body, 5)
     assert found, (creature, last[0], p.pos)
     p.attack(0)
     p.set_fight_modes(fight=1, chase=0, safe=1)

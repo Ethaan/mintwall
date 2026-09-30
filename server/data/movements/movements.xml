@@ -237,8 +237,8 @@
         <movevent event="StepIn"  actionid="51090" script="paradox_tower.lua" />   <!-- Paradox Tower: the treasure room's plates -->
         <movevent event="StepIn"  actionid="51095" script="desert_dungeon.lua" />   <!-- Desert Dungeon: the four vocations' switches -->
         <movevent event="StepOut" actionid="51095" script="desert_dungeon.lua" />
-        <movevent event="AddItem" tileitem="1" actionid="51100" script="serpentine_tower.lua" />   <!-- Serpentine Tower: a pot on the open fire -->
-        <movevent event="StepIn"  actionid="51101" script="serpentine_tower.lua" />   <!-- Serpentine Tower: the forcefield into the pearl room -->
+        <movevent event="AddItem" tileitem="1" actionid="51180" script="serpentine_tower.lua" />   <!-- Serpentine Tower: a pot on the open fire -->
+        <movevent event="StepIn"  actionid="51181" script="serpentine_tower.lua" />   <!-- Serpentine Tower: the forcefield into the pearl room -->
         <movevent event="AddItem" tileitem="1" actionid="51120" script="ancient_tombs.lua" />   <!-- Ancient Tombs: a scarab coin on a mystic flame's coal basin -->
         <movevent event="StepIn"  actionid="51121" script="ancient_tombs.lua" />   <!-- Ancient Tombs: the pharaohs' portals (pass item) -->
         <movevent event="StepIn"  actionid="51126" script="ancient_tombs_dipthrah.lua" />   <!-- Ancient Tombs, Dipthrah: the wrong word doors -->

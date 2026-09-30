@@ -203,11 +203,17 @@ def pick_up(p, items, pos, name, into=3):
 def step_onto(p, pos):
     """One step from a neighbouring tile onto pos - for a floor change the route planner cannot know (a trapdoor,
     stairs or a portal a switch has just made)."""
-    from .route import DIRECTIONS
+    from .route import DIRECTIONS, _blocker, _clear
     d = DIRECTIONS[(pos[0] - p.pos[0], pos[1] - p.pos[1])]
     before = p.pos
-    p.step(d)
-    assert p.wait_for(lambda: p.pos != before, timeout=3), f"could not step from {before} onto {pos}"
+    for _ in range(3):
+        p.step(d)
+        if p.wait_for(lambda: p.pos != before, timeout=3):
+            return
+        if not _blocker(p, pos):
+            break
+        _clear(p, pos)                  # a monster stands on it (a summon on a portal only players use)
+    raise AssertionError(f"could not step from {before} onto {pos}: {p.tiles.get(tuple(pos))}")
 
 
 def assert_level_door(new_player, items, door, outside, level, *, vocation=4, gate="gate of expertise"):

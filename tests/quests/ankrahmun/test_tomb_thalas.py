@@ -84,14 +84,16 @@ def test_thalas_cobra_turns_away_the_unpoisoned(new_player):
 
 
 def test_thalas_forcefield_needs_poison(new_player, items):
+    """From beside the tile in front of the forcefield: test_thalas_tomb leaves its poison field on that tile."""
     from tibia74 import Item
     from tibia74.quest import strong
-    p = strong(new_player, BEFORE_STUB, premium_days=30, maglevel=100, items=[Item(POISON_FIELD_RUNE, 3)])
+    beside = (STUB[0] - 1, STUB[1] - 1, 14)
+    p = strong(new_player, beside, premium_days=30, maglevel=100, items=[Item(POISON_FIELD_RUNE, 3)])
     p.open_container(BACKPACK)
-    from tibia74.route import DIRECTIONS
-    p.step(DIRECTIONS[(0, 1)])                                   # not poisoned: straight back
-    p.sleep(1)
-    assert p.pos == BEFORE_STUB, p.pos
+    assert not p.icons & POISONED
+    step_onto(p, STUB)                                           # not poisoned: back north, as the map had it
+    assert p.wait_for(lambda: p.pos == BEFORE_STUB, timeout=3), p.pos
+    step_onto(p, beside)
     _poison_yourself(p, items)
     step_onto(p, STUB)
     assert p.wait_for(lambda: p.pos == CORRIDOR, timeout=3), p.pos

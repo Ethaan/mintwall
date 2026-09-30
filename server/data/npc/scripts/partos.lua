@@ -1,3 +1,8 @@
+-- Partos, the prisoner in Thais (The Djinn War - Efreet Faction, docs/reference-74/quests.md; npc/lib/djinn.lua): the
+-- supply thief Baa'leal sends the player after. TibiaWiki 2006 transcript: "supplies" "What!? I bet, Baa'leal sent
+-- you! ... I won't tell you anything! Shove off!" - now the player knows his name.
+dofile(getDataDir() .. 'npc/lib/djinn.lua')
+
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
 NpcSystem.parseParameters(npcHandler)
@@ -12,14 +17,19 @@ function onCreatureDisappear(cid)               npcHandler:onCreatureDisappear(c
 function onCreatureSay(cid, type, msg)  npcHandler:onCreatureSay(cid, type, msg)        end
 function onThink()                                              npcHandler:onThink()    end
   
+local topic = 0
+
 function PartosSayCallback (cid, type, msg)
   if(not npcHandler:isFocused(cid)) then
      return 0
   end
  
         if(msgcontains(msg:lower(),"baa'leal") or msgcontains(msg:lower(),"supplies") or msgcontains(msg:lower(),"mal'ouquah") or msgcontains(msg:lower(),"djinn")) then
-            if (getPlayerStorageValue(cid, 1025) == 1) then
-                setPlayerStorageValue(cid, 1026, 1)
+            local progress = djinnProgress(cid, DJINN_EFREET)
+            if progress >= EFREET_THIEF then
+                if progress == EFREET_THIEF then
+                    setPlayerStorageValue(cid, DJINN_EFREET, EFREET_PARTOS)
+                end
                 npcHandler:say("What!? I bet, Baa'leal sent you! ...", cid, 1000)
                 npcHandler:say("I won't tell you anything! Shove off!", cid, 6000)
             else
@@ -34,25 +44,25 @@ function PartosSayCallback (cid, type, msg)
                 npcHandler:say("Guess it! I give you a hint: I am not in this cell to clean it up! ...", cid,1000)
                 npcHandler:say("I wished, I would have never left Ankrahmun.", cid, 8000)
 
-        elseif(msgcontains(msg:lower(),"excalibug")) and (npcHandler.Topic == 3) then
-                npcHandler:doTopic(cid, 0)
+        elseif(msgcontains(msg:lower(),"excalibug")) and (topic == 3) then
+                topic = 0
                 npcHandler:say("My late mentor once told me he found a wallcarving about this sword in a cave beneath the castle.",cid)
-        elseif(msgcontains(msg:lower(),"wallcarving")) and (npcHandler.Topic == 3) then
-                npcHandler:doTopic(cid, 0)
+        elseif(msgcontains(msg:lower(),"wallcarving")) and (topic == 3) then
+                topic = 0
                 npcHandler:say("That part of the dungeon was recently blocked by a cave-in. It was unsecure before, and only a fool would have entered there. I stayed out and alive.",cid)
         elseif(msgcontains(msg:lower(),"excalibug")) then
-                npcHandler:doTopic(cid, 0)
+                topic = 0
                 npcHandler:say("Excalibug? No way that I tell you something about it!",cid)
         elseif(msgcontains(msg:lower(),"grapes")) then
                 npcHandler:say("Do you have any grapes with you?",cid)
-                npcHandler:doTopic(cid, 2)
-        elseif(msgcontains(msg:lower(),"yes")) and (npcHandler.Topic == 2) then
+                topic = 2
+        elseif(msgcontains(msg:lower(),"yes")) and (topic == 2) then
              if (doPlayerRemoveItem(cid,2681,1)) then 
                 npcHandler:say("What do you want for that ...ohhh... tasty ...uhm... sweet ...drool... delicous ...hmm... grapes?",cid)
-                npcHandler:doTopic(cid, 3)
+                topic = 3
              else
                 npcHandler:say("Go away, if you don't have any grapes.",cid)
-                npcHandler:doTopic(cid, 0)
+                topic = 0
              end
         end
 

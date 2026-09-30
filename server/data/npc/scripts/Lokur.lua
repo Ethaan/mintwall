@@ -459,10 +459,10 @@ function creatureSayCallback(cid, type, msg)
       talkState[cid] = 0
    end
 	if(msgcontains(msg, "measurements")) then
-		if(getPlayerStorageValue(cid, 250) == 32) then
-			npcHandler:say(" Come on, I have no clue what they are. Better ask my armorer Kroox for such nonsense. Go and ask him for good ol' Lokur's measurements, he'll know.", cid)
-			setPlayerStorageValue(cid, 250, 33)
-			npcHandlerfocus = 0
+		-- the Postman Missions, mission 7 (npc/lib/postman.lua): he sends you to Kroox
+		if postmanProgress(cid) == POSTMAN_MEASUREMENTS and not postmanHas(cid, POSTMAN_MEASURES, POSTMAN_OFFICERS.lokur) then
+			npcHandler:say("Come on, I have no clue what they are. Better ask my armorer Kroox for such nonsense. Go and ask him for good ol' Lokurs measurements, he'll know.", cid)
+			postmanSet(cid, POSTMAN_MEASURES, POSTMAN_OFFICERS.lokur_asked)
 		end
 	end
    return true

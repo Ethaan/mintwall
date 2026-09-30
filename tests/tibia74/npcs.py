@@ -97,11 +97,15 @@ def load_npcs(server_dir: Path) -> dict:
 
     spawns = next((server_dir / "data" / "world").glob("*-spawns.xml"), None)
     if spawns:
+        # a spawn names the NPC's file ("Baa'Leal" -> Baa'Leal.xml, the name the XML gives is "Baa'leal"); the server
+        # finds the file case-insensitively (Windows)
+        by_lower = {name.lower(): npc for name, npc in npcs.items()}
         for spawn in ET.fromstring(spawns.read_text(encoding="latin-1")).iter("spawn"):
             cx, cy = int(spawn.get("centerx")), int(spawn.get("centery"))
             for n in spawn.iter("npc"):
-                if n.get("name") in npcs:
-                    npcs[n.get("name")].positions.append((cx + int(n.get("x")), cy + int(n.get("y")), int(n.get("z"))))
+                if n.get("name").lower() in by_lower:
+                    by_lower[n.get("name").lower()].positions.append(
+                        (cx + int(n.get("x")), cy + int(n.get("y")), int(n.get("z"))))
     return npcs
 
 

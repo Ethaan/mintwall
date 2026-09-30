@@ -5,9 +5,9 @@
 -- Fire Elemental will now be loose! Kill the Fire Elemental and flip the switch that is inside his cage. This will
 -- remove the Magic Walls holding the Green Djinn downstairs." No reward is known.
 --
--- 51102, the wall lamp above the barrel (33151,32861,7): not on our map, placed where tibiaot74 has an object on that
+-- 51182, the wall lamp above the barrel (33151,32861,7): not on our map, placed where tibiaot74 has an object on that
 --   wall. Using it opens the fire elemental's cage (its front wall 33151,32866,8).
--- 51103, the switch in the fire elemental's cage (33152,32866,8): takes away the magic walls 33148-33149,32867-32868,9
+-- 51183, the switch in the fire elemental's cage (33152,32866,8): takes away the magic walls 33148-33149,32867-32868,9
 --   between the stairs room and the hall where the green djinn stands (33149,32864,9).
 -- Decided with the user 2026-09-27 (no source gives times): both close again after 5 minutes, but only while no player
 -- is inside (the cage, the hall), so nobody is trapped; retried every 10 s. The green djinn's and the vampire's cage
@@ -63,14 +63,14 @@ local function closeMagicWalls()
 end
 
 function onUse(cid, item, frompos, item2, topos)
-	if item.actionid == 51102 then
+	if item.actionid == 51182 then
 		doSendMagicEffect(getPlayerPosition(cid), CONST_ME_MAGIC_RED)
 		local wall = getTileItemById(CAGE_WALL_POS, CAGE_WALL)
 		if wall.uid > 0 then
 			doRemoveItem(wall.uid)
 			addEvent(closeCage, OPEN_FOR)
 		end
-	elseif item.actionid == 51103 then
+	elseif item.actionid == 51183 then
 		doTransformItem(item.uid, item.itemid == SWITCH_LEFT and SWITCH_RIGHT or SWITCH_LEFT)
 		local opened = false
 		for _, pos in ipairs(MAGIC_WALLS) do

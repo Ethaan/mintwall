@@ -97,6 +97,7 @@ end
 -- TFS-era NPC scripts: compatibility layer + Jiddo NpcSystem
 dofile(getDataDir() .. 'npc/lib/compat.lua')
 dofile(getDataDir() .. 'npc/lib/_npcsystem.lua')
+dofile(getDataDir() .. 'npc/lib/postman.lua')   -- the Postman Missions: ranks, passage and postal prices
 
 -- Many NPC texts come from 8.x+ datapacks that mark keywords as {trade}; that highlighting does not
 -- exist in the 7.4 client, which would print the braces. Every NPC line goes through selfSay.

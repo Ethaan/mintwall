@@ -139,11 +139,17 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       Safety: scheduled by the server itself (config: hour), NOT a GM command (too risky, per the user); if a
       manual trigger is ever needed, console / admin-only with a confirmation. Tests: kicked at the hour, refresh
       tiles reset, other tiles untouched, expired premium applied, no login in the last minutes
-- [ ] Quest objects audit (tools/quest-audit.py, 2026-09-24): of tibiaot74's 166 quest objects our map has 8 scripted,
+- [x] Quest objects audit (tools/quest-audit.py, 2026-09-24): of tibiaot74's 166 quest objects our map has 8 scripted,
       62 standing there without a quest id (e.g. the 4 Annihilator chests 33227-33233,31656,13), 96 missing (the
       Battle Axe skeleton and the Dead Archer body were two of them). Our map (= the JS engine's) lost many quest
       containers. Work through them quest by quest with the quest-testing skill - each "missing" one needs sources
       (tibiaot74 also adds its own things)
+      Done 2026-09-30: re-run - 130 done, 36 left, all settled. 32 belong to quests finished at our map's own positions
+      (tibiaot74's spots differ: Draconia's keys lie loose, Sam's Old Backpack is not 7.4, the Tear basin has an action
+      id, etc.). The Holy Tible (32828,32340,7) is a loose book with Banor's prayer on the original map - nothing to
+      do. Key 4009's chest (32690,32129,10), the copper key in the dead tree (32657,32250,7) and six small rubies
+      (32371,32262,12) are tibiaot74's: no door on our map takes keys 4009/4022/2041, the real-map chest table has
+      none of them (key 4009 / the Desert Dungeon library is the current wiki's "long path").
 - [x] Map items decay (found 2026-09-24; built 2026-09-25, tests/test_map_items.py): the OTBM loader started decay on every map item, so the decorative dead
       humans (15 min) and dead skeletons (10 min, then gone) in caves vanished after each start. Fixed in
       iomapotbm.cpp (map items don't decay; moved later, they do) - NEEDS A REBUILD (the dev server was running);
@@ -598,7 +604,7 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
 - [x] Stealth Ring Quest (Minotaur Pyramid) - Minotaur (Dark) Pyramid, north-east of Darashia (~33312,322… (no level; 1 player; premium)
       Done 2026-09-26: the Minotaur Pyramid's bottom-floor coffins 33315,32282,11 uid 3900 stealth ring (SE) and
       33315,32277,11 uid 3901 protection amulet (NE). tests/quests/darashia/test_stealth_ring.py
-- [ ] The Ancient Tombs Quest (Helmet of the Ancients) - 8 Ankrahmun tombs (level 75 (doors); team advised player(s); premium)
+- [x] The Ancient Tombs Quest (Helmet of the Ancients) - 8 Ankrahmun tombs (level 75 (doors); team advised player(s); premium)
       In progress (2026-09-28). Shared (movements/ancient_tombs.lua, decided with the user): level-75 gates (aid 1075,
       10 gates); the mystic flames lost their free map destinations - a scarab coin on the basin beside (aid 51120)
       takes whoever stands on the flame down, the coin is used up; the pharaohs' portals (aid 51121) lead to the
@@ -615,19 +621,35 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       Dipthrah: done - entrance pile 33133,32568,7 restored; the 16 wrong word doors (aid 51126) send you back to the
       first room 33072,32640,15 (decided with the user); the gauntlet's exit teleport pointed into rock: now tibiaot74's
       33095,32590,15. The current wiki's switches before the 7th floor are not on the 7.4 map.
-      Left: Omruc, Thalas, Mahrdis, Morguthis, Ashmunrah + the stone table.
-- [ ] The Djinn War - Efreet Faction (Green Djinn Quest) - Mal'ouquah + Ankrahmun, Carlin, Thais, Ulderek's Rock, Asht… (level 30 (fortress door) / 40 (Orc King door); 1 player; premium)
-- [ ] The Djinn War - Marid Faction (Blue Djinn Quest) - Ashta'daramai + Kazordoon, Mal'ouquah, Ulderek's Rock (level 30 / 40; 1 player; premium)
+      Done 2026-09-29: all eight tombs and the stone table (the seven pieces become the helmet; a small ruby makes it
+      glow 30 minutes) pass - test_tomb_<pharaoh>.py. Test fixes: the Thalas forcefield rule starts beside the tile
+      the full run leaves its poison field on; Ashmunrah's portal is stepped on from beside the tile it sends you
+      back to; the router goes around Ashmunrah's throwers (in their wall slots) and pushes Morguthis's deathslicers
+      (nothing hurts them; TibiaWiki: "You can push it") - step_onto clears a monster standing on a portal.
+- [x] The Djinn War - Efreet Faction (Green Djinn Quest) - Mal'ouquah + Ankrahmun, Carlin, Thais, Ulderek's Rock, Asht… (level 30 (fortress door) / 40 (Orc King door); 1 player; premium)
+- [x] The Djinn War - Marid Faction (Blue Djinn Quest) - Ashta'daramai + Kazordoon, Mal'ouquah, Ulderek's Rock (level 30 / 40; 1 player; premium)
+      Done 2026-09-29 (both sides): the NPC ports could not be finished (no Tear, no lamp exchange, trade open to
+      all, "passage" not understood, missing functions, storages shared with quest chests). Rewritten on
+      npc/lib/djinn.lua (storages 70100 Efreet / 70101 Marid progress, 70102 Melchior's word, 70103 Orc King's
+      guards); ShopModule.mayTrade gates the traders. Map: fortress gates aid 1030; Tear basin's northern tiles aid
+      51170; the gemmed lamps by Gabel's / Malor's beds aid 51171 (actions/scripts/quests/djinn_war.lua). Decided with
+      the user: DJANNI'HAH only (7.4), traders only after the side is done, the basin's northern half, Maryza's
+      cookbook repeatable. tests/quests/ankrahmun/test_djinn_war.py (13 tests). Router: a creature that blocks a tile
+      twice is gone around; one nothing hurts is pushed (deathslicers); walk_near accepts standing next to an NPC
+      on the tile it aimed for.
 - [x] Serpentine Tower Quest / White Pearl Quest (one quest) - Serpentine Tower (Sorcerer guild), Ankrahmun (~33147,32866,… (no level; 1 player; premium)
-      Done 2026-09-27: the open fire 33145,32862,7 (aid 51100, movements/serpentine_tower.lua): a pot put on it becomes
-      the campfire with a pot (1428) until the restart (decided with the user); the forcefield 33148,32864,7 (aid 51101)
+      Done 2026-09-27: the open fire 33145,32862,7 (aid 51180, movements/serpentine_tower.lua): a pot put on it becomes
+      the campfire with a pot (1428) until the restart (decided with the user); the forcefield 33148,32864,7 (aid 51181)
       then goes into the pearl room 33151,32864,7; the way out 33150,32864,7 -> 33147,32864,7 always (tibiaot74; decided
       with the user). Chest 33150,32862,7 (lost on our map) uid 3700: white pearl (real-map table). The continuation
-      (scripted on the user's wish): the wall lamp above the barrel 33151,32861,7 (placed, aid 51102) opens the fire
-      elemental's cage 33151,32866,8; its switch 33152,32866,8 (aid 51103) takes the magic walls 33148-33149,32867-32868,9
+      (scripted on the user's wish): the wall lamp above the barrel 33151,32861,7 (placed, aid 51182) opens the fire
+      elemental's cage 33151,32866,8; its switch 33152,32866,8 (aid 51183) takes the magic walls 33148-33149,32867-32868,9
       from the green djinn's hall; both close after 5 minutes once no player is inside (decided with the user). The
       djinn's and vampire's switches do nothing. tests/quests/ankrahmun/test_serpentine_tower.py
-- [ ] Serpentine Tower: the 5-minute close of the fire elemental's cage and the djinn hall's magic walls is untested
+- [x] Serpentine Tower: the 5-minute close of the fire elemental's cage and the djinn hall's magic walls is untested
+      Done 2026-09-29: test_serpentine_tower_continuation waits them out (open while a player is in the hall).
+- [x] Action id clash: the Serpentine Tower took 51100-51103, the Banshee seal doors' ids (their doors ran the tower's
+      scripts; the Banshee final room was unreachable). Fixed 2026-09-29: the tower uses 51180-51183.
 - [x] Annihilator Quest - Edron, Hero Cave (deepest floors) (level 100 (lever/tiles; level-100 door at que…; exactly 4 player(s); premium)
       Done 2026-09-24: nothing was scripted (lever, squares, chests without ids). quests/annihilator_lever.lua (aid
       51011 on the lever 33226,31671,13): four players on 33222-33225,31671,13, each level 100+ and without a reward
@@ -704,9 +726,25 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       Done 2026-09-25: chest 33078,31656,11 uid 1019 (ring of healing, dragon necklace, 7 small diamonds) and dead skeleton
       below the pick hole 33084,31650,12 uid 1018 (fire axe) were missing - placed (tibiaot74, real-map table).
       tests/quests/edron/test_fire_axe.py
-- [ ] Postman Missions Quest - starts at Kevin (post office between Thais and Kazordoon), … (no level; 1 player; premium)
-      DEFERRED (decided with the user 2026-09-25): a big multi-city quest (Kevin's post office, missions across Thais,
-      Kazordoon, Venore, Carlin, Edron, ...) - its own piece of work after the city-by-city quests
+- [x] Postman Missions Quest - starts at Kevin (post office between Thais and Kazordoon), … (no level; 1 player; premium)
+      Done 2026-09-30: blocked at mission 1 (nothing counted the passages), no map object was scripted, the NPCs kept
+      their topic in a global every NPC shares (Kevin's "yes" chain could reset the quest), several had no greeting.
+      npc/lib/postman.lua (progress storage 70200 1-31, 70201 passages, 70202 bones, 70203 sniffs, 70204 measurements,
+      70205 Markwin, 70206 present taken); npc/lib/questnpc.lua (the NPC builder, shared with the djinns). Kevin,
+      A Strange Fellow, Talphion, Noodles, Hugo, Markwin, Benjamin, Liane, Olrik, Dove, Chrystal rewritten (the 2006
+      transcripts), Eloise/Dermot/Lokur/Kroox patched. StdModule.travel and the captains' "bring me to" count the
+      passages and give Grand Postmen 10 gp off; ShopModule.price: parcels 10 / letters 5 gp for Assistant Postmen.
+      Map (actions/scripts/quests/postman.lua): Folda mailbox 32013,31562,4 aid 51190 (crowbar); Kevin's doors
+      32569/32567,32023,6 aid 51191/51192 and chests placed on the closets' counters 32569/32567,32024,6 aid
+      51194/51195 (present once; letter bag needs 500 oz); Waldo's door 32515,32248,8 aid 51193, body 32514,32248,8
+      aid 51196; Santa's mailbox 31948,31711,6 aid 51197 (the bag becomes a red bag). Royal mailboxes aid 51199 (Minotaur
+      Pyramid 33307,32292,7; Mine Hub 32448/32454/32459,31964-31975,10; Drefia 32995,32446,7; Mintwallin
+      32423,32095,15; Cyclopolis 33271,31656,8; Shadowthorn 33083,32184,8; Orc Fort 32970,31778,7) - the engine
+      (Game::playerMoveItem) refuses non-Arch Postmen. Letters at Benjamin/Chrystal 10 -> 8 gp (TibiaWiki 2006).
+      Decided with the user: 10 gp off a passage, royal mailboxes locked, Markwin wants his guards dead, Noodles any
+      order / keeps nothing. tests/quests/postman/test_postman.py.
+- [ ] Postman: the "surface" royal mailbox near the Kazordoon mines (2006 wiki, no usable coordinate) is not locked;
+      the captains still quote the full price in their question (they charge the discounted one)
 - [-] Iron Ore Quest - Dwarf Mines near Kazordoon (no level; — player(s); —)
       Probably not 7.4 (wiki page from 2011, no version, not on Tibiantis) - left out unless a 7.4 source turns up
 - [x] Minotaur Leather Quest - raft south of Thais - NOT 7.4 (checked 2026-09-24): the item "minotaur leather" is not

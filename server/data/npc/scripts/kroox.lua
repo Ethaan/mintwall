@@ -17,10 +17,11 @@ end
 	npcHandler:say('The problem is, some giant spiders made the tunnels where the storage is their new home. Good luck.')
 	setPlayerStorageValue(cid, 290, 1)
 	elseif(msgcontains(msg, "measurements")) then
-		if(getPlayerStorageValue(cid, 250) == 33) then
+		-- the Postman Missions, mission 7 (npc/lib/postman.lua): once Lokur sent you
+		if postmanProgress(cid) == POSTMAN_MEASUREMENTS and postmanHas(cid, POSTMAN_MEASURES, POSTMAN_OFFICERS.lokur_asked)
+				and not postmanHas(cid, POSTMAN_MEASURES, POSTMAN_OFFICERS.lokur) then
 			npcHandler:say("Hm, well I guess its ok to tell you ... <tells you about Lokurs measurements>", cid)
-			setPlayerStorageValue(cid, 250, 34)
-			npcHandlerfocus = 0
+			postmanSet(cid, POSTMAN_MEASURES, POSTMAN_OFFICERS.lokur)
 		end
 	end
 	return TRUE

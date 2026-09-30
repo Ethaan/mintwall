@@ -1,45 +1,36 @@
-local keywordHandler = KeywordHandler:new()
-local npcHandler = NpcHandler:new(keywordHandler)
-NpcSystem.parseParameters(npcHandler)
+-- Hugo Chief, the tailor upstairs of the Venore clothes shop (The Postman Missions Quest, mission 6;
+-- npc/lib/postman.lua). TibiaWiki 2006 transcript: "new set of uniforms" - his dog ate the last dress pattern; "new
+-- dress pattern" - "I have no clue where Kevin Postner got it from"; at the end "new dress pattern" - "Ok, ok, you will
+-- get those ugly, stinking uniforms". The old port kept its topic in a global every NPC shares.
+dofile(getDataDir() .. 'npc/lib/questnpc.lua')
 
- 
-function onCreatureAppear(cid)			npcHandler:onCreatureAppear(cid)			end
-function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
-function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
-function onThink()				npcHandler:onThink()					end
-
-local function getPlayerBones(cid)
-	return getPlayerItemCount(cid, 2230) + getPlayerItemCount(cid, 2231)
-end
-
-local function doPlayerRemoveBones(cid)
-	return doPlayerRemoveItem(cid, 2230, getPlayerItemCount(cid, 2230)) and doPlayerRemoveItem(cid, 2231, getPlayerItemCount(cid, 2231))
-end
-
-function creatureSayCallback(cid, type, msg)
-	if(not npcHandler:isFocused(cid)) then
+questNpc{
+	farewell = "Good bye.",
+	walkaway = "Good bye.",
+	greet = function(cid)
+		return "Be greeted, |PLAYERNAME|!"
+	end,
+	quest = function(cid, msg, state, say)
+		local progress = postmanProgress(cid)
+		if containsWord(msg, "uniforms") or containsWord(msg, "uniform") then
+			if progress == POSTMAN_UNIFORMS then
+				state.topic = 1
+				say(cid, "A new uniform for the post officers? I am sorry but my dog ate the last dress pattern we used. You need to supply us with a new dress pattern.")
+				return true
+			end
+		elseif containsWord(msg, "dress pattern") or containsWord(msg, "dress patterns") then
+			if progress == POSTMAN_UNIFORMS then
+				state.topic = 0
+				setPlayerStorageValue(cid, POSTMAN, POSTMAN_HUGO_ASKED)
+				say(cid, "It was ... wonderous beyond wildest imaginations! I have no clue where Kevin Postner got it from. Better ask him.")
+				return true
+			elseif progress == POSTMAN_HUGO_ORDER then
+				state.topic = 0
+				setPlayerStorageValue(cid, POSTMAN, POSTMAN_UNIFORMS_DONE)
+				say(cid, "By the gods of fashion! Didn't it do that I fed the last dress pattern to my poor dog? Will this mocking of all which is taste and fashion never stop?? Ok, ok, you will get those ugly, stinking uniforms and now get lost, fashion terrorist.")
+				return true
+			end
+		end
 		return false
-	end
-	
-
-	if(msgcontains(msg, "uniforms")) then
-		if(getPlayerStorageValue(cid, 250) == 13) then
-			npcHandler:say("A new uniform for the post officers? I am sorry but my dog ate the last dress pattern we used. You need to supply us with a new dress pattern. ", cid)
-			npcHandlerfocus = 1
-		end
-	elseif(msgcontains(msg, "dress pattern")) then
-		if(npcHandlerfocus == 1) then
-			npcHandler:say("It was ... wonderous beyond wildest imaginations! I have no clue where Kevin Postner got it from. Better ask him.", cid)
-			setPlayerStorageValue(cid, 250, 14)
-			npcHandlerfocus = 0
-		elseif(getPlayerStorageValue(cid, 250) == 23) then
-			npcHandler:say("By the gods of fashion! Didn't it do that I fed the last dress pattern to my poor dog? Will this mocking of all which is taste and fashion never stop?? Ok, ok, you will get those ugly, stinking uniforms and now get lost, fashion terrorist. ", cid)
-			setPlayerStorageValue(cid, 250, 24)
-			npcHandlerfocus = 0
-		end
-	end
-	return true
-end
- 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
-npcHandler:addModule(FocusModule:new())
+	end,
+}

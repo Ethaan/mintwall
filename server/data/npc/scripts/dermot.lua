@@ -41,12 +41,16 @@ elseif(talkState[talkUser] == 1) then
 npcHandler:say("Believe me, it's better for you that way.", cid)
 talkState[talkUser] = 0
 elseif(talkState[talkUser] == 2) then
-npcHandler:say("Thank you very much!", cid)
-doPlayerRemoveItem(cid, 2231, 1)
-setPlayerStorageValue(cid, 250, 12)
+-- the Postman Missions, mission 5 (npc/lib/postman.lua): "yes" and the present (was: any answer, and a big bone taken)
 talkState[talkUser] = 0
+if msgcontains(msg, "yes") and doPlayerRemoveItem(cid, PRESENT, 1) then
+npcHandler:say("Thank you very much!", cid)
+setPlayerStorageValue(cid, POSTMAN, POSTMAN_PRESENT_GIVEN)
+elseif msgcontains(msg, "yes") then
+npcHandler:say("But you don't have it with you!", cid)
 end
-if(msgcontains(msg, 'present') and getPlayerStorageValue(cid, 250) == 11) then
+end
+if(msgcontains(msg, 'present') and postmanProgress(cid) == POSTMAN_PRESENT) then
 npcHandler:say("You have a present for me?? Realy?", cid)
 talkState[talkUser] = 2
 end

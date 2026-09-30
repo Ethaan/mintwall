@@ -196,12 +196,24 @@
     <action actionid="51036" script="quests/outlaw_camp.lua"/>   <!-- Outlaw Camp: the power-ring switch -->
     <action actionid="51037" script="quests/outlaw_camp.lua"/>   <!-- Outlaw Camp: the mill's switch -->
     <action actionid="51096" script="quests/desert_dungeon.lua"/>   <!-- Desert Dungeon: the paladin's lever -->
-    <action actionid="51102" script="quests/serpentine_tower.lua"/>   <!-- Serpentine Tower: the wall lamp that opens the fire elemental's cage -->
-    <action actionid="51103" script="quests/serpentine_tower.lua"/>   <!-- Serpentine Tower: the switch in that cage (the magic walls below) -->
+    <action actionid="51182" script="quests/serpentine_tower.lua"/>   <!-- Serpentine Tower: the wall lamp that opens the fire elemental's cage -->
+    <action actionid="51183" script="quests/serpentine_tower.lua"/>   <!-- Serpentine Tower: the switch in that cage (the magic walls below) -->
     <action actionid="51122" script="quests/ancient_tombs_vashresamun.lua"/>   <!-- Ancient Tombs, Vashresamun: the eight instruments -->
     <action actionid="51123" script="quests/ancient_tombs_vashresamun.lua"/>   <!-- Ancient Tombs, Vashresamun: the door behind them -->
     <action actionid="51124" script="quests/ancient_tombs_rahemos.lua"/>   <!-- Ancient Tombs, Rahemos: the three hat switches -->
     <action actionid="51128" script="quests/ancient_tombs_morguthis.lua"/>   <!-- Ancient Tombs, Morguthis: the two paintings (hidden wall) -->
+    <action actionid="51170" script="quests/djinn_war.lua"/>   <!-- Djinn War: Ashta'daramai's water basin, the Tear of Daraman -->
+    <action actionid="51171" script="quests/djinn_war.lua"/>   <!-- Djinn War: the gemmed lamps by Gabel's and Malor's beds -->
+    <action itemid="2344" script="quests/djinn_war.lua"/>   <!-- Djinn War: Fa'hradin's lamp used on one of them -->
+    <action actionid="51191" script="quests/postman.lua"/>   <!-- Postman: Kevin's lower right door (the present) -->
+    <action actionid="51192" script="quests/postman.lua"/>   <!-- Postman: Kevin's lower left door (the letter bag) -->
+    <action actionid="51193" script="quests/postman.lua"/>   <!-- Postman: Waldo's door in the troll cave -->
+    <action actionid="51194" script="quests/postman.lua"/>   <!-- Postman: the chest with the present -->
+    <action actionid="51195" script="quests/postman.lua"/>   <!-- Postman: the chest with the letter bag -->
+    <action actionid="51196" script="quests/postman.lua"/>   <!-- Postman: Waldo's body (his posthorn) -->
+    <action itemid="2416" script="quests/postman.lua"/>   <!-- Postman: the crowbar on Folda's jammed mailbox (aid 51190) -->
+    <action itemid="2330" script="quests/postman.lua"/>   <!-- Postman: the letter bag on Santa's mailbox (aid 51197) -->
+    <action itemid="2331" script="quests/postman.lua"/>   <!-- Postman: opening the present destroys it -->
     <action itemid="2342" script="helmet_of_the_ancients.lua"/>   <!-- the helmet of the ancients on a small ruby: glows for 30 minutes -->
     <action actionid="54545" script="draw_well_down.lua"/>   <!-- wells you climb down (Fibula, Ancient Temple) -->
 

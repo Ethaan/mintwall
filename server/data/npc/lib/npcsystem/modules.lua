@@ -200,12 +200,14 @@ if(Modules == nil) then
 			npcHandler:say('You must reach level ' .. parameters.level .. ' before I can let you go there.', cid)
 		elseif(parameters.storageId ~= nil and getPlayerStorageValue(cid, parameters.storageId) < storage) then
 			npcHandler:say(parameters.storageInfo or 'You may not travel there yet!', cid)
-		elseif(not doPlayerRemoveMoney(cid, parameters.cost)) then
+		elseif(not doPlayerRemoveMoney(cid, travelCost(cid, parameters.cost))) then
 			npcHandler:say('You don\'t have enough money.', cid)
 		else
 			npcHandler:say('Set the sails!', cid)
 			npcHandler:releaseFocus(cid)
 
+			-- the Postman Missions (npc/lib/postman.lua): mission 1's passages
+			postmanTravelled(cid, getCreatureName(getNpcId()), parameters.destination)
 			teleportAfterWords(cid, parameters.destination)
 		end
 
@@ -1356,7 +1358,7 @@ if(Modules == nil) then
 		local parseInfo = {
 			[TAG_PLAYERNAME] = getPlayerName(cid),
 			[TAG_ITEMCOUNT] = module.amount,
-			[TAG_TOTALCOST] = parentParameters.cost * module.amount,
+			[TAG_TOTALCOST] = ShopModule.price(cid, parentParameters) * module.amount,
 			[TAG_ITEMNAME] = parentParameters.realName
 		}
 
@@ -1372,7 +1374,7 @@ if(Modules == nil) then
 				module.npcHandler:say(msg, cid)
 			end
 		elseif(parentParameters.eventType == SHOPMODULE_BUY_ITEM) then
-			local ret = doPlayerBuyItem(cid, parentParameters.itemid, module.amount, parentParameters.cost * module.amount, parentParameters.subType)
+			local ret = doPlayerBuyItem(cid, parentParameters.itemid, module.amount, ShopModule.price(cid, parentParameters) * module.amount, parentParameters.subType)
 			if(ret) then
 				if parentParameters.itemid == ITEM_PARCEL then
 					doPlayerBuyItem(cid, ITEM_LABEL, module.amount, 0, parentParameters.subType)
@@ -1386,7 +1388,7 @@ if(Modules == nil) then
 				module.npcHandler:say(msg, cid)
 			end
 		elseif(parentParameters.eventType == SHOPMODULE_BUY_ITEM_CONTAINER) then
-			local ret = doPlayerBuyItemContainer(cid, parentParameters.container, parentParameters.itemid, module.amount, parentParameters.cost * module.amount, parentParameters.subType)
+			local ret = doPlayerBuyItemContainer(cid, parentParameters.container, parentParameters.itemid, module.amount, ShopModule.price(cid, parentParameters) * module.amount, parentParameters.subType)
 			if(ret) then
 				local msg = module.npcHandler:getMessage(MESSAGE_ONBUY)
 				msg = module.npcHandler:parseMessage(msg, parseInfo)
@@ -1413,7 +1415,7 @@ if(Modules == nil) then
 		local parseInfo = {
 			[TAG_PLAYERNAME] = getPlayerName(cid),
 			[TAG_ITEMCOUNT] = module.amount,
-			[TAG_TOTALCOST] = parentParameters.cost * module.amount,
+			[TAG_TOTALCOST] = ShopModule.price(cid, parentParameters) * module.amount,
 			[TAG_ITEMNAME] = parentParameters.realName
 		}
 
@@ -1423,6 +1425,15 @@ if(Modules == nil) then
 		return true
 	end
 
+	-- What one item costs this player: a post officer charges an Assistant Postman less for parcels and letters
+	-- (npc/lib/postman.lua); what the NPC buys, and everything else, the listed price.
+	function ShopModule.price(cid, parameters)
+		if(parameters.eventType == SHOPMODULE_SELL_ITEM or postalPrice == nil) then
+			return parameters.cost
+		end
+		return postalPrice(cid, parameters.itemid, parameters.cost)
+	end
+
 	-- tradeItem callback function. Makes the npc say the message defined by MESSAGE_BUY or MESSAGE_SELL
 	function ShopModule.tradeItem(cid, message, keywords, parameters, node)
 		local module = parameters.module
@@ -1430,12 +1441,19 @@ if(Modules == nil) then
 			return false
 		end
 
+		-- a trader who deals only with some (the djinn: those who finished their side of the war, npc/lib/djinn.lua);
+		-- mayTrade says why not. Back to the root, so a "yes" does not buy.
+		if(module.mayTrade ~= nil and not module.mayTrade(cid)) then
+			module.npcHandler:resetNpc(cid)
+			return true
+		end
+
 		local count = module:getCount(message)
 		module.amount = count
 		local parseInfo = {
 			[TAG_PLAYERNAME] = getPlayerName(cid),
 			[TAG_ITEMCOUNT] = module.amount,
-			[TAG_TOTALCOST] = parameters.cost * module.amount,
+			[TAG_TOTALCOST] = ShopModule.price(cid, parameters) * module.amount,
 			[TAG_ITEMNAME] = parameters.realName
 		}
 

@@ -1180,6 +1180,23 @@ bool Game::playerMoveItem(uint32_t playerId, const Position& fromPos,
 		return false;
 	}
 
+	// The royal mailboxes near hunting grounds (action id 51199 on the map): only an Arch Postman may post there -
+	// TibiaWiki 2006 "You cannot use royal mailboxes ... unless you have completed the entire Postman Quest"
+	// (npc/lib/postman.lua: storage 70200, 31 = Arch Postman)
+	if(Tile* toTile = toCylinder->getTile()){
+		for(uint32_t i = 0; i < toTile->getThingCount(); ++i){
+			Thing* thing = toTile->__getThing(i);
+			Item* onTile = thing ? thing->getItem() : NULL;
+			if(onTile && onTile->getMailbox() && onTile->getActionId() == 51199){
+				int32_t rank = 0;
+				if(!player->getStorageValue(70200, rank) || rank < 31){
+					player->sendTextMessage(MSG_INFO_DESCR, "Only archpostmen may use this mailbox.");
+					return false;
+				}
+			}
+		}
+	}
+
 	ReturnValue ret = internalMoveItem(fromCylinder, toCylinder, toIndex, item, count, NULL);
 	if(ret != RET_NOERROR){
 		player->sendCancelMessage(ret);

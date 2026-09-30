@@ -1,65 +1,47 @@
-local keywordHandler = KeywordHandler:new()
-local npcHandler = NpcHandler:new(keywordHandler)
-NpcSystem.parseParameters(npcHandler)
+-- Noodles, King Tibianus's dog (The Postman Missions Quest, mission 6; npc/lib/postman.lua). TibiaWiki 2006 transcript:
+-- "sniff banana skin" / "sniff dirty fur" / "sniff moldy cheese", then "do you like that?" - "Woof!" twice, the cheese
+-- "Meeep! Grrrrr! <spits>". Decided with the user 2026-09-30: any order, the player must carry what he sniffs, nothing
+-- is taken; the cheese reaction is what Kevin wants to know. The old port had no greeting and forced the order.
+dofile(getDataDir() .. 'npc/lib/questnpc.lua')
 
- 
-function onCreatureAppear(cid)			npcHandler:onCreatureAppear(cid)			end
-function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
-function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
-function onThink()				npcHandler:onThink()					end
+local SMELLS = {
+	{words = {"banana skin", "bananaskin"}, item = 2219, bit = 1, reaction = "Woof!"},
+	{words = {"dirty fur", "piece of fur", "fur"}, item = 2220, bit = 2, reaction = "Woof!"},
+	{words = {"moldy cheese", "mouldy cheese", "cheese"}, item = 2235, bit = 4, reaction = "Meeep! Grrrrr! <spits>"},
+}
 
-local function getPlayerBones(cid)
-	return getPlayerItemCount(cid, 2230) + getPlayerItemCount(cid, 2231)
-end
-
-local function doPlayerRemoveBones(cid)
-	return doPlayerRemoveItem(cid, 2230, getPlayerItemCount(cid, 2230)) and doPlayerRemoveItem(cid, 2231, getPlayerItemCount(cid, 2231))
-end
-
-function creatureSayCallback(cid, type, msg)
-	if(not npcHandler:isFocused(cid)) then
+questNpc{
+	farewell = "Woof!",
+	walkaway = "Woof!",
+	greet = function(cid)
+		return "<sniff> Woof! <sniff>"
+	end,
+	quest = function(cid, msg, state, say)
+		if containsWord(msg, "sniff") then
+			for n, smell in ipairs(SMELLS) do
+				for _, word in ipairs(smell.words) do
+					if containsWord(msg, word) and getPlayerItemCount(cid, smell.item) > 0 then
+						state.topic = n
+						say(cid, "<sniff><sniff>")
+						return true
+					end
+				end
+			end
+			state.topic = 0
+			say(cid, "<sniff>")
+			return true
+		elseif state.topic > 0 and containsWord(msg, "like") then
+			local smell = SMELLS[state.topic]
+			state.topic = 0
+			say(cid, smell.reaction)
+			if postmanProgress(cid) == POSTMAN_NOODLES then
+				postmanSet(cid, POSTMAN_SNIFFED, smell.bit)
+				if smell.bit == 4 then
+					setPlayerStorageValue(cid, POSTMAN, POSTMAN_NOODLES_DONE)
+				end
+			end
+			return true
+		end
 		return false
-	end
-	
-
-	if(msgcontains(msg, "banana skin") or msgcontains(msg, "Sniff Bananaskin")) then
-		if(getPlayerStorageValue(cid, 250) == 19) then
-			if(getPlayerItemCount(cid, 2219) >= 1) then
-				npcHandler:say("<sniff><sniff> ", cid)
-				npcHandlerfocus = 1
-			end
-		end
-	elseif(msgcontains(msg, "dirty fur") or msgcontains(msg, "Sniff Piece of Fur")) then
-		if(getPlayerStorageValue(cid, 250) == 20) then
-			if(getPlayerItemCount(cid, 2220) >= 1) then
-				npcHandler:say("<sniff><sniff> ", cid)
-				npcHandlerfocus = 2
-			end
-		end
-	elseif(msgcontains(msg, "mouldy cheese") or msgcontains(msg, "Sniff Moldy Cheese")) then
-		if(getPlayerStorageValue(cid, 250) == 21) then
-			if(getPlayerItemCount(cid, 2235) >= 1) then
-				npcHandler:say("<sniff><sniff> ", cid)
-				npcHandlerfocus = 3
-			end
-		end
-	elseif(msgcontains(msg, "yes") or msgcontains(msg, "do you like that")) then
-		if(npcHandlerfocus == 1) then
-			npcHandler:say("Woof!", cid)
-			setPlayerStorageValue(cid, 250, 20)
-			npcHandlerfocus = 0
-		elseif(npcHandlerfocus == 2) then
-			npcHandler:say("Woof!", cid)
-			setPlayerStorageValue(cid, 250, 21)
-			npcHandlerfocus = 0
-		elseif(npcHandlerfocus == 3) then
-			npcHandler:say("Meeep! Grrrrr! <spits> ", cid)
-			setPlayerStorageValue(cid, 250, 22)
-			npcHandlerfocus = 0
-		end
-	end
-	return true
-end
- 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
-npcHandler:addModule(FocusModule:new())
+	end,
+}

@@ -19,7 +19,7 @@ CHEST = (33150, 32862, 7)
 
 # The "continuation" (TibiaWiki 2005-current, no reward): the lamp above the barrel lets the fire elemental out of
 # its cage below, the switch in its cage takes the magic walls away from the green djinn's hall on the floor below
-# that. Both close again after 5 minutes (decided with the user; not tested - it would take the 5 minutes).
+# that. Both close again after 5 minutes (decided with the user).
 BARREL, LAMP = (33151, 32862, 7), (33151, 32861, 7)
 CAGE_WALL, CAGE_SWITCH = (33151, 32866, 8), (33152, 32866, 8)
 MAGIC_WALLS = [(33148, 32867, 9), (33149, 32867, 9), (33148, 32868, 9), (33149, 32868, 9)]
@@ -73,7 +73,8 @@ def test_serpentine_tower_quest(new_player, items, world_map):
 
 def test_serpentine_tower_continuation(new_player, items, world_map):
     """The lamp (behind the barrel) opens the fire elemental's cage; the switch in the cage takes the magic walls in
-    front of the green djinn's hall away."""
+    front of the green djinn's hall away; both close again after 5 minutes."""
+    import time
     from tibia74.quest import strong
     from tibia74.route import follow, walk_next_to
     p = strong(new_player, (33151, 32863, 7), premium_days=30, group_id=TESTER_GROUP)
@@ -92,11 +93,23 @@ def test_serpentine_tower_continuation(new_player, items, world_map):
     walk_next_to(p, items, world_map, CAGE_SWITCH, level=2000, open_tiles={CAGE_WALL})
     assert not _on(p, items, CAGE_WALL, CAGE_FRONT), p.tiles.get(CAGE_WALL)
     use_map_item(p, items, CAGE_SWITCH, "switch")
+    walls_opened = time.monotonic()
     assert p.wait_for(lambda: _on(p, items, CAGE_SWITCH, 1946), timeout=3), p.tiles.get(CAGE_SWITCH)
 
     follow(p, items, world_map, STAIRS_ROOM, level=2000)
     for pos in MAGIC_WALLS:
         assert not _on(p, items, pos, MAGIC_WALL), (pos, p.tiles.get(pos))
+
+    # 5 minutes later (decided with the user 2026-09-27): not while a player is in the djinn's hall - the script
+    # retries every 10 s - then the magic walls are back; the cage (nobody in it) closed on time
+    follow(p, items, world_map, (33148, 32866, 9), level=2000, open_tiles=set(MAGIC_WALLS))
+    p.sleep(max(0, walls_opened + 5 * 60 + 5 - time.monotonic()))
+    for pos in MAGIC_WALLS:
+        assert not _on(p, items, pos, MAGIC_WALL), (pos, p.tiles.get(pos))
+    follow(p, items, world_map, STAIRS_ROOM, level=2000, open_tiles=set(MAGIC_WALLS))
+    assert p.wait_for(lambda: all(_on(p, items, pos, MAGIC_WALL) for pos in MAGIC_WALLS), timeout=15),         [p.tiles.get(pos) for pos in MAGIC_WALLS]
+    walk_next_to(p, items, world_map, CAGE_WALL, level=2000)
+    assert p.wait_for(lambda: _on(p, items, CAGE_WALL, CAGE_FRONT), timeout=3), p.tiles.get(CAGE_WALL)
 
 
 def test_serpentine_tower_rules(world_map):

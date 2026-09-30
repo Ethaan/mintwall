@@ -25,29 +25,29 @@ local function creatureSayCallback(cid, type, msg)
 	local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
 	
 	if (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'thais') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 110) then
-		doTeleportThing(cid,{x=32313, y=32212, z=7})
+		if doPlayerRemoveMoney(cid, travelCost(cid, 110)) then
+		travelTo(cid, {x=32313, y=32212, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
         end
 	elseif (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'ab\'dendriel') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 80) then
-		doTeleportThing(cid,{x=32734, y=31669, z=7})
+		if doPlayerRemoveMoney(cid, travelCost(cid, 80)) then
+		travelTo(cid, {x=32734, y=31669, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
         end
 	elseif (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'venore') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 130) then
-		doTeleportThing(cid,{x=32954, y=32022, z=7})
+		if doPlayerRemoveMoney(cid, travelCost(cid, 130)) then
+		travelTo(cid, {x=32954, y=32022, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 
         end
 	elseif (msgcontains(msg, 'bring') and msgcontains(msg, 'me') and msgcontains(msg, 'to') and msgcontains(msg, 'edron') and (not npcHandler:isFocused(cid))) then
-		if doPlayerRemoveMoney(cid, 110) then
-		doTeleportThing(cid,{x=33176, y=31764, z=7})
+		if doPlayerRemoveMoney(cid, travelCost(cid, 110)) then
+		travelTo(cid, {x=33176, y=31764, z=7})
 		npcHandler:addFocus(cid)
 		else 
          selfSay('Sorry, you don\'t have enough money.') 

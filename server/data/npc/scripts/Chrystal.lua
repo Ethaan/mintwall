@@ -1,26 +1,18 @@
-local keywordHandler = KeywordHandler:new()
-local npcHandler = NpcHandler:new(keywordHandler)
-NpcSystem.parseParameters(npcHandler)
- 
-function onCreatureAppear(cid) npcHandler:onCreatureAppear(cid) end
-function onCreatureDisappear(cid) npcHandler:onCreatureDisappear(cid) end
-function onCreatureSay(cid, type, msg) npcHandler:onCreatureSay(cid, type, msg) end
-function onThink() npcHandler:onThink() end
+-- Chrystal, the Edron post officer (The Postman Missions Quest, mission 7: the post officers' measurements, in any order - TibiaWiki 2006;
+-- npc/lib/postman.lua). Transcript: "measurements" - "If its necessary ... <tells you her measurements>". The old port forced an order (250 = n) and kept its topic in a global every NPC shares.
+dofile(getDataDir() .. 'npc/lib/questnpc.lua')
 
-function creatureSayCallback(cid, type, msg)
-	if(not npcHandler:isFocused(cid)) then
-		return false
-	end
-
-	if(msgcontains(msg, "measurements")) then
-		if(getPlayerStorageValue(cid, 250) == 31) then
-			npcHandler:say("If its necessary ... <tells you her measurements>", cid)
-			setPlayerStorageValue(cid, 250, 32)
-			npcHandlerfocus = 0
-		end
-	end
-	return true
+local function measuring(cid, bit)
+	return postmanProgress(cid) == POSTMAN_MEASUREMENTS and not postmanHas(cid, POSTMAN_MEASURES, bit)
 end
- 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
-npcHandler:addModule(FocusModule:new())
+
+questNpc{
+	quest = function(cid, msg, state, say)
+		if containsWord(msg, "measurements") and measuring(cid, POSTMAN_OFFICERS.chrystal) then
+			postmanSet(cid, POSTMAN_MEASURES, POSTMAN_OFFICERS.chrystal)
+			say(cid, "If its necessary ... <tells you her measurements>")
+			return true
+		end
+		return false
+	end,
+}

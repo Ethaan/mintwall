@@ -236,6 +236,16 @@ def main():
         if len(item["props"]) > 2:
             # other attributes (a text, a count): the ids go after them, unless it already has one
             attrs = _item_attrs_strict(item["props"], 2)
+            if (args.replace and args.aid is not None and args.uid is None and "action_id" in attrs
+                    and "unknown" not in attrs and set(attrs) - {"action_id", "unique_id"}):
+                # ids and more (a scripted portal's teleport): change the action id's value where it is
+                old_aid = escape(bytes([ATTR_ACTION_ID]) + struct.pack("<H", attrs["action_id"]))
+                at = raw.find(old_aid, item["start"] + 2, item["props_end"])
+                if at < 0:
+                    raise SystemExit(f"action id {attrs['action_id']} not found in the item's bytes on {target}")
+                start, end = at + 1, at + len(old_aid)
+                print(f"{target}: item {args.id} action id {attrs['action_id']} -> {args.aid} (keeps {attrs})")
+                return _write(args, raw, start, end, escape(struct.pack("<H", args.aid)))
             if "unknown" in attrs or (("action_id" in attrs or "unique_id" in attrs) and
                                       not (args.replace and set(attrs) <= {"action_id", "unique_id"})):
                 raise SystemExit(f"item {args.id} on {target} already has {attrs} - edit it by hand (or --replace)")

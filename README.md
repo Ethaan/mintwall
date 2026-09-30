@@ -41,8 +41,8 @@ against 7.4-era sources and covered by automated tests.
 | Kazordoon | Done |
 | Venore | Done |
 | Darashia, Jakundaf Desert | Done |
-| Ankrahmun (incl. the Djinn War) | Next |
-| The Postman Missions | Deferred (spans many cities) |
+| Ankrahmun (incl. the Djinn War, Ancient Tombs, Serpentine Tower) | Done |
+| The Postman Missions | Done |
 
 The full list, with what was fixed in each quest, is in `task.md` and `docs/reference-74/quests.md`.
 
@@ -134,7 +134,7 @@ Help is welcome, especially from people who played 7.4 and remember how somethin
 
 Good places to start:
 
-- **A quest.** Pick an open one in `task.md` (Ankrahmun and the Djinn War are next). The workflow is
+- **A quest.** Every quest in `task.md` is done; new ones go there first. The workflow is
   in `.claude/skills/quest-testing/SKILL.md`: research the sources, fix the map and scripts, write an end-to-end test
   from the temple plus rule tests, record the result.
 - **Balance and formulas.** Take one of the open items above, or check a vocation's numbers against your 7.4
