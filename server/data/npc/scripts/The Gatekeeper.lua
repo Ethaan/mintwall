@@ -86,7 +86,7 @@ function oracle(cid, message, keywords, parameters, node)
 end
 
 
-function greetCallback(cid)
+local function greetCallback(cid)
     if(getPlayerLevel(cid) < LEVEL) then
         npcHandler:say('CHILD! COME BACK WHEN YOU HAVE GROWN UP!')
         return false

@@ -8,7 +8,7 @@ from tibia74.server import TESTER_GROUP
 
 BLUEBEAR = load_npcs(SERVER_DIR)["Captain Bluebear"].pos    # Thais harbour
 EDRON_HARBOUR = (33176, 31764, 7)                             # barco_thais.lua EdronPosition
-FARE = 110
+FARE = 150                                                    # TibiaWiki 2005: Thais-Edron 150
 
 
 @pytest.mark.parametrize("lines", [
@@ -59,3 +59,29 @@ def test_the_captain_is_heard_before_the_ship_sails(new_player):
     said = p.talk("hi", "edron", "yes", npc="Captain Bluebear")
     assert "Set the sails!" in said, said
     assert p.wait_for(lambda: p.pos == EDRON_HARBOUR, timeout=5), p.pos
+
+
+# docs/reference-74/travel.md: every captain's 7.4 routes and prices, and none of the later destinations
+ROUTES = {
+    "Captain Bluebear": {"ab'dendriel": 130, "carlin": 110, "edron": 150, "venore": 170},
+    "Captain Greyhound": {"ab'dendriel": 80, "edron": 110, "thais": 110, "venore": 130},
+    "Captain Seagull": {"carlin": 80, "edron": 70, "thais": 130, "venore": 90},
+    "Captain Fearless": {"ab'dendriel": 90, "ankrahmun": 150, "carlin": 130, "darashia": 60, "edron": 40, "thais": 170},
+    "Captain Seahorse": {"ab'dendriel": 70, "ankrahmun": 160, "carlin": 110, "cormaya": 20, "thais": 160, "venore": 40},
+    "Captain Sinbeard": {"darashia": 100, "edron": 160, "venore": 150},
+    "Petros": {"ankrahmun": 100, "venore": 60},
+}
+LATER = ["port hope", "liberty bay", "svargrond", "yalahar"]
+
+
+@pytest.mark.parametrize("captain", list(ROUTES))
+def test_captains_sail_the_74_routes(new_player, captain):
+    from tibia74.quest import next_to, talk_to
+    p = next_to(new_player, load_npcs(SERVER_DIR)[captain].pos, level=50, premium_days=30, group_id=TESTER_GROUP,
+                storage={BEGINNER_SET_GIVEN: 1})
+    for town, price in ROUTES[captain].items():
+        said = talk_to(p, captain, "hi", town, "no")
+        assert any(f"for {price} gold coins" in s for s in said), (town, said)
+    for town in LATER:
+        said = talk_to(p, captain, "hi", town)
+        assert not any("gold coins" in s for s in said), (town, said)

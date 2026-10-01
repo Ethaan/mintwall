@@ -47,6 +47,9 @@ class ServerProcess:
         cfg = re.sub(r'(\bPort\s*=\s*)"[^"]*"', lambda m: f'{m.group(1)}"{self.port}"', cfg)
         cfg = re.sub(r'(\bSaveInterval\s*=\s*)\d+', lambda m: f'{m.group(1)}15', cfg)   # test_save.py waits for it
         cfg = re.sub(r'(\bMaxPlayers\s*=\s*)"\d+"', lambda m: f'{m.group(1)}"500"', cfg)  # test_save_load.py: 100+
+        # every test character logs in from 127.0.0.1, many within seconds (next_to tries up to eight tiles): the
+        # brute-force guard (LoginTries logins less than RetryTimeout apart disable the IP) would lock the tests out
+        cfg = re.sub(r'(\bLoginTries\s*=\s*)\d+', lambda m: f'{m.group(1)}0', cfg)
         self.config_path.write_text(cfg, encoding="latin-1")
 
     # --- lifecycle ---------------------------------------------------------

@@ -53,7 +53,7 @@ local function send(cid, pos)
 	doSendMagicEffect(pos, CONST_ME_TELEPORT)
 end
 
-function creatureSayCallback(cid, type, msg)
+local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

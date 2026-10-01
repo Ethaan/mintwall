@@ -60,7 +60,7 @@
 	<spawn centerx="32294" centery="31791" centerz="7" radius="3"><npc name="Busty Bonecrusher" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32312" centery="32210" centerz="7" radius="2"><npc name="Captain Bluebear" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32958" centery="32022" centerz="7" radius="2"><npc name="Captain Fearless" x="0" y="0" z="7" spawntime="60"/></spawn>
-	<spawn centerx="32390" centery="31821" centerz="7" radius="2"><npc name="Captain Greyhound" x="0" y="0" z="6" spawntime="60"/></spawn>
+	<spawn centerx="32390" centery="31821" centerz="7" radius="2"><npc name="Captain Greyhound" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32187" centery="31960" centerz="7" radius="2"><npc name="Captain Jack" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32734" centery="31668" centerz="7" radius="2"><npc name="Captain Seagull" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="33178" centery="31764" centerz="7" radius="2"><npc name="Captain Seahorse" x="0" y="0" z="7" spawntime="60"/></spawn>
@@ -71,7 +71,7 @@
 	<spawn centerx="33270" centery="32439" centerz="6" radius="2"><npc name="Chemar" x="0" y="0" z="6" spawntime="60"/></spawn>
 	<spawn centerx="32890" centery="32077" centerz="6" radius="1"><npc name="Chephan" x="0" y="0" z="6" spawntime="60"/></spawn>
 	<spawn centerx="32348" centery="32184" centerz="6" radius="2"><npc name="Chester Kahs" x="0" y="0" z="6" spawntime="60"/></spawn>
-	<spawn centerx="32885" centery="32032" centerz="6" radius="2"><npc name="Christoph" x="0" y="0" z="7" spawntime="60"/></spawn>
+	<spawn centerx="32885" centery="32032" centerz="6" radius="2"><npc name="Christoph" x="0" y="0" z="6" spawntime="60"/></spawn>
 	<spawn centerx="33174" centery="31811" centerz="7" radius="2"><npc name="Chrystal" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32097" centery="32217" centerz="7" radius="1"><npc name="Cipfried" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="33366" centery="32855" centerz="14" radius="1"><npc name="Cobra" x="0" y="0" z="14" spawntime="60"/></spawn>

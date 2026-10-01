@@ -19,7 +19,7 @@ function onThink()                                              npcHandler:onThi
   
 local topic = 0
 
-function PartosSayCallback (cid, type, msg)
+local function PartosSayCallback(cid, type, msg)
   if(not npcHandler:isFocused(cid)) then
      return 0
   end

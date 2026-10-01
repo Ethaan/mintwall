@@ -1,4 +1,3 @@
-dofile(getDataDir() .. 'global/greeting.lua')
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -13,5 +12,4 @@ function onCreatureSay(cid, type, msg) 	npcHandler:onCreatureSay(cid, type, msg)
 function onThink() 						npcHandler:onThink() end
 
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

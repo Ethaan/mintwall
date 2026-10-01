@@ -29,7 +29,7 @@ local TALK = {
 	{{"finger"}, "Oh, you sure mean this old story about the mage Dago, who lost two fingers when he conjured a dragon."},
 }
 
-function creatureSayCallback(cid, type, msg)
+local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

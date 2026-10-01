@@ -39,7 +39,7 @@ keywordHandler:addKeyword({'offer'}, StdModule.say, {npcHandler = npcHandler, on
 keywordHandler:addKeyword({'buy'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I can offer you bread, cheese, ham, or meat."})
 keywordHandler:addKeyword({'food'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Are you looking for food? I have bread, cheese, ham, and meat."})
 
-function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
+local function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

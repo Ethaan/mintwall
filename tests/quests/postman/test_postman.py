@@ -416,7 +416,8 @@ def test_grand_postmen_sail_for_10_gp_less(new_player, db):
     p = next_to(new_player, npc_pos("Captain Bluebear"), level=50, premium_days=30, group_id=TESTER_GROUP,
                 storage={30001: 1, POSTMAN: RANK_GRAND}, inventory={3: Item(1988, contents=[Item(2152, 2)])})
     before = p.pos
-    talk_to(p, "Captain Bluebear", "hi", "carlin", "yes")
+    replies = talk_to(p, "Captain Bluebear", "hi", "carlin", "yes")
+    assert said(replies, "for 100 gold coins"), replies               # he quotes the postman's price
     assert p.wait_for(lambda: p.pos != before and abs(p.pos[1] - before[1]) > 20, timeout=6), p.pos
     p.logout()
     money = sum({2148: 1, 2152: 100, 2160: 10000}.get(r["itemtype"], 0) * r["count"]

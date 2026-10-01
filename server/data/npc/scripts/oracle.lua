@@ -11,7 +11,7 @@ local islandOfDestinyEnabled = false
         function onCreatureSay(cid, type, msg) 	npcHandler:onCreatureSay(cid, type, msg) end
         function onThink() 						npcHandler:onThink() end
 
-function greetCallback(cid)
+local function greetCallback(cid)
 if(getPlayerLevel(cid) < 8) then
 npcHandler:say("CHILD! COME BACK WHEN YOU HAVE GROWN UP!", cid)
 return  false
@@ -25,7 +25,7 @@ return true
 end
 end
 
-function creatureSayCallback(cid, type, msg)
+local function creatureSayCallback(cid, type, msg)
 local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
 if(not npcHandler:isFocused(cid)) then
 return false

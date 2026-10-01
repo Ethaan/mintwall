@@ -20,5 +20,4 @@ keywordHandler:addKeyword({'vashresamun'}, StdModule.say, {npcHandler = npcHandl
 keywordHandler:addKeyword({'tomb'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Her tomb is sealed and can only be entered by a certain melody."})
 keywordHandler:addKeyword({'melody'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Vashresamun erased the memory of the tune from my mind, I only remember its name: the secret of the rose garden."})
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

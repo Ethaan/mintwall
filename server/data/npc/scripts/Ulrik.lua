@@ -40,5 +40,4 @@ keywordHandler:addKeyword({'offer'}, StdModule.say, {npcHandler = npcHandler, on
 keywordHandler:addKeyword({'weapon'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I have longswords, battle hammers, and battle axes. What do you want?"})
 keywordHandler:addKeyword({'armor'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I have scale armor, soldier helmets, and steel shields. What do you want?"})
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

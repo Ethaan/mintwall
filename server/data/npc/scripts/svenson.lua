@@ -1,3 +1,4 @@
+-- Svenson on Folda (TibiaWiki 2005: the other two Ice Islands for 10 gp, back to Tibia free - not Folda itself).
 local keywordHandler = KeywordHandler:new()
         local npcHandler = NpcHandler:new(keywordHandler)
         NpcSystem.parseParameters(npcHandler)
@@ -13,9 +14,6 @@ local keywordHandler = KeywordHandler:new()
         
         
         -- Don't forget npcHandler = npcHandler in the parameters. It is required for all StdModule functions!
-        local travelNode = keywordHandler:addKeyword({'folda'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want a round-trip passage to Folda for 10 gold?'})
-        	travelNode:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = false, level = 0, cost = 10, destination = {x = 32047, y = 31581, z = 7} })
-        	travelNode:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = 'You shouldn\'t miss the experience.'})
 			
 		local travelNode = keywordHandler:addKeyword({'senja'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want a round-trip passage to Senja for 10 gold?'})
         	travelNode:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = false, level = 0, cost = 10, destination = {x = 32125, y = 31666, z = 7} })
@@ -29,6 +27,6 @@ local keywordHandler = KeywordHandler:new()
         	travelNode:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = false, level = 0, cost = 0, destination = {x = 32231, y = 31677, z = 7} })
         	travelNode:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = 'You shouldn\'t miss the experience.'})
         
-        keywordHandler:addKeyword({'passage'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Where do you want to go today? We serve the routes to Senja, Folda, and Vega, and back to Tibia.'})
+        keywordHandler:addKeyword({'passage'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Where do you want to go today? We serve the routes to Senja and Vega, and back to Tibia.'})
         -- Makes sure the npc reacts when you say hi, bye etc.
         npcHandler:addModule(FocusModule:new())

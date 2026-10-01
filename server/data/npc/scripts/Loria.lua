@@ -1,4 +1,3 @@
-dofile(getDataDir() .. 'global/greeting.lua')
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -30,7 +29,7 @@ keywordHandler:addKeyword({'crystal'}, StdModule.say, {npcHandler = npcHandler, 
 keywordHandler:addKeyword({'necromant'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "He lived in a lonely house in the south eastern part of Tibia beyond the mountains."})
 keywordHandler:addKeyword({'rune'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "All spells starting with the syllable 'ad' must be burned into a rune. For this buy a rune from Xodet and put it in one of your hands. Now cast the formula of the spell."})
 keywordHandler:addKeyword({'Muriel'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "He runs his magic shop in the southwest of the city. He sells runes and spells and helps you, if you want to become a sorcerer."})
-function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
+local function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

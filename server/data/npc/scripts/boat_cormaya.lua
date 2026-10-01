@@ -1,3 +1,4 @@
+-- Pemaret, the Cormaya harbour (TibiaWiki 2005-11-30: "to Edron for 10 gp or to Eremo the Sage for free"; Edron was free).
 local keywordHandler = KeywordHandler:new()
         local npcHandler = NpcHandler:new(keywordHandler)
         NpcSystem.parseParameters(npcHandler)
@@ -13,8 +14,8 @@ local keywordHandler = KeywordHandler:new()
         
         
         -- Don't forget npcHandler = npcHandler in the parameters. It is required for all StdModule functions!
-        local travelNode = keywordHandler:addKeyword({'edron'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want to get to Edron for free?'})
-        	travelNode:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = true, level = 0, cost = 0, destination = {x=33173, y=31764, z=6} })
+        local travelNode = keywordHandler:addKeyword({'edron'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want to get to Edron for 10 gold coins?'})
+        	travelNode:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = true, level = 0, cost = 10, destination = {x=33173, y=31764, z=6} })
         	travelNode:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, reset = true, text = 'Then stay here.'})
 
         local travelNode = keywordHandler:addKeyword({'eremo'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Do you want me to take you to Eremo\'s Isle?'})

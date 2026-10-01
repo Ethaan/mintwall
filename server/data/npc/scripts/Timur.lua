@@ -28,5 +28,4 @@ shopModule:addBuyableItem({'arrow','arrow'}, 2544, 3,1,'arrow')
 shopModule:addBuyableItem({'bolt','bolt'}, 2543, 4,1,'bolt')
 shopModule:addBuyableItem({'viking','viking helmet'}, 2473, 265,1,'viking helmet')
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

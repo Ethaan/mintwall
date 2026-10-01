@@ -47,7 +47,7 @@ keywordHandler:addKeyword({'mission'}, StdModule.say, {npcHandler = npcHandler, 
 keywordHandler:addKeyword({'quest'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Explore the isle and destroy any enemy forces encountered. The honor shall be your reward."})				
 
 
-function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
+local function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

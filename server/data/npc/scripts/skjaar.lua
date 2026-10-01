@@ -15,7 +15,7 @@ function onThink()	 npcHandler: onThink()	end
 local WISE = "It's good to see somebody who has chosen the path of wisdom. What do you want?"
 local STRONG = "Another creature who believes thinks physical strength is more important than wisdom! Why are you disturbing me?"
 
-function greetCallback(cid)
+local function greetCallback(cid)
 -- Resetting talkState[talkUser]
 local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
 talkState[talkUser] = 0

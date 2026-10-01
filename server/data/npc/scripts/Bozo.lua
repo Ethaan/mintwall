@@ -10,7 +10,7 @@ function onCreatureDisappear(cid) 			npcHandler:onCreatureDisappear(cid) end
 function onCreatureSay(cid, type, msg) 	npcHandler:onCreatureSay(cid, type, msg) end
 function onThink() 						npcHandler:onThink() end
 
-function greetCallback(cid)
+local function greetCallback(cid)
 	if getPlayerSex(cid) == 1 then
 	npcHandler:setMessage(MESSAGE_GREET, "Hi there, how's it hanging, ".. getPlayerName(cid) .."!")
 	return true
@@ -80,7 +80,7 @@ keywordHandler:addKeyword({'necromant'}, StdModule.say, {npcHandler = npcHandler
 keywordHandler:addKeyword({'hugo'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I had a cousin named like that."})
 keywordHandler:addKeyword({'cousin'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "He died some years ago."})
 
-function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
+local function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

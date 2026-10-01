@@ -18,7 +18,7 @@ keywordHandler:addKeyword({'defeat'}, StdModule.say, {npcHandler = npcHandler, o
 keywordHandler:addKeyword({'tower'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "This is a watchtower of the city of carlin. From here I can see pretty much all of the surrounding lands. Hardly anybody can startle me up here. I see all enemies long before they can see me."})
 keywordHandler:addKeyword({'enem'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "The enemies I fear most here are these nasty orcs."})
 
-function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
+local function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

@@ -1,4 +1,3 @@
-dofile(getDataDir() .. 'global/greeting.lua')
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -37,7 +36,7 @@ keywordHandler:addKeyword({'offer'}, StdModule.say, {npcHandler = npcHandler, on
 keywordHandler:addKeyword({'blind'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Yes, I seem to be blind. But I am not sure - maybe the dungeons are too dark!"})
 
 
-function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
+local function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

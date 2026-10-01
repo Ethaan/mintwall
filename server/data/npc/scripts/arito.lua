@@ -49,5 +49,4 @@ keywordHandler:addKeyword({'have'}, StdModule.say, {npcHandler = npcHandler, onl
 keywordHandler:addKeyword({'food'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Looking for food? I have lemonade, wine, water, bread, cheese, ham, meat and fish."})
 
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

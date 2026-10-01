@@ -10,7 +10,7 @@ function onCreatureDisappear(cid) 			npcHandler:onCreatureDisappear(cid) end
 function onCreatureSay(cid, type, msg) 	npcHandler:onCreatureSay(cid, type, msg) end
 function onThink() 						npcHandler:onThink() end
 
-function greetCallback(cid)
+local function greetCallback(cid)
 	if getPlayerSex(cid) == 1 then
 	npcHandler:setMessage(MESSAGE_GREET, "Ahoi, young man ".. getPlayerName(cid) ..". Looking for work on my ship?")
 	return true
@@ -38,5 +38,4 @@ keywordHandler:addKeyword({'bruno'}, StdModule.say, {npcHandler = npcHandler, on
 keywordHandler:addKeyword({'aneus'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Hmm, I don't know him very well. But he has a very nice story to tell."})
 keywordHandler:addKeyword({'marlene'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Pssst. Marlene is not near right now...? You know... she is a lovely woman, but she talks too much! So I always try to keep distance from her because she can't stop talking."})
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

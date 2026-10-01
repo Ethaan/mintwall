@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<npc name="Sherry Mcronald" script="Sherry.lua" walkinterval="1000" access="3" floorchange="0">
+<npc name="Sherry McRonald" script="Sherry.lua" walkinterval="1000" access="3" floorchange="0">
 <health now="100" max="100"/>
 <look type="136" head="78" body="94" legs="38" feet="58" />
 <parameters>

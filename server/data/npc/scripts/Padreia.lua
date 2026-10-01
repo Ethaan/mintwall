@@ -23,7 +23,7 @@ local TALK = {
 	{{"sorcerers"}, "Sorcerers are destructive. Their power lies in destruction and pain."},
 }
 
-function creatureSayCallback(cid, type, msg)
+local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

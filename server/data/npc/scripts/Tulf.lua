@@ -10,7 +10,7 @@ function onCreatureDisappear(cid) 			npcHandler:onCreatureDisappear(cid) end
 function onCreatureSay(cid, type, msg) 	npcHandler:onCreatureSay(cid, type, msg) end
 function onThink() 						npcHandler:onThink() end
 
-function greetCallback(cid)
+local function greetCallback(cid)
 	npcHandler:setMessage(MESSAGE_GREET, "Hiho! <mumbles>")
 	return true
 end	
@@ -29,5 +29,4 @@ keywordHandler:addKeyword({'trouble'}, StdModule.say, {npcHandler = npcHandler, 
 keywordHandler:addKeyword({'horned fox'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "It's a renegade minotaur who has a hidden lair somewhere near our mines."})
 keywordHandler:addKeyword({'lair'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "The lair of the Horned Fox is surely well guarded and even better hidden."})
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

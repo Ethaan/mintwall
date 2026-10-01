@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Placeholder: the upstream file was a non-7.4 "Task Manager" NPC. Greets only. -->
+<!-- Donald McRonald, the Thais farmer, Sherry's husband (TibiaWiki 2006: sells wheat 1, cheese 5, carrots 3 gp; buys
+     dead spiders for 2 gp - Sherry: "Spiders infested the sewers beneath our farm ... My husband pays a reward for
+     killed spiders"). His words are ours (no transcript); the upstream file was a non-7.4 "Task Manager" NPC. -->
 <npc name="Donald McRonald" script="default.lua" walkinterval="2000" floorchange="0">
 	<health now="100" max="100"/>
 	<look type="128" head="78" body="94" legs="0" feet="114"/>
 	<parameters>
-		<parameter key="message_greet" value="Hello |PLAYERNAME|."/>
+		<parameter key="message_greet" value="Hello |PLAYERNAME|. Welcome to our farm."/>
 		<parameter key="message_farewell" value="Good bye."/>
+		<parameter key="module_keywords" value="1" />
+		<parameter key="keywords" value="job;name;farm;wife;sherry;spider;offer" />
+		<parameter key="keyword_reply1" value="I and my wife run this farm." />
+		<parameter key="keyword_reply2" value="I am Donald McRonald." />
+		<parameter key="keyword_reply3" value="It is a hard work, but the city needs us." />
+		<parameter key="keyword_reply4" value="My wife Sherry takes care of the house and sells what the farm gives." />
+		<parameter key="keyword_reply5" value="My wife Sherry takes care of the house and sells what the farm gives." />
+		<parameter key="keyword_reply6" value="Spiders infested the sewers beneath our farm. I pay 2 gold for every dead spider you bring me." />
+		<parameter key="keyword_reply7" value="I sell wheat, cheese and carrots, and I buy dead spiders." />
+		<parameter key="module_shop" value="1"/>
+		<parameter key="shop_buyable" value="bunch of wheat,2694,1;cheese,2696,5;carrot,2684,3;" />
+		<parameter key="shop_sellable" value="dead spider,3068,2;" />
 	</parameters>
 </npc>

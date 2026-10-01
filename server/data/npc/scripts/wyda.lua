@@ -42,7 +42,7 @@ local TALK = {
 
 local talkState = {}
 
-function creatureSayCallback(cid, type, msg)
+local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

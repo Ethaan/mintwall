@@ -9,7 +9,7 @@ function onThink() 							npcHandler:onThink() 						end
 function onPlayerEndTrade(cid)				npcHandler:onPlayerEndTrade(cid)			end
 function onPlayerCloseChannel(cid)			npcHandler:onPlayerCloseChannel(cid)		end
 
-function creatureSayCallback(cid, type, msg)
+local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

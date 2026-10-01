@@ -20,7 +20,7 @@ local TALK = {
 	{{"spell"}, "I was once a master of the arcane arts, but I've left the teaching behind. Nowadays I focus more an collecting wisdom and exploring the world we live in."},
 }
 
-function creatureSayCallback(cid, type, msg)
+local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

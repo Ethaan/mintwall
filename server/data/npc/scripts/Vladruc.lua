@@ -1,4 +1,3 @@
-dofile(getDataDir() .. 'global/greeting.lua')
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -12,7 +11,7 @@ function onCreatureDisappear(cid) 			npcHandler:onCreatureDisappear(cid) end
 function onCreatureSay(cid, type, msg) 	npcHandler:onCreatureSay(cid, type, msg) end
 function onThink() 						npcHandler:onThink() end
 
-function greetCallback(cid)
+local function greetCallback(cid)
 	if getPlayerItemCount(cid, Cfgarlicnecklace) >= 1 then
 	npcHandler:setMessage(MESSAGE_GREET, "Chhhh ... Sorry, I'm busy. <cough>")
 	return false
@@ -53,5 +52,4 @@ keywordHandler:addKeyword({'necroman'}, StdModule.say, {npcHandler = npcHandler,
 keywordHandler:addKeyword({'coffin'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "The final restingplace for all of us, isn't it?"})
 
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

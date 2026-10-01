@@ -133,12 +133,12 @@ local function getCount(string)
    return -1
 end
 
-function greetCallback(cid)
+local function greetCallback(cid)
    talkState[cid], count[cid], transfer[cid], pin[cid] = 0, nil, nil, nil
    return true
 end
 
-function creatureSayCallback(cid, type, msg)
+local function creatureSayCallback(cid, type, msg)
 
    if(not npcHandler:isFocused(cid)) then
       return false

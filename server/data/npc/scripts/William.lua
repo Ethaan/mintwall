@@ -1,4 +1,3 @@
-dofile(getDataDir() .. 'global/greeting.lua')
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -12,7 +11,7 @@ function onCreatureDisappear(cid) 			npcHandler:onCreatureDisappear(cid) end
 function onCreatureSay(cid, type, msg) 	npcHandler:onCreatureSay(cid, type, msg) end
 function onThink() 						npcHandler:onThink() end
 
-function greetCallback(cid)
+local function greetCallback(cid)
 	npcHandler:setMessage(MESSAGE_GREET, "Oh, hello! <hicks>")
 	return true
 end	
@@ -32,5 +31,4 @@ keywordHandler:addKeyword({'refuge'}, StdModule.say, {npcHandler = npcHandler, o
 keywordHandler:addKeyword({'todd'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "In Todd we trust! TODD! TODD! TODD!"})
 
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

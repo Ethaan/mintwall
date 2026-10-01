@@ -226,6 +226,16 @@ def main():
         what = "new item above the ground" if args.bottom else "new item on top"
     elif args.teleport is not None:
         props = item["props"] if item is not None else b""
+        attrs = _item_attrs_strict(props, 2) if item is not None and len(props) > 2 else {}
+        if (len(props) != 8 or props[2] != ATTR_TELE_DEST) and "teleport" in attrs and "unknown" not in attrs:
+            # a destination beside other attributes (a scripted portal's action id): change it where it is
+            old = escape(bytes([ATTR_TELE_DEST]) + struct.pack("<HHB", *attrs["teleport"]))
+            at = raw.find(old, item["start"] + 2, item["props_end"])
+            if at < 0:
+                raise SystemExit(f"the destination {attrs['teleport']} was not found in the item's bytes on {target}")
+            dest = tuple(int(v) for v in args.teleport.split(","))
+            print(f"{target}: teleport {attrs['teleport']} -> {dest} (keeps {attrs})")
+            return _write(args, raw, at + 1, at + len(old), escape(struct.pack("<HHB", *dest)))
         if len(props) != 8 or props[2] != ATTR_TELE_DEST:
             raise SystemExit(f"no teleport {args.id} (with only a destination) on {target}")
         dest = tuple(int(v) for v in args.teleport.split(","))

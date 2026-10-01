@@ -49,7 +49,18 @@ if(Modules == nil) then
 		end
 
 		local parseInfo = {[TAG_PLAYERNAME] = getCreatureName(cid)}
-		npcHandler:say(npcHandler:parseMessage(parameters.text or parameters.message, parseInfo), cid, parameters.publicize and true)
+		local text = npcHandler:parseMessage(parameters.text or parameters.message, parseInfo)
+		-- a captain's "Do you want to travel to X for N gold coins?": quote what this player pays (a Grand Postman
+		-- 10 gp less, npc/lib/postman.lua)
+		if(node ~= nil and travelCost ~= nil) then
+			for _, child in pairs(node.children or {}) do
+				if(child.callback == StdModule.travel and child.parameters and child.parameters.cost) then
+					local cost = child.parameters.cost
+					text = string.gsub(text, "(%D)" .. cost .. "( gold)", "%1" .. travelCost(cid, cost) .. "%2", 1)
+				end
+			end
+		end
+		npcHandler:say(text, cid, parameters.publicize and true)
 		if(parameters.reset) then
 			npcHandler:resetNpc(cid)
 		elseif(parameters.moveup and type(parameters.moveup) == 'number') then

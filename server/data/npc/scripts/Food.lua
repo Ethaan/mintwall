@@ -20,5 +20,4 @@ shopModule:addBuyableItem({'Dragon Ham'}, 2672, 25, 1)
 shopModule:addBuyableItem({'Brown Mushroom'}, 2789, 10, 1) 
 
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

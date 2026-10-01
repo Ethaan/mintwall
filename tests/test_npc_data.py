@@ -68,9 +68,39 @@ def test_no_npc_script_changes_the_shared_npc_library():
     words gibberish that way and A Prisoner (and others, by load order) could no longer be greeted with "hi".
     Customise an instance instead: `local focus = FocusModule:new(); function focus:init(handler) ... end`."""
     offenders = []
-    for path in (SERVER_DIR / "data" / "npc" / "scripts").glob("*.lua"):
+    lib = SERVER_DIR / "data" / "npc" / "lib"
+    # anything an NPC script loads counts (data/global/greeting.lua redefined FocusModule:init for 19 NPCs' sake)
+    for path in (p for p in (SERVER_DIR / "data").rglob("*.lua") if lib not in p.parents):
         text = path.read_text(encoding="latin-1")
         for m in re.finditer(r"^\s*function\s+(FocusModule|NpcHandler|KeywordHandler|ShopModule|StdModule|"
                              r"TravelModule|NpcSystem)[.:]\w+", text, re.M):
             offenders.append(f"{path.name}: {m.group(0).strip()}")
     assert not offenders, "\n".join(offenders)
+
+
+def test_every_npc_callback_is_its_own():
+    """All NPCs share one Lua state: a script that registers a callback it never defines - or defines it as a global -
+    runs another NPC's. Edowir registered "creatureSayCallback" without one and ran some other NPC's (with that NPC's
+    handler); after "hi" to him no one could log in. Every callback a script registers is a local of that script."""
+    offenders = []
+    for path in (SERVER_DIR / "data" / "npc" / "scripts").glob("*.lua"):
+        text = re.sub(r"--[^\n]*", "", path.read_text(encoding="latin-1"))
+        for name in set(re.findall(r"setCallback\(\s*CALLBACK_\w+\s*,\s*([A-Za-z_]\w*)\s*\)", text)):
+            if not re.search(r"local\s+function\s+" + name + r"\s*\(|local\s+" + name + r"\s*=", text):
+                offenders.append(f"{path.name}: {name}")
+    assert not offenders, "\n".join(sorted(offenders))
+
+
+def test_no_npc_has_an_empty_keyword():
+    """An empty keyword matched every message forever (Lua 5.1's string.find clamps the start): Edowir had one, and
+    everything said to him froze the server. containsWord refuses them now; none should be written either."""
+    offenders = []
+    for path in (SERVER_DIR / "data" / "npc" / "scripts").glob("*.lua"):
+        text = path.read_text(encoding="latin-1")
+        if re.search(r"addKeyword\(\{\s*(''|\"\")\s*[,}]", text):
+            offenders.append(path.name)
+    for path in (SERVER_DIR / "data" / "npc").glob("*.xml"):
+        m = re.search(r'key="keywords" value="([^"]*)"', path.read_text(encoding="latin-1"))
+        if m and any(not word.strip() for word in m.group(1).rstrip(";").split(";")):
+            offenders.append(path.name)
+    assert not offenders, offenders

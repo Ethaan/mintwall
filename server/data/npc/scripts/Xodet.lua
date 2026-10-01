@@ -9,7 +9,7 @@ function onCreatureSay(cid, type, msg) 	npcHandler:onCreatureSay(cid, type, msg)
 function onThink() 						npcHandler:onThink() end
 -- OTServ event handling functions end
 
-function creatureSayCallback(cid, type, msg)
+local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

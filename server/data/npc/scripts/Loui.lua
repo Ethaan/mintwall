@@ -1,4 +1,3 @@
-dofile(getDataDir() .. 'global/greeting.lua')
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -41,5 +40,4 @@ keywordHandler:addKeyword({'story'}, StdModule.say, {npcHandler = npcHandler, on
 keywordHandler:addKeyword({'them'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "They were so many, EVERYWHERE! I could barely escape alive. I have no clue what THEY were but one more second down there and I'd be dead!"})
 keywordHandler:addKeyword({'heal'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Sorry I am out of mana and ingredients, please visit Cipfried in the town."})
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

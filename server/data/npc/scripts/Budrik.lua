@@ -1,4 +1,3 @@
-dofile(getDataDir() .. 'global/greeting.lua')
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -25,5 +24,4 @@ keywordHandler:addKeyword({'trouble'}, StdModule.say, {npcHandler = npcHandler, 
 keywordHandler:addKeyword({'horned fox'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "A minotaur they threw out at Mintwallin. He must have some kind of hideout nearby."})
 keywordHandler:addKeyword({'hideout'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "The hideout of the Horned Fox is probably a dangerous if not lethal place for the unexperienced ones."})
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

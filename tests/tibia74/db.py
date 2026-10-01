@@ -145,6 +145,16 @@ class TestDatabase:
         finally:
             con.close()
 
+    def town_after_logout(self, guid: int, expected, timeout: float = 30.0):
+        """The character's home town (town_id) once the server has saved it after logout."""
+        import time
+        deadline = time.time() + timeout
+        value = self.character(guid)["town_id"]
+        while value != expected and time.time() < deadline:
+            time.sleep(0.2)
+            value = self.character(guid)["town_id"]
+        return value
+
     def storage_after_logout(self, guid: int, key: int, expected, timeout: float = 90.0):
         """The storage once the server has written the character: logout returns at the disconnect, the save follows -
         and a character that fought (the router kills monsters in its way) stays in the game until its fight

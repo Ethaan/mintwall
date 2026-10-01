@@ -1,4 +1,3 @@
-dofile(getDataDir() .. 'global/greeting.lua')
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -12,7 +11,7 @@ function onCreatureDisappear(cid) 			npcHandler:onCreatureDisappear(cid) end
 function onCreatureSay(cid, type, msg) 	npcHandler:onCreatureSay(cid, type, msg) end
 function onThink() 						npcHandler:onThink() end
 
-function greetCallback(cid)
+local function greetCallback(cid)
 	npcHandler:setMessage(MESSAGE_GREET, "Greetings, high roller. So you care for a game, ".. getPlayerName(cid) .."?")
 	zebron_talk_state = 1
 	return true
@@ -39,7 +38,7 @@ keywordHandler:addKeyword({'swamp'}, StdModule.say, {npcHandler = npcHandler, on
 keywordHandler:addKeyword({'amazon'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Bah, always the same chitchat. Swampelves this and amazons that ... blah blah."})
 
 
-function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
+local function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

@@ -200,6 +200,14 @@
         <movevent event="StepOut" itemid="425" script="switch_tile.lua" />
         <movevent event="StepIn"  itemid="426" script="switch_tile.lua" />
         <movevent event="StepIn"  actionid="50003" script="premium_tile.lua" />
+        <movevent event="StepIn"  actionid="1001" script="citizenship.lua" />   <!-- the portal of citizenship: Thais -->
+        <movevent event="StepIn"  actionid="1002" script="citizenship.lua" />   <!-- the portal of citizenship: Carlin -->
+        <movevent event="StepIn"  actionid="1003" script="citizenship.lua" />   <!-- the portal of citizenship: Kazordoon -->
+        <movevent event="StepIn"  actionid="1004" script="citizenship.lua" />   <!-- the portal of citizenship: Ab'Dendriel -->
+        <movevent event="StepIn"  actionid="1005" script="citizenship.lua" />   <!-- the portal of citizenship: Edron -->
+        <movevent event="StepIn"  actionid="1006" script="citizenship.lua" />   <!-- the portal of citizenship: Darashia -->
+        <movevent event="StepIn"  actionid="1007" script="citizenship.lua" />   <!-- the portal of citizenship: Venore -->
+        <movevent event="StepIn"  actionid="1008" script="citizenship.lua" />   <!-- the portal of citizenship: Ankrahmun -->
         <movevent event="StepIn"  actionid="51002" script="thais_lighthouse_step.lua" />   <!-- Thais Lighthouse step switch -->
         <movevent event="StepOut" actionid="51002" script="thais_lighthouse_step.lua" />
         <movevent event="StepIn"  actionid="50665" script="lost_souls_gate.lua" />   <!-- Hero Cave: Gate of the Lost Souls switches -->

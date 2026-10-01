@@ -10,7 +10,7 @@ function onCreatureDisappear(cid) 			npcHandler:onCreatureDisappear(cid) end
 function onCreatureSay(cid, type, msg) 	npcHandler:onCreatureSay(cid, type, msg) end
 function onThink() 						npcHandler:onThink() end
 
-function greetCallback(cid)
+local function greetCallback(cid)
 	if getPlayerVocation(cid) == 2 or getPlayerVocation(cid) == 6 then
 	npcHandler:setMessage(MESSAGE_GREET, "Nice to see you again, ".. getPlayerName(cid) .."!")
 	return true
@@ -61,7 +61,7 @@ keywordHandler:addKeyword({'rod'}, StdModule.say, {npcHandler = npcHandler, only
 keywordHandler:addKeyword({'wand'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Ask Xodet about those instead! you find him in the magic shop a bit to west from here."})
 
 
-function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
+local function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end

@@ -28,6 +28,7 @@ end
 --   quest     function(cid, msg, state, say) -> true when it answered; state.topic is the open question (0 none)
 --   talk      {{keyword, line, line...}, ...} - everything else he answers, first match (longest keywords first)
 --   shop      function(shopModule) adds his wares; mayTrade function(cid) -> true, or says why not and returns false
+--   anyone    function(cid, msg, say) -> true when it answered something said near him, talking to him or not
 -- Returns npcHandler.
 function questNpc(spec)
 	local keywordHandler = KeywordHandler:new()
@@ -42,6 +43,13 @@ function questNpc(spec)
 
 	local function say(cid, lines, force)
 		questSay(npcHandler, cid, lines, force)
+	end
+
+	-- anything said near him, talking to him or not (a captain's "bring me to <town>"): true = answered
+	if spec.anyone then
+		npcHandler:setCallback(CALLBACK_CREATURE_SAY, function(cid, type, msg)
+			return not spec.anyone(cid, string.lower(msg), say)
+		end)
 	end
 
 	if spec.farewell then npcHandler:setMessage(MESSAGE_FAREWELL, spec.farewell) end

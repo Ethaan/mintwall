@@ -5,6 +5,11 @@
 -- True if keyword occurs in message as whole words ("sell" is not in "counsellor").
 -- Both are lowercase; keyword is a plain string, not a pattern.
 function containsWord(message, keyword)
+	-- an empty keyword never matches: string.find(message, "", init) finds it at every init - forever (Edowir had one:
+	-- every word said to him hung the server)
+	if keyword == nil or keyword == "" then
+		return false
+	end
 	local init = 1
 	while true do
 		local a, b = string.find(message, keyword, init, true)

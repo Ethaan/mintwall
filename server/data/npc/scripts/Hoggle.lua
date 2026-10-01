@@ -29,5 +29,4 @@ keywordHandler:addKeyword({'finger'}, StdModule.say, {npcHandler = npcHandler, o
 keywordHandler:addKeyword({'pet'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Once there was a magician who named all his creatures like their species read backward."})
 keywordHandler:addKeyword({'carlin'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "There are stories about a city behind the mountain, but why should I go there? There is enough fish here."})
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

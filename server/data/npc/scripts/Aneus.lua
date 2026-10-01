@@ -1,4 +1,3 @@
-dofile(getDataDir() .. 'global/greeting.lua')
 
 
 local keywordHandler = KeywordHandler:new()
@@ -26,7 +25,7 @@ keywordHandler:addKeyword({'graubart'}, StdModule.say, {npcHandler = npcHandler,
 keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I'm a storyteller."})
 keywordHandler:addKeyword({'storyteller'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Well, if you wish I can tell you the story about this place here. The story about the Fields of Glory!"})
 
-function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
+local function creatureSayCallback(cid, type, msg) msg = string.lower(msg)
 if msgcontains(msg, 'story') and npcHandler.focus == cid then
 	NPCSay("Ok, sit down and listen. Back in the early days, one of the ancestors of our king Tibianus III wanted to build the best city in whole of Tibia.", 1)
 	aneus_talk_state = 2

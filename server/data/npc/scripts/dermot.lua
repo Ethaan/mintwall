@@ -10,7 +10,7 @@ function onThink()	 npcHandler:onThink()	end
 
 npcHandler:setMessage(MESSAGE_GREET, "Be greeted |PLAYERNAME|.")
 
-function greetCallback(cid)
+local function greetCallback(cid)
 -- Resetting talkState[talkUser]
 local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
 talkState[talkUser] = 0

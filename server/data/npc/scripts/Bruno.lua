@@ -1,4 +1,3 @@
-dofile(getDataDir() .. 'global/greeting.lua')
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -26,5 +25,4 @@ keywordHandler:addKeyword({'aneus'}, StdModule.say, {npcHandler = npcHandler, on
 keywordHandler:addKeyword({'sell'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Well, I sell freshly caught fish. You like some? Of course, you can buy more than one at once. *grin*"})
 keywordHandler:addKeyword({'offer'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Well, I sell freshly caught fish. You like some? Of course, you can buy more than one at once. *grin*"})
 
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

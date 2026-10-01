@@ -11,7 +11,7 @@ function onCreatureDisappear(cid)               npcHandler:onCreatureDisappear(c
 function onCreatureSay(cid, type, msg)  npcHandler:onCreatureSay(cid, type, msg)        end
 function onThink()                                              npcHandler:onThink()    end
 
-function ShaunaSayCallback (cid, type, msg)
+local function ShaunaSayCallback(cid, type, msg)
   if(not npcHandler:isFocused(cid)) then
      return 0
   end

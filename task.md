@@ -57,9 +57,28 @@ When finishing one, tick it and add a short note (what changed / how verified).
       from a source like TibiaWiki's history/archived pages, store it in the repo and compare our NPCs
       against it (then the same for the other towns)
 - [ ] Write real dialogue for The Queen of the Banshees (placeholder greets only)
-- [ ] Replace Donald McRonald placeholder with his real 7.4 NPC
-- [ ] Talk-test every NPC once; log the ones that error or don't answer
-- [ ] Boat captains: verify travel destinations/prices are 7.4 (no Liberty Bay/Port Hope etc. if not in 7.4)
+- [x] Replace Donald McRonald placeholder with his real 7.4 NPC
+      Done 2026-09-30: his TibiaWiki 2006 trade (wheat 1, cheese 5, carrots 3 gp; dead spiders bought at 2 gp) and a
+      few lines (ours - no transcript). Sherry McRonald could not be greeted (her shop and greeting were set up inside a
+      callback that never ran) and was spelled "Mcronald".
+- [x] Talk-test every NPC once; log the ones that error or don't answer
+      Done 2026-09-30: tests/test_npc_talk.py - all 307 spawned NPCs, each greeted its own way (djinns DJANNI'HAH,
+      kings "hail", the Blind Orc "charach", ...), then "job" and "bye"; the no_lua_errors fixture fails a script that
+      errs. Found and fixed: Edowir had an empty keyword - every word said to him looped forever and froze the server
+      (containsWord now refuses empty keywords; test_no_npc_has_an_empty_keyword); 22 scripts registered a
+      creatureSayCallback they never defined and ran another NPC's (all NPCs share one Lua state) and 74 callbacks
+      were globals (now locals; test_every_npc_callback_is_its_own); data/global/greeting.lua redefined FocusModule:init
+      for every NPC after 19 of them (deleted; the shared-library test scans all of data/ now). Silent by design: the
+      four Ghostlands apparitions ("an un-reachable illusion", TibiaWiki 2006) and Arkhothep (a creature's page). The
+      test server's login guard (LoginTries) is off - every test logs in from 127.0.0.1.
+- [x] Boat captains: verify travel destinations/prices are 7.4 (no Liberty Bay/Port Hope etc. if not in 7.4)
+      Done 2026-09-30: docs/reference-74/travel.md (each travel NPC's wiki page before 7.5). The seven sea captains
+      rewritten on npc/lib/captain.lua (one route table each; "bring me to" kept; Fearless keeps the Ghost Ship):
+      Port Hope (Bluebear, Seahorse, Sinbeard, Petros, Fearless's shortcut) and Svargrond (Bluebear) removed,
+      Bluebear-Edron 110 -> 150, Seahorse-Carlin was free -> 110. Uzon-Darashia 40 -> 60, Pemaret-Edron free -> 10,
+      the ice ferrymen no longer offer their own island. Spawns: Captain Greyhound's npc z 6 -> 7 and Christoph's
+      7 -> 6 (the engine uses the spawn centre's floor; the tests read the npc's). test_travel.py
+      test_captains_sail_the_74_routes
 - [ ] Guards (Grof, Tim, Kulag, Walter): scripts use `getMonstersfromArea` - implement or rewrite
 - [ ] Remove or neutralize non-7.4 NPC features: banks (bank.lua, evabank.lua, Lokur), marriage, addon outfits
 - [ ] Promotion NPCs: verify 7.4 rules (level 20, 20k gp, premium) and that `doPlayerSetPromotionLevel` shim is right
@@ -69,7 +88,9 @@ When finishing one, tick it and add a short note (what changed / how verified).
 
 ## Map / world
 
-- [ ] Quests: chests, quest doors, levers (actions/unique ids on the map vs `data/actions`)
+- [x] Quests: chests, quest doors, levers (actions/unique ids on the map vs `data/actions`)
+      Done 2026-09-30: every quest is scripted and tested; the full-map id scan found only the citizenship portals
+      (see "Other map action ids" below) - and the quest-object audit is settled
 
 ## Quests (each one needs an end-to-end test)
 
@@ -147,15 +168,17 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       Done 2026-09-30: re-run - 130 done, 36 left, all settled. 32 belong to quests finished at our map's own positions
       (tibiaot74's spots differ: Draconia's keys lie loose, Sam's Old Backpack is not 7.4, the Tear basin has an action
       id, etc.). The Holy Tible (32828,32340,7) is a loose book with Banor's prayer on the original map - nothing to
-      do. Key 4009's chest (32690,32129,10), the copper key in the dead tree (32657,32250,7) and six small rubies
-      (32371,32262,12) are tibiaot74's: no door on our map takes keys 4009/4022/2041, the real-map chest table has
-      none of them (key 4009 / the Desert Dungeon library is the current wiki's "long path").
+      do. The six small rubies (their 32371,32262,12) are the Six Rubies Quest, done at our map's hole 32370,32265,12.
+      Key 4009's chest (32690,32129,10) and the copper key in the dead tree (32657,32250,7) are tibiaot74's: no door
+      on our map takes keys 4009/4022/2041 and the real-map chest table has neither (key 4009 / the Desert Dungeon
+      library is the current wiki's "long path").
 - [x] Map items decay (found 2026-09-24; built 2026-09-25, tests/test_map_items.py): the OTBM loader started decay on every map item, so the decorative dead
       humans (15 min) and dead skeletons (10 min, then gone) in caves vanished after each start. Fixed in
       iomapotbm.cpp (map items don't decay; moved later, they do) - NEEDS A REBUILD (the dev server was running);
       then a test (a map skeleton is still there after its 10 minutes)
 - [ ] Quest log: the 7.4 client has none (TibiaWiki: added in 7.9) - revisit later (e.g. a !quests command or the website)
-- [ ] Settle reward / level conflicts per quest (Tibiantis vs TibiaWiki, see quests.md) as each one is done
+- [x] Settle reward / level conflicts per quest (Tibiantis vs TibiaWiki, see quests.md) as each one is done
+      Done 2026-09-30: every quest is done; each entry above records what was settled and what was decided with the user
 
 One per quest (rules from quests.md; each: research check -> map/script work -> end-to-end test):
 - [x] Bear Room Quest - Rookgaard, orc/minotaur cave north of town (level none known (listed as 2); 1 player)
@@ -743,8 +766,8 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       (Game::playerMoveItem) refuses non-Arch Postmen. Letters at Benjamin/Chrystal 10 -> 8 gp (TibiaWiki 2006).
       Decided with the user: 10 gp off a passage, royal mailboxes locked, Markwin wants his guards dead, Noodles any
       order / keeps nothing. tests/quests/postman/test_postman.py.
-- [ ] Postman: the "surface" royal mailbox near the Kazordoon mines (2006 wiki, no usable coordinate) is not locked;
-      the captains still quote the full price in their question (they charge the discounted one)
+- [ ] Postman: the "surface" royal mailbox near the Kazordoon mines (2006 wiki, no usable coordinate) is not locked
+      (the captains' quoted price: done 2026-09-30 - StdModule.say quotes the travel node's travelCost)
 - [-] Iron Ore Quest - Dwarf Mines near Kazordoon (no level; — player(s); —)
       Probably not 7.4 (wiki page from 2011, no version, not on Tibiantis) - left out unless a 7.4 source turns up
 - [x] Minotaur Leather Quest - raft south of Thais - NOT 7.4 (checked 2026-09-24): the item "minotaur leather" is not
@@ -777,7 +800,13 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
 - [ ] House doors: test that owners/invited players can open them and others cannot (Houses task)
 - [x] Rookgaard sewer bridge levers (action id 50001, 32098/32104,32204,8): ported upstream's
       rat bridge as `rook_rat_bridge.lua`; covered by test_rookgaard.py
-- [ ] Other map action ids with no script behind them (50001 had none) - list and port them
+- [x] Other map action ids with no script behind them (50001 had none) - list and port them
+      Done 2026-09-30: a full-map scan (every action / unique id vs actions.xml, movements.xml, the quest chest
+      system, doors and keys, and the numbers the scripts use) left two groups. The portals of citizenship (TibiaWiki
+      2005) 1001-1008 in each town (Thais..Ankrahmun = town 2-9) only teleported: movements/scripts/citizenship.lua
+      makes you a citizen (town id) and takes you into the temple; their map destinations cleared (map-set-attrs.py
+      --teleport now edits a destination beside an action id). test_citizenship.py. Left: aid 50002 on two floor
+      tiles of the bridge beside the Rookgaard Academy (32091-32092,32175,6) - no source or script says what it did.
 
 ## Monsters
 
@@ -1047,7 +1076,8 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       is the real 7.4 cost (TibiaWiki: until the 2007 summer update); monster healing rates; mana
       fluid 25-75 in 7.4 (ours 40-80); magic formula base x (mlv*3 + lv*2)/100 (tibiantis-notes).
       No hydras exist on our server (post-7.4 creature?)
-- [ ] Travel questions for the 7.4 reference: Edron premium-only? which captains went where, prices
+- [x] Travel questions for the 7.4 reference: Edron premium-only? which captains went where, prices
+      Done 2026-09-30: docs/reference-74/travel.md
 - [ ] Oracle: premium players are now offered Darashia/Ankrahmun/Edron too (the script's intent; it
       never worked before) - overlaps with the Gatekeeper, check against 7.4
 
@@ -1117,4 +1147,5 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 - [x] God group sees ID / action id / Position on look (flag bit 42; enable "Show Info Messages
       in Console" in the client to copy them)
 un-tests.bat
-- [ ] Test every NPC answers "hi" (generated test per NPC)
+- [x] Test every NPC answers "hi" (generated test per NPC)
+      Done 2026-09-30: tests/test_npc_talk.py (see "Talk-test every NPC once")
