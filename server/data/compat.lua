@@ -119,6 +119,10 @@ function canPlayerWearOutfitId(cid, outfitId, addons) return true end
 function doPlayerAddOutfit(cid, looktype, addons) return false end
 
 -- 7.4 promotion: vocations 1-4 become 5-8
+function getPlayerPromotionLevel(cid)
+	return getPlayerVocation(cid) >= 5 and 1 or 0
+end
+
 function doPlayerSetPromotionLevel(cid, level)
 	local voc = getPlayerVocation(cid)
 	if level >= 1 and voc >= 1 and voc <= 4 then

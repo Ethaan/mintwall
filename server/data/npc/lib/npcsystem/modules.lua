@@ -85,19 +85,21 @@ if(Modules == nil) then
 			return false
 		end
 
-		if(isPremium(cid) or not getBooleanFromString(getConfigValue('premiumForPromotion'))) then
-			if(getPlayerPromotionLevel(cid) >= parameters.promotion) then
-				npcHandler:say('You are already promoted!', cid)
-			elseif(getPlayerLevel(cid) < parameters.level) then
-				npcHandler:say('I am sorry, but I can only promote you once you have reached level ' .. parameters.level .. '.', cid)
-			elseif(not doPlayerRemoveMoney(cid, parameters.cost)) then
-				npcHandler:say('You do not have enough money!', cid)
-			else
-				doPlayerSetPromotionLevel(cid, parameters.promotion)
-				npcHandler:say(parameters.text, cid)
-			end
-		else
+		-- 7.4 (TibiaWiki 2005, Vocation Promotion): "20,000 gold pieces, Level 20 or higher, A premium account"
+		local vocation = getPlayerVocation(cid)
+		if(not isPremium(cid)) then
 			npcHandler:say("You need a premium account in order to get promoted.", cid)
+		elseif(getPlayerPromotionLevel(cid) >= parameters.promotion) then
+			npcHandler:say('You are already promoted!', cid)
+		elseif(vocation < 1 or vocation > 4) then
+			npcHandler:say('You need a vocation before you can be promoted.', cid)
+		elseif(getPlayerLevel(cid) < parameters.level) then
+			npcHandler:say('I am sorry, but I can only promote you once you have reached level ' .. parameters.level .. '.', cid)
+		elseif(not doPlayerRemoveMoney(cid, parameters.cost)) then
+			npcHandler:say('You do not have enough money!', cid)
+		else
+			doPlayerSetPromotionLevel(cid, parameters.promotion)
+			npcHandler:say(parameters.text, cid)
 		end
 
 		npcHandler:resetNpc(cid)

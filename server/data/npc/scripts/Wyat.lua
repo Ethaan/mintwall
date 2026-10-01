@@ -37,7 +37,7 @@ keywordHandler:addKeyword({'sell'}, StdModule.say, {npcHandler = npcHandler, onl
 keywordHandler:addKeyword({'army'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I usually work with the townguards only."})
 keywordHandler:addKeyword({'guard'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I usually work with the townguards only."})
 keywordHandler:addKeyword({'general'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Old Bloodblade does a fine job."})
-keywordHandler:addKeyword({'enem'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Our enemies are numerous and not all are obvious."})
+keywordHandler:addKeyword({'enem*'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Our enemies are numerous and not all are obvious."})
 keywordHandler:addKeyword({'criminal'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Our enemies are numerous and not all are obvious."})
 keywordHandler:addKeyword({'murderer'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Our enemies are numerous and not all are obvious."})
 keywordHandler:addKeyword({'castle'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "The castle should be relatively safe from criminal transgressions."})

@@ -33,7 +33,7 @@ keywordHandler:addKeyword({'tibia'}, StdModule.say, {npcHandler = npcHandler, on
 keywordHandler:addKeyword({'carlin'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Carlin, the beerless ... what a shame."})
 keywordHandler:addKeyword({'hugo'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I had a cousin named hugo, why do you ask?"})
 keywordHandler:addKeyword({'new'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Bah, always the same chitchat. Swampelves this and amazons that ... blah blah."})
-keywordHandler:addKeyword({'rumo'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Bah, always the same chitchat. Swampelves this and amazons that ... blah blah."})
+keywordHandler:addKeyword({'rumo*'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Bah, always the same chitchat. Swampelves this and amazons that ... blah blah."})
 keywordHandler:addKeyword({'swamp'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Bah, always the same chitchat. Swampelves this and amazons that ... blah blah."})
 keywordHandler:addKeyword({'amazon'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Bah, always the same chitchat. Swampelves this and amazons that ... blah blah."})
 

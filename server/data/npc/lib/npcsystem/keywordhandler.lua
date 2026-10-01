@@ -7,8 +7,13 @@
 function containsWord(message, keyword)
 	-- an empty keyword never matches: string.find(message, "", init) finds it at every init - forever (Edowir had one:
 	-- every word said to him hung the server)
-	if keyword == nil or keyword == "" then
+	if keyword == nil or keyword == "" or keyword == "*" then
 		return false
+	end
+	-- "promot*" (CipSoft's way: the start of a word) matches "promotion" and "promote"; without the star, whole words
+	local prefix = string.sub(keyword, -1) == "*"
+	if prefix then
+		keyword = string.sub(keyword, 1, -2)
 	end
 	local init = 1
 	while true do
@@ -17,7 +22,7 @@ function containsWord(message, keyword)
 			return false
 		end
 		local before, after = string.sub(message, a - 1, a - 1), string.sub(message, b + 1, b + 1)
-		if(not string.find(before, '%w') and not string.find(after, '%w')) then
+		if(not string.find(before, '%w') and (prefix or not string.find(after, '%w'))) then
 			return true
 		end
 		init = a + 1

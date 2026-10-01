@@ -81,7 +81,14 @@ When finishing one, tick it and add a short note (what changed / how verified).
       test_captains_sail_the_74_routes
 - [ ] Guards (Grof, Tim, Kulag, Walter): scripts use `getMonstersfromArea` - implement or rewrite
 - [ ] Remove or neutralize non-7.4 NPC features: banks (bank.lua, evabank.lua, Lokur), marriage, addon outfits
-- [ ] Promotion NPCs: verify 7.4 rules (level 20, 20k gp, premium) and that `doPlayerSetPromotionLevel` shim is right
+- [x] Promotion NPCs: verify 7.4 rules (level 20, 20k gp, premium) and that `doPlayerSetPromotionLevel` shim is right
+      Done 2026-09-30: nobody could be promoted - StdModule.promotePlayer called getPlayerPromotionLevel (it did not
+      exist; now in compat.lua: vocation 5-8 = promoted) and read a config key that does not exist. TibiaWiki 2005
+      (Vocation Promotion): King Tibianus, Queen Eloise, Emperor Kruzak, Ishebad; 20,000 gp (they charged 10,000 -
+      Ishebad quoted 20,000), level 20, premium; a character without a vocation is refused before paying. Their
+      keyword 'promot' (a CipSoft word start) never matched "promotion" since keywords match whole words: a keyword
+      ending in "*" now matches the start of a word (containsWord) - promot*, dwarv*, enem*, necroman*, rumo*, undea*
+      in 12 NPCs. tests/test_promotion.py (each promoter; level 19, free account, 19,999 gp, already promoted).
 - [ ] Bone-collector NPCs use `doPlayerRemoveBones`/`getPlayerBones` - implement or rewrite
 - [ ] Spell-teaching NPCs: check spell lists/prices/levels against 7.4
 - [ ] Shop prices: audit buy/sell lists against 7.4 (tibiaot74 data may include 7.72 items)
@@ -930,7 +937,8 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       exist - every use failed. Defined in compat.lua. tests/test_spells.py now fails on any call to a function
       nothing defines (tibia74/luascan.py), with the known ones listed below (the list may only shrink)
 - [ ] Undefined functions still called (KNOWN_UNDEFINED in tests/test_spells.py):
-  - [ ] getPlayerPromotionLevel - the NPC promotion module: promotion probably fails (see Promotion NPCs)
+  - [x] getPlayerPromotionLevel - the NPC promotion module: promotion probably fails (see Promotion NPCs)
+        Done 2026-09-30 (compat.lua)
   - [ ] broadcastMessage - raid announcements, death/kill broadcast scripts
   - [ ] GM ban manager: addAccountBan, addPlayerBan, removeAccountBan, removePlayerBan, getAccountBanList,
         getPlayersByAccountNumber

@@ -47,8 +47,8 @@ keywordHandler:addKeyword({'magic'}, StdModule.say, {npcHandler = npcHandler, on
 keywordHandler:addKeyword({'spell'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I know a spell or two. You might want to buy some spells downstairs in the market."})
 keywordHandler:addKeyword({'alchemy'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "You can buy some potions downstairs."})
 keywordHandler:addKeyword({'blood'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I like blood ... only the color, that is, of course ... <chuckles>"})
-keywordHandler:addKeyword({'undea'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "It is not dead, which can eternal lie, and in strange aeons, even death may die."})
-keywordHandler:addKeyword({'necroman'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Death is the final frontier. Necromancers boldly go, where no one has gone before."})
+keywordHandler:addKeyword({'undea*'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "It is not dead, which can eternal lie, and in strange aeons, even death may die."})
+keywordHandler:addKeyword({'necroman*'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Death is the final frontier. Necromancers boldly go, where no one has gone before."})
 keywordHandler:addKeyword({'coffin'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "The final restingplace for all of us, isn't it?"})
 
 

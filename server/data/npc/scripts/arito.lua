@@ -35,7 +35,7 @@ keywordHandler:addKeyword({'city'}, StdModule.say, {npcHandler = npcHandler, onl
 keywordHandler:addKeyword({'pharaoh'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Our pharaoh is our father, shepherd and teacher."})
 keywordHandler:addKeyword({'arkhothep'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Our pharaoh is our father, shepherd and teacher."})
 keywordHandler:addKeyword({'mortality'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Mortality keeps us from finding our way to ascension."})
-keywordHandler:addKeyword({'undea'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Undeath is a blessing."})
+keywordHandler:addKeyword({'undea*'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Undeath is a blessing."})
 keywordHandler:addKeyword({'rah'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "The Rah is our lifeforce. It is the source of our inner light."})
 keywordHandler:addKeyword({'uthun'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "The Uthun is what we learn and remember."})
 keywordHandler:addKeyword({'mourn'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Mortality is a curse. That is why mortals have to be mourned."})

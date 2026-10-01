@@ -38,7 +38,7 @@ keywordHandler:addKeyword({'tibia'}, StdModule.say, {npcHandler = npcHandler, on
 keywordHandler:addKeyword({'carlin'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "They should return to the Thaian realm."})
 keywordHandler:addKeyword({'edron'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I think it is the best place in Tibia."})
 keywordHandler:addKeyword({'new'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Oh, there are so many. Just ask other travellers like you."})
-keywordHandler:addKeyword({'rumo'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Oh, there are so many. Just ask other travellers like you."})
+keywordHandler:addKeyword({'rumo*'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Oh, there are so many. Just ask other travellers like you."})
 keywordHandler:addKeyword({'buy'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I can offer you food and drinks."})
 keywordHandler:addKeyword({'sell'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I can offer you food and drinks."})
 keywordHandler:addKeyword({'have'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I can offer you food and drinks."})

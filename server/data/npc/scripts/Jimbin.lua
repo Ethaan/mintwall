@@ -31,7 +31,7 @@ keywordHandler:addKeyword({'thais'}, StdModule.say, {npcHandler = npcHandler, on
 keywordHandler:addKeyword({'tibia'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "The Tibia our race was born into was even more fierce than the world you young ones know."})
 keywordHandler:addKeyword({'carlin'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Silly town. Alcohol is forbidden there and elves visit this town quite often, what certainly suggests nothing good about a town, jawoll."})
 keywordHandler:addKeyword({'new'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Oh well, many hidden places of ancient times appear seemingly out of nowhere in these times."})
-keywordHandler:addKeyword({'rumo'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Oh well, many hidden places of ancient times appear seemingly out of nowhere in these times."})
+keywordHandler:addKeyword({'rumo*'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Oh well, many hidden places of ancient times appear seemingly out of nowhere in these times."})
 keywordHandler:addKeyword({'book'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "The cookbook? It belongs to maryza. I think she has a few copies for sale."})
 keywordHandler:addKeyword({'buy'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I can offer you beer ... or water if you are sick."})
 keywordHandler:addKeyword({'sell'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I can offer you beer ... or water if you are sick."})
