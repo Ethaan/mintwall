@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="stalker" nameDescription="a stalker" race="blood" experience="90" speed="210" manacost="0">
-  <health now="150" max="150"/>
+<monster name="stalker" nameDescription="a stalker" race="blood" experience="90" speed="260" manacost="0">
+  <health now="120" max="120"/>
   <look type="128" head="95" body="116" legs="95" feet="114" corpse="3128"/>
   <targetchange interval="5000" chance="8"/>
   <strategy attack="100" defense="0"/>
@@ -40,15 +40,14 @@
     <immunity invisible="1"/>
   </immunities>
   <loot>
-    <item id="2148" countmax="20" chance1="100000" chancemax="0"/>
-    <item id="2649" chance="6666"/>
-    <item id="1987" chance="100000">
-      <inside>
-        <item id="2260" chance="4000"/>
-        <item id="2399" countmax="1" chance1="20000" chancemax="0"/>
-        <item id="2478" chance="3333"/>
-        <item id="2425" chance="2000"/>
-      </inside>
-    </item>
+    <item id="2148" countmax="8" chance="13000"/>   <!-- gold coin -->
+    <item id="2410" countmax="2" chance="11000"/>   <!-- throwing knife -->
+    <item id="2649" chance="10000"/>   <!-- leather legs -->
+    <item id="2260" chance="9000"/>   <!-- blank rune -->
+    <item id="2412" chance="6000"/>   <!-- katana -->
+    <item id="2511" chance="5500"/>   <!-- brass shield -->
+    <item id="1988" chance="4500"/>   <!-- backpack -->
+    <item id="2478" chance="3500"/>   <!-- brass legs -->
+    <item id="2425" chance="1200"/>   <!-- obsidian lance -->
   </loot>
 </monster>

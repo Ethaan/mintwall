@@ -20,7 +20,7 @@
         <parameter key="keyword_reply8" value="I sell life fluid." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="life fluid,2006,60,10;" />
-        <parameter key="shop_sellable" value="vial,2006,5;" />
+        <parameter key="shop_buyable" value="life fluid,2006,100,10" />
+        <parameter key="shop_sellable" value="vial,2006,5" />
     </parameters>
 </npc>

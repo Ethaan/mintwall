@@ -22,7 +22,7 @@
         <parameter key="keyword_reply10" value="With our mail system you can send letters and parcels to other Tibians. I can either explain how letters and parcels work or sell them to you." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="parcel,2595,15;letter,2597,8;label,2599,1;" />
+        <parameter key="shop_buyable" value="parcel,2595,15;letter,2597,8;label,2599,1" />
         <parameter key="shop_sellable" value="" />
     </parameters>
 </npc>

@@ -529,7 +529,7 @@ int32_t Player::getDefense() const
 		defenseValue = int32_t(defenseValue * vocation->defenseMultiplier);
 
 	// 7.4 block max: (5 x skill + 50) x def x stance / 100 - the same shape as the attack formula
-	// (docs/reference-74/formulas.md §6.2). Ours blocked about 3x less.
+	// (docs/reference-74/formulas.md ï¿½6.2). Ours blocked about 3x less.
 	return (int32_t)std::floor((5.0 * defenseSkill + 50) * defenseValue * defenseFactor / 100);
 }
 
@@ -572,7 +572,7 @@ bool Player::isAllowedToUseInfinite() const
 	return false;
 }
 
-// 7.4 fight stances (docs/reference-74/formulas.md §6): offensive attack x1.2 and defense x0.6,
+// 7.4 fight stances (docs/reference-74/formulas.md ï¿½6): offensive attack x1.2 and defense x0.6,
 // balanced x1.0, defensive attack x0.6 and defense x1.8. getAttackFactor() keeps its old meaning
 // for the Lua weapon/spell callbacks.
 float Player::getAttackMultiplier() const
@@ -2735,8 +2735,12 @@ Cylinder* Player::__queryDestination(int32_t& index, const Thing* thing, Item** 
 			return this;
 		}
 
-		//find a appropiate slot
+		//find a appropiate slot - not the ring slot (a ring given there was put on and wore off) nor the ammo slot,
+		//which takes anything in 7.4 (a bought crystal ball landed there)
 		for(int i = SLOT_FIRST; i < SLOT_LAST; ++i){
+			if(i == SLOT_RING || i == SLOT_AMMO){
+				continue;
+			}
 			if(inventory[i] == NULL){
 				if(__queryAdd(i, item, item->getItemCount(), 0) == RET_NOERROR){
 					index = i;

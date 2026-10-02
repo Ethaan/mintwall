@@ -201,13 +201,13 @@ def exchange_lamp(p, items, world_map, lamp):
 
 def test_efreet_traders(new_player, items, world_map):
     """Alesar and Yaman trade once Malor gave his permission - not before, and a "yes" then buys nothing."""
-    p = djinn_player(new_player, efreet=EFREET_LAMP_PLACED, items=[Item(GOLD, 100)] * 60)
+    p = djinn_player(new_player, efreet=EFREET_LAMP_PLACED, items=[Item(PLATINUM, 60)])   # 6000 gp in one stack: room in the bag for the wares
     replies = visit(p, items, world_map, "Yaman", "djanni'hah", "buy life ring", "yes")
     assert said(replies, "I don't trade with humans Malor has not given his permission."), replies
     assert not carries(p, "life ring")
     p.logout()
 
-    p = djinn_player(new_player, efreet=EFREET_DONE, items=[Item(GOLD, 100)] * 60)
+    p = djinn_player(new_player, efreet=EFREET_DONE, items=[Item(PLATINUM, 60)])   # 6000 gp in one stack: room in the bag for the wares
     replies = visit(p, items, world_map, "Yaman", "djanni'hah", "buy life ring", "yes")
     assert p.wait_for(lambda: carries(p, "life ring"), timeout=3), replies
     replies = visit(p, items, world_map, "Alesar", "djanni'hah", "buy dark helmet", "yes")

@@ -17,7 +17,7 @@
 		<parameter key="keyword_reply6" value="I sell parcels and letters. I can also explain how the mail system works." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="parcel,2595,15;letter,2597,8;label,2599,1;" />
+        <parameter key="shop_buyable" value="parcel,2595,15;letter,2597,8;label,2599,1" />
         <parameter key="shop_sellable" value="" />
     </parameters>
 </npc>

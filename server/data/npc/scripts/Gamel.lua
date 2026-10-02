@@ -63,6 +63,7 @@ npcHandler:addModule(shopModule)
 shopModule:addBuyableItem({'staff'},2401,40,'staff')
 shopModule:addBuyableItem({'dagger'},2379,5,'dagger')
 shopModule:addBuyableItem({'mace'},2398,90,'mace')
+shopModule:addBuyableItem({'brass helmet'}, 2460, 12, 'brass helmet')   -- TibiaWiki 2005-06
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

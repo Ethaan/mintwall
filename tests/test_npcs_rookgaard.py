@@ -19,6 +19,7 @@ BACKPACK_ID = 1988
 COINS = {2148: 1, 2152: 100, 2160: 10000}          # gold, platinum, crystal coin
 CHUNK = 12                                         # trades per character: fits one backpack with the change
 GREETINGS = {"hi", "hello", "bye", "farewell"}
+PREMIUM_TRADERS = {"Lee'Delle", "Norma"}            # trade with premium accounts only (npc/lib/premiumshop.lua)
 
 
 def _chunks(kind):
@@ -36,7 +37,8 @@ def _visit(new_player, npc, inventory=None):
     for dx, dy in ((2, 0), (0, 2), (-2, 0), (0, -2), (2, 1), (2, -1), (1, 2), (-1, 2),
                    (0, 0), (0, -1), (1, 0), (0, 1), (-1, 0)):
         p = new_player(pos=(spawn[0] + dx, spawn[1] + dy, spawn[2]), level=100, inventory=inventory,
-                       storage={BEGINNER_SET_GIVEN: 1}, group_id=TESTER_GROUP)
+                       storage={BEGINNER_SET_GIVEN: 1}, group_id=TESTER_GROUP,
+                       premium_days=30 if npc.name in PREMIUM_TRADERS else 0)
         if p.pos[2] == spawn[2] and max(abs(p.pos[0] - spawn[0]), abs(p.pos[1] - spawn[1])) <= 3:
             break
         p.logout()

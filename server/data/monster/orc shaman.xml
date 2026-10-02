@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="orc shaman" nameDescription="a orc shaman" race="blood" experience="110" speed="180" manacost="0">
+<monster name="orc shaman" nameDescription="a orc shaman" race="blood" experience="110" speed="140" manacost="0">
   <health now="115" max="115"/>
   <look type="6" head="0" body="0" legs="0" feet="0" corpse="2860"/>
   <targetchange interval="5000" chance="8"/>
@@ -48,17 +48,13 @@
     <summon name="snake" interval="1000" chance="25" max="4"/>
   </summons>
   <loot>
-    <item id="2148" countmax="20" chance1="100000" chancemax="0"/>
-    <item id="2401" chance="2222"/>
-    <item id="2458" chance="2222"/>
-    <item id="1987" chance="100000">
-      <inside>
-        <item id="2817" chance="5000"/>
-        <item id="2389" countmax="1" chance1="4000" chancemax="0"/>
-        <item id="2079" chance="3333"/>
-        <item id="2190" chance="1538"/>
-        <item id="2188" chance="1000" />
-      </inside>
-    </item>
+    <item id="2148" countmax="5" chance="90000"/>   <!-- gold coin -->
+    <item id="1987" chance="11000"/>   <!-- bag -->
+    <item id="2686" countmax="2" chance="11000"/>   <!-- corncob -->
+    <item id="2389" chance="10000"/>   <!-- spear -->
+    <item id="2464" chance="9000"/>   <!-- chain armor -->
+    <item id="2458" chance="9000"/>   <!-- chain helmet -->
+    <item id="2401" chance="7000"/>   <!-- staff -->
+    <item id="1950" chance="4500"/>   <!-- book -->
   </loot>
 </monster>

@@ -91,10 +91,11 @@ def carries(p, name):
     return any(i.name == name for i in p.all_items())
 
 
-def talk_to(p, npc, *lines, stay=False):
+def talk_to(p, npc, *lines, stay=False, find=5):
     """Say lines to an NPC while following it (NPCs wander and leave talk range); returns its replies.
-    stay: keep talking to it (no "bye") - for an answer it gives line by line, seconds apart."""
-    target = p.wait_for(lambda: next((c for c in p.creatures.values() if c.name == npc), None), timeout=5)
+    stay: keep talking to it (no "bye") - for an answer it gives line by line, seconds apart.
+    find: seconds to wait for it to come into view (Hardek wanders 20 tiles from his spawn)."""
+    target = p.wait_for(lambda: next((c for c in p.creatures.values() if c.name == npc), None), timeout=find)
     assert target, f"{npc} is not in view from {p.pos}"
     p.follow(target.id)
     p.wait_for(lambda: target.pos and p.pos and target.pos[2] == p.pos[2]

@@ -16,7 +16,7 @@
         <parameter key="keyword_reply4" value="I sell items of the distance type." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="crossbow,2455,500;bow,2456,400;bolt,2543,4;arrow,2544,3;spear,2389,10;" />
-        <parameter key="shop_sellable" value="spear,2389,3;" />
+        <parameter key="shop_buyable" value="crossbow,2455,500;bow,2456,400;bolt,2543,4;arrow,2544,3;spear,2389,10" />
+        <parameter key="shop_sellable" value="spear,2389,3" />
     </parameters>
 </npc>

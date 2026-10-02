@@ -14,14 +14,14 @@
 
   <parameter key="module_keywords" value="1" />
         <parameter key="keywords" value="offers;" />
-        <parameter key="keyword_reply1" value="I sell barrel kit, dresser kit, box kit,large trunk kit, drawer kit, locker kit, trough kit ." />
+        <parameter key="keyword_reply1" value="I sell box, amphora, flower bowl, heart pillow, honey flower, potted flower, vase and water-pipe." />
 	
 
 
 
 
 <parameter key="module_shop" value="1" />
-		<parameter key="shop_buyable" value="barrel,1774,12;dresser,1724,70;box,1739,10;large trunk,1750,18;drawer,1716,18;locker,1732,30;Trough,1728,10;" />
+		<parameter key="shop_buyable" value="box,1738,10;amphora,2023,4,0;flower bowl,2102,6;heart pillow,1685,30;honey flower,2103,5;potted flower,2104,5;vase,2008,3,0;water-pipe,2099,40" />
     </parameters>
 </npc>
 

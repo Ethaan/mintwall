@@ -38,6 +38,7 @@ shopModule:addSellableItem({'rapier'},2384,5,'rapier')
 shopModule:addSellableItem({'sabre'},2385,12,'sabre')
 shopModule:addSellableItem({'spear'},2389,3,'spear')
 shopModule:addSellableItem({'sword'},2376,25,'sword')
+shopModule:addSellableItem({'club'},2382,1,'club')   -- Tibiantis
 
 -- Itens para comprar
 shopModule:addBuyableItem({'battle hammer'},2417,350,'battle hammer')

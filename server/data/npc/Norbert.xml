@@ -16,7 +16,7 @@
         <parameter key="keyword_reply4" value="I have wonderful jackets, coats, lovely doublets, even warlike leather armor, and impressive studded armor. Just ask me for a {trade}." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="coat,2651,8;doublet,2485,16;jacket,2650,12;leather armor,2467,25;studded armor,2484,90;" />
+        <parameter key="shop_buyable" value="coat,2651,8;doublet,2485,16;jacket,2650,12;leather armor,2467,25;studded armor,2484,90" />
         <parameter key="shop_sellable" value="" />
     </parameters>
 </npc>

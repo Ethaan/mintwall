@@ -21,6 +21,6 @@
 
         <parameter key="module_shop" value="1"/>
         <parameter key="shop_buyable" value="" />
-        <parameter key="shop_sellable" value="dead rabbit,3119,2;dead rat,2813,2;dead wolf,2826,5;" />
+        <parameter key="shop_sellable" value="dead rabbit,3119,2;dead rat,2813,2;dead wolf,2826,5" />
     </parameters>
 </npc>

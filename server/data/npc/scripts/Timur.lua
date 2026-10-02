@@ -18,14 +18,18 @@ shopModule:addSellableItem({'mace', 'mace'}, 2398, 30, 'mace')
 shopModule:addSellableItem({'hatchet', 'hatchet'}, 2388, 25, 'hatchet')
 
 -- buy part
-shopModule:addBuyableItem({'torch','torch'}, 2051, 3,1,'torch')
+shopModule:addBuyableItem({'torch'}, 2050, 3, 'torch')
 shopModule:addBuyableItem({'scroll','scroll'}, 1949, 10,1,'scroll')
 shopModule:addBuyableItem({'document','document'}, 1952, 12,1,'document')
 shopModule:addBuyableItem({'parchment','parchment'}, 1948, 8,1,'parchment')
 shopModule:addBuyableItem({'rope','rope'}, 2120, 65,1,'rope')
-shopModule:addBuyableItem({'rod','rod'}, 2580, 170,1,'rod')
+shopModule:addBuyableItem({'fishing rod', 'rod'}, 2580, 170, 'fishing rod')
 shopModule:addBuyableItem({'arrow','arrow'}, 2544, 3,1,'arrow')
 shopModule:addBuyableItem({'bolt','bolt'}, 2543, 4,1,'bolt')
 shopModule:addBuyableItem({'viking','viking helmet'}, 2473, 265,1,'viking helmet')
+shopModule:addBuyableItem({'bow'}, 2456, 130, 'bow')   -- TibiaWiki 2005-06
+shopModule:addBuyableItem({'crossbow'}, 2455, 160, 'crossbow')   -- TibiaWiki 2005-06
+shopModule:addBuyableItem({'hatchet'}, 2388, 25, 'hatchet')   -- TibiaWiki 2005-06
+shopModule:addBuyableItem({'mace'}, 2398, 30, 'mace')   -- TibiaWiki 2005-06
 
 npcHandler:addModule(FocusModule:new())

@@ -7,11 +7,6 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)	npcHandler:onCreatureSay(cid, type, msg)	end
 function onThink()						npcHandler:onThink()						end
 
-local function creatureSayCallback(cid, type, msg)
-	if not npcHandler:isFocused(cid) then
-		return false
-end	
-
 local shopModule = ShopModule:new()
 npcHandler:addModule(shopModule)
 
@@ -37,6 +32,4 @@ keywordHandler:addKeyword({'buy'}, StdModule.say, {npcHandler = npcHandler, only
 keywordHandler:addKeyword({'sell'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I can offer you beer ... or water if you are sick."})
 keywordHandler:addKeyword({'have'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I can offer you beer ... or water if you are sick."})
 keywordHandler:addKeyword({'food'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "Ask my wife Maryza for food."})
-end
-npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

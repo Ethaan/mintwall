@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Lich" nameDescription="a lich" race="UNDEAD" experience="1400" speed="320" manacost="0">
+<monster name="Lich" nameDescription="a lich" race="UNDEAD" experience="900" speed="210" manacost="0">
   <health now="880" max="880"/>
   <look type="99" head="95" body="116" legs="119" feet="115" corpse="3025"/>
   <targetchange interval="5000" chance="8"/>
@@ -62,22 +62,17 @@
     <voice sentence="Death and Decay!"/>
   </voices>
   <loot>
- 	<item id="2148" countmax="100" chance1="100000" chancemax="0"/>
- 	<item id="2401" chance="10000"/> --staff
- 	<item id="2171" chance="1666"/> --platinium amulet
- 	<item id="2656" chance="709"/> --blue robe
- 	<item id="2144" countmax="6" chance1="6666" chancemax="0"/>  black pear
-
- 	<item id="1987" chance="100000">
- 	<inside>
- 	<item id="2535" chance="588"/> --castle shield
- 	<item id="2165" chance="888"/> --stealth ring
- 	<item id="2143" countmax="4" chance1="4000" chancemax="0"/>  white pear
- 	<item id="2237" chance="10000"/> --dirty cape
- 	<item id="2148" countmax="12" chance1="80000" chancemax="0"/>
- 	<item id="2175" chance="10000"/> --spell book
- 	<item id="2179" chance="900"/> --gold ring
-      </inside>
-    </item>
+    <item id="2401" chance="60000"/>   <!-- staff -->
+    <item id="2148" countmax="120" chance="58000"/>   <!-- gold coin -->
+    <item id="2237" chance="20000"/>   <!-- dirty cape -->
+    <item id="2175" chance="10000"/>   <!-- spellbook -->
+    <item id="2144" chance="5000"/>   <!-- black pearl -->
+    <item id="2143" chance="2500"/>   <!-- white pearl -->
+    <item id="2214" chance="1000"/>   <!-- ring of healing -->
+    <item id="2178" chance="500"/>   <!-- mind stone -->
+    <item id="2479" chance="500"/>   <!-- strange helmet -->
+    <item id="2535" chance="200"/>   <!-- castle shield -->
+    <item id="2656" chance="100"/>   <!-- blue robe -->
+    <item id="2171" chance="100"/>   <!-- platinum amulet -->
   </loot>
 </monster>

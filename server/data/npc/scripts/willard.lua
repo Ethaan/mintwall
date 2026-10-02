@@ -44,6 +44,9 @@ shopModule:addSellableItem({'halberd'},2381,400,'halberd')
 shopModule:addSellableItem({'crossbow'},2455,120,'crossbow')
 shopModule:addSellableItem({'bow'},2456,100,'bow')
 shopModule:addSellableItem({'spear'},2389,3,'spear')
+shopModule:addSellableItem({'axe'},2386,7,'axe')   -- Tibiantis
+shopModule:addSellableItem({'club'},2382,1,'club')   -- Tibiantis
+shopModule:addSellableItem({'sword'},2376,25,'sword')   -- Tibiantis
 
 -- Itens para comprar
 shopModule:addBuyableItem({'chain helmet'},2458,52,'chain helmet')
@@ -68,5 +71,9 @@ shopModule:addBuyableItem({'bow'},2456,400,'bow')
 shopModule:addBuyableItem({'spear'},2389,10,'spear')
 shopModule:addBuyableItem({'arrow'},2544,3,'arrow')
 shopModule:addBuyableItem({'bolt'},2543,4,'bolt')
+shopModule:addBuyableItem({'axe'}, 2386, 20, 'axe')   -- TibiaWiki 2005-06
+shopModule:addBuyableItem({'hand axe'}, 2380, 8, 'hand axe')   -- TibiaWiki 2005-06
+shopModule:addBuyableItem({'morning star'}, 2394, 430, 'morning star')   -- TibiaWiki 2005-06
+shopModule:addBuyableItem({'sword'}, 2376, 85, 'sword')   -- TibiaWiki 2005-06
 
 npcHandler:addModule(FocusModule:new())

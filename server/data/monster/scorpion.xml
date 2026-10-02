@@ -32,4 +32,6 @@
     <immunity drunk="0"/>
     <immunity invisible="0"/>
   </immunities>
+  <loot>
+  </loot>
 </monster>

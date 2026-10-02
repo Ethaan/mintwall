@@ -13,10 +13,10 @@
 		
 <parameter key="module_keywords" value="1" />
         <parameter key="keywords" value="offers;" />
-        <parameter key="keyword_reply1" value="drum, harp kit, lute, lyre, piano kit, simple fanfare." />
+        <parameter key="keyword_reply1" value="I sell drum, lute, lyre and simple fanfare." />
 	
 
-<parameter key="shop_buyable" value="drum,2073,140;harp kit,3917,50;lute,2072,195;lyre,2071,120;piano kit,3926,200;simple fanfare,2075,150;" />
+<parameter key="shop_buyable" value="drum,2073,140;lute,2072,195;lyre,2071,120;simple fanfare,2075,150" />
         <parameter key="message_greet" value="Be greeted, |PLAYERNAME|! May I help you? With some instruments, perhaps?"/>
         <parameter key="message_farewell" value="Good bye."/>
 		<parameter key="message_walkaway" value="Good bye." />

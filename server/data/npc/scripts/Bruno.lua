@@ -15,6 +15,7 @@ local shopModule = ShopModule:new()
 npcHandler:addModule(shopModule)
 
 shopModule:addBuyableItem({'fish'}, 					Cffish, 5, 0, 'fresh fish')
+shopModule:addBuyableItem({'fish'}, 2667, 5, 'fish')   -- TibiaWiki 2005-06
  
 
 keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "My name is Bruno."})

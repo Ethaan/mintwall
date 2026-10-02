@@ -35,4 +35,6 @@
   <voices interval="5000" chance="10">
     <voice sentence="Zzzzzzt"/>
   </voices>
+  <loot>
+  </loot>
 </monster>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="efreet" nameDescription="a efreet" race="blood" experience="300" speed="270" manacost="0">
+<monster name="efreet" nameDescription="a efreet" race="blood" experience="300" speed="234" manacost="0">
   <health now="550" max="550"/>
   <look type="103" head="20" body="30" legs="40" feet="50" corpse="3037"/>
   <targetchange interval="5000" chance="8"/>
@@ -69,20 +69,13 @@
     <voice sentence="Good wishes are for fairytales"/>
   </voices>
   <loot>
-    <item id="2155" countmax="1" chance="100"/>
-    <item id="2148" countmax="60" chance1="100000" chancemax="0"/>
-    <item id="2673" countmax="4" chance1="6666" chancemax="0"/>
-    <item id="2044" chance="10000"/>
-    <item id="1987" chance="100000">
-    <item id="2063" chance="20000"/>
-      <inside>
-        <item id="2149" countmax="2" chance="7000"/>
-        <item id="2663" chance="200"/>
-        <item id="1860" countmax="1" chance="2500"/>
-        <item id="2148" countmax="15" chance1="80000" chancemax="0"/>
-        <item id="2442" chance="2000"/>
-        <item id="2187" chance="1111" />
-      </inside>
-    </item>
+    <item id="2148" countmax="130" chance="85000"/>   <!-- gold coin -->
+    <item id="2673" countmax="12" chance="25000"/>   <!-- pear -->
+    <item id="2442" chance="20000"/>   <!-- heavy machete -->
+    <item id="2062" chance="20000"/>   <!-- small oil lamp -->
+    <item id="2149" countmax="2" chance="7000"/>   <!-- small emerald -->
+    <item id="1858" chance="2500"/>   <!-- green tapestry -->
+    <item id="2663" chance="200"/>   <!-- mystic turban -->
+    <item id="2155" chance="100"/>   <!-- green gem -->
   </loot>
 </monster>

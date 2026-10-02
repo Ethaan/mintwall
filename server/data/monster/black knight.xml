@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="black knight" nameDescription="a black knight" race="blood" experience="1600" speed="450" manacost="0">
+<monster name="black knight" nameDescription="a black knight" race="blood" experience="1600" speed="390" manacost="0">
   <health now="1800" max="1800"/>
   <look type="131" head="95" body="95" legs="95" feet="95" addons="3" corpse="3128"/>
   <targetchange interval="5000" chance="8"/>
@@ -46,30 +46,24 @@
     <voice sentence="You're no match for me!"/>
   </voices>
   <loot>
-    <item id="2457" chance="10000"/>
-    <item id="2417" chance="7000"/>
-    <item id="2148" countmax="100" chance1="100000" chancemax="0"/>
-    <item id="2476" chance="800"/>
-    <item id="2489" chance="1428"/>
-    <item id="2490" chance="6666"/>
-    <item id="2381" chance="9000"/>
-    <item id="2389" countmax="1" chance1="20000" chancemax="0"/>
-    <item id="1987" chance="100000">
-      <inside>
-        <item id="2477" chance="1000"/>
-        <item id="2691" countmax="2" chance="20000"/>
-        <item id="2478" chance="13000"/>
-        <item id="2475" countmax="1" chance="2000"/>
-        <item id="2463" chance="2500"/>
-        <item id="2148" countmax="15" chance1="100000" chancemax="0"/>
-        <item id="2120" chance="20000"/>
-        <item id="2387" chance="6666"/>
-        <item id="2377" chance="2857"/>
-        <item id="2430" chance="1333"/>
-        <item id="2414" chance="909"/>
-        <item id="2195" chance="555"/>
-        <item id="2133" countmax="1" chance="800"/>
-      </inside>
-    </item>
+    <item id="2148" countmax="150" chance="48100"/>   <!-- gold coin -->
+    <item id="2389" countmax="3" chance="30000"/>   <!-- spear -->
+    <item id="2689" countmax="2" chance="20000"/>   <!-- bread -->
+    <item id="2120" chance="15000"/>   <!-- rope -->
+    <item id="2478" chance="13000"/>   <!-- brass legs -->
+    <item id="2381" chance="13000"/>   <!-- halberd -->
+    <item id="2463" chance="10000"/>   <!-- plate armor -->
+    <item id="2457" chance="10000"/>   <!-- steel helmet -->
+    <item id="2377" chance="10000"/>   <!-- two handed sword -->
+    <item id="2417" chance="7000"/>   <!-- battle hammer -->
+    <item id="2475" chance="5000"/>   <!-- warrior helmet -->
+    <item id="2430" chance="2500"/>   <!-- knight axe -->
+    <item id="2489" chance="2000"/>   <!-- dark armor -->
+    <item id="2490" chance="2000"/>   <!-- dark helmet -->
+    <item id="2476" chance="1000"/>   <!-- knight armor -->
+    <item id="2477" chance="1000"/>   <!-- knight legs -->
+    <item id="2133" chance="800"/>   <!-- ruby necklace -->
+    <item id="2195" chance="500"/>   <!-- boots of haste -->
+    <item id="2414" chance="300"/>   <!-- dragon lance -->
   </loot>
 </monster>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="green djinn" nameDescription="a green djinn" race="VENOM" experience="300" speed="220" manacost="0">
+<monster name="green djinn" nameDescription="a green djinn" race="VENOM" experience="190" speed="220" manacost="0">
   <health now="330" max="330"/>
   <look type="51" head="20" body="30" legs="40" feet="50" corpse="2989"/>
   <targetchange interval="5000" chance="8"/>
@@ -56,16 +56,12 @@
     <voice sentence="Good wishes are for fairytales"/>
   </voices>
   <loot>
-    <item id="2148" countmax="20" chance1="100000" chancemax="0"/>
-    <item id="2696" chance="10000"/>
-    <item id="2747" chance="10000"/>
-    <item id="1987" chance="100000">
-    <item id="2187" chance="1111" />
-      <inside>
-        <item id="2062" chance="5000"/>
-        <item id="2148" countmax="20" chance1="100000" chancemax="0"/>
-        <item id="2176" chance="2000"/>
-      </inside>
-    </item>
+    <item id="2148" countmax="50" chance="70000"/>   <!-- gold coin -->
+    <item id="2696" chance="25000"/>   <!-- cheese -->
+    <item id="2747" chance="10000"/>   <!-- grave flower -->
+    <item id="2062" chance="7500"/>   <!-- small oil lamp -->
+    <item id="2149" countmax="4" chance="2700"/>   <!-- small emerald -->
+    <item id="1950" chance="2500"/>   <!-- book -->
+    <item id="2663" chance="100"/>   <!-- mystic turban -->
   </loot>
 </monster>

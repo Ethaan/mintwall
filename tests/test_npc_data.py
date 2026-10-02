@@ -5,10 +5,15 @@ import pytest
 
 from tibia74 import SERVER_DIR, Items
 from tibia74.items import GROUP_FLUID
+
+FLAG_PICKUPABLE = 1 << 5        # items.otb
 from tibia74.npcs import load_npcs, rookgaard_pos
 
 NPCS = load_npcs(SERVER_DIR)
 ROOKGAARD_NPCS = sorted(n for n, npc in NPCS.items() if rookgaard_pos(npc))
+SPAWNED = sorted(n for n, npc in NPCS.items() if npc.positions)
+# NPCs whose shops still wait for a decision (task.md); test_shops.py skips them too
+PENDING = set()
 ITEMS = Items(SERVER_DIR / "data")
 
 
@@ -38,11 +43,13 @@ def _said(item) -> str:
 
 
 def _name_ok(item, it) -> bool:
-    # a fluid container sold filled ("mug of beer", "life fluid") is named after its contents
-    return _said(item).lower() == it.name.lower() or bool(item.subtype and it.group == GROUP_FLUID)
+    # a fluid container sold filled ("mug of beer", "life fluid") is named after its contents; "apple" is a red apple,
+    # "small book" a book, "pitchfork" a pitch fork
+    said, name = (re.sub(r"[^a-z]", "", n.lower()) for n in (_said(item), it.name))
+    return said in name or name in said or bool(item.subtype and it.group == GROUP_FLUID)
 
 
-@pytest.mark.parametrize("name", ROOKGAARD_NPCS)
+@pytest.mark.parametrize("name", [n for n in SPAWNED if n not in PENDING])
 def test_shop_items_exist_and_match_their_names(name):
     bad = []
     for kind, item in _shop(NPCS[name]):
@@ -52,6 +59,14 @@ def test_shop_items_exist_and_match_their_names(name):
         elif not _name_ok(item, it):
             bad.append(f"{kind} {item.names[0]!r}: called {_said(item)!r}, but item {item.item_id} is a {it.name!r}")
     assert not bad, "\n".join(bad)
+
+
+@pytest.mark.parametrize("name", [n for n in SPAWNED if n not in PENDING])
+def test_everything_the_npc_sells_can_be_carried(name):
+    """The shop hands the item to the player: a dresser or a statue (not pickupable in 7.4) cannot be sold."""
+    bad = [f"{_said(item)!r} ({item.item_id})" for item in NPCS[name].buyable
+           if item.item_id in ITEMS.by_server and not ITEMS.by_server[item.item_id].flags & FLAG_PICKUPABLE]
+    assert not bad, "cannot be carried: " + ", ".join(bad)
 
 
 @pytest.mark.parametrize("name", ROOKGAARD_NPCS)

@@ -16,7 +16,7 @@
         <parameter key="keyword_reply4" value="My inventory of general goods and paperware is large." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="book,1971,15;book,1972,15;book,1973,15;backpack,1988,20;bag,1987,5;document,1968,12;fishing rod,2580,150;machete,2420,40;parchment,1969,8;pick,2553,50;plate,2035,6;present,1990,10;rope,2120,50;scroll,1949,5;scythe,2550,50;shovel,2554,50;torch,2050,2;watch,2036,20;" />
+        <parameter key="shop_buyable" value="brown book,1971,15;black book,1972,15;backpack,1988,20;bag,1987,5;document,1968,12;fishing rod,2580,150;machete,2420,40;parchment,1948,8;pick,2553,50;plate,2035,6;present,1990,10;rope,2120,50;scroll,1949,5;scythe,2550,50;shovel,2554,50;torch,2050,2;watch,2036,20;small book,1959,15;bottle,2007,3,0;bucket,2005,4,0;cup,2013,2,0;jug,2014,10,0;mug,2012,4,0" />
         <parameter key="shop_sellable" value="" />
     </parameters>
 </npc>

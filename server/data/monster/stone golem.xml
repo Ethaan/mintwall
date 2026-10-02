@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="stone golem" nameDescription="a stone golem" race="blood" experience="280" speed="180" manacost="590">
+<monster name="stone golem" nameDescription="a stone golem" race="blood" experience="160" speed="180" manacost="590">
   <health now="270" max="270"/>
   <look type="67" head="20" body="30" legs="40" feet="50" corpse="2952"/>
   <targetchange interval="5000" chance="8"/>
@@ -33,16 +33,14 @@
     <immunity invisible="0"/>
   </immunities>
   <loot>
-    <item id="2148" countmax="20" chance1="100000" chancemax="0"/>
-    <item id="2483" chance="10000"/>
-    <item id="1987" chance="100000">
-      <inside>
-        <item id="1295" chance="10000"/>
-        <item id="1294" countmax="5" chance1="20000" chancemax="0"/>
-        <item id="2395" chance="2500"/>
-        <item id="2050" chance="20000"/>
-        <item id="2580" chance="5000"/>
-      </inside>
-    </item>
+    <item id="2148" countmax="15" chance="16000"/>   <!-- gold coin -->
+    <item id="1294" countmax="4" chance="13000"/>   <!-- small stone -->
+    <item id="2509" chance="7000"/>   <!-- steel shield -->
+    <item id="2050" chance="5500"/>   <!-- torch -->
+    <item id="2166" chance="5000"/>   <!-- power ring -->
+    <item id="2483" chance="5000"/>   <!-- scale armor -->
+    <item id="2395" chance="1500"/>   <!-- carlin sword -->
+    <item id="2124" chance="200"/>   <!-- crystal ring -->
+    <item id="2156" chance="100"/>   <!-- red gem -->
   </loot>
 </monster>

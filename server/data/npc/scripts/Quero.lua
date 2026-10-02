@@ -64,7 +64,7 @@ npcHandler:addModule(shopModule)
 shopModule:addBuyableItem({'lyre'},2071,120,'lyre')
 shopModule:addBuyableItem({'lute'},2072,195,'lute')
 shopModule:addBuyableItem({'drum'},2073,140,'drum')
-shopModule:addBuyableItem({'simple fanfare'},2075,150,'fanfare')
+shopModule:addBuyableItem({'simple fanfare', 'fanfare'},2075,150,'simple fanfare')
 	
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

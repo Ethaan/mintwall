@@ -31,7 +31,7 @@
 		<parameter key="keyword_reply16" value="Oh, I have wonderful leather boots and sandals." />
         
 		<parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="cape,2654,9;green tunic,2652,25;jacket,2650,12;ranger s cloak,2660,550;leather legs,2649,10;leather boots,2643,2;sandals,2642,2;scarf,2661,15" />
+        <parameter key="shop_buyable" value="cape,2654,9;green tunic,2652,10;jacket,2650,12;leather legs,2649,10;leather boots,2643,2;sandals,2642,2;scarf,2661,15" />
         <parameter key="shop_sellable" value="" />
     
 </parameters>

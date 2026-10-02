@@ -35,4 +35,6 @@
   <summons maxSummons="3">
     <summon name="slime summon" interval="1000" chance="10" max="3"/>
   </summons>
+  <loot>
+  </loot>
 </monster>

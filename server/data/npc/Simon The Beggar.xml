@@ -34,7 +34,7 @@
 	<parameter key="keyword_reply21" value="Hehe, do you have a shovel? I can sell you a shovel if you want to return to Tibia." />
 		
 	<parameter key="module_shop" value="1"/>
-	<parameter key="shop_buyable" value="shovel,2554,50;"/>	
+	<parameter key="shop_buyable" value="shovel,2554,50"/>	
 		
   </parameters>
 </npc>

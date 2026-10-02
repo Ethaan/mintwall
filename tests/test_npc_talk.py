@@ -51,7 +51,7 @@ def test_npc_answers(new_player, name):
     p = near(new_player, NPCS[name].positions[0], level=100, premium_days=30, group_id=TESTER_GROUP,
                 storage={30001: 1, **storage})
     # follow the NPC (they wander, some ten tiles from their spawn) and talk
-    replies = talk_to(p, name, word, "job", "bye")
+    replies = talk_to(p, name, word, "job", "bye", find=60)
     if name in SILENT:
         assert not replies, f"{name} is silent in 7.4: {replies}"
     else:

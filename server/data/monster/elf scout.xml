@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="elf scout" nameDescription="a elf scout" race="blood" experience="75" speed="225" manacost="360">
+<monster name="elf scout" nameDescription="a elf scout" race="blood" experience="75" speed="220" manacost="360">
   <health now="160" max="160"/>
   <look type="64" head="20" body="30" legs="40" feet="50" corpse="2981"/>
   <targetchange interval="5000" chance="8"/>
@@ -43,17 +43,15 @@
     <voice sentence="Your existence will end here!"/>
   </voices>
   <loot>
-    <item id="2148" countmax="10" chance1="100000" chancemax="0"/>
-    <item id="2544" countmax="10" chance1="50000" chancemax="0"/>
-    <item id="2484" chance="10000"/>
-    <item id="2456" chance="10000"/>
-    <item id="2681" chance="20000"/>
-    <item id="1987" chance="6666">
-      <inside>
-        <item id="2148" countmax="5" chance1="80000" chancemax="0"/>
-        <item id="2642" chance="5500"/>
-        <item id="2397" chance="4000"/>
-      </inside>
-    </item>
+    <item id="2544" countmax="12" chance="30000"/>   <!-- arrow -->
+    <item id="2148" countmax="5" chance="30000"/>   <!-- gold coin -->
+    <item id="2681" chance="18000"/>   <!-- grapes -->
+    <item id="2545" countmax="3" chance="15000"/>   <!-- poison arrow -->
+    <item id="2031" chance="14000"/>   <!-- waterskin -->
+    <item id="2484" chance="12000"/>   <!-- studded armor -->
+    <item id="2642" chance="10000"/>   <!-- sandals -->
+    <item id="2482" chance="8000"/>   <!-- studded helmet -->
+    <item id="2397" chance="6000"/>   <!-- longsword -->
+    <item id="2456" chance="4000"/>   <!-- bow -->
   </loot>
 </monster>

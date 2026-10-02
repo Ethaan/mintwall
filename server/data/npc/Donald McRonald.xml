@@ -18,7 +18,7 @@
 		<parameter key="keyword_reply6" value="Spiders infested the sewers beneath our farm. I pay 2 gold for every dead spider you bring me." />
 		<parameter key="keyword_reply7" value="I sell wheat, cheese and carrots, and I buy dead spiders." />
 		<parameter key="module_shop" value="1"/>
-		<parameter key="shop_buyable" value="bunch of wheat,2694,1;cheese,2696,5;carrot,2684,3;" />
-		<parameter key="shop_sellable" value="dead spider,3068,2;" />
+		<parameter key="shop_buyable" value="bunch of wheat,2694,1;cheese,2696,5;carrot,2684,3" />
+		<parameter key="shop_sellable" value="dead spider,3068,2" />
 	</parameters>
 </npc>

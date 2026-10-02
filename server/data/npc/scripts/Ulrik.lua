@@ -19,6 +19,9 @@ shopModule:addBuyableItem({'battle axe'}, 					Cfbattleaxe, 235)
 shopModule:addBuyableItem({'scale armor'}, 					Cfscalearmor, 260)
 shopModule:addBuyableItem({'soldier helmet'}, 					Cfsoldierhelmet, 110)
 shopModule:addBuyableItem({'steel shield'}, 					Cfsteelshield, 240)
+shopModule:addBuyableItem({'battle axe'}, 2378, 235, 'battle axe')   -- TibiaWiki 2005-06
+shopModule:addBuyableItem({'battle hammer'}, 2417, 350, 'battle hammer')   -- TibiaWiki 2005-06
+shopModule:addBuyableItem({'longsword'}, 2397, 160, 'longsword')   -- TibiaWiki 2005-06
 
 keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I am a smith. Do you need anything I make?"})
 keywordHandler:addKeyword({'shop'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I am a smith. Do you need anything I make?"})

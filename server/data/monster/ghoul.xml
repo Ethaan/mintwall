@@ -38,19 +38,13 @@
     <immunity invisible="1"/>
   </immunities>
   <loot>
-    <item id="2148" countmax="64" chance1="100000" chancemax="0"/>
-    <item id="2148" countmax="30" chance1="100000" chancemax="0"/>
-    <item id="2050" chance="20000"/>
-    <item id="2483" chance="10000"/>
-    <item id="2473" chance="6666"/>
-    <item id="2398" chance="20000"/>
-    <item id="1987" chance="100000">
-      <inside>
-        <item id="2460" chance="6666"/>
-        <item id="2229" countmax="2" chance1="20000" chancemax="0"/>
-        <item id="2403" chance="10000"/>
-        <item id="2168" chance="2500"/>
-      </inside>
-    </item>
+    <item id="2148" countmax="30" chance="75000"/>   <!-- gold coin -->
+    <item id="2050" chance="60000"/>   <!-- torch -->
+    <item id="2460" chance="20000"/>   <!-- brass helmet -->
+    <item id="2403" chance="15000"/>   <!-- knife -->
+    <item id="2473" chance="5000"/>   <!-- viking helmet -->
+    <item id="2483" chance="4000"/>   <!-- scale armor -->
+    <item id="2229" chance="3000"/>   <!-- skull -->
+    <item id="2168" chance="200"/>   <!-- life ring -->
   </loot>
 </monster>

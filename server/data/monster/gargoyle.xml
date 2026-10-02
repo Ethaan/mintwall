@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="gargoyle" nameDescription="a gargoyle" race="blood" experience="150" speed="250" manacost="0">
-  <health now="450" max="450"/>
+<monster name="gargoyle" nameDescription="a gargoyle" race="blood" experience="150" speed="200" manacost="0">
+  <health now="250" max="250"/>
   <look type="95" head="20" body="30" legs="40" feet="50" corpse="3022"/>
   <targetchange interval="5000" chance="8"/>
   <strategy attack="100" defense="0"/>
@@ -47,18 +47,16 @@
     <voice sentence="There is a stone in your shoe!"/>
   </voices>
   <loot>
-    <item id="2148" countmax="20" chance1="100000" chancemax="0"/>
-    <item id="2671" countmax="2" chance1="33333" chancemax="0"/>
-    <item id="2666" countmax="3" chance1="33333" chancemax="0"/>
-    <item id="2457" chance="20000"/>
-    <item id="2513" chance="25000"/>
-    <item id="2209" chance="3333"/>
-    <item id="2394" chance="5000"/>
-    <item id="1987" chance="100000">
-      <inside>
-        <item id="2489" chance="2500"/>
-        <item id="2148" countmax="5" chance1="100000" chancemax="0"/>
-      </inside>
-    </item>
+    <item id="2148" countmax="30" chance="82000"/>   <!-- gold coin -->
+    <item id="2666" chance="50000"/>   <!-- meat -->
+    <item id="2671" countmax="2" chance="20000"/>   <!-- ham -->
+    <item id="1294" countmax="10" chance="10000"/>   <!-- small stone -->
+    <item id="2448" chance="8000"/>   <!-- studded club -->
+    <item id="2513" chance="1500"/>   <!-- battle shield -->
+    <item id="2394" chance="1000"/>   <!-- morning star -->
+    <item id="2489" chance="200"/>   <!-- dark armor -->
+    <item id="2457" chance="200"/>   <!-- steel helmet -->
+    <item id="2129" chance="200"/>   <!-- wolf tooth chain -->
+    <item id="2209" chance="100"/>   <!-- club ring -->
   </loot>
 </monster>

@@ -11,7 +11,7 @@ local shopModule = ShopModule:new()
 npcHandler:addModule(shopModule)
 
 -- Itens para vender
-shopModule:addSellableItem({'double axe'},2387,260,'battle axe')
+shopModule:addSellableItem({'double axe'},2387,260,'double axe')
 shopModule:addSellableItem({'battle axe'},2378,80,'battle axe')
 shopModule:addSellableItem({'battle hammer'},2417,120,'battle hammer')
 shopModule:addSellableItem({'morning star'},2394,90,'morning star')
@@ -25,19 +25,23 @@ shopModule:addSellableItem({'rapier'},2384,5,'rapier')
 shopModule:addSellableItem({'sabre'},2385,12,'sabre')
 shopModule:addSellableItem({'spear'},2389,3,'spear')
 shopModule:addSellableItem({'sword'},2376,25,'sword')
+shopModule:addSellableItem({'two handed sword'},2377,450,'two handed sword')   -- Tibiantis
 
 -- Itens para comprar
 shopModule:addBuyableItem({'hand axe'},2380,8,'hand axe')
 shopModule:addBuyableItem({'battle hammer'},2417,350,'battle hammer')
 shopModule:addBuyableItem({'throwing knife'},2410,25,'throwing knife')
 shopModule:addBuyableItem({'axe'},2386,20,'axe')
-shopModule:addBuyableItem({'dagger'},2379,5,'dager')
+shopModule:addBuyableItem({'dagger'},2379,5,'dagger')
 shopModule:addBuyableItem({'mace'},2398,90,'mace')
 shopModule:addBuyableItem({'machete'},2420,35,'machete')
 shopModule:addBuyableItem({'rapier'},2384,15,'rapier')
 shopModule:addBuyableItem({'sabre'},2385,35,'sabre')
 shopModule:addBuyableItem({'spear'},2389,10,'spear')
 shopModule:addBuyableItem({'sword'},2376,85,'sword')
+shopModule:addBuyableItem({'morning star'}, 2394, 90, 'morning star')   -- TibiaWiki 2005-06
+shopModule:addBuyableItem({'staff'}, 2401, 40, 'staff')   -- TibiaWiki 2005-06
+shopModule:addSellableItem({'club'}, 2382, 1, 'club')   -- TibiaWiki 2005-06
 
 
 npcHandler:addModule(FocusModule:new())

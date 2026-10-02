@@ -14,7 +14,7 @@
         <parameter key="keyword_reply3" value="I can offer you ham or meat." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="ham,2671,6;meat,2666,3;" />
+        <parameter key="shop_buyable" value="ham,2671,6;meat,2666,3" />
         <parameter key="shop_sellable" value="" />
     </parameters>
 </npc>

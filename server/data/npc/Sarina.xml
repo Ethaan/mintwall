@@ -15,7 +15,7 @@
 		<parameter key="keyword_reply4" value="I sell torches, candlesticks, candelabra, and oil." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="candelabrum,2041,8;candlestick,2047,3;document,1968,12;fishing rod,2580,150;parchment,1969,8;pick,2553,50;plate,2035,6;backpack,2001,20;bag,1994,5;rope,2120,50;scroll,1949,5;scythe,2550,50;shovel,2554,50;torch,2050,2;watch,2036,20;oil,2006,20,11;"/>
+        <parameter key="shop_buyable" value="candelabrum,2041,8;candlestick,2047,3;document,1968,12;fishing rod,2580,150;parchment,1948,8;pick,2553,50;plate,2035,6;purple backpack,2001,20;purple bag,1994,5;rope,2120,50;scroll,1949,5;scythe,2550,50;shovel,2554,50;torch,2050,2;watch,2036,20;oil,2006,20,11"/>
         <parameter key="shop_sellable" value="" />
     </parameters>
 </npc>

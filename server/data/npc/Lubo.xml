@@ -7,7 +7,7 @@
     <parameter key="message_farewell" value="Good bye." />
     <parameter key="message_walkaway" value="Good bye." />
     <parameter key="module_shop" value="1"/>
-    <parameter key="shop_buyable" value="backpack,1988,25;crowbar,2416,260;fishing rod,2580,175;red apple,2674,3;rope,2120,60;torch,2050,3;" />
+    <parameter key="shop_buyable" value="backpack,1988,25;crowbar,2416,260;fishing rod,2580,175;red apple,2674,3;rope,2120,60;torch,2050,3" />
     <parameter key="shop_sellable" value="" />
   </parameters>
 </npc>

@@ -50,7 +50,6 @@ TibiaWiki rev 20896 (2005-09-10)
 
 TibiaWiki rev 28517 (2006-02-05)
 
-- sells at another price: bag 5 (wiki 4), bucket 1 (wiki 4), oil 100 (wiki 20)
 - sells on the wiki, not ours: candelabrum 8, waterskin 10, worm 5
 - sells ours, not on the wiki: book, candlestick, crowbar, document, machete, parchment
 
@@ -101,7 +100,6 @@ TibiaWiki rev 26361 (2006-01-16)
 
 TibiaWiki rev 26036 (2006-01-11)
 
-- sells at another price: dresser 70 (wiki 25), trough 10 (wiki 7)
 - sells on the wiki, not ours: chest 10, trunk 10
 - sells ours, not on the wiki: blue round pillow, blue tapestry, green tapestry, large trunk, orange tapestry, purple round pillow, purple tapestry, red round pillow, red tapestry, small turqoise pillow, white tapestry, yellow tapestry
 
@@ -128,7 +126,7 @@ TibiaWiki rev 63540 (2006-11-06)
 
 TibiaWiki rev 24669 (2005-12-16)
 
-- sells at another price: bottle 1 (wiki 3), bucket 1 (wiki 4), cup 1 (wiki 2), mug 1 (wiki 4), pot 2 (wiki 30)
+- sells at another price: mug 1 (wiki 4), pot 2 (wiki 30)
 - sells ours, not on the wiki: oven spatula
 
 ## Cornelia
@@ -248,7 +246,7 @@ TibiaWiki rev 54162 (2006-09-08)
 
 TibiaWiki rev 25429 (2006-01-05)
 
-- sells at another price: dresser 70 (wiki 25), pendulum clock 10 (wiki 75), trough 10 (wiki 7)
+- sells at another price: pendulum clock 7 (wiki 75)
 - sells on the wiki, not ours: amphora 4, big table 30, birdcage 50, chest 10, coal basin 25, cuckoo clock 40, edged mirror 40, flower bowl 6, globe 50, goblin statue 50, god flower 5, green cushioned chair 40, harp 50, heart pillow 30, honey flower 5, indoor plant 8, knight statue 50, landscape 50, large amphora 50, minotaur statue 50, oval mirror 40, piano 200, portrait 50, potted flower 5, red cushioned chair 40, rocking chair 25, rocking horse 30, round mirror 40, round pillow 25, round table 25, small pillow 20, small table 20, sofa chair 55, square pillow 25, square table 25, still life 50, table lamp 35, tapestry 25, telescope 70, trunk 10, vase 3, water pipe 40, wooden chair 15
 - sells ours, not on the wiki: blue round pillow, blue tapestry, green tapestry, large trunk, orange tapestry, purple round pillow, purple tapestry, red round pillow, red tapestry, small turqoise pillow, white tapestry, yellow tapestry
 
@@ -337,7 +335,6 @@ TibiaWiki rev 31040 (2006-03-09)
 
 TibiaWiki rev 20898 (2005-09-10)
 
-- buys at another price: brass shield 15 (wiki 16)
 - buys on the wiki, not ours: poison dagger 1
 - buys ours, not on the wiki: coat, devil helmet, dragon shield, fire sword, golden armor, guardian shield, jacket, knight armor, knight legs, leather legs, warrior helmet
 
@@ -444,12 +441,13 @@ TibiaWiki rev 20627 (2005-08-02)
 - sells ours, not on the wiki: brass shield, coat, doublet, jacket, leather armor, leather boots, leather helmet, leather legs, scale armor, soldier helmet, studded armor, studded helmet, studded legs, studded shield, viking helmet, viking shield, wooden shield
 - buys at another price: battle shield 95 (wiki 60), brass armor 150 (wiki 112), brass shield 25 (wiki 16), chain armor 70 (wiki 40), chain helmet 17 (wiki 12), chain legs 25 (wiki 20), iron helmet 150 (wiki 145), plate armor 400 (wiki 240), wooden shield 5 (wiki 3)
 - buys on the wiki, not ours: devil's helmet 450, knight legs 375, warrior helmet 696
-- buys ours, not on the wiki: coat, copper shield, doublet, jacket, leather armor, leather boots, leather helmet, leather legs, legion helmet, scale armor, small axe, soldier helmet, steel shield, studded armor, studded helmet, studded legs, studded shield, viking shield
+- buys ours, not on the wiki: coat, copper shield, devil helmet, doublet, jacket, leather armor, leather boots, leather helmet, leather legs, legion helmet, scale armor, small axe, soldier helmet, steel shield, studded armor, studded helmet, studded legs, studded shield, viking shield
 
 ## Lee'Delle
 
 TibiaWiki rev 23914 (2005-11-20)
 
+- sells at another price: studded helmet 63 (wiki 62)
 - buys ours, not on the wiki: bone club, brass helmet, brass shield, chain armor, copper shield, fishing rod, hatchet, katana, leather boots, leather legs, legion helmet, mace, machete, plate shield, rope, scythe, shovel, sickle, studded armor, studded legs, sword, viking helmet
 
 ## Liane
@@ -551,6 +549,7 @@ TibiaWiki rev 23438 (2005-11-07)
 
 TibiaWiki rev 24263 (2005-12-01)
 
+- sells at another price: studded helmet 63 (wiki 62)
 - buys ours, not on the wiki: bone club, brass helmet, brass shield, chain armor, copper shield, fishing rod, hatchet, katana, leather boots, leather legs, legion helmet, mace, machete, plate shield, rope, scythe, shovel, sickle, studded armor, studded legs, sword, viking helmet
 
 ## Nydala
@@ -618,7 +617,6 @@ TibiaWiki rev 42282 (2006-07-05)
 
 TibiaWiki rev 24676 (2005-12-16)
 
-- sells at another price: apple 2 (wiki 3)
 - sells ours, not on the wiki: red apple, sample of venorean spice
 
 ## Romella
@@ -627,9 +625,8 @@ TibiaWiki rev 20900 (2005-09-10)
 
 - sells on the wiki, not ours: morning star 90, staff 40
 - sells ours, not on the wiki: machete, spear, throwing knife
-- buys at another price: battle axe 260 (wiki 80)
-- buys on the wiki, not ours: club 1, two handed sword 450
-- buys ours, not on the wiki: spear
+- buys on the wiki, not ours: club 1
+- buys ours, not on the wiki: double axe, spear
 
 ## Rose
 
@@ -651,7 +648,6 @@ TibiaWiki rev 29884 (2006-02-27)
 
 TibiaWiki rev 20630 (2005-08-02)
 
-- sells at another price: green tunic 25 (wiki 10)
 - sells ours, not on the wiki: ranger s cloak, scarf
 
 ## Sam
@@ -682,9 +678,9 @@ TibiaWiki rev 20549 (2005-07-21)
 - sells at another price: plate shield 125 (wiki 165)
 - sells on the wiki, not ours: dagger 5, longsword 160, rapier 15, sabre 35, staff 40, sword 85
 - sells ours, not on the wiki: brass helmet, brass legs, coat, doublet, dwarven shield, iron helmet, jacket, leather boots, leather legs, mace, plate armor, scale armor, soldier helmet, steel helmet, steel shield, studded armor, studded helmet, studded legs, studded shield, viking helmet, viking shield
-- buys at another price: brass shield 25 (wiki 16), chain legs 25 (wiki 20), iron helmet 150 (wiki 145), leather legs 9 (wiki 1), mace 30 (wiki 23), plate shield 45 (wiki 31), steel helmet 293 (wiki 190)
-- buys on the wiki, not ours: club 1, devil's helmet 450, dragon shield 360, fire sword 1000, golden armor 1500, knife 2, knight armor 875, knight legs 375, longsword 51, sabre 12, short sword 10, spike sword 225, sword 25, two handed sword 450, warrior helmet 696
-- buys ours, not on the wiki: copper shield, doublet, dwarven shield, leather boots, leather helmet, legion helmet, scale armor, small axe, soldier helmet, studded armor, studded helmet, studded legs, studded shield, viking shield
+- buys at another price: brass shield 25 (wiki 16), chain legs 25 (wiki 20), iron helmet 150 (wiki 145), mace 30 (wiki 23), plate shield 45 (wiki 31), steel helmet 293 (wiki 190)
+- buys on the wiki, not ours: devil's helmet 450, dragon shield 360, fire sword 1000, knife 2, knight armor 875, knight legs 375, spike sword 225, warrior helmet 696
+- buys ours, not on the wiki: copper shield, dagger, devil helmet, doublet, dwarven shield, leather boots, leather helmet, legion helmet, rapier, scale armor, small axe, soldier helmet, studded armor, studded helmet, studded legs, studded shield, viking shield
 
 ## Shiantis
 
@@ -777,13 +773,13 @@ TibiaWiki rev 24974 (2005-12-21)
 - sells at another price: brass armor 450 (wiki 150), chain armor 200 (wiki 70), chain helmet 52 (wiki 17), chain legs 80 (wiki 25), leather armor 35 (wiki 12), leather helmet 12 (wiki 4), steel shield 240 (wiki 80), wooden shield 15 (wiki 5)
 - sells ours, not on the wiki: axe, battle hammer, dagger, hand axe, mace, rapier, sabre, spear, sword, throwing knife
 - buys at another price: brass armor 150 (wiki 450), chain armor 70 (wiki 200), chain helmet 17 (wiki 52), chain legs 25 (wiki 80), leather armor 12 (wiki 35), leather helmet 4 (wiki 12), steel shield 80 (wiki 240), wooden shield 5 (wiki 15)
-- buys ours, not on the wiki: axe, battle axe, battle hammer, battle shield, brass shield, dagger, double axe, halberd, hand axe, mace, morning star, plate armor, rapier, sabre, short sword, spear, steel helmet, sword, two handed sword
+- buys ours, not on the wiki: axe, battle axe, battle hammer, battle shield, brass shield, club, dagger, double axe, halberd, hand axe, mace, morning star, plate armor, rapier, sabre, short sword, spear, steel helmet, sword, two handed sword
 
 ## Ukea
 
 TibiaWiki rev 25525 (2006-01-08)
 
-- sells at another price: dresser 70 (wiki 25), pendulum clock 10 (wiki 75), trough 10 (wiki 7)
+- sells at another price: pendulum clock 7 (wiki 75)
 - sells on the wiki, not ours: amphora 4, big table 30, birdcage 50, chest 10, coal basin 25, cuckoo clock 40, edged mirror 40, flower bowl 6, globe 50, goblin statue 50, god flower 5, green cushioned chair 40, harp 50, heart pillow 30, honey flower 5, indoor plant 8, knight statue 50, landscape picture 50, large amphora 50, minotaur statue 50, oval mirror 40, piano 200, portait picture 50, potted flower 5, red cushioned chair 40, rocking chair 25, rocking horse 30, round mirror 40, round pillow 25, round table 25, small pillow 20, small table 20, sofa chair 55, sqare pillow 25, square table 25, stillife picture 50, table lamp 35, telescope 70, trunk 10, vase 3, water pipe 40, wooden chair 15
 - sells ours, not on the wiki: large trunk
 
@@ -798,7 +794,6 @@ TibiaWiki rev 27771 (2006-01-26)
 
 TibiaWiki rev 24674 (2005-12-16)
 
-- sells at another price: beer 5 (wiki 2)
 - sells on the wiki, not ours: lemonade 2, water 1, wine 3
 
 ## Uzgod
@@ -828,7 +823,6 @@ TibiaWiki rev 20613 (2005-07-28)
 
 - sells on the wiki, not ours: axe 20, hand axe 8, morning star 430, sword 85
 - sells ours, not on the wiki: arrow, bolt, bow, crossbow, spear, throwing star
-- buys on the wiki, not ours: axe 7, club 1, sword 25
 - buys ours, not on the wiki: bow, crossbow, double axe, spear
 
 ## Willie

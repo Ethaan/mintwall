@@ -4,7 +4,7 @@
     <look type="128" head="114" body="36" legs="52" feet="59" addons="0"/>
    <parameters>
      <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="parcel,2595,15;letter,2597,8;label,2599,1;" />
+        <parameter key="shop_buyable" value="parcel,2595,15;letter,2597,8;label,2599,1" />
         <parameter key="shop_sellable" value="" />
     </parameters>
 </npc>

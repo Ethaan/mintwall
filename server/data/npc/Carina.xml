@@ -16,7 +16,7 @@
 		<parameter key="keyword_reply4" value="We offer wedding rings, golden amulets, and ruby necklaces." />
 
         <parameter key="module_shop" value="1"/>
-		<parameter key="shop_buyable" value="weddind ring,2121,990;golden amulet,2130,6600;ruby necklace,2133,3560" />
+		<parameter key="shop_buyable" value="wedding ring,2121,990;golden amulet,2130,6600;ruby necklace,2133,3560" />
         <parameter key="shop_sellable" value="" />
     </parameters>
 </npc>

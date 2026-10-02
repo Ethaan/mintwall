@@ -17,7 +17,7 @@
 		 <parameter key="keyword_reply3" value="My name is Rodney." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="apple,2674,2;cherry,2679,1;grapes,2681,3;pear,2673,4;red apple,2674,3;sample of venorean spice,4849,200;" />
+        <parameter key="shop_buyable" value="apple,2674,3;cherry,2679,1;grapes,2681,3;pear,2673,4;red apple,2674,3" />
         <parameter key="shop_sellable" value="" />
     </parameters>
 

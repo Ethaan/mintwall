@@ -29,7 +29,7 @@ djinnNpc{
 		shopModule:addSellableItem({'elven amulet'}, 2198, 500, 'elven amulet')
 		shopModule:addSellableItem({'bronze amulet'}, 2172, 100, 'bronze amulet')
 		shopModule:addSellableItem({'garlic necklace'}, 2199, 100, 'garlic necklace')
-		shopModule:addSellableItem({'magic light wand'}, 2162, 35, 'magic light wand')
+		shopModule:addSellableItem({'magic lightwand', 'magic light wand'}, 2162, 35, 'magic lightwand')
 		shopModule:addSellableItem({'orb'}, 2176, 750, 'orb')
 		shopModule:addSellableItem({'mind stone'}, 2178, 100, 'mind stone')
 		shopModule:addSellableItem({'life crystal'}, 2177, 50, 'life crystal')

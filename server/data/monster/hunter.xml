@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="hunter" nameDescription="a hunter" race="blood" experience="150" speed="215" manacost="0">
+<monster name="hunter" nameDescription="a hunter" race="blood" experience="150" speed="210" manacost="530">
   <health now="150" max="150"/>
   <look type="129" head="95" body="116" legs="121" feet="115" corpse="3128"/>
   <targetchange interval="5000" chance="8"/>
@@ -39,24 +39,17 @@
     <voice sentence="Guess who we're hunting, haha!"/>
   </voices>
   <loot>
-    <item id="2148" countmax="20" chance1="100000" chancemax="0"/>
-    <item id="2465" chance="10000"/>
-    <item id="2461" chance="10000"/>
-    <item id="2649" chance="10000"/>
-    <item id="2671" countmax="2" chance1="20000" chancemax="0"/>
-    <item id="1987" chance="100000">
-      <inside>
-        <item id="2456" chance="6666"/>
-        <item id="2544" countmax="15" chance1="10000" chancemax="0"/>
-        <item id="2546" countmax="5" chance1="10000" chancemax="0"/>
-        <item id="2147" countmax="2" chance1="3333" chancemax="0"/>
-        <item id="2675" countmax="4" chance1="6666" chancemax="0"/>
-        <item id="2690" countmax="4" chance1="6666" chancemax="0"/>
-        <item id="2050" chance="20000"/>
-        <item id="2478" chance="3333"/>
-        <item id="2652" chance="2222"/>
-        <item id="2201" chance="2500"/>
-      </inside>
-    </item>
+    <item id="2544" countmax="22" chance="82000"/>   <!-- arrow -->
+    <item id="2456" chance="30000"/>   <!-- bow -->
+    <item id="2675" countmax="2" chance="20000"/>   <!-- orange -->
+    <item id="2649" chance="14000"/>   <!-- leather legs -->
+    <item id="2690" countmax="2" chance="11000"/>   <!-- roll -->
+    <item id="2461" chance="10000"/>   <!-- leather helmet -->
+    <item id="2465" chance="5000"/>   <!-- brass armor -->
+    <item id="2460" chance="5000"/>   <!-- brass helmet -->
+    <item id="2546" countmax="3" chance="5000"/>   <!-- burst arrow -->
+    <item id="2050" chance="5000"/>   <!-- torch -->
+    <item id="2201" chance="3000"/>   <!-- dragon necklace -->
+    <item id="2147" chance="200"/>   <!-- small ruby -->
   </loot>
 </monster>

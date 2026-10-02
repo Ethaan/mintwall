@@ -13,7 +13,7 @@
         <parameter key="keyword_reply2" value="I am a licensed carpetpilot and responsible for the Darashian airmail. I can bring you to the Femor Hills, Edron, or you can buy letters and parcels." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="parcel,2595,10;letter,2597,5;label,2599,1;" />
+        <parameter key="shop_buyable" value="parcel,2595,15;letter,2597,8;label,2599,1" />
         <parameter key="shop_sellable" value="" />
     </parameters>
 </npc>

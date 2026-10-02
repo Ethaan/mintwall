@@ -34,7 +34,7 @@ shopModule:addBuyableItem({'battle axe'},2378,235,'battle axe')
 shopModule:addBuyableItem({'battle hammer'},2417,350,'battle hammer')
 shopModule:addBuyableItem({'carlin sword'},2395,473,'carlin sword')
 shopModule:addBuyableItem({'morning star'},2394,430,'morning star')
-shopModule:addBuyableItem({'throwing knife'},2410,25,'throwing knight')
+shopModule:addBuyableItem({'throwing knife'},2410,25,'throwing knife')
 shopModule:addBuyableItem({'two handed sword'},2377,950,'two handed sword')
 shopModule:addBuyableItem({'club'},2382,5,'club')
 shopModule:addBuyableItem({'dagger'},2379,5,'dagger')
@@ -43,5 +43,9 @@ shopModule:addBuyableItem({'rapier'},2384,15,'rapier')
 shopModule:addBuyableItem({'sabre'},2385,25,'sabre')
 shopModule:addBuyableItem({'spear'},2389,10,'spear')
 shopModule:addBuyableItem({'sword'},2376,85,'sword')
+shopModule:addBuyableItem({'axe'}, 2386, 20, 'axe')   -- TibiaWiki 2005-06
+shopModule:addSellableItem({'fire sword'}, 2392, 4000, 'fire sword')   -- TibiaWiki 2005-06
+shopModule:addSellableItem({'longsword'}, 2397, 51, 'longsword')   -- TibiaWiki 2005-06
+shopModule:addSellableItem({'spike sword'}, 2383, 1000, 'spike sword')   -- TibiaWiki 2005-06
 
 npcHandler:addModule(FocusModule:new())

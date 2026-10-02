@@ -10,7 +10,7 @@
                 <parameter key="keyword_reply2" value="Im at your service, any items?" />
 
 <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="crowbar,2416,260;fishing rod,2580,150;backpack,2004,10;pick,2553,50;rope,2120,50;scythe,2550,50;shovel,2554,10;oil,2006,20,11;" />
+        <parameter key="shop_buyable" value="crowbar,2416,260;fishing rod,2580,150;golden backpack,2004,10;pick,2553,50;rope,2120,50;scythe,2550,50;shovel,2554,10;oil,2006,20,11;bag,1987,4;candelabrum,2041,8;candlestick,2047,2;cup,2013,2,0;document,1952,12;parchment,1948,8;plate,2035,6;scroll,1949,5;torch,2050,2;watch,2036,20" />
         <parameter key="shop_sellable" value="rope,2120,8" />
     </parameters>
 </npc>

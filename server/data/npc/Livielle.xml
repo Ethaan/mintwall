@@ -14,6 +14,8 @@
         <parameter key="keywords" value="fruits;job;" />
         <parameter key="keyword_reply1" value="What's your favorite flavour today? I offer all sorts of exotic fruits as well as juice squeezers to create tasty fruit juice. Just ask for a trade!" />
         <parameter key="keyword_reply2" value="Alors, guess what my job might be, standing 'ere in the middle of all these juicy exotic fruits?" />
+		<parameter key="shop_buyable" value="banana,2676,5;blueberry,2677,1;melon,2682,10;orange,2675,10;strawberry,2680,2;white mushroom,2787,10" />
+		<parameter key="module_shop" value="1" />
     </parameters>
 
 </npc>

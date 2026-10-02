@@ -147,7 +147,39 @@ When finishing one, tick it and add a short note (what changed / how verified).
       test_a_knight_shoots_sudden_death_from_magic_level_15.
 - [ ] Existing characters on the live database know no spell now (spell buying is new) - grant them their
       vocation's spells once, or let them buy (decided: they buy - "Must buy, as 7.4"); tell the players
-- [ ] Shop prices: audit buy/sell lists against 7.4 (tibiaot74 data may include 7.72 items)
+- [x] Shop prices: audit buy/sell lists against 7.4 (tibiaot74 data may include 7.72 items)
+      Done 2026-10-01 (decided with the user): Tibiantis first (docs/reference-74/tibiantis/, tools/fetch-tibiantis.py:
+      EQSELL = what NPCs pay, MARKET_COST = the cheapest buy anywhere), then each NPC's own TibiaWiki page, then the
+      wiki consensus (docs/reference-74/npc-shops.md, tools/compare-npc-shops.py). Pages after 7.6 (2005-12-12) kept
+      except for fluids: life fluid 100 again (60 is 7.6's), mana fluid 100. Djinn keep their 2006 wiki prices.
+      - Tibiantis: Shanar buys 10 more weapons, Willard axe/club/sword, Turvy/Romella club, Kroox devil helmet,
+        Beatrice sickle 3 / scythe 12; studded legs 60 (was 50), leather legs bought for 1, Rookgaard studded
+        helmet 63; Romella's double axe was called "battle axe".
+      - Wiki: apple 3, bag 4, beer 2, bottle 3, bucket 4, cup 2, oil 20, dresser 25, trough 7, green tunic 10,
+        brass shield 16 (Hardek), Chemar letter 8 / parcel 15; 41 NPCs got the wares their pages list (Ahmet's
+        general store, food and drink sellers, weapon shops...).
+      - Wrong items: Timur's torch was a lit torch, the trough a pendulum clock, "ranger's cloak" a hidden turbant
+        (no 7.4 item - removed), box a crate, parchment a written one; typos (chesse, dager, throwing knight,
+        weddind ring...); Velvet's pillows renamed to their 7.4 names; worms and Venorean spice (not 7.4) removed.
+      tests: test_npc_data.py (every shop item exists, is called what it is, and what is sold can be carried - all
+      spawned NPCs), test_shops.py (every mainland ware bought and sold in game).
+- [x] Shop questions (decided with the user 2026-10-01): furniture shops sell only what can be carried in 7.4
+      (kits - ids 3901+ - are not 7.4 items; dressers, statues... cannot be carried): pillows, flowers, vases,
+      amphoras, crates, tapestries; Allen and Yulas have nothing left to sell. Coloured bags/backpacks keep their
+      colour under their own name ("golden backpack"). Yaman's rods removed (7.6). Also fixed while testing: empty
+      fluid containers were sold filled (Chephan's bottle with beer, buckets with slime), Chephan's second pot for
+      0 gp, Frodo's two price lists (Food.lua deleted), three wares all called "book" (Gorn, Thomas).
+      Jimbin's whole script sat inside his message callback (keywords and shop added again on every message; he
+      stopped answering "hi").
+- [x] Engine: an item given to a player (a purchase, a quest reward) went into any free slot that took it - a
+      bought life ring into the ring slot, worn and wearing off (2205), a crystal ball into the ammo slot. Now never
+      the ring or the ammo slot (Player::__queryDestination; armor still goes on, as the beginner set). 2026-10-01,
+      test_shops.py test_a_bought_ring_is_not_put_on
+- [ ] Two traders in one shop (Bezil and Nezil, Kazordoon): "hi" greets both and both sell on "yes" - the buyer
+      pays twice. Old NPCs answered anyone in range; keep, or let only the NPC greeted first trade?
+      (test_shops.py SHARED_SHOP xfail)
+- [ ] NPC rune sales (Shiriel, Fenech: TibiaWiki 2006) and Maryza's cookbook not added - runes from NPCs may be
+      7.6; ask when the magic shops are looked at
 
 ## Map / world
 
@@ -873,11 +905,28 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
 
 ## Monsters
 
-- [ ] Loot spike (asked 2026-09-26): is every monster's loot the 7.4 loot - items, counts, chances - and is the gold
+- [x] Loot spike (asked 2026-09-26): is every monster's loot the 7.4 loot - items, counts, chances - and is the gold
       and item value per kill balanced like 7.4? Compare monster/*.xml with a 7.4-era source (TibiaWiki pre-8.0
       creature pages, Tibiantis creature data), list the differences ranked by how much they change the economy.
 
-- [ ] Audit the 102 spawned monster types: stats, loot, spells vs 7.4
+- [x] Audit the 102 spawned monster types: stats, loot, spells vs 7.4
+      Done 2026-10-02 (decided with the user): the 87 spawned monsters Tibiantis has are as Tibiantis has them
+      (tools/apply-tibiantis-monsters.py from docs/reference-74/tibiantis/creatures.json): the loot - our most
+      spawned monsters dropped several times 7.4's value per kill (rotworm 44 gold vs 8, dwarf guard 193 vs 40
+      gold+items, ghoul 48 vs 12, mummy 99 vs 30; the demon less, 592 vs 930) - and hit points (gargoyle 450 ->
+      250, elder beholder 1100 -> 500, pig 150 -> 25), experience (lich 1400 -> 900, valkyrie 185 -> 85, swamp
+      troll 65 -> 25, slime 260 -> 160...), speed (56; ours = 2 x Tibiantis + 80: mummy 220 -> 150, lich 320 ->
+      210), flee point, summon/convince cost. docs/reference-74/monsters.md (tools/compare-monsters.py) compares;
+      test_monsters.py pins them. Elder beholder's "beholder helmet" is no 7.4 item - left out.
+      Left: the 15 without 7.4 data (tomb bosses, traps) keep theirs; spells/attacks not compared (Tibiantis'
+      list has no attack spells) - see 3c below
+- [ ] Flaky quest tests (seen 2026-10-02; Rahemos failed the same way before the monster change, the deathslicer
+      in Morguthis's tomb was not changed):
+      test_tomb_rahemos (Rahemos heals 200-500 on 20% of his turns and summons a demon; the test's sword + heavy
+      magic missiles sometimes do not outpace it in 120 s), test_tomb_morguthis (a deathslicer - unkillable,
+      walks, pushable one square, as TibiaWiki 2006 - stands in the corridor at 33263,32679,13 and the router's
+      push loses to it). Make the fights/route more robust (stronger runes for the pharaoh, push the deathslicer
+      off the path before walking)
 - [ ] Check spawn times/radius are sane for 7.4
 
 ## Game rules and formulas

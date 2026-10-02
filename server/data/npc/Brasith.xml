@@ -15,7 +15,7 @@
         <parameter key="keyword_reply3" value="I sell corncobs, cherries, grapes, melons, pumpkins, bananas, strawberries, and carrots." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="banana,2676,2;carrot,2684,3;cherry,2679,1;corncob,2686,3;grapes,2681,3;melon,2682,8;pumpkin,2683,10;strawberry,2680,1;" />
+        <parameter key="shop_buyable" value="banana,2676,2;carrot,2684,3;cherry,2679,1;corncob,2686,3;grapes,2681,3;melon,2682,8;pumpkin,2683,10;strawberry,2680,1" />
         <parameter key="shop_sellable" value="" />
     </parameters>
 </npc>

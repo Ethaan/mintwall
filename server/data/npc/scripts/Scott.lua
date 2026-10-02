@@ -17,6 +17,10 @@ shopModule:addBuyableItem({'bread'}, 					Cfbread, 4)
 shopModule:addBuyableItem({'cheese'}, 					Cfcheese, 6)
 shopModule:addBuyableItem({'meat'}, 					Cfmeat, 5)
 shopModule:addBuyableItem({'ham'}, 					Cfham, 8)
+shopModule:addBuyableItem({'bread'}, 2689, 4, 'bread')   -- TibiaWiki 2005-06
+shopModule:addBuyableItem({'cheese'}, 2696, 6, 'cheese')   -- TibiaWiki 2005-06
+shopModule:addBuyableItem({'ham'}, 2671, 8, 'ham')   -- TibiaWiki 2005-06
+shopModule:addBuyableItem({'meat'}, 2666, 5, 'meat')   -- TibiaWiki 2005-06
 
 
 keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = "I'm the keeper of the inn. You can buy food here."})

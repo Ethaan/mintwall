@@ -14,10 +14,10 @@
         <parameter key="keywords" value="job;venore;offers;" />
         <parameter key="keyword_reply1" value="I run this market and sell furniture." />
 		<parameter key="keyword_reply2" value="This is the best city in the whole world! We don't care about greedy kings or ambitious priests and the like ..." />
-<parameter key="keyword_reply3" value="red cushioned chair kit, green cushioned chair kit, wooden chair kit, rocking chair kit, sofa chair kit." />
+<parameter key="keyword_reply3" value="Sorry, I have none of those." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="red cushioned chair kit,3903,40;green cushioned chair kit,3904,40;wooden chair kit,3901,15;rocking chair kit,3928,25;sofa chair kit,3902,55;" />
+        <parameter key="shop_buyable" value="" />
     </parameters>
 
 </npc>

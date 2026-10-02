@@ -39,29 +39,20 @@
     <voice sentence="Ulderek futgyr human!"/>
   </voices>
   <loot>
-    <item id="2148" countmax="30" chance1="100000" chancemax="0"/>
-    <item id="2410" countmax="2" chance1="50000" chancemax="0"/>
-    <item id="2419" chance="10000"/>
-    <item id="2510" chance="5000"/>
-    <item id="2667" countmax="1" chance1="20000" chancemax="0"/>
-    <item id="2647" chance="1818"/>
-    <item id="2413" chance="2857"/>
-    <item id="1988" chance="20000">
-      <inside>
-        <item id="2148" countmax="1" chance1="2857" chancemax="0"/>
-      </inside>
-    </item>
-    <item id="1987" chance="100000">
-      <inside>
-        <item id="2207" chance="2000"/>
-        <item id="2666" countmax="2" chance1="33333" chancemax="0"/>
-        <item id="2379" chance="6666"/>
-        <item id="2475" chance="1000"/>
-        <item id="2397" chance="10000"/>
-        <item id="2652" chance="2500"/>
-        <item id="2478" chance="2857"/>
-        <item id="2463" chance="1818"/>
-      </inside>
-    </item>
+    <item id="2667" chance="30000"/>   <!-- fish -->
+    <item id="2148" countmax="35" chance="28000"/>   <!-- gold coin -->
+    <item id="2379" chance="23000"/>   <!-- dagger -->
+    <item id="1988" chance="20000"/>   <!-- backpack -->
+    <item id="2666" countmax="2" chance="15000"/>   <!-- meat -->
+    <item id="2419" chance="12000"/>   <!-- scimitar -->
+    <item id="2510" chance="10000"/>   <!-- plate shield -->
+    <item id="2410" countmax="4" chance="10000"/>   <!-- throwing knife -->
+    <item id="2397" chance="8000"/>   <!-- longsword -->
+    <item id="2207" chance="4000"/>   <!-- sword ring -->
+    <item id="2478" chance="2500"/>   <!-- brass legs -->
+    <item id="2463" chance="1500"/>   <!-- plate armor -->
+    <item id="2413" chance="800"/>   <!-- broad sword -->
+    <item id="2647" chance="400"/>   <!-- plate legs -->
+    <item id="2475" chance="100"/>   <!-- warrior helmet -->
   </loot>
 </monster>

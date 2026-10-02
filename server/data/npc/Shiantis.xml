@@ -33,7 +33,7 @@
 		<parameter key="keyword_reply21" value="You will have to visit that spooky magic market for that stuff." />
 	
 	<parameter key="module_shop" value="1"/>
-    <parameter key="shop_buyable" value="oil,2006,20,11;torch,2050,2;candelabrum,2041,8;candlestick,2047,2;coal basin,1484,25;bag,1993,5;backpack,2000,20;present,1990,10;scroll,1949,5;document,1952,12;parchment,1948,8;brown book,1971,15;black book,1972,15;small book,1959,15;watch,2036,20;football,2109,111;" />
+    <parameter key="shop_buyable" value="oil,2006,20,11;torch,2050,2;candelabrum,2041,8;candlestick,2047,2;red bag,1993,5;red backpack,2000,20;present,1990,10;scroll,1949,5;document,1952,12;parchment,1948,8;brown book,1971,15;black book,1972,15;small book,1959,15;watch,2036,20;book,1958,15" />
     <parameter key="shop_sellable" value="vial,2006,5" />
 	
 	</parameters>

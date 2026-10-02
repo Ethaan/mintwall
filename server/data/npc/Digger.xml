@@ -17,8 +17,8 @@
 		  <parameter key="keyword_reply3" value="They call me Digger, that's fine with me." />
 		  <parameter key="keyword_reply4" value="I think the FRANS is bugged." />
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="life fluid,2006,60,10;mana fluid,2006,100,7;blank rune,2260,10;spellbook,2175,150" />
-        <parameter key="shop_sellable" value="vial,2006,5;" />
+        <parameter key="shop_buyable" value="life fluid,2006,100,10;mana fluid,2006,100,7;blank rune,2260,10;spellbook,2175,150" />
+        <parameter key="shop_sellable" value="vial,2006,5" />
     </parameters>
 
 </npc>

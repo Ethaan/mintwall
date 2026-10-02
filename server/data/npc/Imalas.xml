@@ -17,7 +17,7 @@
 		<parameter key="keyword_reply5" value="I sell banana, brown bread, carrot, cheese, cherry, cookie, egg, grapes, melon, pumpkin, roll." />
 
         <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="banana,2676,2;brown bread,2691,3;carrot,2684,2;cheese,2696,5;cherry,2679,1;cookie,2687,2;egg,2695,2;grapes,2681,3;melon,2682,8;pumpkin,2683,10;roll,2690,2;" />
+        <parameter key="shop_buyable" value="banana,2676,2;brown bread,2691,3;carrot,2684,2;cheese,2696,5;cherry,2679,1;cookie,2687,2;egg,2695,2;grapes,2681,3;melon,2682,8;pumpkin,2683,10;roll,2690,2" />
         <parameter key="shop_sellable" value="" />
     </parameters>
 </npc>

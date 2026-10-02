@@ -13,13 +13,13 @@
 		
   <parameter key="module_keywords" value="1" />
         <parameter key="keywords" value="offers;" />
-        <parameter key="keyword_reply1" value="I sell big table kit, round table kit, small table kit, square table kit." />
+        <parameter key="keyword_reply1" value="Sorry, I have none of those." />
 	
 
 
 
 
 <parameter key="module_shop" value="1" />
-		<parameter key="shop_buyable" value="big table kit,3909,35;round table kit,3911,25;small table kit,3912,20;square table kit,3910,25;" />
+		<parameter key="shop_buyable" value="" />
     </parameters>
 </npc>

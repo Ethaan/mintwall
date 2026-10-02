@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="dog" nameDescription="a dog" race="blood" experience="0" speed="200" manacost="220">
+<monster name="dog" nameDescription="a dog" race="blood" experience="0" speed="124" manacost="220">
   <health now="20" max="20"/>
   <look type="32" head="20" body="30" legs="40" feet="50" corpse="2839"/>
   <targetchange interval="2000" chance="0"/>
@@ -35,4 +35,6 @@
   <voices interval="5000" chance="10">
     <voice sentence="hufhuf"/>
   </voices>
+  <loot>
+  </loot>
 </monster>

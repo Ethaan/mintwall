@@ -15,7 +15,7 @@
         <parameter key="keyword_reply2" value="I sell various herbs, mushrooms, and flowers." />
 		
 		        <parameter key="module_shop" value="1"/>
-        <parameter key="shop_buyable" value="white mushroom,2787,6;red mushroom,2788,12;brown mushroom,2789,10;rose,2744,11;tulip,2754,9;stone herb,2799,28;star herb,2800,21;fern,2801,24;" />
+        <parameter key="shop_buyable" value="white mushroom,2787,6;red mushroom,2788,12;brown mushroom,2789,10;rose,2744,11;tulip,2754,9;stone herb,2799,28;star herb,2800,21;fern,2801,24" />
         <parameter key="shop_sellable" value="" />
     </parameters>
 </npc>

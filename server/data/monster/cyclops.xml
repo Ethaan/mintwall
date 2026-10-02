@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="cyclops" nameDescription="a cyclops" race="blood" experience="150" speed="200" manacost="490">
+<monster name="cyclops" nameDescription="a cyclops" race="blood" experience="150" speed="190" manacost="490">
   <health now="260" max="260"/>
   <look type="22" head="0" body="0" legs="0" feet="0" corpse="3069"/>
   <targetchange interval="5000" chance="8"/>
@@ -40,20 +40,15 @@
     <voice sentence="Let da mashing begin!"/>
   </voices>
   <loot>
-    <item id="2148" countmax="80" chance1="100000" chancemax="0"/>
-    <item id="2406" chance="33333"/>
-    <item id="2209" chance="2000"/>
-    <item id="2490" chance="4000"/>
-    <item id="2129" chance="6666"/>
-    <item id="2666" countmax="3" chance1="33333" chancemax="0"/>
-    <item id="1987" chance="100000">
-      <inside>
-        <item id="2513" chance="2500"/>
-        <item id="2511" chance="2857"/>
-        <item id="2381" chance="5000"/>
-        <item id="2148" countmax="10" chance1="20000" chancemax="0"/>
-        <item id="2671" countmax="3" chance1="33333" chancemax="0"/>
-      </inside>
-    </item>
+    <item id="2148" countmax="30" chance="82000"/>   <!-- gold coin -->
+    <item id="2666" chance="50000"/>   <!-- meat -->
+    <item id="2671" countmax="2" chance="20000"/>   <!-- ham -->
+    <item id="2406" chance="8000"/>   <!-- short sword -->
+    <item id="2510" chance="2000"/>   <!-- plate shield -->
+    <item id="2513" chance="1500"/>   <!-- battle shield -->
+    <item id="2381" chance="700"/>   <!-- halberd -->
+    <item id="2490" chance="200"/>   <!-- dark helmet -->
+    <item id="2129" chance="200"/>   <!-- wolf tooth chain -->
+    <item id="2209" chance="100"/>   <!-- club ring -->
   </loot>
 </monster>

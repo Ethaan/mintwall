@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="swamp troll" nameDescription="a swamp troll" race="VENOM" experience="65" speed="128" manacost="320">
+<monster name="swamp troll" nameDescription="a swamp troll" race="VENOM" experience="25" speed="128" manacost="320">
   <health now="55" max="55"/>
   <look type="76" head="20" body="30" legs="40" feet="50" corpse="2995"/>
   <targetchange interval="5000" chance="0"/>
@@ -38,14 +38,11 @@
     <voice sentence="Me strong! Me ate spinach!"/>
   </voices>
   <loot>
-    <item id="2148" countmax="12" chance1="100000" chancemax="0"/>
-    <item id="2667" countmax="1" chance1="90000" chancemax="0"/>
-    <item id="1987" chance="100000">
-      <inside>
-        <item id="2643" chance="20000"/>
-        <item id="2050" chance="20000"/>
-        <item id="2580" chance="20000"/>
-      </inside>
-    </item>
+    <item id="2667" chance="60000"/>   <!-- fish -->
+    <item id="2148" countmax="5" chance="50000"/>   <!-- gold coin -->
+    <item id="2379" chance="30000"/>   <!-- dagger -->
+    <item id="2050" chance="15000"/>   <!-- torch -->
+    <item id="2643" chance="10000"/>   <!-- leather boots -->
+    <item id="2580" chance="100"/>   <!-- fishing rod -->
   </loot>
 </monster>
