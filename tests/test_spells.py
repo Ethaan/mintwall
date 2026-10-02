@@ -131,16 +131,13 @@ def test_conjuring_makes_a_usable_rune(new_player, items, vocation, words, rune)
 # Calls to functions nothing defines (tibia74/luascan.py). Each is a task in task.md; this list may only
 # shrink - a new name here is a script that fails when that line runs.
 KNOWN_UNDEFINED = {
-    # promotion module of the NPC system
-    "getPlayerPromotionLevel",
     # death / kill broadcasts, raid announcements
     "broadcastMessage",
     # GM ban manager (talkactions/scripts/banmanager.lua)
     "addAccountBan", "addPlayerBan", "removeAccountBan", "removePlayerBan", "getAccountBanList",
     "getPlayersByAccountNumber",
-    # marriage and banks: not 7.4, to be removed
-    "addMarryStatus", "doCancelMarryStatus", "doItemSetAttribute", "getMarryStatus", "getOwnMarryStatus",
-    "getPlayerMarriage", "getPlayerPartner", "setPlayerPartner", "isOnline", "getPlayerByName",
+    # the banks (not 7.4): their NPCs are no longer spawned (bank.lua kept for reference)
+    "getPlayerByName",
     # NPC system leftovers
     "doNpcSellItem", "getPlayerPVPBlessing", "getPlayerLookDir",
 }

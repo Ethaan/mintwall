@@ -118,14 +118,26 @@ def test_oracle_sends_away_players_below_level_8(new_player, world):
     assert any("COME BACK WHEN YOU HAVE GROWN UP" in r for r in p.talk("hi", npc="The Oracle"))
 
 
+@pytest.mark.parametrize("premium_days", [0, 30])
+def test_oracle_offers_carlin_thais_and_venore(new_player, world, premium_days):
+    """The 2005 Oracle: the three free towns, premium or not (decided with the user 2026-10-01)."""
+    p = _near_oracle(new_player, world, level=8)
+    replies = p.talk("hi", "yes", "edron", npc="The Oracle")
+    assert any("CARLIN, THAIS, OR VENORE?" in r for r in replies), replies
+    assert not any("IN EDRON" in r for r in replies), replies
+
+
 def test_oracle_turns_a_level_8_into_a_knight_of_thais(new_player, world, db):
     p = _near_oracle(new_player, world, level=8)
     replies = p.talk("hi", "yes", "thais", "knight", npc="The Oracle")
     assert any("ARE YOU SURE" in r for r in replies), replies
     assert any("IN WHICH TOWN" in r for r in replies), replies
     assert not any("{" in r or "}" in r for r in replies), f"8.x {{keyword}} braces in 7.4 text: {replies}"
-    p.say("yes")   # the Oracle teleports us at once, so its "SO BE IT" is said after we're gone
+    items = len(p.all_items())
+    # he teleports us a moment after "SO BE IT!", so we hear it
+    assert "SO BE IT!" in p.talk("yes", npc="The Oracle", wait=1)
     assert p.wait_for(lambda: p.pos == THAIS_TEMPLE, timeout=5), f"not teleported to Thais: {p.pos}"
+    assert len(p.all_items()) == items, "the Oracle gave a starter kit (7.4 had none)"
 
     p.logout()
     row = db.character(p.character.guid)
@@ -206,16 +218,20 @@ ANKRAHMUN_TEMPLE, ANKRAHMUN_TOWN = (33194, 32853, 8), 9   # from Tibia74.otbm
 
 
 def test_gatekeeper_sends_a_premium_level_8_to_ankrahmun(new_player, world, db):
-    """The premium side's Oracle (west of King's Bridge): Ankrahmun, Darashia or Edron."""
+    """The premium side's Oracle (west of King's Bridge): Ab'Dendriel, Ankrahmun, Darashia or Kazordoon."""
     keeper = world.npcs["The Gatekeeper"]
     # snakes roam the (unprotected) room; an attacked player cannot log out, so use the unattackable group
     p = new_player(level=8, premium_days=30, pos=(keeper[0], keeper[1] + 1, keeper[2]),   # +2 is a trapdoor
                    group_id=TESTER_GROUP)
     assert distance(p.pos, keeper) <= 3, f"could not place the player near the Gatekeeper: {p.pos}"
-    replies = p.talk("hi", "yes", "ankrahmun", "knight", npc="The Gatekeeper")
+    replies = p.talk("hi", "yes", "edron", "ankrahmun", "knight", npc="The Gatekeeper")
+    assert any("Ab'Dendriel, Ankrahmun, Darashia or Kazordoon?" in r for r in replies), replies
+    assert not any("Edron will be" in r for r in replies), replies
     assert any("Are you sure" in r for r in replies), replies
+    items = len(p.all_items())
     p.say("yes")
     assert p.wait_for(lambda: p.pos == ANKRAHMUN_TEMPLE, timeout=5), f"not teleported to Ankrahmun: {p.pos}"
+    assert len(p.all_items()) == items, "the Gatekeeper gave a starter kit (7.4 had none)"
 
     p.logout()
     row = db.character(p.character.guid)
@@ -261,3 +277,51 @@ def test_rookgaard_is_non_pvp(new_player, attacker_vocation, target_vocation):
         attacker.text_messages[-3:]
     attacker.sleep(4)                                                          # two attack turns
     assert target.stats.health == health, f"the target lost {health - target.stats.health} hp"
+
+
+# ----------------------------------------------------------------------------- shopkeepers (TibiaWiki 2005)
+
+GOLD = 2148
+
+
+def _shop_customer(new_player, npc, premium_days=0, items=()):
+    from tibia74 import BACKPACK
+    from tibia74.quest import next_to, npc_pos
+    p = next_to(new_player, npc_pos(npc), premium_days=premium_days, group_id=TESTER_GROUP,
+                inventory={BACKPACK: Item(BAG, contents=list(items))})
+    assert p.open_container(BACKPACK), "no backpack"
+    return p
+
+
+def test_seymour_pays_2_gold_for_a_dead_rat(new_player):
+    """TibiaWiki 2005: "At earlier levels you can give him a rat corpse for 2 Gold"."""
+    from tibia74.quest import talk_to
+    p = _shop_customer(new_player, "Seymour", items=[Item(DEAD_RAT)])
+    replies = talk_to(p, "Seymour", "hi", "sell dead rat", "yes")
+    assert p.wait_for(lambda: _gold(p) == 2, timeout=5), f"no gold; Seymour said {replies}"
+    assert not any(i.name == "dead rat" for i in p.all_items()), "the rat is still in the backpack"
+
+
+def test_lee_delle_sells_at_the_2005_prices_and_no_football(new_player):
+    """TibiaWiki 2005-11: spear 10 gp; no football on her list (ours sold one for 111)."""
+    from tibia74.quest import talk_to
+    p = _shop_customer(new_player, "Lee'Delle", premium_days=30, items=[Item(GOLD, count=10)])
+    replies = talk_to(p, "Lee'Delle", "hi", "buy football", "buy spear", "yes")
+    assert not any("football" in r.lower() for r in replies), replies
+    assert p.wait_for(lambda: any(i.name == "spear" for i in p.all_items()), timeout=5), replies
+    assert _gold(p) == 0, f"a spear cost {10 - _gold(p)} gp, not 10"
+
+
+@pytest.mark.parametrize("premium_days", [0, 30])
+def test_norma_sells_equipment_to_premium_players_only(new_player, premium_days):
+    """TibiaWiki 2005: "Norma is a premium npc ... she sells and buys equipments for adventurers"."""
+    from tibia74.quest import talk_to
+    p = _shop_customer(new_player, "Norma", premium_days=premium_days, items=[Item(GOLD, count=10)])
+    replies = talk_to(p, "Norma", "hi", "buy spear", "yes")
+    bought = p.wait_for(lambda: any(i.name == "spear" for i in p.all_items()), timeout=3)
+    if premium_days:
+        assert bought, replies
+        assert _gold(p) == 0
+    else:
+        assert not bought and _gold(p) == 10, replies
+        assert any("only trade with premium" in r for r in replies), replies

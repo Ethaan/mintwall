@@ -1,7 +1,18 @@
-
-<npc name="Lynda" script="marriagesystem.lua" walkinterval="2000">
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Lynda, priestess of the great pantheon in Thais (TibiaWiki 2006: "a priest of great pantheon. She is a servant of
+     gods of good ... She knows a lot about Tibian Gods"; her weddings were role-play). The marriage system she ran is no
+     Tibia feature - removed (decided with the user 2026-10-01). Her words are ours (no transcript). -->
+<npc name="Lynda" script="default.lua" walkinterval="2000">
 	<health now="150" max="150"/>
 	<look type="138" head="79" body="82" legs="67" feet="114" corpse="2212"/>
 	<parameters>
+		<parameter key="message_greet" value="Welcome in the name of the gods, |PLAYERNAME|."/>
+		<parameter key="message_farewell" value="May the gods bless you."/>
+		<parameter key="module_keywords" value="1" />
+		<parameter key="keywords" value="name;job;gods;pantheon" />
+		<parameter key="keyword_reply1" value="I am Lynda." />
+		<parameter key="keyword_reply2" value="I am a priestess of the great pantheon." />
+		<parameter key="keyword_reply3" value="I serve the gods of good, and I beware of the gods of evil." />
+		<parameter key="keyword_reply4" value="I serve the gods of good, and I beware of the gods of evil." />
 	</parameters>
 </npc>

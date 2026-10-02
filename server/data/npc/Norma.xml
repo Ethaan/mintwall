@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<npc name="Norma" script="default.lua" walkinterval="2000" floorchange="0">
+<!-- 7.4: a premium shopkeeper of equipment (TibiaWiki 2005: "Norma is a premium npc, she only attends premium people.
+     Just like Al Dee, she sells and buys equipments for adventurers"; her wares and prices are Lee'Delle's). She became
+     the food seller of the 2008 Rookgaard. -->
+<npc name="Norma" script="premiumshop.lua" walkinterval="2000" floorchange="0">
 	<health now="100" max="100" />
 	<look type="136" head="78" body="76" legs="72" feet="96" addons="2" />
 	<parameters>
-		<parameter key="message_farewell" value="Come back soon!" />
-		<parameter key="message_sendtrade" value="Take all the time you need to decide what you want!" />
+		<parameter key="message_greet" value="Hello, |PLAYERNAME|! Need some equipment for your adventures?" />
+		<parameter key="message_farewell" value="Good bye, and come back soon!" />
+		<parameter key="message_walkaway" value="Good bye, and come back soon!" />
 		<parameter key="module_keywords" value="1" />
-		<parameter key="keywords" value="hi;name;Norma;addon;food;" />
-		<parameter key="keyword_reply1" value="Welcome, welcome! Have a seat! If you like a drink or something to eat, just ask me for a {trade}!" />
-		<parameter key="keyword_reply2" value="Well, my name is {Norma}." />
-		<parameter key="keyword_reply3" value="I hate that name, it sounds so boring. Almost like 'normal'. I think I should change my name to something more exciting. Like... Marylin! Oh, what a glamorous sound!" />
-		<parameter key="keyword_reply4" value="Sorry, but I don't have time for that right now. There's some serious partying to do!" />
-		<parameter key="keyword_reply5" value="Oh, would you like something to eat or drink? Ask me for a {trade} to see my offers!" />
+		<parameter key="keywords" value="name;job;help;offer;weapons;shields;armors;helmets;equipment;" />
+		<parameter key="keyword_reply1" value="My name is Norma." />
+		<parameter key="keyword_reply2" value="I sell and buy equipment for adventurers." />
+		<parameter key="keyword_reply3" value="I can help you with equipment for your adventures." />
+		<parameter key="keyword_reply4" value="I sell weapons, shields, armor, helmets, and equipment. For what do you want to ask?" />
+		<parameter key="keyword_reply5" value="I sell spears, rapiers, sabres, daggers, hand axes, axes, and short swords. Just tell me what you want to buy." />
+		<parameter key="keyword_reply6" value="I sell wooden shields and studded shields. Just tell me what you want to buy." />
+		<parameter key="keyword_reply7" value="I sell jackets, coats, doublets, leather armor, and leather legs. Just tell me what you want to buy." />
+		<parameter key="keyword_reply8" value="I sell leather helmets, studded helmets, and chain helmets. Just tell me what you want to buy." />
+		<parameter key="keyword_reply9" value="I sell torches, bags, scrolls, shovels, backpacks, sickles, scythes, ropes and fishing rods. Just tell me what you want to buy." />
 		<parameter key="module_shop" value="1" />
-		<parameter key="shop_buyable" value="bread,2689,3;cheese,2696,5;egg,2695,2;mug of wine,2012,3,15;mug of beer,2012,3,3;mug of milk,2012,2,6;mug of lemonade,2012,2,5;;" />
+		<parameter key="shop_buyable" value="torch,2050,2;bag,1987,4;scroll,1949,5;shovel,2554,10;backpack,1988,10;sickle,2405,8;scythe,2550,12;rope,2120,50;fishing rod,2580,150;spear,2389,10;rapier,2384,15;sabre,2385,25;dagger,2379,5;hand axe,2380,8;axe,2386,20;short sword,2406,30;wooden shield,2512,15;studded shield,2526,50;coat,2651,8;jacket,2650,10;doublet,2485,16;leather armor,2467,25;leather legs,2649,10;leather helmet,2461,12;studded helmet,2482,62;chain helmet,2458,52" />
+		<parameter key="shop_sellable" value="axe,2386,7;bone club,2449,5;brass helmet,2460,22;brass shield,2511,25;chain armor,2464,40;chain helmet,2458,12;copper shield,2530,50;dagger,2379,2;doublet,2485,3;leather armor,2467,5;leather boots,2643,2;leather helmet,2461,3;leather legs,2649,2;legion helmet,2480,22;plate shield,2510,40;studded armor,2484,10;studded helmet,2482,20;studded legs,2468,15;studded shield,2526,16;viking helmet,2473,25;hand axe,2380,4;hatchet,2388,25;katana,2412,35;mace,2398,30;machete,2420,6;rapier,2384,5;rope,2120,8;sword,2376,25;sabre,2385,12;short sword,2406,10;sickle,2405,2;spear,2389,3;scythe,2550,3;sickle,2405,2;shovel,2554,2;wooden shield,2512,3;fishing rod,2580,30" />
 	</parameters>
 </npc>

@@ -93,7 +93,6 @@
 	<spawn centerx="32919" centery="32075" centerz="7" radius="1"><npc name="Dove" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32617" centery="31938" centerz="8" radius="3"><npc name="Duria" x="0" y="0" z="8" spawntime="60"/></spawn>
 	<spawn centerx="32914" centery="32076" centerz="6" radius="14"><npc name="Dustrunner" x="0" y="0" z="6" spawntime="60"/></spawn>
-	<spawn centerx="33175" centery="31801" centerz="7" radius="1"><npc name="Ebenizer" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32698" centery="31718" centerz="2" radius="3"><npc name="Edala" x="0" y="0" z="2" spawntime="60"/></spawn>
 	<spawn centerx="32168" centery="32431" centerz="7" radius="3"><npc name="Eddy" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="33232" centery="32430" centerz="7" radius="1"><npc name="Edoch" x="0" y="0" z="7" spawntime="60" direction="3"/></spawn>
@@ -107,7 +106,6 @@
 	<spawn centerx="33322" centery="31883" centerz="7" radius="3"><npc name="Eremo" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32661" centery="31685" centerz="6" radius="4"><npc name="Eroth" x="0" y="0" z="6" spawntime="60"/></spawn>
 	<spawn centerx="32626" centery="31917" centerz="5" radius="3"><npc name="Etzel" x="0" y="0" z="5" spawntime="60"/></spawn>
-	<spawn centerx="32327" centery="31781" centerz="7" radius="2"><npc name="Eva" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="33106" centery="32541" centerz="5" radius="1"><npc name="Fa'Hradin" x="0" y="0" z="5" spawntime="60"/></spawn>
 	<spawn centerx="33190" centery="31777" centerz="7" radius="3"><npc name="Falk" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32660" centery="31673" centerz="7" radius="5"><npc name="Faluae" x="0" y="0" z="7" spawntime="60"/></spawn>
@@ -194,7 +192,6 @@
 	<spawn centerx="33240" centery="32393" centerz="6" radius="2"><npc name="Morun" x="0" y="0" z="6" spawntime="60"/></spawn>
 	<spawn centerx="33220" centery="32416" centerz="7" radius="1"><npc name="Mugluf" x="0" y="0" z="7" spawntime="60" direction="2"/></spawn>
 	<spawn centerx="32296" centery="32263" centerz="7" radius="2"><npc name="Muriel" x="0" y="0" z="7" spawntime="60"/></spawn>
-	<spawn centerx="33222" centery="32390" centerz="7" radius="1"><npc name="Muzir" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="33104" centery="32520" centerz="2" radius="1"><npc name="Nah'Bob" x="0" y="0" z="2" spawntime="60"/></spawn>
 	<spawn centerx="32883" centery="32086" centerz="6" radius="2"><npc name="Nelliem" x="0" y="0" z="6" spawntime="60"/></spawn>
 	<spawn centerx="32615" centery="32108" centerz="10" radius="4"><npc name="Nemal" x="0" y="0" z="10" spawntime="60"/></spawn>
@@ -232,7 +229,6 @@
 	<spawn centerx="32287" centery="32252" centerz="6" radius="3"><npc name="Robin" x="0" y="0" z="6" spawntime="60"/></spawn>
 	<spawn centerx="32672" centery="31699" centerz="6" radius="4"><npc name="Roderick" x="0" y="0" z="6" spawntime="60"/></spawn>
 	<spawn centerx="32971" centery="32041" centerz="6" radius="1"><npc name="Rodney" x="0" y="0" z="6" spawntime="60"/></spawn>
-	<spawn centerx="33021" centery="32053" centerz="6" radius="2"><npc name="Rokyn" x="0" y="0" z="6" spawntime="60"/></spawn>
 	<spawn centerx="32913" centery="32117" centerz="6" radius="1"><npc name="Romella" x="0" y="0" z="6" spawntime="60"/></spawn>
 	<spawn centerx="32971" centery="32034" centerz="6" radius="2"><npc name="Rose" x="0" y="0" z="6" spawntime="60"/></spawn>
 	<spawn centerx="32324" centery="31794" centerz="7" radius="3"><npc name="Rowenna" x="0" y="0" z="7" spawntime="60"/></spawn>
@@ -254,7 +250,6 @@
 	<spawn centerx="32979" centery="32087" centerz="6" radius="1"><npc name="Smiley" x="0" y="0" z="6" spawntime="60"/></spawn>
 	<spawn centerx="32657" centery="32190" centerz="8" radius="4"><npc name="Snake Eye" x="0" y="0" z="8" spawntime="60"/></spawn>
 	<spawn centerx="32310" centery="32170" centerz="6" radius="1"><npc name="Stutch" x="0" y="0" z="6" spawntime="60"/></spawn>
-	<spawn centerx="32320" centery="32258" centerz="7" radius="2"><npc name="Suzy" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32044" centery="31582" centerz="7" radius="2"><npc name="Svenson" x="0" y="0" z="7" spawntime="60"/></spawn>
 	<spawn centerx="32897" centery="32145" centerz="4" radius="3"><npc name="Sylvester" x="0" y="0" z="4" spawntime="60"/></spawn>
 	<spawn centerx="32979" centery="32035" centerz="5" radius="1"><npc name="Talesia" x="0" y="0" z="5" spawntime="60"/></spawn>

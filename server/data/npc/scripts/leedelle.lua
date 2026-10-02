@@ -1,3 +1,6 @@
+-- Lee'Delle (Rookgaard, the premium side): the XML shop, premium only (npc/lib/premiumshop.lua), and the honey flower.
+dofile(getDataDir() .. 'npc/lib/premiumshop.lua')
+
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
 NpcSystem.parseParameters(npcHandler)
@@ -31,4 +34,5 @@ local function creatureSayCallback(cid, type, msg)
 end
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
+premiumShop(npcHandler)
 npcHandler:addModule(FocusModule:new())

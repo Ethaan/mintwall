@@ -22,8 +22,10 @@ When finishing one, tick it and add a short note (what changed / how verified).
 - [x] 7.4 beginner set on first login (club, torch, bag with a red apple, jacket/coat) and the
       "noob outfit" (head 78, body 69, legs 58, feet 114 - picked in the real client); login creature events
       were never called by the engine - fixed
-- [ ] Oracle gives a vocation bag (TFS-era, not 7.4) - keep or remove?
-- [ ] Oracle's "SO BE IT" is never seen (player is teleported first) - delay the teleport slightly?
+- [x] Oracle gives a vocation bag (TFS-era, not 7.4) - keep or remove?
+      Done 2026-10-01: removed (decided with the user: 7.4 had no starter kit). npc/lib/oracle.lua
+- [x] Oracle's "SO BE IT" is never seen (player is teleported first) - delay the teleport slightly?
+      Done 2026-10-01: the player is teleported 1 s after it. test_oracle_turns_a_level_8_into_a_knight_of_thais
 - [ ] More journey tests: rookgaard shops buy/sell with money, sewers/ladders, death in Rookgaard, reaching level 8 via exp
 
 ## NPCs
@@ -50,13 +52,31 @@ When finishing one, tick it and add a short note (what changed / how verified).
 - [x] The Gatekeeper (Rookgaard premium side, 32035,32183,6 - the map's blackboards describe him): the
       premium Oracle (Ankrahmun, Darashia, Edron). Ankrahmun and Edron had swapped town ids (respawn in
       the wrong city) - now looked up by name, destination = the town's temple. test_rookgaard.py
-- [ ] Gatekeeper and Oracle hand out vocation starter kits (TFS-era) - 7.4 had none? (reference task)
-- [ ] Questions for the 7.4 reference: did Lee'Delle sell footballs (111 gp)? Seymour buys dead rats?
+- [x] Gatekeeper and Oracle hand out vocation starter kits (TFS-era) - 7.4 had none? (reference task)
+      Done 2026-10-01 (decided with the user): no kit, and the 2005 TibiaWiki town lists - the Oracle Carlin,
+      Thais, Venore (premium or not), the Gatekeeper Ab'Dendriel, Ankrahmun, Darashia, Kazordoon (no Edron, no
+      Port Hope; the Island of Destiny branch is gone). Both are oracleNpc{} (npc/lib/oracle.lua).
+      test_rookgaard.py: test_oracle_offers_carlin_thais_and_venore, test_gatekeeper_sends_a_premium_level_8_...
+- [x] Questions for the 7.4 reference: did Lee'Delle sell footballs (111 gp)? Seymour buys dead rats?
       Norma's lines are 8.x ("ask me for a trade"); NPC muting when talking fast to NPCs
-- [ ] After the Rookgaard NPC tests: gather a 7.4-era reference (prices, NPC dialogue, spell lists)
+      Done 2026-10-01 (TibiaWiki 2005 revisions): Lee'Delle sold no football - removed; her prices were the
+      2005 list (spear 10, rope 50, ...; ours were ~10% under). Seymour paid 2 gold for a rat corpse - kept
+      (it works). Norma was a premium equipment shopkeeper at the same spot (food seller only from 2008):
+      now Lee'Delle's wares and prices; both trade with premium accounts only (npc/lib/premiumshop.lua; the
+      refusal line is ours). Muting: kept - the engine's message buffer mutes NPC talk like any talk in the
+      default channel, as 7.x did. test_rookgaard.py: test_seymour_pays_2_gold_for_a_dead_rat,
+      test_lee_delle_sells_at_the_2005_prices_and_no_football, test_norma_sells_equipment_to_premium_...
+- [x] After the Rookgaard NPC tests: gather a 7.4-era reference (prices, NPC dialogue, spell lists)
       from a source like TibiaWiki's history/archived pages, store it in the repo and compare our NPCs
       against it (then the same for the other towns)
-- [ ] Write real dialogue for The Queen of the Banshees (placeholder greets only)
+      Done 2026-10-01: docs/reference-74/npc-shops.json (tools/wiki-npc-reference.py: each spawned NPC's
+      earliest TibiaWiki revision with a ware list before 8.0 - mostly late 2005/2006; raw text kept) and
+      npc-shops.md (tools/compare-npc-shops.py: 124 shops differ, 16 match, 10 have no list - a guide: the
+      early lists were partly copied between NPCs and have typos). docs/reference-74/spells.json
+      (tools/wiki-spell-reference.py: 60 of 66 spells from May 2005 infoboxes - level, magic level, mana,
+      price, where taught). Dialogue: not collected (the 2005 pages have almost none).
+- [x] Write real dialogue for The Queen of the Banshees (placeholder greets only)
+      Done 2026-09-25 with the Banshee Quest (npc/scripts/banshee_queen.lua, the TibiaWiki transcripts; test_banshee.py)
 - [x] Replace Donald McRonald placeholder with his real 7.4 NPC
       Done 2026-09-30: his TibiaWiki 2006 trade (wheat 1, cheese 5, carrots 3 gp; dead spiders bought at 2 gp) and a
       few lines (ours - no transcript). Sherry McRonald could not be greeted (her shop and greeting were set up inside a
@@ -79,8 +99,20 @@ When finishing one, tick it and add a short note (what changed / how verified).
       the ice ferrymen no longer offer their own island. Spawns: Captain Greyhound's npc z 6 -> 7 and Christoph's
       7 -> 6 (the engine uses the spawn centre's floor; the tests read the npc's). test_travel.py
       test_captains_sail_the_74_routes
-- [ ] Guards (Grof, Tim, Kulag, Walter): scripts use `getMonstersfromArea` - implement or rewrite
-- [ ] Remove or neutralize non-7.4 NPC features: banks (bank.lua, evabank.lua, Lokur), marriage, addon outfits
+- [x] Guards (Grof, Tim, Kulag, Walter): scripts use `getMonstersfromArea` - implement or rewrite
+      Done 2026-09-30: npc/lib/guard.lua. TibiaWiki 2006: each "protects the city from creatures" at a Thais gate;
+      decided with the user: a guard kills a wild monster within 4 tiles on his floor ("Get lost, you beast!"; a
+      player's summon is left alone), the rat bounty pays 1 gold for a dead rat (taken), insults burn. Before: Kulag
+      and Walter erased 401+ HP monsters through a global getMonstersfromArea in the shared Lua state, Grof never
+      answered anything (npcHandler.focus), the bounty paid nothing and the fire was no condition.
+      tests/test_guards.py
+- [x] Remove or neutralize non-7.4 NPC features: banks (bank.lua, evabank.lua, Lokur), marriage, addon outfits
+      Done 2026-10-01 (decided with the user): the bankers Ebenizer, Eva, Muzir, Rokyn and Suzy (TibiaWiki pages start
+      January 2007 - the bank update) are no longer spawned (files kept). Tesha and Tezila stay jewellers (their NPC-file
+      shops; no bank, no money changing - Tezila's "weddind ring" fixed). Lokur is the postman only (his 470-line
+      script was a bank around one Postman line; his greeting named a player "Andrewsorcerer", his city list had Port
+      Hope). Lynda is a Thais priestess again (marriage system removed; marriagesystem.lua and changegold.lua deleted).
+      No NPC offered addon outfits.
 - [x] Promotion NPCs: verify 7.4 rules (level 20, 20k gp, premium) and that `doPlayerSetPromotionLevel` shim is right
       Done 2026-09-30: nobody could be promoted - StdModule.promotePlayer called getPlayerPromotionLevel (it did not
       exist; now in compat.lua: vocation 5-8 = promoted) and read a config key that does not exist. TibiaWiki 2005
@@ -89,8 +121,14 @@ When finishing one, tick it and add a short note (what changed / how verified).
       keyword 'promot' (a CipSoft word start) never matched "promotion" since keywords match whole words: a keyword
       ending in "*" now matches the start of a word (containsWord) - promot*, dwarv*, enem*, necroman*, rumo*, undea*
       in 12 NPCs. tests/test_promotion.py (each promoter; level 19, free account, 19,999 gp, already promoted).
-- [ ] Bone-collector NPCs use `doPlayerRemoveBones`/`getPlayerBones` - implement or rewrite
+- [x] Bone-collector NPCs use `doPlayerRemoveBones`/`getPlayerBones` - implement or rewrite
+      Done 2026-09-30: no NPC uses them any more - they were dead local copies in Hugo, Talphion and Noodles (rewritten
+      for the Postman Missions; Kevin counts the 20 bones himself). test_spells.py: getPlayerPromotionLevel is
+      defined now (compat.lua) and left KNOWN_UNDEFINED.
 - [ ] Spell-teaching NPCs: check spell lists/prices/levels against 7.4
+      Found 2026-10-01: every spell teacher (17 scripts) is broken - StdModule.learnSpell calls
+      parameters.vocation(cid) but they pass a number (a Lua error on every purchase), and all pass level 1.
+      No spell has needlearn, so nobody needs to buy a spell anyway; spells.xml gates by magic level only.
 - [ ] Shop prices: audit buy/sell lists against 7.4 (tibiaot74 data may include 7.72 items)
 
 ## Map / world
@@ -943,7 +981,8 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
   - [ ] GM ban manager: addAccountBan, addPlayerBan, removeAccountBan, removePlayerBan, getAccountBanList,
         getPlayersByAccountNumber
   - [ ] doNpcSellItem, getPlayerPVPBlessing, getPlayerLookDir (NPC system / functions.lua leftovers)
-  - [ ] marriage + banks (not 7.4): remove with the "non-7.4 NPC features" task
+  - [x] marriage + banks (not 7.4): remove with the "non-7.4 NPC features" task
+        Done 2026-10-01
 
 - [x] Exhaustion vs 7.4 (docs/reference-74/formulas.md §9): attack 2 s, strikes 1 s, healing/support 1 s and
       the 1 s use delay were right. Fixed: UH / IH runes gave 1 s (7.4: none), paralyze rune 2 s (7.4: 1 s),
@@ -1086,8 +1125,10 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       No hydras exist on our server (post-7.4 creature?)
 - [x] Travel questions for the 7.4 reference: Edron premium-only? which captains went where, prices
       Done 2026-09-30: docs/reference-74/travel.md
-- [ ] Oracle: premium players are now offered Darashia/Ankrahmun/Edron too (the script's intent; it
+- [x] Oracle: premium players are now offered Darashia/Ankrahmun/Edron too (the script's intent; it
       never worked before) - overlaps with the Gatekeeper, check against 7.4
+      Done 2026-10-01: the Oracle offers Carlin, Thais and Venore to everyone; the premium towns are the
+      Gatekeeper's
 
 ## Stability
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<npc name="Tesha" script="evabank.lua" walkinterval="1000" access="3" floorchange="0">
+<!-- Tesha, Ankrahmun jeweller (TibiaWiki: "Sells and buys gems and jewelry"); her bank was the 2007 update's - removed. -->
+<npc name="Tesha" script="default.lua" walkinterval="1000" access="3" floorchange="0">
     <health now="100" max="100"/>
     <look type="140" head="77" body="32" legs="81" feet="93" addons="0"/>
     <parameters>
@@ -10,7 +11,7 @@
         <parameter key="module_keywords" value="1" />
         <parameter key="keywords" value="name;job;" />
         <parameter key="keyword_reply1" value="I am the mourned Tesha." />
-        <parameter key="keyword_reply2" value="I can change money for you." />
+        <parameter key="keyword_reply2" value="I buy and sell gems and jewelry." />
 		
 		<parameter key="module_shop" value="1"/>
         <parameter key="shop_sellable" value="white pearl,2143,160;black pearl,2144,280;small diamond,2145,300;small sapphire,2146,250;small ruby,2147,250;small emerald,2149,250;small amethyst,2150,200;wedding ring,2121,100;scarab coin,2159,100" />

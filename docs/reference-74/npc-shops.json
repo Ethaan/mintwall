@@ -1,0 +1,4322 @@
+{
+ "A Ghostly Woman": {
+  "buys": {},
+  "date": "2006-11-23",
+  "rev": 66258,
+  "sells": {},
+  "text": "{{Infobox_NPC{{if|test={{{1|}}}|then=/{{{1}}}}}|GetValue={{{GetValue|}}}| | name = A Ghostly Woman | job = ????? | location = Ghostland, [http://www.tibianews.net/worldmap.asp?xcor=731&ycor=314.4 here]. | buysell = yes | buys = ????? | sells = ????? | quests = ????? | notes = |}}"
+ },
+ "A Lost Soul": null,
+ "A Prisoner": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26964,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = A Prisoner | flavortext = | job = Prisoner | location = [[Mintwallin]] | buysell = no | buys = | sells = | quests = | notes = The first human to ever reach the [[Minotaur]] city of [[Mintwallin]]. He was locked up because [[Markwin]] could not understand what he was talking about. He will never be released. |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "A Strange Fellow": {
+  "buys": {},
+  "date": "2005-11-16",
+  "rev": 23786,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = A Strange Fellow | flavortext = | job = Unknown Occupation | location = Below [[Venore]] [[Depot]] | buysell = no | buys = | sells = | quests = In the [[Postman Quest]] you have to give him a bill. | notes = He has bought a fancy [[Magican's Hat]] but not paid for it. In the [[Postman Quest]] you have to give him his bill.<br> If you keep asking him about his 'hat' he will after a while spawn [[Rabbit]]s. |}}"
+ },
+ "A Sweaty Cyclops": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26942,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = A Sweaty Cyclops | flavortext = | job = Armorer | location = [[Ab'Dendriel]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "A Tainted Soul": {
+  "buys": {},
+  "date": "2006-12-16",
+  "rev": 70471,
+  "sells": {},
+  "text": "{{Infobox_NPC{{if|test={{{1|}}}|then=/{{{1}}}}}|GetValue={{{GetValue|}}}| | name = A Tainted Soul | job = Apparition | location = On the way to the [[Banshee Quest]] | buysell = no | buys = none | sells = none | notes = This npc is an un-reachable illusion. When you aproach it, it will disappear (similar to the mirage in the desert near [[Darashia]]). There is no known history or story about this ghostly character. Looks the same as [[Ghost]]. |}}"
+ },
+ "A Tortured Soul": null,
+ "A Wrinkled Beholder": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26932,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = A Wrinkled Beholder | flavortext = | job = Librarian | location = [[Hellgate Library]], under [[Ab'Dendriel]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Abran Ironeye": {
+  "buys": {},
+  "date": "2006-01-16",
+  "rev": 26302,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Abran Ironeye | job = Shopmaster | location = Near the south-west gate, at the Ironhouse. | notes = Abran is a warrior who runs the Ironhouse, [[Image:Hero.gif|Abran Ironeye]] where he and his employees forge, repair and sell weapons and armors. Be careful asking him about ironeyes and [[Teddy Bear|teddy bears]]. | buysell = no | buys = | sells = |}}"
+ },
+ "Adrenius": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26952,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Adrenius | flavortext = | job = Necromancer | location = [[Jakundaf Desert]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Ahmet": {
+  "buys": {
+   "Rope": 8
+  },
+  "date": "2006-01-10",
+  "notes": "Sells equipment of all sorts.",
+  "raw_buys": "[[Rope]] 8 [[gp]]",
+  "raw_sells": "<br>'''Tools:'''<br>[[Shovel]] 10 [[gp]],<br> [[Pick]] 50 [[gp]],<br> [[Scythe]] 50 [[gp]],<br> [[Bag]] 4 [[gp]],<br> [[Rope]] 50 [[gp]],<br> [[Backpack]] 10 [[gp]],<br> [[Fishing Rod]] 150 [[gp]],<br> sixpack of [[Worm]]s 5 [[gp]],<br> '''Paper:'''<br>[[Scroll]] 5 [[gp]],<br> [[Document]] 12 [[gp]],<br> [[Parchment]] 8 [[gp]],<br> '''Lightsources:'''<br>[[Torch]] 2 [[gp]],<br> [[Candlestick]] 2 [[gp]],<br> [[Candelabrum]] 8 [[gp]],<br> [[Oil]] 20 [[gp]],<br> '''Misc:'''<br> [[Watch]] 20 [[gp]],<br> [[Plate]] 6 [[gp]],<br> [[Cup]] 2 [[gp]] |}}",
+  "rev": 25619,
+  "sells": {
+   "Backpack": 10,
+   "Bag": 4,
+   "Candelabrum": 8,
+   "Candlestick": 2,
+   "Cup": 2,
+   "Document": 12,
+   "Fishing Rod": 150,
+   "Oil": 20,
+   "Parchment": 8,
+   "Pick": 50,
+   "Plate": 6,
+   "Rope": 50,
+   "Scroll": 5,
+   "Scythe": 50,
+   "Shovel": 10,
+   "Torch": 2,
+   "Watch": 20
+  }
+ },
+ "Al Dee": {
+  "buys": {
+   "Axe": 7,
+   "Chain Helmet": 12,
+   "Dagger": 2,
+   "Doublet": 3,
+   "Hand Axe": 4,
+   "Leather Armor": 5,
+   "Leather Helmet": 3,
+   "Rapier": 5,
+   "Sabre": 12,
+   "Short Sword": 10,
+   "Spear": 3,
+   "Studded Helmet": 20,
+   "Studded Shield": 16,
+   "Wooden Shield": 3
+  },
+  "date": "2005-11-20",
+  "notes": "He is the only owner of the [[pick]], which is sold exclusively at his [http://www.tibianews.net/worldmap.asp?xcor=1120&ycor=-806 shop]. He is a hot shot guy who wants to be the only merchant on [[Rookgaard]] and is therefore called Mad Al. His signs can be found in many strange and obscure places, advertising his wares. |}}",
+  "raw_buys": "[[Spear]] 3, [[Rapier]] 5, [[Sabre]] 12, [[Dagger]] 2, [[Hand Axe]] 4, [[Axe]] 7, [[Short Sword]] 10, [[Wooden Shield]] 3, [[Studded Shield]] 16, [[Doublet]] 3, [[Leather Armor]] 5, [[Leather Helmet]] 3, [[Studded Helmet]] 20, [[Chain Helmet]] 12.",
+  "raw_sells": "[[Spear]] 10, [[Rapier]] 15, [[Sabre]] 25, [[Dagger]] 5, [[Hand Axe]] 8, [[Axe]] 20, [[Short Sword]] 30, [[Wooden Shield]] 15, [[Studded Shield]] 50, [[Coat]] 8, [[Jacket]] 10, [[Doublet]] 16, [[Leather Armor]] 25, [[Leather Legs]] 10, [[Leather Helmet]] 12, [[Studded Helmet]] 62, [[Chain Helmet]] 52, [[Torch]] 2, [[Bag]] 4, [[Scroll]] 5, [[Shovel]] 10, [[Backpack]] 10, [[Sickle]] 8, [[Scythe]] 12, [[Rope]] 50, [[Fishing Rod]] 150, [[Worms]]",
+  "rev": 23916,
+  "sells": {
+   "Axe": 20,
+   "Backpack": 10,
+   "Bag": 4,
+   "Chain Helmet": 52,
+   "Coat": 8,
+   "Dagger": 5,
+   "Doublet": 16,
+   "Fishing Rod": 150,
+   "Hand Axe": 8,
+   "Jacket": 10,
+   "Leather Armor": 25,
+   "Leather Helmet": 12,
+   "Leather Legs": 10,
+   "Rapier": 15,
+   "Rope": 50,
+   "Sabre": 25,
+   "Scroll": 5,
+   "Scythe": 12,
+   "Short Sword": 30,
+   "Shovel": 10,
+   "Sickle": 8,
+   "Spear": 10,
+   "Studded Helmet": 62,
+   "Studded Shield": 50,
+   "Torch": 2,
+   "Wooden Shield": 15
+  }
+ },
+ "Albert": {
+  "buys": {},
+  "date": "2005-12-06",
+  "rev": 24302,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Albert | flavortext = | job = Healer | location = [[Stonehome]] | buysell = no | buys = | sells = | quests = | notes = A Healer in [[Stonehome]]. |}}"
+ },
+ "Aldo": {
+  "buys": {},
+  "date": "2005-09-10",
+  "notes": "Aldo deals in [[Item#Armors|helmets, legs and boots]].",
+  "raw_buys": "Nothing.",
+  "raw_sells": "[[Leather Helmet]] 12, [[Studded Helmet]] 63, [[Leather Legs]] 10, [[Studded Legs]] 60, [[Sandals]] 2, [[Leather Boots]] 2. |}}",
+  "rev": 20906,
+  "sells": {
+   "Leather Boots": 2,
+   "Leather Helmet": 12,
+   "Leather Legs": 10,
+   "Sandals": 2,
+   "Studded Helmet": 63,
+   "Studded Legs": 60
+  }
+ },
+ "Alesar": {
+  "buys": {
+   "Ancient Shield": 900,
+   "Black Shield": 800,
+   "Dark Armor": 400,
+   "Dark Helmet": 250,
+   "Dragon Hammer": 2000,
+   "Giant Sword": 17000,
+   "Knight Armor": 5000,
+   "Knight Axe": 2000,
+   "Knight Legs": 5000,
+   "Mystic Turban": 150,
+   "Poison Dagger": 50,
+   "Scimitar": 150,
+   "Serpent Sword": 900,
+   "Skull Staff": 6000,
+   "Strange Helmet": 500,
+   "Tower Shield": 8000,
+   "Vampire Shield": 15000,
+   "Warrior Helmet": 5000
+  },
+  "date": "2006-01-20",
+  "notes": "Alesar buys and sells some strong weapons and armor. He does not like humans, but will tolerate those who help fight for his green djinn brethren.",
+  "raw_buys": "<br> '''Weapons:'''<br> [[Scimitar]] 150 [[gp]], <br> [[Giant Sword]] 17,000 [[gp]], <br> [[Serpent Sword]] 900 [[gp]], <br> [[Poison Dagger]] 50 [[gp]], <br> [[Knight Axe]] 2,000 [[gp]], <br> [[Dragon Hammer]] 2,000 [[gp]], <br> [[Skull Staff]] 6,000 [[gp]]<br> '''Armor:'''<br> [[Dark Armor]] 400 [[gp]], <br> [[Knight Armor]] 5,000 [[gp]], <br> '''Helmets:'''<br> [[Dark Helmet]] 250 [[gp]], <br> [[Warrior Helmet]] 5,000 [[gp]], <br> [[Strange Helmet]] 500 [[gp]], <br> [[Mystic Turban]] 150 [[gp]], <br> '''Legs:'''<br> [[Knight Legs]] 5,000 [[gp]], <br> '''Shields:'''<br> [[Tower Shield]] 8,000 [[gp]], <br> [[Black Shield]] 800 [[gp]], <br> [[Ancient Shield]] 900 [[gp]], <br> [[Vampire Shield]] 15,000 [[gp]]",
+  "raw_sells": "<br> '''Weapons:'''<br> [[Ice Rapier]] 5,000 [[gp]], <br> [[Serpent Sword]] 6,000 [[gp]], <br> '''Armor:'''<br> [[Dark Armor]] 1,500 [[gp]], <br> '''Helmets:'''<br> [[Dark Helmet]] 1,000 [[gp]], <br> '''Shields:'''<br> [[Scarab Shield]] |}}",
+  "rev": 27337,
+  "sells": {
+   "Dark Armor": 1500,
+   "Dark Helmet": 1000,
+   "Ice Rapier": 5000,
+   "Serpent Sword": 6000
+  }
+ },
+ "Alexander": {
+  "buys": {},
+  "date": "2005-12-06",
+  "notes": "[[Image:NPC_Alexander.jpg|right]]Deals with runes. |}}",
+  "raw_buys": "",
+  "raw_sells": "[[Blank Rune]] 10 [[gp]], [[Envenom|Envenom Runes]], [[Desintegrate|Desintegrate Runes]], [[Poison Bomb|Poison Bomb Runes]], [[Energy Bomb|Energy Bomb Runes]], [[Soulfire|Soulfire Runes]], [[Magic Wall|Magic Wall Runes]], [[Animate Dead|Animate Dead Runes]], [[Paralyze|Paralyze Runes]], [[Life Ring]] 900 [[gp]], [[Crystal Ball]] 530 [[gp]].",
+  "rev": 24300,
+  "sells": {
+   "Blank Rune": 10,
+   "Crystal Ball": 530,
+   "Life Ring": 900
+  }
+ },
+ "Alia": {
+  "buys": {},
+  "date": "2005-10-29",
+  "rev": 22996,
+  "sells": {},
+  "text": "Alia stays at the Temple of Carlin and can heal you if you are burning, poisoned or heavily wounded."
+ },
+ "Allen": {
+  "buys": {},
+  "date": "2006-01-11",
+  "notes": "Allen works at the Plank and Treasurechest Market. |}}",
+  "raw_buys": "none",
+  "raw_sells": "'''Furniture:''' [[Wooden Chair]] 15 [[gp]], [[Green Cushioned Chair]] 40, [[Red Cusioned Chair]]40 , [[Sofa Chair]] 55, [[Rocking Chair]] 25.",
+  "rev": 26035,
+  "sells": {
+   "Green Cushioned Chair": 40,
+   "Red Cusioned Chair": 40,
+   "Rocking Chair": 25,
+   "Sofa Chair": 55,
+   "Wooden Chair": 15
+  }
+ },
+ "Alwin": {
+  "buys": {},
+  "date": "2005-12-20",
+  "rev": 24888,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Alwin | location = Southwestern gate of [[Venore]]. | job = Guard | notes = He protects the city of Venore from attacking [[creature]]s from the swamp. | buysell = no | buys = | sells = |}}"
+ },
+ "Amanda": {
+  "buys": {},
+  "date": "2005-12-02",
+  "rev": 24268,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Amanda | flavortext = | job = Monk | location = [[Edron]] temple, [http://www.tibianews.net/worldmap.asp?xcor=-2328.4&ycor=298.5 here] | buysell = no | buys = | sells = | quests = | notes = The templemanager. |}}"
+ },
+ "Amber": {
+  "buys": {},
+  "date": "2005-05-13",
+  "rev": 10467,
+  "sells": {},
+  "text": "[[Image:Amber.gif|left]] She is an adventurer who came to [[Rookgaard]] from [[Mainland]] to help less expierienced people find their own adventure. She resides in the basement of the [[Rookgaard Academy|academy]]. She has learned orc language and will share some of it for her favorite food, [[Salmon|salmon]]."
+ },
+ "An Apparition": {
+  "buys": {},
+  "date": "2006-11-23",
+  "rev": 66259,
+  "sells": {},
+  "text": "{{Infobox_NPC{{if|test={{{1|}}}|then=/{{{1}}}}}|GetValue={{{GetValue|}}}| | name = An Apparition | job = ????? | location = Ghostland, [http://www.tibianews.net/worldmap.asp?xcor=699&ycor=383.4 here]. | buysell = yes | buys = ????? | sells = ????? | quests = ????? | notes = |}}"
+ },
+ "An Old Dragonlord": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26933,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = An Old Dragonlord | flavortext = | job = Dragonlord | location = [[Dracona]], near [[Ab'Dendriel]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Anderson": {
+  "buys": {},
+  "date": "2005-12-06",
+  "rev": 24289,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Anderson | job = Ship Captain | location = Senja ([http://www.tibianews.net/worldmap.asp?xcor=915.55&ycor=761.6 here]) | buysell = no | buys = | sells = | notes = Anderson can transport you to any of the [[Ice Islands]] or back to Tibia. *[[Folda]] 10 gp *[[Vega]] 10 gp *[[Tibia (continent)|Tibia]] free From any Ice Island, it costs 10 [[gp]] to travel to any other Ice Island, and passage back to [[Tibia]] is free. |}}"
+ },
+ "Anerui": {
+  "buys": {},
+  "date": "2006-02-05",
+  "notes": "|}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "None",
+  "raw_sells": "<br>'''Food:''' <br>[[Meat]] 4 [[gp]], <br>[[Ham]] 6 [[gp]]",
+  "rev": 28508,
+  "sells": {
+   "Ham": 6,
+   "Meat": 4
+  }
+ },
+ "Aneus": {
+  "buys": {},
+  "date": "2005-11-05",
+  "rev": 23392,
+  "sells": {},
+  "text": "Aneus is a historyteller that knows all about [[Carlin]] and the [[Red Legion]]. He is at north-east of [[Carlin]]."
+ },
+ "Arito": {
+  "buys": {},
+  "date": "2006-01-05",
+  "notes": "| |}}",
+  "raw_buys": "none |",
+  "raw_sells": "[[Bread]] 8 [[gp]],<br>[[Cheese]] 12 [[gp]],<br>[[Ham]] 16 [[gp]],<br>[[Meat]] 10 [[gp]]",
+  "rev": 25428,
+  "sells": {
+   "Bread": 8,
+   "Cheese": 12,
+   "Ham": 16,
+   "Meat": 10
+  }
+ },
+ "Arkhothep": {
+  "buys": {},
+  "date": "2007-03-08",
+  "rev": 87971,
+  "sells": {},
+  "text": "#REDIRECT [[Arkhothep (creature)]]"
+ },
+ "Arnold": {
+  "buys": {},
+  "date": "2005-12-20",
+  "rev": 24887,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Jean Claude | location = Middle city passage of [[Venore]], between the [[temple]] and [[depot]]. | job = Guard | notes = He protects the city of Venore from attacking [[creature]]s from the swamp. | buysell = no | buys = | sells = |}}"
+ },
+ "Aruda": {
+  "buys": {},
+  "date": "2005-05-30",
+  "rev": 10385,
+  "sells": {},
+  "text": "[[Image:Aruda.gif|left]] Aruda is a wily young woman who wanders around [[Thais]]. She attracts young men to herself so that she may steal from them. All people beware for once you talk to her she will quickly take all your [[GP|money]] and run."
+ },
+ "Ashtamor": {
+  "buys": {},
+  "date": "2006-01-26",
+  "notes": "Ashtamor runs the Venore morgue and takes care of corpses. He considers himself a guide and guardian over the souls of those who have passed on.",
+  "raw_buys": "Nothing",
+  "raw_sells": "<br>[[Vase]] 3 [[gp]] <br> [[Amphora]] 4 [[gp]]. |}}",
+  "rev": 27783,
+  "sells": {
+   "Amphora": 4,
+   "Vase": 3
+  }
+ },
+ "Asrak": {
+  "buys": {},
+  "date": "2006-01-16",
+  "rev": 26274,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Asrak | job = Guild Leader | location = 4 floors below [[Venore]] [[depot]], right side. | notes = Asrak [[Image:Minotaur Guard.gif|Asrak]] teaches [[spell]]s to Knights and Paladins. | buysell = yes | buys = None | sells = [[Knight#Knight's Spells|Knight's spells]] and [[Paladin#Paladin's Spells|Paladin's instant]] and [[Paladin#Paladin's Runes|rune spells]]. |}}"
+ },
+ "Azil": {
+  "buys": {
+   "Battle Shield": 60,
+   "Brass Armor": 112,
+   "Brass Helmet": 30,
+   "Brass Legs": 49,
+   "Brass Shield": 16,
+   "Chain Armor": 40,
+   "Chain Helmet": 12,
+   "Chain Legs": 20,
+   "Leather Armor": 5,
+   "Leather Helmet": 3,
+   "Plate Armor": 240,
+   "Plate Shield": 45,
+   "Steel Helmet": 293,
+   "Viking Helmet": 66,
+   "Wooden Shield": 3
+  },
+  "date": "2005-09-10",
+  "notes": "Azil deals in [[Item#Armors|armors, shields and helmets]].",
+  "raw_buys": "[[Wooden Shield]] 3, [[Brass Shield]] 16, [[Plate Shield]] 45, [[Battle Shield]] 60, [[Leather Helmet]] 3, [[Chain Helmet]] 12, [[Brass Helmet]] 30, [[Viking Helmet]] 66, [[Steel Helmet]] 293, [[Leather Armor]] 5, [[Chain Armor]] 40, [[Brass Armor]] 112, [[Plate Armor]] 240, [[Chain Legs]] 20, [[Brass Legs]] 49.",
+  "raw_sells": "[[Leather Helmet]] 12, [[Chain Helmet]] 52, [[Brass Helmet]] 12, [[Viking Helmet]] 265, [[Leather Armor]] 35, [[Chain Armor]] 200, [[Brass Armor]] 450, [[Chain Legs]] 80, [[Brass Legs]] 195. |}}",
+  "rev": 20896,
+  "sells": {
+   "Brass Armor": 450,
+   "Brass Helmet": 12,
+   "Brass Legs": 195,
+   "Chain Armor": 200,
+   "Chain Helmet": 52,
+   "Chain Legs": 80,
+   "Leather Armor": 35,
+   "Leather Helmet": 12,
+   "Viking Helmet": 265
+  }
+ },
+ "Baa'leal": {
+  "buys": {},
+  "date": "2006-01-24",
+  "rev": 27658,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Baa'leal | location = [[Mal'ouquah]] (Green Djinn Fortress) | job = Djinn | notes = | buysell = no | buys = None | sells = None |}}"
+ },
+ "Bambi Bonecrusher": {
+  "buys": {},
+  "date": "2005-10-29",
+  "rev": 22999,
+  "sells": {},
+  "text": "Bambi Bonecrusher is a member of the Bonecrusher family that helps to protect Carlin."
+ },
+ "Barbara": {
+  "buys": {},
+  "date": "2005-11-05",
+  "rev": 23400,
+  "sells": {},
+  "text": "Barbara and [[Fenbala]] guards the castle of [[Queen Eloise]] in [[Carlin]]."
+ },
+ "Bashira": {
+  "buys": {},
+  "date": "2006-02-05",
+  "notes": "Buys and sells equipment ([[bag|bags]] and [[backpack|backpacks]] are green). <br>[[Image:Bashira.JPG]] |}}<noinclude> </noinclude>",
+  "raw_buys": "<br>None",
+  "raw_sells": "<br>'''Equipment:''' <br>[[Shovel]] 50 [[gp]], <br>[[Pick]] 50 [[gp]], <br>[[Scythe]] 50 [[gp]],<br>[[Fishing rod]] 150 [[gp]], <br>[[Bag]] 4 [[gp]], <br>[[Rope]] 50 [[gp]], <br>[[Backpack]] 20 [[gp]], <br>[[Plate]] 6 [[gp]], <br>[[Scroll]] 5 [[gp]], <br>[[Watch]] 20 [[gp]] <br>'''Lightsources:''' <br>[[Torch]] 2 [[gp]], <br>[[Candelabrum]] 8 [[gp]], <br>[[Oil]] 20 [[gp]] <br>'''Other stuff:''' <br>[[Waterskin|Water hose]] 10 [[gp]], <br>[[Pitchfork]] ? [[gp]], <br>[[Present Box|Present]] 10 [[gp]], <br>[[Bucket]] 4 [[gp]], <br>[[Bottle]] 3 [[gp]], <br>[[Worm|Sixpack of worms]] 5 [[gp]]",
+  "rev": 28517,
+  "sells": {
+   "Backpack": 20,
+   "Bag": 4,
+   "Bottle": 3,
+   "Bucket": 4,
+   "Candelabrum": 8,
+   "Fishing rod": 150,
+   "Oil": 20,
+   "Pick": 50,
+   "Plate": 6,
+   "Present Box": 10,
+   "Rope": 50,
+   "Scroll": 5,
+   "Scythe": 50,
+   "Shovel": 50,
+   "Torch": 2,
+   "Watch": 20,
+   "Waterskin": 10,
+   "Worm": 5
+  }
+ },
+ "Basilisk": {
+  "buys": {},
+  "date": "2005-10-26",
+  "rev": 22929,
+  "sells": {},
+  "text": "{{Infobox_Creature<includeonly>/{{{1}}}</includeonly>| | name = Basilisk | hp = ? | exp = ? | summon = -- | convince = -- | abilities = ? | maxdmg = ? | immunities = n/a | behavior = The Basilisk fight until death. | notes = Is the [[Snake]]'s Boss. | location = ? | strategy = ? | loot = ? |}} {{Bosses}}"
+ },
+ "Baxter": {
+  "buys": {},
+  "date": "2005-11-19",
+  "rev": 23824,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Baxter | flavortext = | job = Unknown Occupation | location = [[Thais]] | buysell = yes | buys = [[Rat]] corpses (1 [[gp]]), ? | sells = Nothing? | quests = | notes = |}}"
+ },
+ "Beatrice": {
+  "buys": {},
+  "date": "2005-08-02",
+  "notes": "Beatrice deals in [[Item#Tools|different]] [[Item#Item-Containers|equipment]]. [[Image:Beatrice.jpg|left]]",
+  "raw_buys": "None",
+  "raw_sells": "[[bucket]] 4[[gp]], [[torch]] 2, [[bag]] 5, [[backpack]] 20, [[shovel]] 50 [[pick]] 50 [[scythe]] 50, [[watch]] 20, [[rope]] 50 [[fishing rod]] 150, [[crowbar]] 260, [[lamp]] 8, [[candlestick]] 2, [[basket]] 6, [[trap]] 280. |}}",
+  "rev": 15873,
+  "sells": {
+   "backpack": 20,
+   "bag": 5,
+   "basket": 6,
+   "bucket": 4,
+   "candlestick": 2,
+   "crowbar": 260,
+   "fishing rod": 150,
+   "lamp": 8,
+   "pick": 50,
+   "rope": 50,
+   "scythe": 50,
+   "shovel": 50,
+   "torch": 2,
+   "trap": 280,
+   "watch": 20
+  }
+ },
+ "Benjamin": {
+  "buys": {},
+  "date": "2005-07-21",
+  "rev": 13217,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Benjamin | job = Postman | location = Inside [[Thais]] [[depot]] | notes = Parcels and letters are 10 and 5 [[gp]] if buyer has completed the [[Postman Quest]]. [[Image:Benjamin.jpg]] | buysell =yes | buys = Nothing. | sells = [[Parcel]]s 15 [[gp]], [[letter]]s 8 [[gp]] |}}"
+ },
+ "Bezil": {
+  "buys": {
+   "crowbar": 50,
+   "pick": 15,
+   "rope": 15,
+   "scythe": 15,
+   "shovel": 8,
+   "trap": 75,
+   "watch": 6
+  },
+  "date": "2005-10-26",
+  "notes": "Bezil deals in [[Item#Tools|different]] [[Item#Item-Containers|equipment]]. [[Image:Bezil.jpg|left]]",
+  "raw_buys": "[[rope]] 15 [[gp]], [[shovel]] 8, [[pick]] 15, [[scythe]] 15, [[trap]] 75, [[watch]] 6, [[crowbar]] 50",
+  "raw_sells": "[[shovel]] 10 [[gp]], [[pick]] 50 [[gp]], [[scythe]] 40 [[gp]], [[bag]] 4 [[gp]], [[rope]] 50 [[gp]], [[backpack]] 10 [[gp]], [[scroll]] 5 [[gp]], [[watches]] 20 [[gp]], [[candlestick]] 2 [[gp]], [[fishing rod]] 150 [[gp]], [[torch]] 2 [[gp]], [[candelabrum]] 8 [[gp]], [[oil]] 20 [[gp]], [[parchment]] 8 [[gp]], [[document]] 12 [[gp]], [[crowbar]] 260 [[gp]], [[water hose]] 10 [[gp]], [[present]] 10 [[gp]], [[bucket]] 4[[gp]], and the like. |}}",
+  "rev": 22933,
+  "sells": {
+   "backpack": 10,
+   "bag": 4,
+   "bucket": 4,
+   "candelabrum": 8,
+   "candlestick": 2,
+   "crowbar": 260,
+   "document": 12,
+   "fishing rod": 150,
+   "oil": 20,
+   "parchment": 8,
+   "pick": 50,
+   "present": 10,
+   "rope": 50,
+   "scroll": 5,
+   "scythe": 40,
+   "shovel": 10,
+   "torch": 2,
+   "watches": 20,
+   "water hose": 10
+  }
+ },
+ "Billy": {
+  "buys": {
+   "Bread": 1,
+   "Cheese": 2,
+   "Cherry": 1,
+   "Ham": 4,
+   "Meat": 2,
+   "Rat": 2
+  },
+  "date": "2005-10-11",
+  "notes": "[[Image:NPC_Billie.jpg|float|right]] Billy with his brother [[Willie]] run the mill. Billy works on the premium side, buying and selling various foods. He is known for his [[Wikipedia:Profanity|foul language]]. If you walk away from him without saying \"bye\", he will call you names when you are out of range. Billy wants to make some of his famous chili, but he needs [[Rat]]s and a [[Pan]].",
+  "raw_buys": "Fresh [[Rat]] 2 gp<br>[[Cheese]] 2 gp<br>[[Meat]] 2 gp<br>[[Ham]] 4 gp<br>[[Bread]] 1 gp<br>[[Cherry]] 1 gp|",
+  "raw_sells": "[[Meat]] 5 gp<br>[[Ham]] 8 gp<br>[[Bread]] 3 gp| |",
+  "rev": 21956,
+  "sells": {
+   "Bread": 3,
+   "Ham": 8,
+   "Meat": 5
+  }
+ },
+ "Blind Orc": {
+  "buys": {},
+  "date": "2005-10-18",
+  "notes": "[[Image:Orc.gif|left]]The Blind Orc was a great leader among his people who lived on this small island of [[Rookgaard]]. They thrived for much time until messages came that the warriors were needed across the sea for war. The stronger left quickly to the north of the [[Mainland]] continent to aid their friends against men. The weaker orcs were left with some spearmen guards. When man came to the i",
+  "raw_buys": "",
+  "raw_sells": "<br>[[Sword]] 85 GP<br>[[Sabre]] 25 GP<br>[[Hatchet]] 85 GP<br>[[Short Sword]] 30 GP<br>[[Bow]] 400 GP<br>[[Arrow]]s 30 GP per 10<br>[[Studded Armor]] 90 GP<br>[[Leather Armor]] 25 GP<br>[[Brass Shield]] 65 GP<br>[[Studded Helmet]] 65 GP",
+  "rev": 22217,
+  "sells": {
+   "Bow": 400,
+   "Brass Shield": 65,
+   "Hatchet": 85,
+   "Leather Armor": 25,
+   "Sabre": 25,
+   "Short Sword": 30,
+   "Studded Armor": 90,
+   "Studded Helmet": 65,
+   "Sword": 85
+  }
+ },
+ "Blossom Bonecrusher": {
+  "buys": {},
+  "date": "2005-10-29",
+  "rev": 23000,
+  "sells": {},
+  "text": "Blossom Bonecrusher is a member of the Bonecrusher family that helps to protect Carlin."
+ },
+ "Bo'ques": {
+  "buys": {},
+  "date": "2006-01-24",
+  "rev": 27655,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Bo'ques | location = [[Ashta'daramai]] (Blue Djinn Fortress) | job = Djinn | notes = | buysell = no | buys = None | sells = None |}}"
+ },
+ "Bonifacius": {
+  "buys": {},
+  "date": "2005-12-06",
+  "notes": "Bonifacious deals in [[Item#Foods|Foods]].",
+  "raw_buys": "None",
+  "raw_sells": "[[banana]] 2 [[gp]], [[cheese]] 5, [[cookie]] 2, [[egg]] 2, [[grapes]] 3, [[meat]] 5, [[melon]] 8, [[orange]] 5, [[pumpkin]] 10, [[roll]] 2, [[salmon]] 4. |}}",
+  "rev": 24288,
+  "sells": {
+   "banana": 2,
+   "cheese": 5,
+   "cookie": 2,
+   "egg": 2,
+   "grapes": 3,
+   "meat": 5,
+   "melon": 8,
+   "orange": 5,
+   "pumpkin": 10,
+   "roll": 2,
+   "salmon": 4
+  }
+ },
+ "Boozer": {
+  "buys": {},
+  "date": "2006-01-16",
+  "notes": "Boozer runs the Hard Rock Tavern bar.",
+  "raw_buys": "None",
+  "raw_sells": "'''Food:''' [[Bread]] 4 [[gp]], [[Cheese]] 6, [[Cookie]] 5, [[Ham]] 8, [[Meat]] 5.<br> '''Drinks:''' [[Beer]] 2 [[gp]], [[Lemonade]] 2, [[Wine]] 3. |}}",
+  "rev": 26361,
+  "sells": {
+   "Beer": 2,
+   "Bread": 4,
+   "Cheese": 6,
+   "Cookie": 5,
+   "Ham": 8,
+   "Lemonade": 2,
+   "Meat": 5,
+   "Wine": 3
+  }
+ },
+ "Borkas": {
+  "buys": {},
+  "date": "2006-01-11",
+  "notes": "Borkas works at the Plank and Treasurechest Market. |}}",
+  "raw_buys": "none",
+  "raw_sells": "'''Furniture:''' [[Drawer]] 18 [[gp]], [[Dresser]] 25, [[Locker]] 30 , [[Crate]] 10, [[Chest]] 10, [[Box]] 10, [[Barrel]] 12, [[Trunk]] 10, [[Trough]] 7.",
+  "rev": 26036,
+  "sells": {
+   "Barrel": 12,
+   "Box": 10,
+   "Chest": 10,
+   "Crate": 10,
+   "Drawer": 18,
+   "Dresser": 25,
+   "Locker": 30,
+   "Trough": 7,
+   "Trunk": 10
+  }
+ },
+ "Bozo": {
+  "buys": {},
+  "date": "2005-12-21",
+  "rev": 24980,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Bozo | job = Unknown Occupation | location = [[Thais]] Castle, in the Northwest. | notes = Bozo tells funny jokes about many [[creatures]] and has interesting comments about other his other [[NPCs#Thais|Thaian friends]]. | buysell = yes | buys = Nothing | sells = Ask him about 'weapons' and 'magic' |}}"
+ },
+ "Brasith": {
+  "buys": {},
+  "date": "2006-08-14",
+  "notes": "|}}",
+  "raw_buys": "Nothing",
+  "raw_sells": "<br> [[Corncob]], 3 [[gp]]<br> [[Grapes]], 3 [[gp]]<br> [[Melon]], 8 [[gp]]<br> [[Cherry]], 1 [[gp]]<br> [[Banana]], 2 [[gp]]<br> [[Strawberry]], 1 [[gp]]<br> [[Carrot]], 3 [[gp]]<br> [[Pumpkin]], 10 [[gp]]<br> [[Juice Squeezer]] 100 [[gp]]<br>",
+  "rev": 48991,
+  "sells": {
+   "Juice Squeezer": 100
+  }
+ },
+ "Briasol": {
+  "buys": {
+   "Black Pearl": 280,
+   "Small Amethyst": 200,
+   "Small Diamond": 300,
+   "Small Emerald": 250,
+   "Small Ruby": 250,
+   "Small Sapphire": 250,
+   "White Pearl": 160
+  },
+  "date": "2006-03-09",
+  "notes": "Can change [[Gold Coin]]s, [[Platinum Coin]]s, and [[Crystal Coin]]s.",
+  "raw_buys": "<br>'''Pearls:'''<br>[[White Pearl]] 160 [[gp]], <br>[[Black Pearl]] 280 [[gp]], <br>'''Gems:'''<br>[[Small Diamond]] 300 [[gp]], <br>[[Small Sapphire]] 250 [[gp]], <br>[[Small Ruby]] 250 [[gp]], <br>[[Small Emerald]] 250 [[gp]], <br>[[Small Amethyst]] 200 [[gp]]",
+  "raw_sells": "<br>'''Pearls:'''<br>[[White Pearl]] 320 [[gp]], <br>[[Black Pearl]] 560 [[gp]], <br>'''Gems:'''<br>[[Small Diamond]] 600 [[gp]], <br>[[Small Sapphire]] 500 [[gp]], <br>[[Small Ruby]] 500 [[gp]], <br>[[Small Emerald]] 500 [[gp]], <br>[[Small Amethyst]] 400 [[gp]], <br>'''Jewelry:'''<br>[[Wedding Ring]] 990 [[gp]], <br>[[Golden Amulet]] 6,600 [[gp]], <br>[[Ruby Necklace]] 3,560 [[gp]]. |}}",
+  "rev": 31070,
+  "sells": {
+   "Black Pearl": 560,
+   "Golden Amulet": 6600,
+   "Ruby Necklace": 3560,
+   "Small Amethyst": 400,
+   "Small Diamond": 600,
+   "Small Emerald": 500,
+   "Small Ruby": 500,
+   "Small Sapphire": 500,
+   "Wedding Ring": 990,
+   "White Pearl": 320
+  }
+ },
+ "Brodrosch": {
+  "buys": {},
+  "date": "2005-12-14",
+  "rev": 24567,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Brodosch | job = Ship Captain | location = Several levels underground, below [[Kazordoon]]. | buysell = no | buys = | sells = | notes = Brodosch will transport you from Kazordoon to [[Cormaya]] by Steamship for 160 [[gp]].<br> Completing the [[Postman Quest]] will reduce the ship fare by 10 [[gp]]. |}}"
+ },
+ "Bruno": {
+  "buys": {},
+  "date": "2006-11-06",
+  "notes": "[[Image:NPC_Bruno.gif|float|up]] |}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "",
+  "raw_sells": "[[Fish]] 5 [[gp]]",
+  "rev": 63540,
+  "sells": {
+   "Fish": 5
+  }
+ },
+ "Budrik": {
+  "buys": {},
+  "date": "2006-04-04",
+  "rev": 34533,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Budrik | job = Mine Foreman | location = West side of [[Kazordoon]], cave north of and closest to river. | buysell = no | buys = | sells = | notes = [[Image:Dwarf Soldier.gif]] Budrik runs the mining operations and orders the [[Dwarf]] miners. |}}"
+ },
+ "Bunny Bonecrusher": {
+  "buys": {},
+  "date": "2005-10-29",
+  "rev": 23001,
+  "sells": {},
+  "text": "Bunny Bonecrusher is a member of the Bonecrusher family that helps to protect Carlin."
+ },
+ "Busty Bonecrusher": {
+  "buys": {},
+  "date": "2005-10-29",
+  "rev": 23002,
+  "sells": {},
+  "text": "Busty Bonecrusher is a member of the Bonecrusher family that helps to protect Carlin."
+ },
+ "Captain Bluebear": {
+  "buys": {},
+  "date": "2005-11-30",
+  "rev": 24240,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Captain Bluebear | job = Ship Captain | location = Western shore of [[Thais]]. | buysell = no | buys = | sells = | notes = Captain Bluebear will transport any [[premium]] players by ship to: *[[Ab'Dendriel]] 130 [[gp]] *[[Carlin]] 110 [[gp]] *[[Edron]] 150 [[gp]] *[[Venore]] 170 [[gp]] <br> Completing the [[Postman Quest]] will reduce the ship fare by 10 [[gp]]. |}}"
+ },
+ "Captain Fearless": {
+  "buys": {},
+  "date": "2005-11-30",
+  "rev": 24239,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Captain Fearless | job = Ship Captain | location = North of the city of [[Venore]]. | buysell = no | buys = | sells = | notes = Captain Fearless will transport any [[premium]] players by ship to: *[[Ab'Dendriel]] 90 [[gp]] *[[Carlin]] 130 [[gp]] *[[Edron]] 40 [[gp]] *[[Darashia]] 60 [[gp]] Beware the [[Ghost Ship]]! *[[Thais]] 170 [[gp]] <br> Completing the [[Postman Quest]] will reduce the ship fare by 10 [[gp]]. |}}"
+ },
+ "Captain Greyhound": {
+  "buys": {},
+  "date": "2005-11-05",
+  "rev": 23398,
+  "sells": {},
+  "text": "Captain Greyhound can take you to any seaside [[Hometown|town]] for a price. Only avaiable for [[Premium]] players."
+ },
+ "Captain Jack": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26951,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Captain Jack | flavortext = | job = Ship Captain | location = [[Isle of the Kings]] | buysell = no | buys = | sells = | quests = | notes = Provides passage back to the tibia mainland. |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Captain Seagull": {
+  "buys": {},
+  "date": "2005-11-30",
+  "rev": 24233,
+  "sells": {},
+  "text": "{{Infobox_NPC| |name = Captain Seagull |location = The dock of [[Ab'Dendriel]] |job = Ship Captain |buysell = no |buys =| |sells =| |notes = Captain Seagull can transport you from Ab'Dendriel to three other ports: *[[Carlin]] 80 [[gp]] *[[Edron]] 70 [[gp]] *[[Thais]] 130 [[gp]] *[[Venore]] 90 [[gp]] Completing the [[Postman Quest]] will make each of these boat fares 10 gp cheaper.| |}}"
+ },
+ "Captain Seahorse": {
+  "buys": {},
+  "date": "2005-12-01",
+  "rev": 24261,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Captain Sea Horse | job = Ship Captain | location = North of the city of [[Edron]]. | buysell = no | buys = | sells = | notes = [[Image:Captain_Seahorse.jpg|right]] Captain Fearless will transport any [[premium]] players by ship to: *[[Ab'Dendriel]] 70 [[gp]] *[[Ankrahmun]] 160 [[gp]] *[[Carlin]] 110 [[gp]] *[[Port Hope]] 150 [[gp]] *[[Thais]] 160 [[gp]] *[[Venore]] 40 [[gp]] <br> Completing the [[Postman Quest]] will reduce the ship fare by 10 [[gp]]. |}}"
+ },
+ "Captain Sinbeard": {
+  "buys": {},
+  "date": "2005-07-28",
+  "rev": 20602,
+  "sells": {},
+  "text": "{{Infobox_NPC| |name = Captain Sinbeard |location = The dock of [[Ankrahmun]] |job = Ship Captain |buysell = no |buys =| |sells =| |notes = [[Image:Captain_Sinbeard.jpg|float|right|210px]][[Captain Sinbeard]] can transport you from Ankrahmun to three other ports: *[[Darashia]] 100 gp *[[Venore]] 150 gp *[[Edron]] 160 gp Note that he does not travel to [[Ab'Dendriel]], [[Carlin]], or [[Thais]].<br> Completing the [[Postman Quest]] will make each of these boat fares 10 gp cheaper.| |}}"
+ },
+ "Carina": {
+  "buys": {},
+  "date": "2006-01-11",
+  "notes": "|}}",
+  "raw_buys": "None",
+  "raw_sells": "[[Wedding Ring]] 990 [[gp]], [[Golden Amulet]] 6600, [[Ruby Necklace]] 3560.",
+  "rev": 26063,
+  "sells": {
+   "Golden Amulet": 6600,
+   "Ruby Necklace": 3560,
+   "Wedding Ring": 990
+  }
+ },
+ "Carlson": {
+  "buys": {},
+  "date": "2005-12-31",
+  "rev": 25306,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Carlson | job = Ship Captain | location = [[Vega]] | buysell = no | buys = | sells = | notes = Carlson can transport you to any of the [[Ice Islands]] or back to Tibia. *[[Folda]] 10 gp *[[Senja]] 10 gp *[[Tibia (continent)|Tibia]] free From any Ice Island, it costs 10 [[gp]] to travel to any other Ice Island, and passage back to [[Tibia]] is free. |}}"
+ },
+ "Chatterbone": {
+  "buys": {},
+  "date": "2005-12-22",
+  "rev": 25009,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Chatterbone | location = [[Venore]] magic shop, east of the [[depot]] and [[temple]]. | job = Shopkeeper | notes = [[Image:Skeleton.gif|Chatterbone]] Chatterbone works in The Magic Bazar. | buysell = yes | buys = Nothing | sells = Non-premium Sorcerer [[Sorcerer#Sorcerer's Spells|spells]] and [[Sorcerer#Sorcerer's Runes|runes]]. |}}"
+ },
+ "Chemar": {
+  "buys": {},
+  "date": "2005-11-19",
+  "rev": 23827,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Chemar | flavortext = | job = Magic Carpet Manager | location = [[Darashia]] [[Magic Carpet]] platform, one floor up [http://www.tibianews.net/worldmap.asp?xcor=-2507.15&ycor=-1581.3 here]. | buysell = yes | buys = Nothing. | sells = [[Parcel]]s (15 [[gp]]), [[Letter]]s (8 [[gp]]). | quests = | notes = Can take you to [[Edron]] for 40 [[gp]] and [[Femor Hills]] for 60 [[gp]].<br> [[Letter]]s cost only 5 [[gp]], [[Parcel]]s only 10 [[gp]], and travelling is 10 [[gp]]s cheaper if you have completed the [[Postman Quest]]. |}}"
+ },
+ "Chephan": {
+  "buys": {},
+  "date": "2005-12-16",
+  "notes": "|}}",
+  "raw_buys": "",
+  "raw_sells": "[[Baking Tray]] 20 [[gps]], [[Bottle]] 3, [[Bucket]] 4, [[Cleaver]] 15, [[Cup]] 2, [[Fork]] 10, [[Jug]] 10, [[Knife]] 10, [[Mug]] 4, [[Pan]] 20, [[Plate]] 6, [[Pot]] 30, [[Rolling Pin]] 12, [[Spoon]] 10, [[Wooden Spoon]] 5,.",
+  "rev": 24669,
+  "sells": {
+   "Baking Tray": 20,
+   "Bottle": 3,
+   "Bucket": 4,
+   "Cleaver": 15,
+   "Cup": 2,
+   "Fork": 10,
+   "Jug": 10,
+   "Knife": 10,
+   "Mug": 4,
+   "Pan": 20,
+   "Plate": 6,
+   "Pot": 30,
+   "Rolling Pin": 12,
+   "Spoon": 10,
+   "Wooden Spoon": 5
+  }
+ },
+ "Chester Kahs": {
+  "buys": {},
+  "date": "2005-12-23",
+  "rev": 25033,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Chester Kahs | location = The Guard base between [[Thais]] north gate and castle. | job = Guard | notes = Chester is the captain of the TBI (Tibian Bureau of Investigation). He has control over the 'Red Guard' but prefers to work alone. He left the public scene after his failure to defend the colony [[Carlin]] against the [[orc]]s. | buysell = no | buys = | sells = |}}"
+ },
+ "Christoph": {
+  "buys": {},
+  "date": "2006-01-08",
+  "rev": 25529,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Christoph | location = Northwestern gate of [[Venore]]. | job = Guard | notes = He protects the city of Venore from attacking [[creature]]s from the swamp. | buysell = no | buys = | sells = |}}"
+ },
+ "Chrystal": {
+  "buys": {},
+  "date": "2005-07-25",
+  "rev": 20565,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Chrystal | job = Postman|Postwoman | location = In [[Edron]] next to the [[depot]] entrance. | notes = Parcels and letters are 10 and 5 [[gp]] if buyer has completed the [[Postman Quest]].<br>[[Image:Chrystal.jpg]] | buysell =yes | buys = Nothing. | sells = [[Parcel]]s 15 [[gp]], [[letter]]s 8 [[gp]] |}}"
+ },
+ "Cipfried": {
+  "buys": {},
+  "date": "2005-03-24",
+  "rev": 3990,
+  "sells": {},
+  "text": "[Cipfried]http://www.tibianews.net/worldmap.asp?xcor=1010&ycor=-918 is of the holy order of the monks. He was trained under the great Quentin himself, lead priest in Thais. Cipfried can give helpful hints and can also heal."
+ },
+ "Cobra": {
+  "buys": {},
+  "date": "2005-04-10",
+  "rev": 6623,
+  "sells": {},
+  "text": "[[Image:cobra.gif|left]] Hitpoints: 65<br> Experience: 30<br> Summon: 275<br> Convince: 275<br> <br> '''Immunities:''' n/a<br> <br> '''Special abilities:''' [[Poison|Poison attack]]<br> '''Runs?:''' A bug will run away in red health.<br> <br> '''Description:''' A cobra is a larger poisonous [[Creatures#Insects and Poisonous Creature|snake monster]] that lives hidden in the sand dunes of [[Ankrahmun]] and throughout caves and dungeons in that area. Loot:''' n/a Back to [[Creature]]s"
+ },
+ "Cornelia": {
+  "buys": {},
+  "date": "2006-02-15",
+  "notes": "Buys and sells armors, legs, helmets and shields. |}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "",
+  "raw_sells": "<br>'''Armors''': <br> [[Leather Armor]] 35 [[gp]],<br> [[Chain Armor]] 200 [[gp]],<br> [[Brass Armor]] 350 [[gp]],<br>'''Helmets''':<br> [[Leather Helmet]] 12 [[gp]],<br> [[Chain Helmet]] 52 [[gp]],<br> [[Brass Helmet]] 120 [[gp]],<br>[[Viking Helmet]] 265 [[gp]].",
+  "rev": 29031,
+  "sells": {
+   "Brass Armor": 350,
+   "Brass Helmet": 120,
+   "Chain Armor": 200,
+   "Chain Helmet": 52,
+   "Leather Armor": 35,
+   "Leather Helmet": 12,
+   "Viking Helmet": 265
+  }
+ },
+ "Costello": {
+  "buys": {},
+  "date": "2005-11-06",
+  "rev": 23417,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Costello | job = Unknown Occupation | location = [[Isle of the Kings]] | buysell = no | buys = | sells = | notes = He lives in this island, together with other monks. |}} {{NPC-stub}}"
+ },
+ "Dabui": {
+  "buys": {},
+  "date": "2005-11-24",
+  "rev": 24087,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Dabui | location = The entrance to the castle in [[Darashia]]. | job = Guard | notes = Dabui is a protector of the Caliph [[Kazzan]]. | buysell = no | buys = | sells = |}}"
+ },
+ "Dagomir": {
+  "buys": {},
+  "date": "2005-12-30",
+  "rev": 25294,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Dagomir | job = Unknown Occupation | location = North east [[Venore]] above the second [[depot]]. | buysell = no | buys = | sells = | notes = Dagomir is using the latrine and becomes quite upset when he realizes you are watching. |}}"
+ },
+ "Dalbrect": {
+  "buys": {},
+  "date": "2005-03-29",
+  "rev": 19019,
+  "sells": {},
+  "text": "Dalbrect can be found [http://www.tibianews.net/worldmap.asp?xcor=653&ycor=472 north of ghostlands]."
+ },
+ "Dallheim": {
+  "buys": {},
+  "date": "2005-06-24",
+  "rev": 16193,
+  "sells": {},
+  "text": "'''Dallheim''' Dallheim is a brigdeguard of Rookgard. He is protecting the city from evil monsters and also preventing new players (1 level) from exiting Rookgard. He can also heal players who are <65hp."
+ },
+ "Dane": {
+  "buys": {},
+  "date": "2006-02-15",
+  "notes": "Dane owns the [[White Wave Cellar]], beneath the [[Lonely Seaside Hostel]]. |}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "",
+  "raw_sells": "<br>'''Drinks:'''<br>[[Milk]] 4 [[gp]], <br>[[Water]] 2[[gp]], <br>[[Lemonade]] 5[[gp]]",
+  "rev": 29039,
+  "sells": {
+   "Lemonade": 5,
+   "Milk": 4,
+   "Water": 2
+  }
+ },
+ "Daniel Steelsoul": {
+  "buys": {},
+  "date": "2005-12-02",
+  "rev": 24271,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Daniel Steelsoul | flavortext = | job = Royalty | location = [[Edron]] castle ([http://www.tibianews.net/worldmap.asp?xcor=-2269.05&ycor=353.4 here]) | buysell = no | buys = | sells = | quests = | notes = [[Image:Daniel_Steelsoul.jpg|right]] The ruler of [[Edron]]. |}}"
+ },
+ "Dario": {
+  "buys": {},
+  "date": "2005-07-26",
+  "notes": "[[Image:595 arrows.gif|right|300px]] Dario also sells non-premium spells to [[paladin]]s.",
+  "raw_buys": "None.",
+  "raw_sells": "[[Arrows]] 2 gp, [[Bolt]]s 3 gp, [[Bow]] 400 gp, [[Crossbow]] 500 gp |}}",
+  "rev": 20590,
+  "sells": {
+   "Arrows": 2,
+   "Bow": 400,
+   "Crossbow": 500
+  }
+ },
+ "Dermot": {
+  "buys": {},
+  "date": "2005-12-25",
+  "notes": "The magistrate in [[Fibula]]. |}}",
+  "raw_buys": "Nothing?",
+  "raw_sells": "[[Key 3940]] (Fibula Key) 2,000 [[gp]]",
+  "rev": 25145,
+  "sells": {
+   "Key 3940": 2000
+  }
+ },
+ "Digger": {
+  "buys": {},
+  "date": "2005-12-22",
+  "notes": "[[Image:Necromancer.gif|Digger]] Digger works in The Magic Bazar.",
+  "raw_buys": "[[Vial]]s for 10 [[gp]]",
+  "raw_sells": "[[Mana Fluid]] 100 [[gp]] and [[Life Fluid]] 60 [[gp]] |}}",
+  "rev": 25011,
+  "sells": {
+   "Life Fluid": 60,
+   "Mana Fluid": 100
+  }
+ },
+ "Dixi": {
+  "buys": {
+   "Axe": 7,
+   "Chain Helmet": 12,
+   "Dagger": 2,
+   "Doublet": 3,
+   "Hand Axe": 4,
+   "Leather Armor": 5,
+   "Leather Helmet": 3,
+   "Rapier": 5,
+   "Sabre": 12,
+   "Short Sword": 10,
+   "Spear": 3,
+   "Studded Helmet": 20,
+   "Studded Shield": 16,
+   "Wooden Shield": 3
+  },
+  "date": "2005-11-20",
+  "notes": "[[Image:NPC Dixi.jpg|right]]Dixi works above her husband, [[Obi]], and trades the same items that he does. She came to [[Rookgaard]] to help newcomers with their equipment. |}}",
+  "raw_buys": "[[Spear]] 3, [[Rapier]] 5, [[Sabre]] 12, [[Dagger]] 2, [[Hand Axe]] 4, [[Axe]] 7, [[Short Sword]] 10, [[Wooden Shield]] 3, [[Studded Shield]] 16, [[Doublet]] 3, [[Leather Armor]] 5, [[Leather Helmet]] 3, [[Studded Helmet]] 20, [[Chain Helmet]] 12.",
+  "raw_sells": "[[Spear]] 10, [[Rapier]] 15, [[Sabre]] 25, [[Dagger]] 5, [[Hand Axe]] 8, [[Axe]] 20, [[Short Sword]] 30, [[Wooden Shield]] 15, [[Studded Shield]] 50, [[Coat]] 8, [[Jacket]] 10, [[Doublet]] 16, [[Leather Armor]] 25, [[Leather Legs]] 10, [[Leather Helmet]] 12, [[Studded Helmet]] 62, [[Chain Helmet]] 52, [[Torch]] 2, [[Bag]] 4, [[Scroll]] 5, [[Shovel]] 10, [[Backpack]] 10, [[Sickle]] 8, [[Scythe]] 12, [[Rope]] 50, [[Fishing Rod]] 150, [[Worms]]",
+  "rev": 23927,
+  "sells": {
+   "Axe": 20,
+   "Backpack": 10,
+   "Bag": 4,
+   "Chain Helmet": 52,
+   "Coat": 8,
+   "Dagger": 5,
+   "Doublet": 16,
+   "Fishing Rod": 150,
+   "Hand Axe": 8,
+   "Jacket": 10,
+   "Leather Armor": 25,
+   "Leather Helmet": 12,
+   "Leather Legs": 10,
+   "Rapier": 15,
+   "Rope": 50,
+   "Sabre": 25,
+   "Scroll": 5,
+   "Scythe": 12,
+   "Short Sword": 30,
+   "Shovel": 10,
+   "Sickle": 8,
+   "Spear": 10,
+   "Studded Helmet": 62,
+   "Studded Shield": 50,
+   "Torch": 2,
+   "Wooden Shield": 15
+  }
+ },
+ "Djema": null,
+ "Donald McRonald": {
+  "buys": {},
+  "date": "2006-02-02",
+  "notes": "A farmer from [[Thais]].<br> His name is surely taken from '''Ronald McDonald''', mascot of the large fast-food chain [http://en.wikipedia.org/wiki/McDonalds McDonalds]. |}}",
+  "raw_buys": "Nothing",
+  "raw_sells": "<br>[[Wheat]] 1 gp<br>[[Cheese]] 5 gp<br>[[Carrot]] 3 gp",
+  "rev": 28413,
+  "sells": {
+   "Carrot": 3,
+   "Cheese": 5,
+   "Wheat": 1
+  }
+ },
+ "Dove": {
+  "buys": {},
+  "date": "2005-11-04",
+  "notes": "A proud Postman, Dove is very friendly.",
+  "raw_buys": "",
+  "raw_sells": "[[Parcel]] 15 [[gp]], [[Letter]] 8 [[gp]] |}} {{NPC-stub}}",
+  "rev": 23324,
+  "sells": {
+   "Letter": 8,
+   "Parcel": 15
+  }
+ },
+ "Duria": {
+  "buys": {},
+  "date": "2006-06-24",
+  "notes": "Duria Steelbender, daughter of [[Fire]], of the [[Dragoneaters]] is the Highknight of the [[Dwarves|dwarfs]]. |}}<noinclude> </noinclude>",
+  "raw_buys": "none",
+  "raw_sells": "[[Spells]] only for [[Knight]]s and [[Paladin]]s. <br>[[Find Person]] 80 [[gp]], <br>[[Light]] 100 [[gp]], <br>[[Light Healing]] 170 [[gp]], <br>[[Antidote]] 150 [[gp]], <br>[[Great Light]] 500 [[gp]]",
+  "rev": 41205,
+  "sells": {
+   "Antidote": 150,
+   "Find Person": 80,
+   "Great Light": 500,
+   "Light": 100,
+   "Light Healing": 170
+  }
+ },
+ "Dustrunner": {
+  "buys": {},
+  "date": "2006-01-16",
+  "rev": 26368,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Dustrunner | location = In [[Venore]] 1 floor above the central [[depot]]. | job = Dog | notes = Dustrunner [[Image:Dog.gif|Dustrunner]] races [[Lightfoot]] in a betting competitions. Both start at the west end behind a rock. The starter pulls a lever and they race to the end. Whoever reaches the switch plate first, turns on a coal basin above, and wins. | buysell = no | buys = | sells = |}}"
+ },
+ "Edala": {
+  "buys": {},
+  "date": "2005-11-04",
+  "notes": "Sells one of the five coveted [[Blessing]]s available in [[Tibia]]. |}}",
+  "raw_buys": "",
+  "raw_sells": "[[Blessing]] 10,000 [[gp]]",
+  "rev": 23292,
+  "sells": {
+   "Blessing": 10000
+  }
+ },
+ "Eddy": {
+  "buys": {},
+  "date": "2005-12-23",
+  "notes": "|}}",
+  "raw_buys": "none",
+  "raw_sells": "'''Statues:''' [[Knight Statue]] 50, [[Minotaur Statue]] 50, [[Goblin Statue]] 50;<br> '''Tables:''' [[Small Table]] 20, [[Round Table]] 25, [[Square Table]] 25, [[Big Table]] 30;<br> '''Chairs:''' [[Wooden Chair]] 15, [[Rocking Chair]] 25, [[Red Cushioned Chair]] 40, [[Green Cushioned Chair]] 40, and [[Sofa Chair]] 55;<br> '''Flowers:''' [[Indoor Plant]] 8, [[Flower Bowl]] 6, [[God Flower]] 5, [[Honey Flower]] 5, [[Potted Flower]] 5;<br> '''Pillows:''' [[Small Pillow]] 20, [[Round Pillow]] 25, [[Sqare Pillow]] 25, [[Heart Pillow]] 30;<br> '''Pottery:''' [[Vase]] 3, [[Coal Basin]] 25, [[Amphora]] 4, [[Large Amphora]] 50;<br> '''Instruments:''' [[piano]] 200, [[harp]] 50;<br> '''Decorations:''' [[Water Pipe]] 40, [[Pendulum Clock]] 75, [[Telescope]] 70, [[Table Lamp]] 35, [[Rocking Horse]] 30, [[Globe]] 50, [[Birdcage]] 50, [[Round Mirror]] 40, [[Oval Mirror]] 40, [[Edged Mirror]] 40, [[Landscape Picture]] 50, [[Portait Picture]] 50, [[Stillife Picture]] 50, [[Cuckoo Clock]] 40;<br> ''[[Tapestry]]'' 50;<br> '''Containers:''' [[Drawer]] 18, [[Dresser]] 25, [[Locker]] 30, [[Crate]] 10, [[Chest]] 10, [[Box]] 10, [[Barrel]] 12, [[Trunk]] 10, [[Trough]] 7.",
+  "rev": 25029,
+  "sells": {
+   "Amphora": 4,
+   "Barrel": 12,
+   "Big Table": 30,
+   "Birdcage": 50,
+   "Box": 10,
+   "Chest": 10,
+   "Coal Basin": 25,
+   "Crate": 10,
+   "Cuckoo Clock": 40,
+   "Drawer": 18,
+   "Dresser": 25,
+   "Edged Mirror": 40,
+   "Flower Bowl": 6,
+   "Globe": 50,
+   "Goblin Statue": 50,
+   "God Flower": 5,
+   "Green Cushioned Chair": 40,
+   "Heart Pillow": 30,
+   "Honey Flower": 5,
+   "Indoor Plant": 8,
+   "Knight Statue": 50,
+   "Landscape Picture": 50,
+   "Large Amphora": 50,
+   "Locker": 30,
+   "Minotaur Statue": 50,
+   "Oval Mirror": 40,
+   "Pendulum Clock": 75,
+   "Portait Picture": 50,
+   "Potted Flower": 5,
+   "Red Cushioned Chair": 40,
+   "Rocking Chair": 25,
+   "Rocking Horse": 30,
+   "Round Mirror": 40,
+   "Round Pillow": 25,
+   "Round Table": 25,
+   "Small Pillow": 20,
+   "Small Table": 20,
+   "Sofa Chair": 55,
+   "Sqare Pillow": 25,
+   "Square Table": 25,
+   "Stillife Picture": 50,
+   "Table Lamp": 35,
+   "Telescope": 70,
+   "Trough": 7,
+   "Trunk": 10,
+   "Vase": 3,
+   "Water Pipe": 40,
+   "Wooden Chair": 15,
+   "harp": 50,
+   "piano": 200
+  }
+ },
+ "Edoch": {
+  "buys": {},
+  "date": "2006-01-10",
+  "notes": "Buys and sells [[Paladin]] equipment. |}}",
+  "raw_buys": "Nothing.",
+  "raw_sells": "<br>[[Bow]] 400 [[gp]], <br>[[Crossbow]] 500 [[gp]],<br> [[Arrow]]s 2 [[gp]]/each, <br>[[Bolt]]s 3 [[gp]]/each",
+  "rev": 26019,
+  "sells": {
+   "Bow": 400,
+   "Crossbow": 500
+  }
+ },
+ "Edowir": {
+  "buys": {},
+  "date": "2006-05-22",
+  "rev": 37753,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Edowir | flavortext = | job = Astrologer | location = [[White Flower Temple]], south of [[Thais]] | buysell = no | buys = Nothing. | sells = Nothing. | quests = | notes = Edowir knows much of the history of [[Tibia]]. Ask him questions about [[tibia]]. |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Edvard": {
+  "buys": {},
+  "date": "2006-01-08",
+  "notes": "|}}",
+  "raw_buys": "Nothing.",
+  "raw_sells": "'''Statues:''' [[Knight Statue]] 50, [[Minotaur Statue]] 50, [[Goblin Statue]] 50;<br> '''Tables:''' [[Small Table]] 20, [[Round Table]] 25, [[Square Table]] 25, [[Big Table]] 30;<br> '''Chairs:''' [[Wooden Chair]] 15, [[Rocking Chair]] 25, [[Red Cushioned Chair]] 40, [[Green Cushioned Chair]] 40, and [[Sofa Chair]] 55;<br> '''Flowers:''' [[Indoor Plant]] 8, [[Flower Bowl]] 6, [[God Flower]] 5, [[Honey Flower]] 5, [[Potted Flower]] 5;<br> '''Pillows:''' [[Small Pillow]] 20, [[Round Pillow]] 25, [[Sqare Pillow]] 25, [[Heart Pillow]] 30;<br> '''Pottery:''' [[Vase]] 3, [[Coal Basin]] 25, [[Amphora]] 4, [[Large Amphora]] 50;<br> '''Instruments:''' [[piano]] 200, [[harp]] 50;<br> '''Decorations:''' [[Water Pipe]] 40, [[Pendulum Clock]] 75, [[Telescope]] 70, [[Table Lamp]] 35, [[Rocking Horse]] 30, [[Globe]] 50, [[Birdcage]] 50, [[Round Mirror]] 40, [[Oval Mirror]] 40, [[Edged Mirror]] 40, [[Landscape Picture]] 50, [[Portait Picture]] 50, [[Stillife Picture]] 50, [[Cuckoo Clock]] 40;<br> ''[[Tapestry]]'' 50;<br> '''Containers:''' [[Drawer]] 18, [[Dresser]] 25, [[Locker]] 30, [[Crate]] 10, [[Chest]] 10, [[Box]] 10, [[Barrel]] 12, [[Trunk]] 10, [[Trough]] 7.",
+  "rev": 25526,
+  "sells": {
+   "Amphora": 4,
+   "Barrel": 12,
+   "Big Table": 30,
+   "Birdcage": 50,
+   "Box": 10,
+   "Chest": 10,
+   "Coal Basin": 25,
+   "Crate": 10,
+   "Cuckoo Clock": 40,
+   "Drawer": 18,
+   "Dresser": 25,
+   "Edged Mirror": 40,
+   "Flower Bowl": 6,
+   "Globe": 50,
+   "Goblin Statue": 50,
+   "God Flower": 5,
+   "Green Cushioned Chair": 40,
+   "Heart Pillow": 30,
+   "Honey Flower": 5,
+   "Indoor Plant": 8,
+   "Knight Statue": 50,
+   "Landscape Picture": 50,
+   "Large Amphora": 50,
+   "Locker": 30,
+   "Minotaur Statue": 50,
+   "Oval Mirror": 40,
+   "Pendulum Clock": 75,
+   "Portait Picture": 50,
+   "Potted Flower": 5,
+   "Red Cushioned Chair": 40,
+   "Rocking Chair": 25,
+   "Rocking Horse": 30,
+   "Round Mirror": 40,
+   "Round Pillow": 25,
+   "Round Table": 25,
+   "Small Pillow": 20,
+   "Small Table": 20,
+   "Sofa Chair": 55,
+   "Sqare Pillow": 25,
+   "Square Table": 25,
+   "Stillife Picture": 50,
+   "Table Lamp": 35,
+   "Telescope": 70,
+   "Trough": 7,
+   "Trunk": 10,
+   "Vase": 3,
+   "Water Pipe": 40,
+   "Wooden Chair": 15,
+   "harp": 50,
+   "piano": 200
+  }
+ },
+ "Elane": {
+  "buys": {
+   "Sniper Gloves": 2000
+  },
+  "date": "2007-01-04",
+  "notes": "[[Image:Elane.JPG|right]]She has got some information about the [[Hunter Outfits Quest]] and addons. |}}<noinclude> </noinclude>",
+  "raw_buys": "[[Sniper Gloves]] 2,000 [[gp]] (if you already have the sniper gloves add-on)",
+  "raw_sells": "[[Paladin_Spells|Paladin Spells]] Level 8 - Find Person (80 Gold), Light (100 Gold) <br> Level 9 - Light Healing (179 Gold)<br> Level 10 - Antidote (150 Gold) <br> Level 11 - Intense Healing (350 Gold) <br> Level 13 - Great Light (500 Gold), Conjure Arrow (450 Gold) <br> Level 17 - Fireball (800 Gold), Destroy Field (700 Gold) <br> Level 20 - Ultimate Healing (1000 Gold) <br> Level 25 - Explosive Arrow (1000 Gold), Heavy Magic Missile (1500 Gold) <br> Level 35 - Invisible (2000 Gold) <br>",
+  "rev": 75112,
+  "sells": {}
+ },
+ "Elathriel": {
+  "buys": {},
+  "date": "2005-12-20",
+  "rev": 24884,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Elathriel | location = [[Ab'Dendriel]] prison, 3 floors below ground. | job = Guard | notes = He is responsible for prisoners, and keeping guard over [[Hellgate]] | buysell = yes | buys = | sells = Copper [[Key 3012]], 5,000 [[gp]]. Opens the door to Hellgate. |}}"
+ },
+ "Elf Guard": {
+  "buys": {},
+  "date": "2005-10-30",
+  "rev": 23056,
+  "sells": {},
+  "text": "The Elf Guard is the guardian of [[Ab'Dendriel]]."
+ },
+ "Elvith": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26935,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Elvith | flavortext = | job = Instrument Shopkeeper | location = [[Ab'Dendriel]] | buysell = yes | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Emperor Kruzak": {
+  "buys": {},
+  "date": "2005-11-04",
+  "notes": "Emperor Kruzak reigns in the dwarven mountain of [[Kazordoon]]. He has the power to [[Promotion|promote]] worthy adventurers. |}} {{NPC-stub}}",
+  "raw_buys": "",
+  "raw_sells": "[[Promotion]] 20,000 [[gp]]",
+  "rev": 23316,
+  "sells": {
+   "Promotion": 20000
+  }
+ },
+ "Eremo": {
+  "buys": {
+   "Broken Amulet": 50000
+  },
+  "date": "2006-02-14",
+  "notes": "You can only reach Eremo by the boat from [[Cormaya]]. |}}",
+  "raw_buys": "<br> '''Amulets''' <br> [[Broken Amulet]] 50,000 [[gp]]",
+  "raw_sells": "<br> '''Amulets'''<br> [[Amulet of Loss]] 50,000 [[gp]] <br> '''Promotional Spells''' <br> [[Challenge]] 2,000 [[gp]] <br> [[Wild Growth]] 2,000 [[gp]] <br> [[Exevo con vis|Power Bolt]] 2,000 [[gp]] <br> [[Enchant Staff]] 2,000 [[gp]]",
+  "rev": 28979,
+  "sells": {
+   "Amulet of Loss": 50000,
+   "Challenge": 2000,
+   "Enchant Staff": 2000,
+   "Exevo con vis": 2000,
+   "Wild Growth": 2000
+  }
+ },
+ "Eroth": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26936,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Eroth | flavortext = | job = Paladin Guild Leader | location = [[Ab'Dendriel]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Etzel": {
+  "buys": {},
+  "date": "2006-09-08",
+  "notes": "Etzel Fireworker, son of fire, of the Molten Rocks, is dwarfish mastermage. He sells spells only to sorcerers. |}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "[[Vial]]s 5 [[gp]]",
+  "raw_sells": "[[Sorcerer]] [[Spell]]s <br>'''[[Attack Spells]]:''' <br>[[Fire Wave]] 850 [[gp]] <br>[[Energy Wave]] 2500 [[gp]] <br>[[Energy Beam]] 1000 [[gp]] <br>[[Great Energy Beam]] 1800 [[gp]] <br>'''[[Healing Spells]]:''' <br>[[Light Healing]] 170 [[gp]] <br>[[Intense Healing]] 350 [[gp]] <br>[[Ultimate Healing]] 1000 [[gp]] <br>[[Antidote]] 150 [[gp]] <br>'''[[Support Spells]]:''' <br>[[Find Person]] 80 [[gp]] <br>[[Light]] 100 [[gp]] <br>[[Great Light]] 500 [[gp]] <br>[[Magic Shield]] 450 [[gp]] <br>[[Creature Illusion]] 1000 [[gp]] <br>[[Invisible]] 2000 [[gp]] <br>'''[[Summon Spells]]:''' <br>[[Summon Creature]] 2000 [[gp]] <br>'''[[Missile Rune Spells]]''' <br>[[Light Magic Missile]] 500 [[gp]] <br>[[Heavy Magic Missile]] 1500 [[gp]] <br>[[Sudden Death]] 3000 [[gp]] <br>'''[[Explosive Rune Spells]]:''' <br>[[Fireball]] 800 [[gp]] <br>[[Great Fireball]] 1200 [[gp]] <br>[[Explosion]] 1800 [[gp]]",
+  "rev": 54162,
+  "sells": {
+   "Antidote": 150,
+   "Creature Illusion": 1000,
+   "Energy Beam": 1000,
+   "Energy Wave": 2500,
+   "Explosion": 1800,
+   "Find Person": 80,
+   "Fire Wave": 850,
+   "Fireball": 800,
+   "Great Energy Beam": 1800,
+   "Great Fireball": 1200,
+   "Great Light": 500,
+   "Heavy Magic Missile": 1500,
+   "Intense Healing": 350,
+   "Invisible": 2000,
+   "Light": 100,
+   "Light Healing": 170,
+   "Light Magic Missile": 500,
+   "Magic Shield": 450,
+   "Sudden Death": 3000,
+   "Summon Creature": 2000,
+   "Ultimate Healing": 1000
+  }
+ },
+ "Fa'hradin": {
+  "buys": {},
+  "date": "2006-01-24",
+  "rev": 27654,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Fa'hradin | location = [[Ashta'daramai]] (Blue Djinn Fortress) | job = Djinn | notes = [[Gabel]]'s second in command. A respected fighter and general of the blue djinn. | buysell = no | buys = None | sells = None |}}"
+ },
+ "Falk": {
+  "buys": {},
+  "date": "2005-12-06",
+  "rev": 24303,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Falk | flavortext = | job = Guard | location = [[Edron]] Catsle, north gate ([http://www.tibianews.net/worldmap.asp?xcor=-2266.25&ycor=407.05 here]) | buysell = no | buys = | sells = | quests = | notes = A guard who guards the north gate of [[Edron]] castle. |}}"
+ },
+ "Faluae": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26937,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Faluae | flavortext = | job = Paladin Guild Leader | location = [[Ab'Dendriel]] | buysell = yes | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Feizuhl": {
+  "buys": {},
+  "date": "2006-01-05",
+  "notes": "Feizuhl sells furniture, musical instruments, flowers, paintings and more! Everything you might need for your house! |}}",
+  "raw_buys": "none",
+  "raw_sells": "[[Knight Statue]] 50 [[gp]],<br>[[Minotaur Statue]] 50 [[gp]],<br>[[Goblin Statue]] 50 [[gp]],<br>[[Small Table]] 20 [[gp]],<br>[[Round Table]] 25 [[gp]],<br>[[Square Table]] 25 [[gp]],<br>[[Big Table]] 30 [[gp]],<br>[[Wooden Chair]] 15 [[gp]],<br>[[Rocking Chair]] 25 [[gp]],<br>[[Red Cushioned Chair]] 40 [[gp]],<br>[[Green Cushioned Chair]] 40 [[gp]],<br>[[Sofa Chair]] 55 [[gp]],<br>[[Small Pillow]] 20 [[gp]] (Purple, Green, Red, Blue, Orange, Turquoise, or White),<br>[[Round Pillow]] 25 [[gp]] (Purple, Red, Blue, or Turquoise),<br>[[Square Pillow]] 25 [[gp]] (Red, Green, Blue, or Yellow),<br>[[Heart Pillow]] 30 [[gp]],<br>[[Vase]] 3 [[gp]],<br>[[Coal Basin]] 25 [[gp]],<br>[[Amphora]] 4 [[gp]],<br>[[Large Amphora]] 50 [[gp]],<br>[[Piano]] 200 [[gp]],<br>[[Harp]] 50 [[gp]],<br>[[Water Pipe]] 40 [[gp]],<br>[[Pendulum Clock]] 75 [[gp]],<br>[[Telescope]] 70 [[gp]],<br>[[Table Lamp]] 35 [[gp]],<br>[[Rocking Horse]] 30 [[gp]],<br>[[Globe]] 50 [[gp]],<br>[[Birdcage]] 50 [[gp]],<br>[[Tapestry]] 25 [[gp]] (Purple, Green, Yellow, Orange, Red, Blue, or White),<br>[[Round Mirror]] 40 [[gp]],<br>[[Oval Mirror]] 40 [[gp]],<br>[[Edged Mirror]] 40 [[gp]],<br>[[Landscape]] 50 [[gp]],<br>[[Portrait]] 50 [[gp]],<br>[[Still Life]] 50 [[gp]],<br>[[Cuckoo Clock]] 40 [[gp]],<br>[[Drawer]] 18 [[gp]],<br>[[Dresser]] 25 [[gp]],<br>[[Locker]] 30 [[gp]],<br>[[Crate]] 10 [[gp]],<br>[[Chest]] 10 [[gp]],<br>[[Box]] 10 [[gp]],<br>[[Barrel]] 12 [[gp]],<br>[[Trunk]] 10 [[gp]],<br>[[Trough]] 7 [[gp]],<br>[[Indoor Plant]] 8 [[gp]],<br>[[Flower Bowl]] 6 [[gp]],<br>[[God Flower]] 5 [[gp]],<br>[[Honey Flower]] 5 [[gp]],<br>[[Potted Flower]] 5 [[gp]]",
+  "rev": 25429,
+  "sells": {
+   "Amphora": 4,
+   "Barrel": 12,
+   "Big Table": 30,
+   "Birdcage": 50,
+   "Box": 10,
+   "Chest": 10,
+   "Coal Basin": 25,
+   "Crate": 10,
+   "Cuckoo Clock": 40,
+   "Drawer": 18,
+   "Dresser": 25,
+   "Edged Mirror": 40,
+   "Flower Bowl": 6,
+   "Globe": 50,
+   "Goblin Statue": 50,
+   "God Flower": 5,
+   "Green Cushioned Chair": 40,
+   "Harp": 50,
+   "Heart Pillow": 30,
+   "Honey Flower": 5,
+   "Indoor Plant": 8,
+   "Knight Statue": 50,
+   "Landscape": 50,
+   "Large Amphora": 50,
+   "Locker": 30,
+   "Minotaur Statue": 50,
+   "Oval Mirror": 40,
+   "Pendulum Clock": 75,
+   "Piano": 200,
+   "Portrait": 50,
+   "Potted Flower": 5,
+   "Red Cushioned Chair": 40,
+   "Rocking Chair": 25,
+   "Rocking Horse": 30,
+   "Round Mirror": 40,
+   "Round Pillow": 25,
+   "Round Table": 25,
+   "Small Pillow": 20,
+   "Small Table": 20,
+   "Sofa Chair": 55,
+   "Square Pillow": 25,
+   "Square Table": 25,
+   "Still Life": 50,
+   "Table Lamp": 35,
+   "Tapestry": 25,
+   "Telescope": 70,
+   "Trough": 7,
+   "Trunk": 10,
+   "Vase": 3,
+   "Water Pipe": 40,
+   "Wooden Chair": 15
+  }
+ },
+ "Fenbala": {
+  "buys": {},
+  "date": "2005-11-05",
+  "rev": 23399,
+  "sells": {},
+  "text": "Fenbala and [[Barbara]] guards the castle of [[Queen Eloise]] in [[Carlin]]."
+ },
+ "Fenech": {
+  "buys": {},
+  "date": "2006-01-10",
+  "notes": "Sells runes, wands, rods and spellbooks",
+  "raw_buys": "Nothing",
+  "raw_sells": "<br>'''Blank Runes:'''<br>[[Blank Rune]] 10 [[gp]],<br> '''Missile Runes:'''<br>[[Light Magic Missile]] Rune 40 [[gp]],<br> [[Heavy Magic Missile]] Rune 125 [[gp]],<br> [[Sudden Death]] Rune 325 [[gp]],<br> '''Explosive Runes:'''<br>[[Fireball]] Rune 95 [[gp]],<br> [[Great Fireball]] Rune 180 [[gp]],<br> [[Explosion]] Rune 250 [[gp]],<br> '''Field Runes:'''<br>[[Fire Field]] Rune 85 [[gp]],<br> [[Energy Field]] Rune 115 [[gp]],<br> [[Poison Field]] Rune 65 [[gp]],<br> [[Destroy Field]] Rune 45 [[gp]],<br> '''Wall Runes:'''<br>[[Fire Wall]] Rune 245 [[gp]],<br> [[Energy Wall]] Rune 340 [[gp]],<br> [[Poison Wall]] Rune 210 [[gp]],<br> '''Bomb Runes:'''<br>[[Firebomb]] Rune 235 [[gp]],<br> '''Healing Runes:'''<br>[[Antidote Rune]] 65 [[gp]],<br> [[Intense Healing Rune]] 95 [[gp]],<br> [[Ultimate Healing Rune]] 175 [[gp]],<br> '''Other Spell Runes:'''<br>[[Convince Creature]] Rune 80 [[gp]],<br> [[Chameleon]] Rune 210 [[gp]],<br> '''Spellbooks:'''<br>[[Spellbook]] 150 [[gp]],<br> '''Wands:'''<br>[[Wand of Vortex]] Free/500 [[gp]],<br> [[Wand of Dragonbreath]] 1,000 [[gp]],<br> [[Wand of Plague]] 5,000 [[gp]],<br> [[Wand of Cosmic Energy]] 10,000 [[gp]],<br> [[Wand of Inferno]] 15,000 [[gp]],<br> '''Rods:'''<br>[[Snakebite Rod]] Free/500 [[gp]],<br> [[Moonlight Rod]] 1,000 [[gp]],<br> [[Volcanic Rod]] 5,000 [[gp]],<br> [[Quagmire Rod]] 10,000 [[gp]],<br> [[Tempest Rod]] 15,000 [[gp]] |}}",
+  "rev": 25621,
+  "sells": {
+   "Antidote Rune": 65,
+   "Blank Rune": 10,
+   "Intense Healing Rune": 95,
+   "Moonlight Rod": 1000,
+   "Quagmire Rod": 10000,
+   "Spellbook": 150,
+   "Tempest Rod": 15000,
+   "Ultimate Healing Rune": 175,
+   "Volcanic Rod": 5000,
+   "Wand of Cosmic Energy": 10000,
+   "Wand of Dragonbreath": 1000,
+   "Wand of Inferno": 15000,
+   "Wand of Plague": 5000
+  }
+ },
+ "Frans": {
+  "buys": {},
+  "date": "2005-12-22",
+  "notes": "[[Image:Skull_of_Ratha.gif|Frans]] Frans works in The Magic Bazar.",
+  "raw_buys": "Nothing",
+  "raw_sells": "[[Spell Book]] 150 [[gp]] and non-premium [[rune]]s. |}}",
+  "rev": 25013,
+  "sells": {
+   "Spell Book": 150
+  }
+ },
+ "Frodo": {
+  "buys": {},
+  "date": "2005-12-16",
+  "notes": "He deals in [[Item#Foods|Foods and Drinks]].",
+  "raw_buys": "None",
+  "raw_sells": "[[Bread]] 4, [[Cheese]] 6, [[Ham]] 8, [[Meat]] 5. |}}",
+  "rev": 24673,
+  "sells": {
+   "Bread": 4,
+   "Cheese": 6,
+   "Ham": 8,
+   "Meat": 5
+  }
+ },
+ "Gabel": {
+  "buys": {},
+  "date": "2006-01-24",
+  "rev": 27653,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Gabel | location = [[Ashta'daramai]] (Blue Djinn Fortress) | job = Djinn | notes = Gabel is the leader of the [[Marid]] and [[Blue Djinn]]. He was the original leader of all djinn before he and [[Malor]] began a conflict that has endured even today. | buysell = no | buys = None | sells = None |}}"
+ },
+ "Galuna": {
+  "buys": {},
+  "date": "2006-01-18",
+  "notes": "|}}",
+  "raw_buys": "yes",
+  "raw_sells": "[[Arrow]] 2 [[gp]], [[Bolt]] 3, [[Bow]] 400, [[Crossbow]] 500.",
+  "rev": 27216,
+  "sells": {
+   "Arrow": 2,
+   "Bolt": 3,
+   "Bow": 400,
+   "Crossbow": 500
+  }
+ },
+ "Gamel": {
+  "buys": {},
+  "date": "2005-09-10",
+  "notes": "Gamel deals in random [[Items|equipment]].",
+  "raw_buys": "Nothing.",
+  "raw_sells": "[[Mace]] 90, [[Staff]] 40, [[Dagger]] 5, [[Brass Helmet]] 12, [[Throwing Star]]. |}}",
+  "rev": 16177,
+  "sells": {
+   "Brass Helmet": 12,
+   "Dagger": 5,
+   "Mace": 90,
+   "Staff": 40
+  }
+ },
+ "Gamon": {
+  "buys": {},
+  "date": "2005-12-21",
+  "notes": "|}}",
+  "raw_buys": "none",
+  "raw_sells": "'''Statues:''' [[Knight Statue]] 50, [[Minotaur Statue]] 50, [[Goblin Statue]] 50;<br> '''Tables:''' [[Small Table]] 20, [[Round Table]] 25, [[Square Table]] 25, [[Big Table]] 30;<br> '''Chairs:''' [[Wooden Chair]] 15, [[Rocking Chair]] 25, [[Red Cushioned Chair]] 40, [[Green Cushioned Chair]] 40, and [[Sofa Chair]] 55;<br> '''Flowers:''' [[Indoor Plant]] 8, [[Flower Bowl]] 6, [[God Flower]] 5, [[Honey Flower]] 5, [[Potted Flower]] 5;<br> '''Pillows:''' [[Small Pillow]] 20, [[Round Pillow]] 25, [[Sqare Pillow]] 25, [[Heart Pillow]] 30;<br> '''Pottery:''' [[Vase]] 3, [[Coal Basin]] 25, [[Amphora]] 4, [[Large Amphora]] 50;<br> '''Instruments:''' [[piano]] 200, [[harp]] 50;<br> '''Decorations:''' [[Water Pipe]] 40, [[Pendulum Clock]] 75, [[Telescope]] 70, [[Table Lamp]] 35, [[Rocking Horse]] 30, [[Globe]] 50, [[Birdcage]] 50, [[Round Mirror]] 40, [[Oval Mirror]] 40, [[Edged Mirror]] 40, [[Landscape Picture]] 50, [[Portait Picture]] 50, [[Stillife Picture]] 50, [[Cuckoo Clock]] 40;<br> ''[[Tapestry]]'' 50;<br> '''Containers:''' [[Drawer]] 18, [[Dresser]] 25, [[Locker]] 30, [[Crate]] 10, [[Chest]] 10, [[Box]] 10, [[Barrel]] 12, [[Trunk]] 10, [[Trough]] 7.",
+  "rev": 24972,
+  "sells": {
+   "Amphora": 4,
+   "Barrel": 12,
+   "Big Table": 30,
+   "Birdcage": 50,
+   "Box": 10,
+   "Chest": 10,
+   "Coal Basin": 25,
+   "Crate": 10,
+   "Cuckoo Clock": 40,
+   "Drawer": 18,
+   "Dresser": 25,
+   "Edged Mirror": 40,
+   "Flower Bowl": 6,
+   "Globe": 50,
+   "Goblin Statue": 50,
+   "God Flower": 5,
+   "Green Cushioned Chair": 40,
+   "Heart Pillow": 30,
+   "Honey Flower": 5,
+   "Indoor Plant": 8,
+   "Knight Statue": 50,
+   "Landscape Picture": 50,
+   "Large Amphora": 50,
+   "Locker": 30,
+   "Minotaur Statue": 50,
+   "Oval Mirror": 40,
+   "Pendulum Clock": 75,
+   "Portait Picture": 50,
+   "Potted Flower": 5,
+   "Red Cushioned Chair": 40,
+   "Rocking Chair": 25,
+   "Rocking Horse": 30,
+   "Round Mirror": 40,
+   "Round Pillow": 25,
+   "Round Table": 25,
+   "Small Pillow": 20,
+   "Small Table": 20,
+   "Sofa Chair": 55,
+   "Sqare Pillow": 25,
+   "Square Table": 25,
+   "Stillife Picture": 50,
+   "Table Lamp": 35,
+   "Telescope": 70,
+   "Trough": 7,
+   "Trunk": 10,
+   "Vase": 3,
+   "Water Pipe": 40,
+   "Wooden Chair": 15,
+   "harp": 50,
+   "piano": 200
+  }
+ },
+ "Gorn": {
+  "buys": {},
+  "date": "2005-08-02",
+  "notes": "Gorn deals in [[Item#Tools|different]] [[Item#Item-Containers|equipment]]. [[Image:Gorn.jpg|left]]",
+  "raw_buys": "None",
+  "raw_sells": "[[bucket]] 4[[gp]], [[bottle]] 3, [[mug]] 4, [[cup]] 2, [[jug]] 10, [[plate]] 6, [[torch]] 2, [[bag]] 5, [[backpack]] 20, [[present box]] 10, [[scroll]] 5, [[document]] 12, [[parchment]] 8, [[Brown Book]] 15, [[Black Book]], [[Small Book]] 15, [[shovel]] 50 [[pick]] 50 [[scythe]] 50 [[watch]] 20 [[rope]] 50 [[fishing rod]] 150, [[football]] 111. |}}",
+  "rev": 20637,
+  "sells": {
+   "Brown Book": 15,
+   "Small Book": 15,
+   "backpack": 20,
+   "bag": 5,
+   "bottle": 3,
+   "bucket": 4,
+   "cup": 2,
+   "document": 12,
+   "fishing rod": 150,
+   "football": 111,
+   "jug": 10,
+   "mug": 4,
+   "parchment": 8,
+   "pick": 50,
+   "plate": 6,
+   "present box": 10,
+   "rope": 50,
+   "scroll": 5,
+   "scythe": 50,
+   "shovel": 50,
+   "torch": 2,
+   "watch": 20
+  }
+ },
+ "Graubart": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26966,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Graubart | flavortext = | job = Shopkeeper | location = [[Northport]] | buysell = yes | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Gregor": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26977,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Gregor | flavortext = | job = Knight Guild Leader | location = [[Thais]] | buysell = yes | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Grof, the guard": null,
+ "Gundralph": {
+  "buys": {},
+  "date": "2006-04-19",
+  "notes": "[[Image:Necromancer.gif|left]]Sells special spells to [[Druid]]s and [[Sorcerer]]s. |}}",
+  "raw_buys": "Nothing.",
+  "raw_sells": "'' '''Teaches:''' ''<br>[[Ultimate Light]] 1,600 [[gp]]<br>[[Soulfire]] 1,800 [[gp]]<br>[[Magic Wall]] 2,100 [[gp]]<br>[[Undead Legion]] 2,000 [[gp]]",
+  "rev": 35637,
+  "sells": {
+   "Magic Wall": 2100,
+   "Soulfire": 1800,
+   "Ultimate Light": 1600,
+   "Undead Legion": 2000
+  }
+ },
+ "Gurbasch": {
+  "buys": {},
+  "date": "2005-11-30",
+  "rev": 24238,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Gurbasch | job = Ship Captain | location = Several levels underground, below [[Cormaya]]. | buysell = no | buys = | sells = | notes = Gurbasch will transport you from Cormaya to [[Kazordoon]] by Steamship for 160 [[gp]].<br> Completing the [[Postman Quest]] will reduce the ship fare by 10 [[gp]]. |}}"
+ },
+ "H.L.": {
+  "buys": {
+   "Chain Armor": 30,
+   "Copper Shield": 10,
+   "Dark Helmet": 40,
+   "Dwarven Shield": 55,
+   "Halberd": 8,
+   "Katana": 8,
+   "Legion Helmet": 8,
+   "Mace": 8,
+   "Plate Armor": 110,
+   "Plate Shield": 25,
+   "Scale Armor": 75,
+   "Soldier Helmet": 16,
+   "Studded Armor": 18
+  },
+  "date": "2005-07-16",
+  "notes": "It is a long and sometimes dangerous trip, in the event of [[luring|lured monsters]]). He doesn't pay you incredibly well,but he buys many items that cannot be sold at any other shop. He will not speak to females. [[Image:Outlaw_Camp-NPC_HL.gif|thumb|right|340px|[[Rune Farmer]] and [[H.L.]] at the [[Outlaw Camp]] shop.]] |}}",
+  "raw_buys": "[[Mace]] 8[[gp]], [[Katana]] 8[[gp]], [[Halberd]] 8[[gp]], [[Plate Shield]] 25[[gp]], [[Copper Shield]] 10[[gp]], [[Dwarven Shield]] 55[[gp]], [[Legion Helmet]] 8[[gp]], [[Soldier Helmet]] 16[[gp]], [[Dark Helmet]] 40[[gp]], [[Studded Armor]] 18[[gp]], [[Chain Armor]] 30[[gp]], [[Scale Armor]] 75[[gp]], [[Plate Armor]] 110[[gp]].",
+  "raw_sells": "None.",
+  "rev": 13131,
+  "sells": {}
+ },
+ "Habdel": {
+  "buys": {
+   "Battle Axe": 75,
+   "Battle Hammer": 50,
+   "Club": 1,
+   "Dagger": 1,
+   "Double Axe": 260,
+   "Halberd": 310,
+   "Mace": 23,
+   "Morning Star": 100,
+   "Rapier": 3,
+   "Sabre": 5,
+   "Sword": 15,
+   "War Hammer": 470
+  },
+  "date": "2005-09-10",
+  "notes": "Habdel deals in [[Item#Weapons|weapons]].",
+  "raw_buys": "[[Battle Axe]] 75, [[Double Axe]] 260, [[Halberd]] 310, [[Club]] 1, [[Mace]] 23, [[Battle Hammer]] 50, [[Morning Star]] 100, [[War Hammer]] 470, [[Dagger]] 1, [[Rapier]] 3, [[Sabre]] 5, [[Sword]] 15.",
+  "raw_sells": "[[Battle Axe]] 235, [[Club]] 5, [[Mace]] 90, [[Battle Hammer]] 350, [[Morning Star]] 430, [[Dagger]] 5, [[Rapier]] 15, [[Sabre]] 25, [[Sword]] 85. |}}",
+  "rev": 16057,
+  "sells": {
+   "Battle Axe": 235,
+   "Battle Hammer": 350,
+   "Club": 5,
+   "Dagger": 5,
+   "Mace": 90,
+   "Morning Star": 430,
+   "Rapier": 15,
+   "Sabre": 25,
+   "Sword": 85
+  }
+ },
+ "Hagor": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26953,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Hagor | flavortext = | job = Adventurer | location = [[Jakundaf Desert]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Halif": {
+  "buys": {},
+  "date": "2006-01-10",
+  "notes": "Halif deals in [[Item#Tools|different]] [[Item#Item-Containers|equipment]].",
+  "raw_buys": "None",
+  "raw_sells": "<br>[[Shovel]] 10 [[gp]], <br>[[Pick]], <br>[[Schythe]], <br>[[Bag]] 2 [[gp]], <br>[[Rope]], <br>[[Backpack]] 10 [[gp]], <br>[[Plate]], <br>[[Cup]], <br>[[Scroll]], <br>[[Parchment]], <br>[[Watch]], <br>[[Fishing Rod]], <br>[[Worm]]s, <br>[[Torch]] 2 [[gp]], <br>[[Lamp]] |}}",
+  "rev": 26021,
+  "sells": {
+   "Backpack": 10,
+   "Bag": 2,
+   "Shovel": 10,
+   "Torch": 2
+  }
+ },
+ "Hanna": {
+  "buys": {
+   "Black Pearl": 280,
+   "Small Amethyst": 200,
+   "Small Diamond": 300,
+   "Small Emerald": 250,
+   "Small Ruby": 250,
+   "Small Sapphire": 250,
+   "White Pearl": 160
+  },
+  "date": "2006-03-09",
+  "notes": "Buys and sells valuables |}}",
+  "raw_buys": "<br>'''Pearls:'''<br>[[White Pearl]] 160 [[gp]], <br>[[Black Pearl]] 280 [[gp]], <br>'''Gems:'''<br>[[Small Diamond]] 300 [[gp]], <br>[[Small Sapphire]] 250 [[gp]], <br>[[Small Ruby]] 250 [[gp]], <br>[[Small Emerald]] 250 [[gp]], <br>[[Small Amethyst]] 200 [[gp]]",
+  "raw_sells": "<br>'''Pearls:'''<br>[[White Pearl]] 320 [[gp]], <br>[[Black Pearl]] 560 [[gp]], <br>'''Gems:'''<br>[[Small Diamond]] 600 [[gp]], <br>[[Small Sapphire]] 500 [[gp]], <br>[[Small Ruby]] 500 [[gp]], <br>[[Small Emerald]] 500 [[gp]], <br>[[Small Amethyst]] 400 [[gp]], <br>'''Jewelry:'''<br>[[Wedding Ring]] 990 [[gp]], <br>[[Golden Amulet]] 6,600 [[gp]], <br>[[Ruby Necklace]] 3,560 [[gp]].",
+  "rev": 31040,
+  "sells": {
+   "Black Pearl": 560,
+   "Golden Amulet": 6600,
+   "Ruby Necklace": 3560,
+   "Small Amethyst": 400,
+   "Small Diamond": 600,
+   "Small Emerald": 500,
+   "Small Ruby": 500,
+   "Small Sapphire": 500,
+   "Wedding Ring": 990,
+   "White Pearl": 320
+  }
+ },
+ "Hardek": {
+  "buys": {
+   "Battle Shield": 95,
+   "Brass Armor": 112,
+   "Brass Helmet": 30,
+   "Brass Legs": 49,
+   "Brass Shield": 16,
+   "Chain Legs": 20,
+   "Dagger": 1,
+   "Iron Helmet": 145,
+   "Longsword": 51,
+   "Mace": 23,
+   "Plate Legs": 115,
+   "Plate Shield": 31,
+   "Poison Dagger": 1,
+   "Spike Sword": 225,
+   "Viking Helmet": 66
+  },
+  "date": "2005-09-10",
+  "notes": "Azil deals in [[Item#Armors|armors]] and [[Item#Weapons|weapons]].",
+  "raw_buys": "[[Mace]] 23, [[Dagger]] 1, [[Poison Dagger]] 1, [[Longsword]] 51, [[Spike Sword]] 225, [[Brass Shield]] 16, [[Plate Shield]] 31, [[Battle Shield]] 95, [[Brass Helmet]] 30, [[Viking Helmet]] 66, [[Iron Helmet]] 145, [[Brass Armor]] 112, [[Chain Legs]] 20, [[Brass Legs]] 49, [[Plate Legs]] 115.",
+  "raw_sells": "Nothing. |}}",
+  "rev": 20898,
+  "sells": {}
+ },
+ "Harkath Bloodblade": {
+  "buys": {},
+  "date": "2005-12-23",
+  "rev": 25032,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Harkath Bloodblade | location = South gate of [[Thais]]. | job = Guard | notes = Harkath is the [[king Tibianus III|King's]] army general. He will only talk to you if you greet him with \"hail general.\" | buysell = no | buys = | sells = |}}"
+ },
+ "Haroun": {
+  "buys": {
+   "Axe Ring": 100,
+   "Bronze Amulet": 50,
+   "Club Ring": 100,
+   "Elven Amulet": 100,
+   "Garlic Necklace": 50,
+   "Life Crystal": 50,
+   "Magic Light Wand": 35,
+   "Mind Stone": 100,
+   "Orb": 750,
+   "Power Ring": 50,
+   "Stealth Ring": 200,
+   "Stone Skin Amulet": 500,
+   "Sword Ring": 100,
+   "Wand of Cosmic Energy": 2000,
+   "Wand of Dragonbreath": 200,
+   "Wand of Inferno": 3000,
+   "Wand of Plague": 1000,
+   "Wand of Vortex": 100
+  },
+  "date": "2006-03-06",
+  "notes": "Haroun buys and sells magical items and some other special items. He and [[Nah'Bob]] are dealing in different equipment for the [[Blue Djinn]] army.<br><br>",
+  "raw_buys": "<br> '''Rings:'''<br> [[Sword Ring]] 100 [[gp]], <br> [[Club Ring]] 100 [[gp]], <br> [[Axe Ring]] 100 [[gp]], <br> [[Power Ring]] 50 [[gp]], <br> [[Stealth Ring]] 200 [[gp]], <br> '''Amulets:'''<br> [[Stone Skin Amulet]] 500 [[gp]], <br> [[Elven Amulet]] 100 [[gp]], <br> [[Bronze Amulet]] 50 [[gp]], <br> [[Garlic Necklace]] 50 [[gp]], <br> '''Wands:'''<br> [[Magic Light Wand]] 35 [[gp]]<br> [[Wand of Vortex]] 100 [[gp]], <br> [[Wand of Dragonbreath]] 200 [[gp]], <br> [[Wand of Plague]] 1,000 [[gp]], <br> [[Wand of Cosmic Energy]] 2,000 [[gp]], <br> [[Wand of Inferno]] 3,000 [[gp]], <br> '''Special Items:'''<br> [[Orb]] 750 [[gp]], <br> [[Mind Stone]] 100 [[gp]], <br> [[Life Crystal]] 50 [[gp]]<br>",
+  "raw_sells": "<br> '''Rings:'''<br> [[Sword Ring]] 500 [[gp]], <br> [[Club Ring]] 500 [[gp]], <br> [[Axe Ring]] 500 [[gp]], <br> [[Power Ring]] 100 [[gp]], <br> [[Stealth Ring]] 5,000 [[gp]], <br> '''Amulets:'''<br> [[Stone Skin Amulet]] 500 [[gp]], <br> [[Elven Amulet]] 500 [[gp]], <br> [[Bronze Amulet]] 100 [[gp]], <br> [[Garlic Necklace]] 100 [[gp]], <br> |}}",
+  "rev": 30691,
+  "sells": {
+   "Axe Ring": 500,
+   "Bronze Amulet": 100,
+   "Club Ring": 500,
+   "Elven Amulet": 500,
+   "Garlic Necklace": 100,
+   "Power Ring": 100,
+   "Stealth Ring": 5000,
+   "Stone Skin Amulet": 500,
+   "Sword Ring": 500
+  }
+ },
+ "Harsky": {
+  "buys": {},
+  "date": "2005-12-20",
+  "rev": 24890,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Harsky | job = Guard | location = [[Thais]] Castle | buysell = no | buys = | sells = | notes = Guards the castle of [[King Tibianus III]], along with [[Stutch]]. |}}"
+ },
+ "Hofech": {
+  "buys": {},
+  "date": "2005-12-21",
+  "notes": "Hofech sells furniture, wall hangings, decorations, and more. Everything you might need to furnish your home. |}}",
+  "raw_buys": "Nothing.",
+  "raw_sells": "'''Statues:''' [[Knight Statue]] 50, [[Minotaur Statue]] 50, [[Goblin Statue]] 50;<br> '''Tables:''' [[Small Table]] 20, [[Round Table]] 25, [[Square Table]] 25, [[Big Table]] 30;<br> '''Chairs:''' [[Wooden Chair]] 15, [[Rocking Chair]] 25, [[Red Cushioned Chair]] 40, [[Green Cushioned Chair]] 40, and [[Sofa Chair]] 55;<br> '''Flowers:''' [[Indoor Plant]] 8, [[Flower Bowl]] 6, [[God Flower]] 5, [[Honey Flower]] 5, [[Potted Flower]] 5;<br> '''Pillows:''' [[Small Pillow]] 20, [[Round Pillow]] 25, [[Sqare Pillow]] 25, [[Heart Pillow]] 30;<br> '''Pottery:''' [[Vase]] 3, [[Coal Basin]] 25, [[Amphora]] 4, [[Large Amphora]] 50;<br> '''Instruments:''' [[piano]] 200, [[harp]] 50;<br> '''Decorations:''' [[Water Pipe]] 40, [[Pendulum Clock]] 75, [[Telescope]] 70, [[Table Lamp]] 35, [[Rocking Horse]] 30, [[Globe]] 50, [[Birdcage]] 50, [[Round Mirror]] 40, [[Oval Mirror]] 40, [[Edged Mirror]] 40, [[Landscape Picture]] 50, [[Portait Picture]] 50, [[Stillife Picture]] 50, [[Cuckoo Clock]] 40;<br> ''[[Tapestry]]'' 25;<br> '''Containers:''' [[Drawer]] 18, [[Dresser]] 25, [[Locker]] 30, [[Crate]] 10, [[Chest]] 10, [[Box]] 10, [[Barrel]] 12, [[Trunk]] 10, [[Trough]] 7.",
+  "rev": 24976,
+  "sells": {
+   "Amphora": 4,
+   "Barrel": 12,
+   "Big Table": 30,
+   "Birdcage": 50,
+   "Box": 10,
+   "Chest": 10,
+   "Coal Basin": 25,
+   "Crate": 10,
+   "Cuckoo Clock": 40,
+   "Drawer": 18,
+   "Dresser": 25,
+   "Edged Mirror": 40,
+   "Flower Bowl": 6,
+   "Globe": 50,
+   "Goblin Statue": 50,
+   "God Flower": 5,
+   "Green Cushioned Chair": 40,
+   "Heart Pillow": 30,
+   "Honey Flower": 5,
+   "Indoor Plant": 8,
+   "Knight Statue": 50,
+   "Landscape Picture": 50,
+   "Large Amphora": 50,
+   "Locker": 30,
+   "Minotaur Statue": 50,
+   "Oval Mirror": 40,
+   "Pendulum Clock": 75,
+   "Portait Picture": 50,
+   "Potted Flower": 5,
+   "Red Cushioned Chair": 40,
+   "Rocking Chair": 25,
+   "Rocking Horse": 30,
+   "Round Mirror": 40,
+   "Round Pillow": 25,
+   "Round Table": 25,
+   "Small Pillow": 20,
+   "Small Table": 20,
+   "Sofa Chair": 55,
+   "Sqare Pillow": 25,
+   "Square Table": 25,
+   "Stillife Picture": 50,
+   "Table Lamp": 35,
+   "Telescope": 70,
+   "Trough": 7,
+   "Trunk": 10,
+   "Vase": 3,
+   "Water Pipe": 40,
+   "Wooden Chair": 15,
+   "harp": 50,
+   "piano": 200
+  }
+ },
+ "Hoggle": {
+  "buys": {},
+  "date": "2006-01-16",
+  "rev": 26229,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Hoggle | flavortext = Lonely Looney | job = Humble fisherman | location = East of [[Thais]] and [[Thais]] troll cave | buysell = no | buys = What the NPC buys, if \"yes\" above | sells = What the NPC sells, if \"yes\" above | quests = ?? | notes = Appearantly [[fishing]] is hard for a humble fisherman, especially one that swims and fishes at the same time. Of course this is necessary for any such fisherman that puts holes in his boat to make it more aerodymnamic. If you think this guy is crazy, ask him his opinion of [[fish]]. He thinks they can talk but are too wise to do "
+ },
+ "Hugo": {
+  "buys": {},
+  "date": "2006-01-16",
+  "rev": 26319,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Hugo | location = In Venore, between and south of the depot and temple. | job = Shopmaster | notes = Hugo runs the Dress For Success Warehouse. He is called Hugo Chief, though his real name is Oscar Savage, which he changed because Hugo is more manly. He makes [[Postman Quest/Spoiler#Mission 9 - New Uniforms|uniforms]]. | buysell = no | buys = | sells = |}}"
+ },
+ "Humgolf": {
+  "buys": {
+   "Ham": 4,
+   "Meat": 2
+  },
+  "date": "2006-03-01",
+  "notes": "Humgolf is the primary caretaker and trainer for drilling worms that help in the mines. He cares greatly for his worms, and has strong opinions about people that kill [[Rotworm]]s for sport. |}}",
+  "raw_buys": "<br>[[Meat]] 2 [[gp]], <br> [[Ham]] 4 [[gp]]",
+  "raw_sells": "None",
+  "rev": 30140,
+  "sells": {}
+ },
+ "Humphrey": {
+  "buys": {},
+  "date": "2005-11-04",
+  "notes": "He offers healing for the badly damaged, and can cure you if you are [[poison]]ed, on [[fire]], or [[energy|electrified]]. He also can give you one of the 5 valuable [[Blessing]]s. |}} {{NPC-stub}}",
+  "raw_buys": "None",
+  "raw_sells": "[[Blessing]] 10,000 [[gp]]",
+  "rev": 23299,
+  "sells": {
+   "Blessing": 10000
+  }
+ },
+ "Hyacinth": {
+  "buys": {},
+  "date": "2005-11-04",
+  "notes": "Hyacinth lives on a mountain east of town on [[Rookgaard]]. He worships the god of nature, [[Crunor]]. He has fear about dark magic on the island, and what this could mean. |}}",
+  "raw_buys": "",
+  "raw_sells": "[[Life Fluid]] 100 gp",
+  "rev": 23286,
+  "sells": {
+   "Life Fluid": 100
+  }
+ },
+ "Imalas": {
+  "buys": {},
+  "date": "2005-07-26",
+  "rev": 20583,
+  "sells": {},
+  "text": "Owner of the \"food store\" in [[Carlin]]. Sells bananas, cherries, grapes, melons, carrots, cookies, rolls, brown bread, eggs, and cheese."
+ },
+ "Irea": {
+  "buys": {},
+  "date": "2006-12-22",
+  "notes": "Irea teaches the [[Paladin]] spells [[Conjure Arrow]], [[Poison Arrow]], and [[Explosive Arrow]]. |}}",
+  "raw_buys": "Nothing.",
+  "raw_sells": "<br>'''Distance Weapons:'''<br>[[Bow]] 400 [[gp]]<br>[[Crossbow]] 500 [[gp]]<br>'''Ammunition:'''<br> [[Arrow]]s 2 [[gp]]<br>[[Bolt]]s 3 [[gp]]",
+  "rev": 71816,
+  "sells": {
+   "Bow": 400,
+   "Crossbow": 500
+  }
+ },
+ "Ishebad": {
+  "buys": {},
+  "date": "2005-11-04",
+  "rev": 23202,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Ishebad | job = Grand Vizier | location = [[Ankrahmun]] [[Temple]] ([http://www.tibianews.net/worldmap.asp?xcor=-2174&ycor=-2806 here]) | buysell = no | buys = | sells = | notes = Ishebad is the Grand Vizier to the pharaoh. He is responsible for the daily afairs of the city of [[Ankrahmun]], and can [[Promotion|promote]] characters. |}}"
+ },
+ "Ishina": {
+  "buys": {},
+  "date": "2006-01-10",
+  "notes": "Buys and sells valubles. |}}",
+  "raw_buys": "<br>'''Pearls:'''<br>[[White Pearl]], <br>[[Black Pearl]], <br>'''Gems:'''<br>[[Small Diamond]], <br>[[Small Sapphire]], <br>[[Small Ruby]], <br>[[Small Emerald]], <br>[[Small Amethyst]]",
+  "raw_sells": "<br>'''Pearls:'''<br>[[White Pearl]], <br>[[Black Pearl]], <br>'''Gems:'''<br>[[Small Diamond]], <br>[[Small Sapphire]], <br>[[Small Ruby]], <br>[[Small Emerald]], <br>[[Small Amethyst]], <br>'''Jewelry:'''<br>[[Wedding Ring]] 990 [[gp]], <br>[[Golden Amulet]] 6,600 [[gp]], <br>[[Ruby Necklace]] 3,560 [[gp]]",
+  "rev": 26023,
+  "sells": {
+   "Golden Amulet": 6600,
+   "Ruby Necklace": 3560,
+   "Wedding Ring": 990
+  }
+ },
+ "Isimov": {
+  "buys": {},
+  "date": "2005-12-20",
+  "rev": 24880,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Isimov | location = [[Kazordoon]] [[Temple]], four levels below ground. | job = Priest | notes = Isimov resides in the Carlin Temple, assisting adventurers by offering minor healings and can cure you if you are [[poison]]ed, on [[fire]] or [[energy|electrified]]. | buysell = no | buys = | sells = |}}"
+ },
+ "Iwan": {
+  "buys": {},
+  "date": "2006-01-11",
+  "notes": "Buys and sells valubles. |}}",
+  "raw_buys": "<br>'''Pearls:'''<br>[[White Pearl]], <br>[[Black Pearl]], <br>'''Gems:'''<br>[[Small Diamond]], <br>[[Small Sapphire]], <br>[[Small Ruby]], <br>[[Small Emerald]], <br>[[Small Amethyst]]",
+  "raw_sells": "<br>'''Pearls:'''<br>[[White Pearl]], <br>[[Black Pearl]], <br>'''Gems:'''<br>[[Small Diamond]], <br>[[Small Sapphire]], <br>[[Small Ruby]], <br>[[Small Emerald]], <br>[[Small Amethyst]], <br>'''Jewelry:'''<br>[[Wedding Ring]] 990 [[gp]], <br>[[Golden Amulet]] 6,600 [[gp]], <br>[[Ruby Necklace]] 3,560 [[gp]]",
+  "rev": 26087,
+  "sells": {
+   "Golden Amulet": 6600,
+   "Ruby Necklace": 3560,
+   "Wedding Ring": 990
+  }
+ },
+ "Iwar": {
+  "buys": {},
+  "date": "2006-03-10",
+  "notes": "|}}",
+  "raw_buys": "None",
+  "raw_sells": "<br><b>[[Statue]]s</b><br>[[Knight]] 50 [[gp]],<br>[[Minotaur]] 50 [[gp]],<br>[[Goblin]] 50 [[gp]]<br>'''[[Pottery]]'''<br>[[Vase]] 3 [[gp]],<br>[[Coal Basin]] 25 [[gp]],<br>[[Amphora]] 4 [[gp]],<br>[[Large Amphora]] 50 [[gp]]<br>'''m'''<br>[[]] [[gp]],<br>[[]] [[gp]],",
+  "rev": 31445,
+  "sells": {
+   "Amphora": 4,
+   "Coal Basin": 25,
+   "Goblin": 50,
+   "Knight": 50,
+   "Large Amphora": 50,
+   "Minotaur": 50,
+   "Vase": 3
+  }
+ },
+ "Jakahr": {
+  "buys": {},
+  "date": "2005-11-04",
+  "notes": "[[Image:Jakahr.jpg|right]]",
+  "raw_buys": "Nothing",
+  "raw_sells": "[[Parcel]] 15 [[gp]], [[Letter]] 8 [[gp]] |}}",
+  "rev": 23293,
+  "sells": {
+   "Letter": 8,
+   "Parcel": 15
+  }
+ },
+ "James": {
+  "buys": {},
+  "date": "2005-12-06",
+  "notes": "A Farmer in [[Stonehome]], sells some food. |}}",
+  "raw_buys": "",
+  "raw_sells": "[[Bread]] 3, [[Cheese]] 5, [[Ham]] 8, [[Meat]] 5, [[Apple]] 3.",
+  "rev": 24301,
+  "sells": {
+   "Apple": 3,
+   "Bread": 3,
+   "Cheese": 5,
+   "Ham": 8,
+   "Meat": 5
+  }
+ },
+ "Jean Claude": {
+  "buys": {},
+  "date": "2005-12-20",
+  "rev": 24886,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Jean Claude | location = Northwestern gate of [[Venore]]. | job = Guard | notes = He protects the city of Venore from attacking [[creature]]s from the swamp. | buysell = no | buys = | sells = |}}"
+ },
+ "Jezzara": {
+  "buys": {},
+  "date": "2006-01-10",
+  "notes": "Sells foods of various kinds.",
+  "raw_buys": "None",
+  "raw_sells": "<br>'''Meats:'''<br>[[Meat]] 10 [[gp]],<br> [[Ham]] 15 [[gp]],<br> [[Salmon]] 7 [[gp]],<br> [[Fish]] 6 [[gp]],<br> '''Fruits:'''<br>[[Orange]] 9 [[gp]],<br> [[Banana]] 5 [[gp]],<br> [[Grapes]] 8 [[gp]],<br> [[Pumpkin]] 10 [[gp]],<br> [[Melon]] 13 [[gp]],<br> '''Vegetables:'''<br>[[Carrot]] 8 [[gp]],<br> [[Tomato]] 10 [[gp]] |}}",
+  "rev": 25618,
+  "sells": {
+   "Banana": 5,
+   "Carrot": 8,
+   "Fish": 6,
+   "Grapes": 8,
+   "Ham": 15,
+   "Meat": 10,
+   "Melon": 13,
+   "Orange": 9,
+   "Pumpkin": 10,
+   "Salmon": 7,
+   "Tomato": 10
+  }
+ },
+ "Jimbin": {
+  "buys": {},
+  "date": "2005-12-16",
+  "notes": "He deals in [[Item#Drinks|Drinks]]. He runs the bar with his wife, [[Maryza]].",
+  "raw_buys": "None",
+  "raw_sells": "[[Beer]] 2, [[Water]] 1. |}}",
+  "rev": 24671,
+  "sells": {
+   "Beer": 2,
+   "Water": 1
+  }
+ },
+ "Julian": {
+  "buys": {},
+  "date": "2006-01-16",
+  "notes": "Julian sells [[Items#Instruments|instruments]] at the Useful Things Warehouse.",
+  "raw_buys": "None",
+  "raw_sells": "[[Drum]] 140 [[gp]], [[Harp]] 50, [[Lyre]] 120, [[Lute]] 195, [[Piano]] 200, and a [[Simple Fanfare]] 150. |}}",
+  "rev": 26358,
+  "sells": {
+   "Drum": 140,
+   "Harp": 50,
+   "Lute": 195,
+   "Lyre": 120,
+   "Piano": 200,
+   "Simple Fanfare": 150
+  }
+ },
+ "Karl": {
+  "buys": {},
+  "date": "2006-04-09",
+  "notes": "Karl works in the headquarters, disguised as a tavern, of a resistance against Carlin. He sells beer at a high price. |}}",
+  "raw_buys": "",
+  "raw_sells": "<br>'''Drinks:'''<br> [[Beer]] 20 [[gp]]",
+  "rev": 35038,
+  "sells": {
+   "Beer": 20
+  }
+ },
+ "Kasmir": {
+  "buys": {},
+  "date": "2005-12-18",
+  "rev": 24793,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Kasmir | location = [[Darashia]] [[Temple]], just 6 floors above the [[depot]]. | job = Priest | notes = Kasmir resides in the Darashia Temple, assisting adventurers by offering minor healings and can cure you if you are [[poison]]ed, on [[fire]] or [[energy|electrified]]. | buysell = no | buys = | sells = |}}"
+ },
+ "Kawill": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26960,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Kawill | flavortext = | job = Druid Guild Leader | location = [[Kazordoon]] | buysell = yes | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Kazzan": {
+  "buys": {},
+  "date": "2005-05-17",
+  "rev": 19328,
+  "sells": {},
+  "text": "[[Image:Kazzan.gif|left]] Caliph Kazzan is the ruler of the city of [[Darashia]]. He is also the spiritual leader of the people in following the teachings of Daraman. In his younger years he was a fighter, and fought in the battles against the enemy from [[Drefia]]."
+ },
+ "Kevin": {
+  "buys": {},
+  "date": "2005-10-14",
+  "rev": 22135,
+  "sells": {},
+  "text": "{{infobox_NPC| |name=Kevin |buysell=no |location=[[Postal Service Headquarters]] |job=Postman |notes='''Kevin Postner''' is the Postmaster General of the Tibian Postal Service. His name is an obvious pun on that of the actor [[Wikipedia:Kevin Costner|Kevin Costner]] who played the title character in the 1997 film ''[[Wikipedia:The Postman|The Postman]]''. Costner also directed the film, which boasted a runtime of nearly three hours. Most film critics considered it an overly long and boring movie. ([[Wikipedia:Roger Ebert|Roger Ebert]] gave it 1½ stars [http://rogerebert.suntimes.com/apps/pbcs."
+ },
+ "King Tibianus": {
+  "buys": {},
+  "date": "2005-11-04",
+  "notes": "King Tibianus is the king of [[Tibia]], and has the power to [[Promotion|promote]] worthy adventurers.",
+  "raw_buys": "Nothing",
+  "raw_sells": "[[Promotion]] 20,000 [[gp]] |}} {{NPC-stub}}",
+  "rev": 23320,
+  "sells": {
+   "Promotion": 20000
+  }
+ },
+ "Kroox": {
+  "buys": {
+   "Battle Shield": 60,
+   "Brass Armor": 112,
+   "Brass Helmet": 30,
+   "Brass Legs": 49,
+   "Brass Shield": 16,
+   "Chain Armor": 40,
+   "Chain Helmet": 12,
+   "Chain Legs": 20,
+   "Devil's Helmet": 450,
+   "Dwarven Shield": 100,
+   "Iron Helmet": 145,
+   "Knight Legs": 375,
+   "Plate Armor": 240,
+   "Plate Legs": 115,
+   "Plate Shield": 45,
+   "Steel Helmet": 293,
+   "Viking Helmet": 66,
+   "Warrior Helmet": 696,
+   "Wooden Shield": 3
+  },
+  "date": "2005-08-02",
+  "notes": "Kroox deals in [[Item#Armor_Pieces|armor]]. [[Image:Kroox.jpg|left]]",
+  "raw_buys": "[[Wooden Shield]] 3, [[Brass Shield]] 16, [[Plate Shield]] 45, [[Battle Shield]] 60, [[Dwarven Shield]] 100, [[Chain Helmet]] 12, [[Brass Helmet]] 30, [[Viking Helmet]] 66, [[Iron Helmet]] 145, [[Steel Helmet]] 293, [[Devil's Helmet]] 450, [[Warrior Helmet]] 696, [[Chain Armor]] 40, [[Brass Armor]] 112, [[Plate Armor]] 240, [[Chain Legs]] 20, [[Brass Legs]] 49, [[Plate Legs]] 115, [[Knight Legs]] 375.",
+  "raw_sells": "[[Plate Shield]] 125, [[Steel Shield]] 240, [[Dwarven Shield]] 500, [[Chain Helmet]] 52, [[Brass Helmet]] 12, [[Iron Helmet]] 390, [[Steel Helmet]] 580, [[Chain Armor]] 200, [[Brass Armor]] 450, [[Plate Armor]] 1200, [[Chain Legs]] 80, [[Brass Legs]] 195. |}}",
+  "rev": 20627,
+  "sells": {
+   "Brass Armor": 450,
+   "Brass Helmet": 12,
+   "Brass Legs": 195,
+   "Chain Armor": 200,
+   "Chain Helmet": 52,
+   "Chain Legs": 80,
+   "Dwarven Shield": 500,
+   "Iron Helmet": 390,
+   "Plate Armor": 1200,
+   "Plate Shield": 125,
+   "Steel Helmet": 580,
+   "Steel Shield": 240
+  }
+ },
+ "Kulag, the guard": {
+  "buys": {},
+  "date": "2005-12-20",
+  "rev": 24891,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Kulag | job = Guard | location = Western [[Thais]] gate. | buysell = no | buys = | sells = | notes = He guards Thais against attacking [[creature]]s. |}}"
+ },
+ "Lea": {
+  "buys": {},
+  "date": "2005-11-05",
+  "rev": 23397,
+  "sells": {},
+  "text": "Lea sells [[spell]]s to [[sorcerer]]s. She is one floor above of the [[Carlin]]'s [[Shop|Magic shop]]."
+ },
+ "Lector": {
+  "buys": {},
+  "date": "2007-05-27",
+  "notes": "Owner of \"Lector's Butchery\" |}}",
+  "raw_buys": "",
+  "raw_sells": "<br>'''Food:'''<br>[[Meat]] 3 gold, <br>[[Ham]] 6 gold",
+  "rev": 101157,
+  "sells": {
+   "Ham": 6,
+   "Meat": 3
+  }
+ },
+ "Lee'Delle": {
+  "buys": {
+   "Axe": 7,
+   "Chain Helmet": 12,
+   "Dagger": 2,
+   "Doublet": 3,
+   "Hand Axe": 4,
+   "Leather Armor": 5,
+   "Leather Helmet": 3,
+   "Rapier": 5,
+   "Sabre": 12,
+   "Short Sword": 10,
+   "Spear": 3,
+   "Studded Helmet": 20,
+   "Studded Shield": 16,
+   "Wooden Shield": 3
+  },
+  "date": "2005-11-20",
+  "notes": "[[Image:Lee\\'Delle.JPG|right]]Lee'Delle runs a shop for [[premium]] characters on [[Rookgaard]]. She misses her life on the [[Mainland]], and wishes she could be surrounded by her favorite [[Honey Flower]]s, which are very rare on [[Rookgaard]]. |}}",
+  "raw_buys": "[[Spear]] 3, [[Rapier]] 5, [[Sabre]] 12, [[Dagger]] 2, [[Hand Axe]] 4, [[Axe]] 7, [[Short Sword]] 10, [[Wooden Shield]] 3, [[Studded Shield]] 16, [[Doublet]] 3, [[Leather Armor]] 5, [[Leather Helmet]] 3, [[Studded Helmet]] 20, [[Chain Helmet]] 12.",
+  "raw_sells": "[[Spear]] 10, [[Rapier]] 15, [[Sabre]] 25, [[Dagger]] 5, [[Hand Axe]] 8, [[Axe]] 20, [[Short Sword]] 30, [[Wooden Shield]] 15, [[Studded Shield]] 50, [[Coat]] 8, [[Jacket]] 10, [[Doublet]] 16, [[Leather Armor]] 25, [[Leather Legs]] 10, [[Leather Helmet]] 12, [[Studded Helmet]] 62, [[Chain Helmet]] 52, [[Torch]] 2, [[Bag]] 4, [[Scroll]] 5, [[Shovel]] 10, [[Backpack]] 10, [[Sickle]] 8, [[Scythe]] 12, [[Rope]] 50, [[Fishing Rod]] 150, [[Worms]]",
+  "rev": 23914,
+  "sells": {
+   "Axe": 20,
+   "Backpack": 10,
+   "Bag": 4,
+   "Chain Helmet": 52,
+   "Coat": 8,
+   "Dagger": 5,
+   "Doublet": 16,
+   "Fishing Rod": 150,
+   "Hand Axe": 8,
+   "Jacket": 10,
+   "Leather Armor": 25,
+   "Leather Helmet": 12,
+   "Leather Legs": 10,
+   "Rapier": 15,
+   "Rope": 50,
+   "Sabre": 25,
+   "Scroll": 5,
+   "Scythe": 12,
+   "Short Sword": 30,
+   "Shovel": 10,
+   "Sickle": 8,
+   "Spear": 10,
+   "Studded Helmet": 62,
+   "Studded Shield": 50,
+   "Torch": 2,
+   "Wooden Shield": 15
+  }
+ },
+ "Leeland": {
+  "buys": {},
+  "date": "2006-01-16",
+  "rev": 26335,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Leeland | location = In [[Venore]], the building west from the central [[depot]] | job = Shopmaster | notes = Leeland Slim runs the Useful Things Warehouse. | buysell = no | buys = | sells = |}}"
+ },
+ "Legola": {
+  "buys": {},
+  "date": "2005-07-26",
+  "rev": 13219,
+  "sells": {},
+  "text": "Can be found the Paladin's Guild. Sells spells to Paladins."
+ },
+ "Liane": {
+  "buys": {},
+  "date": "2005-11-04",
+  "notes": "|}} {{NPC-stub}}",
+  "raw_buys": "",
+  "raw_sells": "[[Parcel]] 15 [[gp]]. [[Letter]] 8 [[gp]]",
+  "rev": 23303,
+  "sells": {
+   "Letter": 8,
+   "Parcel": 15
+  }
+ },
+ "Lightfoot": {
+  "buys": {},
+  "date": "2006-01-16",
+  "rev": 26369,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Lightfoot | location = In [[Venore]] 1 floor above the central [[depot]]. | job = Dog | notes = Lightfoot [[Image:Dog.gif|Lightfoot]] races [[Dustrunner]] in a betting competitions. Both start at the west end behind a rock. The starter pulls a lever and they race to the end. Whoever reaches the switch plate first, turns on a coal basin above, and wins. | buysell = no | buys = | sells = |}}"
+ },
+ "Lily": {
+  "buys": {
+   "Blueberry": 1
+  },
+  "date": "2006-01-15",
+  "notes": "[[Image:NPC Lily.jpg|float|right]]She is the only [[NPC]] buying blueberries, and the only NPC in [[Rookgaard]] who sells a rune, the [[Antidote Rune]]. |}}",
+  "raw_buys": "[[Blueberry|Blueberries]] 1 [[gp]] for 5.",
+  "raw_sells": "[[Antidote Rune]]s 30 [[gp]]",
+  "rev": 26204,
+  "sells": {}
+ },
+ "Livielle": {
+  "buys": {},
+  "date": "2005-12-16",
+  "notes": "She deals in [[Item#Foods|Foods]].",
+  "raw_buys": "None",
+  "raw_sells": "[[Banana]] 5, [[Blueberry]] 1, [[Melon]] 10, [[Orange]] 10, [[Strawberry]] 2, [[White Mushroom]] 10. |}}",
+  "rev": 24675,
+  "sells": {
+   "Banana": 5,
+   "Blueberry": 1,
+   "Melon": 10,
+   "Orange": 10,
+   "Strawberry": 2,
+   "White Mushroom": 10
+  }
+ },
+ "Lokur": {
+  "buys": {},
+  "date": "2006-01-17",
+  "notes": "If you have completed the [[Postman Quest]], parcels cost 10 [[gp]], and letters cost only 5 [[gp]]. |}}",
+  "raw_buys": "",
+  "raw_sells": "[[Parcel]] 15 [[gp]], [[Letter]] 8 [[gp]]",
+  "rev": 26766,
+  "sells": {
+   "Letter": 8,
+   "Parcel": 15
+  }
+ },
+ "Loria": {
+  "buys": {},
+  "date": "2005-12-30",
+  "rev": 25293,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Loria | job = Mage | location = North of [[Thais]], by Alatar lake. | buysell = no | buys = | sells = | notes = Loria is well acquainted with magic. She knows much about [[spells]] and will tell you about them if you ask. |}}"
+ },
+ "Loui": {
+  "buys": {},
+  "date": "2005-10-29",
+  "rev": 23006,
+  "sells": {},
+  "text": "Loui is a monk in the wilderness on the premium part of Rookgaard. He is very scared of a sinkhole near him and he says it's something very dangerous down there. He can't heal people because of lack of \"some flower\". note: I got that on rookgaard.tk. credits go to the creator of the site."
+ },
+ "Lubo": {
+  "buys": {},
+  "date": "2006-01-09",
+  "notes": "Lubo claims to sell maps, but apparently he just sold the last one five minutes ago. |}}",
+  "raw_buys": "",
+  "raw_sells": "[[Torch]] 3 [[gp]], [[Fishing Rod]] 175 , sixpack of [[Worms]] 5, [[Water Hose]] 10, [[Rope]] 60, [[Backpack]] 35, [[Apple]] 3.",
+  "rev": 25543,
+  "sells": {
+   "Apple": 3,
+   "Backpack": 35,
+   "Fishing Rod": 175,
+   "Rope": 60,
+   "Torch": 3,
+   "Water Hose": 10,
+   "Worms": 5
+  }
+ },
+ "Lugri": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26979,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Lugri | flavortext = | job = Necromancer | location = [[Thais]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Luna": {
+  "buys": {},
+  "date": "2005-12-06",
+  "notes": "Deals in Herbs and Plants. |}}",
+  "raw_buys": "",
+  "raw_sells": "[[Stone Herb]] 28, [[Star Herb]] 21, [[Fern]] 24, [[White Mushroom]] 6, [[Red Mushroom]] 12, [[Brown Mushroom]] 10, [[Tulip]] 9, [[Red Rose]] 11.",
+  "rev": 24297,
+  "sells": {
+   "Brown Mushroom": 10,
+   "Fern": 24,
+   "Red Mushroom": 12,
+   "Red Rose": 11,
+   "Star Herb": 21,
+   "Stone Herb": 28,
+   "Tulip": 9,
+   "White Mushroom": 6
+  }
+ },
+ "Lungelen": {
+  "buys": {},
+  "date": "2006-06-12",
+  "rev": 40207,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Lungelen | job = Unknown Occupation | location = [[Thais]] | buysell = no | buys = | sells = | notes = She doesn't want to be disturbed. |}}"
+ },
+ "Lynda": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26980,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Lynda | flavortext = | job = Priestess | location = [[Thais]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Maealil": {
+  "buys": {},
+  "date": "2006-01-11",
+  "rev": 26049,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Maealil | location = [[Port Hope]] [[Temple]], just west of the [[depot]]. | job = Priest | notes = Maealil resides in the Venore Temple, assisting adventurers by offering healing up to 65 [[hp]] and can cure you if you are [[poison]]ed, on [[fire]] or [[energy|electrified]]. | buysell = yes | buys = None | sells = '''[[Spells]]:''' [[Light Healing]], [[Antidote]], [[Intense Healing]], [[Heal Friend]], [[Ultimate Healing]], [[Mass Healing]], [[Antidote Rune]], [[Intense Healing Rune]], and [[Ultimate Healing Rune]]. |}}"
+ },
+ "Malor": {
+  "buys": {},
+  "date": "2006-01-20",
+  "rev": 27391,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Malor | location = [[Mal'ouquah]] (Green Djinn Fortress) | job = Shopkeeper | notes = Malor was once a general of the djinns under [[Gabel]], but an ancient incident split the djinn into their now separate factions. Malor and his [[Green Djinn]]s and [[Efreet]] live with a great amount of anger and a sense of vengeance. They are also driven by a desire for eventual world domination. | buysell = no | buys = None | sells = None |}} ''player'': '''DJANNI'HAH'''<br> Malor: Greetings, human ''player''. My patience with your kind is limited,"
+ },
+ "Maria": {
+  "buys": {},
+  "date": "2006-01-16",
+  "notes": "Maria runs a Hard Rock Tavern bar.",
+  "raw_buys": "None",
+  "raw_sells": "'''Food:''' [[Bread]] 4 [[gp]], [[Cheese]] 6, [[Cookie]] 5, [[Egg]] 2, [[Ham]] 8, [[Meat]] 5, [[Tomato]] 5.<br> '''Drinks:''' [[Beer]] 2 [[gp]], [[Lemonade]] 2, [[Water]] 1, [[Wine]] 3. |}}",
+  "rev": 26364,
+  "sells": {
+   "Beer": 2,
+   "Bread": 4,
+   "Cheese": 6,
+   "Cookie": 5,
+   "Egg": 2,
+   "Ham": 8,
+   "Lemonade": 2,
+   "Meat": 5,
+   "Tomato": 5,
+   "Water": 1,
+   "Wine": 3
+  }
+ },
+ "Markwin": {
+  "buys": {},
+  "date": "2005-11-16",
+  "rev": 23783,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Markwin | flavortext = | job = Unknown Occupation | location = [[Mintwallin]] | buysell = no | buys = | sells = | quests = In the [[Postman Quest]] you have to deliver him a letter. ''More?'' | notes = [[Image:Minotaur Mage.gif|left]] The ruler in Mintwallin.<br> '''Warning:''' If you say 'hi' to him he will summon 2 [[Minotaur Guard]]s, 2 [[Minotaur Mage]]s and 2 [[Minotaur Archer]]s. |}}"
+ },
+ "Marlene": {
+  "buys": {},
+  "date": "2005-11-05",
+  "rev": 23394,
+  "sells": {},
+  "text": "Marlene is a [[NPC]] of [[Northport]] that tells histories and rumours."
+ },
+ "Marvik": {
+  "buys": {},
+  "date": "2005-11-24",
+  "rev": 24096,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Marvik | job = Druid | location = [[Thais]] Druid Guild ([http://www.tibianews.net/worldmap.asp?xcor=8.6&ycor=-893.6 here]) | buysell = no | buys = | sells = | notes = [[Image:Marvik.jpg|right]] The chief of all [[druid]]s, and sells all non-[[Premium Account|premium]] spells.<br> Sells the following [[Druid]] [[Spells]]; [[Food (spell)|Food]], [[Find Person]], [[Light]], [[Light Healing]], [[Light Magic Missile]], [[Antidote]], [[Intense Healing]], [[Poison Field]], [[Fire Field]], [[Great Light]], [[Heavy Magic Missile]], [[Intense Healing Rune]], [[Magic Shield]], [["
+ },
+ "Maryza": {
+  "buys": {},
+  "date": "2005-12-16",
+  "notes": "Maryza and her husband, [[Jimbin]] own the tavern in [[Kazordoon]]. She is very touchy about her nickname. |}}",
+  "raw_buys": "",
+  "raw_sells": "[[Bread]] 4, [[Cheese]] 6, [[Ham]] 8, [[Meat]] 5, [[Roll]] 2, [[Cookie]] 2 and a [[Cookbook]] 150.",
+  "rev": 24672,
+  "sells": {
+   "Bread": 4,
+   "Cheese": 6,
+   "Cookbook": 150,
+   "Cookie": 2,
+   "Ham": 8,
+   "Meat": 5,
+   "Roll": 2
+  }
+ },
+ "Mehkesh": {
+  "buys": {},
+  "date": "2006-01-10",
+  "notes": "Sells potions brewed by the foremost alchemists of the land.",
+  "raw_buys": "Empty [[Vial]]s 5 [[gp]]",
+  "raw_sells": "<br>[[Life Fluid]] 60 [[gp]],<br> [[Mana Fluid]] 55 [[gp]] |}}",
+  "rev": 25622,
+  "sells": {
+   "Life Fluid": 60,
+   "Mana Fluid": 55
+  }
+ },
+ "Melchior": {
+  "buys": {},
+  "date": "2006-01-10",
+  "rev": 25620,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Melchior | job = Blind Beggar | location = Wandering the streets in [[Ankrahmun]] | notes = Melchior was blinded by the djinns because of his greed. He has a great story to tell. | buysell = no | buys = None | sells = None |}}"
+ },
+ "Memech": {
+  "buys": {
+   "Axe": 7,
+   "Battle Hammer": 120,
+   "Brass Armor": 150,
+   "Chain Armor": 70,
+   "Chain Helmet": 17,
+   "Chain Legs": 25,
+   "Dagger": 2,
+   "Hand Axe": 4,
+   "Leather Armor": 12,
+   "Leather Helmet": 4,
+   "Mace": 30,
+   "Rapier": 5,
+   "Sabre": 12,
+   "Spear": 3,
+   "Steel Shield": 80,
+   "Sword": 25,
+   "Wooden Shield": 5
+  },
+  "date": "2006-01-10",
+  "notes": "Memech deals in many kinds of armor and weapons.",
+  "raw_buys": "<br>'''Weapons:'''<br>[[Hand Axe]] 4 [[gp]],<br> [[Axe]] 7 [[gp]],<br> [[Spear]] 3 [[gp]],<br> [[Mace]] 30 [[gp]],<br> [[Battle Hammer]] 120 [[gp]],<br> [[Sword]] 25 [[gp]],<br> [[Rapier]] 5 [[gp]],<br> [[Dagger]] 2 [[gp]],<br> [[Sabre]] 12 [[gp]],<br> '''Armor:'''<br>[[Leather Armor]] 12 [[gp]],<br> [[Chain Armor]] 70 [[gp]],<br> [[Brass Armor]] 150 [[gp]],<br> '''Helmets:'''<br>[[Leather Helmet]] 4 [[gp]],<br> [[Chain Helmet]] 17 [[gp]],<br> '''Legs:'''<br>[[Chain Legs]] 25 [[gp]],<br> '''Shields:'''<br>[[Wooden Shield]] 5 [[gp]],<br> [[Steel Shield]] 80 [[gp]]",
+  "raw_sells": "<br>'''Weapons:'''<br>[[Hand Axe]] 8 [[gp]],<br> [[Axe]] 20 [[gp]],<br> [[Spear]] 10 [[gp]],<br> [[Mace]] 90 [[gp]],<br> [[Battle Hammer]] 350 [[gp]],<br> [[Sword]] 85 [[gp]],<br> [[Rapier]] 15 [[gp]],<br> [[Dagger]] 5 [[gp]],<br> [[Sabre]] 35 [[gp]],<br> '''Armor:'''<br>[[Leather Armor]] 12 [[gp]],<br> [[Chain Armor]] 200 [[gp]],<br> [[Brass Armor]] 450 [[gp]],<br> '''Helmets:'''<br>[[Leather Helmet]] 12 [[gp]],<br> [[Chain Helmet]] 52 [[gp]],<br> '''Legs:'''<br>[[Chain Legs]] 80 [[gp]],<br> '''Shields:'''<br>[[Wooden Shield]] 15 [[gp]],<br> [[Steel Shield]] 240 [[gp]] |}}",
+  "rev": 25616,
+  "sells": {
+   "Axe": 20,
+   "Battle Hammer": 350,
+   "Brass Armor": 450,
+   "Chain Armor": 200,
+   "Chain Helmet": 52,
+   "Chain Legs": 80,
+   "Dagger": 5,
+   "Hand Axe": 8,
+   "Leather Armor": 12,
+   "Leather Helmet": 12,
+   "Mace": 90,
+   "Rapier": 15,
+   "Sabre": 35,
+   "Spear": 10,
+   "Steel Shield": 240,
+   "Sword": 85,
+   "Wooden Shield": 15
+  }
+ },
+ "Miraia": {
+  "buys": {},
+  "date": "2005-12-16",
+  "notes": "She deals in [[Item#Foods|Foods and Drinks]].",
+  "raw_buys": "None",
+  "raw_sells": "[[Bread]] 4, [[Cheese]] 6, [[Ham]] 8, [[Meat]] 5, <br>[[Beer]] 2, [[Wine]] 3, [[Lemonade]] 2, [[Water]] 1. |}}",
+  "rev": 24670,
+  "sells": {
+   "Beer": 2,
+   "Bread": 4,
+   "Cheese": 6,
+   "Ham": 8,
+   "Lemonade": 2,
+   "Meat": 5,
+   "Water": 1,
+   "Wine": 3
+  }
+ },
+ "Morun": {
+  "buys": {},
+  "date": "2005-12-20",
+  "rev": 24879,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Morun | location = The entrance to the Caliph's chambers in the [[Darashia]] castle. | job = Guard | notes = Morun is a protector of the Caliph [[Kazzan]]. | buysell = no | buys = | sells = |}}"
+ },
+ "Mugluf": {
+  "buys": {},
+  "date": "2006-01-26",
+  "notes": "|}}",
+  "raw_buys": "Nothing.",
+  "raw_sells": "<br> [[Meat]] 7 [[gp]]<br> [[Ham]] 10 [[gp]]<br> [[Salmon]] 6 [[gp]]<br>",
+  "rev": 27804,
+  "sells": {
+   "Ham": 10,
+   "Meat": 7,
+   "Salmon": 6
+  }
+ },
+ "Muriel": {
+  "buys": {},
+  "date": "2006-02-12",
+  "notes": "|}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "",
+  "raw_sells": "Sorcerer spells<br> [[Spellbook]] 150 gp",
+  "rev": 28783,
+  "sells": {
+   "Spellbook": 150
+  }
+ },
+ "Nah'bob": null,
+ "Nelliem": {
+  "buys": {},
+  "date": "2005-12-15",
+  "notes": "|}}",
+  "raw_buys": "",
+  "raw_sells": "[[Broom]] 12 [[gps]], [[Document]] 12, [[Fishing Rod]] 150, [[Pitchfork]] 25, [[Pick]] 50, [[Scythe]] 25, [[Shovel]] 20, [[Rake]] 20, [[Rope]] 50.",
+  "rev": 24668,
+  "sells": {
+   "Broom": 12,
+   "Document": 12,
+   "Fishing Rod": 150,
+   "Pick": 50,
+   "Pitchfork": 25,
+   "Rake": 20,
+   "Rope": 50,
+   "Scythe": 25,
+   "Shovel": 20
+  }
+ },
+ "Nemal": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26954,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Nemal | flavortext = | job = Necromancer | location = [[Jakundaf Desert]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Nezil": {
+  "buys": {
+   "Crowbar": 50,
+   "Pick": 15,
+   "Rope": 15,
+   "Scythe": 15,
+   "Shovel": 8,
+   "Trap": 75,
+   "Watch": 6
+  },
+  "date": "2005-11-07",
+  "notes": "Nezil and his brother [[Bezil]] buy and sell [[Equipment]] to adventurers.",
+  "raw_buys": "[[Rope]] 15 [[gp]], [[Shovel]] 8, [[Pick]] 15, [[Scythe]] 15, [[Trap]] 75, [[Watch]] 6, [[Crowbar]] 50",
+  "raw_sells": "[[Shovel]] 10 [[gp]], [[Pick]] 50 [[gp]], [[Scythe]] 40 [[gp]], [[Bag]] 4 [[gp]], [[Rope]] 50 [[gp]], [[Backpack]] 10 [[gp]], [[Scroll]] 5 [[gp]], [[Watch]] 20 [[gp]], [[Candlestick]] 2 [[gp]], [[Fishing Rod]] 150 [[gp]], [[Torch]] 2 [[gp]], [[Candelabrum]] 8 [[gp]], [[Oil]] 20 [[gp]], [[Parchment]] 8 [[gp]], [[Document]] 12 [[gp]], [[Crowbar]] 260 [[gp]], [[Water Hose]] 10 [[gp]], [[Present Box]] 10 [[gp]], [[Bucket]] 4[[gp]] |}}",
+  "rev": 23447,
+  "sells": {
+   "Backpack": 10,
+   "Bag": 4,
+   "Bucket": 4,
+   "Candelabrum": 8,
+   "Candlestick": 2,
+   "Crowbar": 260,
+   "Document": 12,
+   "Fishing Rod": 150,
+   "Oil": 20,
+   "Parchment": 8,
+   "Pick": 50,
+   "Present Box": 10,
+   "Rope": 50,
+   "Scroll": 5,
+   "Scythe": 40,
+   "Shovel": 10,
+   "Torch": 2,
+   "Watch": 20,
+   "Water Hose": 10
+  }
+ },
+ "Nielson": {
+  "buys": {},
+  "date": "2005-11-07",
+  "notes": "Runs the ferry to the [[Ice Islands]]. Once on the Ice Islands, it costs 10 [[gp]] to travel to any other Ice Island. Passage back to Tibia is free. |}}",
+  "raw_buys": "None",
+  "raw_sells": "Passage to [[Folda]] 20 [[gp]], [[Senja]] 20 [[gp]], [[Vega]] 20 [[gp]]",
+  "rev": 23438,
+  "sells": {
+   "Folda": 20,
+   "Senja": 20,
+   "Vega": 20
+  }
+ },
+ "Noodles": {
+  "buys": {},
+  "date": "2005-12-21",
+  "rev": 24981,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Noodles | job = Creature | location = [[Thais]] Castle | buysell = no | buys = | sells = | notes = Noodles is the Royal Poodle, [[King Tibianus III]]'s greatest treasure. He has a very good nose which can prove useful. |}}"
+ },
+ "Norbert": {
+  "buys": {},
+  "date": "2005-09-10",
+  "notes": "Norbert deals in [[Item#Armors|armors]].",
+  "raw_buys": "Nothing.",
+  "raw_sells": "[[Coat]] 8, [[Jacket]] 12, [[Doublet]] 16, [[Leather Armor]] 25, [[Studded Armor]] 90. |}}",
+  "rev": 20908,
+  "sells": {
+   "Coat": 8,
+   "Doublet": 16,
+   "Jacket": 12,
+   "Leather Armor": 25,
+   "Studded Armor": 90
+  }
+ },
+ "Norf": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26982,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Norf | flavortext = | job = Monk | location = [[White Flower Temple]], south of [[Thais]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Norma": {
+  "buys": {
+   "Axe": 7,
+   "Chain Helmet": 12,
+   "Dagger": 2,
+   "Doublet": 3,
+   "Hand Axe": 4,
+   "Leather Armor": 5,
+   "Leather Helmet": 3,
+   "Rapier": 5,
+   "Sabre": 12,
+   "Short Sword": 10,
+   "Spear": 3,
+   "Studded Helmet": 20,
+   "Studded Shield": 16,
+   "Wooden Shield": 3
+  },
+  "date": "2005-12-01",
+  "notes": "Norma buys and sells equipment with [[premium]] players. |}}",
+  "raw_buys": "[[Spear]] 3, [[Rapier]] 5, [[Sabre]] 12, [[Dagger]] 2, [[Hand Axe]] 4, [[Axe]] 7, [[Short Sword]] 10, [[Wooden Shield]] 3, [[Studded Shield]] 16, [[Doublet]] 3, [[Leather Armor]] 5, [[Leather Helmet]] 3, [[Studded Helmet]] 20, [[Chain Helmet]] 12.",
+  "raw_sells": "[[Spear]] 10, [[Rapier]] 15, [[Sabre]] 25, [[Dagger]] 5, [[Hand Axe]] 8, [[Axe]] 20, [[Short Sword]] 30, [[Wooden Shield]] 15, [[Studded Shield]] 50, [[Coat]] 8, [[Jacket]] 10, [[Doublet]] 16, [[Leather Armor]] 25, [[Leather Legs]] 10, [[Leather Helmet]] 12, [[Studded Helmet]] 62, [[Chain Helmet]] 52, [[Torch]] 2, [[Bag]] 4, [[Scroll]] 5, [[Shovel]] 10, [[Backpack]] 10, [[Sickle]] 8, [[Scythe]] 12, [[Rope]] 50, [[Fishing Rod]] 150, [[Worms]] (5 [[GP]]s for a six-pack).",
+  "rev": 24263,
+  "sells": {
+   "Axe": 20,
+   "Backpack": 10,
+   "Bag": 4,
+   "Chain Helmet": 52,
+   "Coat": 8,
+   "Dagger": 5,
+   "Doublet": 16,
+   "Fishing Rod": 150,
+   "Hand Axe": 8,
+   "Jacket": 10,
+   "Leather Armor": 25,
+   "Leather Helmet": 12,
+   "Leather Legs": 10,
+   "Rapier": 15,
+   "Rope": 50,
+   "Sabre": 25,
+   "Scroll": 5,
+   "Scythe": 12,
+   "Short Sword": 30,
+   "Shovel": 10,
+   "Sickle": 8,
+   "Spear": 10,
+   "Studded Helmet": 62,
+   "Studded Shield": 50,
+   "Torch": 2,
+   "Wooden Shield": 15
+  }
+ },
+ "Nydala": {
+  "buys": {},
+  "date": "2006-04-26",
+  "notes": "Sells home furnishings. She will only sell to [[Premium]] players. |}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "Nothing.",
+  "raw_sells": "<br>'''Statues:'''<br> [[Knight Statue]] 50 [[gp]], <br>[[Minotaur Statue]] 50 [[gp]], <br>[[Goblin Statue]] 50 [[gp]];<br> '''Tables:''' <br>[[Small Table]] 20 [[gp]], <br>[[Round Table]] 25 [[gp]], <br>[[Square Table]] 25 [[gp]], <br>[[Big Table]] 30 [[gp]];<br> '''Chairs:''' <br>[[Wooden Chair]] 15 [[gp]], <br>[[Rocking Chair]] 25 [[gp]], <br>[[Red Cushioned Chair]] 40 [[gp]], <br>[[Green Cushioned Chair]] 40 [[gp]], <br>[[Sofa Chair]] 55 [[gp]];<br> '''Flowers:''' <br>[[Indoor Plant]] 8 [[gp]], <br>[[Flower Bowl]] 6 [[gp]], <br>[[God Flower]] 5 [[gp]], <br>[[Honey Flower]] 5 [[gp]], <br>[[Potted Flower]] 5 [[gp]];<br> '''Pillows:''' <br>[[Small Pillow]] 20 [[gp]], <br>[[Round Pillow]] 25 [[gp]], <br>[[Square Pillow]] 25 [[gp]], <br>[[Heart Pillow]] 30 [[gp]];<br> '''Pottery:''' <br>[[Vase]] 3 [[gp]], <br>[[Coal Basin]] 25 [[gp]], <br>[[Amphora]] 4 [[gp]], <br>[[Large Amphora]] 50 [[gp]];<br> '''Instruments:''' <br>[[Piano]] 200 [[gp]], <br>[[Harp]] 50 [[gp]];<br> '''Decorations:''' <br>[[Water Pipe]] 40 [[gp]], <br>[[Pendulum Clock]] 75 [[gp]], <br>[[Telescope]] 70 [[gp]], <br>[[Table Lamp]] 35 [[gp]], <br>[[Rocking Horse]] 30 [[gp]], <br>[[Globe]] 50 [[gp]], <br>[[Birdcage]] 50 [[gp]], <br>[[Round Mirror]] 40 [[gp]], <br>[[Oval Mirror]] 40 [[gp]], <br>[[Edged Mirror]] 40 [[gp]], <br>[[Landscape Picture]] 50 [[gp]], <br>[[Portrait Picture]] 50 [[gp]], <br>[[Cuckoo Clock]] 40 [[gp]];<br> ''[[Tapestry]]'' 25 [[gp]];<br> '''Containers:''' <br>[[Drawer]] 18 [[gp]], <br>[[Dresser]] 25 [[gp]], <br>[[Locker]] 30 [[gp]], <br>[[Crate]] 10 [[gp]], <br>[[Chest]] 10 [[gp]], <br>[[Box]] 10 [[gp]], <br>[[Barrel]] 12 [[gp]], <br>[[Trunk]] 10 [[gp]], <br>[[Trough]] 7 [[gp]]",
+  "rev": 36107,
+  "sells": {
+   "Amphora": 4,
+   "Barrel": 12,
+   "Big Table": 30,
+   "Birdcage": 50,
+   "Box": 10,
+   "Chest": 10,
+   "Coal Basin": 25,
+   "Crate": 10,
+   "Cuckoo Clock": 40,
+   "Drawer": 18,
+   "Dresser": 25,
+   "Edged Mirror": 40,
+   "Flower Bowl": 6,
+   "Globe": 50,
+   "Goblin Statue": 50,
+   "God Flower": 5,
+   "Green Cushioned Chair": 40,
+   "Harp": 50,
+   "Heart Pillow": 30,
+   "Honey Flower": 5,
+   "Indoor Plant": 8,
+   "Knight Statue": 50,
+   "Landscape Picture": 50,
+   "Large Amphora": 50,
+   "Locker": 30,
+   "Minotaur Statue": 50,
+   "Oval Mirror": 40,
+   "Pendulum Clock": 75,
+   "Piano": 200,
+   "Portrait Picture": 50,
+   "Potted Flower": 5,
+   "Red Cushioned Chair": 40,
+   "Rocking Chair": 25,
+   "Rocking Horse": 30,
+   "Round Mirror": 40,
+   "Round Pillow": 25,
+   "Round Table": 25,
+   "Small Pillow": 20,
+   "Small Table": 20,
+   "Sofa Chair": 55,
+   "Square Pillow": 25,
+   "Square Table": 25,
+   "Table Lamp": 35,
+   "Telescope": 70,
+   "Trough": 7,
+   "Trunk": 10,
+   "Vase": 3,
+   "Water Pipe": 40,
+   "Wooden Chair": 15
+  }
+ },
+ "Obi": {
+  "buys": {
+   "Axe": 7,
+   "Chain Helmet": 12,
+   "Dagger": 2,
+   "Doublet": 3,
+   "Hand Axe": 4,
+   "Leather Armor": 5,
+   "Leather Helmet": 3,
+   "Rapier": 5,
+   "Sabre": 12,
+   "Short Sword": 10,
+   "Spear": 3,
+   "Studded Helmet": 20,
+   "Studded Shield": 16,
+   "Wooden Shield": 3
+  },
+  "date": "2005-11-20",
+  "notes": "[[Image:Obi.JPG|right]] Buys and sells equipment to adventurers. |}}",
+  "raw_buys": "[[Spear]] 3, [[Rapier]] 5, [[Sabre]] 12, [[Dagger]] 2, [[Hand Axe]] 4, [[Axe]] 7, [[Short Sword]] 10, [[Wooden Shield]] 3, [[Studded Shield]] 16, [[Doublet]] 3, [[Leather Armor]] 5, [[Leather Helmet]] 3, [[Studded Helmet]] 20, [[Chain Helmet]] 12.",
+  "raw_sells": "[[Spear]] 10, [[Rapier]] 15, [[Sabre]] 25, [[Dagger]] 5, [[Hand Axe]] 8, [[Axe]] 20, [[Short Sword]] 30, [[Wooden Shield]] 15, [[Studded Shield]] 50, [[Coat]] 8, [[Jacket]] 10, [[Doublet]] 16, [[Leather Armor]] 25, [[Leather Legs]] 10, [[Leather Helmet]] 12, [[Studded Helmet]] 62, [[Chain Helmet]] 52, [[Torch]] 2, [[Bag]] 4, [[Scroll]] 5, [[Shovel]] 10, [[Backpack]] 10, [[Sickle]] 8, [[Scythe]] 12, [[Rope]] 50, [[Fishing Rod]] 150, [[Worms]]",
+  "rev": 23915,
+  "sells": {
+   "Axe": 20,
+   "Backpack": 10,
+   "Bag": 4,
+   "Chain Helmet": 52,
+   "Coat": 8,
+   "Dagger": 5,
+   "Doublet": 16,
+   "Fishing Rod": 150,
+   "Hand Axe": 8,
+   "Jacket": 10,
+   "Leather Armor": 25,
+   "Leather Helmet": 12,
+   "Leather Legs": 10,
+   "Rapier": 15,
+   "Rope": 50,
+   "Sabre": 25,
+   "Scroll": 5,
+   "Scythe": 12,
+   "Short Sword": 30,
+   "Shovel": 10,
+   "Sickle": 8,
+   "Spear": 10,
+   "Studded Helmet": 62,
+   "Studded Shield": 50,
+   "Torch": 2,
+   "Wooden Shield": 15
+  }
+ },
+ "Odemara": {
+  "buys": {
+   "Black Pearl": 280,
+   "Small Amethyst": 200,
+   "Small Diamond": 300,
+   "Small Emerald": 250,
+   "Small Ruby": 250,
+   "Small Sapphire": 250,
+   "White Pearl": 160
+  },
+  "date": "2006-01-11",
+  "notes": "|}}",
+  "raw_buys": "[[Small Diamond]] 300 [[gp]], [[Small Sapphire]] 250, [[Small Ruby]] 250, [[Small Emerald]] 250, [[Small Amethyst]] 200, [[Black Pearl]] 280, and [[White Pearl]] 160.",
+  "raw_sells": "[[Small Diamond]] 600 [[gp]], [[Small Sapphire]] 500, [[Small Ruby]] 500, [[Small Emerald]] 500, and [[Small Amethyst]] 400 [[Black Pearl]] 560, and [[White Pearl]] 320.",
+  "rev": 26062,
+  "sells": {
+   "Black Pearl": 560,
+   "Small Amethyst": 400,
+   "Small Diamond": 600,
+   "Small Emerald": 500,
+   "Small Ruby": 500,
+   "Small Sapphire": 500,
+   "White Pearl": 320
+  }
+ },
+ "Oldrak": {
+  "buys": {},
+  "date": "2007-04-19",
+  "notes": "[[Image:Monk.gif|left]] A monk who works in the [[Plains of Havoc]]. Looks the same as the [[Monk]]. |}}",
+  "raw_buys": "",
+  "raw_sells": "[[Holy Tible]] 1000 [[gp]]",
+  "rev": 95912,
+  "sells": {
+   "Holy Tible": 1000
+  }
+ },
+ "Olrik": {
+  "buys": {},
+  "date": "2005-07-25",
+  "rev": 20563,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Olrik | job = Postman | location = In [[Ab'Dendriel]], just south of the [[depot]]. | notes = Parcels and letters are 10 and 5 [[gp]] if buyer has completed the [[Postman Quest]].<br>[[Image:Olrik.jpg]] | buysell =yes | buys = Nothing. | sells = [[Parcel]]s 15 [[gp]], [[letter]]s 8 [[gp]] |}}"
+ },
+ "Omur": {
+  "buys": {},
+  "date": "2006-01-26",
+  "notes": "Sells fruits and vegetables. |}}",
+  "raw_buys": "Nothing.",
+  "raw_sells": "<br> '''Fruit:'''<br> [[Orange]] 7 [[gp]] <br> [[Banana]] 3 [[gp]] <br> [[Grapes]] 5 [[gp]] <br> [[Melon]] 10 [[gp]] <br> '''Vegetables:'''<br> [[Carrot]] 4 [[gp]] <br> [[Tomato]] 5 [[gp]] <br> [[Pumpkin]] 10 [[gp]] <br>",
+  "rev": 27803,
+  "sells": {
+   "Banana": 3,
+   "Carrot": 4,
+   "Grapes": 5,
+   "Melon": 10,
+   "Orange": 7,
+   "Pumpkin": 10,
+   "Tomato": 5
+  }
+ },
+ "Ormuhn": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26945,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Ormuhn | flavortext = | job = Knight Guild Leader | location = [[Ankrahmun]] | buysell = yes | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Oswald": {
+  "buys": {},
+  "date": "2005-12-30",
+  "rev": 25291,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Oswald | job = Unknown Occupation | location = [[Thais]], at cross-roads, near the [[temple]]. | buysell = no | buys = | sells = | notes = Oswald is the assistant of the illustrious Durin! He must prevent people from bothering Durin and is rather vague in his explanations. Could this Durin be the great [[god]] of the [[dwarf|dwarves]]? |}}"
+ },
+ "Padreia": {
+  "buys": {},
+  "date": "2006-12-11",
+  "notes": "Padreia is the grand [[druid]] of [[Carlin]]. Just like all of Carlin's NPCs (except [[Imalas]] and [[Perac]]), she is a woman and will teach [[druid]]s all of her knowledge about [[spell]]s. She is responsible not only for the guild but for the fields, and Carlin citizens health. |}}<noinclude> </noinclude>",
+  "raw_buys": "",
+  "raw_sells": "[[Cough Syrup]] 50 gp<br> ''' ''Teaches'': '''<br> '''Instant Support Spells:'''<br> [[Find Person]] ''(lvl 8)'' 80 gp<br> [[Light]] ''(lvl 8)'' 100 gp<br> [[Great Light]] ''(lvl 13)'' 500 gp<br> [[Magic Shield]] ''(lvl 14)'' 450 gp<br> [[Invisible]] ''(lvl 35)'' 2,000 gp<br> '''Instant Supply Spells:'''<br> [[Food (spell)|Food]] ''(lvl 14)'' 300 gp<br> '''Instant Healing Spells:'''<br> [[Light Healing]] ''(lvl 9)'' 170 gp<br> [[Antidote]] ''(lvl 10)'' 150 gp<br> [[Intense Healing]] ''(lvl 11)'' 350 gp<br> [[Ultimate Healing]] ''(lvl 20)'' 1,000 gp<br> '''Instant Summon Spells:'''<br> [[Creature Illusion]] ''(lvl 23)'' 1,000 gp<br> [[Summon Creature]] ''(lvl 25)'' 2,000 gp<br> '''Field Rune Spells:'''<br> [[Poison Field]] ''(lvl 14)'' 300 gp<br> [[Fire Field]] ''(lvl 15)'' 500 gp<br> [[Energy Field]] ''(lvl 18)'' 700 gp<br> [[Firebomb]] ''(lvl 27)'' 1,500 gp<br> [[Poison Wall]] ''(lvl 29)'' 1,600 gp<br> [[Fire Wall]] ''(lvl 33)'' 2,000 gp<br> [[Energy Wall]] ''(lvl 41)'' 2,500 gp<br> '''Healing Rune Spells:'''<br> [[Intense Healing Rune]] ''(lvl 15)'' 600 gp<br> [[Ultimate Healing Rune]] ''(lvl 34)'' 1,500 gp<br> '''Missile Rune Spells:'''<br> [[Light Magic Missile]] ''(lvl 15)'' 500 gp<br> [[Heavy Magic Missile]] ''(lvl 25)'' 1,500 gp<br> '''Summon Rune Spells:'''<br> [[Convince Creature]] ''(lvl 16)'' 800 gp<br> [[Chameleon]] ''(lvl 27)'' 1,300 gp<br> '''Support Rune Spells:'''<br> [[Destroy Field]] ''(lvl 17)'' 700 gp<br> '''Explosive Runes Spells:'''<br> [[Fireball]] ''(lvl 17)'' 800 gp<br> [[Great Fireball]] ''(lvl 23)'' 1,200 gp<br> [[Explosion]] ''(lvl 31)'' 1,800 gp<br>",
+  "rev": 69038,
+  "sells": {
+   "Cough Syrup": 50
+  }
+ },
+ "Partos": {
+  "buys": {},
+  "date": "2005-12-30",
+  "rev": 25292,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Partos | job = Unknown Occupation | location = [[Thais]] prison, downstairs, to the left of the south gate. | buysell = no | buys = | sells = | notes = Partos is a thief serving his time. He holds some valuable information and is rumored to have [[Green_Djinn_Quest/Spoiler|dealings]] in [[ankrahmun]]. |}}"
+ },
+ "Pemaret": {
+  "buys": {},
+  "date": "2005-11-30",
+  "rev": 24237,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Pemaret | job = Ship Captain | location = Northern port of [[Cormaya]] | buysell = no | buys = | sells = | notes = Pemaret can transport you from Cormaya to [[Edron]] for 10 [[gp]] or to [[Eremo]] the Sage for free. To go back from Eremo just say 'Cormaya,' 'Tibia' or 'back.' |}}"
+ },
+ "Perac": {
+  "buys": {},
+  "date": "2006-12-22",
+  "notes": "|}}",
+  "raw_buys": "Nothing.",
+  "raw_sells": "<br>'''Distance Weapons:'''<br>[[Bow]] 400 [[gp]]<br>[[Crossbow]] 500 [[gp]]<br>'''Ammunition:'''<br> [[Arrow]]s 2 [[gp]]<br>[[Bolt]]s 3 [[gp]]",
+  "rev": 71815,
+  "sells": {
+   "Bow": 400,
+   "Crossbow": 500
+  }
+ },
+ "Petros": {
+  "buys": {},
+  "date": "2005-11-30",
+  "rev": 24232,
+  "sells": {},
+  "text": "{{Infobox_NPC| |name = Petros |location = The dock of [[Darashia]] |job = Ship Captain |buysell = no |buys =| |sells =| |notes = [[Petros]] can transport you from Darashia to three other ports: *[[Ankrahmun]] 100 gp *[[Venore]] 60 gp *[[Port Hope]] 180 gp Completing the [[Postman Quest]] will make each of these boat fares 10 gp cheaper.| |}}"
+ },
+ "Phillip": {
+  "buys": {},
+  "date": "2005-11-05",
+  "rev": 23401,
+  "sells": {},
+  "text": "Philip is the teacher of the school in [[Carlin]]."
+ },
+ "Pino": {
+  "buys": {},
+  "date": "2005-11-16",
+  "rev": 23784,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Pino | flavortext = | job = Magic Carpet manager | location = [[Edron]], head up [http://www.tibianews.net/worldmap.asp?xcor=-2342.65&ycor=388.55 here] and follow signs to ''flying carpet passenger service''. | buysell = no | buys = | sells = | quests = None | notes = Can take you to [[Darashia]] for 40[[gp]]s and to [[Femor Hills]] for 60[[gp]]s. |}}"
+ },
+ "Puffels": {
+  "buys": {},
+  "date": "2005-11-16",
+  "rev": 23780,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Puffels | flavortext = | job = Spell seller | location = [[Edron]], Ivory towers | buysell = no | buys = | sells = | quests = None? | notes = [[Image:Dog.gif|right]] Sells basic premium spells.<br> He sells: [[Magic Rope]], [[Levitate]], [[Haste]], [[Berserk]], [[Force Strike]], [[Energy Strike]], ''more?'' |}}"
+ },
+ "Pydar": {
+  "buys": {},
+  "date": "2006-03-29",
+  "rev": 33808,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Pydar | flavortext = | job = Pyromancer | location = [[Kazordoon]] | buysell = no | buys = | sells = | quests = | notes = None |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Queen Eloise": {
+  "buys": {},
+  "date": "2005-11-04",
+  "notes": "The highly revered Queen of Tibia. She resides in [[Carlin]], and has the power to [[Promotion|promote]] worthy adventurers. |}} {{NPC-stub}}",
+  "raw_buys": "",
+  "raw_sells": "[[Promotion]] 20,000 [[gp]]",
+  "rev": 23311,
+  "sells": {
+   "Promotion": 20000
+  }
+ },
+ "Quentin": {
+  "buys": {},
+  "date": "2006-01-11",
+  "rev": 26052,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Quentin | location = [[Thais]] [[Temple]], just south and east of [[depot]], in middle of town. | job = Priest | notes = Quentin resides in the Thais Temple, assisting adventurers by offering healing up to 65 [[hp]] and can cure you if you are [[poison]]ed, on [[fire]] or [[energy|electrified]]. | buysell = no | buys = | sells = |}}"
+ },
+ "Quero": {
+  "buys": {},
+  "date": "2006-01-24",
+  "notes": "Sells musical instruments. |}}",
+  "raw_buys": "Nothing.",
+  "raw_sells": "<br>[[Lyre]] 120 gold<br>[[Lute]] 195 gold<br>[[Drum]] 140 gold<br>[[Simple_Fanfare|Simple fanfare]] 150 gold",
+  "rev": 27628,
+  "sells": {
+   "Drum": 140,
+   "Lute": 195,
+   "Lyre": 120,
+   "Simple_Fanfare": 150
+  }
+ },
+ "Rachel": {
+  "buys": {
+   "Empty Vial": 5
+  },
+  "date": "2006-01-17",
+  "notes": "Owner of \"The Mysterious Sorcerers and Magician's Shop\" |}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "[[Empty Vial]] 5 [[gp]]",
+  "raw_sells": "<br>[[Spellbook]] 150[[gp]], <br>[[Life Fluid]] 60 [[gp]], <br>[[Mana Fluid]] 5 [[gp]], <br>Spell Runes",
+  "rev": 26696,
+  "sells": {
+   "Life Fluid": 60,
+   "Mana Fluid": 5,
+   "Spellbook": 150
+  }
+ },
+ "Rahkem": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26946,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Rahkem | flavortext = | job = Druid Guild Leader | location = | buysell = yes | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Rata'mari": {
+  "buys": {},
+  "date": "2006-04-26",
+  "rev": 36062,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Rata'mari | location = [[Mal'ouquah]] (Green Djinn Fortress) | job = Spy | notes = [[Image:Rat.gif|right]] Rata'mari is a spy for [[Fa'hradin]] that is stationed in the [[Mal'ouquah]]. He is disguised as a [[rat]] to collect information about [[Malor]]'s plans in the ongoing war between the [[Djinns]]. | buysell = no | buys = None | sells = None |}}"
+ },
+ "Razan": {
+  "buys": {},
+  "date": "2006-07-05",
+  "notes": "Razan Ibn Rublai is the weaponmaster of [[Kazzan|Caliph Kazzan]]. He can teach [[spells]] to [[Knight]]s and [[Paladin]]s. |}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "Nothing",
+  "raw_sells": "<br>[[Paladin]]'s [[Spells]]<br> '''Knight Spells:'''<br> [[Light]] 100 gp<br> [[Find person]] 80 gp<br> [[Light Healing]] 170 gp<br> [[Antidote]] 150 gp<br> [[Great Light]] 500 gp<br>",
+  "rev": 42282,
+  "sells": {
+   "Antidote": 150,
+   "Find person": 80,
+   "Great Light": 500,
+   "Light": 100,
+   "Light Healing": 170
+  }
+ },
+ "Riddler": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26961,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Riddler | flavortext = | job = Unknown Occupation | location = [[Paradox Tower]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Robin": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26983,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Robin | flavortext = | job = Paladin | location = [[Thais]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Roderick": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26939,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Roderick | flavortext = | job = Old Man | location = [[Ab'Dendriel]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Rodney": {
+  "buys": {},
+  "date": "2005-12-16",
+  "notes": "He deals in [[Item#Foods|Foods]].",
+  "raw_buys": "None",
+  "raw_sells": "[[Apple]] 3, [[Cherry]] 1, [[Grapes]] 3, [[Pear]] 4. |}}",
+  "rev": 24676,
+  "sells": {
+   "Apple": 3,
+   "Cherry": 1,
+   "Grapes": 3,
+   "Pear": 4
+  }
+ },
+ "Romella": {
+  "buys": {
+   "Axe": 7,
+   "Battle Axe": 80,
+   "Battle Hammer": 120,
+   "Club": 1,
+   "Dagger": 2,
+   "Halberd": 400,
+   "Hand Axe": 4,
+   "Mace": 30,
+   "Morning Star": 90,
+   "Rapier": 5,
+   "Sabre": 12,
+   "Short Sword": 10,
+   "Sword": 25,
+   "Two Handed Sword": 450
+  },
+  "date": "2005-09-10",
+  "notes": "Romella deals in [[Item#Weapons|weapons]].",
+  "raw_buys": "[[Hand Axe]] 4, [[Axe]] 7, [[Battle Axe]] 80, [[Halberd]] 400, [[Club]] 1, [[Mace]] 30, [[Battle Hammer]] 120, [[Morning Star]] 90, [[Dagger]] 2, [[Rapier]] 5, [[Short Sword]] 10, [[Sabre]] 12, [[Sword]] 25, [[Two Handed Sword]] 450.",
+  "raw_sells": "[[Hand Axe]] 8, [[Axe]] 20, [[Mace]] 90, [[Staff]] 40, [[Battle Hammer]] 350, [[Morning Star]] 90, [[Dagger]] 5, [[Rapier]] 15, [[Sabre]] 35, [[Sword]] 85. |}}",
+  "rev": 20900,
+  "sells": {
+   "Axe": 20,
+   "Battle Hammer": 350,
+   "Dagger": 5,
+   "Hand Axe": 8,
+   "Mace": 90,
+   "Morning Star": 90,
+   "Rapier": 15,
+   "Sabre": 35,
+   "Staff": 40,
+   "Sword": 85
+  }
+ },
+ "Rose": {
+  "buys": {},
+  "date": "2006-01-11",
+  "notes": "Rose works at Crunor's Finest Warehouse. |}}",
+  "raw_buys": "none",
+  "raw_sells": "'''Plants:''' [[Indoor Plants]] 8 [[gp]], [[Flower Bowl]] 6, [[God Flower]] 5, [[Honey Flower]] 5, and [[Potted Flower]] 5.",
+  "rev": 26054,
+  "sells": {
+   "Flower Bowl": 6,
+   "God Flower": 5,
+   "Honey Flower": 5,
+   "Indoor Plants": 8,
+   "Potted Flower": 5
+  }
+ },
+ "Rowenna": {
+  "buys": {
+   "Battle Axe": 75,
+   "Battle Hammer": 50,
+   "Carlin Sword": 118,
+   "Club": 1,
+   "Dagger": 1,
+   "Double Axe": 260,
+   "Fire Sword": 1000,
+   "Halberd": 310,
+   "Longsword": 51,
+   "Mace": 23,
+   "Morning Star": 100,
+   "Rapier": 3,
+   "Sabre": 5,
+   "Spike Sword": 225,
+   "Sword": 15,
+   "Two Handed Sword": 190,
+   "War Hammer": 470
+  },
+  "date": "2006-02-27",
+  "notes": "Buys and sells weapons. |}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "<br>'''Axe Weapons:'''<br>[[Battle Axe]] 75, <br>[[Double Axe]] 260, <br>[[Halberd]] 310, <br>'''Club Weapons:'''<br>[[Club]] 1, <br>[[Mace]] 23, <br>[[Battle Hammer]] 50, <br>[[Morning Star]] 100, <br>[[War Hammer]] 470, <br>'''Sword Weapons:'''<br>[[Dagger]] 1, <br>[[Rapier]] 3, <br>[[Sabre]] 5, <br>[[Sword]] 15, <br>[[Carlin Sword]] 118, <br>[[Longsword]] 51, <br>[[Two Handed Sword]] 190, <br>[[Spike Sword]] 225, <br>[[Fire Sword]] 1000",
+  "raw_sells": "<br>'''Axe Weapons:'''<br>[[Axe]] 20, <br>[[Battle Axe]] 235, <br>'''Club Weapons:'''<br>[[Club]] 5, <br>[[Mace]] 90, <br>[[Battle Hammer]] 350, <br>[[Morning Star]] 430, <br>'''Sword Weapons:'''<br>[[Dagger]] 5, <br>[[Rapier]] 15, <br>[[Sabre]] 25, <br>[[Sword]] 85, <br>[[Two Handed Sword]] 950 |}}",
+  "rev": 29884,
+  "sells": {
+   "Axe": 20,
+   "Battle Axe": 235,
+   "Battle Hammer": 350,
+   "Club": 5,
+   "Dagger": 5,
+   "Mace": 90,
+   "Morning Star": 430,
+   "Rapier": 15,
+   "Sabre": 25,
+   "Sword": 85,
+   "Two Handed Sword": 950
+  }
+ },
+ "Rudolph": {
+  "buys": {},
+  "date": "2005-08-02",
+  "notes": "Rudolph deals in [[Item#Armor_Pieces|armor]]. [[Image:Rudolph.jpg|left]]",
+  "raw_buys": "None",
+  "raw_sells": "[[Cape]] 9, [[Jacket]] 12, [[Green Tunic]] 10, [[Leather Legs]] 10, [[Sandals]] 2, [[Leather Boots]] 2. |}}",
+  "rev": 20630,
+  "sells": {
+   "Cape": 9,
+   "Green Tunic": 10,
+   "Jacket": 12,
+   "Leather Boots": 2,
+   "Leather Legs": 10,
+   "Sandals": 2
+  }
+ },
+ "Sam": {
+  "buys": {},
+  "date": "2005-11-04",
+  "notes": "[[Image:NPC_Sam.gif|right]] Sam is the Blacksmith of [[Thais]]. His real name is Samuel, but he prefers to be called Sam. He was named after his grandfather. He sells and buys many weapons and armors. |}} {{NPC-stub}}",
+  "raw_buys": "",
+  "raw_sells": "[[Dagger]] 5 [[gp]], [[Rapier]] 15 [[gp]], [[Sabre]] 35 [[gp]], [[Sword]] 85 [[gp]], [[Hand Axe]] 8 [[gp]], [[Axe]] 20 [[gp]], [[Mace]] 90 [[gp]], [[Battle Hammer]] 350 [[gp]], [[Leather Helmet]] 12 [[gp]], [[Chain Helmet]] 52 [[gp]], [[Chain Legs]] 80 [[gp]], [[Wooden Shield]] 15 [[gp]], [[Steel Shield]] 240 [[gp]], [[Leather Armor]] 35 [[gp]], [[Chain Armor]] 200 [[gp]], [[Brass Armor]] 450 [[gp]]",
+  "rev": 23321,
+  "sells": {
+   "Axe": 20,
+   "Battle Hammer": 350,
+   "Brass Armor": 450,
+   "Chain Armor": 200,
+   "Chain Helmet": 52,
+   "Chain Legs": 80,
+   "Dagger": 5,
+   "Hand Axe": 8,
+   "Leather Armor": 35,
+   "Leather Helmet": 12,
+   "Mace": 90,
+   "Rapier": 15,
+   "Sabre": 35,
+   "Steel Shield": 240,
+   "Sword": 85,
+   "Wooden Shield": 15
+  }
+ },
+ "Sandra": {
+  "buys": {
+   "Empty Vial": 5
+  },
+  "date": "2005-11-11",
+  "notes": "Sandra sells all kinds of [[Liquids]]",
+  "raw_buys": "[[Empty Vial]] 5 gp",
+  "raw_sells": "[[Lemonade]], [[Oil]], [[Mud]], [[Urine]], [[Blood]], [[Life Fluid]] 100 gp, [[Mana Fluid]] 100 gp, [[Water]] 6 gp |}} {{NPC-stub}}",
+  "rev": 23704,
+  "sells": {
+   "Life Fluid": 100,
+   "Mana Fluid": 100,
+   "Water": 6
+  }
+ },
+ "Sarina": {
+  "buys": {},
+  "date": "2005-07-26",
+  "rev": 20584,
+  "sells": {},
+  "text": "Owner of the general store in [[Carlin]]. Buys and sells many miscellaneous items."
+ },
+ "Scott": {
+  "buys": {},
+  "date": "2005-12-31",
+  "notes": "Sells food in his tavern in [[Senja]]. |}}",
+  "raw_buys": "Nothing.",
+  "raw_sells": "[[Bread]] 4, [[Cheese]] 6, [[Ham]] 8, [[Meat]] 5.",
+  "rev": 25304,
+  "sells": {
+   "Bread": 4,
+   "Cheese": 6,
+   "Ham": 8,
+   "Meat": 5
+  }
+ },
+ "Seymour": {
+  "buys": {},
+  "date": "2005-05-13",
+  "rev": 10218,
+  "sells": {},
+  "text": "[[Image:Seymour.gif|left]] Seymour is the keeper of the [[Rookgaard]] [[Academy]]. He also offers some items for services to him. At earlier [[Level|levels]] you can give him a rat corpse for 2 [[Gold]]. Later at about level 6 Seymour will give you a [[Legion Helmet|legion helmet]] for a [[Present Box|present box]], found in the [[Rookgaard#Spoiled_Quests|bear room]]."
+ },
+ "Shalmar": {
+  "buys": {},
+  "date": "2005-09-05",
+  "rev": 15792,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Shalmar | flavortext = NPC subtext | job = Job of the NPC | location = Area the NPC can be found | buysell = \"yes\" or \"no\" | buys = What the NPC buys, if \"yes\" above | sells = What the NPC sells, if \"yes\" above | quests = Information NPC gives on quests | notes = Any other information NPC provides |}}"
+ },
+ "Shanar": {
+  "buys": {
+   "Battle Shield": 95,
+   "Brass Armor": 150,
+   "Brass Helmet": 30,
+   "Brass Legs": 49,
+   "Brass Shield": 16,
+   "Chain Armor": 70,
+   "Chain Helmet": 17,
+   "Chain Legs": 20,
+   "Devil's Helmet": 450,
+   "Dragon Shield": 360,
+   "Fire Sword": 1000,
+   "Golden Armor": 1500,
+   "Iron Helmet": 145,
+   "Knight Armor": 875,
+   "Knight Legs": 375,
+   "Leather Armor": 12,
+   "Leather Legs": 1,
+   "Plate Armor": 400,
+   "Plate Legs": 115,
+   "Plate Shield": 31,
+   "Short Sword": 10,
+   "Spike Sword": 225,
+   "Steel Helmet": 190,
+   "Steel Shield": 80,
+   "Two Handed Sword": 450,
+   "Viking Helmet": 66,
+   "Warrior Helmet": 696,
+   "Wooden Shield": 5,
+   "club": 1,
+   "coat": 1,
+   "jacket": 1,
+   "knife": 2,
+   "longsword": 51,
+   "mace": 23,
+   "sabre": 12,
+   "sword": 25
+  },
+  "date": "2005-07-21",
+  "notes": "Shanar deals in [[Item#Armor_Pieces|armor]] and [[Item#Weapons|weapons]]. He is a member of the kuridai caste. Greet elves with 'Ashari' and say goodbye with 'Asha Thrazi' [[Image:Shanar.jpg|left]]",
+  "raw_buys": "[[club]] 1[[gp]], [[mace]] 23, [[knife]] 2, [[Short Sword]] 10, [[sabre]] 12, [[sword]] 25, [[longsword]] 51, [[Two Handed Sword]] 450, [[Spike Sword]] 225, [[Fire Sword]] 1000, [[Chain Helmet]] 17, [[Brass Helmet]] 30, [[Viking Helmet]] 66, [[Iron Helmet]] 145, [[Steel Helmet]] 190, [[Devil's Helmet]] 450, [[Warrior Helmet]] 696, [[coat]] 1, [[jacket]] 1, [[Leather Armor]] 12, [[Chain Armor]] 70, [[Brass Armor]] 150, [[Plate Armor]] 400, [[Knight Armor]] 875, [[Golden Armor]] 1500, [[Leather Legs]] 1, [[Chain Legs]] 20, [[Brass Legs]] 49, [[Plate Legs]] 115, [[Knight Legs]] 375, [[Wooden Shield]] 5gp, [[Brass Shield]] 16, [[Plate Shield]] 31, [[Steel Shield]] 80, [[Battle Shield]] 95, [[Dragon Shield]] 360.",
+  "raw_sells": "[[staff]] 40[[gp]], [[dagger]] 5, [[rapier]] 15, [[sabre]] 35, [[sword]] 85, [[longsword]] 160, [[Leather Helmet]] 12, [[Chain Helmet]] 52, [[Leather Armor]] 35, [[Chain Armor]] 200, [[Brass Armor]] 450, [[Chain Legs]] 80, [[Wooden Shield]] 15, [[Brass Shield]] 65, [[Plate Shield]] 165. |}}",
+  "rev": 20549,
+  "sells": {
+   "Brass Armor": 450,
+   "Brass Shield": 65,
+   "Chain Armor": 200,
+   "Chain Helmet": 52,
+   "Chain Legs": 80,
+   "Leather Armor": 35,
+   "Leather Helmet": 12,
+   "Plate Shield": 165,
+   "Wooden Shield": 15,
+   "dagger": 5,
+   "longsword": 160,
+   "rapier": 15,
+   "sabre": 35,
+   "staff": 40,
+   "sword": 85
+  }
+ },
+ "Shauna": {
+  "buys": {},
+  "date": "2005-11-05",
+  "rev": 23396,
+  "sells": {},
+  "text": "Shauna is the [[sheriff]] of [[Carlin]]."
+ },
+ "Sherry McRonald": {
+  "buys": {
+   "Bread": 2
+  },
+  "date": "2006-02-02",
+  "notes": "|}}",
+  "raw_buys": "[[Bread]] 2 gp",
+  "raw_sells": "<br>[[Cheese]] 5 gp<br>[[Cherry]] 1 gp<br>[[Pumpkin]] 10 gp<br>[[Melon]] 8 gp",
+  "rev": 28414,
+  "sells": {
+   "Cheese": 5,
+   "Cherry": 1,
+   "Melon": 8,
+   "Pumpkin": 10
+  }
+ },
+ "Shiantis": {
+  "buys": {},
+  "date": "2005-12-15",
+  "notes": "|}}",
+  "raw_buys": "",
+  "raw_sells": "[[Book]] 15 [[gps]], [[Backpack]] 20, [[Candlebra]] 8, [[Candlestick]] 2, [[Document]] 12, [[Football]] 111, [[Parchment]] 8, [[Scroll]] 5, [[Torch]] 2, [[Watch]] 20.",
+  "rev": 24667,
+  "sells": {
+   "Backpack": 20,
+   "Book": 15,
+   "Candlebra": 8,
+   "Candlestick": 2,
+   "Document": 12,
+   "Football": 111,
+   "Parchment": 8,
+   "Scroll": 5,
+   "Torch": 2,
+   "Watch": 20
+  }
+ },
+ "Shiriel": {
+  "buys": {
+   "Flask": 5
+  },
+  "date": "2006-02-08",
+  "notes": "This NPC has many mystic runes, power fluids, spellbooks and other magic equipment, for example rods for druids or wands for sorcerers. For a new druids he have a little present. |}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "<br>[[Flask]] ([[Vial]]) 5 [[gp]]",
+  "raw_sells": "<br>'''[[Runes]]:''' <br>[[Blank Rune]] 10 [[gp]], <br>[[Light Magic Missile|Light Magic Missile Rune]] 40 [[gp]], <br>[[Heavy Magic Missile|Heavy Magic Missile Rune]] 120 [[gp]], <br>[[Sudden Death Rune]] 325 [[gp]], <br>[[Fireball|Fireball Rune]] 95 [[gp]], <br>[[Great Fireball|Great Fireball Rune]] 180 [[gp]], <br>[[Explosion|Explosion Rune]] 250 [[gp]], <br>[[Firebomb|Firebomb Rune]] 235 [[gp]], <br>[[Fire Field|Fire Field Rune]] 85 [[gp]], <br>[[Poison Field|Poison Field Rune]] 65 [[gp]], <br>[[Destroy Field|Destroy Field Rune]] 45 [[gp]], <br>[[Fire Wall|Fire Wall Rune]] 245 [[gp]], <br>[[Energy Wall|Energy Wall Rune]] 340 [[gp]], <br>[[Poison Wall|Poison Wall Rune]] 240 [[gp]], <br>[[Intense Healing Rune]] 95 [[gp]], <br>[[Ultimate Healing Rune]] 175 [[gp]], <br>[[Convince Creature|Convince Creature Rune]] 80 [[gp]], <br>[[Chameleon|Chameleon Rune]] 210 [[gp]] <br>'''Wands:''' <br>[[Wand of Vortex]] 500 [[gp]], <br>[[Wand of Dragonbreath]] 1000 [[gp]], <br>[[Wand of Plague]] 5000 [[gp]], <br>[[Wand of Cosmic Energy]] 10000 [[gp]] <br>'''Rods:''' <br>[[Snakebite Rod]] first for free, next 500 [[gp]], <br>[[Moonlight Rod]] 1000 [[gp]], <br>[[Volcanic Rod]] 5000 [[gp]], <br>[[Quagmire Rod]] 10000 [[gp]] <br>'''Fluids:''' <br>[[Mana fluid]] 55 [[gp]], <br>[[Life fluid]] 60 [[gp]] <br>'''Other:''' <br>[[Spellbook]] 150 [[gp]]",
+  "rev": 28702,
+  "sells": {
+   "Blank Rune": 10,
+   "Chameleon": 210,
+   "Convince Creature": 80,
+   "Destroy Field": 45,
+   "Energy Wall": 340,
+   "Explosion": 250,
+   "Fire Field": 85,
+   "Fire Wall": 245,
+   "Fireball": 95,
+   "Firebomb": 235,
+   "Great Fireball": 180,
+   "Heavy Magic Missile": 120,
+   "Intense Healing Rune": 95,
+   "Life fluid": 60,
+   "Light Magic Missile": 40,
+   "Mana fluid": 55,
+   "Moonlight Rod": 1000,
+   "Poison Field": 65,
+   "Poison Wall": 240,
+   "Quagmire Rod": 10000,
+   "Spellbook": 150,
+   "Sudden Death Rune": 325,
+   "Ultimate Healing Rune": 175,
+   "Volcanic Rod": 5000,
+   "Wand of Cosmic Energy": 10000,
+   "Wand of Dragonbreath": 1000,
+   "Wand of Plague": 5000,
+   "Wand of Vortex": 500
+  }
+ },
+ "Shirith": {
+  "buys": {},
+  "date": "2006-02-05",
+  "notes": "|}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "<br>Nothing",
+  "raw_sells": "<br>[[Key]] 50 [[gp]]",
+  "rev": 28511,
+  "sells": {
+   "Key": 50
+  }
+ },
+ "Simon the Beggar": {
+  "buys": {},
+  "date": "2005-11-20",
+  "notes": "In order to buy the key you must give him some money as a donation, when you have given him 700 [[gp]] he will sell you the key for 100 [[gp]]. |}}",
+  "raw_buys": "Nothing.",
+  "raw_sells": "[[Key 3940]] (Fibula Key) 800 [[gp]].",
+  "rev": 23889,
+  "sells": {
+   "Key 3940": 800
+  }
+ },
+ "Skjaar": {
+  "buys": {},
+  "date": "2005-10-18",
+  "rev": 22271,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name=Skjaar | job=Necromancer | location=Deep below [[Mt. Sternum]] | buysell=yes | buys=| | notes=[[Image:Necromancer.gif|right]]'''Skjaar''' sells asks you questions and sells you a key as part of the [[Noble Armor Quest]]. | sells=[[Key 3142]], 1,000 [[gp]]. }}"
+ },
+ "Smiley": {
+  "buys": {},
+  "date": "2005-12-22",
+  "rev": 25010,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Smiley | location = [[Venore]] magic shop, east of the [[depot]] and [[temple]]. | job = Shopkeeper | notes = [[Image:Demon_Skeleton.gif|Smiley]] Smiley works in The Magic Bazar. | buysell = yes | buys = Nothing | sells = Non-premium Druid [[Druid#Druid's Spells|spells]] and [[Druid#Druid's Runes|runes]]. |}}"
+ },
+ "Snake Eye": {
+  "buys": {},
+  "date": "2006-05-14",
+  "notes": "He got in a fight with a snake and lost one eye. |}}",
+  "raw_buys": "",
+  "raw_sells": "[[Beer]] 5 [[gp]], [[Wine]] 6[[gp]], [[Meat]] 6[[gp]].",
+  "rev": 37100,
+  "sells": {
+   "Beer": 5,
+   "Meat": 6,
+   "Wine": 6
+  }
+ },
+ "Stutch": {
+  "buys": {},
+  "date": "2005-12-20",
+  "rev": 24889,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Stutch | job = Guard | location = [[Thais]] Castle | buysell = no | buys = | sells = | notes = Guards the castle of [[King Tibianus III]], along with [[Harsky]]. |}}"
+ },
+ "Svenson": {
+  "buys": {},
+  "date": "2005-12-06",
+  "rev": 24290,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Svenson | job = Ship Captain | location = Folda ([http://www.tibianews.net/worldmap.asp?xcor=1166.75&ycor=992.75 here]) | buysell = no | buys = | sells = | notes = Svenson can transport you to any of the [[Ice Islands]] or back to Tibia. *[[Vega]] 10 gp *[[Senja]] 10 gp *[[Tibia (continent)|Tibia]] free From any Ice Island, it costs 10 [[gp]] to travel to any other Ice Island, and passage back to [[Tibia]] is free. |}}"
+ },
+ "Sylvester": {
+  "buys": {},
+  "date": "2006-01-08",
+  "rev": 25531,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Sylvester | location = Between Southwest and South gates of [[Venore]], 3rd floor of the guard house. | job = Guard | notes = He is the captain of the Venore Guard. He protects the city of Venore from attacking [[creature]]s from the swamp. | buysell = no | buys = | sells = |}}"
+ },
+ "Talesia": {
+  "buys": {},
+  "date": "2006-01-11",
+  "rev": 26055,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Talesia | job = Shopkeeper | location = [[Venore]], in between the [[temple]] and second [[depot]]. | buysell = no | buys = none | sells = | notes = Talesia runs Crunor's Finest Warehouse. |}}"
+ },
+ "Talphion": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26962,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Talphion | flavortext = | job = Technomancer | location = [[Kazordoon]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Tesha": {
+  "buys": {
+   "Black Pearl": 280,
+   "Small Amethyst": 200,
+   "Small Diamond": 300,
+   "Small Emerald": 250,
+   "Small Ruby": 250,
+   "Small Sapphire": 250,
+   "White Pearl": 160
+  },
+  "date": "2006-01-10",
+  "notes": "Sells and buys gems and jewelry. She also changes money.",
+  "raw_buys": "<br>'''Gems:'''<br>[[Small Diamond]] 300 [[gp]],<br> [[Small Sapphire]] 250 [[gp]],<br> [[Small Ruby]] 250 [[gp]],<br> [[Small Emerald]] 250 [[gp]],<br> [[Small Amethyst]] 200 [[gp]],<br> '''Pearls:'''<br>[[White Pearl]] 160 [[gp]],<br> [[Black Pearl]] 280 [[gp]]",
+  "raw_sells": "<br>'''Gems:'''<br>[[Small Diamond]] 600 [[gp]],<br> [[Small Sapphire]] 500 [[gp]],<br> [[Small Ruby]] 500 [[gp]],<br> [[Small Emerald]] 500 [[gp]],<br> [[Small Amethyst]] 400 [[gp]],<br> '''Pearls:'''<br>[[White Pearl]] 320 [[gp]],<br> [[Black Pearl]] 560 [[gp]],<br> '''Jewelry:'''<br>[[Wedding Ring]] 990 [[gp]],<br> [[Golden Amulet]] 6600 [[gp]],<br> [[Ruby Necklace]] 3560 [[gp]] |}}",
+  "rev": 25617,
+  "sells": {
+   "Black Pearl": 560,
+   "Golden Amulet": 6600,
+   "Ruby Necklace": 3560,
+   "Small Amethyst": 400,
+   "Small Diamond": 600,
+   "Small Emerald": 500,
+   "Small Ruby": 500,
+   "Small Sapphire": 500,
+   "Wedding Ring": 990,
+   "White Pearl": 320
+  }
+ },
+ "Tezila": {
+  "buys": {
+   "Black Pearl": 280,
+   "Small Amethyst": 200,
+   "Small Diamond": 300,
+   "Small Emerald": 250,
+   "Small Ruby": 250,
+   "Small Sapphire": 250,
+   "White Pearl": 160
+  },
+  "date": "2006-03-09",
+  "notes": "Buys and sells valuables. Also changes Gold-Platinum-Crystal coins. |}}",
+  "raw_buys": "<br>'''Pearls:'''<br>[[White Pearl]] 160 [[gp]], <br>[[Black Pearl]] 280 [[gp]], <br>'''Gems:'''<br>[[Small Diamond]] 300 [[gp]], <br>[[Small Sapphire]] 250 [[gp]], <br>[[Small Ruby]] 250 [[gp]], <br>[[Small Emerald]] 250 [[gp]], <br>[[Small Amethyst]] 200 [[gp]]",
+  "raw_sells": "<br>'''Pearls:'''<br>[[White Pearl]] 320 [[gp]], <br>[[Black Pearl]] 560 [[gp]], <br>'''Gems:'''<br>[[Small Diamond]] 600 [[gp]], <br>[[Small Sapphire]] 500 [[gp]], <br>[[Small Ruby]] 500 [[gp]], <br>[[Small Emerald]] 500 [[gp]], <br>[[Small Amethyst]] 400 [[gp]], <br>'''Jewelry:'''<br>[[Wedding Ring]] 990 [[gp]], <br>[[Golden Amulet]] 6,600 [[gp]], <br>[[Ruby Necklace]] 3,560 [[gp]].",
+  "rev": 31407,
+  "sells": {
+   "Black Pearl": 560,
+   "Golden Amulet": 6600,
+   "Ruby Necklace": 3560,
+   "Small Amethyst": 400,
+   "Small Diamond": 600,
+   "Small Emerald": 500,
+   "Small Ruby": 500,
+   "Small Sapphire": 500,
+   "Wedding Ring": 990,
+   "White Pearl": 320
+  }
+ },
+ "Thanita": {
+  "buys": {},
+  "date": "2005-12-20",
+  "rev": 24883,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Thanita | location = The Tower of Whitewatch, in northern [[Femur Hills]] | job = Guard | notes = She is entrusted by [[Carlin]]'s [[Queen Eloise]] to watch out for [[orc]]ish invasion in the hills. | buysell = no | buys = | sells = |}}"
+ },
+ "The Crone": null,
+ "The Gatekeeper": {
+  "buys": {},
+  "date": "2005-11-09",
+  "rev": 23647,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = The Gatekeeper | job = Oracle | location = [[Rookgaard]] premium town, [http://www.tibianews.net/worldmap.asp?xcor=1196&ycor=-814 here] | buysell = no | buys = | sells = | notes = The Gatekeeper will [[Teleport]] premium charachters from [[Rookgaard]] to the [[Mainland]], there is also [[The Oracle]] on the free account side who does the same. The difference between [[The Oracle]] and [[The Gatekeeper]], are your choices of what city to live in. The Gatekeeper can teleport you to [[Darashia]], [[Ankrahmun]], [[Port Hope]], [[Ab'Dendriel]] or [[Kazordoon]]. |}}"
+ },
+ "The Oracle": {
+  "buys": {},
+  "date": "2005-03-24",
+  "rev": 3988,
+  "sells": {},
+  "text": "The oracle is located in the second floor of the academy building, which is direct north of the temple. The oracle will only speak to those of Level 8 and above. When you are at the appropiate level go to the oracle and say 'hi.' She will respond in three questions. Are you prepared to leave to mainland? What city will you live in? What vocation will you take? When you answer with your choices of each you will be teleported to the city of your choice with the desired vocation."
+ },
+ "The Orc King": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26987,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = The Orc King | flavortext = | job = King | location = [[Ulderek's Rock]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "The Queen of the Banshees": {
+  "buys": {},
+  "date": "2006-03-19",
+  "rev": 33035,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = The Queen Of The Banshees | job = Banshee | location = [[Isle of the Kings]] | buysell = no | buys = | sells = | notes = [[Image:Banshee.gif]] She lives seven floors below the Isle of the Kings. She will instruct you in how to fullfill the [[Banshee Quest|Seven Seals]] in order for you to gain rewards in exchange for your soul. |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Thomas": {
+  "buys": {},
+  "date": "2005-12-06",
+  "notes": "Deals in Books and Documents. |}}",
+  "raw_buys": "",
+  "raw_sells": "[[Scroll]] 5, [[Document]] 12, [[Parchment]] 8, [[Inkwell]] 8, [[Small Book]] 15, [[Brown Book]] 15, [[Black Book]] 15, [[Spell Book]] 150.",
+  "rev": 24298,
+  "sells": {
+   "Black Book": 15,
+   "Brown Book": 15,
+   "Document": 12,
+   "Inkwell": 8,
+   "Parchment": 8,
+   "Scroll": 5,
+   "Small Book": 15,
+   "Spell Book": 150
+  }
+ },
+ "Tibra": {
+  "buys": {},
+  "date": "2005-07-26",
+  "rev": 20587,
+  "sells": {},
+  "text": "A priest(ess?) of the great pantheon, located in the Congress Hall and Library of [[Carlin]]. She can teach you about some of the various [[Tibian Gods|Gods]] of Tibia."
+ },
+ "Tim, The Guard": {
+  "buys": {},
+  "date": "2005-12-23",
+  "rev": 25031,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Tim, The Guard | location = East gate of [[Thais]], on second floor. | job = Guard | notes = Tim protects the city from [[creatures]]. | buysell = no | buys = | sells = |}}"
+ },
+ "Timur": {
+  "buys": {
+   "Viking Helmet": 265
+  },
+  "date": "2005-11-24",
+  "notes": "He is the only [[mainland]] NPC who buys [[hatchet]]s.",
+  "raw_buys": "[[Viking Helmet]] 265 [[gp]].",
+  "raw_sells": "[[Mace]] 30 [[gp]], [[Hatchet]] 25, [[Viking Helmet]] 66, [[Crossbow]] 160, [[Bow]] 130. |}}",
+  "rev": 24090,
+  "sells": {
+   "Bow": 130,
+   "Crossbow": 160,
+   "Hatchet": 25,
+   "Mace": 30,
+   "Viking Helmet": 66
+  }
+ },
+ "Todd": {
+  "buys": {},
+  "date": "2005-10-14",
+  "rev": 22111,
+  "sells": {},
+  "text": "He is one Floor above frodo, he complains about a headache if you talk to him"
+ },
+ "Tokel": {
+  "buys": {},
+  "date": "2006-01-26",
+  "notes": "Tokel is a farmer, and proud of it. |}}",
+  "raw_buys": "None",
+  "raw_sells": "<br>'''Food:'''<br>[[Bread]] 3 [[gp]]<br>[[Cheese]] 5 [[gp]]<br>[[Ham]] 8 [[gp]]<br>[[Meat]] 5 [[gp]]",
+  "rev": 27772,
+  "sells": {
+   "Bread": 3,
+   "Cheese": 5,
+   "Ham": 8,
+   "Meat": 5
+  }
+ },
+ "Tom": {
+  "buys": {
+   "Bear Paw": 10,
+   "Wolf Paw": 7
+  },
+  "date": "2006-08-30",
+  "notes": "[[Image:NPC Tom.jpg|right]] Tom the tanner owns a shop in the center of the town on [[Rookgaard]]. He will buy rat, rabbit and wolf corpses from you for some money. Tom has been on the island for some time and might tell you of some hidden goods left behind somewhere.<br> |}}",
+  "raw_buys": "<br>[[Rat]] corpses 2 [[gp]], <br>[[Rabbit]] corpses 2 [[gp]], <br>[[Wolf]] corpses 5 [[gp]], <br>[[Bear Paw]] 10 [[gp]], <br>[[Wolf Paw]] 7 [[gp]]",
+  "raw_sells": "Nothing",
+  "rev": 52544,
+  "sells": {}
+ },
+ "Topsy": {
+  "buys": {},
+  "date": "2006-01-18",
+  "notes": "She sells magical items.",
+  "raw_buys": "<br>[[Empty Vial]]s 5 [[gp]].",
+  "raw_sells": "<br>[[Mana Fluid]] 55 [[gp]], <br>[[Life Fluid]] 60[[gp]], <br>[[Spellbook]] 150 [[gp]], <br>[[Blank Rune]]s 10 [[gp]], <br>[[Spells#List_of_Rune_Spells|Spell Runes]] |}}",
+  "rev": 27187,
+  "sells": {
+   "Life Fluid": 60,
+   "Mana Fluid": 55,
+   "Spellbook": 150
+  }
+ },
+ "Tothdral": {
+  "buys": {},
+  "date": "2007-06-07",
+  "notes": "Tothdral is located in the library of the [[Serpentine Tower]]. He teaches all spells available to Non-Premium Sorcerer's. |}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "",
+  "raw_sells": "<br>'''Teaches:'''<br> spells:<br><br> [[Find Person]] 80 gp<br> [[Light]]100 gp<br> [[Light Healing]] 170 gp<br> [[Antidote]] 150 gp<br> [[Intense Healing]] 350 gp<br> [[Great Light]] 500 gp<br> [[Magic Shield]] 450 gp<br> [[Fire Wave]] 850 gp<br> [[Energy Beam]] 1000gp<br> [[Creature Illusion]] 1000 gp<br> [[Summon Creature]] 2000 gp<br> [[Great Energy Beam]] 1800 gp<br> [[Invisible]] 2000 gp<br> [[Energy Wave]] 2500 gp<br> [[Poison Field]] 300 gp<br> [[Fire Field]] 500 gp<br> [[Light Magic Missile]] 500 gp<br> [[Ultimate Healing]] 1000 gp<br><br> runes:<br><br> [[Fireball]] 800 gp<br> [[Destroy Field]] 700 gp <br> [[Energy Field]] 700 gp<br> [[Great Fireball]] 1200 gp<br> [[Heavy Magic Missile]] 1500 gp<br> [[Firebomb]] 1500 gp<br> [[Poison Wall]] 1600 gp<br> [[Explosion]] 1800 gp<br> [[Fire Wall]] 2000 gp <br> [[Energy Wall]] 2500 gp <br> [[Sudden Death]] 3000 gp<br>",
+  "rev": 102769,
+  "sells": {
+   "Antidote": 150,
+   "Creature Illusion": 1000,
+   "Destroy Field": 700,
+   "Energy Beam": 1000,
+   "Energy Field": 700,
+   "Energy Wall": 2500,
+   "Energy Wave": 2500,
+   "Explosion": 1800,
+   "Find Person": 80,
+   "Fire Field": 500,
+   "Fire Wall": 2000,
+   "Fire Wave": 850,
+   "Fireball": 800,
+   "Firebomb": 1500,
+   "Great Energy Beam": 1800,
+   "Great Fireball": 1200,
+   "Great Light": 500,
+   "Heavy Magic Missile": 1500,
+   "Intense Healing": 350,
+   "Invisible": 2000,
+   "Light": 100,
+   "Light Healing": 170,
+   "Light Magic Missile": 500,
+   "Magic Shield": 450,
+   "Poison Field": 300,
+   "Poison Wall": 1600,
+   "Sudden Death": 3000,
+   "Summon Creature": 2000,
+   "Ultimate Healing": 1000
+  }
+ },
+ "Trimegis": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26985,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Timegris | flavortext = | job = Astrologer | location = [[Thais]] | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Trisha": {
+  "buys": {},
+  "date": "2005-10-29",
+  "rev": 23003,
+  "sells": {},
+  "text": "Trisha stands north of Carlin, and will help knights on learning spells for them."
+ },
+ "Tulf": {
+  "buys": {},
+  "date": "2005-12-20",
+  "rev": 24885,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Tulf | location = Guard room off of [[Emperor Kruzak]]'s chambers, four floors above ground. | job = Guard | notes = He protects the emperor, despote being drunk. A room with 2 [[Dwarf Guard]]s and [[Dwarf Soldier|Soldiers]] is directly above him. | buysell = no | buys = | sells = |}}"
+ },
+ "Turvy": {
+  "buys": {
+   "Brass Armor": 450,
+   "Chain Armor": 200,
+   "Chain Helmet": 52,
+   "Chain Legs": 80,
+   "Leather Armor": 35,
+   "Leather Helmet": 12,
+   "Steel Shield": 240,
+   "Wooden Shield": 15
+  },
+  "date": "2005-12-21",
+  "notes": "She sells [[Items#weapons|weapons]] and [[Items#armors|armors]].",
+  "raw_buys": "'''Armor:''' [[Brass Armor]] 450, [[Chain Armor]] 200, [[Leather Armor]] 35;<br> '''Helmets:''' [[Chain Helmet]] 52, [[Leather Helmet]] 12;<br> '''Legs:''' [[Chain Legs]] 80;<br> '''Shields:''' [[Steel Shield]] 240, [[Wooden Shield]] 15.",
+  "raw_sells": "'''Armor:''' [[Brass Armor]] 150, [[Chain Armor]] 70, [[Leather Armor]] 12;<br> '''Helmets:''' [[Chain Helmet]] 17, [[Leather Helmet]] 4;<br> '''Legs:''' [[Chain Legs]] 25;<br> '''Shields:''' [[Steel Shield]] 80, [[Wooden Shield]] 5. |}}",
+  "rev": 24974,
+  "sells": {
+   "Brass Armor": 150,
+   "Chain Armor": 70,
+   "Chain Helmet": 17,
+   "Chain Legs": 25,
+   "Leather Armor": 12,
+   "Leather Helmet": 4,
+   "Steel Shield": 80,
+   "Wooden Shield": 5
+  }
+ },
+ "Ubaid": {
+  "buys": {},
+  "date": "2006-01-24",
+  "rev": 27657,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Ubaid | location = [[Mal'ouquah]] (Green Djinn Fortress) | job = Djinn | notes = | buysell = no | buys = None | sells = None |}}"
+ },
+ "Ukea": {
+  "buys": {},
+  "date": "2006-01-08",
+  "notes": "|}}",
+  "raw_buys": "Nothing.",
+  "raw_sells": "'''Statues:''' [[Knight Statue]] 50, [[Minotaur Statue]] 50, [[Goblin Statue]] 50;<br> '''Tables:''' [[Small Table]] 20, [[Round Table]] 25, [[Square Table]] 25, [[Big Table]] 30;<br> '''Chairs:''' [[Wooden Chair]] 15, [[Rocking Chair]] 25, [[Red Cushioned Chair]] 40, [[Green Cushioned Chair]] 40, and [[Sofa Chair]] 55;<br> '''Flowers:''' [[Indoor Plant]] 8, [[Flower Bowl]] 6, [[God Flower]] 5, [[Honey Flower]] 5, [[Potted Flower]] 5;<br> '''Pillows:''' [[Small Pillow]] 20, [[Round Pillow]] 25, [[Sqare Pillow]] 25, [[Heart Pillow]] 30;<br> '''Pottery:''' [[Vase]] 3, [[Coal Basin]] 25, [[Amphora]] 4, [[Large Amphora]] 50;<br> '''Instruments:''' [[piano]] 200, [[harp]] 50;<br> '''Decorations:''' [[Water Pipe]] 40, [[Pendulum Clock]] 75, [[Telescope]] 70, [[Table Lamp]] 35, [[Rocking Horse]] 30, [[Globe]] 50, [[Birdcage]] 50, [[Round Mirror]] 40, [[Oval Mirror]] 40, [[Edged Mirror]] 40, [[Landscape Picture]] 50, [[Portait Picture]] 50, [[Stillife Picture]] 50, [[Cuckoo Clock]] 40;<br> ''[[Tapestry]]'' 50;<br> '''Containers:''' [[Drawer]] 18, [[Dresser]] 25, [[Locker]] 30, [[Crate]] 10, [[Chest]] 10, [[Box]] 10, [[Barrel]] 12, [[Trunk]] 10, [[Trough]] 7.",
+  "rev": 25525,
+  "sells": {
+   "Amphora": 4,
+   "Barrel": 12,
+   "Big Table": 30,
+   "Birdcage": 50,
+   "Box": 10,
+   "Chest": 10,
+   "Coal Basin": 25,
+   "Crate": 10,
+   "Cuckoo Clock": 40,
+   "Drawer": 18,
+   "Dresser": 25,
+   "Edged Mirror": 40,
+   "Flower Bowl": 6,
+   "Globe": 50,
+   "Goblin Statue": 50,
+   "God Flower": 5,
+   "Green Cushioned Chair": 40,
+   "Heart Pillow": 30,
+   "Honey Flower": 5,
+   "Indoor Plant": 8,
+   "Knight Statue": 50,
+   "Landscape Picture": 50,
+   "Large Amphora": 50,
+   "Locker": 30,
+   "Minotaur Statue": 50,
+   "Oval Mirror": 40,
+   "Pendulum Clock": 75,
+   "Portait Picture": 50,
+   "Potted Flower": 5,
+   "Red Cushioned Chair": 40,
+   "Rocking Chair": 25,
+   "Rocking Horse": 30,
+   "Round Mirror": 40,
+   "Round Pillow": 25,
+   "Round Table": 25,
+   "Small Pillow": 20,
+   "Small Table": 20,
+   "Sofa Chair": 55,
+   "Sqare Pillow": 25,
+   "Square Table": 25,
+   "Stillife Picture": 50,
+   "Table Lamp": 35,
+   "Telescope": 70,
+   "Trough": 7,
+   "Trunk": 10,
+   "Vase": 3,
+   "Water Pipe": 40,
+   "Wooden Chair": 15,
+   "harp": 50,
+   "piano": 200
+  }
+ },
+ "Ulrik": {
+  "buys": {},
+  "date": "2006-01-26",
+  "notes": "Ulrik sells some weapons and armor, but he does not purchase used equipment. |}}",
+  "raw_buys": "None",
+  "raw_sells": "<br>'''Weapons:'''<br>[[Longsword]] 160 [[gp]]<br>[[Battle Hammer]] 350 [[gp]]<br>[[Battle Axe]] 235 [[gp]]<br>'''Armor:'''<br>[[Scale Armor]] 260 [[gp]]<br>[[Soldier Helmet]] 110 [[gp]]<br>[[Steel Shield]] 240 [[gp]]",
+  "rev": 27771,
+  "sells": {
+   "Battle Axe": 235,
+   "Battle Hammer": 350,
+   "Longsword": 160,
+   "Scale Armor": 260,
+   "Soldier Helmet": 110,
+   "Steel Shield": 240
+  }
+ },
+ "Umar": {
+  "buys": {},
+  "date": "2006-01-24",
+  "rev": 27656,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Umar | location = [[Ashta'daramai]] (Blue Djinn Fortress) | job = Djinn | notes = | buysell = no | buys = None | sells = None |}}"
+ },
+ "Urkalio": {
+  "buys": {},
+  "date": "2005-12-16",
+  "notes": "He deals in [[Item#Foods|Foods and Drinks]].",
+  "raw_buys": "None",
+  "raw_sells": "[[Bread]] 4, [[Cheese]] 6, [[Cookie]] 5, [[Ham]] 8, [[Meat]] 5, <br>[[Beer]] 2, [[Lemonade]] 2, [[Water]] 1, [[Wine]] 3. |}}",
+  "rev": 24674,
+  "sells": {
+   "Beer": 2,
+   "Bread": 4,
+   "Cheese": 6,
+   "Cookie": 5,
+   "Ham": 8,
+   "Lemonade": 2,
+   "Meat": 5,
+   "Water": 1,
+   "Wine": 3
+  }
+ },
+ "Ursula": {
+  "buys": {},
+  "date": "2005-12-06",
+  "rev": 24294,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Ursula | flavortext = | job = Spell Seller | location = [[Edron]], Ivory Towers ([http://www.tibianews.net/worldmap.asp?xcor=-2503.05&ycor=199.3 here]) | buysell = no | buys = | sells = | quests = | notes = [[Image:Witch.gif|left]]Sells the following spells to [[Druid]]s, [[Sorcerer]]s and [[Paladin]]s;<br> [[Conjure Bolt]], [[Animate Dead]], [[Envenom]], [[Heal Friend]], [[Desintegrate]], [[Poison Bomb]], [[Strong Haste]]. |}}"
+ },
+ "Uzgod": {
+  "buys": {
+   "Battle Axe": 75,
+   "Battle Hammer": 50,
+   "Carlin Sword": 118,
+   "Club": 1,
+   "Dagger": 1,
+   "Double Axe": 260,
+   "Fire Sword": 1000,
+   "Halberd": 310,
+   "Longsword": 51,
+   "Mace": 23,
+   "Morning Star": 100,
+   "Rapier": 3,
+   "Sabre": 5,
+   "Spike Sword": 225,
+   "Sword": 15,
+   "Two Handed Sword": 190,
+   "War Hammer": 470
+  },
+  "date": "2005-09-10",
+  "notes": "Uzgod deals in [[Item#Weapons|weapons]].",
+  "raw_buys": "[[Battle Axe]] 75, [[Double Axe]] 260, [[Halberd]] 310, [[Club]] 1, [[Mace]] 23, [[Battle Hammer]] 50, [[Morning Star]] 100, [[War Hammer]] 470, [[Dagger]] 1, [[Rapier]] 3, [[Sabre]] 5, [[Sword]] 15, [[Carlin Sword]] 118, [[Longsword]] 51, [[Two Handed Sword]] 190, [[Spike Sword]] 225, [[Fire Sword]] 1000.",
+  "raw_sells": "[[Axe]] 20, [[Battle Axe]] 235, [[Club]] 5, [[Mace]] 90, [[Battle Hammer]] 350, [[Morning Star]] 430, [[Dagger]] 5, [[Rapier]] 15, [[Sabre]] 35, [[Sword]] 85, [[Two Handed Sword]] 950. |}}",
+  "rev": 20893,
+  "sells": {
+   "Axe": 20,
+   "Battle Axe": 235,
+   "Battle Hammer": 350,
+   "Club": 5,
+   "Dagger": 5,
+   "Mace": 90,
+   "Morning Star": 430,
+   "Rapier": 15,
+   "Sabre": 35,
+   "Sword": 85,
+   "Two Handed Sword": 950
+  }
+ },
+ "Uzon": {
+  "buys": {},
+  "date": "2005-11-19",
+  "rev": 23830,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Uzon | flavortext = | job = Magic Carpet Manager | location = South-west [[Femor Hills]] | buysell = no | buys = | sells = | quests = | notes = Can take you to [[Darashia]] or [[Edron]] for 60 [[gp]]. |}}"
+ },
+ "Velvet": {
+  "buys": {},
+  "date": "2005-12-22",
+  "notes": "",
+  "raw_buys": "Nothing.",
+  "raw_sells": "[[Small Pillow]] 20, [[Round Pillow]] 25, [[Square Pillow]] 25, [[Heart Pillow]] 30, and [[Tapestry|Tapestries]] 25. |}}",
+  "rev": 25016,
+  "sells": {
+   "Heart Pillow": 30,
+   "Round Pillow": 25,
+   "Small Pillow": 20,
+   "Square Pillow": 25,
+   "Tapestry": 25
+  }
+ },
+ "Vera": {
+  "buys": {},
+  "date": "2006-07-07",
+  "notes": "|}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "",
+  "raw_sells": "<br>'''Statues:'''<br> [[Knight Statue]] 50 [[gp]], <br>[[Minotaur Statue]] 50 [[gp]], <br>[[Goblin Statue]] 50 [[gp]];<br> '''Tables:''' <br>[[Small Table]] 20 [[gp]], <br>[[Round Table]] 25 [[gp]], <br>[[Square Table]] 25 [[gp]], <br>[[Big Table]] 30 [[gp]];<br> '''Chairs:''' <br>[[Wooden Chair]] 15 [[gp]], <br>[[Rocking Chair]] 25 [[gp]], <br>[[Red Cushioned Chair]] 40 [[gp]], <br>[[Green Cushioned Chair]] 40 [[gp]], <br>[[Sofa Chair]] 55 [[gp]];<br> '''Flowers:''' <br>[[Indoor Plant]] 8 [[gp]], <br>[[Flower Bowl]] 6 [[gp]], <br>[[God Flower]] 5 [[gp]], <br>[[Honey Flower]] 5 [[gp]], <br>[[Potted Flower]] 5 [[gp]];<br> '''Pillows:''' <br>[[Small Pillow]] 20 [[gp]], <br>[[Round Pillow]] 25 [[gp]], <br>[[Square Pillow]] 25 [[gp]], <br>[[Heart Pillow]] 30 [[gp]];<br> '''Pottery:''' <br>[[Vase]] 3 [[gp]], <br>[[Coal Basin]] 25 [[gp]], <br>[[Amphora]] 4 [[gp]], <br>[[Large Amphora]] 50 [[gp]];<br> '''Instruments:''' <br>[[Piano]] 200 [[gp]], <br>[[Harp]] 50 [[gp]];<br> '''Decorations:''' <br>[[Water Pipe]] 40 [[gp]], <br>[[Pendulum Clock]] 75 [[gp]], <br>[[Telescope]] 70 [[gp]], <br>[[Table Lamp]] 35 [[gp]], <br>[[Rocking Horse]] 30 [[gp]], <br>[[Globe]] 50 [[gp]], <br>[[Birdcage]] 50 [[gp]], <br>[[Round Mirror]] 40 [[gp]], <br>[[Oval Mirror]] 40 [[gp]], <br>[[Edged Mirror]] 40 [[gp]], <br>[[Landscape Picture]] 50 [[gp]], <br>[[Portrait Picture]] 50 [[gp]], <br>[[Stillife Picture]] 50 [[gp]], <br>[[Cuckoo Clock]] 40 [[gp]];<br> ''[[Tapestry]]'' 25 [[gp]];<br> '''Containers:''' <br>[[Drawer]] 18 [[gp]], <br>[[Dresser]] 25 [[gp]], <br>[[Locker]] 30 [[gp]], <br>[[Crate]] 10 [[gp]], <br>[[Chest]] 10 [[gp]], <br>[[Box]] 10 [[gp]], <br>[[Barrel]] 12 [[gp]], <br>[[Trunk]] 10 [[gp]], <br>[[Trough]] 7 [[gp]]",
+  "rev": 42577,
+  "sells": {
+   "Amphora": 4,
+   "Barrel": 12,
+   "Big Table": 30,
+   "Birdcage": 50,
+   "Box": 10,
+   "Chest": 10,
+   "Coal Basin": 25,
+   "Crate": 10,
+   "Cuckoo Clock": 40,
+   "Drawer": 18,
+   "Dresser": 25,
+   "Edged Mirror": 40,
+   "Flower Bowl": 6,
+   "Globe": 50,
+   "Goblin Statue": 50,
+   "God Flower": 5,
+   "Green Cushioned Chair": 40,
+   "Harp": 50,
+   "Heart Pillow": 30,
+   "Honey Flower": 5,
+   "Indoor Plant": 8,
+   "Knight Statue": 50,
+   "Landscape Picture": 50,
+   "Large Amphora": 50,
+   "Locker": 30,
+   "Minotaur Statue": 50,
+   "Oval Mirror": 40,
+   "Pendulum Clock": 75,
+   "Piano": 200,
+   "Portrait Picture": 50,
+   "Potted Flower": 5,
+   "Red Cushioned Chair": 40,
+   "Rocking Chair": 25,
+   "Rocking Horse": 30,
+   "Round Mirror": 40,
+   "Round Pillow": 25,
+   "Round Table": 25,
+   "Small Pillow": 20,
+   "Small Table": 20,
+   "Sofa Chair": 55,
+   "Square Pillow": 25,
+   "Square Table": 25,
+   "Stillife Picture": 50,
+   "Table Lamp": 35,
+   "Telescope": 70,
+   "Trough": 7,
+   "Trunk": 10,
+   "Vase": 3,
+   "Water Pipe": 40,
+   "Wooden Chair": 15
+  }
+ },
+ "Vladruc": {
+  "buys": {},
+  "date": "2005-12-22",
+  "rev": 25014,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Vladruc | location = [[Venore]] magic shop, east of the [[depot]] and [[temple]]. | job = Shopkeeper | notes = [[Image:Vampire.gif|Vladruc]] Vladruc Urghain runs The Magic Bazar. He likes [[blood]] but hates [[Garlic Necklace|garlic]] | buysell = no | buys = | sells = |}}"
+ },
+ "Wally": {
+  "buys": {},
+  "date": "2005-11-04",
+  "rev": 23223,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Wally | job = Postman | location = [[Postal Service Headquarters]] | notes = Parcels and letters are 10 and 5 [[gp]] if buyer has completed the [[Postman Quest]].<br> | buysell =yes | buys = Nothing. | sells = [[Parcel]]s 15 [[gp]], [[letter]]s 8 [[gp]] |}}"
+ },
+ "Walter, The Guard": {
+  "buys": {},
+  "date": "2005-12-23",
+  "rev": 25030,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Walter, The Guard | location = North gate of [[Thais]]. | job = Guard | notes = Walter protects the city from [[creatures]]. | buysell = no | buys = | sells = |}}"
+ },
+ "Warbert": {
+  "buys": {},
+  "date": "2006-01-08",
+  "rev": 25530,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Warbert | location = Southern gate of [[Venore]]. | job = Guard | notes = He protects the city of Venore from attacking [[creature]]s from the swamp. | buysell = no | buys = | sells = |}}"
+ },
+ "Willard": {
+  "buys": {
+   "Axe": 7,
+   "Barbarian Axe": 185,
+   "Battle Axe": 80,
+   "Battle Hammer": 120,
+   "Battle Shield": 95,
+   "Brass Armor": 150,
+   "Chain Armor": 70,
+   "Chain Helmet": 17,
+   "Chain Legs": 25,
+   "Clerical Mace": 170,
+   "Club": 1,
+   "Dagger": 2,
+   "Halberd": 400,
+   "Hand Axe": 4,
+   "Iron Helmet": 150,
+   "Leather Armor": 12,
+   "Leather Helmet": 4,
+   "Mace": 30,
+   "Morning Star": 90,
+   "Plate Armor": 400,
+   "Rapier": 5,
+   "Sabre": 12,
+   "Short Sword": 10,
+   "Spike Sword": 240,
+   "Steel Helmet": 190,
+   "Steel Shield": 80,
+   "Sword": 25,
+   "Two Handed Sword": 450,
+   "Viking Shield": 85,
+   "Wooden Shield": 5
+  },
+  "date": "2005-07-28",
+  "notes": "Willard deals in [[Item#Armor_Pieces|armor]] and [[Item#Weapons|weapons]]. [[Image:Willard.jpg|left]]",
+  "raw_buys": "[[Hand Axe]] 4, [[Axe]] 7, [[Battle Axe]] 80, [[Halberd]] 400, [[Barbarian Axe]] 185, [[Club]] 1, [[Mace]] 30, [[Battle Hammer]] 120, [[Morning Star]] 90, [[Clerical Mace]] 170, [[Dagger]] 2, [[Rapier]] 5, [[Short Sword]] 10, [[Sabre]] 12, [[Sword]] 25, [[Two Handed Sword]] 450, [[Spike Sword]] 240, [[Wooden Shield]] 5, [[Steel Shield]] 80, [[Viking Shield]] 85, [[Battle Shield]] 95, [[Leather Helmet]] 4, [[Chain Helmet]] 17, [[Iron Helmet]] 150, [[Steel Helmet]] 190, [[Leather Armor]] 12, [[Chain Armor]] 70, [[Brass Armor]] 150, [[Plate Armor]] 400, [[Chain Legs]] 25.",
+  "raw_sells": "[[Hand Axe]] 8, [[Axe]] 20, [[Barbarian Axe]] 590, [[Mace]] 90, [[Battle Hammer]] 350, [[Morning Star]] 430, [[Clerical Mace]] 540, [[Dagger]] 5, [[Rapier]] 15, [[Sabre]] 35, [[Sword]] 85, [[Wooden Shield]] 15, [[Steel Shield]] 240, [[Viking Shield]] 260, [[Leather Helmet]] 12, [[Chain Helmet]] 52, [[Leather Armor]] 35, [[Chain Armor]] 200, [[Brass Armor]] 450, [[Chain Legs]] 80. |}}",
+  "rev": 20613,
+  "sells": {
+   "Axe": 20,
+   "Barbarian Axe": 590,
+   "Battle Hammer": 350,
+   "Brass Armor": 450,
+   "Chain Armor": 200,
+   "Chain Helmet": 52,
+   "Chain Legs": 80,
+   "Clerical Mace": 540,
+   "Dagger": 5,
+   "Hand Axe": 8,
+   "Leather Armor": 35,
+   "Leather Helmet": 12,
+   "Mace": 90,
+   "Morning Star": 430,
+   "Rapier": 15,
+   "Sabre": 35,
+   "Steel Shield": 240,
+   "Sword": 85,
+   "Viking Shield": 260,
+   "Wooden Shield": 15
+  }
+ },
+ "William": {
+  "buys": {},
+  "date": "2006-04-16",
+  "rev": 35406,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = William | job = Unknown Occupation | location = [[Carlin]] sewers | buysell = no | buys = | sells = | notes = William has drank some beer. |}}"
+ },
+ "Willie": {
+  "buys": {
+   "Bread": 1,
+   "Ham": 4,
+   "Meat": 2,
+   "Salmon": 2
+  },
+  "date": "2005-10-09",
+  "notes": "[[Image:NPC_Willie.jpg|float|right]] Willie with his brother [[Billy]] run the mill. Willie works on the non-premium side, buying and selling various foods. He is known for his [[Wikipedia:Profanity|foul language]]: <table cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tr><td valign=\"top\">Willie:&nbsp;</td><td valign=\"top\">''A banana! Great. Take [[Studded Shield|this shield]], so the &#@&* [[monster",
+  "raw_buys": "[[Meat]] 2 [[gp]], [[Ham]] 4 [[gp]], [[Bread]] 1 [[gp]], [[Salmon]] 2 [[gp]]|",
+  "raw_sells": "[[Meat]] 6 [[gp]], [[Ham]] 8 [[gp]], [[Bread]] 2 [[gp]]| |",
+  "rev": 21921,
+  "sells": {
+   "Bread": 2,
+   "Ham": 8,
+   "Meat": 6
+  }
+ },
+ "Wyat": {
+  "buys": {},
+  "date": "2006-01-18",
+  "rev": 26986,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Wyat | flavortext = | job = Sheriff | location = near [[Thais]] south gate | buysell = no | buys = | sells = | quests = | notes = |}}<noinclude> {{NPC-stub}} </noinclude>"
+ },
+ "Wyda": {
+  "buys": {},
+  "date": "2006-02-20",
+  "rev": 29273,
+  "sells": {},
+  "text": "{{Infobox_NPC<includeonly>/{{{1}}}</includeonly>| | name = Wyda | flavortext = | job = Witch | location = West of [[Venore]], in the swamps. | buysell = no | buys = | sells = | quests = | notes = She has fled soldiers from her camp north of [[Carlin]] and come to the [[Venore]] swamps. Here she lives in solitude though not far from a conclave of [[witch]]es and [[beholder]]s. She needs a [[Blood Herb]] for her potions and is willing to offer her [[Witchesbroom]] for it. |}}"
+ },
+ "Xed": {
+  "buys": {},
+  "date": "2006-01-16",
+  "notes": "Xed deals in [[Item#Distance Weapon|distance weapons and ammunition]].",
+  "raw_buys": "None",
+  "raw_sells": "[[Arrow]] 2 [[gp]], [[Bolt]] 3, [[Bow]] 400, [[Crossbow]] 500. |}}",
+  "rev": 26310,
+  "sells": {
+   "Arrow": 2,
+   "Bolt": 3,
+   "Bow": 400,
+   "Crossbow": 500
+  }
+ },
+ "Xodet": {
+  "buys": {},
+  "date": "2006-01-18",
+  "notes": "Sells magical items.",
+  "raw_buys": "<br>[[Empty Vial]]s 5 [[gp]]",
+  "raw_sells": "<br>[[Mana Fluid]] 55 [[gp]], <br>[[Life Fluid]] 60 [[gp]], <br>[[Spellbook]] 150 [[gp]], <br>[[Blank Rune]] 10 [[gp]], <br>all kinds of made [[Rune]]s. |}}",
+  "rev": 27189,
+  "sells": {
+   "Blank Rune": 10,
+   "Life Fluid": 60,
+   "Mana Fluid": 55,
+   "Spellbook": 150
+  }
+ },
+ "Yaman": {
+  "buys": {
+   "Ankh": 100,
+   "Dragon Necklace": 100,
+   "Dwarven Ring": 100,
+   "Energy Ring": 100,
+   "Life Ring": 50,
+   "Might Ring": 250,
+   "Moonlight Rod": 200,
+   "Mysterious Fetish": 50,
+   "Protection Amulet": 100,
+   "Quagmire Rod": 2000,
+   "Ring of Healing": 100,
+   "Silver Amulet": 50,
+   "Snakebite Rod": 100,
+   "Strange Talisman": 30,
+   "Tempest Rod": 3000,
+   "Time Ring": 100,
+   "Volcanic Rod": 1000
+  },
+  "date": "2006-01-20",
+  "notes": "Yaman buys and sells magical items and some other special items. He is particularly indifferent towards humans, but will not trade with them until he has permission from [[Malor]].",
+  "raw_buys": "<br> '''Rings:'''<br> [[Might Ring]] 250 [[gp]], <br> [[Energy Ring]] 100 [[gp]], <br> [[Life Ring]] 50 [[gp]], <br> [[Time Ring]] 100 [[gp]], <br> [[Dwarven Ring]] 100 [[gp]], <br> [[Ring of Healing]] 100 [[gp]], <br> '''Amulets:'''<br> [[Strange Talisman]] 30 [[gp]], <br> [[Silver Amulet]] 50 [[gp]], <br> [[Protection Amulet]] 100 [[gp]], <br> [[Dragon Necklace]] 100 [[gp]], <br> '''Rods:'''<br> [[Snakebite Rod]] 100 [[gp]], <br> [[Moonlight Rod]] 200 [[gp]], <br> [[Volcanic Rod]] 1,000 [[gp]], <br> [[Quagmire Rod]] 2,000 [[gp]], <br> [[Tempest Rod]] 3,000 [[gp]], <br> '''Special Items:'''<br> [[Ankh]] 100 [[gp]], <br> [[Mysterious Fetish]] 50 [[gp]], <br>",
+  "raw_sells": "<br> '''Rings:'''<br> [[Might Ring]] 5,000 [[gp]], <br> [[Energy Ring]] 2,000 [[gp]], <br> [[Life Ring]] 900 [[gp]], <br> [[Time Ring]] 2,000 [[gp]], <br> [[Dwarven Ring]] 2,000 [[gp]], <br> [[Ring of Healing]] 2,000 [[gp]], <br> '''Amulets:'''<br> [[Strange Talisman]] 100 [[gp]], <br> [[Silver Amulet]] 100 [[gp]], <br> [[Protection Amulet]] 700 [[gp]], <br> [[Dragon Necklace]] 1,000 [[gp]], <br> |}}",
+  "rev": 27361,
+  "sells": {
+   "Dragon Necklace": 1000,
+   "Dwarven Ring": 2000,
+   "Energy Ring": 2000,
+   "Life Ring": 900,
+   "Might Ring": 5000,
+   "Protection Amulet": 700,
+   "Ring of Healing": 2000,
+   "Silver Amulet": 100,
+   "Strange Talisman": 100,
+   "Time Ring": 2000
+  }
+ },
+ "Yanni": {
+  "buys": {
+   "Battle Shield": 95,
+   "Brass Armor": 150,
+   "Chain Armor": 70,
+   "Chain Helmet": 17,
+   "Chain Legs": 25,
+   "Leather Armor": 12,
+   "Leather Helmet": 4,
+   "Plate Armor": 400,
+   "Steel Helmet": 190,
+   "Steel Shield": 80,
+   "Wooden Shield": 5
+  },
+  "date": "2005-09-10",
+  "notes": "Yanni deals in [[Item#Armors|shields, helmets, and armors]].",
+  "raw_buys": "[[Wooden Shield]] 5, [[Steel Shield]] 80, [[Battle Shield]] 95, [[Leather Helmet]] 4, [[Chain Helmet]] 17, [[Steel Helmet]] 190, [[Leather Armor]] 12, [[Chain Armor]] 70, [[Brass Armor]] 150, [[Plate Armor]] 400, [[Chain Legs]] 25.",
+  "raw_sells": "[[Wooden Shield]] 15, [[Steel Shield]] 240, [[Chain Helmet]] 52, [[Chain Armor]] 200, [[Brass Armor]] 450, [[Chain Legs]] 80. |}}",
+  "rev": 20904,
+  "sells": {
+   "Brass Armor": 450,
+   "Chain Armor": 200,
+   "Chain Helmet": 52,
+   "Chain Legs": 80,
+   "Steel Shield": 240,
+   "Wooden Shield": 15
+  }
+ },
+ "Yberius": {
+  "buys": {},
+  "date": "2006-01-11",
+  "rev": 26047,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Yberius | location = [[Venore]] [[Temple]], just east of the central [[depot]]. | job = Priest | notes = Yberius resides in the Venore Temple, assisting adventurers by offering healing up to 65 [[hp]] and can cure you if you are [[poison]]ed, on [[fire]] or [[energy|electrified]]. | buysell = no | buys = | sells = |}}"
+ },
+ "Yoem": {
+  "buys": {},
+  "date": "2006-07-07",
+  "notes": "|}}<noinclude> {{NPC-stub}} </noinclude>",
+  "raw_buys": "",
+  "raw_sells": "<br>'''Statues:'''<br> [[Knight Statue]] 50 [[gp]], <br>[[Minotaur Statue]] 50 [[gp]], <br>[[Goblin Statue]] 50 [[gp]];<br> '''Tables:''' <br>[[Small Table]] 20 [[gp]], <br>[[Round Table]] 25 [[gp]], <br>[[Square Table]] 25 [[gp]], <br>[[Big Table]] 30 [[gp]];<br> '''Chairs:''' <br>[[Wooden Chair]] 15 [[gp]], <br>[[Rocking Chair]] 25 [[gp]], <br>[[Red Cushioned Chair]] 40 [[gp]], <br>[[Green Cushioned Chair]] 40 [[gp]], <br>[[Sofa Chair]] 55 [[gp]];<br> '''Flowers:''' <br>[[Indoor Plant]] 8 [[gp]], <br>[[Flower Bowl]] 6 [[gp]], <br>[[God Flower]] 5 [[gp]], <br>[[Honey Flower]] 5 [[gp]], <br>[[Potted Flower]] 5 [[gp]];<br> '''Pillows:''' <br>[[Small Pillow]] 20 [[gp]], <br>[[Round Pillow]] 25 [[gp]], <br>[[Square Pillow]] 25 [[gp]], <br>[[Heart Pillow]] 30 [[gp]];<br> '''Pottery:''' <br>[[Vase]] 3 [[gp]], <br>[[Coal Basin]] 25 [[gp]], <br>[[Amphora]] 4 [[gp]], <br>[[Large Amphora]] 50 [[gp]];<br> '''Instruments:''' <br>[[Piano]] 200 [[gp]], <br>[[Harp]] 50 [[gp]];<br> '''Decorations:''' <br>[[Water Pipe]] 40 [[gp]], <br>[[Pendulum Clock]] 75 [[gp]], <br>[[Telescope]] 70 [[gp]], <br>[[Table Lamp]] 35 [[gp]], <br>[[Rocking Horse]] 30 [[gp]], <br>[[Globe]] 50 [[gp]], <br>[[Birdcage]] 50 [[gp]], <br>[[Round Mirror]] 40 [[gp]], <br>[[Oval Mirror]] 40 [[gp]], <br>[[Edged Mirror]] 40 [[gp]], <br>[[Landscape Picture]] 50 [[gp]], <br>[[Portrait Picture]] 50 [[gp]], <br>[[Stillife Picture]] 50 [[gp]], <br>[[Cuckoo Clock]] 40 [[gp]];<br> ''[[Tapestry]]'' 25 [[gp]];<br> '''Containers:''' <br>[[Drawer]] 18 [[gp]], <br>[[Dresser]] 25 [[gp]], <br>[[Locker]] 30 [[gp]], <br>[[Crate]] 10 [[gp]], <br>[[Chest]] 10 [[gp]], <br>[[Box]] 10 [[gp]], <br>[[Barrel]] 12 [[gp]], <br>[[Trunk]] 10 [[gp]], <br>[[Trough]] 7 [[gp]]",
+  "rev": 42576,
+  "sells": {
+   "Amphora": 4,
+   "Barrel": 12,
+   "Big Table": 30,
+   "Birdcage": 50,
+   "Box": 10,
+   "Chest": 10,
+   "Coal Basin": 25,
+   "Crate": 10,
+   "Cuckoo Clock": 40,
+   "Drawer": 18,
+   "Dresser": 25,
+   "Edged Mirror": 40,
+   "Flower Bowl": 6,
+   "Globe": 50,
+   "Goblin Statue": 50,
+   "God Flower": 5,
+   "Green Cushioned Chair": 40,
+   "Harp": 50,
+   "Heart Pillow": 30,
+   "Honey Flower": 5,
+   "Indoor Plant": 8,
+   "Knight Statue": 50,
+   "Landscape Picture": 50,
+   "Large Amphora": 50,
+   "Locker": 30,
+   "Minotaur Statue": 50,
+   "Oval Mirror": 40,
+   "Pendulum Clock": 75,
+   "Piano": 200,
+   "Portrait Picture": 50,
+   "Potted Flower": 5,
+   "Red Cushioned Chair": 40,
+   "Rocking Chair": 25,
+   "Rocking Horse": 30,
+   "Round Mirror": 40,
+   "Round Pillow": 25,
+   "Round Table": 25,
+   "Small Pillow": 20,
+   "Small Table": 20,
+   "Sofa Chair": 55,
+   "Square Pillow": 25,
+   "Square Table": 25,
+   "Stillife Picture": 50,
+   "Table Lamp": 35,
+   "Telescope": 70,
+   "Trough": 7,
+   "Trunk": 10,
+   "Vase": 3,
+   "Water Pipe": 40,
+   "Wooden Chair": 15
+  }
+ },
+ "Yulas": {
+  "buys": {},
+  "date": "2006-01-11",
+  "notes": "Yulas works at the Plank and Treasurechest Market. |}}",
+  "raw_buys": "none",
+  "raw_sells": "'''Furniture:''' [[Small Table]] 20 [[gp]], [[Round Table]] 25, [[Square Table]] 25, [[BigTable]] 30.",
+  "rev": 26037,
+  "sells": {
+   "BigTable": 30,
+   "Round Table": 25,
+   "Small Table": 20,
+   "Square Table": 25
+  }
+ },
+ "Zebron": {
+  "buys": {},
+  "date": "2006-01-16",
+  "rev": 26367,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Zebron | location = In [[Venore]] 2 floors below the central [[depot]], on right side. | job = Unknown Occupation | notes = He hangs around the tavern and offers a game of dice.<br> You can bet from 1 to 99 [[gold]] and if the dice lands on 6 you get 5 times your bet. | buysell = no | buys = | sells = |}}"
+ },
+ "Zerbrus": {
+  "buys": {},
+  "date": "2005-11-24",
+  "rev": 24089,
+  "sells": {},
+  "text": "[[Category:NPCs|*]] {{Infobox_NPC| | name = Zerbrus | location = The premium bridge out of [[Rookgaard]]'s city. | job = Guard | notes = Zerbrus protects the city from [[creatures]]. | buysell = no | buys = | sells = |}}"
+ },
+ "Zoltan": {
+  "buys": {},
+  "date": "2005-12-06",
+  "rev": 24296,
+  "sells": {},
+  "text": "{{Infobox_NPC| | name = Zoltan | flavortext = | job = Spell Seller | location = [[Edron]], Ivory Towers (two floors up [http://www.tibianews.net/worldmap.asp?xcor=-2503.05&ycor=199.3 here]) | buysell = no | buys = | sells = | quests = | notes = Sells the following spells to [[Druid]]s and [[Sorcerer]]s;<br> [[Energy Bomb]], [[Mass Healing]], [[Poison Storm]], [[Paralyze]], [[Ultimate Explosion]]. |}}"
+ },
+ "avar tar": null
+}
