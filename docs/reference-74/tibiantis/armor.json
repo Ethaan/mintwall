@@ -1,0 +1,595 @@
+{
+ "ARMOR": {
+  "order": [
+   "Amulet",
+   "Helmet",
+   "Armor",
+   "Legs",
+   "Boots",
+   "Ring"
+  ],
+  "slots": {
+   "Amulet": [
+    {
+     "arm": 2,
+     "name": "platinum amulet",
+     "obt": true,
+     "sprite": "assets/items/platinum-amulet.gif?v=78b17495"
+    },
+    {
+     "arm": 1,
+     "name": "scarf",
+     "obt": true,
+     "sprite": "assets/items/scarf.png?v=5f5abf1c"
+    },
+    {
+     "arm": 0,
+     "buy": [
+      {
+       "city": "Edron",
+       "npc": "Eremo",
+       "xyz": [
+        33322,
+        31883,
+        7
+       ]
+      }
+     ],
+     "name": "amulet of loss",
+     "obt": true,
+     "special": "no item loss on death (unless red skull)",
+     "sprite": "assets/items/amulet-of-loss.png?v=fa36777f"
+    },
+    {
+     "arm": 0,
+     "name": "wolf tooth chain",
+     "obt": true,
+     "sprite": "assets/items/wolf-tooth-chain.png?v=2305851d"
+    },
+    {
+     "arm": 0,
+     "name": "crystal necklace",
+     "obt": true,
+     "sprite": "assets/items/crystal-necklace.png?v=eeacb4cf"
+    }
+   ],
+   "Armor": [
+    {
+     "arm": 22,
+     "name": "magic plate armor",
+     "obt": true,
+     "special": "+30% mana drain protection",
+     "sprite": "assets/items/magic-plate-armor.png?v=8b02e66e"
+    },
+    {
+     "arm": 21,
+     "name": "demon armor",
+     "obt": true,
+     "special": "+3% fire protection",
+     "sprite": "assets/armor/demon-armor.png?v=70a5f16a"
+    },
+    {
+     "arm": 19,
+     "name": "dragon scale mail",
+     "obt": true,
+     "sprite": "assets/items/dragon-scale-mail.png?v=4aeb378c"
+    },
+    {
+     "arm": 17,
+     "name": "golden armor",
+     "obt": true,
+     "sprite": "assets/items/golden-armor.png?v=d19d788f"
+    },
+    {
+     "arm": 15,
+     "name": "crown armor",
+     "obt": true,
+     "sprite": "assets/items/crown-armor.png?v=a4dc2418"
+    },
+    {
+     "arm": 13,
+     "name": "amazon armor",
+     "obt": true,
+     "sprite": "assets/armor/amazon-armor.png?v=9fa1cc3e"
+    },
+    {
+     "arm": 13,
+     "name": "knight armor",
+     "obt": true,
+     "sprite": "assets/items/knight-armor.png?v=18751fa9"
+    },
+    {
+     "arm": 11,
+     "name": "blue robe",
+     "obt": true,
+     "sprite": "assets/items/blue-robe.png?v=8f51939e"
+    },
+    {
+     "arm": 11,
+     "name": "noble armor",
+     "obt": true,
+     "sprite": "assets/armor/noble-armor.png?v=ffa6b6bb"
+    },
+    {
+     "arm": 10,
+     "name": "dark armor",
+     "obt": true,
+     "sprite": "assets/items/dark-armor.png?v=cc4eeea5"
+    },
+    {
+     "arm": 10,
+     "name": "dwarven armor",
+     "obt": true,
+     "sprite": "assets/armor/dwarven-armor.png?v=c50b1b8b"
+    },
+    {
+     "arm": 10,
+     "name": "plate armor",
+     "obt": true,
+     "sprite": "assets/items/plate-armor.png?v=5f9f8b02"
+    },
+    {
+     "arm": 9,
+     "name": "elven mail",
+     "obt": false,
+     "sprite": "assets/armor/elven-mail.png?v=4fb2a7dd"
+    },
+    {
+     "arm": 9,
+     "name": "scale armor",
+     "obt": true,
+     "sprite": "assets/items/scale-armor.png?v=56bcd72b"
+    },
+    {
+     "arm": 8,
+     "name": "brass armor",
+     "obt": true,
+     "sprite": "assets/items/brass-armor.png?v=725142a1"
+    },
+    {
+     "arm": 7,
+     "name": "native armor",
+     "obt": true,
+     "sprite": "assets/items/native-armor.png?v=b5c9e3d9"
+    },
+    {
+     "arm": 7,
+     "name": "rangers cloak",
+     "obt": true,
+     "sprite": "assets/armor/rangers-cloak.png?v=cad81a56"
+    },
+    {
+     "arm": 6,
+     "name": "chain armor",
+     "obt": true,
+     "sprite": "assets/items/chain-armor.png?v=c94c59be"
+    },
+    {
+     "arm": 5,
+     "name": "studded armor",
+     "obt": true,
+     "sprite": "assets/items/studded-armor.png?v=c5db8222"
+    },
+    {
+     "arm": 4,
+     "name": "leather armor",
+     "obt": true,
+     "sprite": "assets/items/leather-armor.png?v=d0118426"
+    },
+    {
+     "arm": 2,
+     "name": "doublet",
+     "obt": true,
+     "sprite": "assets/armor/doublet.png?v=3270e635"
+    },
+    {
+     "arm": 2,
+     "name": "red tunic",
+     "obt": false,
+     "sprite": "assets/armor/red-tunic.png?v=3728cf38"
+    },
+    {
+     "arm": 1,
+     "name": "cape",
+     "obt": true,
+     "sprite": "assets/items/cape.png?v=71e605d8"
+    },
+    {
+     "arm": 1,
+     "name": "coat",
+     "obt": true,
+     "sprite": "assets/items/coat.png?v=4d1b47e3"
+    },
+    {
+     "arm": 1,
+     "name": "green tunic",
+     "obt": true,
+     "sprite": "assets/items/green-tunic.png?v=2dea4294"
+    },
+    {
+     "arm": 1,
+     "name": "jacket",
+     "obt": true,
+     "sprite": "assets/armor/jacket.png?v=c7917ee7"
+    },
+    {
+     "arm": 1,
+     "name": "red robe",
+     "obt": true,
+     "sprite": "assets/items/red-robe.png?v=99bec12f"
+    },
+    {
+     "arm": 0,
+     "name": "ball gown",
+     "obt": true,
+     "sprite": "assets/armor/ball-gown.png?v=9a553b90"
+    },
+    {
+     "arm": 0,
+     "name": "simple dress",
+     "obt": true,
+     "sprite": "assets/items/simple-dress.png?v=60bc24ba"
+    },
+    {
+     "arm": 0,
+     "name": "white dress",
+     "obt": true,
+     "sprite": "assets/armor/white-dress.png?v=04e2ee55"
+    }
+   ],
+   "Boots": [
+    {
+     "arm": 8,
+     "name": "golden boots",
+     "obt": false,
+     "sprite": "assets/armor/golden-boots.png?v=7bdcc067"
+    },
+    {
+     "arm": 5,
+     "name": "steel boots",
+     "obt": true,
+     "sprite": "assets/items/steel-boots.png?v=9a5bff94"
+    },
+    {
+     "arm": 2,
+     "name": "patched boots",
+     "obt": false,
+     "sprite": "assets/armor/patched-boots.png?v=3f01c7aa"
+    },
+    {
+     "arm": 1,
+     "name": "leather boots",
+     "obt": true,
+     "sprite": "assets/items/leather-boots.png?v=1168f057"
+    },
+    {
+     "arm": 0,
+     "name": "boots of haste",
+     "obt": true,
+     "special": "+20 speed",
+     "sprite": "assets/items/boots-of-haste.png?v=58d7d09f"
+    },
+    {
+     "arm": 0,
+     "name": "bunnyslippers",
+     "obt": true,
+     "sprite": "assets/items/bunnyslippers.png?v=76889693"
+    },
+    {
+     "arm": 0,
+     "name": "sandals",
+     "obt": true,
+     "sprite": "assets/items/sandals.png?v=7389d178"
+    },
+    {
+     "arm": 0,
+     "name": "soft boots",
+     "obt": false,
+     "sprite": "assets/armor/soft-boots.png?v=6fd8fb41"
+    }
+   ],
+   "Helmet": [
+    {
+     "arm": 17,
+     "name": "golden helmet",
+     "obt": false,
+     "sprite": "assets/armor/golden-helmet.png?v=8cebf4db"
+    },
+    {
+     "arm": 16,
+     "name": "horned helmet",
+     "obt": true,
+     "sprite": "assets/items/horned-helmet.png?v=66911df6"
+    },
+    {
+     "arm": 14,
+     "name": "winged helmet",
+     "obt": false,
+     "special": "+40 speed",
+     "sprite": "assets/armor/winged-helmet.png?v=30d4e184"
+    },
+    {
+     "arm": 13,
+     "name": "demon helmet",
+     "obt": true,
+     "sprite": "assets/armor/demon-helmet.png?v=e262a241"
+    },
+    {
+     "arm": 11,
+     "name": "dragon scale helmet",
+     "obt": false,
+     "sprite": "assets/armor/dragon-scale-helmet.png?v=ad153c55"
+    },
+    {
+     "arm": 11,
+     "name": "helmet of the ancients",
+     "obt": true,
+     "sprite": "assets/armor/helmet-of-the-ancients.png?v=34d411a0"
+    },
+    {
+     "arm": 11,
+     "name": "royal helmet",
+     "obt": true,
+     "sprite": "assets/items/royal-helmet.png?v=cbc1f514"
+    },
+    {
+     "arm": 10,
+     "name": "ceremonial mask",
+     "obt": false,
+     "sprite": "assets/armor/ceremonial-mask.png?v=245df96e"
+    },
+    {
+     "arm": 9,
+     "name": "crusader helmet",
+     "obt": true,
+     "sprite": "assets/items/crusader-helmet.png?v=fc45ff8f"
+    },
+    {
+     "arm": 9,
+     "name": "warrior helmet",
+     "obt": true,
+     "sprite": "assets/items/warrior-helmet.png?v=3b1594c3"
+    },
+    {
+     "arm": 7,
+     "name": "amazon helmet",
+     "obt": true,
+     "sprite": "assets/armor/amazon-helmet.png?v=29cad9c1"
+    },
+    {
+     "arm": 7,
+     "name": "crown helmet",
+     "obt": true,
+     "sprite": "assets/items/crown-helmet.png?v=a82f94f5"
+    },
+    {
+     "arm": 7,
+     "name": "devil helmet",
+     "obt": true,
+     "sprite": "assets/items/devil-helmet.png?v=a560bbb9"
+    },
+    {
+     "arm": 6,
+     "name": "dark helmet",
+     "obt": true,
+     "sprite": "assets/items/dark-helmet.png?v=3a75ebdf"
+    },
+    {
+     "arm": 6,
+     "name": "dwarfen helmet",
+     "obt": true,
+     "sprite": "assets/armor/dwarven-helmet.png?v=bc57605a"
+    },
+    {
+     "arm": 6,
+     "name": "steel helmet",
+     "obt": true,
+     "sprite": "assets/items/steel-helmet.png?v=c577dd70"
+    },
+    {
+     "arm": 6,
+     "name": "strange helmet",
+     "obt": true,
+     "sprite": "assets/items/strange-helmet.png?v=076c76f5"
+    },
+    {
+     "arm": 5,
+     "name": "iron helmet",
+     "obt": true,
+     "sprite": "assets/items/iron-helmet.png?v=88f0f456"
+    },
+    {
+     "arm": 5,
+     "name": "soldier helmet",
+     "obt": true,
+     "sprite": "assets/items/soldier-helmet.png?v=fb8a4b6b"
+    },
+    {
+     "arm": 4,
+     "name": "legion helmet",
+     "obt": true,
+     "sprite": "assets/items/legion-helmet.png?v=6a7e35f2"
+    },
+    {
+     "arm": 4,
+     "name": "viking helmet",
+     "obt": true,
+     "sprite": "assets/items/viking-helmet.png?v=666694c4"
+    },
+    {
+     "arm": 3,
+     "name": "brass helmet",
+     "obt": true,
+     "sprite": "assets/items/brass-helmet.png?v=0013afab"
+    },
+    {
+     "arm": 3,
+     "name": "hat of the mad",
+     "obt": true,
+     "sprite": "assets/armor/hat-of-the-mad.png?v=8590caa5"
+    },
+    {
+     "arm": 2,
+     "name": "chain helmet",
+     "obt": true,
+     "sprite": "assets/items/chain-helmet.png?v=940e3197"
+    },
+    {
+     "arm": 2,
+     "name": "studded helmet",
+     "obt": true,
+     "sprite": "assets/items/studded-helmet.png?v=3037c0f8"
+    },
+    {
+     "arm": 2,
+     "name": "wood cape",
+     "obt": false,
+     "sprite": "assets/armor/wood-cape.png?v=9aa4d187"
+    },
+    {
+     "arm": 1,
+     "name": "leather helmet",
+     "obt": true,
+     "sprite": "assets/items/leather-helmet.png?v=df540647"
+    },
+    {
+     "arm": 1,
+     "name": "magic hat",
+     "obt": true,
+     "sprite": "assets/armor/magic-hat.png?v=8590caa5"
+    },
+    {
+     "arm": 1,
+     "name": "mystic turban",
+     "obt": true,
+     "sprite": "assets/items/mystic-turban.png?v=839ac129"
+    },
+    {
+     "arm": 1,
+     "name": "post officers hat",
+     "obt": true,
+     "sprite": "assets/armor/post-officers-hat.png?v=8f4a5b48"
+    },
+    {
+     "arm": 0,
+     "name": "ancient tiara",
+     "obt": false,
+     "sprite": "assets/armor/ancient-tiara.png?v=718b91db"
+    },
+    {
+     "arm": 0,
+     "name": "crown",
+     "obt": false,
+     "sprite": "assets/armor/crown.png?v=7a511f6c"
+    }
+   ],
+   "Legs": [
+    {
+     "arm": 15,
+     "name": "dragon scale legs",
+     "obt": false,
+     "sprite": "assets/armor/dragon-scale-legs.png?v=5ff393ee"
+    },
+    {
+     "arm": 13,
+     "name": "demon legs",
+     "obt": false,
+     "sprite": "assets/armor/demon-legs.png?v=7da12ac3"
+    },
+    {
+     "arm": 12,
+     "name": "golden legs",
+     "obt": true,
+     "sprite": "assets/items/golden-legs.png?v=00167155"
+    },
+    {
+     "arm": 9,
+     "name": "crown legs",
+     "obt": true,
+     "sprite": "assets/items/crown-legs.png?v=12466c4f"
+    },
+    {
+     "arm": 9,
+     "name": "knight legs",
+     "obt": true,
+     "sprite": "assets/items/knight-legs.png?v=ce647638"
+    },
+    {
+     "arm": 7,
+     "name": "dwarven legs",
+     "obt": false,
+     "sprite": "assets/armor/dwarven-legs.png?v=0fc5b95c"
+    },
+    {
+     "arm": 7,
+     "name": "plate legs",
+     "obt": true,
+     "sprite": "assets/items/plate-legs.png?v=d0e6d69d"
+    },
+    {
+     "arm": 5,
+     "name": "brass legs",
+     "obt": true,
+     "sprite": "assets/items/brass-legs.png?v=51c75a25"
+    },
+    {
+     "arm": 4,
+     "name": "elven legs",
+     "obt": false,
+     "sprite": "assets/armor/elven-legs.png?v=19793d6e"
+    },
+    {
+     "arm": 3,
+     "name": "chain legs",
+     "obt": true,
+     "sprite": "assets/items/chain-legs.png?v=9736ffa0"
+    },
+    {
+     "arm": 2,
+     "name": "studded legs",
+     "obt": true,
+     "sprite": "assets/items/studded-legs.png?v=28314aa1"
+    },
+    {
+     "arm": 1,
+     "name": "leather legs",
+     "obt": true,
+     "sprite": "assets/items/leather-legs.png?v=2d393690"
+    }
+   ],
+   "Ring": [
+    {
+     "arm": 0,
+     "name": "gold ring",
+     "obt": true,
+     "sprite": "assets/items/gold-ring.png?v=ba3b55e7"
+    },
+    {
+     "arm": 0,
+     "name": "crystal ring",
+     "obt": true,
+     "sprite": "assets/items/crystal-ring.png?v=48c3823b"
+    },
+    {
+     "arm": 0,
+     "name": "emerald bangle",
+     "obt": true,
+     "sprite": "assets/items/emerald-bangle.png?v=9f003f09"
+    },
+    {
+     "arm": 0,
+     "name": "ring of the sky",
+     "obt": true,
+     "sprite": "assets/items/ring-of-the-sky.png?v=dba39771"
+    },
+    {
+     "arm": 0,
+     "name": "wedding ring",
+     "obt": true,
+     "sprite": "assets/items/wedding-ring.png?v=8534006c"
+    }
+   ]
+  }
+ },
+ "source": "https://tibiantis.life/"
+}

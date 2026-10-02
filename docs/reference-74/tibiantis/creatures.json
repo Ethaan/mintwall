@@ -1,0 +1,6213 @@
+{
+ "CREATURES": [
+  {
+   "custom": true,
+   "exp": 480,
+   "hp": 750,
+   "id": 1,
+   "img": "assets/creatures/alphadyte.png?v=d29dd6f0",
+   "loot": "Battle Shield, Big Bone, 0-70gp, 0-2 Meat, Plate Armor, Plate Legs, Protection Amulet, Skull, Small Diamond, Small Rock Crystal, War Hammer",
+   "name": "Alphadyte"
+  },
+  {
+   "armor": 11,
+   "attack": 16,
+   "convince": 390,
+   "custom": false,
+   "defend": 11,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Dagger",
+     "pct": 80.0
+    },
+    {
+     "amount": 2,
+     "name": "Skull",
+     "pct": 80.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Armor",
+     "pct": 50.0
+    },
+    {
+     "amount": 10,
+     "name": "Gold Coin",
+     "pct": 40.0
+    },
+    {
+     "amount": 1,
+     "name": "Brown Bread",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Sabre",
+     "pct": 23.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Shield",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Torch",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Crystal Necklace",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Small Ruby",
+     "pct": 0.1
+    }
+   ],
+   "exp": 60,
+   "flee": 10,
+   "hp": 110,
+   "id": 2,
+   "img": "assets/creatures/amazon.png?v=035e53a3",
+   "name": "Amazon",
+   "speed": 46,
+   "summon": 390,
+   "traits": [
+    "Moves objects",
+    "Unpushable",
+    "Ranged attacker"
+   ],
+   "voices": [
+    "Yeeee ha!",
+    "Your head will be mine!"
+   ]
+  },
+  {
+   "armor": 36,
+   "attack": 50,
+   "custom": false,
+   "defend": 33,
+   "drops": [
+    {
+     "amount": 188,
+     "name": "Gold Coin",
+     "pct": 100.0
+    },
+    {
+     "amount": 1,
+     "name": "Magic Light Wand",
+     "pct": 10.9
+    },
+    {
+     "amount": 1,
+     "name": "Plate Armor",
+     "pct": 10.0
+    },
+    {
+     "amount": 3,
+     "name": "Scarab Coin",
+     "pct": 5.9
+    },
+    {
+     "amount": 4,
+     "name": "Small Amethyst",
+     "pct": 1.2
+    },
+    {
+     "amount": 1,
+     "name": "Ancient Amulet",
+     "pct": 1.0
+    },
+    {
+     "amount": 3,
+     "name": "Small Emerald",
+     "pct": 0.6
+    },
+    {
+     "amount": 1,
+     "name": "Scarab Amulet",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Scarab Shield",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Daramanian Waraxe",
+     "pct": 0.3
+    }
+   ],
+   "exp": 720,
+   "flee": 0,
+   "hp": 1000,
+   "id": 3,
+   "img": "assets/creatures/ancient_scarab.png?v=c6b367a2",
+   "immune": [
+    "Earth",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Ancient Scarab",
+   "speed": 69,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ]
+  },
+  {
+   "armor": 1,
+   "attack": 10,
+   "convince": 200,
+   "custom": false,
+   "defend": 3,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 40.0
+    }
+   ],
+   "exp": 5,
+   "flee": 10,
+   "hp": 23,
+   "id": 4,
+   "img": "assets/creatures/badger.png?v=29af2cd9",
+   "name": "Badger",
+   "speed": 30,
+   "summon": 200
+  },
+  {
+   "armor": 25,
+   "attack": 30,
+   "custom": false,
+   "defend": 65,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Candlestick",
+     "pct": 70.0
+    },
+    {
+     "amount": 1,
+     "name": "Simple Dress",
+     "pct": 60.0
+    },
+    {
+     "amount": 80,
+     "name": "Gold Coin",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Dirty Cape",
+     "pct": 19.9
+    },
+    {
+     "amount": 1,
+     "name": "Silver Amulet",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Mirror",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Black Pearl",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Poison Dagger",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Silver Brooch",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Lyre",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "White Pearl",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Ring of Healing",
+     "pct": 0.8
+    },
+    {
+     "amount": 1,
+     "name": "Stone Skin Amulet",
+     "pct": 0.8
+    },
+    {
+     "amount": 1,
+     "name": "Blue Robe",
+     "pct": 0.6
+    },
+    {
+     "amount": 1,
+     "name": "Spellbook",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Wedding Ring",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Crystal Ring",
+     "pct": 0.1
+    },
+    {
+     "amount": 1,
+     "name": "Life Crystal",
+     "pct": 0.1
+    },
+    {
+     "amount": 1,
+     "name": "Red Robe",
+     "pct": 0.1
+    }
+   ],
+   "exp": 900,
+   "flee": 500,
+   "hp": 1000,
+   "id": 5,
+   "img": "assets/creatures/banshee.png?v=e316c57b",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Banshee",
+   "speed": 70,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Are you ready to rock?",
+    "That's what I call easy listening!",
+    "Let the music play!",
+    "I will mourn your death!",
+    "IIIIEEEeeeeeehhhHHHHH!",
+    "Dance for me your dance of death!",
+    "Feel my gentle kiss of death."
+   ]
+  },
+  {
+   "armor": 6,
+   "attack": 17,
+   "convince": 300,
+   "custom": false,
+   "defend": 6,
+   "drops": [
+    {
+     "amount": 4,
+     "name": "Meat",
+     "pct": 70.0
+    },
+    {
+     "amount": 2,
+     "name": "Ham",
+     "pct": 40.0
+    }
+   ],
+   "exp": 23,
+   "flee": 15,
+   "hp": 80,
+   "id": 6,
+   "img": "assets/creatures/bear.png?v=eb22c854",
+   "name": "Bear",
+   "speed": 38,
+   "summon": 300,
+   "traits": [
+    "Unpushable"
+   ],
+   "voices": [
+    "Grrrr",
+    "Groar"
+   ]
+  },
+  {
+   "armor": 50,
+   "attack": 75,
+   "custom": false,
+   "defend": 65,
+   "drops": [
+    {
+     "amount": 140,
+     "name": "Gold Coin",
+     "pct": 85.0
+    },
+    {
+     "amount": 6,
+     "name": "Meat",
+     "pct": 40.0
+    },
+    {
+     "amount": 1,
+     "name": "Crowbar",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Amphora",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Double Axe",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Big Bone",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Pick",
+     "pct": 6.0
+    },
+    {
+     "amount": 2,
+     "name": "Small Amethyst",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Two Handed Sword",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Dark Armor",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Plate Armor",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Giant Sword",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Strange Symbol",
+     "pct": 0.8
+    },
+    {
+     "amount": 1,
+     "name": "Steel Boots",
+     "pct": 0.4
+    },
+    {
+     "amount": 1,
+     "name": "Crystal Necklace",
+     "pct": 0.3
+    }
+   ],
+   "exp": 2500,
+   "flee": 0,
+   "hp": 4000,
+   "id": 7,
+   "img": "assets/creatures/behemoth.png?v=53d48ac3",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Energy",
+    "Paralyze"
+   ],
+   "name": "Behemoth",
+   "speed": 130,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "You're so little!",
+    "Human flesh - delicious!",
+    "Crush the intruders!"
+   ]
+  },
+  {
+   "armor": 5,
+   "attack": 12,
+   "custom": false,
+   "defend": 20,
+   "drops": [
+    {
+     "amount": 48,
+     "name": "Gold Coin",
+     "pct": 99.4
+    },
+    {
+     "amount": 1,
+     "name": "Longsword",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Morning Star",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Spellbook",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Steel Shield",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Two Handed Sword",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Wooden Shield",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Beholder Shield",
+     "pct": 0.1
+    }
+   ],
+   "exp": 170,
+   "flee": 0,
+   "hp": 260,
+   "id": 8,
+   "img": "assets/creatures/beholder.png?v=87374848",
+   "immune": [
+    "Earth",
+    "Life Drain"
+   ],
+   "name": "Beholder",
+   "speed": 35,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Ranged attacker",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Eye for eye!",
+    "Here's looking at you!",
+    "Let me take a look at you!",
+    "You've got the look!"
+   ]
+  },
+  {
+   "armor": 42,
+   "attack": 60,
+   "custom": false,
+   "defend": 60,
+   "drops": [
+    {
+     "amount": 150,
+     "name": "Gold Coin",
+     "pct": 48.1
+    },
+    {
+     "amount": 3,
+     "name": "Spear",
+     "pct": 30.0
+    },
+    {
+     "amount": 2,
+     "name": "Brown Bread",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Rope",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Legs",
+     "pct": 13.0
+    },
+    {
+     "amount": 1,
+     "name": "Halberd",
+     "pct": 13.0
+    },
+    {
+     "amount": 1,
+     "name": "Plate Armor",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Steel Helmet",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Two Handed Sword",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Battle Hammer",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Warrior Helmet",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Knight Axe",
+     "pct": 2.5
+    },
+    {
+     "amount": 1,
+     "name": "Dark Armor",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Dark Helmet",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Knight Armor",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Knight Legs",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Ruby Necklace",
+     "pct": 0.8
+    },
+    {
+     "amount": 1,
+     "name": "Boots of Haste",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Dragon Lance",
+     "pct": 0.3
+    }
+   ],
+   "exp": 1600,
+   "flee": 0,
+   "hp": 1800,
+   "id": 9,
+   "img": "assets/creatures/black_knight.png?v=4c773d45",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Energy",
+    "Paralyze"
+   ],
+   "name": "Black Knight",
+   "speed": 155,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "MINE!",
+    "NO PRISONERS!",
+    "NO MERCY!",
+    "By Bolg's Blood!",
+    "You're no match for me!"
+   ]
+  },
+  {
+   "armor": 1,
+   "attack": 0,
+   "convince": 250,
+   "custom": false,
+   "defend": 2,
+   "drops": [
+    {
+     "amount": 4,
+     "name": "Meat",
+     "pct": 70.0
+    }
+   ],
+   "exp": 0,
+   "flee": 20,
+   "hp": 20,
+   "id": 10,
+   "img": "assets/creatures/black_sheep.png?v=93fcc58d",
+   "name": "Black Sheep",
+   "speed": 18,
+   "summon": 250,
+   "voices": [
+    "Maeh"
+   ]
+  },
+  {
+   "armor": 20,
+   "attack": 30,
+   "custom": false,
+   "defend": 30,
+   "drops": [
+    {
+     "amount": 50,
+     "name": "Gold Coin",
+     "pct": 70.0
+    },
+    {
+     "amount": 1,
+     "name": "Carrot",
+     "pct": 25.0
+    },
+    {
+     "amount": 1,
+     "name": "Small Oil Lamp",
+     "pct": 7.5
+    },
+    {
+     "amount": 1,
+     "name": "Book",
+     "pct": 2.5
+    },
+    {
+     "amount": 4,
+     "name": "Small Sapphire",
+     "pct": 2.5
+    },
+    {
+     "amount": 1,
+     "name": "Blue Rose",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Mystic Turban",
+     "pct": 0.1
+    }
+   ],
+   "exp": 190,
+   "flee": 0,
+   "hp": 330,
+   "id": 11,
+   "img": "assets/creatures/blue_djinn.png?v=cfb95e66",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Energy",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Blue Djinn",
+   "speed": 70,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Simsalabim",
+    "Feel the power of my magic, tiny mortal!",
+    "Be careful what you wish for.",
+    "Wishes can come true."
+   ]
+  },
+  {
+   "armor": 40,
+   "attack": 47,
+   "custom": false,
+   "defend": 45,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Bone",
+     "pct": 50.0
+    },
+    {
+     "amount": 90,
+     "name": "Gold Coin",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Skull",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Big Bone",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Plate Armor",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Bone Club",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Bone Shield",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Green Mushroom",
+     "pct": 1.5
+    }
+   ],
+   "exp": 580,
+   "flee": 0,
+   "hp": 515,
+   "id": 12,
+   "img": "assets/creatures/bonebeast.png?v=17bc1625",
+   "immune": [
+    "Earth",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Bonebeast",
+   "speed": 69,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Cccchhhhhhhhh!",
+    "Knooorrrrr!"
+   ]
+  },
+  {
+   "armor": 2,
+   "attack": 9,
+   "convince": 250,
+   "custom": false,
+   "defend": 3,
+   "drops": [
+    {
+     "amount": 6,
+     "name": "Gold Coin",
+     "pct": 35.0
+    },
+    {
+     "amount": 3,
+     "name": "Cherry",
+     "pct": 3.0
+    }
+   ],
+   "exp": 18,
+   "flee": 0,
+   "hp": 29,
+   "id": 13,
+   "img": "assets/creatures/bug.png?v=04bd6d3d",
+   "name": "Bug",
+   "speed": 40,
+   "summon": 250
+  },
+  {
+   "armor": 1,
+   "attack": 8,
+   "convince": 250,
+   "custom": false,
+   "defend": 4,
+   "drops": [
+    {
+     "amount": 2,
+     "name": "Gold Coin",
+     "pct": 85.0
+    },
+    {
+     "amount": 1,
+     "name": "Cheese",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Cookie",
+     "pct": 1.0
+    }
+   ],
+   "exp": 10,
+   "flee": 3,
+   "hp": 30,
+   "id": 14,
+   "img": "assets/creatures/cave_rat.png?v=66e62cca",
+   "name": "Cave Rat",
+   "speed": 35,
+   "summon": 250,
+   "voices": [
+    "Meeeeep!",
+    "Meep!"
+   ]
+  },
+  {
+   "armor": 1,
+   "attack": 15,
+   "convince": 275,
+   "custom": false,
+   "defend": 6,
+   "exp": 30,
+   "flee": 0,
+   "hp": 65,
+   "id": 15,
+   "img": "assets/creatures/cobra.png?v=164b6bfe",
+   "immune": [
+    "Earth"
+   ],
+   "name": "Cobra",
+   "speed": 20,
+   "summon": 275,
+   "voices": [
+    "Zzzzzz"
+   ]
+  },
+  {
+   "armor": 30,
+   "attack": 39,
+   "convince": 580,
+   "custom": false,
+   "defend": 25,
+   "drops": [
+    {
+     "amount": 55,
+     "name": "Gold Coin",
+     "pct": 58.0
+    },
+    {
+     "amount": 1,
+     "name": "Bone",
+     "pct": 50.0
+    },
+    {
+     "amount": 1,
+     "name": "Rotten Meat",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Iron Helmet",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Two Handed Sword",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Bone Shield",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Bone Sword",
+     "pct": 1.0
+    },
+    {
+     "amount": 3,
+     "name": "Throwing Star",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Small Diamond",
+     "pct": 0.5
+    }
+   ],
+   "exp": 195,
+   "flee": 0,
+   "hp": 330,
+   "id": 16,
+   "img": "assets/creatures/crypt_shambler.png?v=40749852",
+   "immune": [
+    "Earth",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Crypt Shambler",
+   "speed": 30,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Unpushable",
+    "Unsummonable"
+   ],
+   "voices": [
+    "Uhhhhhhh!",
+    "Aaaaahhhh!",
+    "Hoooohhh!",
+    "Chhhhhhh!"
+   ]
+  },
+  {
+   "armor": 17,
+   "attack": 30,
+   "convince": 490,
+   "custom": false,
+   "defend": 24,
+   "drops": [
+    {
+     "amount": 30,
+     "name": "Gold Coin",
+     "pct": 82.0
+    },
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 50.0
+    },
+    {
+     "amount": 2,
+     "name": "Ham",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Short Sword",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Plate Shield",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Battle Shield",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Halberd",
+     "pct": 0.7
+    },
+    {
+     "amount": 1,
+     "name": "Dark Helmet",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Wolf Tooth Chain",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Club Ring",
+     "pct": 0.1
+    }
+   ],
+   "exp": 150,
+   "flee": 0,
+   "hp": 260,
+   "id": 17,
+   "img": "assets/creatures/cyclops.png?v=c900399c",
+   "name": "Cyclops",
+   "speed": 55,
+   "summon": 490,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Unpushable"
+   ],
+   "voices": [
+    "Il lorstok human!",
+    "Toks utat.",
+    "Human, uh whil dyh!",
+    "Youh ah trak!",
+    "Let da mashing begin!"
+   ]
+  },
+  {
+   "armor": 2,
+   "attack": 2,
+   "convince": 260,
+   "custom": false,
+   "defend": 2,
+   "drops": [
+    {
+     "amount": 3,
+     "name": "Meat",
+     "pct": 80.0
+    },
+    {
+     "amount": 1,
+     "name": "Ham",
+     "pct": 45.0
+    }
+   ],
+   "exp": 0,
+   "flee": 25,
+   "hp": 25,
+   "id": 19,
+   "img": "assets/creatures/deer.png?v=244726d2",
+   "name": "Deer",
+   "speed": 58,
+   "summon": 260
+  },
+  {
+   "armor": 40,
+   "attack": 80,
+   "custom": false,
+   "defend": 65,
+   "drops": [
+    {
+     "amount": 400,
+     "name": "Gold Coin",
+     "pct": 96.4
+    },
+    {
+     "amount": 1,
+     "name": "Double Axe",
+     "pct": 20.0
+    },
+    {
+     "amount": 6,
+     "name": "Fire Mushroom",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Coconut",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Small Emerald",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Fire Axe",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Talon",
+     "pct": 3.5
+    },
+    {
+     "amount": 1,
+     "name": "Orb",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Giant Sword",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Golden Sickle",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Stealth Ring",
+     "pct": 1.4
+    },
+    {
+     "amount": 1,
+     "name": "Purple Tome",
+     "pct": 1.3
+    },
+    {
+     "amount": 1,
+     "name": "Devil Helmet",
+     "pct": 1.2
+    },
+    {
+     "amount": 1,
+     "name": "Gold Ring",
+     "pct": 1.1
+    },
+    {
+     "amount": 1,
+     "name": "Demon Shield",
+     "pct": 0.7
+    },
+    {
+     "amount": 1,
+     "name": "Platinum Amulet",
+     "pct": 0.7
+    },
+    {
+     "amount": 1,
+     "name": "Ice Rapier",
+     "pct": 0.6
+    },
+    {
+     "amount": 1,
+     "name": "Mastermind Shield",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Ring of Healing",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Golden Legs",
+     "pct": 0.4
+    },
+    {
+     "amount": 1,
+     "name": "Might Ring",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Magic Plate Armor",
+     "pct": 0.1
+    }
+   ],
+   "exp": 6000,
+   "flee": 0,
+   "hp": 8200,
+   "id": 20,
+   "img": "assets/creatures/demon.png?v=050678f0",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Energy",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Demon",
+   "speed": 80,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "MUHAHAHAHA!",
+    "I SMELL FEEEEEAAAR!",
+    "CHAMEK ATH UTHUL ARAK!",
+    "Your resistance is futile!",
+    "Your soul will be mine!"
+   ]
+  },
+  {
+   "armor": 25,
+   "attack": 45,
+   "convince": 620,
+   "custom": false,
+   "defend": 35,
+   "drops": [
+    {
+     "amount": 45,
+     "name": "Gold Coin",
+     "pct": 58.0
+    },
+    {
+     "amount": 1,
+     "name": "Torch",
+     "pct": 50.0
+    },
+    {
+     "amount": 3,
+     "name": "Throwing Star",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Battle Hammer",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Iron Helmet",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Battle Shield",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Mysterious Fetish",
+     "pct": 0.3
+    },
+    {
+     "amount": 1,
+     "name": "Mind Stone",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Guardian Shield",
+     "pct": 0.1
+    }
+   ],
+   "exp": 240,
+   "flee": 0,
+   "hp": 400,
+   "id": 22,
+   "img": "assets/creatures/demon_skeleton.png?v=28f612f0",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Demon Skeleton",
+   "speed": 50,
+   "summon": 620,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Unpushable"
+   ]
+  },
+  {
+   "custom": true,
+   "exp": 230,
+   "hp": 180,
+   "id": 23,
+   "img": "assets/creatures/desert_hunter.png?v=1eacde73",
+   "loot": "0-20 Arrows, Bow, Brass Armor, 0-10 Burst Arrows, Foil, 0-25gp, Leather Helmet, Leather Legs, 0-3 Meat, 0-12 Poison Arrows, Power Arrow, Small Amethyst, Torch",
+   "name": "Desert Hunter"
+  },
+  {
+   "armor": 1,
+   "attack": 0,
+   "convince": 220,
+   "custom": false,
+   "defend": 2,
+   "exp": 0,
+   "flee": 8,
+   "hp": 20,
+   "id": 24,
+   "img": "assets/creatures/dog.png?v=f9d5ecfa",
+   "name": "Dog",
+   "speed": 22,
+   "summon": 220,
+   "voices": [
+    "Wuff wuff"
+   ]
+  },
+  {
+   "armor": 25,
+   "attack": 42,
+   "custom": false,
+   "defend": 38,
+   "drops": [
+    {
+     "amount": 105,
+     "name": "Gold Coin",
+     "pct": 90.0
+    },
+    {
+     "amount": 3,
+     "name": "Dragon Ham",
+     "pct": 45.0
+    },
+    {
+     "amount": 1,
+     "name": "Short Sword",
+     "pct": 25.0
+    },
+    {
+     "amount": 1,
+     "name": "Mace",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Steel Shield",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Crossbow",
+     "pct": 10.0
+    },
+    {
+     "amount": 10,
+     "name": "Burst Arrow",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Longsword",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Steel Helmet",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Broadsword",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Plate Legs",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Double Axe",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Dragon Hammer",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Serpent Sword",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Small Diamond",
+     "pct": 0.4
+    },
+    {
+     "amount": 1,
+     "name": "Dragon Shield",
+     "pct": 0.3
+    },
+    {
+     "amount": 1,
+     "name": "Life Crystal",
+     "pct": 0.1
+    }
+   ],
+   "exp": 700,
+   "flee": 300,
+   "hp": 1000,
+   "id": 25,
+   "img": "assets/creatures/dragon.png?v=f44c912e",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Paralyze"
+   ],
+   "name": "Dragon",
+   "speed": 45,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "GROOAAARRR",
+    "FCHHHHH"
+   ]
+  },
+  {
+   "armor": 32,
+   "attack": 55,
+   "custom": false,
+   "defend": 48,
+   "drops": [
+    {
+     "amount": 250,
+     "name": "Gold Coin",
+     "pct": 95.2
+    },
+    {
+     "amount": 5,
+     "name": "Dragon Ham",
+     "pct": 60.0
+    },
+    {
+     "amount": 1,
+     "name": "Green Mushroom",
+     "pct": 12.0
+    },
+    {
+     "amount": 1,
+     "name": "Book",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Power Bolt",
+     "pct": 6.0
+    },
+    {
+     "amount": 1,
+     "name": "Energy Ring",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Small Sapphire",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Golden Mug",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Life Crystal",
+     "pct": 0.6
+    },
+    {
+     "amount": 1,
+     "name": "Strange Helmet",
+     "pct": 0.4
+    },
+    {
+     "amount": 1,
+     "name": "Fire Sword",
+     "pct": 0.3
+    },
+    {
+     "amount": 1,
+     "name": "Tower Shield",
+     "pct": 0.3
+    },
+    {
+     "amount": 1,
+     "name": "Royal Helmet",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Dragon Scale Mail",
+     "pct": 0.1
+    }
+   ],
+   "exp": 2100,
+   "flee": 300,
+   "hp": 1900,
+   "id": 26,
+   "img": "assets/creatures/dragon_lord.png?v=3023ffe4",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Dragon Lord",
+   "speed": 60,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "ZCHHHHH",
+    "YOU WILL BURN!"
+   ]
+  },
+  {
+   "custom": true,
+   "exp": 210,
+   "hp": 340,
+   "id": 27,
+   "img": "assets/creatures/dreadspike_snail.png?v=bb430510",
+   "loot": "Battle Hammer, Battle Shield, Black Pearl, Dark Armor, Fish, Gold, Small Amethyst, Throwing Star, Viking Helmet",
+   "name": "Dreadspike Snail"
+  },
+  {
+   "armor": 8,
+   "attack": 14,
+   "convince": 320,
+   "custom": false,
+   "defend": 14,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "White Mushroom",
+     "pct": 50.0
+    },
+    {
+     "amount": 8,
+     "name": "Gold Coin",
+     "pct": 45.0
+    },
+    {
+     "amount": 1,
+     "name": "Hatchet",
+     "pct": 25.0
+    },
+    {
+     "amount": 1,
+     "name": "Axe",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Copper Shield",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Legs",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Pick",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Letter",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Armor",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Dwarven Ring",
+     "pct": 0.1
+    }
+   ],
+   "exp": 45,
+   "flee": 0,
+   "hp": 90,
+   "id": 28,
+   "img": "assets/creatures/dwarf.png?v=30666e43",
+   "immune": [
+    "Earth"
+   ],
+   "name": "Dwarf",
+   "speed": 45,
+   "summon": 320,
+   "voices": [
+    "Hail Durin!"
+   ]
+  },
+  {
+   "armor": 15,
+   "attack": 30,
+   "custom": false,
+   "defend": 35,
+   "drops": [
+    {
+     "amount": 30,
+     "name": "Gold Coin",
+     "pct": 70.0
+    },
+    {
+     "amount": 2,
+     "name": "White Mushroom",
+     "pct": 60.0
+    },
+    {
+     "amount": 1,
+     "name": "Bag",
+     "pct": 50.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Boots",
+     "pct": 40.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Legs",
+     "pct": 20.0
+    },
+    {
+     "amount": 2,
+     "name": "Pear",
+     "pct": 18.0
+    },
+    {
+     "amount": 1,
+     "name": "Magic Light Wand",
+     "pct": 12.0
+    },
+    {
+     "amount": 1,
+     "name": "Blank Rune",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Soldier Helmet",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Clerical Mace",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Spellbook",
+     "pct": 0.4
+    },
+    {
+     "amount": 1,
+     "name": "Dwarven Ring",
+     "pct": 0.3
+    },
+    {
+     "amount": 1,
+     "name": "Small Sapphire",
+     "pct": 0.1
+    }
+   ],
+   "exp": 245,
+   "flee": 150,
+   "hp": 380,
+   "id": 29,
+   "img": "assets/creatures/dwarf_geomancer.png?v=37e1b961",
+   "immune": [
+    "Fire",
+    "Earth"
+   ],
+   "name": "Dwarf Geomancer",
+   "speed": 60,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Ranged attacker",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Hail Durin!",
+    "Earth is the strongest element.",
+    "Dust to dust."
+   ]
+  },
+  {
+   "armor": 15,
+   "attack": 39,
+   "convince": 600,
+   "custom": false,
+   "defend": 37,
+   "drops": [
+    {
+     "amount": 2,
+     "name": "White Mushroom",
+     "pct": 55.0
+    },
+    {
+     "amount": 30,
+     "name": "Gold Coin",
+     "pct": 50.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Boots",
+     "pct": 40.0
+    },
+    {
+     "amount": 1,
+     "name": "Scale Armor",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Battle Shield",
+     "pct": 7.5
+    },
+    {
+     "amount": 1,
+     "name": "Battle Hammer",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Steel Helmet",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Double Axe",
+     "pct": 0.6
+    },
+    {
+     "amount": 1,
+     "name": "Axe Ring",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Small Amethyst",
+     "pct": 0.1
+    }
+   ],
+   "exp": 170,
+   "flee": 0,
+   "hp": 245,
+   "id": 30,
+   "img": "assets/creatures/dwarf_guard.png?v=9a8beeeb",
+   "immune": [
+    "Earth"
+   ],
+   "name": "Dwarf Guard",
+   "speed": 63,
+   "summon": 600,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable"
+   ],
+   "voices": [
+    "Hail Durin!"
+   ]
+  },
+  {
+   "armor": 9,
+   "attack": 21,
+   "convince": 360,
+   "custom": false,
+   "defend": 20,
+   "drops": [
+    {
+     "amount": 4,
+     "name": "Bolt",
+     "pct": 40.0
+    },
+    {
+     "amount": 2,
+     "name": "White Mushroom",
+     "pct": 40.0
+    },
+    {
+     "amount": 12,
+     "name": "Gold Coin",
+     "pct": 35.0
+    },
+    {
+     "amount": 1,
+     "name": "Soldier Helmet",
+     "pct": 12.0
+    },
+    {
+     "amount": 1,
+     "name": "Shovel",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Armor",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Dwarven Shield",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Crossbow",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Battle Axe",
+     "pct": 2.5
+    },
+    {
+     "amount": 1,
+     "name": "Axe Ring",
+     "pct": 0.1
+    }
+   ],
+   "exp": 70,
+   "flee": 0,
+   "hp": 135,
+   "id": 31,
+   "img": "assets/creatures/dwarf_soldier.png?v=0e1c7b24",
+   "immune": [
+    "Earth"
+   ],
+   "name": "Dwarf Soldier",
+   "speed": 48,
+   "summon": 360,
+   "traits": [
+    "Moves objects",
+    "Unpushable"
+   ],
+   "voices": [
+    "Hail Durin!"
+   ]
+  },
+  {
+   "armor": 24,
+   "attack": 35,
+   "custom": false,
+   "defend": 35,
+   "drops": [
+    {
+     "amount": 130,
+     "name": "Gold Coin",
+     "pct": 85.0
+    },
+    {
+     "amount": 12,
+     "name": "Pear",
+     "pct": 25.0
+    },
+    {
+     "amount": 1,
+     "name": "Heavy Machete",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Small Oil Lamp",
+     "pct": 20.0
+    },
+    {
+     "amount": 2,
+     "name": "Small Emerald",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Green Tapestry",
+     "pct": 2.5
+    },
+    {
+     "amount": 1,
+     "name": "Mystic Turban",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Green Gem",
+     "pct": 0.1
+    }
+   ],
+   "exp": 300,
+   "flee": 0,
+   "hp": 550,
+   "id": 32,
+   "img": "assets/creatures/efreet.png?v=2ffdec41",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Energy",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Efreet",
+   "speed": 77,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "I grant you a deathwish!",
+    "Muhahahaha!",
+    "I wish you a merry trip to hell!",
+    "Tell me your last wish!",
+    "Good wishes are for fairytales"
+   ]
+  },
+  {
+   "armor": 13,
+   "attack": 16,
+   "custom": false,
+   "defend": 26,
+   "drops": [
+    {
+     "amount": 91,
+     "name": "Gold Coin",
+     "pct": 99.4
+    },
+    {
+     "amount": 1,
+     "name": "Longsword",
+     "pct": 12.0
+    },
+    {
+     "amount": 1,
+     "name": "Morning Star",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Steel Shield",
+     "pct": 6.0
+    },
+    {
+     "amount": 1,
+     "name": "Two Handed Sword",
+     "pct": 6.0
+    },
+    {
+     "amount": 1,
+     "name": "Spellbook",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Beholder Helmet",
+     "pct": 0.1
+    },
+    {
+     "amount": 1,
+     "name": "Beholder Shield",
+     "pct": 0.1
+    }
+   ],
+   "exp": 280,
+   "flee": 0,
+   "hp": 500,
+   "id": 33,
+   "img": "assets/creatures/elder_beholder.png?v=1be21818",
+   "immune": [
+    "Earth",
+    "Life Drain"
+   ],
+   "name": "Elder Beholder",
+   "speed": 45,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Ranged attacker",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "653768764!",
+    "Let me take a look at you!",
+    "Inferior creatures, bow before my power!",
+    "659978 54764!"
+   ]
+  },
+  {
+   "armor": 6,
+   "attack": 12,
+   "convince": 320,
+   "custom": false,
+   "defend": 12,
+   "drops": [
+    {
+     "amount": 2,
+     "name": "Red Apple",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Helmet",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Shield",
+     "pct": 13.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Boots",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Armor",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Longsword",
+     "pct": 8.0
+    },
+    {
+     "amount": 3,
+     "name": "Arrow",
+     "pct": 7.0
+    }
+   ],
+   "exp": 42,
+   "flee": 0,
+   "hp": 100,
+   "id": 34,
+   "img": "assets/creatures/elf.png?v=58d98511",
+   "name": "Elf",
+   "speed": 55,
+   "summon": 320,
+   "traits": [
+    "Sees invisible"
+   ],
+   "voices": [
+    "Ulathil beia Thratha!",
+    "Bahaha aka!",
+    "You are not welcome here.",
+    "Flee as long as you can.",
+    "Death to the defilers!"
+   ]
+  },
+  {
+   "armor": 15,
+   "attack": 20,
+   "custom": false,
+   "defend": 20,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Scroll",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Candlestick",
+     "pct": 22.0
+    },
+    {
+     "amount": 1,
+     "name": "Melon",
+     "pct": 22.0
+    },
+    {
+     "amount": 1,
+     "name": "Blank Rune",
+     "pct": 18.0
+    },
+    {
+     "amount": 1,
+     "name": "Bread",
+     "pct": 14.0
+    },
+    {
+     "amount": 1,
+     "name": "Sandals",
+     "pct": 13.0
+    },
+    {
+     "amount": 1,
+     "name": "Staff",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Inkwell",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Grave Flower",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Green Tunic",
+     "pct": 7.0
+    },
+    {
+     "amount": 3,
+     "name": "Arrow",
+     "pct": 6.0
+    },
+    {
+     "amount": 1,
+     "name": "Bowl",
+     "pct": 5.5
+    },
+    {
+     "amount": 1,
+     "name": "Sling Herb",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Elven Amulet",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Life Crystal",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Yellow Gem",
+     "pct": 0.2
+    }
+   ],
+   "exp": 175,
+   "flee": 0,
+   "hp": 220,
+   "id": 35,
+   "img": "assets/creatures/elf_arcanist.png?v=7c4fe37f",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Energy"
+   ],
+   "name": "Elf Arcanist",
+   "speed": 70,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Ranged attacker",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Feel my wrath!",
+    "For the Daughter of the Stars!",
+    "I'll bring balance upon you!",
+    "Tha'shi Cenath!",
+    "Vihil Ealuel!"
+   ]
+  },
+  {
+   "armor": 7,
+   "attack": 18,
+   "convince": 360,
+   "custom": false,
+   "defend": 18,
+   "drops": [
+    {
+     "amount": 12,
+     "name": "Arrow",
+     "pct": 30.0
+    },
+    {
+     "amount": 5,
+     "name": "Gold Coin",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Grapes",
+     "pct": 18.0
+    },
+    {
+     "amount": 3,
+     "name": "Poison Arrow",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Waterskin",
+     "pct": 14.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Armor",
+     "pct": 12.0
+    },
+    {
+     "amount": 1,
+     "name": "Sandals",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Helmet",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Longsword",
+     "pct": 6.0
+    },
+    {
+     "amount": 1,
+     "name": "Bow",
+     "pct": 4.0
+    }
+   ],
+   "exp": 75,
+   "flee": 0,
+   "hp": 160,
+   "id": 36,
+   "img": "assets/creatures/elf_scout.png?v=9873bc3d",
+   "name": "Elf Scout",
+   "speed": 70,
+   "summon": 360,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Ranged attacker"
+   ],
+   "voices": [
+    "Tha'shi Ab'Dendriel!",
+    "Feel the sting of my arrows!",
+    "Thy blood will quench the soil's thirst!",
+    "Evicor guide my arrow.",
+    "Your existence will end here!"
+   ]
+  },
+  {
+   "armor": 13,
+   "attack": 22,
+   "convince": 530,
+   "custom": false,
+   "defend": 15,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Pitchfork",
+     "pct": 50.0
+    },
+    {
+     "amount": 2,
+     "name": "Torch",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Blank Rune",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Cleaver",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Scimitar",
+     "pct": 6.0
+    },
+    {
+     "amount": 1,
+     "name": "Double Axe",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Small Amethyst",
+     "pct": 0.3
+    },
+    {
+     "amount": 1,
+     "name": "Guardian Shield",
+     "pct": 0.2
+    }
+   ],
+   "exp": 110,
+   "flee": 0,
+   "hp": 200,
+   "id": 37,
+   "img": "assets/creatures/fire_devil.png?v=4b8abc3d",
+   "immune": [
+    "Fire"
+   ],
+   "name": "Fire Devil",
+   "speed": 50,
+   "summon": 530,
+   "traits": [
+    "Moves objects",
+    "Unpushable",
+    "Ranged attacker"
+   ],
+   "voices": [
+    "Hot, eh?",
+    "Hell, oh hell!"
+   ]
+  },
+  {
+   "armor": 18,
+   "attack": 38,
+   "convince": 690,
+   "custom": false,
+   "defend": 20,
+   "exp": 220,
+   "flee": 0,
+   "hp": 280,
+   "id": 38,
+   "img": "assets/creatures/fire_elemental.png?v=d6f7a8b2",
+   "immune": [
+    "Fire",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Fire Elemental",
+   "speed": 55,
+   "summon": 690,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable"
+   ]
+  },
+  {
+   "armor": 7,
+   "attack": 11,
+   "convince": 300,
+   "custom": false,
+   "defend": 9,
+   "drops": [
+    {
+     "amount": 12,
+     "name": "Gold Coin",
+     "pct": 50.0
+    },
+    {
+     "amount": 1,
+     "name": "Spear",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Fish",
+     "pct": 18.0
+    },
+    {
+     "amount": 1,
+     "name": "Rapier",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Wooden Shield",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Coat",
+     "pct": 12.0
+    },
+    {
+     "amount": 1,
+     "name": "Club",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Twigs",
+     "pct": 8.0
+    }
+   ],
+   "exp": 23,
+   "flee": 10,
+   "hp": 55,
+   "id": 39,
+   "img": "assets/creatures/frost_troll.png?v=169716bf",
+   "name": "Frost Troll",
+   "speed": 30,
+   "summon": 300,
+   "voices": [
+    "Brrrr",
+    "Broar!"
+   ]
+  },
+  {
+   "armor": 26,
+   "attack": 24,
+   "custom": false,
+   "defend": 30,
+   "drops": [
+    {
+     "amount": 30,
+     "name": "Gold Coin",
+     "pct": 82.0
+    },
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 50.0
+    },
+    {
+     "amount": 2,
+     "name": "Ham",
+     "pct": 20.0
+    },
+    {
+     "amount": 10,
+     "name": "Small Stone",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Club",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Battle Shield",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Morning Star",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Dark Armor",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Steel Helmet",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Wolf Tooth Chain",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Club Ring",
+     "pct": 0.1
+    }
+   ],
+   "exp": 150,
+   "flee": 30,
+   "hp": 250,
+   "id": 40,
+   "img": "assets/creatures/gargoyle.png?v=c241e7bd",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Life Drain"
+   ],
+   "name": "Gargoyle",
+   "speed": 60,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Harrrr Harrrr!",
+    "Stone sweet stone.",
+    "Feel my claws, softskin.",
+    "Chhhhhrrrrk!",
+    "There is a stone in your shoe!"
+   ]
+  },
+  {
+   "armor": 4,
+   "attack": 9,
+   "custom": false,
+   "defend": 15,
+   "drops": [
+    {
+     "amount": 24,
+     "name": "Gold Coin",
+     "pct": 99.4
+    },
+    {
+     "amount": 1,
+     "name": "Wooden Shield",
+     "pct": 3.0
+    }
+   ],
+   "exp": 90,
+   "flee": 0,
+   "hp": 120,
+   "id": 41,
+   "img": "assets/creatures/gazer.png?v=31a1eb19",
+   "immune": [
+    "Earth",
+    "Life Drain"
+   ],
+   "name": "Gazer",
+   "speed": 30,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Ranged attacker",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Mommy!?",
+    "Buuuuhaaaahhaaaaa!",
+    "Me need mana!"
+   ]
+  },
+  {
+   "armor": 10,
+   "attack": 28,
+   "custom": false,
+   "defend": 20,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Sandals",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Shadow Herb",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Morning Star",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Cape",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Combat Knife",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Book",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Ancient Shield",
+     "pct": 0.8
+    },
+    {
+     "amount": 1,
+     "name": "Stealth Ring",
+     "pct": 0.2
+    }
+   ],
+   "exp": 120,
+   "flee": 0,
+   "hp": 150,
+   "id": 42,
+   "img": "assets/creatures/ghost.png?v=2b0dfc8f",
+   "immune": [
+    "Earth",
+    "Physical",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Ghost",
+   "speed": 40,
+   "traits": [
+    "Moves objects",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Huh!",
+    "Shhhhhh",
+    "Buuuuuh"
+   ]
+  },
+  {
+   "armor": 8,
+   "attack": 26,
+   "convince": 450,
+   "custom": false,
+   "defend": 17,
+   "drops": [
+    {
+     "amount": 30,
+     "name": "Gold Coin",
+     "pct": 75.0
+    },
+    {
+     "amount": 1,
+     "name": "Torch",
+     "pct": 60.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Helmet",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Knife",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Viking Helmet",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Scale Armor",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Skull",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Life Ring",
+     "pct": 0.2
+    }
+   ],
+   "exp": 85,
+   "flee": 0,
+   "hp": 100,
+   "id": 43,
+   "img": "assets/creatures/ghoul.png?v=d5a48068",
+   "immune": [
+    "Earth",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Ghoul",
+   "speed": 32,
+   "summon": 450,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable"
+   ]
+  },
+  {
+   "custom": true,
+   "exp": 800,
+   "hp": 1100,
+   "id": 44,
+   "img": "assets/creatures/giant_crayfish.png?v=d0d1e5d2",
+   "loot": "Gold, Plate Armor, Plate Shield, Scimitar, Shrimp, Small Sapphire",
+   "name": "Giant Crayfish"
+  },
+  {
+   "armor": 30,
+   "attack": 65,
+   "custom": false,
+   "defend": 40,
+   "drops": [
+    {
+     "amount": 99,
+     "name": "Gold Coin",
+     "pct": 100.0
+    },
+    {
+     "amount": 1,
+     "name": "Plate Armor",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Legs",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Steel Helmet",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Time Ring",
+     "pct": 0.7
+    },
+    {
+     "amount": 1,
+     "name": "Knight Armor",
+     "pct": 0.3
+    },
+    {
+     "amount": 1,
+     "name": "Knight Legs",
+     "pct": 0.3
+    },
+    {
+     "amount": 1,
+     "name": "Platinum Amulet",
+     "pct": 0.1
+    }
+   ],
+   "exp": 900,
+   "flee": 0,
+   "hp": 1300,
+   "id": 45,
+   "img": "assets/creatures/giant_spider.png?v=da6c9f4f",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Life Drain"
+   ],
+   "name": "Giant Spider",
+   "speed": 80,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ]
+  },
+  {
+   "armor": 6,
+   "attack": 10,
+   "convince": 290,
+   "custom": false,
+   "defend": 8,
+   "drops": [
+    {
+     "amount": 9,
+     "name": "Gold Coin",
+     "pct": 50.0
+    },
+    {
+     "amount": 3,
+     "name": "Small Stone",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Dagger",
+     "pct": 18.0
+    },
+    {
+     "amount": 1,
+     "name": "Fish",
+     "pct": 13.0
+    },
+    {
+     "amount": 1,
+     "name": "Bone",
+     "pct": 12.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Helmet",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Small Axe",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Short Sword",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Armor",
+     "pct": 7.5
+    },
+    {
+     "amount": 1,
+     "name": "Moldy Cheese",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Bone Club",
+     "pct": 5.0
+    }
+   ],
+   "exp": 25,
+   "flee": 15,
+   "hp": 50,
+   "id": 46,
+   "img": "assets/creatures/goblin.png?v=1496f4ff",
+   "name": "Goblin",
+   "speed": 20,
+   "summon": 290,
+   "voices": [
+    "Me have him!",
+    "Zig Zag! Gobo attack!",
+    "Help! Goblinkiller!",
+    "Bugga! Bugga!",
+    "Me green, me mean!"
+   ]
+  },
+  {
+   "convince": 350,
+   "custom": true,
+   "exp": 40,
+   "hp": 80,
+   "id": 47,
+   "img": "assets/creatures/gorlak.png?v=8903fe23",
+   "loot": "Brown Mushroom, Fishbone, 0-10gp, Moldy Cheese, Small Citrine, Small Emerald, Small Rock Crystal, Some Mushrooms, Studded Club, Worn Leather Boots",
+   "name": "Gorlak",
+   "summon": 350
+  },
+  {
+   "armor": 20,
+   "attack": 30,
+   "custom": false,
+   "defend": 30,
+   "drops": [
+    {
+     "amount": 50,
+     "name": "Gold Coin",
+     "pct": 70.0
+    },
+    {
+     "amount": 1,
+     "name": "Cheese",
+     "pct": 25.0
+    },
+    {
+     "amount": 1,
+     "name": "Grave Flower",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Small Oil Lamp",
+     "pct": 7.5
+    },
+    {
+     "amount": 4,
+     "name": "Small Emerald",
+     "pct": 2.7
+    },
+    {
+     "amount": 1,
+     "name": "Book",
+     "pct": 2.5
+    },
+    {
+     "amount": 1,
+     "name": "Mystic Turban",
+     "pct": 0.1
+    }
+   ],
+   "exp": 190,
+   "flee": 0,
+   "hp": 330,
+   "id": 48,
+   "img": "assets/creatures/green_djinn.png?v=8f19a92b",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Energy",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Green Djinn",
+   "speed": 70,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "I grant you a deathwish!",
+    "Muhahahaha!",
+    "I wish you a merry trip to hell!",
+    "Tell me your last wish!",
+    "Good wishes are for fairytales"
+   ]
+  },
+  {
+   "armor": 35,
+   "attack": 58,
+   "custom": false,
+   "defend": 50,
+   "drops": [
+    {
+     "amount": 100,
+     "name": "Gold Coin",
+     "pct": 60.0
+    },
+    {
+     "amount": 1,
+     "name": "Scroll",
+     "pct": 45.0
+    },
+    {
+     "amount": 13,
+     "name": "Arrow",
+     "pct": 27.0
+    },
+    {
+     "amount": 1,
+     "name": "Grapes",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Red Rose",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Rope",
+     "pct": 20.0
+    },
+    {
+     "amount": 2,
+     "name": "Meat",
+     "pct": 18.0
+    },
+    {
+     "amount": 1,
+     "name": "Lyre",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Bow",
+     "pct": 13.0
+    },
+    {
+     "amount": 1,
+     "name": "Scarf",
+     "pct": 12.0
+    },
+    {
+     "amount": 1,
+     "name": "Green Tunic",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Wedding Ring",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Two Handed Sword",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "War Hammer",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Crown Armor",
+     "pct": 0.6
+    },
+    {
+     "amount": 1,
+     "name": "Crown Helmet",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Crown Legs",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Fire Sword",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Might Ring",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Crown Shield",
+     "pct": 0.4
+    }
+   ],
+   "exp": 1200,
+   "flee": 0,
+   "hp": 1400,
+   "id": 49,
+   "img": "assets/creatures/hero.png?v=2be1390e",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Energy",
+    "Paralyze"
+   ],
+   "name": "Hero",
+   "speed": 100,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Let's have a fight!",
+    "Welcome to my battleground.",
+    "Have you seen princess Lumelia?",
+    "I will sing a tune at your grave."
+   ]
+  },
+  {
+   "armor": 8,
+   "attack": 13,
+   "convince": 530,
+   "custom": false,
+   "defend": 10,
+   "drops": [
+    {
+     "amount": 22,
+     "name": "Arrow",
+     "pct": 82.0
+    },
+    {
+     "amount": 1,
+     "name": "Bow",
+     "pct": 30.0
+    },
+    {
+     "amount": 2,
+     "name": "Orange",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Legs",
+     "pct": 14.0
+    },
+    {
+     "amount": 2,
+     "name": "Roll",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Helmet",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Armor",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Helmet",
+     "pct": 5.0
+    },
+    {
+     "amount": 3,
+     "name": "Burst Arrow",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Torch",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Dragon Necklace",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Small Ruby",
+     "pct": 0.2
+    }
+   ],
+   "exp": 150,
+   "flee": 10,
+   "hp": 150,
+   "id": 50,
+   "img": "assets/creatures/hunter.png?v=5495a0a8",
+   "name": "Hunter",
+   "speed": 65,
+   "traits": [
+    "Moves objects",
+    "Unpushable",
+    "Ranged attacker",
+    "Unsummonable"
+   ],
+   "voices": [
+    "Guess who we are hunting, hahaha!"
+   ]
+  },
+  {
+   "armor": 1,
+   "attack": 11,
+   "convince": 275,
+   "custom": false,
+   "defend": 5,
+   "drops": [
+    {
+     "amount": 2,
+     "name": "Meat",
+     "pct": 50.0
+    }
+   ],
+   "exp": 20,
+   "flee": 30,
+   "hp": 60,
+   "id": 51,
+   "img": "assets/creatures/hyaena.png?v=4d8bd384",
+   "name": "Hyaena",
+   "speed": 58,
+   "summon": 275,
+   "voices": [
+    "Grrrrrr",
+    "Hou hou hou!"
+   ]
+  },
+  {
+   "custom": true,
+   "exp": 60,
+   "hp": 120,
+   "id": 52,
+   "img": "assets/creatures/kobold.png?v=5011a595",
+   "loot": "Dirty Fur, 0-23gp, Leather Helmet, Mace, Meat, Silver Dagger, Small Sapphire, Spear, Studded Armor, Studded Legs, Wooden Shield",
+   "name": "Kobold"
+  },
+  {
+   "custom": true,
+   "exp": 100,
+   "hp": 150,
+   "id": 53,
+   "img": "assets/creatures/kobold_stoneshooter.png?v=e01b1dd8",
+   "loot": "Brass Armor, Brass Helmet, Brass Legs, Copper Shield, 0-19gp, Grapefruit, Meat, Native Armor, Protection Amulet, Rapier, 0-2 Skulls, Small Ruby, Small Stone",
+   "name": "Kobold Stoneshooter"
+  },
+  {
+   "armor": 5,
+   "attack": 20,
+   "convince": 355,
+   "custom": false,
+   "defend": 11,
+   "drops": [
+    {
+     "amount": 10,
+     "name": "Gold Coin",
+     "pct": 35.0
+    },
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 30.0
+    }
+   ],
+   "exp": 44,
+   "flee": 0,
+   "hp": 70,
+   "id": 54,
+   "img": "assets/creatures/larva.png?v=1b58a756",
+   "immune": [
+    "Earth",
+    "Paralyze"
+   ],
+   "name": "Larva",
+   "speed": 22,
+   "summon": 355
+  },
+  {
+   "armor": 50,
+   "attack": 40,
+   "custom": false,
+   "defend": 60,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Staff",
+     "pct": 60.0
+    },
+    {
+     "amount": 120,
+     "name": "Gold Coin",
+     "pct": 58.0
+    },
+    {
+     "amount": 1,
+     "name": "Dirty Cape",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Spellbook",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Black Pearl",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "White Pearl",
+     "pct": 2.5
+    },
+    {
+     "amount": 1,
+     "name": "Ring of Healing",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Mind Stone",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Strange Helmet",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Castle Shield",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Blue Robe",
+     "pct": 0.1
+    },
+    {
+     "amount": 1,
+     "name": "Platinum Amulet",
+     "pct": 0.1
+    }
+   ],
+   "exp": 900,
+   "flee": 0,
+   "hp": 880,
+   "id": 55,
+   "img": "assets/creatures/lich.png?v=695bc822",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Lich",
+   "speed": 65,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Death awaits all!",
+    "Doomed be the living!",
+    "Death and Decay!",
+    "You will endure agony beyond thy death!",
+    "Come to me my children!",
+    "Pain sweet pain!",
+    "Thy living flesh offends me!"
+   ]
+  },
+  {
+   "armor": 6,
+   "attack": 20,
+   "convince": 320,
+   "custom": false,
+   "defend": 13,
+   "drops": [
+    {
+     "amount": 3,
+     "name": "Meat",
+     "pct": 45.0
+    },
+    {
+     "amount": 2,
+     "name": "Ham",
+     "pct": 20.0
+    }
+   ],
+   "exp": 30,
+   "flee": 10,
+   "hp": 80,
+   "id": 56,
+   "img": "assets/creatures/lion.png?v=c7a7e413",
+   "name": "Lion",
+   "speed": 55,
+   "summon": 320,
+   "traits": [
+    "Unpushable"
+   ],
+   "voices": [
+    "Groarrr!"
+   ]
+  },
+  {
+   "custom": true,
+   "exp": 3300,
+   "hp": 5700,
+   "id": 57,
+   "img": "assets/creatures/magma_beast.png?v=ad272cea",
+   "loot": "Broadsword, 0-9 Burst Arrows, Dark Armor, 0-300gp, Hammer of Wrath, Might Ring, Obsidian Lance, Red Gem, Ring of Healing, 0-3 Small Rubies, Stone Skin Amulet, Strange Helmet, 0-2 Talons, Tower Shield",
+   "name": "Magma Beast"
+  },
+  {
+   "armor": 24,
+   "attack": 35,
+   "custom": false,
+   "defend": 35,
+   "drops": [
+    {
+     "amount": 130,
+     "name": "Gold Coin",
+     "pct": 85.0
+    },
+    {
+     "amount": 25,
+     "name": "Blueberry",
+     "pct": 25.0
+    },
+    {
+     "amount": 1,
+     "name": "Heavy Machete",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Small Oil Lamp",
+     "pct": 20.0
+    },
+    {
+     "amount": 2,
+     "name": "Small Sapphire",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Blue Tapestry",
+     "pct": 2.5
+    },
+    {
+     "amount": 1,
+     "name": "Wooden Flute",
+     "pct": 0.3
+    },
+    {
+     "amount": 1,
+     "name": "Mystic Turban",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Blue Gem",
+     "pct": 0.1
+    }
+   ],
+   "exp": 300,
+   "flee": 0,
+   "hp": 550,
+   "id": 58,
+   "img": "assets/creatures/marid.png?v=ec1e1089",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Energy",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Marid",
+   "speed": 77,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Simsalabim",
+    "Feel the power of my magic, tiny mortal!",
+    "Be careful what you wish for.",
+    "Wishes can come true."
+   ]
+  },
+  {
+   "armor": 11,
+   "attack": 15,
+   "convince": 330,
+   "custom": false,
+   "defend": 11,
+   "drops": [
+    {
+     "amount": 25,
+     "name": "Gold Coin",
+     "pct": 66.3
+    },
+    {
+     "amount": 1,
+     "name": "Plate Shield",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Legs",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Mace",
+     "pct": 13.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Armor",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Sword",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Helmet",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Helmet",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Axe",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Shovel",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Bronze Amulet",
+     "pct": 0.1
+    }
+   ],
+   "exp": 50,
+   "flee": 0,
+   "hp": 100,
+   "id": 59,
+   "img": "assets/creatures/minotaur.png?v=e9ff54ff",
+   "name": "Minotaur",
+   "speed": 44,
+   "summon": 330,
+   "voices": [
+    "Kaplar!"
+   ]
+  },
+  {
+   "armor": 7,
+   "attack": 15,
+   "convince": 390,
+   "custom": false,
+   "defend": 8,
+   "drops": [
+    {
+     "amount": 20,
+     "name": "Bolt",
+     "pct": 90.0
+    },
+    {
+     "amount": 30,
+     "name": "Gold Coin",
+     "pct": 74.5
+    },
+    {
+     "amount": 1,
+     "name": "Crossbow",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Helmet",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Legs",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Armor",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Soldier Helmet",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Scale Armor",
+     "pct": 1.0
+    }
+   ],
+   "exp": 65,
+   "flee": 10,
+   "hp": 100,
+   "id": 60,
+   "img": "assets/creatures/minotaur_archer.png?v=763348d9",
+   "name": "Minotaur Archer",
+   "speed": 40,
+   "summon": 390,
+   "traits": [
+    "Unpushable",
+    "Ranged attacker"
+   ],
+   "voices": [
+    "Ruan Wihmpy!",
+    "Kaplar!"
+   ]
+  },
+  {
+   "armor": 15,
+   "attack": 35,
+   "convince": 550,
+   "custom": false,
+   "defend": 32,
+   "drops": [
+    {
+     "amount": 20,
+     "name": "Gold Coin",
+     "pct": 60.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Legs",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Hatchet",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Fishing Rod",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Armor",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Armor",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Battle Shield",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Legs",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Double Axe",
+     "pct": 0.4
+    }
+   ],
+   "exp": 160,
+   "flee": 0,
+   "hp": 185,
+   "id": 61,
+   "img": "assets/creatures/minotaur_guard.png?v=a2912133",
+   "name": "Minotaur Guard",
+   "speed": 55,
+   "summon": 550,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Unpushable"
+   ],
+   "voices": [
+    "Kirll Karrrl!",
+    "Kaplar!"
+   ]
+  },
+  {
+   "armor": 18,
+   "attack": 15,
+   "custom": false,
+   "defend": 40,
+   "drops": [
+    {
+     "amount": 10,
+     "name": "Gold Coin",
+     "pct": 80.0
+    },
+    {
+     "amount": 1,
+     "name": "Dead Snake",
+     "pct": 70.0
+    },
+    {
+     "amount": 2,
+     "name": "Torch",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Legs",
+     "pct": 15.0
+    },
+    {
+     "amount": 7,
+     "name": "Carrot",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Knife",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Helmet",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Armor",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Combat Knife",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Legs",
+     "pct": 2.0
+    }
+   ],
+   "exp": 150,
+   "flee": 0,
+   "hp": 155,
+   "id": 62,
+   "img": "assets/creatures/minotaur_mage.png?v=ff968ac4",
+   "immune": [
+    "Energy"
+   ],
+   "name": "Minotaur Mage",
+   "speed": 45,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Ranged attacker",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Learrn tha secrret uf deathhh!",
+    "Kaplar!"
+   ]
+  },
+  {
+   "armor": 25,
+   "attack": 42,
+   "custom": false,
+   "defend": 52,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Bread",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Scroll",
+     "pct": 20.0
+    },
+    {
+     "amount": 18,
+     "name": "Gold Coin",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Bag",
+     "pct": 13.0
+    },
+    {
+     "amount": 1,
+     "name": "Staff",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Lamp",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Brown Flask",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Sandals",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Armor",
+     "pct": 5.5
+    },
+    {
+     "amount": 1,
+     "name": "Life Crystal",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Ankh",
+     "pct": 0.1
+    },
+    {
+     "amount": 1,
+     "name": "Power Ring",
+     "pct": 0.1
+    }
+   ],
+   "exp": 200,
+   "flee": 0,
+   "hp": 240,
+   "id": 63,
+   "img": "assets/creatures/monk.png?v=16db885d",
+   "name": "Monk",
+   "speed": 80,
+   "summon": 600,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "I will punish the sinners!",
+    "A prayer to the almighty one.",
+    "Repent Heretic!"
+   ]
+  },
+  {
+   "custom": true,
+   "exp": 165,
+   "hp": 280,
+   "id": 64,
+   "img": "assets/creatures/monstrous_snail.png?v=493cf923",
+   "loot": "Fish, Fishbone, Gold, Orange Mushroom, Small Citrine, White Pearl, Worn Leather Boots",
+   "name": "Monstrous Snail"
+  },
+  {
+   "armor": 14,
+   "attack": 32,
+   "custom": false,
+   "defend": 23,
+   "drops": [
+    {
+     "amount": 80,
+     "name": "Gold Coin",
+     "pct": 40.0
+    },
+    {
+     "amount": 1,
+     "name": "Magic Light Wand",
+     "pct": 16.0
+    },
+    {
+     "amount": 1,
+     "name": "Short Sword",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Strange Talisman",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Silver Brooch",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Poison Dagger",
+     "pct": 2.5
+    },
+    {
+     "amount": 1,
+     "name": "Crystal Ring",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Black Pearl",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Black Shield",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Silver Amulet",
+     "pct": 0.1
+    }
+   ],
+   "exp": 150,
+   "flee": 0,
+   "hp": 240,
+   "id": 65,
+   "img": "assets/creatures/mummy.png?v=2e1104d7",
+   "immune": [
+    "Earth",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Mummy",
+   "speed": 35,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "I will ssswallow your sssoul!",
+    "Ahkahra exura belil mort!",
+    "Yohag Sssetham!",
+    "I will tassste life again!",
+    "Mort ulhegh dakh visss.",
+    "Flesssh to dussst!"
+   ]
+  },
+  {
+   "armor": 50,
+   "attack": 40,
+   "custom": false,
+   "defend": 40,
+   "drops": [
+    {
+     "amount": 90,
+     "name": "Gold Coin",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Short Sword",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Scale Armor",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Green Mushroom",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Clerical Mace",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Mystic Turban",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Boots of Haste",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Skull Staff",
+     "pct": 0.1
+    }
+   ],
+   "exp": 580,
+   "flee": 0,
+   "hp": 580,
+   "id": 66,
+   "img": "assets/creatures/necromancer.png?v=b8227004",
+   "immune": [
+    "Earth",
+    "Life Drain"
+   ],
+   "name": "Necromancer",
+   "speed": 54,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Ranged attacker",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Your corpse will be mine!",
+    "Taste the sweetness of death!"
+   ]
+  },
+  {
+   "custom": true,
+   "exp": 14900,
+   "hp": 17100,
+   "id": 67,
+   "img": "assets/creatures/obliterator.png?v=a4dddc3f",
+   "loot": "Ancient Shield, Broken Amulet, Dark Armor, Demon Shield, Gold Coins, Heavy Mace, Horned Helmet, Giant Sword, Ice Rapier, Light Mace, Magic Plate Armor, Mind Stone, Orb, Stone Skin Amulet, Strange Helmet, Tempest Shield, Time Ring, More?",
+   "name": "Obliterator"
+  },
+  {
+   "armor": 4,
+   "attack": 13,
+   "convince": 300,
+   "custom": false,
+   "defend": 8,
+   "drops": [
+    {
+     "amount": 8,
+     "name": "Gold Coin",
+     "pct": 85.0
+    },
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Armor",
+     "pct": 12.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Shield",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Helmet",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Axe",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Sabre",
+     "pct": 6.0
+    }
+   ],
+   "exp": 25,
+   "flee": 15,
+   "hp": 70,
+   "id": 68,
+   "img": "assets/creatures/orc.png?v=1ca9c69e",
+   "name": "Orc",
+   "speed": 35,
+   "summon": 300,
+   "voices": [
+    "Grak brrretz!",
+    "Grow truk grrrrr.",
+    "Prek tars, dekklep zurk."
+   ]
+  },
+  {
+   "armor": 12,
+   "attack": 65,
+   "convince": 590,
+   "custom": false,
+   "defend": 12,
+   "drops": [
+    {
+     "amount": 12,
+     "name": "Gold Coin",
+     "pct": 55.0
+    },
+    {
+     "amount": 1,
+     "name": "Ham",
+     "pct": 17.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Helmet",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Armor",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Lamp",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Halberd",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Battle Axe",
+     "pct": 6.0
+    }
+   ],
+   "exp": 195,
+   "flee": 0,
+   "hp": 210,
+   "id": 69,
+   "img": "assets/creatures/orc_berserker.png?v=cda49033",
+   "immune": [
+    "Earth"
+   ],
+   "name": "Orc Berserker",
+   "speed": 85,
+   "summon": 590,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Unpushable"
+   ],
+   "voices": [
+    "KRAK ORRRRRRK!"
+   ]
+  },
+  {
+   "armor": 20,
+   "attack": 48,
+   "convince": 640,
+   "custom": false,
+   "defend": 45,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Fish",
+     "pct": 30.0
+    },
+    {
+     "amount": 35,
+     "name": "Gold Coin",
+     "pct": 28.0
+    },
+    {
+     "amount": 1,
+     "name": "Dagger",
+     "pct": 23.0
+    },
+    {
+     "amount": 1,
+     "name": "Backpack",
+     "pct": 20.0
+    },
+    {
+     "amount": 2,
+     "name": "Meat",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Scimitar",
+     "pct": 12.0
+    },
+    {
+     "amount": 1,
+     "name": "Plate Shield",
+     "pct": 10.0
+    },
+    {
+     "amount": 4,
+     "name": "Throwing Knife",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Longsword",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Sword Ring",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Legs",
+     "pct": 2.5
+    },
+    {
+     "amount": 1,
+     "name": "Plate Armor",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Broadsword",
+     "pct": 0.8
+    },
+    {
+     "amount": 1,
+     "name": "Plate Legs",
+     "pct": 0.4
+    },
+    {
+     "amount": 1,
+     "name": "Warrior Helmet",
+     "pct": 0.1
+    }
+   ],
+   "exp": 270,
+   "flee": 0,
+   "hp": 450,
+   "id": 70,
+   "img": "assets/creatures/orc_leader.png?v=dd0396f2",
+   "immune": [
+    "Fire"
+   ],
+   "name": "Orc Leader",
+   "speed": 75,
+   "summon": 640,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable"
+   ],
+   "voices": [
+    "Ulderek futgyr human!"
+   ]
+  },
+  {
+   "armor": 9,
+   "attack": 41,
+   "convince": 490,
+   "custom": false,
+   "defend": 20,
+   "drops": [
+    {
+     "amount": 90,
+     "name": "Gold Coin",
+     "pct": 50.0
+    },
+    {
+     "amount": 1,
+     "name": "Backpack",
+     "pct": 30.0
+    },
+    {
+     "amount": 3,
+     "name": "Meat",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Orcish Axe",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Helmet",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Wolf Tooth Chain",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Torch",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Battle Shield",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Obsidian Lance",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Scale Armor",
+     "pct": 0.6
+    }
+   ],
+   "exp": 110,
+   "flee": 0,
+   "hp": 180,
+   "id": 71,
+   "img": "assets/creatures/orc_rider.png?v=223c340b",
+   "name": "Orc Rider",
+   "speed": 90,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Unpushable",
+    "Unsummonable"
+   ],
+   "voices": [
+    "Grrrrrrr",
+    "Orc arga Huummmak!"
+   ]
+  },
+  {
+   "armor": 8,
+   "attack": 13,
+   "custom": false,
+   "defend": 10,
+   "drops": [
+    {
+     "amount": 5,
+     "name": "Gold Coin",
+     "pct": 90.0
+    },
+    {
+     "amount": 1,
+     "name": "Bag",
+     "pct": 11.0
+    },
+    {
+     "amount": 2,
+     "name": "Corncob",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Spear",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Armor",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Helmet",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Staff",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Book",
+     "pct": 4.5
+    }
+   ],
+   "exp": 110,
+   "flee": 15,
+   "hp": 115,
+   "id": 72,
+   "img": "assets/creatures/orc_shaman.png?v=ef178ec4",
+   "immune": [
+    "Earth",
+    "Energy"
+   ],
+   "name": "Orc Shaman",
+   "speed": 30,
+   "traits": [
+    "Sees invisible",
+    "Unpushable",
+    "Ranged attacker",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Grak brrretz gulu.",
+    "Huumans stinkk!"
+   ]
+  },
+  {
+   "armor": 6,
+   "attack": 17,
+   "convince": 310,
+   "custom": false,
+   "defend": 12,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Spear",
+     "pct": 23.0
+    },
+    {
+     "amount": 7,
+     "name": "Gold Coin",
+     "pct": 22.0
+    },
+    {
+     "amount": 1,
+     "name": "Machete",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Legs",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Helmet",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Dirty Fur",
+     "pct": 7.7
+    }
+   ],
+   "exp": 38,
+   "flee": 10,
+   "hp": 105,
+   "id": 73,
+   "img": "assets/creatures/orc_spearman.png?v=af02f392",
+   "name": "Orc Spearman",
+   "speed": 48,
+   "summon": 310,
+   "traits": [
+    "Ranged attacker"
+   ],
+   "voices": [
+    "Ugaar!"
+   ]
+  },
+  {
+   "armor": 28,
+   "attack": 68,
+   "custom": false,
+   "defend": 55,
+   "drops": [
+    {
+     "amount": 40,
+     "name": "Throwing Star",
+     "pct": 30.0
+    },
+    {
+     "amount": 2,
+     "name": "Meat",
+     "pct": 20.0
+    },
+    {
+     "amount": 45,
+     "name": "Gold Coin",
+     "pct": 19.0
+    },
+    {
+     "amount": 1,
+     "name": "Orcish Axe",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Scimitar",
+     "pct": 12.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Legs",
+     "pct": 10.0
+    },
+    {
+     "amount": 2,
+     "name": "Fish",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Plate Armor",
+     "pct": 6.0
+    },
+    {
+     "amount": 1,
+     "name": "Plate Legs",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Protection Amulet",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Two Handed Sword",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Dark Helmet",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Brass Armor",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Crusader Helmet",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Dragon Hammer",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Stealth Ring",
+     "pct": 0.1
+    }
+   ],
+   "exp": 670,
+   "flee": 0,
+   "hp": 950,
+   "id": 74,
+   "img": "assets/creatures/orc_warlord.png?v=e4ea25c9",
+   "immune": [
+    "Fire"
+   ],
+   "name": "Orc Warlord",
+   "speed": 77,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Ranat Ulderek!",
+    "Orc buta bana!",
+    "Ikem rambo zambo!",
+    "Futchi maruk buta!"
+   ]
+  },
+  {
+   "armor": 8,
+   "attack": 19,
+   "convince": 360,
+   "custom": false,
+   "defend": 14,
+   "drops": [
+    {
+     "amount": 15,
+     "name": "Gold Coin",
+     "pct": 65.0
+    },
+    {
+     "amount": 1,
+     "name": "Sabre",
+     "pct": 50.0
+    },
+    {
+     "amount": 1,
+     "name": "Wooden Shield",
+     "pct": 18.0
+    },
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Armor",
+     "pct": 7.5
+    },
+    {
+     "amount": 1,
+     "name": "Bottle",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Copper Shield",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Poison Dagger",
+     "pct": 0.1
+    }
+   ],
+   "exp": 50,
+   "flee": 10,
+   "hp": 125,
+   "id": 75,
+   "img": "assets/creatures/orc_warrior.png?v=3b4f1ef5",
+   "name": "Orc Warrior",
+   "speed": 55,
+   "summon": 360,
+   "voices": [
+    "Grow truk grrrr.",
+    "Trak grrrr brik.",
+    "Alk!"
+   ]
+  },
+  {
+   "custom": true,
+   "exp": 290,
+   "hp": 430,
+   "id": 76,
+   "img": "assets/creatures/overseer.png?v=cbc0b217",
+   "loot": "Brass Legs, Club Ring, Dark Armor, 0-65gp, Ham, Morning Star, Strange Helmet, Torch",
+   "name": "Overseer"
+  },
+  {
+   "custom": true,
+   "exp": 225,
+   "hp": 205,
+   "id": 77,
+   "img": "assets/creatures/phantom.png?v=75e98b91",
+   "name": "Phantom"
+  },
+  {
+   "armor": 2,
+   "attack": 0,
+   "convince": 255,
+   "custom": false,
+   "defend": 2,
+   "drops": [
+    {
+     "amount": 4,
+     "name": "Meat",
+     "pct": 65.0
+    }
+   ],
+   "exp": 0,
+   "flee": 25,
+   "hp": 25,
+   "id": 78,
+   "img": "assets/creatures/pig.png?v=35189fd1",
+   "name": "Pig",
+   "speed": 17,
+   "summon": 255
+  },
+  {
+   "armor": 2,
+   "attack": 12,
+   "convince": 270,
+   "custom": false,
+   "defend": 6,
+   "drops": [
+    {
+     "amount": 4,
+     "name": "Gold Coin",
+     "pct": 25.0
+    }
+   ],
+   "exp": 22,
+   "flee": 6,
+   "hp": 26,
+   "id": 79,
+   "img": "assets/creatures/poison_spider.png?v=b531a448",
+   "immune": [
+    "Earth"
+   ],
+   "name": "Poison Spider",
+   "speed": 40,
+   "summon": 270
+  },
+  {
+   "armor": 7,
+   "attack": 18,
+   "convince": 315,
+   "custom": false,
+   "defend": 10,
+   "drops": [
+    {
+     "amount": 4,
+     "name": "Meat",
+     "pct": 70.0
+    },
+    {
+     "amount": 2,
+     "name": "Ham",
+     "pct": 50.0
+    }
+   ],
+   "exp": 28,
+   "flee": 5,
+   "hp": 85,
+   "id": 80,
+   "img": "assets/creatures/polar_bear.png?v=e67cb6ca",
+   "name": "Polar Bear",
+   "speed": 38,
+   "summon": 315,
+   "traits": [
+    "Unpushable"
+   ],
+   "voices": [
+    "Grrrrrr",
+    "GROARRR!"
+   ]
+  },
+  {
+   "armor": 30,
+   "attack": 20,
+   "custom": false,
+   "defend": 50,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Dagger",
+     "pct": 23.0
+    },
+    {
+     "amount": 1,
+     "name": "Bowl",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Sling Herb",
+     "pct": 14.0
+    },
+    {
+     "amount": 1,
+     "name": "Goat Grass",
+     "pct": 12.0
+    },
+    {
+     "amount": 2,
+     "name": "Red Apple",
+     "pct": 7.5
+    },
+    {
+     "amount": 1,
+     "name": "Book",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Powder Herb",
+     "pct": 6.0
+    },
+    {
+     "amount": 1,
+     "name": "Wood Mushroom",
+     "pct": 3.5
+    },
+    {
+     "amount": 1,
+     "name": "Clerical Mace",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Wooden Flute",
+     "pct": 1.4
+    },
+    {
+     "amount": 1,
+     "name": "Crystal Ball",
+     "pct": 1.2
+    },
+    {
+     "amount": 1,
+     "name": "Talon",
+     "pct": 0.7
+    },
+    {
+     "amount": 1,
+     "name": "Crystal Necklace",
+     "pct": 0.6
+    },
+    {
+     "amount": 1,
+     "name": "Black Shield",
+     "pct": 0.2
+    }
+   ],
+   "exp": 420,
+   "flee": 0,
+   "hp": 390,
+   "id": 81,
+   "img": "assets/creatures/priestess.png?v=a0b6b919",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Energy"
+   ],
+   "name": "Priestess",
+   "speed": 45,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Ranged attacker",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Your energy is mine.",
+    "Now, your life has come to an end, hahahha!",
+    "Throw the soul on the altar!"
+   ]
+  },
+  {
+   "armor": 1,
+   "attack": 0,
+   "convince": 220,
+   "custom": false,
+   "defend": 2,
+   "drops": [
+    {
+     "amount": 2,
+     "name": "Meat",
+     "pct": 85.0
+    },
+    {
+     "amount": 1,
+     "name": "Carrot",
+     "pct": 10.0
+    }
+   ],
+   "exp": 0,
+   "flee": 15,
+   "hp": 15,
+   "id": 82,
+   "img": "assets/creatures/rabbit.png?v=8632d9e7",
+   "name": "Rabbit",
+   "speed": 50,
+   "summon": 220
+  },
+  {
+   "armor": 1,
+   "attack": 7,
+   "convince": 200,
+   "custom": false,
+   "defend": 3,
+   "drops": [
+    {
+     "amount": 4,
+     "name": "Gold Coin",
+     "pct": 70.0
+    },
+    {
+     "amount": 1,
+     "name": "Cheese",
+     "pct": 40.0
+    }
+   ],
+   "exp": 5,
+   "flee": 5,
+   "hp": 20,
+   "id": 83,
+   "img": "assets/creatures/rat.png?v=6d69039c",
+   "name": "Rat",
+   "speed": 27,
+   "summon": 200
+  },
+  {
+   "armor": 8,
+   "attack": 18,
+   "convince": 305,
+   "custom": false,
+   "defend": 11,
+   "drops": [
+    {
+     "amount": 20,
+     "name": "Gold Coin",
+     "pct": 72.0
+    },
+    {
+     "amount": 1,
+     "name": "Ham",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Mace",
+     "pct": 4.5
+    },
+    {
+     "amount": 1,
+     "name": "Sword",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Legion Helmet",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Copper Shield",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Katana",
+     "pct": 0.3
+    }
+   ],
+   "exp": 40,
+   "flee": 0,
+   "hp": 65,
+   "id": 84,
+   "img": "assets/creatures/rotworm.png?v=409c4f88",
+   "name": "Rotworm",
+   "speed": 18,
+   "traits": [
+    "Unpushable",
+    "Unsummonable"
+   ]
+  },
+  {
+   "custom": true,
+   "exp": 4800,
+   "hp": 4000,
+   "id": 85,
+   "img": "assets/creatures/sandlord.png?v=237cedcc",
+   "loot": "Bread, Bright Sword, Candlestick, Crystal Ring, Dark Mushroom, 0-240gp, Gold Ring, Golden Armor, Inkwell, Mind Stone, Poison Dagger, Small Ruby, Stone Skin Amulet, Portable Hole, Red Robe, Red Tome, Talon, Time Ring, Wand of Might, Watch",
+   "name": "Sandlord"
+  },
+  {
+   "armor": 21,
+   "attack": 25,
+   "convince": 395,
+   "custom": false,
+   "defend": 26,
+   "drops": [
+    {
+     "amount": 52,
+     "name": "Gold Coin",
+     "pct": 83.6
+    },
+    {
+     "amount": 2,
+     "name": "Meat",
+     "pct": 54.0
+    },
+    {
+     "amount": 3,
+     "name": "Arrow",
+     "pct": 5.0
+    },
+    {
+     "amount": 2,
+     "name": "Scarab Coin",
+     "pct": 1.1
+    },
+    {
+     "amount": 1,
+     "name": "Heavy Machete",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Small Amethyst",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Daramanian Mace",
+     "pct": 0.3
+    },
+    {
+     "amount": 1,
+     "name": "Small Emerald",
+     "pct": 0.3
+    }
+   ],
+   "exp": 120,
+   "flee": 80,
+   "hp": 320,
+   "id": 86,
+   "img": "assets/creatures/scarab.png?v=49636d06",
+   "immune": [
+    "Earth",
+    "Paralyze"
+   ],
+   "name": "Scarab",
+   "speed": 40,
+   "summon": 395,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Unpushable"
+   ]
+  },
+  {
+   "armor": 14,
+   "attack": 21,
+   "convince": 310,
+   "custom": false,
+   "defend": 5,
+   "exp": 45,
+   "flee": 5,
+   "hp": 45,
+   "id": 87,
+   "img": "assets/creatures/scorpion.png?v=63d2e705",
+   "immune": [
+    "Earth"
+   ],
+   "name": "Scorpion",
+   "speed": 35,
+   "summon": 310
+  },
+  {
+   "armor": 1,
+   "attack": 0,
+   "convince": 250,
+   "custom": false,
+   "defend": 2,
+   "drops": [
+    {
+     "amount": 4,
+     "name": "Meat",
+     "pct": 70.0
+    }
+   ],
+   "exp": 0,
+   "flee": 20,
+   "hp": 20,
+   "id": 88,
+   "img": "assets/creatures/sheep.png?v=9c9316f9",
+   "name": "Sheep",
+   "speed": 18,
+   "summon": 250,
+   "voices": [
+    "Maeh"
+   ]
+  },
+  {
+   "armor": 2,
+   "attack": 14,
+   "convince": 300,
+   "custom": false,
+   "defend": 9,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Bone",
+     "pct": 50.0
+    },
+    {
+     "amount": 1,
+     "name": "Torch",
+     "pct": 50.0
+    },
+    {
+     "amount": 10,
+     "name": "Gold Coin",
+     "pct": 45.0
+    },
+    {
+     "amount": 1,
+     "name": "Hatchet",
+     "pct": 25.0
+    },
+    {
+     "amount": 1,
+     "name": "Mace",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Shield",
+     "pct": 12.0
+    },
+    {
+     "amount": 1,
+     "name": "Viking Helmet",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Sword",
+     "pct": 2.0
+    }
+   ],
+   "exp": 35,
+   "flee": 0,
+   "hp": 50,
+   "id": 89,
+   "img": "assets/creatures/skeleton.png?v=d43178a4",
+   "immune": [
+    "Earth",
+    "Life Drain"
+   ],
+   "name": "Skeleton",
+   "speed": 37,
+   "summon": 300
+  },
+  {
+   "armor": 1,
+   "attack": 4,
+   "convince": 200,
+   "custom": false,
+   "defend": 5,
+   "drops": [
+    {
+     "amount": 2,
+     "name": "Meat",
+     "pct": 1.0
+    }
+   ],
+   "exp": 3,
+   "flee": 8,
+   "hp": 20,
+   "id": 90,
+   "img": "assets/creatures/skunk.png?v=cdb93165",
+   "name": "Skunk",
+   "speed": 28,
+   "summon": 200
+  },
+  {
+   "armor": 3,
+   "attack": 42,
+   "custom": false,
+   "defend": 10,
+   "exp": 160,
+   "flee": 0,
+   "hp": 150,
+   "id": 91,
+   "img": "assets/creatures/slime.png?v=3bad96d3",
+   "immune": [
+    "Earth"
+   ],
+   "name": "Slime",
+   "speed": 20,
+   "traits": [
+    "Moves objects",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Blubb"
+   ]
+  },
+  {
+   "armor": 0,
+   "attack": 5,
+   "convince": 205,
+   "custom": false,
+   "defend": 1,
+   "exp": 10,
+   "flee": 0,
+   "hp": 15,
+   "id": 92,
+   "img": "assets/creatures/snake.png?v=a17725fc",
+   "immune": [
+    "Earth"
+   ],
+   "name": "Snake",
+   "speed": 20,
+   "summon": 205,
+   "voices": [
+    "Zzzzzzt"
+   ]
+  },
+  {
+   "armor": 2,
+   "attack": 7,
+   "convince": 210,
+   "custom": false,
+   "defend": 2,
+   "drops": [
+    {
+     "amount": 5,
+     "name": "Gold Coin",
+     "pct": 35.0
+    }
+   ],
+   "exp": 12,
+   "flee": 6,
+   "hp": 20,
+   "id": 93,
+   "img": "assets/creatures/spider.png?v=f65bda46",
+   "name": "Spider",
+   "speed": 36,
+   "summon": 210
+  },
+  {
+   "armor": 14,
+   "attack": 30,
+   "custom": false,
+   "defend": 20,
+   "drops": [
+    {
+     "amount": 8,
+     "name": "Gold Coin",
+     "pct": 13.0
+    },
+    {
+     "amount": 2,
+     "name": "Throwing Knife",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Legs",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Blank Rune",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Katana",
+     "pct": 6.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Shield",
+     "pct": 5.5
+    },
+    {
+     "amount": 1,
+     "name": "Backpack",
+     "pct": 4.5
+    },
+    {
+     "amount": 1,
+     "name": "Brass Legs",
+     "pct": 3.5
+    },
+    {
+     "amount": 1,
+     "name": "Obsidian Lance",
+     "pct": 1.2
+    }
+   ],
+   "exp": 90,
+   "flee": 0,
+   "hp": 120,
+   "id": 94,
+   "img": "assets/creatures/stalker.png?v=75e98b91",
+   "immune": [
+    "Life Drain"
+   ],
+   "name": "Stalker",
+   "speed": 90,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ]
+  },
+  {
+   "armor": 30,
+   "attack": 38,
+   "convince": 590,
+   "custom": false,
+   "defend": 25,
+   "drops": [
+    {
+     "amount": 15,
+     "name": "Gold Coin",
+     "pct": 16.0
+    },
+    {
+     "amount": 4,
+     "name": "Small Stone",
+     "pct": 13.0
+    },
+    {
+     "amount": 1,
+     "name": "Steel Shield",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Torch",
+     "pct": 5.5
+    },
+    {
+     "amount": 1,
+     "name": "Power Ring",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Scale Armor",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Carlin Sword",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Crystal Ring",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Red Gem",
+     "pct": 0.1
+    }
+   ],
+   "exp": 160,
+   "flee": 0,
+   "hp": 270,
+   "id": 95,
+   "img": "assets/creatures/stone_golem.png?v=04a4b21f",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Paralyze"
+   ],
+   "name": "Stone Golem",
+   "speed": 50,
+   "summon": 590,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Unpushable"
+   ]
+  },
+  {
+   "armor": 6,
+   "attack": 12,
+   "convince": 320,
+   "custom": false,
+   "defend": 10,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Fish",
+     "pct": 60.0
+    },
+    {
+     "amount": 5,
+     "name": "Gold Coin",
+     "pct": 50.0
+    },
+    {
+     "amount": 1,
+     "name": "Dagger",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Torch",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Boots",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Fishing Rod",
+     "pct": 0.1
+    }
+   ],
+   "exp": 25,
+   "flee": 15,
+   "hp": 55,
+   "id": 96,
+   "img": "assets/creatures/swamp_troll.png?v=253eccf8",
+   "name": "Swamp Troll",
+   "speed": 24,
+   "summon": 320,
+   "voices": [
+    "Grrrr",
+    "Groar!",
+    "Me strong! Me ate spinach!"
+   ]
+  },
+  {
+   "custom": true,
+   "exp": 260,
+   "hp": 240,
+   "id": 97,
+   "img": "assets/creatures/tar.png?v=920c62ca",
+   "name": "Tar"
+  },
+  {
+   "custom": true,
+   "exp": 4900,
+   "hp": 5200,
+   "id": 98,
+   "img": "assets/creatures/tentacle_horror.png?v=a317da27",
+   "loot": "Black Pearl, Bone, Brass Armor, Brass Legs, Double Axe, Gold, Gold Nugget, Golden Armor, Meat, Medusa Shield, Rotten Meat, Ring of Healing, Shrimp, Small Amethyst, Small Diamond, Steel Helmet, Turquoise Gem, Two-handed Sword, Viking Shield, White Pearl, Warrior Helmet",
+   "name": "Tentacle Horror"
+  },
+  {
+   "custom": true,
+   "exp": 95,
+   "hp": 140,
+   "id": 99,
+   "img": "assets/creatures/tentacle_spawn.png?v=ed436038",
+   "loot": "Brass Legs, Brass Shield, Gold, Hatchet, Life Crystal, Shrimp, Sword, Viking Helmet",
+   "name": "Tentacle Spawn"
+  },
+  {
+   "convince": 350,
+   "custom": true,
+   "exp": 38,
+   "hp": 50,
+   "id": 100,
+   "img": "assets/creatures/trilobite.png?v=e405a522",
+   "loot": "Small Rock Crystal",
+   "name": "Trilobite"
+  },
+  {
+   "custom": true,
+   "exp": 220,
+   "hp": 380,
+   "id": 101,
+   "img": "assets/creatures/troglodyte.png?v=9cf7c585",
+   "loot": "Bone, Bone Shield, Brass Legs, Fish, 0-31gp, Mace, Piece of Iron, Remains of a Fish, Rotten Meat, Scale Armor, Spear",
+   "name": "Troglodyte"
+  },
+  {
+   "armor": 6,
+   "attack": 10,
+   "convince": 290,
+   "custom": false,
+   "defend": 8,
+   "drops": [
+    {
+     "amount": 10,
+     "name": "Gold Coin",
+     "pct": 60.0
+    },
+    {
+     "amount": 1,
+     "name": "Spear",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Hand Axe",
+     "pct": 18.0
+    },
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Wooden Shield",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Boots",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Helmet",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Rope",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Studded Club",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Silver Amulet",
+     "pct": 0.1
+    }
+   ],
+   "exp": 20,
+   "flee": 15,
+   "hp": 50,
+   "id": 102,
+   "img": "assets/creatures/troll.png?v=98520a7f",
+   "name": "Troll",
+   "speed": 23,
+   "summon": 290,
+   "voices": [
+    "Grrrr",
+    "Groar",
+    "Gruntz!",
+    "Hmmm, bugs.",
+    "Hmmm, dogs."
+   ]
+  },
+  {
+   "custom": true,
+   "exp": 1900,
+   "hp": 2200,
+   "id": 103,
+   "img": "assets/creatures/underworm.png?v=41f49fc3",
+   "loot": "Axe Ring, Battle Hammer, Big Bone, Brass Armor, Brass Legs, Bronze Amulet, Dark Shield, 0-200gp, Guardian Halberd, 0-3 Ham, Iron Helmet, 0-4 Meat, Skeleton, 0-2 Skulls, Small Ruby, Two Handed Sword",
+   "name": "Underworm"
+  },
+  {
+   "armor": 12,
+   "attack": 20,
+   "convince": 450,
+   "custom": false,
+   "defend": 14,
+   "drops": [
+    {
+     "amount": 2,
+     "name": "Skull",
+     "pct": 80.0
+    },
+    {
+     "amount": 3,
+     "name": "Spear",
+     "pct": 60.0
+    },
+    {
+     "amount": 12,
+     "name": "Gold Coin",
+     "pct": 32.0
+    },
+    {
+     "amount": 3,
+     "name": "Meat",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Dagger",
+     "pct": 25.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Armor",
+     "pct": 10.0
+    },
+    {
+     "amount": 2,
+     "name": "Red Apple",
+     "pct": 7.5
+    },
+    {
+     "amount": 1,
+     "name": "Chain Helmet",
+     "pct": 4.0
+    },
+    {
+     "amount": 1,
+     "name": "Protection Amulet",
+     "pct": 1.1
+    },
+    {
+     "amount": 1,
+     "name": "Plate Armor",
+     "pct": 0.8
+    },
+    {
+     "amount": 1,
+     "name": "Double Axe",
+     "pct": 0.4
+    },
+    {
+     "amount": 1,
+     "name": "Small Diamond",
+     "pct": 0.1
+    }
+   ],
+   "exp": 85,
+   "flee": 10,
+   "hp": 190,
+   "id": 104,
+   "img": "assets/creatures/valkyrie.png?v=f3289291",
+   "name": "Valkyrie",
+   "speed": 48,
+   "summon": 450,
+   "traits": [
+    "Moves objects",
+    "Unpushable"
+   ],
+   "voices": [
+    "Stand still!",
+    "One more head for me!",
+    "Head off!"
+   ]
+  },
+  {
+   "armor": 27,
+   "attack": 42,
+   "custom": false,
+   "defend": 38,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Grave Flower",
+     "pct": 18.0
+    },
+    {
+     "amount": 20,
+     "name": "Gold Coin",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Katana",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Bowl",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Skull",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Legs",
+     "pct": 8.0
+    },
+    {
+     "amount": 1,
+     "name": "Black Pearl",
+     "pct": 1.5
+    },
+    {
+     "amount": 1,
+     "name": "Spike Sword",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Strange Helmet",
+     "pct": 0.4
+    },
+    {
+     "amount": 1,
+     "name": "Ice Rapier",
+     "pct": 0.3
+    },
+    {
+     "amount": 1,
+     "name": "Bronze Amulet",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Emerald Bangle",
+     "pct": 0.2
+    },
+    {
+     "amount": 1,
+     "name": "Vampire Shield",
+     "pct": 0.1
+    }
+   ],
+   "exp": 290,
+   "flee": 0,
+   "hp": 450,
+   "id": 105,
+   "img": "assets/creatures/vampire.png?v=a6e83e20",
+   "immune": [
+    "Earth",
+    "Life Drain",
+    "Paralyze"
+   ],
+   "name": "Vampire",
+   "speed": 70,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "BLOOD!",
+    "Let me kiss your neck.",
+    "I smell warm blood.",
+    "I call you, my bats! Come!"
+   ]
+  },
+  {
+   "armor": 8,
+   "attack": 24,
+   "convince": 420,
+   "custom": false,
+   "defend": 16,
+   "drops": [
+    {
+     "amount": 4,
+     "name": "Meat",
+     "pct": 70.0
+    },
+    {
+     "amount": 2,
+     "name": "Ham",
+     "pct": 40.0
+    }
+   ],
+   "exp": 55,
+   "flee": 0,
+   "hp": 140,
+   "id": 106,
+   "img": "assets/creatures/war_wolf.png?v=25dc4580",
+   "name": "War Wolf",
+   "speed": 92,
+   "traits": [
+    "Moves objects",
+    "Unpushable",
+    "Unsummonable"
+   ],
+   "voices": [
+    "Grrrrrrr",
+    "Yoooohhuuuu!"
+   ]
+  },
+  {
+   "armor": 32,
+   "attack": 40,
+   "custom": false,
+   "defend": 50,
+   "drops": [
+    {
+     "amount": 80,
+     "name": "Gold Coin",
+     "pct": 30.0
+    },
+    {
+     "amount": 4,
+     "name": "Cherry",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Candlestick",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Inkwell",
+     "pct": 13.0
+    },
+    {
+     "amount": 1,
+     "name": "Bread",
+     "pct": 11.0
+    },
+    {
+     "amount": 1,
+     "name": "Poison Dagger",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Skull Staff",
+     "pct": 7.0
+    },
+    {
+     "amount": 1,
+     "name": "Dark Mushroom",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Energy Ring",
+     "pct": 3.0
+    },
+    {
+     "amount": 1,
+     "name": "Mind Stone",
+     "pct": 2.5
+    },
+    {
+     "amount": 1,
+     "name": "Blue Robe",
+     "pct": 2.0
+    },
+    {
+     "amount": 1,
+     "name": "Small Sapphire",
+     "pct": 1.4
+    },
+    {
+     "amount": 1,
+     "name": "Talon",
+     "pct": 1.1
+    },
+    {
+     "amount": 1,
+     "name": "Crystal Ring",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Stone Skin Amulet",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Red Tome",
+     "pct": 0.4
+    },
+    {
+     "amount": 1,
+     "name": "Golden Armor",
+     "pct": 0.3
+    },
+    {
+     "amount": 1,
+     "name": "Ring of the Sky",
+     "pct": 0.2
+    }
+   ],
+   "exp": 4000,
+   "flee": 1000,
+   "hp": 3200,
+   "id": 107,
+   "img": "assets/creatures/warlock.png?v=2a270d5b",
+   "immune": [
+    "Fire",
+    "Earth",
+    "Energy",
+    "Paralyze"
+   ],
+   "name": "Warlock",
+   "speed": 75,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Ranged attacker",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Learn the secret of our magic! YOUR death!",
+    "Even a rat is a better mage than you.",
+    "We don't like intruders!"
+   ]
+  },
+  {
+   "armor": 4,
+   "attack": 12,
+   "convince": 280,
+   "custom": false,
+   "defend": 8,
+   "exp": 24,
+   "flee": 0,
+   "hp": 35,
+   "id": 108,
+   "img": "assets/creatures/wasp.png?v=3454cfe7",
+   "immune": [
+    "Earth"
+   ],
+   "name": "Wasp",
+   "speed": 120,
+   "summon": 280,
+   "voices": [
+    "Bsssssss"
+   ]
+  },
+  {
+   "armor": 9,
+   "attack": 16,
+   "convince": 420,
+   "custom": false,
+   "defend": 18,
+   "drops": [
+    {
+     "amount": 30,
+     "name": "Gold Coin",
+     "pct": 49.0
+    },
+    {
+     "amount": 1,
+     "name": "Meat",
+     "pct": 40.0
+    },
+    {
+     "amount": 1,
+     "name": "Axe",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Shield",
+     "pct": 17.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Legs",
+     "pct": 15.0
+    },
+    {
+     "amount": 1,
+     "name": "Mace",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Chain Helmet",
+     "pct": 5.0
+    },
+    {
+     "amount": 1,
+     "name": "Brass Armor",
+     "pct": 2.5
+    },
+    {
+     "amount": 1,
+     "name": "Steel Shield",
+     "pct": 1.0
+    },
+    {
+     "amount": 1,
+     "name": "Doll",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Iron Helmet",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "War Hammer",
+     "pct": 0.1
+    }
+   ],
+   "exp": 55,
+   "flee": 10,
+   "hp": 120,
+   "id": 109,
+   "img": "assets/creatures/wild_warrior.png?v=0b1a336c",
+   "name": "Wild Warrior",
+   "speed": 55,
+   "summon": 420,
+   "voices": [
+    "An enemy!",
+    "Gimme your money!"
+   ]
+  },
+  {
+   "armor": 2,
+   "attack": 13,
+   "convince": 260,
+   "custom": false,
+   "defend": 6,
+   "drops": [
+    {
+     "amount": 2,
+     "name": "Meat",
+     "pct": 30.0
+    }
+   ],
+   "exp": 20,
+   "flee": 0,
+   "hp": 30,
+   "id": 110,
+   "img": "assets/creatures/winter_wolf.png?v=928bcdcc",
+   "name": "Winter Wolf",
+   "speed": 45,
+   "summon": 260
+  },
+  {
+   "armor": 8,
+   "attack": 18,
+   "custom": false,
+   "defend": 12,
+   "drops": [
+    {
+     "amount": 1,
+     "name": "Cape",
+     "pct": 50.0
+    },
+    {
+     "amount": 1,
+     "name": "Leather Boots",
+     "pct": 50.0
+    },
+    {
+     "amount": 1,
+     "name": "Cheese",
+     "pct": 40.0
+    },
+    {
+     "amount": 1,
+     "name": "Sickle",
+     "pct": 40.0
+    },
+    {
+     "amount": 8,
+     "name": "Cookie",
+     "pct": 30.0
+    },
+    {
+     "amount": 1,
+     "name": "Broom",
+     "pct": 20.0
+    },
+    {
+     "amount": 1,
+     "name": "Coat",
+     "pct": 20.0
+    },
+    {
+     "amount": 10,
+     "name": "Gold Coin",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Wolf Tooth Chain",
+     "pct": 10.0
+    },
+    {
+     "amount": 1,
+     "name": "Star Herb",
+     "pct": 9.0
+    },
+    {
+     "amount": 1,
+     "name": "Garlic Necklace",
+     "pct": 2.5
+    },
+    {
+     "amount": 1,
+     "name": "Silver Dagger",
+     "pct": 0.5
+    }
+   ],
+   "exp": 120,
+   "flee": 30,
+   "hp": 300,
+   "id": 111,
+   "img": "assets/creatures/witch.png?v=16c106f6",
+   "immune": [
+    "Earth",
+    "Energy"
+   ],
+   "name": "Witch",
+   "speed": 62,
+   "traits": [
+    "Moves objects",
+    "Sees invisible",
+    "Unpushable",
+    "Ranged attacker",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Horax pokti!",
+    "Hihihihi!",
+    "Herba budinia ex!"
+   ]
+  },
+  {
+   "armor": 1,
+   "attack": 12,
+   "convince": 255,
+   "custom": false,
+   "defend": 4,
+   "drops": [
+    {
+     "amount": 2,
+     "name": "Meat",
+     "pct": 50.0
+    }
+   ],
+   "exp": 18,
+   "flee": 8,
+   "hp": 25,
+   "id": 112,
+   "img": "assets/creatures/wolf.png?v=97a8e535",
+   "name": "Wolf",
+   "speed": 42,
+   "summon": 255
+  },
+  {
+   "armor": 28,
+   "attack": 53,
+   "custom": false,
+   "defend": 43,
+   "drops": [
+    {
+     "amount": 4,
+     "name": "Meat",
+     "pct": 75.0
+    },
+    {
+     "amount": 30,
+     "name": "Gold Coin",
+     "pct": 72.0
+    },
+    {
+     "amount": 22,
+     "name": "Snowball",
+     "pct": 50.0
+    },
+    {
+     "amount": 6,
+     "name": "Ham",
+     "pct": 35.0
+    },
+    {
+     "amount": 1,
+     "name": "Wolf Tooth Chain",
+     "pct": 0.5
+    },
+    {
+     "amount": 1,
+     "name": "Bunnyslippers",
+     "pct": 0.1
+    }
+   ],
+   "exp": 460,
+   "flee": 0,
+   "hp": 950,
+   "id": 113,
+   "img": "assets/creatures/yeti.png?v=f533dfc6",
+   "immune": [
+    "Energy"
+   ],
+   "name": "Yeti",
+   "speed": 85,
+   "traits": [
+    "Moves objects",
+    "Pushes creatures",
+    "Sees invisible",
+    "Unpushable",
+    "Unsummonable",
+    "Unconvinceable"
+   ],
+   "voices": [
+    "Yooodelaaahooohooo!",
+    "Yooodelaaaheeeheee!"
+   ]
+  }
+ ],
+ "source": "https://tibiantis.life/"
+}

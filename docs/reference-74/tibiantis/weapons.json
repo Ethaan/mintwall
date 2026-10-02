@@ -1,0 +1,617 @@
+{
+ "WEAPONS": [
+  {
+   "atk": 7,
+   "def": 5,
+   "hands": 1,
+   "name": "knife",
+   "sprite": "assets/items/knife.png?v=23196da8",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 8,
+   "def": 6,
+   "hands": 1,
+   "name": "combat knife",
+   "sprite": "assets/items/combat-knife.png?v=ce88a585",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 8,
+   "def": 6,
+   "hands": 1,
+   "name": "dagger",
+   "sprite": "assets/items/dagger.png?v=8b83f518",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 8,
+   "def": 7,
+   "hands": 1,
+   "name": "silver dagger",
+   "sprite": "assets/items/silver-dagger.png?v=8362fbfd",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 9,
+   "def": 11,
+   "hands": 1,
+   "name": "foil",
+   "sprite": "assets/items/foil.png?v=1d529c8a",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 10,
+   "def": 8,
+   "hands": 1,
+   "name": "rapier",
+   "sprite": "assets/items/rapier.png?v=e268361d",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 11,
+   "def": 11,
+   "hands": 1,
+   "name": "short sword",
+   "sprite": "assets/items/short-sword.png?v=8d2376f0",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 12,
+   "def": 9,
+   "hands": 1,
+   "name": "machete",
+   "sprite": "assets/items/machete.png?v=e468068e",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 12,
+   "def": 10,
+   "hands": 1,
+   "name": "sabre",
+   "sprite": "assets/items/sabre.png?v=2da03e68",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 14,
+   "def": 10,
+   "hands": 1,
+   "name": "bone sword",
+   "sprite": "assets/items/bone-sword.png?v=cef16157",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 14,
+   "def": 12,
+   "hands": 1,
+   "name": "sword",
+   "sprite": "assets/items/sword.png?v=a0c8b3a0",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 15,
+   "def": 13,
+   "hands": 1,
+   "name": "carlin sword",
+   "sprite": "assets/items/carlin-sword.png?v=ae4c1d64",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 16,
+   "def": 10,
+   "hands": 1,
+   "name": "heavy machete",
+   "sprite": "assets/items/heavy-machete.png?v=a5e9de13",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 16,
+   "def": 12,
+   "hands": 1,
+   "name": "katana",
+   "sprite": "assets/items/katana.png?v=2260e9c9",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 17,
+   "def": 14,
+   "hands": 1,
+   "name": "longsword",
+   "sprite": "assets/items/longsword.png?v=2f7d9103",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 18,
+   "def": 8,
+   "hands": 1,
+   "name": "poison dagger",
+   "sprite": "assets/items/poison-dagger.png?v=b6c3acd4",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 19,
+   "def": 13,
+   "hands": 1,
+   "name": "scimitar",
+   "sprite": "assets/items/scimitar.png?v=f6665e20",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 24,
+   "def": 21,
+   "hands": 1,
+   "name": "spike sword",
+   "sprite": "assets/items/spike-sword.png?v=5d22217f",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 26,
+   "def": 23,
+   "hands": 2,
+   "name": "broadsword",
+   "sprite": "assets/items/broadsword.png?v=fa2e15cb",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 26,
+   "def": 15,
+   "hands": 1,
+   "name": "serpent sword",
+   "sprite": "assets/items/serpent-sword.png?v=f9d56e42",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 30,
+   "def": 25,
+   "hands": 2,
+   "name": "two handed sword",
+   "sprite": "assets/items/two-handed-sword.png?v=8ef401a5",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 35,
+   "def": 20,
+   "hands": 1,
+   "name": "fire sword",
+   "sprite": "assets/items/fire-sword.png?v=b38c62b2",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 36,
+   "def": 30,
+   "hands": 1,
+   "name": "bright sword",
+   "sprite": "assets/items/bright-sword.png?v=f7716347",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 38,
+   "def": 22,
+   "hands": 1,
+   "name": "djinn blade",
+   "sprite": "assets/weapons/djinn-blade.png?v=17d55fb2",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 41,
+   "def": 23,
+   "hands": 1,
+   "name": "pharao sword",
+   "sprite": "assets/weapons/pharao-sword.png?v=79013849",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 46,
+   "def": 22,
+   "hands": 2,
+   "name": "giant sword",
+   "sprite": "assets/items/giant-sword.png?v=78595e44",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 48,
+   "def": 35,
+   "hands": 1,
+   "name": "magic sword",
+   "sprite": "assets/weapons/magic-sword.png?v=decbded8",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 53,
+   "def": 38,
+   "hands": 2,
+   "name": "warlord sword",
+   "obt": false,
+   "sprite": "assets/weapons/warlord-sword.png?v=709c2214",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 55,
+   "def": 40,
+   "hands": 2,
+   "name": "magic longsword",
+   "obt": false,
+   "sprite": "assets/weapons/magic-longsword.png?v=fc3aa188",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 100,
+   "def": 1,
+   "hands": 1,
+   "name": "ice rapier",
+   "note": "Breaks after 1 hit.",
+   "sprite": "assets/items/ice-rapier.png?v=2f2109cb",
+   "wtype": "Sword"
+  },
+  {
+   "atk": 7,
+   "def": 4,
+   "hands": 1,
+   "name": "sickle",
+   "sprite": "assets/items/sickle.png?v=3cc8e7c1",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 10,
+   "def": 5,
+   "hands": 1,
+   "name": "hand axe",
+   "sprite": "assets/items/hand-axe.png?v=a1ff160d",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 12,
+   "def": 6,
+   "hands": 1,
+   "name": "axe",
+   "sprite": "assets/items/axe.png?v=a922837b",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 13,
+   "def": 6,
+   "hands": 1,
+   "name": "golden sickle",
+   "sprite": "assets/items/golden-sickle.png?v=226b5ef7",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 15,
+   "def": 8,
+   "hands": 1,
+   "name": "hatchet",
+   "sprite": "assets/items/hatchet.png?v=9709ed6d",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 17,
+   "def": 8,
+   "hands": 1,
+   "name": "daramian axe",
+   "sprite": "assets/weapons/daramian-axe.png?v=9ecfeb9b",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 23,
+   "def": 12,
+   "hands": 1,
+   "name": "orcish axe",
+   "sprite": "assets/items/orcish-axe.png?v=855e6ac2",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 25,
+   "def": 10,
+   "hands": 2,
+   "name": "battle axe",
+   "sprite": "assets/items/battle-axe.png?v=f5ec28d5",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 28,
+   "def": 18,
+   "hands": 1,
+   "name": "barbarian axe",
+   "sprite": "assets/items/barbarian-axe.png?v=24b954fa",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 31,
+   "def": 19,
+   "hands": 1,
+   "name": "dwarven axe",
+   "sprite": "assets/weapons/dwarven-axe.png?v=53ed0848",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 33,
+   "def": 21,
+   "hands": 1,
+   "name": "knight axe",
+   "sprite": "assets/items/knight-axe.png?v=20053e04",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 34,
+   "def": 10,
+   "hands": 2,
+   "name": "obsidian lance",
+   "sprite": "assets/items/obsidian-lance.png?v=6c6725eb",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 35,
+   "def": 12,
+   "hands": 2,
+   "name": "double axe",
+   "sprite": "assets/items/double-axe.png?v=7d927226",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 35,
+   "def": 14,
+   "hands": 2,
+   "name": "halberd",
+   "sprite": "assets/items/halberd.png?v=acaf9968",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 38,
+   "def": 16,
+   "hands": 1,
+   "name": "fire axe",
+   "sprite": "assets/items/fire-axe.png?v=6f2b5b99",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 39,
+   "def": 15,
+   "hands": 2,
+   "name": "daramanian waraxe",
+   "sprite": "assets/items/daramanian-waraxe.png?v=602fdb7f",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 39,
+   "def": 25,
+   "hands": 2,
+   "name": "naginata",
+   "sprite": "assets/weapons/naginata.png?v=a0953a26",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 45,
+   "def": 24,
+   "hands": 2,
+   "name": "twin axe",
+   "obt": false,
+   "sprite": "assets/weapons/twin-axe.png?v=b098c888",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 46,
+   "def": 15,
+   "hands": 2,
+   "name": "guardian halberd",
+   "sprite": "assets/items/guardian-halberd.png?v=6eb92328",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 47,
+   "def": 16,
+   "hands": 2,
+   "name": "dragon lance",
+   "sprite": "assets/items/dragon-lance.png?v=758c2267",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 48,
+   "def": 10,
+   "hands": 2,
+   "name": "war axe",
+   "obt": false,
+   "sprite": "assets/weapons/war-axe.png?v=9ae72a77",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 50,
+   "def": 30,
+   "hands": 1,
+   "name": "stonecutter axe",
+   "sprite": "assets/weapons/stonecutter-axe.png?v=064490bc",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 52,
+   "def": 22,
+   "hands": 2,
+   "name": "great axe",
+   "obt": "unique",
+   "sprite": "assets/weapons/great-axe.png?v=a2ec560e",
+   "wtype": "Axe"
+  },
+  {
+   "atk": 6,
+   "def": 6,
+   "hands": 1,
+   "name": "crowbar",
+   "sprite": "assets/items/crowbar.png?v=918a2bee",
+   "wtype": "Club"
+  },
+  {
+   "atk": 7,
+   "def": 7,
+   "hands": 1,
+   "name": "club",
+   "sprite": "assets/items/club.png?v=2e5d6035",
+   "wtype": "Club"
+  },
+  {
+   "atk": 8,
+   "def": 3,
+   "hands": 2,
+   "name": "scythe",
+   "sprite": "assets/weapons/scythe.png?v=ab1ad0b8",
+   "wtype": "Club"
+  },
+  {
+   "atk": 9,
+   "def": 8,
+   "hands": 1,
+   "name": "studded club",
+   "sprite": "assets/items/studded-club.png?v=0e0cdd92",
+   "wtype": "Club"
+  },
+  {
+   "atk": 10,
+   "def": 25,
+   "hands": 2,
+   "name": "staff",
+   "sprite": "assets/items/staff.png?v=a6c611b9",
+   "wtype": "Club"
+  },
+  {
+   "atk": 12,
+   "def": 8,
+   "hands": 1,
+   "name": "bone club",
+   "sprite": "assets/items/bone-club.png?v=eb17ce32",
+   "wtype": "Club"
+  },
+  {
+   "atk": 16,
+   "def": 11,
+   "hands": 1,
+   "name": "mace",
+   "sprite": "assets/items/mace.png?v=337e0d1d",
+   "wtype": "Club"
+  },
+  {
+   "atk": 18,
+   "def": 10,
+   "hands": 1,
+   "name": "iron hammer",
+   "sprite": "assets/weapons/iron-hammer.png?v=1186ad12",
+   "wtype": "Club"
+  },
+  {
+   "atk": 21,
+   "def": 12,
+   "hands": 1,
+   "name": "daramanian mace",
+   "sprite": "assets/items/daramanian-mace.png?v=3b73709f",
+   "wtype": "Club"
+  },
+  {
+   "atk": 24,
+   "def": 14,
+   "hands": 1,
+   "name": "battle hammer",
+   "sprite": "assets/items/battle-hammer.png?v=31968b9f",
+   "wtype": "Club"
+  },
+  {
+   "atk": 24,
+   "def": 14,
+   "hands": 1,
+   "name": "giant smithhammer",
+   "sprite": "assets/weapons/giant-smithhammer.png?v=31968b9f",
+   "wtype": "Club"
+  },
+  {
+   "atk": 25,
+   "def": 11,
+   "hands": 1,
+   "name": "morning star",
+   "sprite": "assets/items/morning-star.png?v=b18c75a3",
+   "wtype": "Club"
+  },
+  {
+   "atk": 28,
+   "def": 15,
+   "hands": 1,
+   "name": "clerical mace",
+   "sprite": "assets/items/clerical-mace.png?v=5822b74f",
+   "wtype": "Club"
+  },
+  {
+   "atk": 32,
+   "def": 20,
+   "hands": 1,
+   "name": "dragon hammer",
+   "sprite": "assets/items/dragon-hammer.png?v=3efea424",
+   "wtype": "Club"
+  },
+  {
+   "atk": 36,
+   "def": 12,
+   "hands": 1,
+   "name": "skull staff",
+   "sprite": "assets/items/skull-staff.png?v=fcff618c",
+   "wtype": "Club"
+  },
+  {
+   "atk": 38,
+   "def": 16,
+   "hands": 1,
+   "name": "crystal mace",
+   "obt": false,
+   "sprite": "assets/weapons/crystal-mace.png?v=933e98cd",
+   "wtype": "Club"
+  },
+  {
+   "atk": 40,
+   "def": 30,
+   "hands": 1,
+   "name": "silver mace",
+   "obt": false,
+   "sprite": "assets/weapons/silver-mace.png?v=2bfd59e1",
+   "wtype": "Club"
+  },
+  {
+   "atk": 45,
+   "def": 10,
+   "hands": 2,
+   "name": "war hammer",
+   "sprite": "assets/items/war-hammer.png?v=c54e5be2",
+   "wtype": "Club"
+  },
+  {
+   "atk": 48,
+   "def": 12,
+   "hands": 2,
+   "name": "hammer of wrath",
+   "sprite": "assets/items/hammer-of-wrath.png?v=ba22e6c6",
+   "wtype": "Club"
+  },
+  {
+   "atk": 50,
+   "def": 15,
+   "hands": 2,
+   "name": "heavy mace",
+   "sprite": "assets/items/heavy-mace.png?v=796bef2b",
+   "wtype": "Club"
+  },
+  {
+   "atk": 49,
+   "def": 35,
+   "hands": 1,
+   "name": "thunder hammer",
+   "sprite": "assets/weapons/thunder-hammer.png?v=81db240e",
+   "wtype": "Club"
+  },
+  {
+   "atk": null,
+   "name": "bow",
+   "sprite": "assets/items/bow.png?v=9b292fc4",
+   "wtype": "Distance"
+  },
+  {
+   "atk": null,
+   "name": "crossbow",
+   "sprite": "assets/items/crossbow.png?v=e738a6f1",
+   "wtype": "Distance"
+  }
+ ],
+ "source": "https://tibiantis.life/"
+}

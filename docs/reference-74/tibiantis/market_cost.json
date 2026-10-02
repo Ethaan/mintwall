@@ -1,0 +1,133 @@
+{
+ "MARKET_COST": {
+  "amazon armor": [
+   2000000,
+   3000000
+  ],
+  "amazon helmet": [
+   2000000,
+   3000000
+  ],
+  "blue robe": [
+   8000,
+   12000
+  ],
+  "brass armor": 450,
+  "brass helmet": 120,
+  "brass legs": 195,
+  "cape": 9,
+  "chain armor": 200,
+  "chain helmet": 52,
+  "chain legs": 80,
+  "coat": 8,
+  "crown armor": [
+   13000,
+   16000
+  ],
+  "crown helmet": [
+   4000,
+   8000
+  ],
+  "crown legs": [
+   18000,
+   28000
+  ],
+  "crusader helmet": [
+   6000,
+   9000
+  ],
+  "dark armor": 1500,
+  "dark helmet": 1000,
+  "demon armor": [
+   1000000,
+   1500000
+  ],
+  "demon helmet": [
+   120000,
+   200000
+  ],
+  "devil helmet": 1000,
+  "doublet": 16,
+  "dragon scale mail": [
+   35000,
+   45000
+  ],
+  "dwarfen helmet": "norec",
+  "dwarven armor": "norec",
+  "golden armor": [
+   20000,
+   30000
+  ],
+  "golden legs": [
+   100000,
+   160000
+  ],
+  "green tunic": 10,
+  "hat of the mad": "norec",
+  "helmet of the ancients": "norec",
+  "horned helmet": [
+   2000000,
+   3000000
+  ],
+  "iron helmet": 100,
+  "jacket": 10,
+  "knight armor": [
+   5000,
+   7000
+  ],
+  "knight legs": [
+   5000,
+   8000
+  ],
+  "leather armor": 25,
+  "leather boots": 2,
+  "leather helmet": 12,
+  "leather legs": 10,
+  "legion helmet": 50,
+  "magic hat": "norec",
+  "magic plate armor": [
+   400000,
+   600000
+  ],
+  "mystic turban": "norec",
+  "native armor": 200,
+  "noble armor": 8000,
+  "plate armor": [
+   500,
+   700
+  ],
+  "plate legs": [
+   400,
+   600
+  ],
+  "platinum amulet": [
+   5000,
+   8000
+  ],
+  "post officers hat": "norec",
+  "rangers cloak": "norec",
+  "red robe": 50000,
+  "royal helmet": [
+   25000,
+   35000
+  ],
+  "scale armor": 260,
+  "scarf": 15,
+  "soldier helmet": 110,
+  "steel boots": [
+   17000,
+   27000
+  ],
+  "steel helmet": 400,
+  "strange helmet": 400,
+  "studded armor": 90,
+  "studded helmet": 63,
+  "studded legs": 60,
+  "viking helmet": 265,
+  "warrior helmet": [
+   6000,
+   8000
+  ]
+ },
+ "source": "https://tibiantis.life/"
+}

@@ -125,10 +125,28 @@ When finishing one, tick it and add a short note (what changed / how verified).
       Done 2026-09-30: no NPC uses them any more - they were dead local copies in Hugo, Talphion and Noodles (rewritten
       for the Postman Missions; Kevin counts the 20 bones himself). test_spells.py: getPlayerPromotionLevel is
       defined now (compat.lua) and left KNOWN_UNDEFINED.
-- [ ] Spell-teaching NPCs: check spell lists/prices/levels against 7.4
+- [x] Spell-teaching NPCs: check spell lists/prices/levels against 7.4
       Found 2026-10-01: every spell teacher (17 scripts) is broken - StdModule.learnSpell calls
       parameters.vocation(cid) but they pass a number (a Lua error on every purchase), and all pass level 1.
       No spell has needlearn, so nobody needs to buy a spell anyway; spells.xml gates by magic level only.
+      Done 2026-10-01, decided with the user: spells as Tibiantis (a 7.4 server) has them - its spell table
+      (docs/reference-74/spells-tibiantis.json, tools/apply-tibiantis-spells.py --fetch) won over TibiaWiki,
+      whose 2005 spell pages and 2007 teacher pages disagree on ~30 spells (spells.json keeps them).
+      - Every spell must be learned (needlearn="1"); magic level only, no character level (Levitate keeps its
+        premium flag, loses its level 12); mana, rune charges, vocations from Tibiantis. Eremo's spells
+        (Challenge, Power Bolt, Wild Growth, Enchant Staff) stay promoted-only (Tibiantis' table names the base
+        vocation; the 2005 wiki and our old data say promoted).
+      - Runes: any vocation uses any rune with its use magic level (Magic Wall 9, Sudden Death 15, Paralyze 18).
+      - Teachers: Tibiantis' 24 (npc/lib/spellteacher.lua + spells74.lua; the 7.x lines "Do you want to learn
+        the spell '...' for ... gold?"): Elane, Faluae, Irea, Shanar, Eroth, Etzel, Maealil, Elathriel,
+        Padreia, Marvik, Zoltan (he still taught in 7.4), Eremo added; Chatterbone, Smiley, Tothdral, Rahkem,
+        Ormuhn no longer teach (none in Tibiantis; Ankrahmun has no teacher). Force Strike and Envenom kept
+        (Tibiantis teaches them); its Discharge/Extinguish/exito tera left out (no price).
+      - Test characters know their vocation's spells unless spells=[] (tests/tibia74/db.py).
+      tests: test_spell_teachers.py (learning rules, all 24 teachers list their spells), test_spells.py
+      test_a_knight_shoots_sudden_death_from_magic_level_15.
+- [ ] Existing characters on the live database know no spell now (spell buying is new) - grant them their
+      vocation's spells once, or let them buy (decided: they buy - "Must buy, as 7.4"); tell the players
 - [ ] Shop prices: audit buy/sell lists against 7.4 (tibiaot74 data may include 7.72 items)
 
 ## Map / world
@@ -968,7 +986,8 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 
 ## Spells and runes (found while making the Centurion test character)
 
-- [x] Levitate (exani hur): premium and level 12 (TibiaWiki 2005 and 2006) - it had neither. 2026-09-26,
+- [x] Levitate (exani hur): premium and level 12 (TibiaWiki 2005 and 2006) - it had neither (2026-10-01: the level
+      went with Tibiantis' magic-level-only spells; premium stays). 2026-09-26,
       test_paradox_tower_levitate_is_premium. The other premium spells still carry no prem="1" (see the premium task).
 
 - [x] rope, shovel, pick, keys (key.lua), bread, instruments, decaying items called isIntegerInArray, which did not

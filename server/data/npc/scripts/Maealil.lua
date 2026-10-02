@@ -1,3 +1,4 @@
+dofile(getDataDir() .. 'npc/lib/spellteacher.lua')   -- teachSpells: the spells Tibiantis has him teach
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
 NpcSystem.parseParameters(npcHandler)
@@ -32,5 +33,6 @@ function onCreatureSay(cid, type, msg)     npcHandler:onCreatureSay(cid, type, m
 end
 function onThink()                         npcHandler:onThink() end
 -- OTServ event handling functions end
+teachSpells(keywordHandler, npcHandler, getNpcName())
 npcHandler:addModule(FocusModule:new())
 

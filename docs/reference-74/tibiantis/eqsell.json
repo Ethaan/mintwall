@@ -1,0 +1,1298 @@
+{
+ "EQSELL": {
+  "axe": {
+   "best": 7,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Romella"
+     ]
+    }
+   ]
+  },
+  "barbarian axe": {
+   "best": 185,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    }
+   ]
+  },
+  "battle axe": {
+   "best": 80,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Romella"
+     ]
+    }
+   ]
+  },
+  "battle hammer": {
+   "best": 120,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Romella"
+     ]
+    }
+   ]
+  },
+  "blue robe": {
+   "best": 8000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "boots of haste": {
+   "best": 28000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "bow": {
+   "best": 130,
+   "cities": [
+    {
+     "city": "Fibula",
+     "npcs": [
+      "Timur"
+     ]
+    }
+   ]
+  },
+  "brass armor": {
+   "best": 150,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Yanni"
+     ]
+    }
+   ]
+  },
+  "brass helmet": {
+   "best": 30,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Carlin",
+     "npcs": [
+      "Cornelia"
+     ]
+    },
+    {
+     "city": "Darashia",
+     "npcs": [
+      "Azil"
+     ]
+    },
+    {
+     "city": "Kazordoon",
+     "npcs": [
+      "Kroox"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Hardek"
+     ]
+    }
+   ]
+  },
+  "brass legs": {
+   "best": 49,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Carlin",
+     "npcs": [
+      "Cornelia"
+     ]
+    },
+    {
+     "city": "Darashia",
+     "npcs": [
+      "Azil"
+     ]
+    },
+    {
+     "city": "Kazordoon",
+     "npcs": [
+      "Kroox"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Hardek"
+     ]
+    }
+   ]
+  },
+  "broadsword": {
+   "best": 500,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "carlin sword": {
+   "best": 118,
+   "cities": [
+    {
+     "city": "Carlin",
+     "npcs": [
+      "Rowenna"
+     ]
+    },
+    {
+     "city": "Darashia",
+     "npcs": [
+      "Habdel"
+     ]
+    },
+    {
+     "city": "Kazordoon",
+     "npcs": [
+      "Uzgod"
+     ]
+    }
+   ]
+  },
+  "chain armor": {
+   "best": 70,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Yanni"
+     ]
+    }
+   ]
+  },
+  "chain helmet": {
+   "best": 17,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Yanni"
+     ]
+    }
+   ]
+  },
+  "chain legs": {
+   "best": 25,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Yanni"
+     ]
+    }
+   ]
+  },
+  "clerical mace": {
+   "best": 170,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    }
+   ]
+  },
+  "club": {
+   "best": 1,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Carlin",
+     "npcs": [
+      "Rowenna"
+     ]
+    },
+    {
+     "city": "Darashia",
+     "npcs": [
+      "Habdel"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Kazordoon",
+     "npcs": [
+      "Uzgod"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Turvy"
+     ]
+    }
+   ]
+  },
+  "coat": {
+   "best": 1,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Hardek"
+     ]
+    }
+   ]
+  },
+  "crossbow": {
+   "best": 160,
+   "cities": [
+    {
+     "city": "Fibula",
+     "npcs": [
+      "Timur"
+     ]
+    }
+   ]
+  },
+  "crowbar": {
+   "best": 50,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Beatrice"
+     ]
+    }
+   ]
+  },
+  "crown armor": {
+   "best": 12000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "crown helmet": {
+   "best": 2500,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "crown legs": {
+   "best": 12000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "crusader helmet": {
+   "best": 6000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "dagger": {
+   "best": 2,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Romella"
+     ]
+    }
+   ]
+  },
+  "dark armor": {
+   "best": 400,
+   "cities": [
+    {
+     "city": "Aruthang",
+     "npcs": []
+    }
+   ]
+  },
+  "dark helmet": {
+   "best": 200,
+   "cities": [
+    {
+     "city": "Aruthang",
+     "npcs": []
+    }
+   ]
+  },
+  "devil helmet": {
+   "best": 450,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Kazordoon",
+     "npcs": [
+      "Kroox"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Hardek"
+     ]
+    }
+   ]
+  },
+  "double axe": {
+   "best": 260,
+   "cities": [
+    {
+     "city": "Carlin",
+     "npcs": [
+      "Rowenna"
+     ]
+    },
+    {
+     "city": "Darashia",
+     "npcs": [
+      "Habdel"
+     ]
+    },
+    {
+     "city": "Kazordoon",
+     "npcs": [
+      "Uzgod"
+     ]
+    }
+   ]
+  },
+  "dragon hammer": {
+   "best": 1500,
+   "cities": [
+    {
+     "city": "Aruthang",
+     "npcs": []
+    }
+   ]
+  },
+  "dragon lance": {
+   "best": 9000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "fire axe": {
+   "best": 7500,
+   "cities": [
+    {
+     "city": "Aruthang",
+     "npcs": []
+    }
+   ]
+  },
+  "fire sword": {
+   "best": 4000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "giant sword": {
+   "best": 16000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "golden armor": {
+   "best": 1500,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Hardek"
+     ]
+    }
+   ]
+  },
+  "halberd": {
+   "best": 400,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Romella"
+     ]
+    }
+   ]
+  },
+  "hand axe": {
+   "best": 4,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Romella"
+     ]
+    }
+   ]
+  },
+  "hatchet": {
+   "best": 25,
+   "cities": [
+    {
+     "city": "Fibula",
+     "npcs": [
+      "Timur"
+     ]
+    }
+   ]
+  },
+  "ice rapier": {
+   "best": 1000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "iron helmet": {
+   "best": 150,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    }
+   ]
+  },
+  "jacket": {
+   "best": 1,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Hardek"
+     ]
+    }
+   ]
+  },
+  "knight armor": {
+   "best": 5000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "knight axe": {
+   "best": 2000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "knight legs": {
+   "best": 5000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "leather armor": {
+   "best": 12,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Yanni"
+     ]
+    }
+   ]
+  },
+  "leather helmet": {
+   "best": 4,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Yanni"
+     ]
+    }
+   ]
+  },
+  "leather legs": {
+   "best": 1,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Hardek"
+     ]
+    }
+   ]
+  },
+  "longsword": {
+   "best": 51,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Kazordoon",
+     "npcs": [
+      "Uzgod"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Hardek"
+     ]
+    }
+   ]
+  },
+  "mace": {
+   "best": 30,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Fibula",
+     "npcs": [
+      "Timur"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Romella"
+     ]
+    }
+   ]
+  },
+  "morning star": {
+   "best": 100,
+   "cities": [
+    {
+     "city": "Carlin",
+     "npcs": [
+      "Rowenna"
+     ]
+    },
+    {
+     "city": "Darashia",
+     "npcs": [
+      "Habdel"
+     ]
+    },
+    {
+     "city": "Kazordoon",
+     "npcs": [
+      "Uzgod"
+     ]
+    }
+   ]
+  },
+  "mystic turban": {
+   "best": 150,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "noble armor": {
+   "best": 900,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "obsidian lance": {
+   "best": 500,
+   "cities": [
+    {
+     "city": "Aruthang",
+     "npcs": []
+    }
+   ]
+  },
+  "plate armor": {
+   "best": 400,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Yanni"
+     ]
+    }
+   ]
+  },
+  "plate legs": {
+   "best": 115,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Kazordoon",
+     "npcs": [
+      "Kroox"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Hardek"
+     ]
+    }
+   ]
+  },
+  "poison dagger": {
+   "best": 50,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "rapier": {
+   "best": 5,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Romella"
+     ]
+    }
+   ]
+  },
+  "royal helmet": {
+   "best": 25000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "sabre": {
+   "best": 12,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Romella"
+     ]
+    }
+   ]
+  },
+  "scale armor": {
+   "best": 75,
+   "cities": [
+    {
+     "city": "Outlaw Camp",
+     "npcs": []
+    }
+   ]
+  },
+  "scimitar": {
+   "best": 150,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "scythe": {
+   "best": 12,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Beatrice"
+     ]
+    }
+   ]
+  },
+  "serpent sword": {
+   "best": 900,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "short sword": {
+   "best": 10,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Romella"
+     ]
+    }
+   ]
+  },
+  "sickle": {
+   "best": 3,
+   "cities": [
+    {
+     "city": "Edron",
+     "npcs": [
+      "Beatrice"
+     ]
+    }
+   ]
+  },
+  "skull staff": {
+   "best": 3500,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "spike sword": {
+   "best": 1000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "steel helmet": {
+   "best": 293,
+   "cities": [
+    {
+     "city": "Carlin",
+     "npcs": [
+      "Cornelia"
+     ]
+    },
+    {
+     "city": "Darashia",
+     "npcs": [
+      "Azil"
+     ]
+    },
+    {
+     "city": "Kazordoon",
+     "npcs": [
+      "Kroox"
+     ]
+    }
+   ]
+  },
+  "strange helmet": {
+   "best": 500,
+   "cities": [
+    {
+     "city": "Aruthang",
+     "npcs": []
+    }
+   ]
+  },
+  "sword": {
+   "best": 25,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Romella"
+     ]
+    }
+   ]
+  },
+  "two handed sword": {
+   "best": 450,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Edron",
+     "npcs": [
+      "Willard"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Sam",
+      "Turvy"
+     ]
+    },
+    {
+     "city": "Venore",
+     "npcs": [
+      "Romella"
+     ]
+    }
+   ]
+  },
+  "viking helmet": {
+   "best": 66,
+   "cities": [
+    {
+     "city": "Ab'Dendriel",
+     "npcs": [
+      "Shanar"
+     ]
+    },
+    {
+     "city": "Carlin",
+     "npcs": [
+      "Cornelia"
+     ]
+    },
+    {
+     "city": "Darashia",
+     "npcs": [
+      "Azil"
+     ]
+    },
+    {
+     "city": "Fibula",
+     "npcs": [
+      "Timur"
+     ]
+    },
+    {
+     "city": "Kazordoon",
+     "npcs": [
+      "Kroox"
+     ]
+    },
+    {
+     "city": "Thais",
+     "npcs": [
+      "Hardek"
+     ]
+    }
+   ]
+  },
+  "war hammer": {
+   "best": 1200,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  },
+  "warrior helmet": {
+   "best": 5000,
+   "cities": [
+    {
+     "city": "Djinn Fortress",
+     "npcs": []
+    }
+   ]
+  }
+ },
+ "source": "https://tibiantis.life/"
+}

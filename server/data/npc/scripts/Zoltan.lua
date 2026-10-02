@@ -1,3 +1,4 @@
+dofile(getDataDir() .. 'npc/lib/spellteacher.lua')   -- teachSpells: the spells Tibiantis has him teach
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
 NpcSystem.parseParameters(npcHandler)
@@ -16,8 +17,7 @@ local chain = knowledgeChain(npcHandler, {
 
 local TALK = {
 	{{"name"}, "My name is Zoltan."},
-	{{"job"}, "I was once a teacher of the most powerful spells in Tibia. That time has come to an end."},
-	{{"spell"}, "I was once a master of the arcane arts, but I've left the teaching behind. Nowadays I focus more an collecting wisdom and exploring the world we live in."},
+	{{"job"}, "I am a teacher of the most powerful spells in Tibia."},   -- 7.4: he still taught (Tibiantis); the 8.x line said "once"
 }
 
 local function creatureSayCallback(cid, type, msg)
@@ -31,4 +31,5 @@ local function creatureSayCallback(cid, type, msg)
 end
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
+teachSpells(keywordHandler, npcHandler, getNpcName())
 npcHandler:addModule(FocusModule:new())

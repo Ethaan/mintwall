@@ -91,8 +91,9 @@ def carries(p, name):
     return any(i.name == name for i in p.all_items())
 
 
-def talk_to(p, npc, *lines):
-    """Say lines to an NPC while following it (NPCs wander and leave talk range); returns its replies."""
+def talk_to(p, npc, *lines, stay=False):
+    """Say lines to an NPC while following it (NPCs wander and leave talk range); returns its replies.
+    stay: keep talking to it (no "bye") - for an answer it gives line by line, seconds apart."""
     target = p.wait_for(lambda: next((c for c in p.creatures.values() if c.name == npc), None), timeout=5)
     assert target, f"{npc} is not in view from {p.pos}"
     p.follow(target.id)
@@ -105,7 +106,7 @@ def talk_to(p, npc, *lines):
         return replies
     finally:
         p.follow(0)
-        if lines and lines[-1] != "bye":
+        if lines and lines[-1] != "bye" and not stay:
             # like a player: an NPC talks to one player at a time and would keep us. Wait for its goodbye,
             # or it arrives late and is taken for the answer to the next conversation's first line
             _say_unmuted(p, "bye", npc)

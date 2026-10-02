@@ -1,3 +1,4 @@
+dofile(getDataDir() .. 'npc/lib/spellteacher.lua')   -- teachSpells: the spells Tibiantis has him teach
 local keywordHandler = KeywordHandler:new()
         local npcHandler = NpcHandler:new(keywordHandler)
         NpcSystem.parseParameters(npcHandler)
@@ -27,4 +28,5 @@ local keywordHandler = KeywordHandler:new()
 -- sells the blessing of wisdom of solitude; any word of its name works (lib/npc.lua)
 addBlessingKeywords(keywordHandler, npcHandler, 4, 'wisdom of solitude', true)
 
+teachSpells(keywordHandler, npcHandler, getNpcName())
 npcHandler:addModule(FocusModule:new())

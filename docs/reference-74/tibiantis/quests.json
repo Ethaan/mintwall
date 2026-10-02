@@ -1,0 +1,958 @@
+{
+ "QUESTS": [
+  {
+   "desc": "Little remains of Ankrahmun since the war of the djinns reduced it to ruins. The passage from Darashia is watched by a guard under the Caliph's strict orders — and he lets no one through without permission…",
+   "id": 25,
+   "level": 0,
+   "location": "Ankrahmun",
+   "name": "Access to Ankrahmun",
+   "premium": true,
+   "rewards": "Access to Ankrahmun"
+  },
+  {
+   "desc": "The wizard Alawar hid his treasure in a vault beneath the icy isles north of Carlin, trusting fierce minotaurs and treacherous magic fields to keep it safe…",
+   "id": 1,
+   "level": 0,
+   "location": "Carlin",
+   "name": "Alawar's Vault Quest",
+   "premium": false,
+   "rewards": "3 White Pearls, Broadsword, Dark Helmet, 4 Throwing Knives, Blank Rune, 33 gp, Key 4501, Key 4502, Key 4503"
+  },
+  {
+   "creatures": "Wolf, Bug, Spider, Poison Spider",
+   "desc": "On her voyage from Thais to Rookgaard, the explorer Amber left her precious notebook behind on a raft. She would surely value its safe return…",
+   "id": 101,
+   "img": "assets/quests/black_book.png?v=d3cbfb3f",
+   "level": 0,
+   "linked": [
+    77
+   ],
+   "location": "Rookgaard",
+   "name": "Amber's Notebook Quest",
+   "premium": false,
+   "qtype": "chest",
+   "rewards": "Black Book (Amber's Notebook)",
+   "video": "assets/quests/ambers-notebook-quest.mp4?v=e6622969"
+  },
+  {
+   "desc": "The most infamous challenge in Tibiantis: four heroes, one chamber of demons, and a choice between legendary rewards. The old sign at the entrance offers the only welcome you'll get — come and die with your friends…",
+   "id": 3,
+   "level": 100,
+   "location": "Edron",
+   "name": "Annihilator Quest",
+   "premium": true,
+   "rewards": "One of the following: Demon Armor, Magic Sword, Stonecutter Axe, or a Present Box"
+  },
+  {
+   "desc": "Poison is one of a young adventurer's deadliest foes. Rumor has it a remedy can be bartered — if you bring the right item to the right person…",
+   "id": 82,
+   "img": "assets/quests/cure_poison_rune.png?v=f746cdc0",
+   "level": 0,
+   "linked": [
+    40
+   ],
+   "location": "Rookgaard",
+   "name": "Antidote Rune Quest",
+   "premium": true,
+   "qtype": "trade",
+   "rewards": "Antidote Rune"
+  },
+  {
+   "desc": "Far off Venore's coast lies the island of Aruthang. The captain will sail you there — for a price few can afford. Those who prove themselves to the islanders will find that their generosity goes well beyond a ride on the steamboat…",
+   "id": 4,
+   "level": 0,
+   "location": "Aruthang",
+   "name": "Aruthang Quest",
+   "premium": true,
+   "rewards": "Dwarfen Helmet, Dwarven Armor, access to Aruthang steamboat, access to NPC"
+  },
+  {
+   "creatures": "Wolf, Bug, Spider, Poison Spider",
+   "desc": "A tropical fruit growing far from its home. Curiously, someone on the island may want it even more than you do…",
+   "id": 107,
+   "img": "assets/quests/banana.png?v=de871e06",
+   "level": 0,
+   "linked": [
+    88
+   ],
+   "location": "Rookgaard",
+   "name": "Banana Quest",
+   "premium": false,
+   "qtype": "chest",
+   "rewards": "Banana",
+   "video": "assets/quests/banana-quest.mp4?v=6e05b80c",
+   "videoNote": "Disclaimer: there is a second banana palm in the premium area of Rookgaard. Both palms share the same quest id, so you can only take the banana from one of them — and the free-side palm shown above is the recommended pick: reaching the premium one requires stacking three boxes, which are not that easy to find (or carry around) in Rookgaard."
+  },
+  {
+   "desc": "The orcs of Edron guard their finest equipment deep within their underground hideout — and they don't take kindly to visitors…",
+   "id": 5,
+   "level": 0,
+   "location": "Edron",
+   "name": "Barbarian Axe Quest",
+   "premium": true,
+   "rewards": "Barbarian Axe, Scimitar"
+  },
+  {
+   "desc": "Somewhere beneath Thais, a soldier's axe waits for an owner brave enough to claim it…",
+   "id": 6,
+   "level": 0,
+   "location": "Thais",
+   "name": "Battle Axe Quest",
+   "premium": false,
+   "rewards": "Battle Axe"
+  },
+  {
+   "creatures": "Snake, Rat, Troll, Orc, Minotaur, Bear",
+   "desc": "Deep in the tunnels north of town, behind a locked door, a restless guardian watches over boxes that aren't his…",
+   "id": 7,
+   "img": "assets/quests/chain_armor.png?v=c94c59be",
+   "level": 2,
+   "linked": [
+    63,
+    100
+   ],
+   "location": "Rookgaard",
+   "name": "Bear Room Quest",
+   "premium": false,
+   "qtype": "chest",
+   "rewards": "Key 4601, Chain Armor, Brass Helmet, 12 Arrows and 40 gp",
+   "video": "assets/quests/bear-room-quest.mp4?v=80ee320c",
+   "videoNote": "Note: the first part of this walkthrough is shared with the Present Box Quest — both quests live in the same tunnels. The fade marks where the Bear Room route continues on its own."
+  },
+  {
+   "desc": "In the depths of Cyclopolis, north of Edron, the mightiest of giants hoard a treasure worthy of their size. Bring friends — behemoths don't share…",
+   "id": 8,
+   "level": 60,
+   "location": "Edron",
+   "name": "Behemoth Quest",
+   "premium": true,
+   "rewards": "30k, Life Ring, 5 Small Diamonds, 5 Small Sapphires, 5 Small Rubies, 100 Power Bolts"
+  },
+  {
+   "desc": "Even the fiercest berserkers of Edron's orc cave keep a small hoard of pearls and gold. Taking it from them is another matter…",
+   "id": 9,
+   "level": 0,
+   "location": "Edron",
+   "name": "Berserker Treasure Quest",
+   "premium": true,
+   "rewards": "3 White Pearls and 175 gp"
+  },
+  {
+   "desc": "The witch Wyda knows the value of a rare herb that grows only near dead trees, deep in the Greenclaw Swamp. Finding it is dangerous; deciding what to do with it is up to you…",
+   "id": 11,
+   "level": 0,
+   "location": "Venore",
+   "name": "Blood Herb Quest",
+   "premium": false,
+   "rewards": "Blood Herb / Witchesbroom"
+  },
+  {
+   "creatures": "Spider, Poison Spider, Skeleton",
+   "desc": "There are signs that little Rookgaard was visited long before the Order of the Knights of Thais arrived — castaways brought in by the tide, explorers seeking respite, or pirates looking to hide their treasures. Either way, some of the island's caves sheltered what today are but faint traces of these outsiders' passing…",
+   "id": 12,
+   "img": "assets/quests/salmon.png?v=0232ec66",
+   "level": 2,
+   "location": "Rookgaard",
+   "name": "Captain Iglues Treasure Quest",
+   "premium": false,
+   "qtype": "chest",
+   "req": "Rope. Food is highly recommended, and an antidote rune is optional but can be useful.",
+   "rewards": "2 Salmon",
+   "video": "assets/quests/captain-iglues-treasure-quest.mp4?v=3bedab59"
+  },
+  {
+   "desc": "A dwarven garrison guards a valuable treasure in a circular room deep beneath Kazordoon's mines. They will defend it from all sides — literally…",
+   "id": 13,
+   "level": 32,
+   "location": "Kazordoon",
+   "name": "Circle Room Quest",
+   "premium": false,
+   "rewards": "Dwarven Axe, War Hammer"
+  },
+  {
+   "creatures": "Rat",
+   "desc": "Not every blade rests in a place of honor. This one lies where only the rats would find it…",
+   "id": 14,
+   "img": "assets/quests/combat_knife.png?v=ce88a585",
+   "level": 0,
+   "location": "Rookgaard",
+   "name": "Combat Knife Quest",
+   "premium": false,
+   "qtype": "chest",
+   "rewards": "Combat Knife",
+   "video": "assets/quests/combat-knife-quest.mp4?v=b3faed03"
+  },
+  {
+   "id": 16,
+   "level": 60,
+   "location": "Carlin",
+   "name": "Crystal Wand Quest",
+   "premium": false,
+   "rewards": "Crystal Wand, Double SD Rune, Twinkiller Rune (Book)"
+  },
+  {
+   "id": 17,
+   "level": 0,
+   "location": "Edron",
+   "name": "Dark Armor Quest",
+   "premium": true,
+   "rewards": "Dark Armor"
+  },
+  {
+   "id": 18,
+   "level": 0,
+   "location": "Thais",
+   "name": "Dead Archer Quest",
+   "premium": false,
+   "rewards": "Bow, 5 Poison Arrows, Mana Fluid, Life Fluid"
+  },
+  {
+   "id": 19,
+   "level": 0,
+   "location": "Thais",
+   "name": "Deeper Fibula Quest",
+   "premium": false,
+   "rewards": "Elven Amulet, Dwarven Ring, Serpent Sword, 6 Small Diamonds, Time Ring"
+  },
+  {
+   "id": 20,
+   "level": 100,
+   "location": "Edron",
+   "name": "Demon Helmet Quest",
+   "premium": true,
+   "rewards": "to be discovered"
+  },
+  {
+   "id": 21,
+   "level": 60,
+   "location": "Carlin",
+   "name": "Demona Ring Quest",
+   "premium": false,
+   "rewards": "Energy Ring, Stealth Ring"
+  },
+  {
+   "id": 22,
+   "level": 20,
+   "location": "Venore",
+   "name": "Desert Dungeon Quest",
+   "premium": false,
+   "rewards": "100 Platinum Coins and a green bag with: Protection Amulet, Ring Of Healing, Magic Light Wand and Ankh"
+  },
+  {
+   "id": 23,
+   "level": 30,
+   "location": "Thais",
+   "name": "Devil Helmet Quest",
+   "premium": false,
+   "rewards": "Devil Helmet, Halberd, 4 Small Sapphires"
+  },
+  {
+   "id": 24,
+   "level": 40,
+   "location": "Ankrahmun",
+   "name": "Djinn Quest",
+   "premium": true,
+   "rewards": "Ability to trade with the djinns"
+  },
+  {
+   "id": 26,
+   "level": 0,
+   "location": "Edron",
+   "name": "Double Hero Quest",
+   "premium": true,
+   "rewards": "Club Ring, Red Gem"
+  },
+  {
+   "creatures": "Rat",
+   "creaturesNote": "Only one — unless more are roped up from beneath the floor.",
+   "desc": "Some adventurer used to stash his loot under a loose board in the stable to the north, next to a strange note on the wall. He may have forgotten something when he left…",
+   "id": 27,
+   "img": "assets/quests/doublet.png?v=be6de65d",
+   "level": 0,
+   "location": "Rookgaard",
+   "name": "Doublet Quest",
+   "premium": false,
+   "qtype": "chest",
+   "rewards": "Doublet",
+   "video": "assets/quests/doublet-quest.mp4?v=4210162f"
+  },
+  {
+   "id": 28,
+   "level": 25,
+   "location": "Ab'Dendriel",
+   "name": "Draconia Quest",
+   "premium": false,
+   "rewards": "Ice Rapier, Serpent Sword, Stone Skin Amulet and Energy Ring"
+  },
+  {
+   "creatures": "Snake, Wolf, Bear",
+   "desc": "A dying dragon found its way to Rookgaard — luckily it perished before it could do any real harm to the young local adventurers. Those brave enough to face its flames may still find something of great value within its corpse…",
+   "id": 29,
+   "img": "assets/quests/copper_shield.png?v=07da8fcb",
+   "level": 2,
+   "location": "Rookgaard",
+   "name": "Dragon Corpse Quest",
+   "premium": false,
+   "qtype": "chest",
+   "req": "Rope, shovel and scythe. Food and/or life fluids are essential — facing the flames without them is certain death.",
+   "rewards": "Copper Shield, Legion Helmet",
+   "video": "assets/quests/dragon-corpse-quest.mp4?v=1b0a8e68"
+  },
+  {
+   "id": 30,
+   "level": 0,
+   "location": "Venore",
+   "name": "Dragon Tower Quest",
+   "premium": false,
+   "rewards": "2 Small Sapphires, 30 Burst Arrows, 60 Poison Arrows, Bow, 1 Health Potion, 1 Mana Potion"
+  },
+  {
+   "id": 31,
+   "level": 0,
+   "location": "Edron",
+   "name": "Edron Goblin Quest",
+   "premium": true,
+   "rewards": "Steel Shield, Silver Amulet"
+  },
+  {
+   "id": 32,
+   "level": 0,
+   "location": "Ab'Dendriel",
+   "name": "Elvenbane Quest",
+   "premium": false,
+   "rewards": "Morning Star, Dwarven Shield, Mana Potion, Blank Rune, Spellbook, 2 Small Diamonds and 100 gp"
+  },
+  {
+   "id": 33,
+   "level": 0,
+   "location": "Kazordoon",
+   "name": "Emperor's Cookies Quest",
+   "premium": false,
+   "rewards": "Key 3800, a bag with 20+7 cookies and Key 3801 and Key 3802"
+  },
+  {
+   "id": 34,
+   "level": 0,
+   "location": "Kazordoon",
+   "name": "Explorer Brooch Quest",
+   "premium": false,
+   "rewards": "Explorer Brooch"
+  },
+  {
+   "id": 35,
+   "level": 0,
+   "location": "Carlin",
+   "name": "Fanfare Quest",
+   "premium": false,
+   "rewards": "Fanfare"
+  },
+  {
+   "id": 36,
+   "level": 60,
+   "location": "Edron",
+   "name": "Fire Axe Quest",
+   "premium": true,
+   "rewards": "Red Spellwand, Life Ring, BP GFB, BP UH, Paralyze Rune, 2x Soulfire Rune, 4x Fire Bomb rune, 2x Energy Bomb Rune"
+  },
+  {
+   "id": 37,
+   "level": 0,
+   "location": "Thais",
+   "name": "Geomancer Quest",
+   "premium": false,
+   "rewards": "Small Sapphire, Small Diamond, Dwarven Ring"
+  },
+  {
+   "id": 38,
+   "level": 0,
+   "location": "Thais",
+   "name": "Ghoul Room Quest",
+   "premium": false,
+   "rewards": "Garlic Necklace, Club Ring"
+  },
+  {
+   "id": 39,
+   "level": 0,
+   "location": "Venore",
+   "name": "Giant Smithhammer Quest",
+   "premium": false,
+   "rewards": "Talon, Giant Smithhammer, 100 gp"
+  },
+  {
+   "desc": "Across a stone-guarded bridge, the goblins keep a temple to their crude gods — and a rather odd collection of offerings…",
+   "id": 40,
+   "img": "assets/quests/sandals.png?v=37198d81",
+   "level": 0,
+   "linked": [
+    82
+   ],
+   "location": "Rookgaard",
+   "name": "Goblin Temple Quest",
+   "premium": true,
+   "qtype": "chest",
+   "rewards": "50 gp, 4 Snowballs, 5 Small Stones, Sandals, Pan and a Vial of Milk"
+  },
+  {
+   "id": 41,
+   "level": 30,
+   "location": "Carlin",
+   "name": "Griffin Shield Quest",
+   "premium": false,
+   "rewards": "Griffin Shield, Dwarven Axe, Obsidian Lance"
+  },
+  {
+   "id": 42,
+   "level": 0,
+   "location": "Venore",
+   "name": "Heaven Blossom Quest",
+   "premium": false,
+   "rewards": "Heaven Blossom"
+  },
+  {
+   "creatures": "Snake, Wolf, Wasp",
+   "creaturesMaybe": "Orc, Orc Spearman",
+   "desc": "A beautiful flower, in a rather inconvenient spot…",
+   "id": 104,
+   "img": "assets/quests/honey_flower.png?v=68bb0f40",
+   "level": 0,
+   "linked": [
+    87
+   ],
+   "location": "Rookgaard",
+   "name": "Honey Flower Quest",
+   "premium": false,
+   "qtype": "chest",
+   "req": "Rope. A few life fluids and at least one antidote rune are recommended.",
+   "rewards": "Honey Flower",
+   "video": "assets/quests/honey-flower-quest.mp4?v=c8388159"
+  },
+  {
+   "id": 43,
+   "level": 0,
+   "location": "Kazordoon",
+   "name": "Iron Hammer Quest",
+   "premium": false,
+   "rewards": "Iron Hammer"
+  },
+  {
+   "id": 44,
+   "level": 0,
+   "location": "Venore",
+   "name": "Iron Helmet Quest",
+   "premium": false,
+   "rewards": "Iron Helmet, Sudden Death Rune, Leather Armor, Porgol's Strange Behaviour (Book), Worn Leather Boots, Longsword"
+  },
+  {
+   "id": 45,
+   "level": 0,
+   "location": "Venore",
+   "name": "Isle of the Mists Quest",
+   "premium": false,
+   "rewards": "2 Small Emeralds, Book"
+  },
+  {
+   "creatures": "Bug, Spider, Wolf, Poison Spider, Skeleton, Rotworm",
+   "desc": "In the northeast of Rookgaard island, a sharp blade awaits whoever is brave enough to reach it…",
+   "id": 46,
+   "img": "assets/quests/katana.png?v=fa3fdce5",
+   "level": 2,
+   "location": "Rookgaard",
+   "name": "Katana Quest",
+   "premium": false,
+   "qtype": "chest",
+   "req": "Rope and shovel. While not strictly required, a few life fluids are highly recommended.",
+   "rewards": "Katana, Viking Helmet, Key 4603",
+   "video": "assets/quests/katana-quest.mp4?v=798fb6c9"
+  },
+  {
+   "id": 47,
+   "level": 0,
+   "location": "Thais",
+   "name": "Kingdom of Kormarak Quest",
+   "premium": false,
+   "rewards": "Brass Armor, Brass Helmet, Hatchet and 13 Throwing Stars"
+  },
+  {
+   "desc": "A relic of the soldiers who served on the island long ago. One can still be earned — for the right price…",
+   "id": 106,
+   "img": "assets/quests/legion_helmet.png?v=6a7e35f2",
+   "level": 0,
+   "linked": [
+    69
+   ],
+   "location": "Rookgaard",
+   "name": "Legion Helmet Quest",
+   "premium": false,
+   "qtype": "trade",
+   "rewards": "Legion Helmet",
+   "video": "assets/quests/legion-helmet-quest.mp4?v=9e141038"
+  },
+  {
+   "id": 48,
+   "level": 0,
+   "location": "Thais",
+   "name": "Life Ring Quest",
+   "premium": false,
+   "rewards": "Life Ring, Dragon Necklace"
+  },
+  {
+   "id": 49,
+   "level": 0,
+   "location": "Kazordoon",
+   "name": "Longsword Quest",
+   "premium": false,
+   "rewards": "Longsword, Mirror, 3 Blank Runes, Wooden Doll, Wedding Ring, 76 gp"
+  },
+  {
+   "id": 50,
+   "level": 40,
+   "location": "Thais",
+   "name": "Mad Mage Room Quest",
+   "premium": false,
+   "rewards": "Hat of the Mad, Stone Skin Amulet and Star Amulet in Quest boxes. Silver Dagger and some Mana Potions spawn in another chest in this room"
+  },
+  {
+   "id": 51,
+   "level": 60,
+   "location": "Darashia",
+   "name": "Medusa Shield Quest",
+   "premium": true,
+   "rewards": "5k, Blue Spell Wand, 2x BP UH, 2x BP HMM'S, BP Explosion"
+  },
+  {
+   "desc": "The deepest, darkest corner of the island, spoken of only in whispers: a burning pit the locals call Minotaur Hell. Few descend; fewer return…",
+   "id": 52,
+   "img": "assets/quests/carlin_sword.png?v=38ece308",
+   "level": 2,
+   "location": "Rookgaard",
+   "name": "Minotaur Hell Quest",
+   "premium": false,
+   "qtype": "chest",
+   "rewards": "Carlin Sword, 4 Poison Arrows, 10 Arrows and a Fishing Rod"
+  },
+  {
+   "id": 53,
+   "level": 0,
+   "location": "Thais",
+   "name": "Mintwallin Cyclops Quest",
+   "premium": false,
+   "rewards": "Small Diamond, 2 Health Potions, Hatchet, Chain Helmet and a Chain Armor"
+  },
+  {
+   "id": 54,
+   "level": 40,
+   "location": "Thais",
+   "name": "Naginata Quest",
+   "premium": false,
+   "rewards": "Naginata"
+  },
+  {
+   "id": 55,
+   "level": 35,
+   "location": "Thais",
+   "name": "Noble Armor Quest",
+   "premium": false,
+   "rewards": "Noble Armor"
+  },
+  {
+   "id": 56,
+   "level": 40,
+   "location": "Ab'Dendriel",
+   "name": "Orc Fortress Quest",
+   "premium": false,
+   "rewards": "10k, Stone Skin Amulet, 8 Small Emeralds"
+  },
+  {
+   "id": 57,
+   "level": 0,
+   "location": "Venore",
+   "name": "Orc Shaman Quest",
+   "premium": false,
+   "rewards": "Magic Light Wand, Axe Ring and Blank Rune"
+  },
+  {
+   "id": 58,
+   "level": 0,
+   "location": "Venore",
+   "name": "Ornamented Shield Quest",
+   "premium": false,
+   "rewards": "Brown Bag containing Key 3702, Might Ring, Dragon Necklace, Spike Sword, Devious Dragons (Book), Ornamented Shield, Steel Helmet, Inkwell. Red Bag containing Time Ring, 5 Platinum Coins, Garlic Necklace, Spellbook, Lyre"
+  },
+  {
+   "id": 59,
+   "level": 45,
+   "location": "Venore",
+   "name": "Outlaw Camp Quest",
+   "premium": false,
+   "rewards": "8k, 50 Power Bolts, Red Gem"
+  },
+  {
+   "id": 60,
+   "level": 0,
+   "location": "Venore",
+   "name": "Panpipe Quest",
+   "premium": false,
+   "rewards": "Panpipes, 2 Small Amethysts, Power Ring"
+  },
+  {
+   "id": 61,
+   "level": 30,
+   "location": "Kazordoon",
+   "name": "Paradox Tower Quest",
+   "premium": true,
+   "rewards": "Up to two of the following: 10k gp, Wooden Wand, 32 Talons, Phoenix Egg"
+  },
+  {
+   "id": 62,
+   "level": 0,
+   "location": "Edron",
+   "name": "Parchment Room Quest",
+   "premium": true,
+   "rewards": "Brown Bag containing Key 6010, Bone, Stealth Ring, 2 Talons, Skull"
+  },
+  {
+   "desc": "Sturdy tools are hard to come by on a frontier island. A certain shopkeeper will only part with his precious picks for high-quality goods…",
+   "id": 63,
+   "img": "assets/quests/pick.png?v=698ec255",
+   "level": 2,
+   "linked": [
+    7,
+    100
+   ],
+   "location": "Rookgaard",
+   "name": "Pick Quest",
+   "premium": false,
+   "qtype": "trade",
+   "req": "Small Axe.",
+   "rewards": "Pick",
+   "video": "assets/quests/pick-quest.mp4?v=86c34653"
+  },
+  {
+   "id": 64,
+   "level": 0,
+   "location": "Darashia",
+   "name": "Plate Armor Quest",
+   "premium": true,
+   "rewards": "Plate Armor"
+  },
+  {
+   "id": 65,
+   "level": 0,
+   "location": "Edron",
+   "name": "Poison Daggers Quest",
+   "premium": true,
+   "rewards": "2 Poison Daggers, 30 Poison Arrows"
+  },
+  {
+   "id": 66,
+   "level": 0,
+   "location": "Thais",
+   "name": "Postman Missions Quest",
+   "premium": true,
+   "rewards": "Cheaper parcels (10 gp), letters (5 gp), boat fares (10 gp cheaper). 6k discount in The Thieves Guild Quest. Use of locked mailboxes, Post Officer's Hat, Post Horn"
+  },
+  {
+   "id": 67,
+   "level": 0,
+   "location": "Venore",
+   "name": "Power Bolts Quest",
+   "premium": false,
+   "rewards": "5 Power Bolts, 12 Burst Arrows, Two Handed Sword, The Dreammaster (Book), 6 Throwing Stars, Talon"
+  },
+  {
+   "id": 68,
+   "level": 0,
+   "location": "Carlin",
+   "name": "Power Ring Quest",
+   "premium": false,
+   "rewards": "a Power Ring and a Bronze Amulet"
+  },
+  {
+   "creatures": "Snake, Rat, Troll, Orc, Minotaur",
+   "desc": "Somewhere in the dangerous tunnels, a brightly wrapped present box sits, oddly out of place. Who left it there, and for whom, nobody knows…",
+   "id": 69,
+   "img": "assets/quests/present.png?v=3d4211cd",
+   "level": 2,
+   "linked": [
+    106
+   ],
+   "location": "Rookgaard",
+   "name": "Present Box Quest",
+   "premium": false,
+   "qtype": "chest",
+   "rewards": "Present Box",
+   "video": "assets/quests/present-box-quest.mp4?v=257297a3"
+  },
+  {
+   "id": 70,
+   "level": 60,
+   "location": "Carlin",
+   "name": "Purple Tome Quest",
+   "premium": false,
+   "rewards": "Tibia Map (Book), Fields of Glory Map (Book) and Purple Tome"
+  },
+  {
+   "id": 71,
+   "level": 60,
+   "location": "Carlin",
+   "name": "Queen of the Banshees Quest",
+   "premium": false,
+   "rewards": "Boots of Haste, Amulet of Loss, Stealth Ring, Stone Skin Amulet"
+  },
+  {
+   "desc": "Swift and elegant, a fencer's blade — abandoned in the least elegant place imaginable…",
+   "id": 72,
+   "img": "assets/quests/rapier.png?v=42c041a6",
+   "level": 0,
+   "location": "Rookgaard",
+   "name": "Rapier Quest",
+   "premium": false,
+   "qtype": "chest",
+   "rewards": "Rapier",
+   "video": "assets/quests/rapier-quest.mp4?v=a2e160f3"
+  },
+  {
+   "id": 73,
+   "level": 0,
+   "location": "Edron",
+   "name": "Ring Quest",
+   "premium": true,
+   "rewards": "Time Ring, Sword Ring"
+  },
+  {
+   "id": 74,
+   "level": 0,
+   "location": "Thais",
+   "name": "Scale Armor Quest",
+   "premium": false,
+   "rewards": "Scale Armor"
+  },
+  {
+   "id": 76,
+   "level": 0,
+   "location": "Edron",
+   "name": "Shaman Treasure Quest",
+   "premium": true,
+   "rewards": "3 Blank Runes"
+  },
+  {
+   "desc": "Every hero's story starts with a humble blade. This one can be earned with a good deed rather than a good fight…",
+   "id": 77,
+   "img": "assets/quests/short_sword.png?v=61976fb5",
+   "level": 2,
+   "linked": [
+    101
+   ],
+   "location": "Rookgaard",
+   "name": "Short Sword Quest",
+   "premium": false,
+   "qtype": "trade",
+   "rewards": "Short Sword",
+   "video": "assets/quests/short-sword-quest.mp4?v=bbb57db4"
+  },
+  {
+   "id": 78,
+   "level": 0,
+   "location": "Thais",
+   "name": "Silver Amulet Quest",
+   "premium": false,
+   "rewards": "Silver Amulet"
+  },
+  {
+   "id": 79,
+   "level": 0,
+   "location": "Venore",
+   "name": "Silver Brooch Quest",
+   "premium": false,
+   "rewards": "Silver Brooch, 2 Small Rubies, 3 Small Diamonds"
+  },
+  {
+   "id": 80,
+   "level": 0,
+   "location": "Thais",
+   "name": "Six Rubies Quest",
+   "premium": false,
+   "rewards": "Six Small Rubies"
+  },
+  {
+   "id": 81,
+   "level": 0,
+   "location": "Venore",
+   "name": "Skull of Ratha Quest",
+   "premium": false,
+   "rewards": "White Pearl, 2 Black Pearls, Skull of Ratha, Wolf Tooth Chain, Dwarven Ring, 100 gp, Crystal Necklace"
+  },
+  {
+   "creatures": "Snake, Cave Rat, Skeleton",
+   "desc": "A woodcutter's tool, not good enough for a weapon — yet, in the hands of a shrewd trader, worth more than many blades…",
+   "id": 100,
+   "img": "assets/quests/small_axe.png?v=a9f7d895",
+   "level": 0,
+   "linked": [
+    7,
+    63
+   ],
+   "location": "Rookgaard",
+   "name": "Small Axe Quest",
+   "premium": true,
+   "qtype": "chest",
+   "rewards": "Small Axe",
+   "video": "assets/quests/small-axe-quest.mp4?v=ebdf5e89"
+  },
+  {
+   "id": 83,
+   "level": 0,
+   "location": "Thais",
+   "name": "Small Ruby Quest",
+   "premium": false,
+   "rewards": "1 Small Ruby"
+  },
+  {
+   "id": 84,
+   "level": 0,
+   "location": "Thais",
+   "name": "Spike Sword Quest",
+   "premium": false,
+   "rewards": "Spike Sword"
+  },
+  {
+   "id": 85,
+   "level": 0,
+   "location": "Darashia",
+   "name": "Stealth Ring Quest",
+   "premium": true,
+   "rewards": "Stealth Ring and Protection Amulet"
+  },
+  {
+   "id": 86,
+   "level": 0,
+   "location": "Kazordoon",
+   "name": "Steel Helmet Quest",
+   "premium": false,
+   "rewards": "Steel Helmet, 47 gp, 56 gp, The Fox Is Out (Book)"
+  },
+  {
+   "desc": "Sturdy legwear for those who plan on getting hit. A certain islander will part with a pair — if you bring what they fancy…",
+   "id": 87,
+   "img": "assets/quests/studded_legs.png?v=b02f90d6",
+   "level": 2,
+   "linked": [
+    104
+   ],
+   "location": "Rookgaard",
+   "name": "Studded Legs Quest",
+   "premium": true,
+   "qtype": "trade",
+   "rewards": "Studded Legs",
+   "video": "assets/quests/studded-legs-quest.mp4?v=fda8e420"
+  },
+  {
+   "desc": "A dependable shield for a rookie's arm. Its owner will trade it — for something you'd never expect a shield to cost…",
+   "id": 88,
+   "img": "assets/quests/studded_shield.png?v=164746c1",
+   "level": 2,
+   "linked": [
+    107
+   ],
+   "location": "Rookgaard",
+   "name": "Studded Shield Quest",
+   "premium": false,
+   "qtype": "trade",
+   "rewards": "Studded Shield",
+   "video": "assets/quests/studded-shield-quest.mp4?v=e683c8bc"
+  },
+  {
+   "id": 89,
+   "level": 0,
+   "location": "Thais",
+   "name": "Thais Lighthouse Quest",
+   "premium": false,
+   "rewards": "Dark Shield and Battle Hammer"
+  },
+  {
+   "id": 90,
+   "level": 0,
+   "location": "Thais",
+   "name": "Throwing Star Quest",
+   "premium": false,
+   "rewards": "10 Throwing Stars"
+  },
+  {
+   "id": 91,
+   "level": 0,
+   "location": "Venore",
+   "name": "Time Ring Quest",
+   "premium": false,
+   "rewards": "Time Ring, Elven Amulet, Crystal Ball"
+  },
+  {
+   "desc": "Dark places outnumber the lit ones on this island. A little fire goes a long way…",
+   "id": 105,
+   "img": "assets/quests/torch.png?v=597091e0",
+   "level": 0,
+   "location": "Rookgaard",
+   "name": "Torch Quest",
+   "premium": false,
+   "qtype": "chest",
+   "rewards": "Torch",
+   "video": "assets/quests/torch-quest.mp4?v=b8ced92e"
+  },
+  {
+   "id": 92,
+   "level": 0,
+   "location": "Thais",
+   "name": "Triangle Tower Quest",
+   "premium": false,
+   "rewards": "Garlic Necklace, Dwarven Ring and 2 Small Sapphires"
+  },
+  {
+   "id": 93,
+   "level": 0,
+   "location": "Edron",
+   "name": "Triple UH Rune Quest",
+   "premium": true,
+   "rewards": "Triple UH Rune"
+  },
+  {
+   "id": 94,
+   "level": 0,
+   "location": "Edron",
+   "name": "Troll Cave Quest",
+   "premium": true,
+   "rewards": "Brass Legs, Garlic Necklace"
+  },
+  {
+   "id": 95,
+   "level": 70,
+   "location": "Edron",
+   "name": "Vampire Shield Quest",
+   "premium": true,
+   "rewards": "Ice Rapier, 2x BP SD"
+  },
+  {
+   "id": 96,
+   "level": 0,
+   "location": "Venore",
+   "name": "Voodoo Doll Quest",
+   "premium": false,
+   "rewards": "Voodoo Doll (King), Magic Light Wand"
+  },
+  {
+   "id": 97,
+   "level": 0,
+   "location": "Edron",
+   "name": "Wedding Ring Quest",
+   "premium": true,
+   "rewards": "Wedding Ring, Dragon Necklace"
+  },
+  {
+   "id": 99,
+   "level": 0,
+   "location": "Carlin",
+   "name": "White Raven Monastery Quest",
+   "premium": false,
+   "rewards": "Blessed Ankh, Family Brooch, access to the Isle of the Kings"
+  }
+ ],
+ "source": "https://tibiantis.life/"
+}

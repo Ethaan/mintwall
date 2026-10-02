@@ -55,7 +55,7 @@ def test_haste_lasts_66_and_strong_haste_44_seconds(new_player):
     assert 64 <= haste <= 69, f"haste lasted {haste:.1f} s, expected 66"
 
 
-def _wild_growth(new_player, vocation=2):
+def _wild_growth(new_player, vocation=6):   # elder druids only (Eremo teaches it to the promoted)
     p = new_player(pos=FIELD, level=100, vocation=vocation, maglevel=30, mana=1000, group_id=TESTER_GROUP,
                    inventory={RIGHT: Item(MACHETE)})
     target = (p.pos[0] + 1, p.pos[1], p.pos[2])
@@ -70,8 +70,8 @@ def _rush_wood(p, items, pos):
 
 def test_wild_growth_is_druid_only(new_player, items):
     p, target = _wild_growth(new_player, vocation=1)
-    p.say("exevo grav vita")
-    assert p.wait_for(lambda: p.messages("vocation"), timeout=3), p.text_messages[-2:]
+    p.say("exevo grav vita")      # a sorcerer cannot learn it, so he never knows it
+    assert p.wait_for(lambda: p.messages("learn this spell first"), timeout=3), p.text_messages[-2:]
     assert not _rush_wood(p, items, target)
 
 

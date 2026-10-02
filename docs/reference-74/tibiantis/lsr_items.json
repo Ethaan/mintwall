@@ -1,0 +1,341 @@
+{
+ "LSR_ITEMS": [
+  {
+   "best": 450,
+   "bestCities": [
+    "Ab'Dendriel",
+    "Edron",
+    "Thais",
+    "Venore"
+   ],
+   "cat": "Weapons",
+   "item": "two handed sword",
+   "sprite": "assets/items/two-handed-sword.png?v=8ef401a5"
+  },
+  {
+   "best": 400,
+   "bestCities": [
+    "Edron",
+    "Thais",
+    "Venore"
+   ],
+   "cat": "Weapons",
+   "item": "halberd",
+   "sprite": "assets/items/halberd.png?v=acaf9968"
+  },
+  {
+   "best": 400,
+   "bestCities": [
+    "Ab'Dendriel",
+    "Edron",
+    "Thais",
+    "Venore"
+   ],
+   "cat": "Armor",
+   "item": "plate armor",
+   "sprite": "assets/items/plate-armor.png?v=5f9f8b02"
+  },
+  {
+   "best": 293,
+   "bestCities": [
+    "Carlin",
+    "Darashia",
+    "Kazordoon"
+   ],
+   "cat": "Helmets",
+   "item": "steel helmet",
+   "sprite": "assets/items/steel-helmet.png?v=c577dd70"
+  },
+  {
+   "best": 260,
+   "bestCities": [
+    "Carlin",
+    "Darashia",
+    "Kazordoon"
+   ],
+   "cat": "Weapons",
+   "item": "double axe",
+   "sprite": "assets/items/double-axe.png?v=7d927226"
+  },
+  {
+   "best": 185,
+   "bestCities": [
+    "Edron"
+   ],
+   "cat": "Weapons",
+   "item": "barbarian axe",
+   "sprite": "assets/items/barbarian-axe.png?v=24b954fa"
+  },
+  {
+   "best": 170,
+   "bestCities": [
+    "Edron"
+   ],
+   "cat": "Weapons",
+   "item": "clerical mace",
+   "sprite": "assets/items/clerical-mace.png?v=5822b74f"
+  },
+  {
+   "best": 160,
+   "bestCities": [
+    "Fibula"
+   ],
+   "cat": "Distance",
+   "item": "crossbow",
+   "sprite": "assets/items/crossbow.png?v=e738a6f1"
+  },
+  {
+   "best": 150,
+   "bestCities": [
+    "Ab'Dendriel",
+    "Edron",
+    "Thais",
+    "Venore"
+   ],
+   "cat": "Armor",
+   "item": "brass armor",
+   "sprite": "assets/items/brass-armor.png?v=725142a1"
+  },
+  {
+   "best": 150,
+   "bestCities": [
+    "Edron"
+   ],
+   "cat": "Helmets",
+   "item": "iron helmet",
+   "sprite": "assets/items/iron-helmet.png?v=88f0f456"
+  },
+  {
+   "best": 130,
+   "bestCities": [
+    "Fibula"
+   ],
+   "cat": "Distance",
+   "item": "bow",
+   "sprite": "assets/items/bow.png?v=9b292fc4"
+  },
+  {
+   "best": 120,
+   "bestCities": [
+    "Edron",
+    "Thais",
+    "Venore"
+   ],
+   "cat": "Weapons",
+   "item": "battle hammer",
+   "sprite": "assets/items/battle-hammer.png?v=31968b9f"
+  },
+  {
+   "best": 118,
+   "bestCities": [
+    "Carlin",
+    "Darashia",
+    "Kazordoon"
+   ],
+   "cat": "Weapons",
+   "item": "carlin sword",
+   "sprite": "assets/items/carlin-sword.png?v=ae4c1d64"
+  },
+  {
+   "best": 115,
+   "bestCities": [
+    "Ab'Dendriel",
+    "Kazordoon",
+    "Thais"
+   ],
+   "cat": "Legs",
+   "item": "plate legs",
+   "sprite": "assets/items/plate-legs.png?v=d0e6d69d"
+  },
+  {
+   "best": 100,
+   "bestCities": [
+    "Kazordoon"
+   ],
+   "cat": "Shields",
+   "item": "dwarven shield",
+   "sprite": "assets/items/dwarven-shield.png?v=9cdc57f4"
+  },
+  {
+   "best": 100,
+   "bestCities": [
+    "Carlin",
+    "Darashia",
+    "Kazordoon"
+   ],
+   "cat": "Weapons",
+   "item": "morning star",
+   "sprite": "assets/items/morning-star.png?v=b18c75a3"
+  },
+  {
+   "best": 95,
+   "bestCities": [
+    "Ab'Dendriel",
+    "Edron",
+    "Thais",
+    "Venore"
+   ],
+   "cat": "Shields",
+   "item": "battle shield",
+   "sprite": "assets/items/battle-shield.png?v=d712b024"
+  },
+  {
+   "best": 85,
+   "bestCities": [
+    "Edron"
+   ],
+   "cat": "Shields",
+   "item": "viking shield",
+   "sprite": "assets/items/viking-shield.png?v=40d0e19f"
+  },
+  {
+   "best": 80,
+   "bestCities": [
+    "Edron",
+    "Thais",
+    "Venore"
+   ],
+   "cat": "Weapons",
+   "item": "battle axe",
+   "sprite": "assets/items/battle-axe.png?v=f5ec28d5"
+  },
+  {
+   "best": 80,
+   "bestCities": [
+    "Ab'Dendriel",
+    "Edron",
+    "Thais",
+    "Venore"
+   ],
+   "cat": "Shields",
+   "item": "steel shield",
+   "sprite": "assets/items/steel-shield.png?v=791876c5"
+  },
+  {
+   "best": 75,
+   "bestCities": [
+    "Outlaw Camp"
+   ],
+   "cat": "Armor",
+   "item": "scale armor",
+   "sprite": "assets/items/scale-armor.png?v=56bcd72b"
+  },
+  {
+   "best": 70,
+   "bestCities": [
+    "Ab'Dendriel",
+    "Edron",
+    "Thais",
+    "Venore"
+   ],
+   "cat": "Armor",
+   "item": "chain armor",
+   "sprite": "assets/items/chain-armor.png?v=c94c59be"
+  },
+  {
+   "best": 66,
+   "bestCities": [
+    "Ab'Dendriel",
+    "Carlin",
+    "Darashia",
+    "Kazordoon",
+    "Thais"
+   ],
+   "cat": "Helmets",
+   "item": "viking helmet",
+   "sprite": "assets/items/viking-helmet.png?v=666694c4"
+  },
+  {
+   "best": 51,
+   "bestCities": [
+    "Ab'Dendriel",
+    "Kazordoon",
+    "Thais"
+   ],
+   "cat": "Weapons",
+   "item": "longsword",
+   "sprite": "assets/items/longsword.png?v=2f7d9103"
+  },
+  {
+   "best": 49,
+   "bestCities": [
+    "Ab'Dendriel",
+    "Carlin",
+    "Darashia",
+    "Kazordoon",
+    "Thais"
+   ],
+   "cat": "Legs",
+   "item": "brass legs",
+   "sprite": "assets/items/brass-legs.png?v=51c75a25"
+  },
+  {
+   "best": 45,
+   "bestCities": [
+    "Carlin",
+    "Darashia",
+    "Kazordoon"
+   ],
+   "cat": "Shields",
+   "item": "plate shield",
+   "sprite": "assets/items/plate-shield.png?v=abda2a61"
+  },
+  {
+   "best": 30,
+   "bestCities": [
+    "Ab'Dendriel",
+    "Carlin",
+    "Darashia",
+    "Kazordoon",
+    "Thais"
+   ],
+   "cat": "Helmets",
+   "item": "brass helmet",
+   "sprite": "assets/items/brass-helmet.png?v=0013afab"
+  },
+  {
+   "best": 30,
+   "bestCities": [
+    "Edron",
+    "Thais",
+    "Venore"
+   ],
+   "cat": "Weapons",
+   "item": "mace",
+   "sprite": "assets/items/mace.png?v=337e0d1d"
+  },
+  {
+   "best": 25,
+   "bestCities": [
+    "Edron",
+    "Thais",
+    "Venore"
+   ],
+   "cat": "Legs",
+   "item": "chain legs",
+   "sprite": "assets/items/chain-legs.png?v=9736ffa0"
+  },
+  {
+   "best": 25,
+   "bestCities": [
+    "Fibula"
+   ],
+   "cat": "Weapons",
+   "item": "hatchet",
+   "sprite": "assets/items/hatchet.png?v=9709ed6d"
+  },
+  {
+   "best": 25,
+   "bestCities": [
+    "Ab'Dendriel",
+    "Edron",
+    "Thais",
+    "Venore"
+   ],
+   "cat": "Weapons",
+   "item": "sword",
+   "sprite": "assets/items/sword.png?v=a0c8b3a0"
+  }
+ ],
+ "source": "https://tibiantis.life/"
+}

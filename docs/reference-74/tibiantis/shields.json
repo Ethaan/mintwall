@@ -1,0 +1,277 @@
+{
+ "SHIELDS": [
+  {
+   "def": 14,
+   "hands": 1,
+   "name": "wooden shield",
+   "obt": true,
+   "sprite": "assets/items/wooden-shield.png?v=82033394",
+   "weight": 40
+  },
+  {
+   "def": 15,
+   "hands": 1,
+   "name": "studded shield",
+   "obt": true,
+   "sprite": "assets/items/studded-shield.png?v=164746c1",
+   "weight": 59
+  },
+  {
+   "def": 16,
+   "hands": 1,
+   "name": "brass shield",
+   "obt": true,
+   "sprite": "assets/items/brass-shield.png?v=f34e77e9",
+   "weight": 60
+  },
+  {
+   "def": 17,
+   "hands": 1,
+   "name": "plate shield",
+   "obt": true,
+   "sprite": "assets/items/plate-shield.png?v=abda2a61",
+   "weight": 65
+  },
+  {
+   "def": 18,
+   "hands": 1,
+   "name": "black shield",
+   "obt": true,
+   "sprite": "assets/items/black-shield.png?v=14486d67",
+   "weight": 41.5
+  },
+  {
+   "def": 19,
+   "hands": 1,
+   "name": "copper shield",
+   "obt": true,
+   "sprite": "assets/items/copper-shield.png?v=5ba63356",
+   "weight": 63
+  },
+  {
+   "def": 20,
+   "hands": 1,
+   "name": "bone shield",
+   "obt": true,
+   "sprite": "assets/items/bone-shield.png?v=86d42a01",
+   "weight": 55
+  },
+  {
+   "def": 21,
+   "hands": 1,
+   "name": "steel shield",
+   "obt": true,
+   "sprite": "assets/items/steel-shield.png?v=791876c5",
+   "weight": 69
+  },
+  {
+   "def": 22,
+   "hands": 1,
+   "name": "ornamented shield",
+   "obt": true,
+   "sprite": "assets/items/ornamented-shield.png?v=7e1640b4",
+   "weight": 72
+  },
+  {
+   "def": 22,
+   "hands": 1,
+   "name": "viking shield",
+   "obt": true,
+   "sprite": "assets/items/viking-shield.png?v=40d0e19f",
+   "weight": 66
+  },
+  {
+   "def": 23,
+   "hands": 1,
+   "name": "battle shield",
+   "obt": true,
+   "sprite": "assets/items/battle-shield.png?v=d712b024",
+   "weight": 62
+  },
+  {
+   "def": 25,
+   "hands": 1,
+   "name": "dark shield",
+   "obt": true,
+   "sprite": "assets/items/dark-shield.png?v=5faede1d",
+   "weight": 52
+  },
+  {
+   "def": 25,
+   "hands": 1,
+   "name": "scarab shield",
+   "obt": true,
+   "sprite": "assets/items/scarab-shield.png?v=7a9b40b1",
+   "weight": 47
+  },
+  {
+   "def": 26,
+   "hands": 1,
+   "name": "dwarven shield",
+   "obt": true,
+   "sprite": "assets/items/dwarven-shield.png?v=9cdc57f4",
+   "weight": 55
+  },
+  {
+   "def": 27,
+   "hands": 1,
+   "name": "ancient shield",
+   "obt": true,
+   "sprite": "assets/items/ancient-shield.png?v=3cf95060",
+   "weight": 61
+  },
+  {
+   "def": 27,
+   "hands": 1,
+   "name": "rose shield",
+   "obt": true,
+   "sprite": "assets/items/rose-shield.png?v=b179a1c0",
+   "weight": 52
+  },
+  {
+   "def": 28,
+   "hands": 1,
+   "name": "beholder shield",
+   "obt": true,
+   "sprite": "assets/items/beholder-shield.png?v=fa4e772e",
+   "weight": 47
+  },
+  {
+   "def": 28,
+   "hands": 1,
+   "name": "castle shield",
+   "obt": true,
+   "sprite": "assets/items/castle-shield.png?v=452d48a6",
+   "weight": 49
+  },
+  {
+   "def": 29,
+   "hands": 1,
+   "name": "griffin shield",
+   "obt": true,
+   "sprite": "assets/items/griffin-shield.png?v=c0c1cbe8",
+   "weight": 50
+  },
+  {
+   "def": 30,
+   "hands": 1,
+   "name": "guardian shield",
+   "obt": true,
+   "sprite": "assets/items/guardian-shield.png?v=b983448e",
+   "weight": 55
+  },
+  {
+   "def": 31,
+   "hands": 1,
+   "name": "dragon shield",
+   "obt": true,
+   "sprite": "assets/items/dragon-shield.png?v=fd4e603c",
+   "weight": 60
+  },
+  {
+   "def": 32,
+   "hands": 1,
+   "name": "amazon shield",
+   "obt": true,
+   "sprite": "assets/items/amazon-shield.png?v=80da423b",
+   "weight": 62
+  },
+  {
+   "def": 32,
+   "hands": 1,
+   "name": "crown shield",
+   "obt": true,
+   "sprite": "assets/items/crown-shield.png?v=2ee796f0",
+   "weight": 62
+  },
+  {
+   "def": 32,
+   "hands": 1,
+   "name": "eagle shield",
+   "obt": true,
+   "sprite": "assets/items/eagle-shield.png?v=bf836b1a",
+   "weight": 62
+  },
+  {
+   "def": 32,
+   "hands": 1,
+   "name": "tower shield",
+   "obt": true,
+   "sprite": "assets/items/tower-shield.png?v=925c9853",
+   "weight": 88
+  },
+  {
+   "def": 33,
+   "hands": 1,
+   "name": "medusa shield",
+   "obt": true,
+   "sprite": "assets/items/medusa-shield.png?v=3f5f58f7",
+   "weight": 58
+  },
+  {
+   "def": 33,
+   "hands": 1,
+   "name": "shield of honour",
+   "obt": true,
+   "sprite": "assets/items/shield-of-honour.png?v=4ffde7fe",
+   "weight": 54
+  },
+  {
+   "def": 34,
+   "hands": 1,
+   "name": "phoenix shield",
+   "obt": true,
+   "sprite": "assets/items/phoenix-shield.png?v=034c11cc",
+   "weight": 35
+  },
+  {
+   "def": 34,
+   "hands": 1,
+   "name": "vampire shield",
+   "obt": true,
+   "sprite": "assets/items/vampire-shield.png?v=33e2b056",
+   "weight": 38
+  },
+  {
+   "def": 35,
+   "hands": 1,
+   "name": "demon shield",
+   "obt": true,
+   "sprite": "assets/items/demon-shield.png?v=d4061418",
+   "weight": 26
+  },
+  {
+   "def": 36,
+   "hands": 1,
+   "name": "tempest shield",
+   "obt": true,
+   "sprite": "assets/items/tempest-shield.png?v=c0c4aac9",
+   "weight": 51
+  },
+  {
+   "def": 37,
+   "hands": 1,
+   "name": "mastermind shield",
+   "obt": true,
+   "sprite": "assets/items/mastermind-shield.png?v=da60a400",
+   "weight": 57
+  },
+  {
+   "def": 38,
+   "hands": 1,
+   "name": "great shield",
+   "obt": true,
+   "sprite": "assets/items/great-shield.png?v=fe0a8512",
+   "weight": 84
+  },
+  {
+   "def": 40,
+   "hands": 1,
+   "name": "blessed shield",
+   "obt": false,
+   "sprite": "assets/items/blessed-shield.png?v=32d16df0",
+   "weight": 68
+  }
+ ],
+ "source": "https://tibiantis.life/"
+}

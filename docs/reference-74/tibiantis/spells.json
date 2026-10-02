@@ -1,0 +1,5162 @@
+{
+ "SPELLS": [
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Faluae",
+      "xyz": [
+       32660,
+       31673,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Knight": [
+     {
+      "city": "Carlin",
+      "npc": "Trisha",
+      "xyz": [
+       32348,
+       31748,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Duria",
+      "xyz": [
+       32617,
+       31938,
+       8
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Gregor",
+      "xyz": [
+       32407,
+       32202,
+       6
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Faluae",
+      "xyz": [
+       32660,
+       31673,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 20,
+   "ml": 0,
+   "mluse": null,
+   "name": "Find Person",
+   "price": 80,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin",
+    "Knight"
+   ],
+   "words": "exiva \"name\""
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Faluae",
+      "xyz": [
+       32660,
+       31673,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Faluae",
+      "xyz": [
+       32660,
+       31673,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_GREEN",
+   "glow": "green",
+   "kind": "instant",
+   "mana": 30,
+   "ml": 0,
+   "mluse": null,
+   "name": "Food",
+   "price": 150,
+   "type": "Support",
+   "voc": [
+    "Druid",
+    "Paladin"
+   ],
+   "words": "exevo pan"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Faluae",
+      "xyz": [
+       32660,
+       31673,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Knight": [
+     {
+      "city": "Carlin",
+      "npc": "Trisha",
+      "xyz": [
+       32348,
+       31748,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Duria",
+      "xyz": [
+       32617,
+       31938,
+       8
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Gregor",
+      "xyz": [
+       32407,
+       32202,
+       6
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Faluae",
+      "xyz": [
+       32660,
+       31673,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 20,
+   "ml": 0,
+   "mluse": null,
+   "name": "Light",
+   "price": 100,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin",
+    "Knight"
+   ],
+   "words": "utevo lux"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Maealil",
+      "xyz": [
+       32732,
+       31631,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Knight": [
+     {
+      "city": "Carlin",
+      "npc": "Trisha",
+      "xyz": [
+       32348,
+       31748,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Duria",
+      "xyz": [
+       32617,
+       31938,
+       8
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Gregor",
+      "xyz": [
+       32407,
+       32202,
+       6
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Maealil",
+      "xyz": [
+       32732,
+       31631,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 25,
+   "ml": 1,
+   "mluse": null,
+   "name": "Light Healing",
+   "price": 170,
+   "type": "Healing",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin",
+    "Knight"
+   ],
+   "words": "exura"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Elathriel",
+      "xyz": [
+       32684,
+       31671,
+       9
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Elathriel",
+      "xyz": [
+       32684,
+       31671,
+       9
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 5,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 40,
+   "ml": 1,
+   "mluse": 0,
+   "name": "Light Magic Missile",
+   "price": 200,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin"
+   ],
+   "words": "adori"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ],
+    "Knight": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_ENERGY",
+   "glow": "energy",
+   "kind": "instant",
+   "mana": 20,
+   "ml": 1,
+   "mluse": null,
+   "name": "Magic Rope",
+   "price": 200,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin",
+    "Knight"
+   ],
+   "words": "exani tera"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Maealil",
+      "xyz": [
+       32732,
+       31631,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Knight": [
+     {
+      "city": "Carlin",
+      "npc": "Trisha",
+      "xyz": [
+       32348,
+       31748,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Duria",
+      "xyz": [
+       32617,
+       31938,
+       8
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Gregor",
+      "xyz": [
+       32407,
+       32202,
+       6
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Maealil",
+      "xyz": [
+       32732,
+       31631,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 30,
+   "ml": 2,
+   "mluse": null,
+   "name": "Antidote",
+   "price": 150,
+   "type": "Healing",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin",
+    "Knight"
+   ],
+   "words": "exana pox"
+  },
+  {
+   "buy": {
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Irea",
+      "xyz": [
+       32688,
+       31610,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ]
+   },
+   "charges": 15,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "conjure",
+   "mana": 40,
+   "ml": 2,
+   "mluse": null,
+   "name": "Conjure Arrow",
+   "price": 450,
+   "type": "Conjure",
+   "voc": [
+    "Paladin"
+   ],
+   "words": "exevo con"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_DEATH",
+   "glow": "death",
+   "kind": "instant",
+   "mana": 20,
+   "ml": 2,
+   "mluse": null,
+   "name": "Force Strike",
+   "price": 600,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "exori mort"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Maealil",
+      "xyz": [
+       32732,
+       31631,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Maealil",
+      "xyz": [
+       32732,
+       31631,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 40,
+   "ml": 2,
+   "mluse": null,
+   "name": "Intense Healing",
+   "price": 350,
+   "type": "Healing",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin"
+   ],
+   "words": "exura gran"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Shanar",
+      "xyz": [
+       32657,
+       31655,
+       8
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 3,
+   "fx": null,
+   "glow": "poison",
+   "kind": "rune",
+   "mana": 50,
+   "ml": 2,
+   "mluse": 0,
+   "name": "Poison Field",
+   "price": 300,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "adevo grav pox"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Gundralph",
+      "q": true,
+      "xyz": [
+       33268,
+       31849,
+       5
+      ]
+     },
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "q": true,
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": null,
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 30,
+   "ml": 3,
+   "mluse": null,
+   "name": "Discharge",
+   "prem": true,
+   "price": 0,
+   "priceq": true,
+   "type": "Healing",
+   "voc": [
+    "Druid"
+   ],
+   "words": "exana vis"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_ENERGY",
+   "glow": "energy",
+   "kind": "instant",
+   "mana": 20,
+   "ml": 3,
+   "mluse": null,
+   "name": "Energy Strike",
+   "price": 800,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "exori vis"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Gundralph",
+      "q": true,
+      "xyz": [
+       33268,
+       31849,
+       5
+      ]
+     },
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "q": true,
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": null,
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 30,
+   "ml": 3,
+   "mluse": null,
+   "name": "Extinguish",
+   "prem": true,
+   "price": 0,
+   "priceq": true,
+   "type": "Healing",
+   "voc": [
+    "Druid"
+   ],
+   "words": "exana flam"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Shanar",
+      "xyz": [
+       32657,
+       31655,
+       8
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 3,
+   "fx": null,
+   "glow": "fire",
+   "kind": "rune",
+   "mana": 60,
+   "ml": 3,
+   "mluse": 1,
+   "name": "Fire Field",
+   "price": 500,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "adevo grav flam"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_FIRE_BURST",
+   "glow": "fire",
+   "kind": "instant",
+   "mana": 20,
+   "ml": 3,
+   "mluse": null,
+   "name": "Flame Strike",
+   "price": 800,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "exori flam"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Faluae",
+      "xyz": [
+       32660,
+       31673,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Knight": [
+     {
+      "city": "Carlin",
+      "npc": "Trisha",
+      "xyz": [
+       32348,
+       31748,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Duria",
+      "xyz": [
+       32617,
+       31938,
+       8
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Gregor",
+      "xyz": [
+       32407,
+       32202,
+       6
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Faluae",
+      "xyz": [
+       32660,
+       31673,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 60,
+   "ml": 3,
+   "mluse": null,
+   "name": "Great Light",
+   "price": 500,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin",
+    "Knight"
+   ],
+   "words": "utevo gran lux"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Elathriel",
+      "xyz": [
+       32684,
+       31671,
+       9
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Elathriel",
+      "xyz": [
+       32684,
+       31671,
+       9
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 5,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 70,
+   "ml": 3,
+   "mluse": 1,
+   "name": "Heavy Magic Missile",
+   "price": 600,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin"
+   ],
+   "words": "adori gran"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ],
+    "Knight": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_ENERGY",
+   "glow": "energy",
+   "kind": "instant",
+   "mana": 50,
+   "ml": 3,
+   "mluse": null,
+   "name": "Levitate",
+   "price": 500,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin",
+    "Knight"
+   ],
+   "words": "exani hur up / down"
+  },
+  {
+   "buy": {
+    "Knight": [
+     {
+      "city": "Edron",
+      "npc": "Eremo",
+      "xyz": [
+       33322,
+       31883,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 90,
+   "ml": 4,
+   "mluse": null,
+   "name": "Challenge",
+   "price": 2000,
+   "type": "Support",
+   "voc": [
+    "Knight"
+   ],
+   "words": "exeta res"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ],
+    "Knight": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_GREEN",
+   "glow": "green",
+   "kind": "instant",
+   "mana": 60,
+   "ml": 4,
+   "mluse": null,
+   "name": "Haste",
+   "price": 600,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin",
+    "Knight"
+   ],
+   "words": "utani hur"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Maealil",
+      "xyz": [
+       32732,
+       31631,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ]
+   },
+   "charges": 1,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 60,
+   "ml": 4,
+   "mluse": 1,
+   "name": "Intense Healing Rune",
+   "price": 600,
+   "type": "Healing",
+   "voc": [
+    "Druid"
+   ],
+   "words": "adura gran"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Eroth",
+      "xyz": [
+       32661,
+       31685,
+       6
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Eroth",
+      "xyz": [
+       32661,
+       31685,
+       6
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 50,
+   "ml": 4,
+   "mluse": null,
+   "name": "Magic Shield",
+   "price": 450,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin"
+   ],
+   "words": "utamo vita"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Maealil",
+      "xyz": [
+       32732,
+       31631,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ]
+   },
+   "charges": 1,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 50,
+   "ml": 5,
+   "mluse": 0,
+   "name": "Antidote Rune",
+   "price": 600,
+   "type": "Healing",
+   "voc": [
+    "Druid"
+   ],
+   "words": "adana pox"
+  },
+  {
+   "buy": {
+    "Knight": [
+     {
+      "city": "Edron",
+      "npc": "Puffels",
+      "xyz": [
+       33269,
+       31850,
+       8
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_BONE_HIT",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": "var",
+   "ml": 5,
+   "mluse": null,
+   "name": "Berserk",
+   "price": 2500,
+   "type": "Attack",
+   "voc": [
+    "Knight"
+   ],
+   "words": "exori"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Shanar",
+      "xyz": [
+       32657,
+       31655,
+       8
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 3,
+   "fx": null,
+   "glow": "energy",
+   "kind": "rune",
+   "mana": 80,
+   "ml": 5,
+   "mluse": 3,
+   "name": "Energy Field",
+   "price": 700,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "adevo grav vis"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Elathriel",
+      "xyz": [
+       32684,
+       31671,
+       9
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Elathriel",
+      "xyz": [
+       32684,
+       31671,
+       9
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 3,
+   "fx": null,
+   "glow": "fire",
+   "kind": "rune",
+   "mana": 60,
+   "ml": 5,
+   "mluse": 2,
+   "name": "Fireball",
+   "price": 800,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin"
+   ],
+   "words": "adori flam"
+  },
+  {
+   "buy": {
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Irea",
+      "xyz": [
+       32688,
+       31610,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ]
+   },
+   "charges": 10,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "poison",
+   "kind": "conjure",
+   "mana": 70,
+   "ml": 5,
+   "mluse": null,
+   "name": "Poisoned Arrow",
+   "price": 700,
+   "type": "Conjure",
+   "voc": [
+    "Paladin"
+   ],
+   "words": "exevo con pox"
+  },
+  {
+   "buy": {
+    "Paladin": [
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 10,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "conjure",
+   "mana": 70,
+   "ml": 6,
+   "mluse": null,
+   "name": "Conjure Bolt",
+   "price": 750,
+   "type": "Conjure",
+   "voc": [
+    "Paladin"
+   ],
+   "words": "exevo con mort"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Eroth",
+      "xyz": [
+       32661,
+       31685,
+       6
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Eroth",
+      "xyz": [
+       32661,
+       31685,
+       6
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 3,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 60,
+   "ml": 6,
+   "mluse": 3,
+   "name": "Destroy Field",
+   "price": 350,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin"
+   ],
+   "words": "adito grav"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 2,
+   "fx": null,
+   "glow": "death",
+   "kind": "rune",
+   "mana": 300,
+   "ml": 7,
+   "mluse": 4,
+   "name": "Animate Dead",
+   "price": 1200,
+   "type": "Summon",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "adana mort"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Gundralph",
+      "q": true,
+      "xyz": [
+       33268,
+       31849,
+       5
+      ]
+     },
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "q": true,
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": null,
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 60,
+   "ml": 7,
+   "mluse": null,
+   "name": "Desintegrate Spell",
+   "prem": true,
+   "price": 0,
+   "priceq": true,
+   "type": "Support",
+   "voc": [
+    "Druid"
+   ],
+   "words": "exito tera"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 3,
+   "fx": null,
+   "glow": "poison",
+   "kind": "rune",
+   "mana": 100,
+   "ml": 7,
+   "mluse": 4,
+   "name": "Envenom",
+   "price": 1000,
+   "type": "Attack",
+   "voc": [
+    "Druid"
+   ],
+   "words": "adevo res pox"
+  },
+  {
+   "buy": {
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_FIRE_BURST",
+   "glow": "fire",
+   "kind": "instant",
+   "mana": 80,
+   "ml": 7,
+   "mluse": null,
+   "name": "Fire Wave",
+   "price": 850,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer"
+   ],
+   "words": "exevo flam hur"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 70,
+   "ml": 7,
+   "mluse": null,
+   "name": "Heal Friend",
+   "price": 800,
+   "type": "Healing",
+   "voc": [
+    "Druid"
+   ],
+   "words": "exura sio \"name\""
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 3,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 100,
+   "ml": 8,
+   "mluse": 4,
+   "name": "Desintegrate",
+   "price": 900,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin"
+   ],
+   "words": "adito tera"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 2,
+   "fx": null,
+   "glow": "poison",
+   "kind": "rune",
+   "mana": 130,
+   "ml": 8,
+   "mluse": 4,
+   "name": "Poisonbomb",
+   "price": 1000,
+   "type": "Attack",
+   "voc": [
+    "Druid"
+   ],
+   "words": "adevo mas pox"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Ursula",
+      "xyz": [
+       33268,
+       31849,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_GREEN",
+   "glow": "green",
+   "kind": "instant",
+   "mana": 100,
+   "ml": 8,
+   "mluse": null,
+   "name": "Strong Haste",
+   "price": 1300,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "utani gran hur"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Maealil",
+      "xyz": [
+       32732,
+       31631,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Maealil",
+      "xyz": [
+       32732,
+       31631,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 80,
+   "ml": 8,
+   "mluse": null,
+   "name": "Ultimate Healing",
+   "price": 1000,
+   "type": "Healing",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin"
+   ],
+   "words": "exura vita"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Elathriel",
+      "xyz": [
+       32684,
+       31671,
+       9
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 2,
+   "fx": null,
+   "glow": "fire",
+   "kind": "rune",
+   "mana": 150,
+   "ml": 9,
+   "mluse": 5,
+   "name": "Firebomb",
+   "price": 1500,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "adevo mas flam"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Elathriel",
+      "xyz": [
+       32684,
+       31671,
+       9
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 2,
+   "fx": null,
+   "glow": "fire",
+   "kind": "rune",
+   "mana": 120,
+   "ml": 9,
+   "mluse": 4,
+   "name": "Great Fireball",
+   "price": 1200,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "adori gran flam"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Eroth",
+      "xyz": [
+       32661,
+       31685,
+       6
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ]
+   },
+   "charges": 1,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 100,
+   "ml": 10,
+   "mluse": 5,
+   "name": "Convince Creature",
+   "price": 1300,
+   "type": "Support",
+   "voc": [
+    "Druid"
+   ],
+   "words": "adeta sio"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Eroth",
+      "xyz": [
+       32661,
+       31685,
+       6
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 100,
+   "ml": 10,
+   "mluse": null,
+   "name": "Creature Illusion",
+   "price": 1000,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "utevo res ina \"name\""
+  },
+  {
+   "buy": {
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_FIRE_BLAST",
+   "glow": "energy",
+   "kind": "instant",
+   "mana": 100,
+   "ml": 10,
+   "mluse": null,
+   "name": "Energy Beam",
+   "price": 1000,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer"
+   ],
+   "words": "exevo vis lux"
+  },
+  {
+   "buy": {
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Irea",
+      "xyz": [
+       32688,
+       31610,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ]
+   },
+   "charges": 5,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "conjure",
+   "mana": 120,
+   "ml": 10,
+   "mluse": null,
+   "name": "Explosive Arrow",
+   "price": 1000,
+   "type": "Conjure",
+   "voc": [
+    "Paladin"
+   ],
+   "words": "exevo con flam"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Eroth",
+      "xyz": [
+       32661,
+       31685,
+       6
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ]
+   },
+   "charges": 1,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 150,
+   "ml": 11,
+   "mluse": 4,
+   "name": "Chameleon",
+   "price": 1500,
+   "type": "Support",
+   "voc": [
+    "Druid"
+   ],
+   "words": "adevo ina"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Shanar",
+      "xyz": [
+       32657,
+       31655,
+       8
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 4,
+   "fx": null,
+   "glow": "poison",
+   "kind": "rune",
+   "mana": 160,
+   "ml": 11,
+   "mluse": 5,
+   "name": "Poison Wall",
+   "price": 1600,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "adevo mas grav pox"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Maealil",
+      "xyz": [
+       32732,
+       31631,
+       7
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ]
+   },
+   "charges": 1,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 100,
+   "ml": 11,
+   "mluse": 4,
+   "name": "Ultimate Healing Rune",
+   "price": 1500,
+   "type": "Healing",
+   "voc": [
+    "Druid"
+   ],
+   "words": "adura vita"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Gundralph",
+      "xyz": [
+       33268,
+       31849,
+       5
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 250,
+   "ml": 12,
+   "mluse": null,
+   "name": "Cancel Invisibility",
+   "price": 1600,
+   "type": "Support",
+   "voc": [
+    "Druid"
+   ],
+   "words": "exana ina"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Elathriel",
+      "xyz": [
+       32684,
+       31671,
+       9
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 3,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 180,
+   "ml": 12,
+   "mluse": 6,
+   "name": "Explosion",
+   "price": 1800,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "adevo mas hur"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Gundralph",
+      "xyz": [
+       33268,
+       31849,
+       5
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Gundralph",
+      "xyz": [
+       33268,
+       31849,
+       5
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 140,
+   "ml": 12,
+   "mluse": null,
+   "name": "Ultimate Light",
+   "price": 1600,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "utevo vis lux"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Shanar",
+      "xyz": [
+       32657,
+       31655,
+       8
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 4,
+   "fx": null,
+   "glow": "fire",
+   "kind": "rune",
+   "mana": 200,
+   "ml": 13,
+   "mluse": 6,
+   "name": "Fire Wall",
+   "price": 2000,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "adevo mas grav flam"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Gundralph",
+      "xyz": [
+       33268,
+       31849,
+       5
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Gundralph",
+      "xyz": [
+       33268,
+       31849,
+       5
+      ]
+     }
+    ]
+   },
+   "charges": 2,
+   "fx": null,
+   "glow": "fire",
+   "kind": "rune",
+   "mana": 150,
+   "ml": 13,
+   "mluse": 7,
+   "name": "Soulfire",
+   "price": 1800,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "adevo res flam"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Eremo",
+      "xyz": [
+       33322,
+       31883,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": null,
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 150,
+   "ml": 13,
+   "mluse": null,
+   "name": "Wild Growth",
+   "price": 2000,
+   "type": "Support",
+   "voc": [
+    "Druid"
+   ],
+   "words": "exevo grav vita"
+  },
+  {
+   "buy": {
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_FIRE_BLAST",
+   "glow": "energy",
+   "kind": "instant",
+   "mana": 200,
+   "ml": 14,
+   "mluse": null,
+   "name": "Great Energy Beam",
+   "price": 1800,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer"
+   ],
+   "words": "exevo gran vis lux"
+  },
+  {
+   "buy": {
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Gundralph",
+      "xyz": [
+       33268,
+       31849,
+       5
+      ]
+     }
+    ]
+   },
+   "charges": 4,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 250,
+   "ml": 14,
+   "mluse": 9,
+   "name": "Magic Wall",
+   "price": 2100,
+   "type": "Support",
+   "voc": [
+    "Sorcerer"
+   ],
+   "words": "adevo grav tera"
+  },
+  {
+   "buy": {
+    "Paladin": [
+     {
+      "city": "Edron",
+      "npc": "Eremo",
+      "xyz": [
+       33322,
+       31883,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 1,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "conjure",
+   "mana": 200,
+   "ml": 14,
+   "mluse": null,
+   "name": "Power Bolt",
+   "price": 2000,
+   "type": "Conjure",
+   "voc": [
+    "Paladin"
+   ],
+   "words": "exevo con vis"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Eroth",
+      "xyz": [
+       32661,
+       31685,
+       6
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Paladin": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Eroth",
+      "xyz": [
+       32661,
+       31685,
+       6
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Legola",
+      "xyz": [
+       32298,
+       31784,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Razan",
+      "xyz": [
+       33239,
+       32409,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Elane",
+      "xyz": [
+       32343,
+       32239,
+       7
+      ]
+     },
+     {
+      "city": "Venore",
+      "npc": "Asrak",
+      "xyz": [
+       32932,
+       32074,
+       11
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 210,
+   "ml": 15,
+   "mluse": null,
+   "name": "Invisible",
+   "price": 1000,
+   "type": "Support",
+   "voc": [
+    "Sorcerer",
+    "Druid",
+    "Paladin"
+   ],
+   "words": "utana vid"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Gundralph",
+      "xyz": [
+       33268,
+       31849,
+       5
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 400,
+   "ml": 15,
+   "mluse": null,
+   "name": "Undead Legion",
+   "price": 2000,
+   "type": "Summon",
+   "voc": [
+    "Druid"
+   ],
+   "words": "exana mas mort"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Eroth",
+      "xyz": [
+       32661,
+       31685,
+       6
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 0,
+   "ml": 16,
+   "mluse": null,
+   "name": "Summon Creature",
+   "price": 2000,
+   "type": "Summon",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "utevo res \"name\""
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Ab'Dendriel",
+      "npc": "Shanar",
+      "xyz": [
+       32657,
+       31655,
+       8
+      ]
+     },
+     {
+      "city": "Carlin",
+      "npc": "Padreia",
+      "xyz": [
+       32300,
+       31816,
+       7
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Marvik",
+      "xyz": [
+       32444,
+       32213,
+       8
+      ]
+     }
+    ],
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 4,
+   "fx": null,
+   "glow": "energy",
+   "kind": "rune",
+   "mana": 250,
+   "ml": 18,
+   "mluse": 9,
+   "name": "Energy Wall",
+   "price": 2500,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer",
+    "Druid"
+   ],
+   "words": "adevo mas grav vis"
+  },
+  {
+   "buy": {
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Zoltan",
+      "xyz": [
+       33268,
+       31849,
+       4
+      ]
+     }
+    ]
+   },
+   "charges": 2,
+   "fx": null,
+   "glow": "energy",
+   "kind": "rune",
+   "mana": 220,
+   "ml": 18,
+   "mluse": 10,
+   "name": "Energybomb",
+   "price": 2300,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer"
+   ],
+   "words": "adevo mas vis"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Zoltan",
+      "xyz": [
+       33268,
+       31849,
+       4
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_BLUE",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 120,
+   "ml": 19,
+   "mluse": null,
+   "name": "Mass Healing",
+   "price": 2200,
+   "type": "Healing",
+   "voc": [
+    "Druid"
+   ],
+   "words": "exura gran mas res"
+  },
+  {
+   "buy": {
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_ENERGY",
+   "glow": "energy",
+   "kind": "instant",
+   "mana": 250,
+   "ml": 20,
+   "mluse": null,
+   "name": "Energy Wave",
+   "price": 2500,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer"
+   ],
+   "words": "exevo mort hur"
+  },
+  {
+   "buy": {
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Eremo",
+      "xyz": [
+       33322,
+       31883,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_MAGIC_GREEN",
+   "glow": "green",
+   "kind": "instant",
+   "mana": 80,
+   "ml": 22,
+   "mluse": null,
+   "name": "Enchant Staff",
+   "price": 2000,
+   "type": "Support",
+   "voc": [
+    "Sorcerer"
+   ],
+   "words": "exeta vis"
+  },
+  {
+   "buy": {
+    "Sorcerer": [
+     {
+      "city": "Carlin",
+      "npc": "Lea",
+      "xyz": [
+       32348,
+       31828,
+       6
+      ]
+     },
+     {
+      "city": "Darashia",
+      "npc": "Shalmar",
+      "xyz": [
+       33221,
+       32408,
+       7
+      ]
+     },
+     {
+      "city": "Kazordoon",
+      "npc": "Etzel",
+      "xyz": [
+       32626,
+       31917,
+       5
+      ]
+     },
+     {
+      "city": "Thais",
+      "npc": "Muriel",
+      "xyz": [
+       32296,
+       32263,
+       7
+      ]
+     }
+    ]
+   },
+   "charges": 1,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 220,
+   "ml": 25,
+   "mluse": 15,
+   "name": "Sudden Death",
+   "price": 3000,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer"
+   ],
+   "words": "adori vita vis"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Zoltan",
+      "xyz": [
+       33268,
+       31849,
+       4
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_POISON",
+   "glow": "poison",
+   "kind": "instant",
+   "mana": 400,
+   "ml": 28,
+   "mluse": null,
+   "name": "Poison Storm",
+   "price": 3400,
+   "type": "Attack",
+   "voc": [
+    "Druid"
+   ],
+   "words": "exevo gran mas pox"
+  },
+  {
+   "buy": {
+    "Druid": [
+     {
+      "city": "Edron",
+      "npc": "Zoltan",
+      "xyz": [
+       33268,
+       31849,
+       4
+      ]
+     }
+    ]
+   },
+   "charges": 1,
+   "fx": null,
+   "glow": "blue",
+   "kind": "rune",
+   "mana": 600,
+   "ml": 35,
+   "mluse": 18,
+   "name": "Paralyze",
+   "price": 1900,
+   "type": "Support",
+   "voc": [
+    "Druid"
+   ],
+   "words": "adana ani"
+  },
+  {
+   "buy": {
+    "Sorcerer": [
+     {
+      "city": "Edron",
+      "npc": "Zoltan",
+      "xyz": [
+       33268,
+       31849,
+       4
+      ]
+     }
+    ]
+   },
+   "charges": null,
+   "fx": "EFFECT_EXPLOSION",
+   "glow": "blue",
+   "kind": "instant",
+   "mana": 800,
+   "ml": 40,
+   "mluse": null,
+   "name": "Ultimate Explosion",
+   "price": 8000,
+   "type": "Attack",
+   "voc": [
+    "Sorcerer"
+   ],
+   "words": "exevo gran mas vis"
+  }
+ ],
+ "source": "https://tibiantis.life/"
+}

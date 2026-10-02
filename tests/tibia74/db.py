@@ -1,5 +1,7 @@
 """Creates test characters directly in the test database (the 7.4 client has no character creation)."""
+import functools
 import itertools
+import re
 import sqlite3
 import time
 from dataclasses import dataclass, field
@@ -20,6 +22,25 @@ VOCATION_GAINS.update({v + 4: g for v, g in list(VOCATION_GAINS.items()) if v})
 
 TEST_ACCOUNT_BASE = 500000
 _counter = itertools.count(1)
+
+
+VOCATION_NAMES = {1: "Sorcerer", 2: "Druid", 3: "Paladin", 4: "Knight",
+                  5: "Master Sorcerer", 6: "Elder Druid", 7: "Royal Paladin", 8: "Elite Knight"}
+
+
+@functools.lru_cache(maxsize=None)
+def learnable_spells(vocation: int = None) -> tuple:
+    """The spells a player must learn from an NPC (needlearn in spells.xml) - those of a vocation, or all of them.
+    A learned spell is cast whatever the vocation, so a test character only knows its own vocation's."""
+    xml = (Path(__file__).resolve().parents[2] / "server" / "data" / "spells" / "spells.xml").read_text("latin-1")
+    spells = []
+    for m in re.finditer(r'<(instant|conjure) name="([^"]+)"([^>]*?)(/>|>(.*?)</\1>)', xml, re.S):
+        if 'needlearn="1"' not in m.group(3):
+            continue
+        vocations = re.findall(r'vocation name="([^"]+)"', m.group(5) or "")
+        if vocation is None or not vocations or VOCATION_NAMES.get(vocation) in vocations:
+            spells.append(m.group(2))
+    return tuple(spells)
 
 
 def exp_for_level(level: int) -> int:
@@ -66,10 +87,12 @@ class TestDatabase:
                          inventory: dict = None, group_id: int = 1,
                          health: int = None, mana: int = None, storage: dict = None,
                          premium_days: int = 0, maglevel: int = 0, skills: dict = None,
-                         experience: int = None) -> Character:
+                         experience: int = None, spells: list = None) -> Character:
         """New character on its own account. pos=None means 'spawn at the town temple'.
         storage: {key: value} player storage, e.g. {BEGINNER_SET_GIVEN: 1} to skip the first-login set.
-        skills: {skill id: level}, 0 fist 1 club 2 sword 3 axe 4 distance 5 shielding 6 fishing."""
+        skills: {skill id: level}, 0 fist 1 club 2 sword 3 axe 4 distance 5 shielding 6 fishing.
+        spells: the spells it has learned (spells.xml names); None: every spell of its vocation (spells must be
+        learned from an NPC - npc/lib/spellteacher.lua - and most tests just cast them)."""
         n = next(_counter)
         name = name or f"Test{n:04d}"
         account = TEST_ACCOUNT_BASE + n
@@ -100,12 +123,24 @@ class TestDatabase:
                 con.execute('UPDATE players SET maglevel = ? WHERE id = ?', (maglevel, guid))
             for skill, value in (skills or {}).items():
                 con.execute('UPDATE player_skills SET value = ? WHERE player_id = ? AND skillid = ?', (value, guid, skill))
+            if spells is None:
+                spells = learnable_spells(vocation) if vocation else []
+            for spell in spells:
+                con.execute('INSERT INTO player_spells (player_id, name) VALUES (?, ?)', (guid, spell))
             for key, value in (storage or {}).items():
                 con.execute('INSERT INTO player_storage (player_id, key, value) VALUES (?, ?, ?)', (guid, key, value))
             con.commit()
         finally:
             con.close()
         return Character(guid, name, account, password)
+
+    def spells(self, guid: int) -> list:
+        """The spells a character has learned (saved at logout)."""
+        con = self._connect()
+        try:
+            return [r[0] for r in con.execute('SELECT name FROM player_spells WHERE player_id = ?', (guid,))]
+        finally:
+            con.close()
 
     def _insert_items(self, con, guid: int, inventory: dict):
         sid = itertools.count(101)

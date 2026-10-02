@@ -52,11 +52,11 @@ FIELD = (32094, 32165, 7)            # open ground x..x+9, y..y+6 north of Rookg
 INFINITE = bytes([4]) + (64000).to_bytes(2, "little")     # action id 64000: a test character's never-ending rune
 
 
-def _sd_caster(new_player, row, marked=False):
+def _sd_caster(new_player, row, marked=False, vocation=5, maglevel=70):
     """Each test its own row: a caster stays online (in fight) after the test, on the tile it stood on."""
     from tibia74 import BACKPACK, Item
     pos = (FIELD[0], FIELD[1] + row, FIELD[2])
-    p = new_player(pos=pos, level=100, vocation=5, maglevel=70, mana=1000,
+    p = new_player(pos=pos, level=100, vocation=vocation, maglevel=maglevel, mana=1000,
                    inventory={BACKPACK: Item(1988, contents=[Item(SD_RUNE, 5, attributes=INFINITE if marked else b"")])})
     assert p.pos == pos, f"caster placed at {p.pos}, not {pos}"
     p.set_fight_modes(fight=1, chase=0, safe=0)    # secure mode off, or runes on unmarked players are refused
@@ -91,6 +91,20 @@ def test_sudden_death_does_not_reach_off_screen(new_player, items, marked, row):
     hit = target.wait_for(lambda: target.stats.health < before, timeout=3)
     assert not hit, f"an SD hit 8 tiles away ({before} -> {target.stats.health} hp)"
     assert p.messages("too far"), p.text_messages[-3:]
+
+
+@pytest.mark.parametrize("maglevel, row, hits", [(14, 1, False), (15, 3, True)], ids=["ml 14", "ml 15"])
+def test_a_knight_shoots_sudden_death_from_magic_level_15(new_player, items, maglevel, row, hits):
+    """Any vocation uses any rune with the rune's magic level - Tibiantis: Sudden Death 15, Magic Wall 9 (decided
+    with the user 2026-10-01)."""
+    p = _sd_caster(new_player, row, vocation=4, maglevel=maglevel)
+    target = new_player(pos=(p.pos[0] + 3, p.pos[1], p.pos[2]), level=100, vocation=4, storage={30001: 1})
+    before = target.wait_for(lambda: target.stats.health, timeout=3)
+    _throw_sd(p, items, target)
+    hit = target.wait_for(lambda: target.stats.health < before, timeout=3)
+    assert bool(hit) == hits, f"magic level {maglevel}: hit {bool(hit)}; {p.text_messages[-2:]}"
+    if not hits:
+        assert p.messages("magic level"), p.text_messages[-3:]
 
 
 def _spells_xml():

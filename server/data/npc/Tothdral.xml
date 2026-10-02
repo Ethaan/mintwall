@@ -1,4 +1,4 @@
-<npc name="Tothdral" script="Tothdral.lua" floorchange="0" walkinterval="1500" speed="100">
+<npc name="Tothdral" script="default.lua" floorchange="0" walkinterval="1500" speed="100">
 	<health now="100" max="100"/>
 	<look type="65" head="0" body="0" legs="0" feet="0"/>
 	<parameters>

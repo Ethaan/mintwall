@@ -1,3 +1,4 @@
+dofile(getDataDir() .. 'npc/lib/spellteacher.lua')   -- teachSpells: the spells Tibiantis has him teach
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
 NpcSystem.parseParameters(npcHandler)
@@ -36,4 +37,5 @@ node1 = keywordHandler:addKeyword({'key'}, StdModule.say, {npcHandler = npcHandl
 node1:addChildKeyword({'yes'}, key, {})
 node1:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Believe me, it\'s better for you that way.', reset = true})
 
+teachSpells(keywordHandler, npcHandler, getNpcName())
 npcHandler:addModule(FocusModule:new())
