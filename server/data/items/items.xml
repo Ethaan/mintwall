@@ -3771,7 +3771,7 @@
 		<attribute key="duration" value="1200"/>
 		<attribute key="healthGain" value="1"/>
 		<attribute key="healthTicks" value="3000"/>
-		<attribute key="manaGain" value="4"/>
+		<attribute key="manaGain" value="1"/>   <!-- 1 hp and mana every 3 s for 20 min: 400 (tibiantis-notes) -->
 		<attribute key="manaTicks" value="3000"/>
 		<attribute key="showduration" value="1"/>
 	</item>
@@ -3859,10 +3859,10 @@
 		<attribute key="weight" value="100"/>
 		<attribute key="decayTo" value="0"/>
 		<attribute key="transformDeEquipTo" value="2214"/>
-		<attribute key="duration" value="480"/>
+		<attribute key="duration" value="450"/>   <!-- 7.5 min, 1 hp and mana a second: 450 (tibiantis-notes) -->
 		<attribute key="healthGain" value="1"/>
 		<attribute key="healthTicks" value="1000"/>
-		<attribute key="manaGain" value="4"/>
+		<attribute key="manaGain" value="1"/>
 		<attribute key="manaTicks" value="1000"/>
 		<attribute key="showduration" value="1"/>
 	</item>

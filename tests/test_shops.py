@@ -41,7 +41,7 @@ def _visit(new_player, npc, inventory=None):
     assert me, f"{npc.name} is not near its spawn {spawn} (we are at {p.pos})"
     if max(abs(me.pos[0] - p.pos[0]), abs(me.pos[1] - p.pos[1])) > 3:
         p.walk_to(me.pos)
-    p.greeting = p.talk("hi", npc=npc.name)
+    p.greeting = p.talk(f"hi {npc.name.lower()}", npc=npc.name)    # by name: a neighbour would take a plain "hi"
     assert p.greeting, f"{npc.name} does not answer hi"
     return p
 
@@ -104,4 +104,17 @@ def test_only_one_trader_of_a_shared_shop_answers(new_player, db):
     said = p.talk("buy candelabrum", "yes")                  # every NPC's words, not just Bezil's
     assert not any(n == "Nezil" for n, _, _ in p.speech), [s for s in p.speech if s[0] in ("Bezil", "Nezil")]
     rows = rook._saved(p, db)
-    assert rook._money(rows) == 0 and any(r["itemtype"] == 2041 for r in rows), (said, rows)
+    paid = 10000 - rook._money(rows)                         # paid with a crystal coin
+    assert paid == 8 and any(r["itemtype"] == 2041 for r in rows), (said, paid)
+
+
+def test_greeting_the_other_trader_by_name_hands_the_player_over(new_player, db):
+    """Talking to Bezil, "hi nezil" reaches Nezil; Bezil lets go, so a "yes" buys once."""
+    npc = NPCS["Bezil"]
+    p = _visit(new_player, npc, inventory={BACKPACK: Item(rook.BACKPACK_ID, contents=rook._coins(8))})
+    assert p.wait_for(lambda: p.nearest("Nezil"), timeout=60), "Nezil is not in the shop"
+    assert p.talk("hi nezil", npc="Nezil"), "Nezil does not answer his name"
+    said = p.talk("buy candelabrum", "yes")
+    rows = rook._saved(p, db)
+    paid = 10000 - rook._money(rows)                         # paid with a crystal coin
+    assert paid == 8 and any(r["itemtype"] == 2041 for r in rows), (said, paid)

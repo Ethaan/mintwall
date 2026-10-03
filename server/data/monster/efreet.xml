@@ -25,18 +25,8 @@
     <attack name="energy" interval="2000" chance="25" range="7" min="-65" max="-115">
       <attribute key="shootEffect" value="energy"/>
     </attack>
-    <attack name="lifedrain" interval="3000" chance="20" range="7" min="-60" max="-120">
-      <attribute key="shootEffect" value="suddendeath"/>
-    </attack>
     <attack name="speed" interval="1000" chance="13" range="7" speedchange="-650" duration="15000">
       <attribute key="areaEffect" value="redshimmer"/>
-    </attack>
-    <attack name="drunk" interval="1000" chance="20" range="7">
-      <attribute key="shootEffect" value="energy"/>
-      <attribute key="areaEffect" value="energyarea"/>
-    </attack>
-    <attack name="outfit" interval="1000" chance="17" range="7" monster="rat" duration="30000">
-      <attribute key="areaEffect" value="blueshimmer"/>
     </attack>
     <attack name="energycondition" interval="1000" chance="17" radius="3" target="0" min="-60" max="-100">
       <attribute key="areaEffect" value="energy"/>

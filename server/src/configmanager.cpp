@@ -21,6 +21,7 @@
 
 #include "configmanager.h"
 #include <iostream>
+#include <cstdio>
 
 ConfigManager::ConfigManager()
 {
@@ -49,6 +50,21 @@ bool ConfigManager::loadFile(const std::string& _filename)
 		lua_close(L);
 		L = NULL;
 		return false;
+	}
+
+	// config.local.lua beside it, when there is one: local settings over config.lua that are not committed (.gitignore),
+	// e.g. the quest-testing characters in InfiniteItemPlayers (tools/provision-quest-testers.py)
+	std::string localFile = _filename;
+	std::string::size_type ext = localFile.rfind(".lua");
+	if(ext != std::string::npos){
+		localFile.insert(ext, ".local");
+		if(FILE* f = fopen(localFile.c_str(), "r")){
+			fclose(f);
+			if(luaL_dofile(L, localFile.c_str())){
+				std::cout << "Warning: [ConfigManager] " << localFile << ": " << lua_tostring(L, -1) << std::endl;
+				lua_pop(L, 1);
+			}
+		}
 	}
 
 	// parse config

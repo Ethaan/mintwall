@@ -1,0 +1,63 @@
+Home 
+Tibia 7.4/ Tibiantis notes 
+ by Tarsal. 
+Magic 
+Magic damage formula is base_damage x (mlv x 3 + lv x 2)/100. The (mlv x 3 + lv x 2) component will be referred to as ‘magic power’. Base damage has a min and max component. 
+The formula results in level having a large factor in magic power and even high level knights will start to see increases such that attack runes become viable. 
+If magic power is less than 100, spell base damage is used. Characters will only see an increase in their spells effectiveness beyond this threshold. For knights this is around Lv43 Mlv5, for Paladins its around Lv33 Mlv11, for Mages Lv19 Mlv21. This is a great advantage to knights who get to use UH for 250hp as soon as they reach Mlv4. 
+Magic level can be ‘trained’ more quickly by using mana potions to make runes, these runes can then be sold for more mana potions and so on. Making runes with mana fluids costs more than their sell price each round of making and selling gives less runes. The formula of how much you can multiply your natural mana regeneration this way is as follows m= (1/(1-buy/sell)), so if your sell price is 75% of the buy price you can multiply your mana regen in terms of Mlv by 4x, for the cost of the runes or cash. With manafluids for bp runes this becomes m=1/(1-(sell/(20xrune cost x 95/50)-200)), the higher the sell price the more the multiplier. This mechanism also helps anchor the sell price of runes from getting too high. Note that level is considered more valuable than magic level as it affects 5 attributes. 
+Mages can also hunt while manasitting for extra income, 3k gp profit per hour becomes 1+1.75=2.75x base regen and therefore up to 11x natural regen. 
+Mana fluids provide 25-75 mana (50 average) and cost 100gp, 5 gp can be refunded for each empty vial. 
+Life ring generates 1 HP and mana every 3 seconds for 20 minutes, for a total of 400 mana and HP. They cost 900 gp. Rings of healing 1 HP and mana every second for 7.5 minutes, for a total of 450 mana and HP. 
+To make 400 mana with mana fluids would cost 400 x 95/50 = 760 gp, which is 15% cheaper than life rings. If used while hunting the 400 hp can be used to offset some healing costs - just one exura vita saved would bring mana fluid and life rings to an equal value. Life rings main advantage is that they weigh much less. 
+Life Ring vs IH for knights. Knights with Mlv 0-3 have two options for healing: Intense Healing (IH) rune or life ring. Life ring + exura provides 400+20/25*400 = 720hp = 0.8 hp/ gp and 80 minutes worth of magic lv progresion. IH would cost 85gp each and heal 70 for 0.82 hp/gp. Overall pick life ring for hunting and IH to avoid PK. 
+Table: Rune cost/mana for given bp price 
+ LMM IH FB HMM UH GFB F bomb Explo SD M Wall Paralyze 
+ 40 60 60 70 100 120 150 180 220 250 600 
+ 500 (0.38) 1100 (0.75) 1100 (0.75) 1300 (0.79) 2300 (1.05) 2200 (0.83) 3000 (0.93) 4000 (1.06) 3900 (0.84) 4700 (0.90) 11000 (0.90) 
+ 600 (0.50) 1200 (0.83) 1200 (0.83) 1400 (0.86) 2400 (1.10) 2400 (0.92) 3200 (1.00) 4200 (1.11) 4200 (0.91) 5000 (0.96) 12000 (0.98) 
+ 700 (0.63) 1300 (0.92) 1300 (0.92) 1500 (0.93) 2500 (1.15) 2600 (1.00) 3400 (1.07) 4400 (1.17) 4500 (0.98) 5300 (1.02) 13000 (1.07) 
+ 800 (0.75) 1400 (1.00) 1400 (1.00) 1600 (1.00) 2600 (1.20) 2800 (1.08) 3600 (1.13) 4600 (1.22) 4800 (1.05) 5600 (1.08) 14000 (1.15) 
+ 900 (0.88) 1500 (1.08) 1500 (1.08) 1700 (1.07) 2700 (1.25) 3000 (1.17) 3800 (1.20) 4800 (1.28) 5100 (1.11) 5900 (1.14) 15000 (1.23) 
+ 1000 (1.00) 1600 (1.17) 1600 (1.17) 1800 (1.14) 2800 (1.30) 3200 (1.25) 4000 (1.27) 5000 (1.33) 5400 (1.18) 6200 (1.20) 16000 (1.32) 
+ 1100 (1.13) 1700 (1.25) 1700 (1.25) 1900 (1.21) 2900 (1.35) 3400 (1.33) 4200 (1.33) 5200 (1.39) 5700 (1.25) 6500 (1.26) 17000 (1.40) 
+ 1200 (1.25) 1800 (1.33) 1800 (1.33) 2000 (1.29) 3000 (1.40) 3600 (1.42) 4400 (1.40) 5400 (1.44) 6000 (1.32) 6800 (1.32) 18000 (1.48) 
+ 1300 (1.38) 1900 (1.42) 1900 (1.42) 2100 (1.36) 3100 (1.45) 3800 (1.50) 4600 (1.47) 5600 (1.50) 6300 (1.39) 7100 (1.38) 19000 (1.57) 
+ 1400 (1.50) 2000 (1.50) 2000 (1.50) 2200 (1.43) 3200 (1.50) 4000 (1.58) 4800 (1.53) 5800 (1.56) 6600 (1.45) 7400 (1.44) 20000 (1.65) 
+ 1500 (1.63) 2100 (1.58) 2100 (1.58) 2300 (1.50) 3300 (1.55) 4200 (1.67) 5000 (1.60) 6000 (1.61) 6900 (1.52) 7700 (1.50) 21000 (1.73) 
+This table compares the gp/ mana for runes at different Backpack (bp) prices. 
+The gp/ mana price excludes rune cost. bp prices include rune cost. 
+The table aims to cover all reasonable bp prices, but is not inteded to indicate normal prices. 
+Example: If a bp UH readily sells for 3000, other bps would need to sell at 1.40 gp/mana to be as profitable. 
+Table: Damage per mana 
+ Spell Mana Base Damage Number of Targets 
+ Min Max Avg 1 2 3 4 5 6 7 8 
+ Light Magic Missile 8 10 20 15 1.88 
+ Heavy Magic Misslile 14 20 40 30 2.14 
+ Burst Arrow 24 0 60 30 1.25 2.50 3.75 5.00 6.25 7.5 8.75 10.0 
+ Fireball 20 15 25 20 1.00 2.00 3.00 4.00 5.00 6.00 7.00 8.00 
+ Great Fireball 60 35 65 50 0.83 1.67 2.50 3.33 4.17 5.00 5.83 6.67 
+ Explosion 60 20 100 60 1.00 2.00 3.00 4.00 5.00 
+ Sudden Death 220 130 170 150 0.68 
+ Energy Strike 20 35 55 45 2.25 
+ Fire wave 80 20 40 30 0.38 0.75 1.13 1.50 1.88 2.25 2.63 3.00 
+ Energy Beam 100 40 80 60 0.60 1.20 1.80 2.40 3.00 
+ Great Energy Beam 200 40 200 120 0.60 1.20 1.80 2.40 3.00 3.60 4.20 4.80 
+ Energy Wave 250 100 200 150 0.60 1.20 1.80 2.40 3.00 3.60 4.20 4.80 
+ Ultimate Explosion 800 200 300 250 0.31 0.63 0.94 1.25 1.56 1.88 2.19 2.50 
+ Envenom 33 50 90 70 2.12 
+ Poison Storm 400 150 250 200 0.50 1.00 1.50 2.00 2.50 3.00 3.50 4.00 
+ Soulfire 75 100 140 120 1.60 
+ Light Healing 25 10 30 20 0.80 
+ Intense Healing 40 20 60 40 1.00 
+ Ultimate Healing 80 200 300 250 3.13 
+ Heal Friend 70 160 240 200 2.86 
+ Heal Friend (classic) 70 80 160 120 1.71 
+ Mass Healing 120 160 240 200 1.67 3.33 5.00 6.67 
+ Mass Healing (classic) 150 160 240 200 1.33 2.67 4.00 5.33 
+ Intense Healing Rune 60 40 100 70 1.17 
+ Ultimate Healing Rune 100 250 250 250 2.50 
+This table shows the damage per mana of different spells and runes to compare their effectiveness. 
+The columns show number of targets which increase overall damage. 
+The damage/ mana price excludes rune cost. Note that instant spells and runes are not directly comparable. 
+Physical attacks like explosion will have their damage reduced by armour

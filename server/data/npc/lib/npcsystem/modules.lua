@@ -262,7 +262,9 @@ if(Modules == nil) then
 
 	-- Greeting callback function.
 	function FocusModule.onGreet(cid, message, keywords, parameters)
-		parameters.module.npcHandler:onGreet(cid)
+		-- "hi <his name>" reaches him even while the player talks to another NPC (Bezil and Nezil share a shop)
+		local named = string.find(string.lower(message), string.lower(getCreatureName(getNpcId())), 1, true) ~= nil
+		parameters.module.npcHandler:onGreet(cid, named)
 		return true
 	end
 
@@ -282,13 +284,15 @@ if(Modules == nil) then
 		local spectators = getSpectators(getCreaturePosition(getNpcId()), 7, 7)
 		for i, word in pairs(keywords) do
 			if(type(word) == 'string') then
-				if(string.find(message, word) and not string.find(message, '[%w+]' .. word) and not string.find(message, word .. '[%w+]')) then
-					if(string.find(message, getCreatureName(getNpcId()))) then
+				-- the greeting as a whole word: "hi bashira" was refused - "hi" followed by a letter in "basHIra"
+				if(containsWord(message, word)) then
+					-- "hi bezil": the message comes in lower case, names do not
+					if(string.find(message, string.lower(getCreatureName(getNpcId())), 1, true)) then
 						return true
 					end
 
 					for i, uid in ipairs(spectators) do
-						if(string.find(message, getCreatureName(uid))) then
+						if(string.find(message, string.lower(getCreatureName(uid)), 1, true)) then
 							return false
 						end
 					end

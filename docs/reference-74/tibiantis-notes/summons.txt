@@ -1,0 +1,160 @@
+Summons 
+ Home 
+Tibia 7.4/ Tibiantis notes 
+ by Tarsal. 
+Summons 
+Introduction 
+This page discusses summons in Tibia 7.4 for both PvP and PvE.
+The following summons have a common use: Fire Elemental, Orc Leader, Demon Skeleton, Monk, Ghoul, Minotaur Archer.
+The following summons have a rare or highly situational use:
+Orc Berserker, Fire Devil, Hunter, Scorpion, Skeleton, Rat.
+You can have a maximum of two summoned or convinced creatures. Summons deal and take full damage in PvP.
+Table: Common Summons 
+ Name Mana
+cost Mage
+Level Paladin
+Level Knight
+Level 
+ Fire Elemental 690 30 52 139 
+ Orc Leader 640 29 49 129 
+ Demon Skeleton 620 28 47 125 
+ Monk 600 27 - - 
+ Orc Berserker 590 27 45 119 
+ Fire Devil 530 25 41 107 
+ Hunter (convince) 530 25 41 107 
+ Ghoul 450 22 36 91 
+ Minotaur Archer 390 20 32 79 
+ Scorpion 310 18 27 63 
+ Rat 200 14 19 41 
+General Summons Guidance 
+Summons can be used for a variety of tasks: to boost damage, blocking, immunity, shield breaker, training, RP.
+Summons will remain alive up to 32 (TBC) tiles, and +/-1 one floor after which they will disappear. When you are out of range they will stay still (TBC).
+Summons without a target move adjacent when diagonal or leave a one tile gap when orthogonal. Summons with no target will not walk randomly after they are in one of these positions.
+If you take protection zone lock (pz) + are attacked by a monster (logout block) + close the client you and your summon will remain in game. You and your summon will lose their target and not be able to attack anything.
+If you stand orthognally adjacent to a summon they will move away or to the side randomly. You can use this to push your summon to aggro a monster but it is slow.
+Like all creatures, summons have shielding values (see creature page for details). To reduce the damage your summons take avoid letting their shielding get broken.
+Two melee summons + summoner attacking will break the target's shielding. If you attack first one summon will bypass shielding, if last then you will bypass shielding.
+Physical spells (projectiles) from Minotaur Archers, Hunters, and Orc Leaders are reduced by shielding and can break shielding in the same manner as physical attacks. Having the summoner or blocker attack with melee weapon can therefoee increase summon damage.
+The mechanics of where a summon can and can't appear are not known. 
+ Convince creature runes take 100 mana and mlv 16 to make and mlv 5 to use.
+ Spell/ projectile chance is 1/'frequency' for each time the stimulus function is called. For melee creatures (Orc Leader, Fire Elemental) this is once per 2 seconds. For creatues that keep distance (Fire Devil, Minotaur Archer, Hunter) this is once per second. Additonal stimulus function calls may occur when the summon retargets (TBC if this can be influcenced on summoms) or has to recalculate pathing. Where retreating creatures are engaged in melee they will attack once per 2 seconds.
+You can set your summon to defensive stance by having no target. If you target and then remove a targrt a unit then the summon will remember its last target until it is killed or the target dissapears (target lost). For monks this would increase their average block (excluding armor) from 83 to 150.
+If you have two summons and get one to attack the other where there is no path, the attacking summon will start to walk randomly. Summons do not block respawn so this can be used to lure monsters as soon as they have spawned. An example would be the Ank 2x Dragon.
+Many ranged summons do not 'kick creature' so can be pinned in by a layer of skeletons from raise dead or undead leigon and then a layer of parcels. This works for fire elementals, fire devils, minotaur archers and hunters.
+In non-pvp summons don't cause friendly fire, can't be hurt by the summoner or other players, will only create short term fire or poison fields, and can be pushed by players (but not into the players orthogonal path?).
+Specific Summons Guidance 
+Fire Elemental 
+Fire Elementals (FE) have tbe highest damage output of any summon and turn the spamming potential of 7.4 creature spells to your advantage. They are also the most expensive summon at 690 mana.
+They have bad defence - similar to a dwarf soldier and low HP. They chase their targets which leads to them taking additional damage in PvE. Most of the strongest creatures in 7.4 have fire immunities, except for Necromancers and Ancient Scarabs. Blocking FE in with mages while a knight lures can help keep them under control.
+FE attacks leave fire fields which can risk you taking a white skull.
+In PvP they are the best summon and can significantly increase your ranged damage output and overwhelm lower and mid level players. Their ranged explosion attack deals 55-155 fire damage with a frequency of 4 and they throw fire fields with a frequency of 3. Damage is not reduced in PvP. Their relatively low 280 HP is vulnerable to single SD shots from even a lv40 mage. Watch out you don't get caught in the fire. The fact they chase their opponent means the target can't escape out of range as easily as a fire devil or hunter. 
+If a fire elemental can't reach or is chasing its target, such as by being trapped by players, it will cast around twice as frequently. If you are being attacked by fire elementals you can conversely engage at melee range to reduce your damage taken.
+ Video: 6x Fire Elementals cause chaos in Ab'dendriel (7.6) 
+ Video: Trapped fire elemental attacks faster (Tibiantis) 
+Fire Devil 
+Similar in many ways to the Fire Elemental but with 'ranged attacker' behaviour so they will keep out of harms way (but will only flee from the monster you target). They cost 530 mana, 200 hp and bad defences.
+Their fireball attack does 60-95 damage with a frequency of 9 and a 20-60 damage fire explosion with a frequency of 4. Note that this is situationally higher damage than fire elementals due to ranged attacker spell frequencies being higher (TBC). Watch out for collateral damage.
+ Video: Fire Devil collateral damage (7.4) 
+Orc Berserker 
+The orc berserker takes 590 mana to summon and is the fastest summon with the strongest physical attack - up to 195.
+In PvE its rarely seen due to its high cost and weak defences. It has an immunity to poison.
+In PvP Berserkers are both very fast and high damaging, particularly for weakly armoured rune makers, and paladins. Any higher level or prepared opponent will kill them with ease, and with such little HP you will struggle to heal them.
+ Video: Summoned Berserkers PK in Ab'dendriel (7.4) 
+Demon Skeleton 
+Demon skeletons cost 620 mana and are one of the most versatile summons due to their good damage (178), tanky HP and defence, and resistances to Poison, Fire, Life Drain, and Paralyze. They are a little slow.
+DS have a close range life drain attack which deals 30-50 damage at a frequency of 10. This is a nice addition where the opponent isn't immune to life drain, such as dragons.
+In PvP DS are overshadowed by Orc Leaders who can undertake the same role but are faster.
+Summoned DS are used to block dragons, such as at the fast 2x dragon spawn in Ankrahmun. Their higher damage and unblockable life drain attack make up for the lower HP compared to Orc Leaders.
+A Druid with 25+4 skill and Hammer of Wrath can hit a dragon with broken shielding as hard as a knight with GS and 68 skill (37 damage/ turn). If the dragon targets a DS and you stand diagonally opposite you will not be hit by the fireball. If your current HP is higher than the DS's current HP the dragon will retarget to you less.
+A druid can use spears to increase damage against dragons while DS are blocking. At 26 skill you'd be doing 10 damage per turn to a dragon. This is not a great strategy. 
+ Video: Lv30 Mage hunts Dragons with Demon Skeleton (Tibiantis) 
+DS can be used against to hunt necromancers, typically used as a blocker while the mage shoots HMM and GFB. DS are immune to necromancer life drain and fire attacks, but will start to take damage if attacked by more than two lesser undead. Attack the ghouls if you can as they will die quickly.
+ Video: Lv40 mage hunts Necromancers with Demon Skeleton (7.3) 
+DS allow Mages to hunt Banshees at a relatively low level who's life drain attacks are all resisted by the DS, and their physical attacks deal minimal damage. 2x DS + HMM are enough to overcome Banshee healing. Hunting Banshee in this style is still very dangerous. See Goshnar's video for an example.
+ Video: Lv80 Druid hunting Banshees with Demon Skeleton (Tibiantis) 
+DS can, in theory, be used to block ancient scarabs being immune to poison and paralysis but they will still take significant damage from the raw attack power and larvae taking shielding. Each DS will do an average damage of 14 per turn, and take 36 per turn on balance mode and 16 per turn on defence mode. The viability of hunting Ancient Scarabs with DS is yet to be tested.
+DS can be used to block (not attack) warlocks. They have lower HP and speed than Orc Leaders but the immunity to paralysis helps. Warlocks deal physical damage (blue star attack) which is similar in strength and frequency to a hunters arrow and is blocked by DS shielding. DS is immune to Warlock's fire, life drain, mana drain attacks, though be mindful to not stand diagonal from DS as it will then move adjacent to you and you will be hit with burst arrow damage. Warlock's energy beam attack can be avoided by positioning. Warlock AI is like an orc spearman - they will quickly retarget to the closest target/ player. They will not randomly target another creature.
+The main problem with this is to manage the DS's shielding. With DS on defence mode (no target) and no stone golem the DS could last two minutes between heals. But with the stone golem the DS will occasionally break shielding and the DS will take moderate physical damage. Considering the physical damage and mana drain warlocks dish out this may still be desirable. In some areas such as the hero cave warlock you can trap it in the 1sqm gap and prevent the stone golem from attacking. Further testing is needed.
+DS skill much quicker than other relevant summons. DS base skill is 70 and increases by 2 skill each 100 attacks with a 10% multiplier. Skill gains affect attack and defence like a 2 handed weapon, and blood hits aren't required so training on ghosts is possible. Veteran DS quickly outperform orc leaders and can open up some interesting options for a patient player. After 2 hour of training a DS hits as hard as a Giant Spider.
+Table: DS skill increase over time 
+ Duration Turns available Skill gains 
+ 30 min 900 12 
+ 1 hour 1,800 20 
+ 2 hours 3,600 32 
+ 3 hours 5,400 38 
+Orc Leader 
+Orc Leaders are similar to DS but have more HP (450 vs 400), move 25% faster, have slightly lower armor and attack, and the same blocking. Orc Leaders are only immune to fire.
+Orc Leaders have a physical throwing knife attack instead of life drain. It deals physical damage of 50-70 with a frequency of 6. This higher damage is offset by armor and shielding making it lower damage than DS life drain attack. In the scenario where you have two orc leaders breaking shielding these bonus attacks may overall deal more damage.
+The main use case for Orc Leaders is against Dragon Lords. Dragon Lords only use fire spells and are immune to life drain so the additional knife damage is useful.
+ Video: Lv50 Mage hunts fibula DL (7.3) 
+Monk 
+Monks are the only summon suitable for PvE hunting that can heal. They also have the strongest defence but only 240 HP and a weaker attack. Monks heal 30-50 HP every 6 turns which is 6.7 HP per turn.
+Monks have no immunities which can be problematic even for weaker creatures like scarabs. Dwarf guards and undead are among the best use cases for monks.
+It's useful to take advantage of the defensive stance when their HP is low to avoid using healing.
+Monks are most often used for training - refer to the page on skills for more details.
+In PvP they can be defensively strong against weaker players who can't overcome their healing or will waste their supplies of runes trying while the summoner only occasionally heals. Their haste spell also helps them chase down their targets.
+In Non-PvP summoned monks can be used to block ghouls, to allow players to train on the ghoul without taking damage. Ghouls do not retarget.
+.
+Ghoul 
+A budget monk that can be used for training knights even at high skill. For further details see the page on skills.
+There may be a way to double a ghouls healing rate by having it target a creature it cannot reach, but this is yet to be tested.
+Minotaur Archer 
+Minotaur Archers deal 45-85 bolt damage with a fequency of 3. They cost a relatively cheap 390 mana to summon.
+They are the best summonable ranged physical attacker. With multiple mages each with two summons the damage improves. They can be used with a blocker to allow lower level makes hunt some stronger monsters that are immune to energy and so otherwise expensive to kill with runes. Even with shielding broken they are only doing 28 damage per hit to behemoths.
+With 100 HP and no defence they will die if they get sneezed on so try to block them in somehow.
+Hunter 
+Can be convinced and not summoned for 530+100 mana. Like the minotaur archer but more damage and fire 50% faster. Two hunters will break shielding very often dealing 50-100 damage at a frequency of 2. Spawn locations limits their utility, but PoH would be one option. 
+ Video: Lv107 Knight hunts heroes with 2 hunters (7.4) 
+Scorpion 
+A low summon cost of 310 and 315 poison damage total. Could have some use against AFK runemakers.
+Rats 
+Rats are the cheapest summon from "utevo res" at 200 mana. They have a niche use to break shielding, block areas, set up teleports, etc.
+Animate Dead 
+The Animate Dead rune creates a skeleton summon when used on an adjacent non-human corpse. It costs 300 mana to make giving 2 charges (150 per charge), and using the rune does not cost mana. It requires magic level 5 which knights reach around level 30-40. You are not limited on the number of summoned skeletons but you cannot use the Summon Creature spell or Convince Creature rune after you have 2 summons.
+This is perhaps the most overlooked rune in the game - it allows knights to kill a range of powerful monsters they would otherwise struggle with and, cryptically, can greatly improve survivability on the annihilator quest - this is (or will be) discussed separately.
+Use as a shield breaker 
+The main use case is to act as a way for knights to break their targets shielding. Using this on a behemoth will make it as weak defensively as a cyclops. It is still an expensive rune to use - your skeletons will often be killed or abandoned and you will take high damage on attack mode but nonetheless it acts as an SD substitute and welcome additional damage source for knights. A Lv130 knight with 92 skill and SCA hitting a behemoth with skeletons, melee and explosion runes can do 118 average melee damage and 131 average damage with explosion for a combined total of 250.
+You need to watch that your character is the one breaking the shielding, not the skeletons. To ensure the skeletons attack first cast a rune on the target or change attack stance which both give a two second delay. It doesn't matter if the rune does damage so Light Magic Missile can work.
+You may be thinking "what a waste, the monster will immediately kill my summon and I will waste 150 mana!" but by assessing creature data files and retargetting mechanics, it turns out many creatures aren't actually that likely to retarget.
+This rune can work well in team hunts as the second player can provide more efficient healing for the large amount of damage taken, can block the monster, can reduce the chance of retargets to skeletons, can provide an extra source of shield breaking, or with two knights and two skeletons can double the damage for the same damage taken and allow the teammate to lure.
+Note that behemoths have unusual retargetting behaviour - they will only retarget to players that are equal distance (or closer) or those that have dealt the highest total damage. Since the blocker is getting higher damage mages or paladins can also shoot or heal without fear of retargetting provided they do less damage than the knight. A blocked behemoth will only roll to retarget on each hit, so if a mage steps in Physical Strike (exori mort) and out again timed between the behemoth hits, then the behemoth will never see the mage as either closest or highest damage and will never retarget.
+To test your damage on the damage calculator with broken shielding select the monster as the defender then switch to manual and change the defence to 0.
+The damage from this method doesn't scale with level as it relies on weapon and skill damage. Higher levels may find it cheaper to use damage runes or burst arrows, or combine animate dead with runes for very high damage output. By the same reasons this rune allows low level knights (~Lv40-100) with high skills to do deal more damage while their runes are inneffective.
+Table: Animate dead monster retarget rates 
+ Name Retarget
+chance (%) Closest
+(%) Lowest
+HP (%) Highest
+Damage (%) Random
+(%) Rate
+(1:x turns) Comment 
+ Banshee 3 80 10 10 0 52.6 Fairly strong since it rarely retargets and the high damage can kill a banshee before it has had much time to heal, knights would otherwise struggle to even kill a banshee. At close range Banshees don't do a huge amount of melee or magic damage but they can spam for very lare amounts. When the Banshee flees it can be difficult to maintain contact to break shielding and they can run into other banshees. Supplement with HMM for faster kills. 
+ Black Knight 3 80 10 10 0 52.6 Quite strong, you can wait for respawn at the south of the teleport while keeping your skeletons. Can be killed even by relatively low level knights. Initially if you run straight to the teleport you can bring the BK out of range and then kill the beholders more calmly. 
+ Behemoth 5 70 0 30 0 42.9 Quite strong, low retarget chance and quite predictable when the behe is trapped between pillars. Behe have a large HP pool giving more reward for the set up. See example below. High level knights might get more success using burst arrows and explosion on 3 behes due to magic power scaling. 
+ Demon Skeleton 5 70 0 30 0 42.9 Retarget infrequently but low HP and vulnerable to HMM. Consider if you have a large group of them. 
+ Orc Warlord 5 70 15 15 0 32.4 Retarget fairly infrequently but might be better to just HMM them. Invisibility causes chaos. 
+ Hero 5 80 10 10 0 31.6 Fairly low retarget rate and no option to use HMM makes Heroes a decent target for animate dead. 
+ Vampire 5 70 30 0 0 26.1 Not super likely to retarget but lower defence limits the benefit. Better to use HMM or GFB. 
+ Ancient Scarab 10 70 20 0 10 13.6 Retargets fairly often and its summoned larvas will cause chaos. Not recommended. 
+ Giant Spider 10 70 20 0 10 13.6 Retargets fairly often and summoned spiders will cause chaos. Not recommended. 
+ Bonebeast 20 100 0 0 0 7.5 Bonebeasts have a high defence but retarget frequently and only to adjacent targets making animate dead useless. 
+Notes: 
+ Retarget rate is the base chance to lose its current target. This chance is per turn when the monster is adjacent but when it does additional pathing assessments this can generate additional rolls. It then rolls one of four retarget stategies as per the odds shown.
+ Target closest means with 2 adjacent skeletons there is a 2/3 chance the monster will retarget a skeleton.
+ Target weakest will always retarget a skeleton.
+ Target highest damage. This will usually not result in retargetting to the skeleton, but it can help to use a rune while luring so the monster doesn't retarget while luring.
+ Target random will retarget the skeletons 2/3 of the time.
+ Combining these odds gives you an overall chance the monster will both retarget and to one of your skeletons. 
+Image: Knight using Animate Dead on a Behemoth 
+Note: Lv130 EK, 50 atk, 92 skill
+Other uses 
+Another use case (TBC) is to trap skeletons on the perimeter of the parchment quest, when the demons spawn some are likely to target the skeletons, causing some of the initial fireballs to miss.
+Skeletons can in theory be used to trap one of your own summons in place, that would otherwise chase you.
+If you skeleton is killed, the corpse can be immediately recycled into a new skeleton with another cast. Dead skeletons weigh 400>260>140oz and last 60 minutes changing decay stage each 20 minutes. Corpses will not decay in inventories while logged out. Most relevant corpses last 60 minutes, one of the lightest being a snake at weigh 12oz.
+On non pvp it can be used to block passages.
+Prank your friends by making them go to temple after they afk log out while manasitting!
+Skeletons do a small amount of life drain damage which is often not resisted
+Convince Creature Rune 
+Can be used to allow knights and paladins to summon creatures. Can be used on hunters but not monks. If you take over another player's spot on dragons, ask to convince their DS when they are finished. On non-pvp you can't convince another player's summon. Making use of this rune can be quite spawn limited. Situational use in PVP to block or increase DPS.
+Undead Legion 
+Undead Legion in Tibiantis has a custom radius of 4 instead of 3, and reduced mana cost of 400 instead of 500. I don't know a lot of realistic practical use cases for this other than trapping in PvP as its generally bothersome and GFB isnt always possible for the defender if there are unskulled players, or against hard hitters who don't use area of effect spells like behemoths. The skeletons mean its more likely you won't be targeted and a hit wasted killing a skeleton would save some mana on manashield. Taken to the extreme you could could create 56 skeletons for an average mana cost of 7. Undead Legion shares many of the applications discussed in the Animate Dead section. Note monsters that can push can push your summons can do so even if you are fully surrounded.

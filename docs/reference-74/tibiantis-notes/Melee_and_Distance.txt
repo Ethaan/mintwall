@@ -1,0 +1,82 @@
+Home 
+Tibia 7.4/ Tibiantis notes 
+ by Tarsal. 
+Stances 
+Table: Attack and defence multipliers for different stances 
+ Atk Bal Def 
+ Attacking 
+ 1.2 
+ 1.0 
+ 0.6 
+ Blocking 
+ 0.6 
+ 1.0 
+ 1.8 
+ Total 
+ 1.8 
+ 2.0 
+ 2.4 
+ When you have no active target blocking is calculated as if you were on defensive mode, regardless of your current stance . This will be referred to as passive defence stance. You can block an attack on passive defensive stance, then attack on (active) offensive stance by attacking after you have recieved the first hit. 
+If you untarget or kill a monster after attacking you will need to wait until the next turn (2 seconds) for passive defensive stance to reactivate. 
+You can chain this first hit advantage by stairhopping to only take damage on defensive stance. 
+Monsters use balanced stance. 
+Passive defensive stance affects monsters and summons any time they don't have a target, such as when you are invisible. This is discussed further in the summons section. 
+The stance multipliers to damage and blocking are not symmetrical, with the total of attack and defence multipliers increasing from offensive > balanced > defensive. 
+A Giant Sword on balanced stance (Atk:46 Def:22) has comparable stats to a Fire Axe and MMS on offensive stance (Atk:45 Def:23). 
+In the game code, integer rounding of (Atk_or_def x stance_multiplier) is different for different stance multipliers. For multipliers below 1 the product is rounded up, for multipliers above 1 the product is rounded down. Refer to the modified Atk and Def table. 
+The rounding of modified Atk and Def values means each +1 increase in stats may not have a proportional outcome. For example on offensive mode both a Vampire Shield and a Demon Shield have the same Def (Def:21). For the SoV on offensive mode 48 atk x 1.2 = 57.6, which is rounded down to 57 on offsenive mode. Dividing by 1.2 this becomes Atk:47.5, a 0.5 atk reduction. SCA (Atk:50) multiplies cleanly to 60 and has no reduction from rounding. 
+Table: Attack and defence values for different stances 
+ 1.0x 0.6x 1.2x 1.8x 1.0x 0.6x 1.2x 1.8x 1.0x 0.6x 1.2x 1.8x 
+ 1 1 1 1 21 13 25 37 41 25 49 73 
+ 2 2 2 3 22 14 26 39 42 26 50 75 
+ 3 2 3 5 23 14 27 41 43 26 51 77 
+ 4 3 4 7 24 15 28 43 44 27 52 79 
+ 5 3 6 9 25 15 30 45 45 27 54 81 
+ 6 4 7 10 26 16 31 46 46 28 55 82 
+ 7 5 8 12 27 17 32 48 47 29 56 84 
+ 8 5 9 14 28 17 33 50 48 29 57 86 
+ 9 6 10 16 29 18 34 52 49 30 58 88 
+ 10 6 12 18 30 18 36 54 50 30 60 90 
+ 11 7 13 19 31 19 37 55 51 31 61 91 
+ 12 8 14 21 32 20 38 57 52 32 62 93 
+ 13 8 15 23 33 20 39 59 53 32 63 95 
+ 14 9 16 25 34 21 40 61 54 33 64 97 
+ 15 9 18 27 35 21 42 63 55 33 66 99 
+ 16 10 19 28 36 22 43 64 
+ 17 11 20 30 37 23 44 66 
+ 18 11 21 32 38 23 45 68 
+ 19 12 22 34 39 24 46 70 
+ 20 12 24 36 40 24 48 72 
+Manipulating passive defensive stance 
+When you have no target for over two seconds you will passively gain defensive stance, without touching the stance toggle. There are several techniques to exploit this mechanic so that you attack on attack stance but receive damage on defensive stance. Note: this is not the same as stair hopping in later versions of tibia
+As the monster approaches, do not target it , instead wait for the monster to attack you first. A targeted monster will have a red square. When you block this attack you will have passive defensive stance.
+Now you have blocked, target the monster to return the hit on your current stance - full attack is reccomended.
+As quick as possible un-target the monster. You can target and untarget quickly by double clicking.
+Move a way to create distance between you and the monster to prevent it hitting you before your passive defensive stance has reactivated.
+Wait at least two seconds for passive defensive stance to reactivate, then repeat step 1 - blocking the attack.
+The simplest technique is to stair, ladder or rope 'hop'. By changing floor you automatically un-target and the monster will always attack you before you attack them. Wait for two seconds while upstairs and repeat this in a rhythm as close to, but more than, two seconds as possible - likely 2.3-3 seconds per cycle. Too fast and you will start taking hits on attack stance, and take more damage. Too slow and your attack speee goes down significantly. For rope spots it only works to go up from the lower floor to attack.
+In the below example a knight would kill the dwarf guard in an average of 6.0 hits (14-18 seconds) and take 23 damage in total. Compared to balanced mode without stair hopping, the knight would need 8.6 turns (17.2 seconds) to kill and take 92 damage. That is one quarter the damage taken in the same time! 
+As skill, gear, and magic power develop to reduce healing expenses it becomes less useful to use this technique as the slower attack speed compared to just full attack reduces the loot and exp. A high level knight can still benefit without the speed reduction by waiting for the first hit before targeting.
+Image: Stair hopping for passive defence mode 
+Note: Giant Sword, 72 skill, attack mode, 33 armor
+An intermediate technique is to use corners to exchange hits then run to get an immediate one tile gap between you and the monster as they still need to turn the corner. You can do this while luring or chain these together in a circle if there are some obstacles sized 2x2 or bigger.
+Image: Using corners and passive defence mode 
+Note: Giant Sword, 72 skill, attack mode, 33 armor
+If you're in an open area with no stairs, ladders or corners you can just try to outrun the monster while recharging passive mode. This is less reliable with low speed characters since initially you will cycle between a 1 and 0 tile gap. You can improve your head start by attacking as soon as the monster starts to move into the tile adjacent to you - in game code you immediately move to the new tile and the animation just shows it retrospectively, by attacking then moving early the monster will have to wait for its step delay before chasing you. This works better on fast tiles but also takes up a lot of space.
+Image: Open running for passive defence mode 
+Note: Giant Sword, 72 skill, attack mode, 33 armor
+The final and most advanced technique is to take advantage of the fact you only need to have a gap between you and the monster between the time the monster has recharged its attack and when your passive defensive mode has reactivated. In a nutshell it can't attack you for two seconds! Say the monster is on the adjacent northeast tile, if you take a diagonal step to the southwest you will instantly have created a 1 tile gap, so the creature needs two steps (one whole step time) to reach you - if your passive defence reactivates in this time the trick will work. This works better with slower tiles. 
+Ranged units 
+Don’t target ranged units while chasing until you reach them as your shield will block ranged attacks as if on defence mode. 
+EvP ranged attacks count towards your shielding counter and break your shielding. For example if you take two melee hits and then a ranged attack within a 2 second turn, the ranged attack will bypass shielding for extra damage. For this reason orc spearmen are often left to flee on red hp as occasional shield breaks vs orc berserkers can be painful! 
+PvE and PvP ranged attacks don’t get blocked by shielding and don’t count towards your shielding break. 
+Ranged attacks count as spells and can are affected by a bug where the cooldown/ chance to hit is reset with each step (TBC). This can lead to a flurry of hits. 
+Ranged unit slow down when you are adjacent. 
+Armour 
+Damage reduction from armour from 50-100% of armour value, for an average of 75%. Due to rounding the resultant damage reduction is slightly less. 
+Also due to rounding, damage reduction only increases on even armour values - an total armour of 31 is equivalent to 30. This only affects the total and not individual pieces. 
+A typical full set of obtainable items: Demon Helmet (13), MPA (22) and Golden Legs (12) provide a total of 47 armour. 
+Melee mages 
+This section discusses the potential of Druids and Sorcerers to boost their offensive and defensive power.
+Mages can use this to use their melee weapons while hunting with runes which has the dual advantage of killing weak monsters for free and allowing your shielding skill to progress. 
+Don’t underestimate the power of the 1.8x multiplier on defensive mode. For example a mage on defence mode with MMS and 25 skill will block as much as a 88 skill knight blocking with MMS on offence mode or giant sword on balance mode.

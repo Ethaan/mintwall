@@ -224,6 +224,8 @@ def assert_level_door(new_player, items, door, outside, level, *, vocation=4, ga
     Testers (monsters leave them alone) with no GM access - access skips the check (gateofexp_closed.lua)."""
     from .server import TESTER_GROUP
     below = new_player(pos=outside, level=level - 1, vocation=vocation, group_id=TESTER_GROUP, storage={30001: 1})
+    if below.pos != tuple(outside):          # a monster stood there: logged in beside it - step over once it moves
+        below.wait_for(lambda: below.walk_to(tuple(outside), max_steps=3), timeout=15)
     assert below.pos == tuple(outside), f"level {level - 1} did not start at {outside}: {below.pos}"
     use_map_item(below, items, door, gate)
     assert below.wait_for(lambda: below.messages("Only the worthy may pass."), timeout=3), \

@@ -18,12 +18,15 @@
     <flag runonhealth="500"/>
   </flags>
   <attacks>
-    <attack name="melee" interval="2000" poison="150" skill="45" attack="30"/>
+    <attack name="melee" interval="2000" poison="65" skill="45" attack="30"/>
     <attack name="speed" interval="1000" chance="10" range="7" speedchange="-600" duration="20000">
       <attribute key="areaEffect" value="redshimmer"/>
     </attack>
-    <attack name="lifedrain" interval="1000" chance="40" radius="4" target="0" min="-120" max="-250">
+    <attack name="lifedrain" interval="1000" chance="40" radius="4" target="0" min="-150" max="-270">
       <attribute key="areaEffect" value="rednote"/>
+    </attack>
+    <attack name="physical" interval="2000" chance="15" range="7" radius="4" target="1" min="-100" max="-200">   <!-- Great Musical Bomb (100-200), TibiaWiki 2007 -->
+      <attribute key="areaEffect" value="purplenote"/>
     </attack>
   </attacks>
   <defenses armor="25" defense="65" skill="45">

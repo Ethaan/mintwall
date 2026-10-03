@@ -16,6 +16,8 @@ server/db.db3*
 server/build.log
 server/server.log
 server/config.lua.bak
+# local settings over config.lua, never committed - e.g. the quest-testing characters (tools/provision-quest-testers.py)
+server/config.local.lua
 server/npctest.log
 server/maptest.log
 tests/.venv/

@@ -19,14 +19,10 @@
   </flags>
   <attacks>
     <attack name="melee" interval="2000" skill="50" attack="30"/>
-    <attack name="fire" interval="1000" chance="10" range="7" radius="4" target="1" min="-50" max="-120">
-      <attribute key="shootEffect" value="fire"/>
-      <attribute key="areaEffect" value="firearea"/>
-    </attack>
-    <attack name="physical" interval="1000" chance="34" range="7" min="-55" max="-105">
+    <attack name="physical" interval="1000" chance="34" range="7" min="-0" max="-120">
       <attribute key="shootEffect" value="largerock"/>
     </attack>
-    <attack name="manadrain" interval="1000" chance="25" range="7" min="-50" max="-80"/>
+    <attack name="manadrain" interval="1000" chance="25" range="7" min="-0" max="-80"/>
   </attacks>
   <defenses armor="15" defense="35" skill="50">
     <defense name="healing" interval="1000" chance="50" min="75" max="125">

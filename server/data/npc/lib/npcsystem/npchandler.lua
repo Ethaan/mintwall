@@ -19,6 +19,9 @@ if(NpcHandler == nil) then
 	-- Currently applied conversation behavior. CONVERSATION_PRIVATE is default.
 	NPCHANDLER_CONVBEHAVIOR = CONVERSATION_DEFAULT
 
+	-- player cid -> the NPC it talks to (NpcHandler:addFocus, onGreet)
+	TALKING_TO = TALKING_TO or {}
+
 	-- Constant indexes for defining default messages.
 	MESSAGE_GREET 			= 1 -- When the player greets the npc.
 	MESSAGE_FAREWELL 		= 2 -- When the player unGreets the npc.
@@ -144,6 +147,14 @@ if(NpcHandler == nil) then
 			return
 		end
 
+		-- who each player talks to (all NPCs share this Lua state): a player talks to one NPC at a time
+		local me = getNpcCid()
+		if(self.focuses ~= 0 and TALKING_TO[self.focuses] == me) then
+			TALKING_TO[self.focuses] = nil
+		end
+		if(newFocus ~= 0) then
+			TALKING_TO[newFocus] = me
+		end
 		self.focuses = newFocus
 		-- 42 old NPC scripts keep their conversation in one global talk_state: a new customer starts clean, or they
 		-- could answer "yes" to the question the previous one walked away from (NPCs talk to one player at a time)
@@ -352,6 +363,11 @@ if(NpcHandler == nil) then
 
 	-- Handles onCreatureSay events. If you with to handle this yourself, please use the CALLBACK_CREATURE_SAY callback.
 	function NpcHandler:onCreatureSay(cid, class, msg)
+		-- the player greeted another NPC by name meanwhile: this one lets him go, or both would answer "yes"
+		if(self.focuses == cid and TALKING_TO[cid] ~= nil and TALKING_TO[cid] ~= getNpcCid()) then
+			self:releaseFocus(cid)
+			self:resetNpc(cid)
+		end
 		local callback = self:getCallback(CALLBACK_CREATURE_SAY)
 		if(callback == nil or callback(cid, class, msg)) then
 			if(self:processModuleCallback(CALLBACK_CREATURE_SAY, cid, class, msg)) then
@@ -459,7 +475,14 @@ if(NpcHandler == nil) then
 	end
 
 	-- Tries to greet the player with the given cid.
-	function NpcHandler:onGreet(cid)
+	function NpcHandler:onGreet(cid, named)
+		-- talking to another NPC still: only that one answers, unless the player greets this one by name ("hi
+		-- nezil"). Bezil and Nezil share a shop - both greeted the player and both sold on "yes", he paid twice
+		-- (asked by the user 2026-10-02)
+		local other = TALKING_TO[cid]
+		if(not named and other ~= nil and other ~= getNpcCid() and isCreature(other) and isCreature(cid)) then
+			return
+		end
 		if(self:isInRange(cid)) then
 			if(self.focuses == 0) then
 				self:greet(cid)

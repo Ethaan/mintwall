@@ -1,0 +1,316 @@
+Home 
+Tibia 7.4/ Tibiantis notes 
+ by Tarsal. 
+Training Guide 
+It takes 216 hours to train to 80 skill in perfect conditions - 100% efficiency, but might take another 50 hours if you only trained at 80% efficiency.
+This guide aims to help you improve your training efficiency and convenience.
+Calculating efficiency 
+Players training melee need to deal at least one blood hit every 30 attempted hit or attempted block before they stop gaining skill experience.
+Attacking with a 
+shield equipped and two creatures attacking you will mean in 10 turns you will have 10 hits and 20 blocks, if you don't make a blood hit within these 10 turns you will stop progressing weapon and shielding skill. Remember you dont need to take damage to train shielding! If you block more than 2 creatures your shielding will be broken and the additional creatures will ignore your shielding for extra damage, but thankfully as a result it doesn't use your allowance.
+Similarly if you block one creature you will need to hit within 15 turns, and shielding progresses half as fast. If you dont wear a shield at all, your weapon defence will be used to block up to two creatures, but helpfully blocking with a weapon doesn't use your blocking allowance and you would only need a hit within 30 turns to maintain progression, but would not progress shielding at all!
+You can calculate efficiency by working out the chance the previous n hits were a miss, where n is the 10, 15 or 30 hits discussed before.
+ efficiency = 1 − miss_chance n 
+ efficiency = 1 − (1 − hit_chance) n 
+Table: Training efficiency from hit chance 
+Use this table to estimate your efficiency based on chance to hit while blocking 0, 1 or 2 monsters. 1/ chance represents the average turns between blood hits.
+ Efficiency
+(%) Hit Chance (%) 1/Chance 
+ 2 1 0 2 1 0 
+ 60 8.8 5.9 3.0 11.4 16.9 33.2 
+ 70 11.3 7.7 3.9 8.8 13.0 25.4 
+ 80 14.9 10.2 5.2 6.7 9.8 19.1 
+ 85 17.3 11.9 6.1 5.8 8.4 16.3 
+ 87 18.5 12.7 6.6 5.4 7.9 15.2 
+ 90 20.6 14.2 7.4 4.9 7.0 13.5 
+ 92 22.3 15.5 8.1 4.5 6.5 12.4 
+ 94 24.5 17.1 9.0 4.1 5.8 11.2 
+ 95 25.9 18.1 9.5 3.9 5.5 10.5 
+ 96 27.5 19.3 10.2 3.6 5.2 9.8 
+ 98 32.4 23.0 12.2 3.1 4.4 8.2 
+ 99 36.9 26.4 14.2 2.7 3.8 7.0 
+ 99.5 41.4 29.8 16.2 2.4 3.4 6.2 
+ 99.9 49.9 36.9 20.6 2.0 2.7 4.9 
+General Guidance 
+Each skill level takes 10% longer than the previous level and, strangely, is equal to 10% of the entire experience gained before it. This makes it easy to work out how much you will loose on death: 10x the overall percent lost, so 2% becomes 20% of a skill level. A player training at 100% efficiency will have roughly 2.5 more skill levels than at 80%.
+Against non-self healing monsters, training is a balance between efficiency and longevity of the monster, and this compromise often prevents players hitting 100% efficiency. There is no single best way to train, a range of options will be provided from high longevity to high efficiency.
+For training times to different skill levels see the skills page.
+ Max damage combines the weapon atk, skill and stance into one convenient number. Use the calculator to work out your max damage.
+ Average damage is relevant for healing mons, and kill time shows how often monsters would need to be refreshed.
+ Max AFK efficiency refers to maximising the amount of skill experience that can be gained while afk until log out, on non healing monsters. This is achieved by by reducing your max attack until your kill time is around 15 minutes, or 14 so you don't log back in with a red hp monster. Your efficiency will drop but skill experience gained will be maximised.
+ Higher HP monsters allow you to train for longer before refreshing but when they have higher defences and armor they you will need higher damage to maintain efficiency so your average hit will be for more damage - reducing the benefit of higher HP. Some monsters spawn with armor and this can significantly reduce your efficiency.
+ Physical damage projectiles such as the Dwarf Soldier's bolt are blocked by shielding in the same way as melee attacks. This reduces their damage (good against hunters), and progresses your skill but also takes up some of your blocking limit. If you are blocking two orc warriors and there is an orc spearman in the background the spearman's spear will bypass your shielding. Similarly if you are blocking two Valkyries and one throws a spear it will bypass your shielding. If you only block one Valkyrie it may be able to do a melee attack and a spear in the same turn but your shielding won't be broken. These monsters are often only suitable to train on if you only block one.
+ Monsters increase their skill over time, and the amount varies depending on the monster. This can have a large impact for those monsters that aren't refreshed regularly. So long as they are attacking something they will gain skill experience, they dont need to get blood hits.
+Look for opportunities to skill outside of proper training. It doesn't need to be efficient if the altentative is nothing!
+Examples include: 
+Skilling on weaker mobs while waiting for a spawn or respawn, e.g. monks by demons spawns.
+Switching to balanced or defensive stance in hunting spots that do not respawn fast enough.
+PvP skilling while team hunting.
+Blocking additional monsters when armor is high enough.
+AFK training on cyclops when you need to leave during a hunt at Cyclopolis.
+Attacking on defensive stance while blocking for a shooter which. You can get some efficiency even against the strongest monsters.
+ On the weakest monsters you may not be able to train weapon skill but you can still train shielding by attacking every 30 seconds.
+Remember mage shield training is very effective, see the melee and distance page. 
+Weapon Choice 
+Using a variety of weapons and stances can give some flexibility over your max damage, but there are some limits.
+Your minimum damage is defence stance with a knife , sickle or crowbar - club users get a good advantage for having 6 atk crowbar. This minimum can be too high for some monsters as your skill grows.
+Sword users often don't train shield since the Giant Sword, Sword of Valour have great defence, by skipping a shield they can train more efficiently and get higher skills than axe + shield, further boosted when hunting (since often you are only hit by only one mob so shielding rises slower). In the past few knew this and sword players often trained using shields - to their detriment. The problem with dropping a shield is that some monsters attacks are too strong to block with a weak weapon, in these cases a middle ground of blocking one monster can be used. Bright sword, two handed sword, broad sword and staff all have good defence.
+Sword might be faster to skill, but the SCA + MMS combo has significantly better raw attack (+5%) and defence (+10%) stats on attack stance that efficient training will not fully compensate for.
+Weapons on defensive stance have 60% their atk value, rounded up. This means that 7 atk and 8 atk weapons become 4.2 and 4.8 rounded up to 5. You aren't limited to the 7 atk knife and can instead use 8 atk dagger, combat knife or silver dagger. The extra 2 defence of the silver dagger is appreciated if not wearing a shield.
+An ideal monster (non healing) should have high HP and low defence, but not so low you kill too quickly on minimum damage.
+If you are a club user you probrably will want to train shield. Those that dont - PvP warhammer, thunder hammer, or just want to maximise hammer of wrath/ heavy mace damage will have powerful options for training as crowbar and no shield is one of the best options available - staff also is great for its 25 defence and low attack.
+Creature Guidance 
+Ghouls - general 
+Ghouls have an average healing of 1.5 hp per turn. Your average hit must be less than this to avoid killing it.
+Summoned Ghoul (defensive stance) 
+Knights can train on summoned or convinced ghouls. These work like budget monks for mages from lv21 and are the only self healing creature that a knight can convince, though at lv91. This won't work for non-pvp as you cant attack summons!
+Summoned ghouls use defensive stance by default. If you target and untarget a player or creature it will use balanced stance, which changes the damage needed to train. The training table for a ghoul on defensive stance is provided, but note that balanced stance (see spawned ghoul section for skill table) is more favourable as the weaker defence allows weaker, more frequent hits. 
+Trying to shield break a ghoul will overcome its healing unless at a very low skill, so is only suitable for mages solo skilling or melee paladins (lv36) where high efficiency can be gained. Keep your max damage at 13 or below to avoid killing the ghoul.
+ Max
+Damage Average
+Damage Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 30 0.30 80.2 55.5 41.7 
+ 35 0.54 91.9 71.5 56.7 
+ 40 0.87 97.2 83.2 69.6 
+ 45 1.34 99.3 91.5 80.7 
+Spawned Ghoul (balanced stance) 
+Knight training on summoned or convinced ghouls requires a high level knight or a friend to set up - would it work to just lure a ghoul outside a safe place and just accept the life drain damage? Then log in and out as you need.
+Ghouls deals life drain damage at a rate of 4000 damage per hour. A garlic necklace would save about 600 damage each, and reduce damage to 3200/hr. A lv 42 or below elite knight heals 900hp and can exura for 240, healing 1140hp/hr. Therefore you would need rune healing for 2060 hp per hour. This is equivalent to 9 UH or 1.35k/hr. This is expensive but managable. Don't train on these if you don't have enough HP to survive 15 minutes afk, starting around lv 50-70.
+Ghouls skill progression is fast, gaining 20 skill levels in 1 hour. This makes a significant difference to efficiency so attack would need to be adjusted as time goes on, or just refresh regularly. Its overall defences will remain between the balanced mode and defensive mode tables after skilling.
+Spawned ghouls have a chance to hold a viking helmet (5%) or scale armor (5%), which would reduce your efficiency. You can check that a ghoul is holding no armor by using a trap - any damage lower than 22 confirms additional armor (TBC).
+ Verdict : Between life drain, fast skilling, and slow healing spawned ghouls are not suitable for new characters and not a good long term option for knights until much higher levels, at which point they become a more convenient monk.
+ Max
+Damage Average
+Damage Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 20 0.18 78.0 53.1 39.7 
+ 25 0.48 96.1 80.1 66.0 
+ 30 0.90 99.4 92.6 82.3 
+ 33 1.36 99.9 97.2 90.8 
+Monks 
+Monks when they work are among the best training monsters at high skill since they have strong healing allowing long lasting sessions with easy set up.
+Spawned Monks 
+They heal with an average rate of 6.7 per turn meaning if you want to effectively train shielding your efficiency will be limited to 97% blocking 1 or 93% blocking 2, else risk killing the monk. 
+Monk defences and damage is quite high so you will want to be on defensive mode with a good ‘def’ value to reduce damage taken. If you are sword fighting you want to avoid equipping a shield which could decrease your efficiency, so a bright sword (atk 36 def 30) might be ideal. There are limited options for weapons that deal enough damage on defence modewhile having good enough defence to train. In later versions of the game the change in damage formula meant weapon choice was much simpler. 
+ Bright sword is probrably the ideal weapon for sword training on monks. You get a decent 30 defence and at 80 skill on defence mode your efficiency will be 95.8%. With 53 arm (demon helmet, MPA and golden legs, steel boots) and 80 skill, you would take 2100 per hour - which is both safe and managable. Higher skill only works better. At 70 skill with 38 armor you would take 4300 orr hour, for 89% efficiency which is viable. In Tibiantis Bright sword drops from Sandlords so may not be cheap early on. 
+ Fire axe is not strong enough to get high efficiency while training shielding on defence mode. At 80 skill you reach 70% but by 100 skill you get 87% which is respectable. Taking damage is not much of an issue due to the higher def of MMS. On balance mode you would kill the monk at 65 skill.
+ Stonecutter axe will work well for knights but only until around 80 skill on defence mode after which you will kill the monk.
+ Dwarven axe works up to 80 skill on balance , for 93.6% efficiency at which point you kill the monk. Barbarian axe can take you from 80 to 90 skill. A player with 38 arm, 37 def, 70 skill on balance mode takes 8900 damage per hour which is not viable, whereas 53 arm 37 def and 80 skill on balance is 4400 hp per hour and viable.
+Monk spots are available in Isle of Kings, Maze of Lost Souls, Triangle Tower, Hero Cave, Ghostlands, or as summons.
+Monks will themselves gain 1 skill each 100, 150, 225, etc hits while they attack (even with no damage) which could drop your efficiency. They will gain 5 skills in the first hour, and gain slowly after that. If you had 140 damage and 94.4% efficiency blocking 2, an additional 5 skills would reduce efficiency to 91.7%. Refresh your monk to reset their skill.
+ Max
+Damage Average
+Damage Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 100 1.88 96.5 81.2 67.2 
+ 120 3.84 99.7 94.2 85.0 
+ 140 6.72 100.0 98.7 94.4 
+Summoned Monk - defensive mode 
+Summoned monks are on defence mode (see summon page for more detail) which greatly increases their defences and different damage is needed. not for non-pvp as you cant't attack summons!
+ Max
+Damage Average
+Damage Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 140 2.16 92.3 72.2 57.4 
+ 180 5.33 99.3 91.5 80.6 
+ 190 6.29 99.6 93.8 84.3 
+Summoned Monk - shield break 
+Many players use weak creatures to break the monks shielding which makes it easier to maximise efficiency and enable multiple players to use a single monk, but can take effort to lure and set up. 40 max damage is probably the limit for a solo knight attacking without killing the monk. Try to pay attention to whether you are regularly getting hits since you might get out of sequence. You can change stance back and forth to reset your position as third attacker.
+This method won't work on non-pvp as you cant attack summons.
+ Max
+Damage Average
+Damage Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 20 2.55 86.9 63.8 49.2 
+ 24 0.59 99.5 93.2 83.3 
+ 30 1.71 100.0 99.7 98.1 
+ 34 2.59 100.0 100.0 100.0 
+ 40 4.57 100.0 100.0 100.0 
+Kobolds 
+Nice and simple Tibiantis custom mobs with 120 HP and low defences. Some good training spots in Aruthang have no map reset so a pen of parcels is made so the respawn walks to you! They sometimes have armour.
+ Max
+Damage Average
+Damage Mins to
+kill Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 24 0.28 14.3 85.8 62.3 47.8 
+ 30 0.65 6.3 97.4 83.8 70.3 
+ 35 1.13 3.7 99.6 93.7 84.2 
+ 40 1.93 2.2 100 98.4 93.8 
+Slimes 
+Slimes are a classic training mob, super low defences for high efficiency, replenished automatically, easy to set up, and available all over. They are however slightly overrated since they die so quickly, require a lot of attention and efficiency is lost waiting between slimes. For sword and axe users the minimum atk of 7 is too much, 6 atk crowbars users benefit here. For example with 7 atk, defence mode, and 60 skill you have a max damage of 17, already taking only 3 minutes per kill. At low skill you will take quite a lot of damage from the slimes but with gear and UH this might not be a problem.
+Always wear a shield as you will always have two slimes on you and it doesn’t affect efficiency.
+Slimes have decent attack with a max damage of 66. A player with 40 skill, 25 armor (plate set), and a dragon shield 31 def on defence mode will take 1800 damage per hour from two slimes - requiring UHes. A player with a vampire shield, 50 skill, 35 armor on defence mode will take 540 damage per hour from two slimes, which can be healed with natural regeneration.
+Slimes will increase their skill at a moderate rate. The summons are not relevant since they are killed regularly, but the mother could remain for some time, gaining 11 skill levels over an hour to 89 max damage.
+Slime training has its risks as you can be pushed out of your position to get surrounded by slimes and quickly killed. Using a stealth ring for a few seconds can push mother slimes into corridors so you can't get pushed and can safely train (non-pvp).
+ Max
+Damage Average
+Damage Mins to
+kill Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 11 0.5 10.0 99.8 95.3 87.1 
+ 13 0.83 6.0 100.0 99.0 95.4 
+ 17 1.82 2.7 100.0 100.0 99.5 
+ 22 3.33 1.5 100.0 100.0 100.0 
+ 25 4.8 1.0 100.0 100.0 100.0 
+Image: Safe slime training 
+Note: Location: Ab'dendriel Ghouls.
+Tars 
+Tibiantis custom slimes with higher 240HP and higher stats and defences - the slime we all dreamed of?
+Reverse engineered stats are (roughly) 32 atk, 21 def, 55 skill, 22 arm. In terms of longevity they are a bit like Cyclops, so no golden bullet as you will have to refresh often for good efficiency, but they work better than a slime at higher skill.
+Their attack is higher than a slime, comparable to a minotaur guard and so not suitable for lower skill levels.
+ Max
+Damage Average
+Damage Mins to
+kill Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 49 0.59 13.6 91.2 70.3 55.5 
+ 55 0.99 8.4 97.3 83.6 70.0 
+ 60 1.47 5.4 99.2 91.3 80.3 
+ 65 2.09 3.8 99.8 95.8 88.0 
+ 70 2.84 2.8 100.0 98.2 93.1 
+Trolls 
+The humble troll. You can train on these straight out of Rookgaard, they come in large numbers close to towns. Their 50 HP is low and defence is worse than a slime so with higher skill the minimum damage becomes too high. They flee on 15 HP so you effectively have only 35 hp to play with unless you trap with parcels. Their low attack means 20 armor is enough to be immune from their attacks, then you can train while 8 boxed on chase mode. Use them to get early skill levels but no further.
+ Max
+Damage Average
+Damage Mins to
+kill* Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 8 0.06 27.8 70.7 45.9 33.6 
+ 10 0.15 11.2 92.6 72.8 58.0 
+ 12 0.46 3.6 99.8 96.0 88.3 
+ 15 1.03 1.6 100.0 99.8 98.3 
+ 20 2.60 0.6 100.0 100.0 100.0 
+*Note fleeing reduces this number
+Minotaurs 
+Quite popular but perhaps a bit overrated. Defences and damage are low, they are easy to find in large numbers, and they don't run. They have a high chance to hold extra armor which will drop your efficiency.
+ Max
+Damage Average
+Damage Mins to
+kill Training efficiency (%)
+while blocking 
+ 0 1 2 
+ x x x x x x 
+ x x x x x x 
+ x x x x x x 
+ x x x x x x 
+ x x x x x x 
+Minotaurs with chain armor:
+ Max
+Damage Average
+Damage Mins to
+kill Training efficiency (%)
+while blocking 
+ 0 1 2 
+ x x x x x x 
+ x x x x x x 
+ x x x x x x 
+ x x x x x x 
+ x x x x x x 
+Orc warrior 
+Higher HP than minotaurs but also higher defence. Chain armors sometimes drop. Run away at low HP. Not ideal for training unless its convenient.
+Cyclops 
+Cyclops can be found in many different locations and have a high 260HP, low-ish defences and moderate attack. Their defences mean its difficult to get high efficiency with a shield without a short kill time sword users removing their shields would take high damage from the cyclops - with high skill and good armor no shield is workable. Cyclops rarely hold hidden armor. Not recommened as a large scale training monster, but servicable if you are at a cyclops spot anyway.
+In mount sternum there are a number of spots that are immune from pushing or luring, useful for non-PvP servers.
+ Max
+Damage Average
+Damage Mins to
+kill Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 45 0.62 14.0 92.1 71.9 57.1 
+ 50 0.92 9.42 96.8 82.1 68.2 
+ 60 2.05 4.2 99.8 95.7 87.8 
+ 70 3.46 2.5 100.0 99.2 96.1 
+Geomancer 
+Dwarf Geomancer's stand out quality is their amazing healing at 50 per turn - enough for paladins to train on them, and for knights to get max efficiency in a broad range of attack values. Their defence is similar to a minotaur guard, allowing great efficiency while remaining on defence mode.
+In later versions Geomancers fire unblockable earth missiles which might mislead players to think they are unsuitable for training, however in 7.4 the Dwarf Geomancer's stone projectile deals 55-105 physical damage and so is blocked by shielding. With decent gear and skills a knight or paladin can prevent most of this damage, so long as it is pinned in melee mode and there are no other monsters attacking. Unfortunately the damage calculator is not accurate for blocking projectiles.
+You will get a boost to shielding skill experience for each projectile, which has a 33% chance per turn so although you might be blocking only 1 creature your shielding experience will progress at up to 66% efficiency instead of 50%.
+You wont regen mana but thats not necessarily a problem for Knights and Paladins.
+There are a few decent spots to find Dwarf Geomancers like triangle tower, mount sternum, dwarf hell. Triangle tower requires killing a monk and witch but after this you can't be lured on.
+ Max
+Damage Average
+Damage Chance to
+hit (%) Training efficiency (%)
+while blocking 
+ 0 1.33* 2** 
+ 70 2.02 15.33 99.3 88.2 81.1 
+ 80 3.20 20.93 99.9 95.1 90.4 
+ 90 4.92 27.64 100 98.44 96.2 
+ 100 7.08 34.54 100 99.6 98.6 
+ 180 34.31 72.59 100 100 100 
+*Increased rate due to projectiles breaking shielding. n = 30/2.33 = 12.7.
+**Not reccomended due to projectiles
+Rotworms 
+Classic monster to train on but only suitable early on - low HP, damage, don't run, drop food, go and armor, but often wear armor.
+ Max
+Damage Average
+Damage Mins to
+kill Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 13 0.16 14.06 90.0 68.4 53.6 
+ 14 0.29 7.73 97.7 84.7 71.4 
+ 16 0.55 4.01 99.8 96.0 88.3 
+ 18 0.86 2.59 100 98.9 95.1 
+Elf 
+Good 100 HP and very nice low defences. Low attack so can hunt from early on but watch out for arrows 15-35 damage. There are many locations to find them.
+Dwarf Guard 
+Less hp and higher defence and damage than a cyclops, with good chance for extra armor. At least the loot and xp is very nice.
+Dwarf Soldier 
+Decent HP lowish defence, and good loot. Downside is it fires bolts and drops armor.
+Dwarf 
+Can be found in large numbers in quiet spots with a decent 90 HP lowish defence, and doesn't flee. It drops armor.
+Gargoyle 
+Light healing of 1 per turn, decent HP of 250, defenses similar to a minotaur guard and attack similar to a slime. Gains skills slowly. Major downside is their location which requires quest access and is close to lurable djinns. The data suggests these are inefficient to train on, though they are popular for some so some tests are needed.
+It is not clear from the data file whether gargoyles have 45 or 50 skill. 45 skill assumed.
+ Max
+Damage Average
+Damage Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 50 0.30 76.1 46.7 34.3 
+ 55 0.51 84.9 61.1 46.7 
+ 60 0.77 92.5 72.6 57.8 
+ 65 1.10 96.7 82.0 68.1 
+Valkyrie 
+Huge 190 hp and low defences - one of the best monsters for this ratio. Their spears might break shielding if there are more than 1 so try and take on one at a time. They hold chain armor (10%) or more rarely plate armor, and will run on very low hp. The only places to train on Valkyries are the Amazon camps north of Carlin and northwest of Venore.
+ Max
+Damage Average
+Damage Mins to
+kill Training efficiency (%)
+while blocking 
+ 0 1 2 
+ 27 0.46 13.8 96.5 81.3 67.3 
+ 30 0.86 7.6 99.6 93.5 83.8 
+ 36 1.68 3.7 100.0 98.9 95.2 
+Tentacle spawn 
+Custom Tibiantis mob that has self healing. Can these be trained on without getting disintegrated by a tentacle horror?
+PvP training 
+Requires a friend and pz lock but can potentially be set up nicely since they can have zero shielding and as little armor as needed to keep the minimum damage from the player to a minimum. Characters can (legally) be kept in game while the owner is offline, but they won’t be able to take any actions like eating food etc.
+Generally low shielding high armor is best but sometimes a small amount of shielding can result in an overall more consistent defence, making it tricky to optimise. I have run a few case studies to see where the optimal balance lies.
+Fist fighting is atk 7, def 5
+Location location location 
+Avoiding luring, automatic respawn, close to supplies (bring cascade of hams, mushrooms or bananas cheapskate!), avoiding PK, avoiding PZ, solo vs team, mana investment to set up, close to prefferer hunting spot, avoid pushing (aka isle of kings)
+Single or zero blockers trainers can use 1sqm channels to be unpushable. On non-PvP servers if the location also has no strong monsters that can be roped or lured then you can be completely safe.
+ Max
+Damage Average
+Damage Mins to
+kill Training efficiency (%)
+while blocking 
+ 0 1 2 
+ x x x x x x 
+ x x x x x x 
+ x x x x x x 
+ x x x x x x 
+ x x x x x x

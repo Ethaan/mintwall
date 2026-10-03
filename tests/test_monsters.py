@@ -47,3 +47,13 @@ def test_monster_drops_the_74_loot(name):
     want = sorted((int(i), int(c), int(n or 1)) for i, n, c in
                   re.findall(r'<item id="(\d+)"(?: countmax="(\d+)")? chance="(\d+)"', xml))
     assert got == want
+
+
+def test_monster_attacks_agree_with_74_or_are_reviewed():
+    """Every spawned monster's attacks against TibiaWiki pre-8.0 and tibiantis-notes (the spell spike,
+    tools/compare-monster-spells.py): a difference is fixed or written down in its REVIEWED list."""
+    spec = importlib.util.spec_from_file_location("spells", ROOT / "tools" / "compare-monster-spells.py")
+    spells = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(spells)
+    spells.main()
+    assert ", 0 flagged and not reviewed." in spells.OUT.read_text(encoding="utf-8")

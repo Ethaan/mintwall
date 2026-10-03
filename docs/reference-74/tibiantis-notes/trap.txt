@@ -1,0 +1,57 @@
+Home 
+Tibia 7.4/ Tibiantis notes 
+ by Tarsal. 
+Traps 
+Traps can be bought in Edron for 280gp a piece, and weigh a modest 21oz. They deal a fixed 30 physical damage, reduced by armor. They can be reused indefinitely. 
+To use traps place them on the ground and right click to set (open). If a monster or player walks on or is pushed onto a trap, it will close. Players and player summons take no damage from traps. If a player or monster is already on a trap before it was set or subsequently walks off it will stay open. If an open trap is moved or picked up it will close. 
+The easiest way to use is to place and open a trap under your character with a monster adjacent, then take a step away in the opposite direction. The monster will follow and step on the trap. Then drag the trap back under the character and repeat quickly. An example of this is shown below. 
+The rate that a monster can be hit is only limited by their walk speed and the player's hand but can be every 2 seconds or less. 
+Although underused in the 7.4 era, they have a good potential to increase your damage output. Particularly for mages where 2h weapon with traps can kill monsters such as ghouls, dwarf soldiers and orc warriors. 
+Monster armor can greatly reduce trap damage which leads to their being ineffective against 25+ armor opponents. 
+To gain full experience from the monster killed with traps you will need to deal 1 or more damage from another source like physical attack or spell. For example a mage can kill a minotaur guard with one light magic missile shot, traps and still get full experience. 
+Multiple traps can be used, with the more ambitious using 8 in a square around an obstacle to deal continuous damage while staying out of range. This is more vulnerable to theft. 
+Invisible monsters like stalkers, orc warlords and warlocks can be revealed with traps. For high armor monsters it may not cause a blood hit every time. Against warlocks in particular you can hide behind a corner to make them repeatedly walk into and out of melee range. 
+Image: Mage killing a ghoul with a trap 
+Image: Knight making warlock visible with a trap 
+Table: Trap damage for different armor values 
+ Armor Average
+Trap Damage Example Creature 
+ 1 29.0 
+ 2 29.0 Slime, Skeleton 
+ 4 27.5 Beholder, Larva, Orc 
+ 6 26.0 Orc Spearman, Troll 
+ 8 24.5 Rotworm, Dwarf, Dwarf Soldier, Ghoul, Orc Warrior 
+ 10 23.0 Amazon 
+ 12 21.5 Orc Berserker 
+ 14 20.0 Dwarf Guard, Minotaur Guard, Mummy, Stalker 
+ 16 18.5 Cyclops 
+ 18 17.0 Fire Elemental 
+ 20 15.5 Orc Leader, Scarab, Djinn 
+ 22 14.1 
+ 24 12.5 Demon Skeleton, Dragon, Efreet/Marid 
+ 26 11.1 Vampire 
+ 28 9.6 Orc Warlord 
+ 30 8.1 Giant Spider, Crypt Shambler 
+ 32 6.6 Dragon Lord, Warlock 
+ 34 5.4 Hero 
+ 36 4.4 Ancient Scarab 
+ 38 3.5 
+ 40 2.8 Demon 
+ 42 2.2 Black Knight 
+ 44 1.7 
+ 46 1.3 
+ 48 0.9 
+ 50 0.6 Behemoth, Necromancer 
+Traps for random number generation 
+As traps deal a fixed damage and damage reduction from armor is uniformly distributed, trap damage can be used as a dice. Note that dice had not been introduced in 7.4.
+The table below shows how traps used on different monsters can approximate dice rolls. For example a trap used on a wasp is equally likely to result in 2 or 3 so can be used as a coin flip.
+ For wild monsters the potential for armor can invalidate this so either choose a monster that cannot drop armor or use a summon.
+Table: Dice equivalents for trap use on monsters 
+ Dice Armor values Outcomes Suggested Creatures 
+ d2 4, 5 2–3 Orc, Wasp, Larva 
+ d3 6, 7 3–5 Bear, Elf, Goblin, Lion, Orc Spearman,
+Trolls, Polar Bear 
+ d4 8, 9 4–7 Dwarf, Ghoul, Orc Warrior, Rotworm, War Wolf,
+Dwarf Soldier, Orc Rider, Wild Warrior 
+ d6 12, 13 6–11 Orc Berserker, Valkyrie 
+ d12 24, 25 12–23 Demon Skeleton, Monk

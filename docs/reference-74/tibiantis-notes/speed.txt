@@ -1,0 +1,261 @@
+Home 
+Tibia 7.4/ Tibiantis notes 
+ by Tarsal. 
+Speed Mechanics 
+This page describes the mechanics of speed in Tibia 7.4.
+Base speed 
+The base speed formula is as follows:
+ BaseSpeed = 218 + (Level * 2) 
+Speed modifying items 
+Boots of haste (BoH) increase speed by 40 (equivalent to 20 levels).
+Time rings increase speed by 60 (equivalent to 30 levels). Time rings lasts for 10 minutes.
+Winged helmets increase speed by 40, but are extremely rare.
+Haste 
+ Haste (Utani Hur) costs 60 mana and increases speed for 66 seconds as follows:
+ ModifiedSpeed = (BaseSpeed * 1.3) - 24 
+ Strong Haste (Utani Gran Hur) costs 100 mana and increases speed for 44 seconds as follows:
+ ModifiedSpeed = (BaseSpeed * 1.7) - 56 
+Then resulting value is rounded down to the nearest even number. The negative speed modifier reduces the effect of haste spells, but this effect reduces at higher levels. A level 11, 100 and 200 will have a 20, 24 and 29% increase in speed from haste and 47, 56 and 61% from strong haste respectively. 
+Speed formula and breakpoints 
+ TotalSpeed = ModifiedSpeed + ItemModifier 
+ StepTime = roundup(TerrainFactor / TotalSpeed * DiagonalFactor, 0.05) 
+The time for each step, in seconds, is speed divided by the terrain factor, then rounded up to the nearest 50 milliseconds. The rounding can have a significant impact on speed causing noticable jumps at certain 'breakpoints'. The higher the speed, the more spreadout but impactful these breakpoints become.
+At the extreme a level 290 mage with strong haste, BoH and a time ring will have 1400 speed. On a sandstone floor they would reach the minimum 0.05 second breakpoint and travel at 20 tiles/ second, but at level 289 would travel at 10 tiles per second.
+ DiagonalFactor = 3 for diagonal or 1 for orthogonal 
+Using Pythagoras a diagonal step should take 1.41x longer than an orthogonal one, but instead it takes 3 times longer! This is not an efficient way to move except to avoid fire fields, creature boxing and in PvP. Speed appears to be related to tile you are moving to. When you move a step from the game's perspective you are immediately on the new tile and then need to wait the step duration for the next action.
+Terrain 
+Different terrain tiles can be traversed at different speeds determined by the Terrain Factor of the tile you are moving to which ranges from 70 (fastest) to 200 (slowest). There are a huge number of tiles with varying factors including averaged values for tiles that transition from one type to another. The game pathing will take tile speed into account when choosing the optimal route.
+The following list should be taken as a rough guide: sandstone floor = 70, drawbridge (Ab'dendriel walkways) = 90, cobbled, wooden, marble, tiled floor = 100, dirt, ice = 110, rock = 120, grass, gravel = 150, sand = 160, mud = 120/130/140/160/200, snow = 200. You can only collect mud (liquid) from the slowest mud tile.
+Paralyze 
+The Paralyze rune is exclusively made by Druids with premium but can be used by free account Druids. It costs 600 mana to make and a further 600 to use (for real 7.4 Tibia it was 900 mana). It sets speed to 40, cancelling haste and overriding base speed so target level makes no difference. Using a healing spell or rune or the haste spells will remove the paralyzed status, although the current step will need to be completed at paralyzed speed. The spell duration lasts about 10 seconds if not removed via a spell. From the games perspective when you take a step your position is immediately the new tile, and the animation relflects the delay before your next step. Because speed modifing items are not affected by paralysis they can significantly increase speed while paralyzed. Casting paralyze does not give you a skull, although will block you from enetering a protection zone (PZ).
+ TotalSpeed = 40 + ItemModifier 
+During a step you cannot use runes or equip items like energy rings although multiple instant spells can be used. Due to its huge cost and limited effect, the Paralyze rune is not valuable in PvE. In PvP it can be very powerful by allowing time to surround and trap a target even if they are in the open, or to prevent rune healing and kill while the target completes a step - this is more effective against knights who don't get exura vita. Casting paralyze then immediately pushing the target in a diagonal step on a slow tile will maximise the duration. A diagonal step on the slowest tile can take as long as 15 seconds to complete under paralysis.
+Creature speed 
+In the game files, monsters and human (player) speeds are defined by GoStrength, where BaseSpeed = GoStrength * 2 + 80 . Level 1 players have a GoStrength of 70.
+Giant Spiders with haste have a max speed of 408. Monster haste has some degee of variance, for example Giant spiders are 60-70% boosted. On a grass tile this rounds down to 375 needed to match their speed (breakpoint 8). This is comparable to level 59 with BoH.
+To outrun an Orc Berserker with haste you need 386 speed which is level 64 with BoH (before breakpoint rounding).
+To outrun a Behemoth with haste you need 510 speed which is level 126 with BoH.
+Creature paralysis 
+Most creatures that can paralyse can reduce your speed in a range up to 100% of your base speed (speed is limited to a minimum of 40) and each new cast overwrites the old which could make you slower or faster. As with the Paralyze rune, BoH and time rings can help to significantly increase minimum movement speed.
+Creatures that cause paralysis include mummies, vampires, banshees, elder beholders and ancient scarabs.
+Speed Calculator 
+See tibiantis.info/speed/calc/speed. 
+References 
+ 2004 Dagor Dragontooth Article 
+ Example of Paralyze rune use 
+ Tibiantis Discord: Kay on speed breakpoints 
+Haste vs Strong Haste 
+Haste is approximately 20% more efficient than strong haste if you are travelling long distances. Strong haste spell is more useful in PvP.
+66s *(1-1/1.24)=12.8 seconds saved for 60 mana = 0.21 seconds saved per mana.
+44s *(1-1/1.56)=15.8 seconds saved for 100 mana = 0.158 seconds saved per mana.
+Speed breakpoints by total speed 
+ Breakpoint
+level Breakpoint
+(seconds) Speed (tile
+per second) Terrain Factor 
+ 70 90 100 110 120 130 150 160 200 
+ 1 0.05 20.0 1400+ 
+ 2 0.10 10.0 700-1399 900-1799 1000-1999 1100-2199 1200-2399 1300-2599 
+ 3 0.15 6.7 467-699 600-899 667-999 734-1099 800-1199 867-1299 1000-1499 1067-1599 1334-1999 
+ 4 0.20 5.0 350-466 450-599 500-666 550-733 600-799 650-866 750-999 800-1066 1000-1333 
+ 5 0.25 4.0 280-349 360-449 400-499 440-549 480-599 520-649 600-749 640-799 800-999 
+ 6 0.30 3.3 234-279 300-359 334-399 367-439 400-479 434-519 500-599 534-639 667-799 
+ 7 0.35 2.9 200-233 258-299 286-333 315-366 343-399 372-433 429-499 458-533 572-666 
+ 8 0.40 2.5 225-257 250-285 275-314 300-342 325-371 375-428 400-457 500-571 
+ 9 0.45 2.2 200-224 223-249 245-274 267-299 289-324 334-374 356-399 445-499 
+ 10 0.50 2.0 200-222 220-244 240-266 260-288 300-333 320-355 400-444 
+ 11 0.55 1.8 219-239 237-259 273-299 291-319 364-399 
+ 12 0.60 1.7 217-236 250-272 267-290 334-363 
+ 13 0.65 1.5 231-249 247-266 308-333 
+ 14 0.70 1.4 215-230 229-246 286-307 
+ 15 0.75 1.3 214-228 267-285 
+ 16 0.80 1.3 250-266 
+ 17 0.85 1.2 236-249 
+ 18 0.90 1.1 223-235 
+ 19 0.95 1.1 211-222 
+Notes:
+ Speed ranges to reach different breakpoints. A level 300 with strong haste, boots of haste and time ring has a speed of 1434, and a level 1 has a speed of 220; speed breakpoints outside this are not shown. 
+Speed breakpoints by Level - with Boots of Haste 
+ Breakpoint
+Level Breakpoint
+(seconds) Speed (tile
+per second) Terrain Factor 
+ 70 90 100 110 120 130 150 160 200 
+ 1 0.05 20.0 
+ 2 0.10 10.0 221-570 
+ 3 0.15 6.7 105-220 171-320 205-370 238-420 271-470 305-520 
+ 4 0.20 5.0 46-104 96-170 121-204 146-237 171-270 196-304 246-370 271-404 
+ 5 0.25 4.0 11-45 51-95 71-120 91-145 111-170 131-195 171-245 191-270 271-370 
+ 6 0.30 3.3 1-10 21-50 38-70 55-90 71-110 88-130 121-170 138-190 205-270 
+ 7 0.35 2.9 1-20 14-37 29-54 43-70 57-87 86-120 100-137 157-204 
+ 8 0.40 2.5 1-13 9-28 21-42 34-56 59-85 71-99 121-156 
+ 9 0.45 2.2 1-8 5-20 16-33 38-58 49-70 94-120 
+ 10 0.50 2.0 1-4 1-15 21-37 31-48 71-93 
+ 11 0.55 1.8 8-20 17-30 53-70 
+ 12 0.60 1.7 1-7 5-16 38-52 
+ 13 0.65 1.5 1-4 25-37 
+ 14 0.70 1.4 14-24 
+ 15 0.75 1.3 5-13 
+ 16 0.80 1.3 1-4 
+Notes:
+ Values shown are level ranges for each breakpoint while wearing Boots of Haste on a given TerrainFactor (100-200).
+ Sometimes Boots of Haste will not change your speed, eg.. lv 58-70 on 100 speeds tile. Sometimes it will move more than one breakpoint, e.g. lv 18-20 on a 150 speed tile.
+Boots of Haste effect reference table 
+ Level Terrain Factor 
+ 100 110 120 130 150 160 200 
+ 1 25 11 10 20 17 15 19 
+ 2 25 11 10 20 17 15 19 
+ 3 13 11 10 20 17 15 13 
+ 4 13 11 10 20 17 15 13 
+ 5 13 11 22 20 17 25 20 
+ 6 13 11 22 20 17 17 20 
+ 7 13 11 22 20 8 17 20 
+ 8 13 11 22 20 18 17 20 
+ 9 13 25 22 20 18 17 13 
+ 10 13 25 22 10 18 17 13 
+ 11 13 25 11 10 18 17 13 
+ 12 13 25 11 10 18 17 13 
+ 13 13 25 11 10 18 17 13 
+ 14 29 13 11 10 18 17 21 
+ 15 29 13 11 10 18 8 21 
+ 16 14 13 11 22 9 8 14 
+ 17 14 13 11 22 9 18 14 
+ 18 14 13 11 22 9 18 14 
+ 19 14 13 11 22 9 18 14 
+ 20 14 13 11 22 9 18 14 
+ 21 14 13 25 11 20 18 14 
+ 22 14 13 25 11 20 18 14 
+ 23 14 13 25 11 20 18 14 
+ 24 14 13 25 11 20 18 14 
+ 25 14 13 13 11 20 9 15 
+ 26 14 13 13 11 20 9 15 
+ 27 14 13 13 11 20 9 15 
+ 28 14 13 13 11 10 9 15 
+ 29 14 14 13 11 10 9 15 
+ 30 14 14 13 11 10 9 15 
+ 31 14 14 13 11 10 20 15 
+ 32 14 14 13 11 10 20 15 
+ 33 14 14 13 11 10 20 15 
+ 34 0 14 13 25 10 20 8 
+ 35 0 14 13 25 10 20 8 
+ 36 0 14 13 13 10 20 8 
+ 37 0 14 13 13 10 10 8 
+ 38 17 14 13 13 22 10 17 
+ 39 17 14 13 13 22 10 17 
+ 40 17 14 13 13 22 10 17 
+ 41 17 14 0 13 11 10 17 
+ 42 17 14 0 13 11 10 17 
+ 43 17 14 14 13 11 10 17 
+ 44 17 14 14 13 11 10 17 
+ 45 17 14 14 13 11 10 8 
+ 46 17 14 14 13 11 10 8 
+ 47 17 14 14 13 11 10 8 
+ 48 17 14 14 13 11 10 8 
+ 49 17 0 14 13 11 22 8 
+ 50 17 0 14 13 11 22 8 
+ 51 17 0 14 13 11 11 8 
+ 52 17 0 14 13 11 11 8 
+ 53 17 0 14 13 11 11 18 
+ 54 17 0 14 0 11 11 18 
+ 55 17 17 14 0 11 11 18 
+ 56 17 17 14 0 11 11 18 
+ 57 17 17 14 14 11 11 18 
+ 58 0 17 14 14 0 11 9 
+ 59 0 17 14 14 13 11 9 
+ 60 0 17 14 14 13 11 9 
+ 61 0 17 14 14 13 11 9 
+ 62 0 17 14 14 13 11 9 
+ 63 0 17 0 14 13 11 9 
+ 64 0 17 0 14 13 11 9 
+ 65 0 17 0 14 13 11 9 
+ 66 0 17 0 14 13 11 9 
+ 67 0 17 0 14 13 11 9 
+ 68 0 17 0 14 13 11 9 
+ 69 0 17 0 14 13 0 9 
+ 70 0 17 0 14 13 0 9 
+ 71 20 17 17 14 13 13 20 
+ 72 20 17 17 14 13 13 20 
+ 73 20 17 17 14 13 13 10 
+ 74 20 17 17 14 13 13 10 
+ 75 20 0 17 14 13 13 10 
+ Level Terrain Factor 
+ 100 110 120 130 150 160 200 
+ 76 20 0 17 14 13 13 10 
+ 77 20 0 17 0 13 13 10 
+ 78 20 0 17 0 13 13 10 
+ 79 20 0 17 0 0 13 10 
+ 80 20 0 17 0 0 13 10 
+ 81 20 0 17 0 0 13 10 
+ 82 20 0 17 0 0 13 10 
+ 83 20 0 17 0 0 13 10 
+ 84 20 0 17 0 0 13 10 
+ 85 20 0 17 0 0 13 10 
+ 86 20 0 17 0 14 13 10 
+ 87 20 0 17 0 14 13 10 
+ 88 20 0 17 17 14 13 10 
+ 89 20 0 17 17 14 13 10 
+ 90 20 0 17 17 14 13 10 
+ 91 0 20 0 17 14 0 0 
+ 92 0 20 0 17 14 0 0 
+ 93 0 20 0 17 14 0 0 
+ 94 0 20 0 17 14 0 11 
+ 95 0 20 0 17 14 0 11 
+ 96 0 20 0 17 14 0 11 
+ 97 0 20 0 17 14 0 11 
+ 98 0 20 0 17 14 0 11 
+ 99 0 20 0 17 14 0 11 
+ 100 0 20 0 17 14 14 11 
+ 101 0 20 0 17 14 14 11 
+ 102 0 20 0 17 14 14 11 
+ 103 0 20 0 17 14 14 11 
+ 104 0 20 0 17 14 14 11 
+ 105 0 20 0 17 14 14 11 
+ 106 0 20 0 17 0 14 11 
+ 107 0 20 0 17 0 14 11 
+ 108 0 20 0 0 0 14 11 
+ 109 0 20 0 0 0 14 11 
+ 110 0 20 0 0 0 14 11 
+ 111 0 0 20 0 0 14 11 
+ 112 0 0 20 0 0 14 11 
+ 113 0 0 20 0 0 14 11 
+ 114 0 0 20 0 0 14 0 
+ 115 0 0 20 0 0 14 0 
+ 116 0 0 20 0 0 14 0 
+ 117 0 0 20 0 0 14 0 
+ 118 0 0 20 0 0 14 0 
+ 119 0 0 20 0 0 14 0 
+ 120 0 0 20 0 0 0 0 
+ 121 25 0 20 0 17 0 13 
+ 122 25 0 20 0 17 0 13 
+ 123 25 0 20 0 17 0 13 
+ 124 25 0 20 0 17 0 13 
+ 125 25 0 20 0 17 0 13 
+ 126 25 0 20 0 17 0 13 
+ 127 25 0 20 0 17 0 13 
+ 128 25 0 20 0 17 0 13 
+ 129 25 0 20 0 17 0 13 
+ 130 25 0 20 0 17 0 13 
+ 131 25 0 0 20 17 0 13 
+ 132 25 0 0 20 17 0 13 
+ 133 25 0 0 20 17 0 13 
+ 134 25 0 0 20 17 0 13 
+ 135 25 0 0 20 17 0 13 
+ 136 25 0 0 20 17 0 13 
+ 137 25 0 0 20 17 0 13 
+ 138 25 0 0 20 17 17 13 
+ 139 25 0 0 20 17 17 13 
+ 140 25 0 0 20 17 17 13 
+ 141 0 0 0 20 0 17 0 
+ 142 0 0 0 20 0 17 0 
+ 143 0 0 0 20 0 17 0 
+ 144 0 0 0 20 0 17 0 
+ 145 0 0 0 20 0 17 0 
+ 146 0 25 0 20 0 17 0 
+ 147 0 25 0 20 0 17 0 
+ 148 0 25 0 20 0 17 0 
+ 149 0 25 0 20 0 17 0 
+ 150 0 25 0 20 0 17 0 
+Notes:
+ Boots of Hastes effect varies due to breakpoints - sometimes it will bump you two breakpoints, other times none at all. The higher the speed the more spread but significant the increase. 
+ Values shown are the percent (%) increase in speed from wearing BoH on a given TerrainFactor (100-200).
+-->

@@ -12,7 +12,7 @@ HEAD, NECKLACE, BACKPACK, ARMOR, RIGHT, LEFT, LEGS, FEET, RING, AMMO = range(1, 
 
 # From data/vocations.xml: (hp, mana, cap) gained per level
 VOCATION_GAINS = {
-    0: (5, 5, 5),     # none (Rookgaard)
+    0: (5, 5, 10),    # none (Rookgaard): 10 cap a level - 470 at level 8 for every vocation (tibiantis-notes)
     1: (5, 30, 10),   # sorcerer
     2: (5, 30, 10),   # druid
     3: (10, 15, 20),  # paladin

@@ -19,10 +19,10 @@
   </flags>
   <attacks>
     <attack name="melee" interval="2000" skill="25" attack="20" poison="250"/>
-    <attack name="physical" interval="2000" chance="25" range="7" min="-55" max="-95">
+    <attack name="physical" interval="2000" chance="25" range="7" min="-0" max="-120">
       <attribute key="shootEffect" value="suddendeath"/>
     </attack>
-    <attack name="manadrain" interval="1000" chance="25" range="7" min="-60" max="-120">
+    <attack name="manadrain" interval="1000" chance="25" range="7" min="-10" max="-170">
       <attribute key="areaEffect" value="redshimmer"/>
   </attack>
   </attacks>

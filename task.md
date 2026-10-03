@@ -175,9 +175,14 @@ When finishing one, tick it and add a short note (what changed / how verified).
       bought life ring into the ring slot, worn and wearing off (2205), a crystal ball into the ammo slot. Now never
       the ring or the ammo slot (Player::__queryDestination; armor still goes on, as the beginner set). 2026-10-01,
       test_shops.py test_a_bought_ring_is_not_put_on
-- [ ] Two traders in one shop (Bezil and Nezil, Kazordoon): "hi" greets both and both sell on "yes" - the buyer
-      pays twice. Old NPCs answered anyone in range; keep, or let only the NPC greeted first trade?
-      (test_shops.py SHARED_SHOP xfail)
+- [x] Two traders in one shop (Bezil and Nezil, Kazordoon): "hi" greeted both and both sold on "yes" - the buyer
+      paid twice. Fixed 2026-10-02 (asked by the user): a player talks to one NPC at a time - the other stays
+      silent until that conversation ends (TALKING_TO in npc/lib/npcsystem/npchandler.lua); "hi <name>" reaches
+      that NPC anyway and the first one lets the player go (the name check compared the lower-case message with
+      capitalised names - it never worked; and "hi" counted only when no "hi" + letter appeared anywhere in the message,
+      so "hi bashira", "hi shiriel", "hi phillip" were refused - now a whole-word match). Orc King's guards are
+      summoned beside a blocked tile. test_shops.py test_only_one_trader_of_a_shared_shop_answers,
+      test_greeting_the_other_trader_by_name_hands_the_player_over; test_npc_talk greets each NPC by name
 - [ ] NPC rune sales (Shiriel, Fenech: TibiaWiki 2006) and Maryza's cookbook not added - runes from NPCs may be
       7.6; ask when the magic shops are looked at
 
@@ -920,6 +925,27 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       test_monsters.py pins them. Elder beholder's "beholder helmet" is no 7.4 item - left out.
       Left: the 15 without 7.4 data (tomb bosses, traps) keep theirs; spells/attacks not compared (Tibiantis'
       list has no attack spells) - see 3c below
+- [x] Monster attacks and spells vs 7.4 - spike 2026-10-02, docs/reference-74/monster-spells.md
+      (tools/compare-monster-spells.py). Sources found: TibiaWiki pre-8.0 creature pages give each attack with its
+      damage range (docs/reference-74/monster-abilities.json, tools/wiki-monster-reference.py; 101 of 102 spawned
+      monsters, the June 2007 revisions - the earlier ones mostly lack abilities); tibiantis-notes gives haste and
+      paralyze spells (strength, duration, chance), melee poison, strategy, target changing
+      (docs/reference-74/tibiantis/notes-creatures.json). Not found anywhere: spell chances, intervals and areas.
+      Of 102 monsters 72 agree with the wiki; 30 are flagged, e.g. the dragon's fireball 45-65 (7.4 60-110), the
+      deathslicer's exori 150-250 (200-400), the elder beholder's energy beam 45-75 (130-300?), the marid's energy
+      65-115 (100-250), elf scout/hunter arrows half the 7.4 damage; attacks 7.4 did not list (life drains on the
+      djinn and tomb pharaohs, the witch's frog spell missing, the djinn's cancel invisibility missing).
+      Fixed 2026-10-02 by hand (the user: "fix all 30"): damage to the wiki's (dragon fireball 60-110 / wave
+      100-160, deathslicer 0-500 melee, 200-400 area + an energy beam, marid energy 100-250, warlock, priestess,
+      orc warlord, elf arcanist, geomancer, fire devil, banshee life drain + its Great Musical Bomb, elder
+      beholder energy beam), attacks 7.4 does not list removed (djinn and marid life drain, marid fire and rabbit,
+      efreet drunk/rat, geomancer fire, gargoyle stones, warlock mana drain), melee poison as tibiantis-notes
+      (banshee 65, scorpion 350, swamp troll 10, wasp 25, giant spider 150, lich 400); beholders' doubled
+      summons. Kept on purpose, with reasons, in the tool's REVIEWED list: the tomb pharaohs (their wiki pages
+      are incomplete), the witch's frog and djinn's cancel invisibility (nothing in 7.4 / the engine to do them
+      with). test_monsters.py test_monster_attacks_agree_with_74_or_are_reviewed
+- [ ] Flaky in the full run, pass alone (2026-10-03): test_npc_talk for Hardek (wanders 20 tiles), A Wrinkled
+      Beholder, Jimbin - probably a character an earlier test left standing or talking there
 - [ ] Flaky quest tests (seen 2026-10-02; Rahemos failed the same way before the monster change, the deathslicer
       in Morguthis's tomb was not changed):
       test_tomb_rahemos (Rahemos heals 200-500 on 20% of his turns and summons a demon; the test's sword + heavy
@@ -939,10 +965,14 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [x] Experience works (the 2026-09-22 report was a false alarm). Pinned by
       test_rookgaard.py::test_killing_a_rat_gives_experience_and_a_level_up: 99 exp + a rat (5) ->
       level 2, "You advanced from Level 1 to Level 2.", more max hp
-- [ ] Experience per level: confirm `(50*(L-1)^3 - 150*(L-1)^2 + 400*(L-1)) / 3` (Player::getExpForLevel)
+- [x] Experience per level: confirm `(50*(L-1)^3 - 150*(L-1)^2 + 400*(L-1)) / 3` (Player::getExpForLevel)
+      2026-10-02: the same as Tibiantis' experience table (tibiantis.online ?page=exptable: 8 = 4,200, 50 = 1,847,300)
 - [ ] Experience rate: keep 1x, pick a multiplier, or enable stages (7.4 had no stages)
 - [ ] Monster experience: exp from each monster matches 7.4, including exp split when several players attack
-- [ ] Level-up gains per vocation: HP / mana / capacity (data/vocations.xml: none 5/5/5, knight 15/5/25...)
+- [x] Level-up gains per vocation: HP / mana / capacity (data/vocations.xml: none 5/5/5, knight 15/5/25...)
+      2026-10-02, tibiantis-notes "Classes": knight 15/5/25, paladin 10/15/20, mage 5/30/10 and their base hp/mana
+      as ours; capacity is 470 at level 8 for all - Rookgaard (no vocation) gives 10 cap a level, not 5 (fixed).
+      test_vocations.py
 - [ ] Level-down on death: losing enough exp removes levels and their HP/mana/cap
 
 ### Magic level
@@ -954,6 +984,7 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 
 ### Skills
 - [ ] Skill tries per level: `50 * multiplier^(skill-10)`-style formula per skill and vocation (vocations.xml)
+      2026-10-02: the multipliers are tibiantis-notes' "Skills" table (test_vocations.py); the formula not checked
 - [ ] Which actions train which skill: melee hits, shield blocks, distance, fishing; RateSkill applies
 - [ ] Fist fighting when no weapon; skills start at 10
 
@@ -965,7 +996,11 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [x] Attack speed (vocations.xml attackspeed 2000 ms) and exhaustion (exhaustion done 2026-09-23, §9)
 
 ### Regeneration, food, soul
-- [ ] HP/mana regeneration per vocation (gainhpticks/gainmanaticks) and food duration
+- [x] HP/mana regeneration per vocation (gainhpticks/gainmanaticks) and food duration
+      2026-10-02: per hour as tibiantis-notes (knight 600/900 promoted hp, 300 mana; paladin 450, RP 600; mage
+      300 hp, 600/900 mana) - test_vocations.py. Life ring gave 4 mana a tick (1600 instead of 400) and ring of
+      healing 4 a second for 480 s (7.5 min, 450 total) - fixed. Food: regeneration = nutrition x 12 s, at most
+      1200 s (tibiantis-notes) - not checked yet
 - [ ] Soul points: did 7.4 have them? (soul came in 7.5 - probably disable)
 - [ ] Capacity: item weights and cap limit
 
@@ -1266,3 +1301,9 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 un-tests.bat
 - [x] Test every NPC answers "hi" (generated test per NPC)
       Done 2026-09-30: tests/test_npc_talk.py (see "Talk-test every NPC once")
+
+## Pre-launch
+
+- [ ] Before launch: remove the quest-testing account 8 (password "8") and its characters from the production
+      database, and never deploy server/config.local.lua (their InfiniteItemPlayers names; .gitignore keeps it out of
+      git - the server reads it after config.lua when it is there; tools/provision-quest-testers.py, local only)

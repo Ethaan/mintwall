@@ -90,6 +90,8 @@ def test_thalas_forcefield_needs_poison(new_player, items):
     beside = (STUB[0] - 1, STUB[1] - 1, 14)
     p = strong(new_player, beside, premium_days=30, maglevel=100, items=[Item(POISON_FIELD_RUNE, 3)])
     p.open_container(BACKPACK)
+    if p.pos != beside:                     # another test's character stood there: logged in next to it
+        assert p.walk_to(beside, max_steps=6), f"could not reach {beside} from {p.pos}"
     assert not p.icons & POISONED
     step_onto(p, STUB)                                           # not poisoned: back north, as the map had it
     assert p.wait_for(lambda: p.pos == BEFORE_STUB, timeout=3), p.pos

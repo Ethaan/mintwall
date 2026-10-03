@@ -47,7 +47,8 @@ SILENT = {"A Ghostly Woman", "A Lost Soul", "A Tainted Soul", "A Tortured Soul",
 
 @pytest.mark.parametrize("name", SPAWNED)
 def test_npc_answers(new_player, name):
-    word, storage = GREETING.get(name, ("hi", {}))
+    # by name, like a player between two NPCs: a player talks to one NPC at a time (npchandler.lua)
+    word, storage = GREETING.get(name, (f"hi {name.lower()}", {}))
     p = near(new_player, NPCS[name].positions[0], level=100, premium_days=30, group_id=TESTER_GROUP,
                 storage={30001: 1, **storage})
     # follow the NPC (they wander, some ten tiles from their spawn) and talk

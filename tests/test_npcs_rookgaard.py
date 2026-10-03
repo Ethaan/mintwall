@@ -46,7 +46,7 @@ def _visit(new_player, npc, inventory=None):
     assert me, f"{npc.name} is not near its spawn {spawn} (we are at {p.pos})"
     if max(abs(me.pos[0] - p.pos[0]), abs(me.pos[1] - p.pos[1])) > 3:
         p.walk_to(me.pos)
-    p.greeting = p.talk("hi", npc=npc.name)
+    p.greeting = p.talk(f"hi {npc.name.lower()}", npc=npc.name)    # by name: a neighbour would take a plain "hi"
     assert p.greeting, f"{npc.name} does not answer hi"
     return p
 

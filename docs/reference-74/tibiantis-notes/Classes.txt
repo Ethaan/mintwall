@@ -1,0 +1,100 @@
+Home 
+Tibia 7.4/ Tibiantis notes 
+ by Tarsal. 
+Classes 
+Table: Class stats comparison 
+ Class HP Mana Carry
+capacity HP regen
+(hour) Mana regen
+(hour) Base HP Base mana Base capacity 
+ Knight 15 5 25 600/ 900 300 65 -5 270 
+ Paladin 10 15 20 450/ 600 450/ 600 105 -85 310 
+ Druid/ Sorcerer 5 30 10 300 600/ 900 145 -205 390 
+Notes:
+ Base HP and mana is the difference between (lv x stat) and actual value. Assumes leaving Rookgaard at lv 8.
+Table: Class magic power progression 
+ Level Magic Level Magic Power 
+ Knight Paladin Mage Knight Paladin Mage 
+ 10 1 3 5 1 1 1 
+ 20 3 9 20 1 1 1 
+ 30 4 12 32 1 1 1.56 
+ 40 5 15 44 1 1.25 2.12 
+ 50 5 16 55 1.15 1.48 2.65 
+ 60 6 17 59 1.38 1.71 2.97 
+ 70 6 17 62 1.58 1.91 3.26 
+ 80 6 18 63 1.78 2.14 3.49 
+ 90 6 19 64 1.98 2.37 3.72 
+ 100 7 19 67 2.21 2.57 4.01 
+ 110 7 20 70 2.41 2.8 4.3 
+ 120 7 21 71 2.61 3.03 4.53 
+ 130 7 21 72 2.81 3.23 4.76 
+ 140 7 22 73 3.01 3.46 4.99 
+ 150 8 22 74 3.24 3.66 5.22 
+ 160 8 23 75 3.44 3.89 5.45 
+ 170 8 23 76 3.64 4.09 5.68 
+ 180 8 23 77 3.84 4.29 5.91 
+ 190 8 24 78 4.04 4.52 6.14 
+ 200 9 24 79 4.27 4.72 6.37 
+ 210 9 24 80 4.47 4.92 6.6 
+ 220 9 24 81 4.67 5.12 6.83 
+ 230 9 24 82 4.87 5.32 7.06 
+ 240 9 25 83 5.07 5.55 7.29 
+ 250 9 25 84 5.27 5.75 7.52 
+Notes:
+ Typical values used, may vary between characters.
+ Magic Power represents the 'base power' multiplier.
+Class Overviews 
+This section will give an overveiw of the different classes and their relative merits.
+Knight 
+The knight is the most chill and most profitable class to pick, click mobs and collect loot.
+The early game is often dominated by training, which is fairly straightforward for knights who will typically train to skill 75-85 before levelling in earnest. There is a view that at higher levels, afk training is too risky and so training becomes less convenient. Skilling adds to attack and defence and is reccomeneded until atleast Magic Level 4 is reached for UH access, which is very powerful even at low levels. 
+With mid level skills knights are somewhat limited to weaker mobs their hunting choices since many creatures do too much damage or have too high shielding. Nonetheless cyclops and dwarf guards and similar mobs can be good experience and great profit, and there are many places to hunt. After the parcel quest a knight can hunt for many hours between resupply.
+In team hunting knights are effective as both a blocker. Knights often heal themselves to allow mages to shoot runes.
+On the road to Level 100 knights may afford an SoV or MMS which will significantly boost their defences and modestly boost attack. This reduces UH burn while hunting making them more profitable. The combination of better skill, defences, magic power, and available cash afford knights to use HMM and UHs to effectively fight stronger creatures like dragon lords.
+In PvP knight damage is often terrible while their survivability is very high making them get targetted less. They can do decent damage against much weaker opponents who have poor armor or no shield, and in late game runes, exori, explosion and ice rapiers can help somewhat. They do best in a war of attrition as a mage may simply not have enouh runes to take out a well equipped knight and its very hard to combo. They lack instant healing so are vulnerable to paralysis and stacking traps.
+Paladin 
+The paladin is a strong versatile class that can progress quickly from the start, thanks to their immediate access to their endgame weapon - the crossbow.
+The combination of bolts piercing monster shielding, avoiding taking damage, and double speed skill progression significantly reduces the need for Paladins to train distance fighting. It is difficult to train with spears as they need to be picked up and do a lot of damage.
+In the mid game they have great damage and can boost with runes where needed. Giant Spiders in the Plains of Havoc are just one example of where their ranged damage shines when paired with speed. DS are a menace for mages and knights but are habdled with ease by Paladins. They are easily the best class to roam with as they can offensively and defensively handle most scenarios. 
+In the late game they remain strong with bolt damage increases slowly. Paladin HMM + bolts will beat Mage HMM at any level, particularly notable when reaching Lv100 is much easier on Paladins. Around level 100 burst arrows match bolts in damage but they aren't worth it for some time after this. 
+In PvP Paladins enjoy access to SDs and consistent damage from bolts making them a threat in short and long fights, paricularly against slower opponents. If forced into close quarters against knights they will either take high damage from weapons or need to forego xbow damage. Later on they still have decent damage and survivability with Exura Vita and SD. 
+ Lag and latency can make it difficult to effectively kite monsters.
+ Bolts cost money, capacity and can limit hunts without forward planning. Sometimes supplies need to be dragged to the hunting spot.
+ The lack of shield makes you take more damage from melee and ranged physical attackers the latter of which are quite common in 7.4.
+ Spear and shielding is a great alternative combination. Spears do high damage and never break so even a few can help where you don't have space or run out of bolts.
+ Decent magic level progression.
+ Good mana regeneration and lower demands on mana while hunting. Can make runes when hunting and outside of hunts.
+ The best healing of any class thanks to magic power and higher HP, and great use of the instant Ultimate Healing spell.
+ Access to SD and magic wall.
+ Can't use torches with xbow.
+Sorcerer and Druid 
+In 7.4 Mages (Sorcerers and Druids) fit the stereotype of squishy and useless at lower levels and gods at higher levels.
+In terms of economy Mages are by far the worst, usually needing financial support from a knight character, credit card, extensive rune farming scheme or monk hire. By the time their power is high enough to break even on hunts they will usually want to be hunting something stronger and end up wasting even more. It could be said that the combination of lower profit and experience (for magic power) for a self funded mage means that Paladins and Knights can afford more damage from runes.
+There are no functional wands or rods in 7.4 so mages rely on melee damage, classically rotworms and larvae with a warhammer. There are ways to hunt to get more profit and xp.
+In terms of power Mages benefit from the 7.4 mana system where damage is high with no cooldown and some spell costs are low. With a full mana pool there is lots a mage can do.
+In the mid to late game Mages start to benefit greatly from burst arrows which allow them to double dip on their magic power each turn and have enough magic power to overcome damage reductions from monster armor.
+For most late game mages hunting expense is less of a concern so they can enjoy unrivalled damage output and exp potential.
+In PvP mages are the ultimate offensive shooter with some defensive utility. The expense of Sudden Death makes burst arrows easily justified matching or exceeding paladin damage from an early stage. UE in particular can make devastating combos and can break through traps containing weaker characters. Strong haste is very powerful to allow you to engage or disengage quickly, or simply run around the map until your pz is over. Mages benefit disproportionately with level due to their damage for hitting combos, as well as HP, speed and manapool. 
+Sorcerer vs Druid 
+Sorcerers get access to powerful instant spells in Ultimate Explosion and Energy Wave. Druids get access to Poison Storm, Heal Friend, Mass Healing and Paralyze.
+Heal Friend has minimal advantage over UH even after the custom buff in terms of economy. Knights often heal themselves in team hunts to allow mages to throw runes. It is nice to not need to aim. Mass Healing can help with summons but the effect can often be achieved with runes. Paralyze can be very strong but is difficult and situational to use.
+A few custom spells like Extinguish and Desintegrate, help druids defensively in PvP but are niche. UE as an instant spell can be useful in clearing traps (such as boat traps) or traps that prevent you using runes.
+Runes can be traded and so are not unique to either class. UH tends to have a higher sell price.
+The consensus is that Sorcerers are superior to druids.
+Free account druids can use paralyze runes, and sorcerers can use energy wave.
+Summons can have some utility in the mid game, but are much more expensive than in later versions.
+The various utility and roleplaying spells, and the ability to make most runes on the go are a nice touch for mages.
+Druids get better melee skill development (1.8x) compared to Sorcerers (2.0x). This results in a 1 or 2 skill advantage. Shielding is the same for both.
+The passive income from manasitting is about 1.2k/hr.
+Often supplies will need to be dragged to a hunting spot.
+Mage progression milestones 
+Level 20: Promotion quest for 50% extra mana regeneration.
+Level 27: Some Druids can use paralyze rune.
+Level 27: Mages can summon monks.
+Level 30: Mages can use all summons.
+Level 34: Sorcerers can cast UE.
+Level 61: Sorcerers can cast two UE.
+Level 71: 500 hp.
+Level 120-130: Sorcerer Anni with UE.
+Level 171: 1000 hp.
+Level 290: Mage can reach the fastest speed breakpoint possible.

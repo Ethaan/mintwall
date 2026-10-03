@@ -50,7 +50,7 @@ djinnNpc{
 			for _, guard in ipairs(GUARDS) do
 				local at = {x = pos.x + guard[2], y = pos.y + guard[3], z = pos.z}
 				if getTopCreature(at).uid == 0 then    -- the guards another player's "hi" called may still stand there
-					doSummonCreature(guard[1], at)
+					doSummonCreature(guard[1], at, true)   -- a free tile beside it when that one is blocked
 				end
 			end
 			return nil
