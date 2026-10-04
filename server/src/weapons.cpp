@@ -930,9 +930,11 @@ bool WeaponDistance::useWeapon(Player* player, Item* item, Creature* target) con
 		Weapon::internalUseWeapon(player, item, target, damageModifier);
 	}
 	else{
-		// miss target
+		// miss target: 7.4 lands it on a random tile of the 3x3 around the target, its own tile included
+		// (tibiantis-notes distance_calculator: a missed burst arrow still hits the centre 1 time in 9)
 		typedef std::pair<int32_t, int32_t> dPair;
 		std::vector<dPair> destList;
+		destList.push_back(dPair(0, 0));
 		destList.push_back(dPair(-1, -1));
 		destList.push_back(dPair(-1, 0));
 		destList.push_back(dPair(-1, 1));

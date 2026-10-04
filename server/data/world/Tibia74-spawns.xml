@@ -15298,7 +15298,7 @@
 		<monster name="Scorpion" x="1" y="1" z="11" spawntime="60"/>
 	</spawn>
 	<spawn centerx="32874" centery="31948" centerz="11" radius="1">
-		<monster name="Black Knight" x="0" y="0" z="11" spawntime="60"/>
+		<monster name="Black Knight" x="0" y="0" z="11" spawntime="720"/>
 	</spawn>
 	<spawn centerx="32880" centery="31946" centerz="12" radius="1">
 		<monster name="Beholder" x="0" y="0" z="12" spawntime="60"/>
@@ -20694,7 +20694,7 @@
 		<monster name="Warlock" x="0" y="0" z="14" spawntime="60"/>
 	</spawn>
 	<spawn centerx="33076" centery="32781" centerz="14" radius="1">
-		<monster name="Rahemos" x="0" y="0" z="14" spawntime="60"/>
+		<monster name="Rahemos" x="0" y="0" z="14" spawntime="600"/>
 	</spawn>
 	<spawn centerx="33079" centery="32781" centerz="14" radius="1">
 		<monster name="Magicthrower" x="0" y="0" z="14" spawntime="60"/>
@@ -21910,7 +21910,7 @@
 		<monster name="Beholder" x="0" y="0" z="15" spawntime="60"/>
 	</spawn>
 	<spawn centerx="33092" centery="32590" centerz="15" radius="1">
-		<monster name="Dipthrah" x="0" y="0" z="15" spawntime="60"/>
+		<monster name="Dipthrah" x="0" y="0" z="15" spawntime="600"/>
 	</spawn>
 	<spawn centerx="33095" centery="32595" centerz="15" radius="1">
 		<monster name="Magicthrower" x="0" y="0" z="15" spawntime="60"/>
@@ -23925,7 +23925,7 @@
 		<monster name="Banshee" x="1" y="0" z="15" spawntime="60"/>
 	</spawn>
 	<spawn centerx="33121" centery="32656" centerz="15" radius="1">
-		<monster name="Vashresamun" x="0" y="0" z="15" spawntime="60"/>
+		<monster name="Vashresamun" x="0" y="0" z="15" spawntime="600"/>
 	</spawn>
 	<spawn centerx="33125" centery="32661" centerz="15" radius="1">
 		<monster name="Magicthrower" x="0" y="0" z="15" spawntime="60"/>
@@ -26110,7 +26110,7 @@
 		<monster name="Vampire" x="0" y="0" z="14" spawntime="60"/>
 	</spawn>
 	<spawn centerx="33169" centery="32694" centerz="14" radius="1">
-		<monster name="Morguthis" x="0" y="0" z="14" spawntime="60"/>
+		<monster name="Morguthis" x="0" y="0" z="14" spawntime="600"/>
 	</spawn>
 	<spawn centerx="33169" centery="32697" centerz="14" radius="1">
 		<monster name="Shredderthrower" x="0" y="0" z="14" spawntime="60"/>
@@ -26535,7 +26535,7 @@
 		<monster name="Ghost" x="0" y="1" z="11" spawntime="60"/>
 	</spawn>
 	<spawn centerx="33179" centery="32884" centerz="11" radius="1">
-		<monster name="Ashmunrah" x="0" y="0" z="11" spawntime="60"/>
+		<monster name="Ashmunrah" x="0" y="0" z="11" spawntime="600"/>
 	</spawn>
 	<spawn centerx="33152" centery="32870" centerz="11" radius="1">
 		<monster name="Flamethrower" x="0" y="0" z="11" spawntime="60"/>
@@ -28361,7 +28361,7 @@
 		<monster name="Dragon Lord" x="0" y="0" z="15" spawntime="60"/>
 	</spawn>
 	<spawn centerx="33191" centery="32954" centerz="15" radius="1">
-		<monster name="Mahrdis" x="0" y="0" z="15" spawntime="60"/>
+		<monster name="Mahrdis" x="0" y="0" z="15" spawntime="600"/>
 	</spawn>
 	<spawn centerx="33194" centery="32957" centerz="15" radius="1">
 		<monster name="Flamethrower" x="0" y="0" z="15" spawntime="60"/>
@@ -28381,7 +28381,7 @@
 		<monster name="Stalker" x="1" y="1" z="14" spawntime="60"/>
 	</spawn>
 	<spawn centerx="33202" centery="32998" centerz="14" radius="1">
-		<monster name="Omruc" x="0" y="0" z="14" spawntime="60"/>
+		<monster name="Omruc" x="0" y="0" z="14" spawntime="600"/>
 	</spawn>
 	<spawn centerx="33203" centery="33007" centerz="14" radius="1">
 		<monster name="Shredderthrower" x="0" y="0" z="14" spawntime="60"/>
@@ -34342,7 +34342,7 @@
 		<monster name="Necromancer" x="0" y="1" z="14" spawntime="60"/>
 	</spawn>
 	<spawn centerx="33396" centery="32839" centerz="14" radius="1">
-		<monster name="Thalas" x="0" y="0" z="14" spawntime="60"/>
+		<monster name="Thalas" x="0" y="0" z="14" spawntime="600"/>
 	</spawn>
 	<spawn centerx="33400" centery="32852" centerz="14" radius="1">
 		<monster name="Plaguethrower" x="0" y="0" z="14" spawntime="60"/>

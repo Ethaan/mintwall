@@ -91,7 +91,7 @@ function getDistanceBetween(pos1, pos2)
 end
 
 function getPlayerLookPos(cid)
-	return getPosByDir(getThingPos(cid), getPlayerLookDir(cid))
+	return getPosByDir(getThingPos(cid), getCreatureLookDir(cid))	-- Avesta's name; getPlayerLookDir never existed
 end
 
 function getPosByDir(basePos, dir)

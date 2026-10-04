@@ -66,3 +66,8 @@ def test_regeneration_ring(item_id, seconds, every_ms, total):
     for stat in ("health", "mana"):
         assert int(a[stat + "Ticks"]) == every_ms
         assert int(a[stat + "Gain"]) * seconds * 1000 // every_ms == total
+
+
+def test_rookie_magic_multiplier_is_3():
+    """No vocation: 3.0 (TibiaWiki formulae page, the only source; ours was 4.0 - decided with the user 2026-10-03)."""
+    assert float(VOCATIONS[0].get("manamultiplier")) == 3.0

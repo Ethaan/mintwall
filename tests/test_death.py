@@ -254,7 +254,7 @@ def test_death_loss_is_10_percent_minus_blessings(new_player, db, vocation, bles
 # ----------------------------------------------------------------------------- levels, items, amulet of loss, respawn
 
 from tibia74 import HEAD, NECKLACE, ARMOR, LEFT, LEGS, FEET, RING, AMMO   # noqa: E402
-from tibia74.db import VOCATION_GAINS                                    # noqa: E402
+from tibia74.db import VOCATION_GAINS, capacity                          # noqa: E402
 
 AMULET_OF_LOSS = 2173
 ANKRAHMUN_TEMPLE, ANKRAHMUN_TOWN = (33194, 32853, 8), 9   # a home town far from where the victim dies
@@ -284,10 +284,10 @@ def _after_death(db, guid, before):
     return row
 
 
-def _kill_on(new_player, db, row, **victim):
+def _kill_on(new_player, db, row, vocation=KNIGHT, **victim):
     """A knight (100 hp: a quick kill) killed on its own ROAD row; returns (guid, saved row after the death)."""
     killer = _killer(new_player, (ROAD[0], ROAD[1] + row, ROAD[2]))
-    p = new_player(pos=(ROAD[0], ROAD[1] + row + 1, ROAD[2]), vocation=KNIGHT, health=100,
+    p = new_player(pos=(ROAD[0], ROAD[1] + row + 1, ROAD[2]), vocation=vocation, health=100,
                    storage={30001: 1}, **victim)
     guid = p.character.guid
     before = db.character(guid)["experience"]
@@ -305,8 +305,8 @@ def test_lost_levels_take_their_hp_mana_and_cap_and_respawn_full(new_player, db)
     He comes back with full health and mana (killed at 100 hp and 0 mana)."""
     guid, row = _kill_on(new_player, db, 2, level=50, mana=0)
     assert row["experience"] == 1847300 - 184730 and row["level"] == 48, (row["experience"], row["level"])
-    hp, mana, cap = VOCATION_GAINS[KNIGHT]
-    assert (row["healthmax"], row["manamax"], row["cap"]) == (150 + 47 * hp, 47 * mana, 400 + 47 * cap), \
+    hp, mana, _ = VOCATION_GAINS[KNIGHT]
+    assert (row["healthmax"], row["manamax"], row["cap"]) == (150 + 47 * hp, 47 * mana, capacity(KNIGHT, 48)), \
         {k: row[k] for k in ("healthmax", "manamax", "cap")}
     assert (row["health"], row["mana"]) == (row["healthmax"], row["manamax"]), \
         {k: row[k] for k in ("health", "healthmax", "mana", "manamax")}
@@ -378,3 +378,86 @@ def test_respawn_in_the_home_town_temple_with_full_health_and_mana(new_player, d
         assert again.wait_for(lambda: again.pos == ANKRAHMUN_TEMPLE, timeout=5), f"logged in at {again.pos}"
     finally:
         again.logout()
+
+
+# ----------------------------------------------------------------------------- what a death takes: exp, ML, skills
+#
+# 7.4 (docs/reference-74/death.md §1-2; TibiaWiki Death 2005-05, oldid 6509/19247/23124; Blessings 2005-05, oldid
+# 19249): 10% of the experience and of all skills, 7% for a promoted character (with premium), each blessing one
+# point less. The loss is a share of everything gained (all the tries / mana spent since level 10 / ML 0), not of
+# the current level's progress, so a death can take skill and magic levels away. The level-scaled formula is 8.41.
+
+SWORD = 2
+
+
+def _skill(db, guid, skill):
+    con = db._connect()
+    try:
+        return tuple(con.execute("SELECT value, count FROM player_skills WHERE player_id = ? AND skillid = ?",
+                                 (guid, skill)).fetchone())
+    finally:
+        con.close()
+
+
+def _knight_sword_tries(level):
+    """Tries from sword level-1 to level for a knight (50 x 1.1^(level-11), vocations.xml)."""
+    return int(50 * 1.1 ** (level - 11))
+
+
+def _sorcerer_mana(ml):
+    """Mana spent from magic level ml-1 to ml for a sorcerer (1600 x 1.1^(ml-1), vocations.xml)."""
+    return int(1600 * 1.1 ** (ml - 1))
+
+
+def _after_loss(requirement, first, level, progress, percent):
+    """(level, progress) left after losing percent of everything gained from level `first` (a skill starts at 10,
+    the magic level at 0). The rounding of the loss is not in any source: ours rounds it up, either is accepted."""
+    total = sum(requirement(n) for n in range(first + 1, level + 1)) + progress
+    results = set()
+    for lost in (total * percent // 100, -(-total * percent // 100)):
+        left, lvl = total - lost, first
+        while left >= requirement(lvl + 1):
+            left -= requirement(lvl + 1)
+            lvl += 1
+        results.add((lvl, left))
+    return results
+
+
+@pytest.mark.parametrize("vocation, percent, line", [(KNIGHT, 10, 14), (ELITE_KNIGHT, 7, 16)])
+def test_death_takes_10_percent_of_all_skill_tries_7_promoted(new_player, db, vocation, percent, line):
+    """Sword 20 with no tries towards 21: 793 tries in all, 10% (80) is more than the level's progress, so the
+    knight is back at sword 19 with 117 - 80 = 37 tries; promoted 7% (56) leaves 61. Level 50 so the 10% / 7% of
+    experience is a few levels, nothing more."""
+    guid, row = _kill_on(new_player, db, line, vocation=vocation, level=50, premium_days=30,
+                          skills={SWORD: 20}, skill_tries={SWORD: 0})
+    assert row["experience"] == 1847300 - 1847300 * percent // 100, row["experience"]
+    assert row["vocation"] == vocation, f"the promotion was lost on death: vocation {row['vocation']}"
+    expected = _after_loss(_knight_sword_tries, 10, 20, 0, percent)
+    assert _skill(db, guid, SWORD) in expected, f"sword {_skill(db, guid, SWORD)}, expected one of {expected}"
+
+
+@pytest.mark.parametrize("vocation, percent, line", [(SORCERER, 10, 18), (MASTER_SORCERER, 7, 20)])
+def test_death_takes_10_percent_of_all_mana_spent_7_promoted(new_player, db, vocation, percent, line):
+    """Magic level 10 with no mana towards 11: 25,495 mana spent in all; 10% (2,550) costs the magic level -
+    back at 9 with 3,772 - 2,550 = 1,222 spent towards 10. Promoted: 7% (1,785) leaves 1,987."""
+    guid, row = _kill_on(new_player, db, line, vocation=vocation, level=50, premium_days=30,
+                          maglevel=10, manaspent=0)
+    assert row["experience"] == 1847300 - 1847300 * percent // 100, row["experience"]
+    expected = _after_loss(_sorcerer_mana, 0, 10, 0, percent)
+    got = (row["maglevel"], row["manaspent"])
+    assert got in expected, f"magic level {got}, expected one of {expected}"
+
+
+def test_death_keeps_progress_when_the_loss_is_smaller(new_player, db):
+    """Sword 20 and 100 tries towards 21: 893 in all, 10% is 89.3 - still sword 20 with 10 or 11 tries."""
+    guid, _ = _kill_on(new_player, db, 22, level=50, skills={SWORD: 20}, skill_tries={SWORD: 100})
+    expected = _after_loss(_knight_sword_tries, 10, 20, 100, 10)
+    assert _skill(db, guid, SWORD) in expected, f"sword {_skill(db, guid, SWORD)}, expected one of {expected}"
+
+
+def test_a_suspended_promotion_loses_10_percent_and_stays_promoted(new_player, db):
+    """An elite knight without premium plays as a knight (the promotion is suspended), so he loses the full 10% -
+    and the promotion is still saved after the death, back with premium."""
+    guid, row = _kill_on(new_player, db, 24, vocation=ELITE_KNIGHT, level=50, premium_days=0)
+    assert row["experience"] == 1847300 - 184730, f"lost {(1847300 - row['experience']) / 1847300:.2%}, expected 10%"
+    assert row["vocation"] == ELITE_KNIGHT, f"the promotion was lost on death: vocation {row['vocation']}"

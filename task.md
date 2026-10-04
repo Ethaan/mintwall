@@ -17,6 +17,47 @@ When finishing one, tick it and add a short note (what changed / how verified).
 - [x] Oracle: fixed undefined CONST_ME_TELEPORT (compat.lua loaded too early) and wrong town ids
       (now looked up by name); covered by test_rookgaard.py
 
+
+## Questions for the user
+
+Gathered while working (the work goes on meanwhile); each with the evidence and a recommendation. Asked in batches.
+
+- [x] Q1 Server/world name (branding tasks wait on it): the character list shows "<char> (OpenTibia)", the login - answered 2026-10-03 -> "Mintwall"
+      message mentions otserv.org. What name - "Mintwall"? Then WorldName/ServerName/OwnerName, MOTD, LoginMsg,
+      the first-login text all use it (see "Branding and client texts").
+- [x] Q2 Experience rate: 7.4 was 1x with no stages (ours: RateExp 1, stages script unused). Keep 1x? (recommended: - answered 2026-10-03 -> keep 1x
+      yes - the formulas and loot are now 7.4's, a multiplier changes the whole economy)
+- [x] Q3 Rookgaard (no vocation) magic level multiplier: ours 4.0, TibiaWiki's formulae page 3.0 (one source). - answered 2026-10-03 -> 3.0
+      Change to 3.0? (recommended: yes - it only affects rookies; 3.0 is the only source)
+- [x] Q4 Premium running out (see "Premium runs out -> free"): the outfit - back to the free one at once, or kept - answered 2026-10-03: Tibiantis rules (outfit kept until changed, moved to the Thais temple, house items to the depot of the house's town) - implement under "Premium runs out -> free"
+      until changed (Tibiantis)? moved to the Thais temple or the nearest free town? house items to the depot of
+      the house's town or Thais? (recommended: Tibiantis' rules - outfit kept until changed, moved to the Thais
+      temple, house items to the house town's depot)
+- [ ] Q5 Daily server save (see "Daily server save"): the hour, warnings before it, kick + restart, what resets.
+      (recommended: 9:00 CET like Tibiantis... or a quiet hour for your players; broadcast at 5/3/1 minutes; kick +
+      restart; nothing else resets until "refresh" squares are chosen)
+- [ ] Q6 Shop runes from NPCs (Shiriel, Fenech sold runes in the 2006 wiki - possibly 7.6): add rune sales or not?
+      (recommended: not yet - no pre-7.6 source)
+- [ ] Q7 The 30 monsters with no 7.4 combat data (tomb bosses, traps, assassin, bandit, dark monk, smuggler,
+      chicken, yeti): keep their current values? (recommended: keep - no 7.4 source; the pharaohs were reviewed)
+- [ ] Q8 Respawn (docs/reference-74/spawns.md): every spot is 60 s; with the engine's 60 s check a kill is back in
+      60-120 s, 5-10x faster than 7.x (Cip data: 600 s for 78% of spots, rare spots 1,800-20,000 s). (a) keep 60 s,
+      (b) Nostalrius' value per spot, (c) (b) + Cip's randomisation, players-online scaling and a timer per slot,
+      (d) one value. Also: block respawn from other floors (one-line Spawn::findPlayer change), Cip values for the 77
+      rare / quest-guardian spots anyway, overspawn at ~10 squares or a floor change instead of radius 1.
+      (recommended: (c), multi-floor yes, rare spots yes, ~10 squares)
+- [ ] Q9 Using a rope on the rope spot you stand on is refused ("You can not use this object.", rope.lua refuses any
+      creature on the spot, the user too); players step off first. 7.4 let a creature or a field block a rope spot
+      (tibiantis notes, poison bomb). Keep, or let the user through when alone on it? (recommended: keep, unless you
+      remember 7.4 allowing it)
+- [ ] Q10 Automatic ban length (6/10/20 unjustified kills a day/week/month): ours BanLength 1 day. The 7.4 manual only
+      says "banished automatically"; Tibiantis: 7 days the first time, 30 the second, +30 each after. (recommended:
+      Tibiantis - the only source with numbers; needs a small change to count earlier bans)
+- [ ] Q11 Thrown weapons: (a) spear attack - 7.4-era wiki (revs 6760/19275, May-June 2005) says 30, 25 from Nov 2005
+      (rev 23930, no update note); ours 25; knife 30->25 and stone 20->10 same pattern. (b) throwing star / knife / small
+      stone range: ours 5; rev 131557 says all hand-thrown weapons were 6 before 8.1 (later revisions name only spears).
+      (recommended: (a) keep 25 - no second 7.4 source; (b) 6 for all, consistent with the one source)
+
 ## New player journey (tests/test_rookgaard.py)
 
 - [x] 7.4 beginner set on first login (club, torch, bag with a red apple, jacket/coat) and the
@@ -892,7 +933,12 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       (ours and the JS engine's copy: 0 of 121,586 tiles; the Thais temple 176). test_temples.py
       test_rookgaard_temple_is_no_protection_zone
 - [ ] Depots and mailboxes (mailboxes weren't in 7.4 - check the map)
-- [ ] Teleports, ladders, holes, rope spots, shovel spots work
+- [x] Teleports, ladders, holes, rope spots, shovel spots work
+      Done 2026-10-03: tests/test_map_mechanics.py (48 cases: Rookgaard, Thais, Carlin, Kazordoon, Venore, Edron,
+      Ab'Dendriel/Hellgate, Ankrahmun, Darashia): ladders, sewer grates, stairs up/down (incl. landing shifted off a ramp),
+      holes, trapdoors, pitfall, rope spots, teleports, shovel on stone piles and loose stone piles (the dug hole closes
+      after 60 s). No bugs. Always-open holes left alone: Elvenbane 32579,31679,7 (decided), pitfall 32371,32149,7,
+      unreachable loose ice 32491,32245,11. Open: Q9 (rope on the spot you stand on).
 - [ ] Reduce server memory (~2.5 GB with full map)
 - [x] Removed the teleport in Rookgaard temple that sent new players to Thais
       (tools/map-remove-item.py)
@@ -979,7 +1025,11 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       walks, pushable one square, as TibiaWiki 2006 - stands in the corridor at 33263,32679,13 and the router's
       push loses to it). Make the fights/route more robust (stronger runes for the pharaoh, push the deathslicer
       off the path before walking)
-- [ ] Check spawn times/radius are sane for 7.4
+- [x] Check spawn times/radius are sane for 7.4
+      Done 2026-10-03: docs/reference-74/spawns.md. Our 18,666 monster positions match CipSoft-derived data (Nostalrius
+      7.7) almost 1:1, but every spawntime is the map editor's 60 s (7.x: 600 s for most spots, randomised and scaled by
+      players online; Black Knight about 12 min per the 2006 wiki). Fixed: the 8 tomb pharaohs 60 -> 600 s, the Black
+      Knight 60 -> 720 s. Open: Q8 in the questions at the top (global respawn speed, multi-floor blocking, rare spots, overspawn, timers).
 
 ## Game rules and formulas
 
@@ -993,7 +1043,7 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
       level 2, "You advanced from Level 1 to Level 2.", more max hp
 - [x] Experience per level: confirm `(50*(L-1)^3 - 150*(L-1)^2 + 400*(L-1)) / 3` (Player::getExpForLevel)
       2026-10-02: the same as Tibiantis' experience table (tibiantis.online ?page=exptable: 8 = 4,200, 50 = 1,847,300)
-- [ ] Experience rate: keep 1x, pick a multiplier, or enable stages (7.4 had no stages)
+- [x] Experience rate: keep 1x, pick a multiplier, or enable stages (7.4 had no stages) - Done 2026-10-03: decided with the user - stays 1x, no stages (RateExp 1)
 - [ ] Monster experience: exp from each monster matches 7.4, including exp split when several players attack
 - [x] Level-up gains per vocation: HP / mana / capacity (data/vocations.xml: none 5/5/5, knight 15/5/25...)
       2026-10-02, tibiantis-notes "Classes": knight 15/5/25, paladin 10/15/20, mage 5/30/10 and their base hp/mana
@@ -1003,14 +1053,15 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
       2026-10-03: test_death.py test_lost_levels_take_their_hp_mana_and_cap_and_respawn_full
 
 ### Magic level
-- [ ] Rookie (no vocation) magic level multiplier is 4.0; 7.4 used 3.0 (TW-Formulae, one source)
+- [x] Rookie (no vocation) magic level multiplier is 4.0; 7.4 used 3.0 (TW-Formulae, one source) - Done 2026-10-03: decided with the user - now 3.0 (vocations.xml); test_vocations.py test_rookie_magic_multiplier_is_3
 - [x] Mana needed per magic level: `1600 * multiplier^mlvl` with vocation multipliers
       2026-10-03 test_training.py: one cast short of the next level, the next cast levels it - ML 0->1 (1600, 80
       utevo lux), knight ML 5 and 8 (8->9: 10.5 million), paladin ML 15 and 25 (25->26: 7.2 million), sorcerer ML 70
       (1.26 million). The engine works in single precision (7 mana off at 7.2 million)
       (vocations.xml manamultiplier: sorcerer/druid 1.1, paladin 1.4, knight 3.0, none 4.0)
 - [x] Mana spent counts toward magic level (spells and runes), RateMag applies (test_training.py: utevo lux)
-- [ ] Magic level shown correctly in the client (stats packet mlvl + percent)
+- [x] Magic level shown correctly in the client (stats packet mlvl + percent)
+      2026-10-03: test_training.py reads the magic level from the client's stats packet as it advances
 
 ### Skills
 - [x] Skill tries per level: `50 * multiplier^(skill-10)`-style formula per skill and vocation (vocations.xml)
@@ -1021,9 +1072,18 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [ ] Fist fighting when no weapon; skills start at 10
 
 ### Combat formulas
-- [ ] Melee damage: attack, skill, level, fight mode (offensive/balanced/defensive)
-- [ ] Defense and armor reduction (the Avesta "revbattlesys" formula - compare with 7.4)
-- [ ] Distance: hit chance, ammo, range
+- [x] Melee damage: attack, skill, level, fight mode (offensive/balanced/defensive)
+      2026-10-03 test_combat_formulas.py test_armor_takes_off_melee_damage, test_a_shield_blocks_melee_as_7_4:
+      balanced-stance hits as (5 x skill + 50) x atk x 0.99 / 100 (sword 50 atk 14, sword 80 atk 48); other stances
+      not measured
+- [x] Defense and armor reduction (the Avesta "revbattlesys" formula - compare with 7.4)
+      2026-10-03 test_armor_takes_off_melee_damage (40 armor: ~95% off a 41-max sword) and
+      test_a_shield_blocks_melee_as_7_4 (shielding 80 + dragon shield, balanced: ~22 a swing, 7.4 ~22).
+      Open: 7.4 blocks in defensive stance with no target; ours keeps the player's stance (default offensive)
+- [x] Distance: hit chance, ammo, range
+      2026-10-03 test_combat_formulas.py test_crossbow_bolts_hit_as_the_melee_formula_with_the_ammo_attack: bolts
+      at 3 tiles 82-93% hit (7.4 90%), a bolt used per shot, damage the melee formula with the bolt's atk 30;
+      test_formulas.py: hit chance at 5 tiles. Range (out of range) not tested
 - [ ] Spell and rune damage formulas (level + magic level) per spell
 - [x] Attack speed (vocations.xml attackspeed 2000 ms) and exhaustion (exhaustion done 2026-09-23, §9)
 
@@ -1033,13 +1093,19 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
       300 hp, 600/900 mana) - test_vocations.py. Life ring gave 4 mana a tick (1600 instead of 400) and ring of
       healing 4 a second for 480 s (7.5 min, 450 total) - fixed. Food: regeneration = nutrition x 12 s, at most
       1200 s (tibiantis-notes) - not checked yet
-- [ ] Soul points: did 7.4 have them? (soul came in 7.5 - probably disable)
+- [x] Soul points: did 7.4 have them? (soul came in 7.5 - probably disable)
+      2026-10-03: no (TibiaWiki 7.5 update); ours: soul is compiled only under __PROTOCOL_76__, off (formulas.md §7)
 - [ ] Capacity: item weights and cap limit
 
 ### Death and PvP
 - [ ] Revisit the death rules (not a bug - make sure every 7.4 rule is applied), research first like
       the formulas (docs/reference-74), then pin each rule with a test:
-  - [ ] Experience / magic level / skills: 10%, promoted characters 7% (Player::getDeathLossFactor)
+  - [x] Experience / magic level / skills: 10%, promoted characters 7% (Player::getDeathLossFactor)
+        Done 2026-10-03: already 7.4 (Player::getDeathLossPercent: 10%, promoted 7%, -1 per blessing - blessings existed
+        in 7.4, TibiaWiki Blessings oldid 6510 of 2005-05). Loss is a share of everything gained (exp, all tries, all mana
+        spent), so it can cost a level. test_death.py: ..._10_percent_of_all_skill_tries_7_promoted, ..._of_all_mana_spent_
+        7_promoted, test_death_keeps_progress_when_the_loss_is_smaller. Unknown: 7.4 rounding (ours: skills up, exp down).
+    - [x] death.md §1/2/7/8 and formulas.md §8 still describe the old getDeathLossFactor and say no blessings - refresh - Done 2026-10-03 (§3-6, 9 still cite some stale line numbers)
   - [x] Levels lost with their HP / mana / capacity
         2026-10-03: test_death.py test_lost_levels_take_their_hp_mana_and_cap_and_respawn_full (level 50 knight
         -> 48: 2 x 15 hp / 5 mana / 25 cap gone, back at full health and mana)
@@ -1053,7 +1119,7 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
         2026-10-03: test_death.py test_a_red_skull_drops_everything_amulet_of_loss_or_not (white skull: no
         change, death.md). Found: a red skull with more than ~24.8 days left was lost at login (redskulltime
         read back as int32 milliseconds overflowed, IOPlayer::loadPlayer) - fixed, needs the rebuild
-  - [ ] Promotion kept or lost on death; premium ending while promoted
+  - [x] Promotion kept or lost on death; premium ending while promoted - Done 2026-10-03: kept on death; suspended (plays as base vocation, loses 10%) while not premium, the DB keeps the promotion - test_a_suspended_promotion_loses_10_percent_and_stays_promoted
   - [x] Where you respawn (home town temple), with what health/mana
         2026-10-03: test_death.py test_respawn_in_the_home_town_temple_with_full_health_and_mana (an Ankrahmun
         character killed in Rookgaard logs in at Ankrahmun's temple)
@@ -1081,8 +1147,15 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [x] Respawn at home town temple (town_id), bag/items drop rules
       2026-10-03: test_death.py test_respawn_in_the_home_town_temple_with_full_health_and_mana,
       test_the_backpack_always_drops_other_items_10_percent_each, test_amulet_of_loss_keeps_every_item_and_is_used_up
-- [ ] Skulls and PZ: PZLock 60 s, KillsToRedSkull 5, KillsToBan 7 - confirm 7.4 values
-- [ ] Rookgaard: no PvP on the island (non-pvp zone or protection level)
+- [x] Skulls and PZ: PZLock 60 s, KillsToRedSkull 5, KillsToBan 7 - confirm 7.4 values
+      Done 2026-10-03: already 7.4 (tibia.com manual 4.3, archived 2005-03-08; TibiaWiki Skull_System oldid 11103):
+      PZ/logout block 60 s, 15 min after a kill, white skull while blocked, red skull at 3/5/10 unjustified kills per
+      day/week/month for 30 days (resets), ban at 6/10/20 (addUnjustifiedDead - KillsToRedSkull/KillsToBan in config.lua
+      are no longer read), kill credit last hit + most damage in 60 s. No protection level in 7.4.
+      tests/test_skulls.py (secure mode, PZ block 60 s after an attack / 15 min after a kill). Not 7.4, left out: no
+      attacking for 10 s after login (2007 manual). Kept: a defender who fights back is PZ-blocked too (2005 wording).
+      Open: Q10 (ban length).
+- [x] Rookgaard: no PvP on the island (non-pvp zone or protection level) - Done 2026-10-03: 7.4 manual "free to attack each other once they have left Rookgaard"; ours by vocation 0 (combat.cpp rookgaardForbids) - same in practice; test_rookgaard.py::test_rookgaard_is_non_pvp
 
 ### Idle and session
 - [x] Idle timeout: warned at 30 s and kicked at 60 s, so the warning read "idle for 0 minutes"
@@ -1094,8 +1167,10 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [ ] What premium unlocks in 7.4 (towns, promotion, spells, houses) and how players get it
 
 ### Spells, runes, items
-- [ ] Verify 7.4 spell list, words, mana, level, vocation, premium (remove post-7.4 spells)
-- [ ] Runes: charges, magic level required, soul (7.4 had none)
+- [x] Verify 7.4 spell list, words, mana, level, vocation, premium (remove post-7.4 spells)
+      2026-10-01: as Tibiantis (spells-tibiantis.json, tools/apply-tibiantis-spells.py) - see Spell-teaching NPCs
+- [x] Runes: charges, magic level required, soul (7.4 had none)
+      2026-10-01: charges and the use magic level as Tibiantis; any vocation uses a rune; no soul (see above)
 - [x] Remove leftover warnings: "Unknown command /invisible, /serverdiag", items.otb minor-version warning
       Done 2026-10-03: removed /invisible (never in the engine) and /serverdiag (only built with
       __ENABLE_SERVER_DIAGNOSTIC__) from commands.xml. Left: "[OTBM loader] This map needs an updated items
@@ -1106,11 +1181,11 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 ## Branding and client texts
 
 Server-side (config.lua) - editable, current values are Avesta defaults:
-- [ ] MOTD shown after entering the account (`MOTD`, bump `MOTD_Num` so clients show it again)
-- [ ] Pick the one server/world name and use it everywhere (character list shows "<char> (OpenTibia)",
+- [x] MOTD shown after entering the account (`MOTD`, bump `MOTD_Num` so clients show it again) - Done 2026-10-03: MOTD "Welcome to Mintwall!", MOTD_Num 2
+- [x] Pick the one server/world name and use it everywhere (character list shows "<char> (OpenTibia)", - Done 2026-10-03: decided with the user - "Mintwall": WorldName, ServerName, OwnerName (config.lua)
       MOTD, login message, website, patched client): `WorldName`, `ServerName`, `OwnerName` in config.lua
-- [ ] In-game login message (`LoginMsg`, mentions otserv.org) and `ServerName` / `OwnerName`
-- [ ] First-login "Welcome to <ServerName>. Please choose an outfit." (protocolgame.cpp sendAddCreature)
+- [x] In-game login message (`LoginMsg`, mentions otserv.org) and `ServerName` / `OwnerName` - Done 2026-10-03: LoginMsg "Welcome to Mintwall.", ServerName "Mintwall"
+- [x] First-login "Welcome to <ServerName>. Please choose an outfit." (protocolgame.cpp sendAddCreature) - Done 2026-10-03: uses ServerName - now "Welcome to Mintwall. Please choose an outfit."
 
 Client-side (Tibia.exe) - only by patching strings in the copy we hand out, never longer than the original:
 - [ ] Decide if we patch client texts at all (besides the IP patch and loading mintwall.dll)
@@ -1171,13 +1246,18 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       Mana: kept at 220 (Tibiantis charges 150) - decided 2026-09-23
 - [ ] Royal paladin: bolts / crossbow and arrows / bow distance (range, hit chance - see 5b in the
       formulas list), damage with the 7.4 formula; test with Legolas (6 / 6)
-- [ ] Spears: range, breaking/dropping on the ground, stacking, damage vs 7.4
+- [x] Spears: range, breaking/dropping on the ground, stacking, damage vs 7.4
+      Done 2026-10-03: 7.4 (TibiaWiki Spear revs 6579/10893, 2005; tibiantis-notes "spears never break"): spears drop
+      under/around the target and can be picked up, no breaking (3% came Christmas 2005); stackable (7.4 Tibia.dat flag,
+      items.otb agree). Range 6 until 8.1 (revs 131557/151060): items.xml 5 -> 6. A miss lands on any tile of the 3x3
+      around the target, centre included (TN distance_calculator): weapons.cpp - NEEDS REBUILD. tests/test_spears.py
+      (stack, land/no break, range 6 vs 7). Open: Q11.
 
 - [ ] Spell values the research lists as higher than 7.4 but did not rank: fireball (16-33 vs 15-25 %P),
       great fireball (40+30..70 vs 35-65), force strike (20-50 vs 18..33, one source), exura sio
       (100+30..135 vs 80-160, one source). docs/reference-74/formulas.md §5
-- [ ] Life ring / ring of healing regeneration not checked against 7.4 (1 per 3 s for 20 min / 1 per 1 s
-      for 7.5 min)
+- [x] Life ring / ring of healing regeneration not checked against 7.4 (1 per 3 s for 20 min / 1 per 1 s
+      for 7.5 min) - 2026-10-02: they gave 4 mana a tick; fixed, test_vocations.py test_regeneration_ring
 
 - [x] Conjuring makes the wrong items: "adori vita vis" -> 2263 (done 2026-09-23), "adura vita" -> 2274 ("spell rune"),
       but the usable runes are 2268 (sudden death) and 2273 (ultimate healing) - spells.xml conjureId
@@ -1276,7 +1356,14 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
         target (Thais street, no monsters near): HMM at magic power 100 hits 13-19 (7.4: 10-20 halved PvP) and at
         380 38-75 (38-76); SD at power 410 284-304 (271-348), with a stone skin amulet 55-64 (1/5); a sword hitting
         for at most 41 took 152-185 hp in 40 s off a bare target, 2-12 off one in 40 armor (7.4 armor formula
-        predicts ~198 and ~10). Distance and shield blocks not measured yet
+        predicts ~198 and ~10). 2026-10-03, 3 runs: the same sword (40 s) took 190-241 off a bare target and 8-25
+        off the armored one (7.4 ~197 / ~10); crossbow + bolts at distance 60, 3 tiles, 60 s: 28-30 shots (bolts
+        used), 82-93% hit (76 of 88, 7.4: 90%), hits 3-51 mean 25-28 (7.4 max 51 halved, mean ~26); magic sword,
+        sword 80, 60 s, 28-30 swings: bare mean 53-59 a hit (7.4 ~53), a balanced knight with shielding 80 and a
+        dragon shield 19-23 a swing, 7-10 swings blocked to 0 (7.4 block max 139: ~22, a quarter blocked) - the
+        shield takes ~60% off. Found: the engine starts every player in offensive stance (Player fightMode =
+        FIGHTMODE_ATTACK, block x0.6: an unset target took 696 instead of ~440 in 20 swings); 7.4 blocks in
+        defensive stance when the player has no target - not done (test sets the target balanced)
 - [x] 7.4 formulas research (docs/reference-74/formulas.md): Berserk = level x 4 mana
       is the real 7.4 cost (TibiaWiki: until the 2007 summer update); monster healing rates; mana
       fluid 25-75 in 7.4 (ours 40-80); magic formula base x (mlv*3 + lv*2)/100 (tibiantis-notes).

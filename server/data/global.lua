@@ -326,14 +326,6 @@ function string.strip_whitespace(str)
 	return str
 end
 
-function getPlayerByAccountNumber(acc)
-	players = getPlayersByAccountNumber(acc)
-	if #players == 0 then
-		return 0
-	end
-	return players[1]
-end
-
 function convertIntToIP(int, mask)
 	local b4 = bit.urshift(bit.uband(int,  4278190080), 24)
 	local b3 = bit.urshift(bit.uband(int,  16711680), 16)

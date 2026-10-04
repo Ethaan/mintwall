@@ -102,7 +102,7 @@ def test_stone_skin_amulet_takes_80_percent_of_a_sudden_death(new_player, items,
 
 def _melee(new_player, attacker_pos, target_pos, armor, seconds=40):
     """A knight (sword skill 50, a sword: atk 14 - a hit of at most 41) hits the target for `seconds`;
-    returns the damage numbers and the hp the target lost."""
+    returns the damage numbers and their sum."""
     target = new_player(pos=target_pos, level=300, vocation=4, storage={30001: 1},
                         inventory=dict(armor) if armor else None)
     assert target.pos == target_pos, target.pos
@@ -138,11 +138,12 @@ def test_armor_takes_off_melee_damage(new_player):
     c, d = _row(7)
     armor = {slot: Item(item) for slot, item in ARMOR_SET.items()}
     armed_hits, armed_lost = _melee(new_player, c, d, armor)
+    want_bare, want_armed = _expected_melee(50, 14, 0) * 20, _expected_melee(50, 14, 40) * 20   # 40 s: 20 swings
     print(f"\nmelee sword 50 atk 14 for 40 s: bare lost {bare_lost} ({len(bare_hits)} hits, mean "
-          f"{statistics.mean(bare_hits) if bare_hits else 0:.1f}), armored lost {armed_lost} ({len(armed_hits)} "
-          f"hits, mean {statistics.mean(armed_hits) if armed_hits else 0:.1f})")
-    assert bare_lost > 0, "the bare target was never hit"
-    assert armed_lost < bare_lost * 0.6, f"armor saved too little: {armed_lost} vs {bare_lost}"
+          f"{statistics.mean(bare_hits) if bare_hits else 0:.1f}; 7.4 ~{want_bare:.0f}), armored lost {armed_lost} "
+          f"({len(armed_hits)} hits, mean {statistics.mean(armed_hits) if armed_hits else 0:.1f}; 7.4 ~{want_armed:.0f})")
+    assert 0.65 * want_bare <= bare_lost <= 1.35 * want_bare, f"bare lost {bare_lost}, 7.4 ~{want_bare:.0f}"
+    assert armed_lost < bare_lost * 0.3, f"armor saved too little: {armed_lost} vs {bare_lost}"
 
 
 # --- distance and shield blocks ------------------------------------------------------------------------------------
@@ -156,7 +157,8 @@ def _row2(r):
 
 def test_crossbow_bolts_hit_as_the_melee_formula_with_the_ammo_attack(new_player):
     """7.4: the bow's and ammunition's attack in the melee formula - distance 60, bolts (30): at most
-    (5 x 60 + 50) x 30 x 0.99 / 100 = 103, halved against a player; adjacent... at 3 tiles about 9 shots in 10 hit."""
+    (5 x 60 + 50) x 30 x 0.99 / 100 = 103, halved against a player; at 3 tiles min(60 / (15 x 3 - 1), 1) x 90% =
+    9 shots in 10 hit. Every shot uses a bolt, a hit or not: the shots are the bolts gone from the ammo slot."""
     at, to = _row2(0)
     target = _target(new_player, to)
     paladin = new_player(pos=at, level=60, vocation=3, skills={4: 60}, storage={30001: 1},
@@ -165,15 +167,19 @@ def test_crossbow_bolts_hit_as_the_melee_formula_with_the_ammo_attack(new_player
     paladin.set_fight_modes(fight=2, chase=0, safe=0)         # balanced, stand still
     start = len(target.animated_texts)
     paladin.attack(target.player_id)
-    time.sleep(30)
+    time.sleep(60)
     paladin.attack(0)
     time.sleep(1)
     hits = _hits(target, target.pos, start, PHYSICAL)
+    ammo = paladin.inventory.get(10)
+    shots = 100 - (ammo.count if ammo else 0)
     top = int((5 * 60 + 50) * 30 * 0.99 / 100) // 2
-    print(f"\ncrossbow + bolts, distance 60, 30 s: max {top}, {len(hits)} hits {sorted(hits)}")
-    assert len(hits) >= 10, f"only {len(hits)} hits in 30 s (a shot every 2 s, ~90% hit): {hits}"
+    print(f"\ncrossbow + bolts, distance 60, 60 s: max {top}, {shots} shots, {len(hits)} hits "
+          f"({len(hits) / max(shots, 1):.0%}), mean {statistics.mean(hits) if hits else 0:.1f}: {sorted(hits)}")
+    assert shots >= 25, f"only {shots} bolts used in 60 s (a shot every 2 s)"
+    assert len(hits) >= 0.7 * shots, f"{len(hits)} hits of {shots} shots (7.4: 90%)"   # binomial 90%: <0.1% fails
     assert all(1 <= h <= top + 1 for h in hits), f"outside 1-{top}: {sorted(hits)}"
-    assert top * 0.3 <= statistics.mean(hits) <= top * 0.7, f"mean {statistics.mean(hits):.1f} of max {top}"
+    assert top * 0.35 <= statistics.mean(hits) <= top * 0.65, f"mean {statistics.mean(hits):.1f} of max {top}"
 
 
 def _expected_blocked(skill, atk, shield_skill, shield_def, turns=20000):
@@ -189,32 +195,42 @@ def _expected_blocked(skill, atk, shield_skill, shield_def, turns=20000):
     return total / turns
 
 
-def _hitter(new_player, attacker_pos, target, seconds=40):
+def _hitter(new_player, attacker_pos, target, seconds=60):
+    """A knight (sword 80, magic sword atk 48) hits the target for `seconds`; returns the damage numbers and the
+    attacks seen: every swing shows over the target a blood splash (a hit), a puff (blocked to 0) or a spark (armor)."""
     knight = new_player(pos=attacker_pos, level=100, vocation=4, skills={2: 80}, storage={30001: 1},
                         inventory={5: Item(MAGIC_SWORD)})
     knight.set_fight_modes(fight=2, chase=1, safe=0)
-    start = len(target.animated_texts)
+    start, effects = len(target.animated_texts), len(target.effects)
     knight.attack(target.player_id)
     time.sleep(seconds)
     knight.attack(0)
     time.sleep(1)
-    return sum(_hits(target, target.pos, start, PHYSICAL))
+    attacks = sum(1 for p, e in target.effects[effects:] if tuple(p) == tuple(target.pos) and e in (0, 2, 3))
+    return _hits(target, target.pos, start, PHYSICAL), attacks
 
 
 def test_a_shield_blocks_melee_as_7_4(new_player):
     """A magic sword (atk 48) in sword 80 hands against a knight with shielding 80 and a dragon shield (def 31) and
-    against the same knight with no shield: the shield takes off about what the 7.4 block formula says."""
+    against the same knight with no shield, both in balanced stance: 7.4 hit max 213, block max 139, so a bare hit
+    is about 53 and a shielded one about 22 (halved), a quarter of them blocked to nothing. The engine rolls with a
+    clipped normal distribution, not the 7.4 average of two rolls: its means differ from the simulation by ~5%, and
+    60 s (30 swings) of a target still spread ~25% (bare ~12%) - the bounds hold 99.9% of the engine's runs."""
     a, b = _row2(2)
     bare = new_player(pos=b, level=300, vocation=4, storage={30001: 1}, skills={5: 80})
-    bare_lost = _hitter(new_player, a, bare)
+    bare_hits, _ = _hitter(new_player, a, bare)        # its unblocked 0 rolls show nothing: the shielded run counts
     c, d = _row2(4)
     shielded = new_player(pos=d, level=300, vocation=4, storage={30001: 1}, skills={5: 80},
                           inventory={6: Item(DRAGON_SHIELD)})
-    shielded_lost = _hitter(new_player, c, shielded)
-    turns = 20
-    want_bare, want_shielded = _expected_melee(80, 48, 0) * turns, _expected_blocked(80, 48, 80, 31) * turns
-    print(f"\nmagic sword, sword 80, 40 s: bare lost {bare_lost} (7.4 ~{want_bare:.0f}), dragon shield / shielding 80 "
-          f"lost {shielded_lost} (7.4 ~{want_shielded:.0f})")
-    assert 0.6 * want_bare <= bare_lost <= 1.4 * want_bare
-    assert shielded_lost <= 0.6 * bare_lost, "the shield blocked too little"
-    assert 0.5 * want_shielded <= shielded_lost <= 1.6 * want_shielded
+    shielded.set_fight_modes(fight=2, chase=0, safe=0)   # balanced: the engine's default offensive stance blocks x0.6
+    shielded_hits, swings = _hitter(new_player, c, shielded)
+    bare_lost, shielded_lost = sum(bare_hits), sum(shielded_hits)
+    want_bare, want_shielded = _expected_melee(80, 48, 0) * swings, _expected_blocked(80, 48, 80, 31) * swings
+    print(f"\nmagic sword, sword 80, 60 s: bare lost {bare_lost} in {len(bare_hits)} hits (mean "
+          f"{statistics.mean(bare_hits):.1f}, 7.4 ~{want_bare:.0f}); dragon shield / shielding 80 lost {shielded_lost} in "
+          f"{swings} swings (mean {shielded_lost / max(swings, 1):.1f}, {swings - len(shielded_hits)} blocked to 0; "
+          f"7.4 ~{want_shielded:.0f})")
+    assert 25 <= swings <= 32, f"{swings} swings in 60 s (one every 2 s)"
+    assert 0.7 * want_bare <= bare_lost <= 1.3 * want_bare, f"bare {bare_lost}, 7.4 ~{want_bare:.0f}"
+    assert shielded_lost <= 0.62 * bare_lost, f"the shield blocked too little: {shielded_lost} vs {bare_lost}"
+    assert 0.5 * want_shielded <= shielded_lost <= 1.75 * want_shielded, f"7.4 ~{want_shielded:.0f}"

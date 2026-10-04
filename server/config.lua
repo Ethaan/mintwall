@@ -31,7 +31,7 @@
     ExhaustedAdd = 200
 
     -- How long does the player has to stay out of fight to get pz unlocked in ms (1000 = 1 second)
-    PZLock = 60000
+    PZLock = 60000   -- 7.4: 60 s after the last violence (tibia.com manual 4.3.4, 2005; tests/test_skulls.py)
 
     -- How long a field belongs to a player before it no longer causes PZ lock for the owner
     FieldOwnershipDuration = 5000
@@ -40,7 +40,7 @@
     TimeToDecreaseFrags = 24 * 60 * 60 * 1000   -- no longer used (see KillsToRedSkull)
 
     -- Time white skull will remain after killing a player, in minutes
-    WhiteSkullTime = 15   -- minutes; 7.4: 15 (docs/reference-74/death.md, one source)
+    WhiteSkullTime = 15   -- minutes; 7.4: a killer is blocked 15 min (tibia.com manual 4.3.4, 2005; TibiaWiki White Skull 2006)
 
     -- amount of kills that leads to red skull
     KillsToRedSkull = 5   -- no longer used: red skull at 3 a day / 5 a week / 10 a month, for 30 days
@@ -119,16 +119,16 @@
 --- INFO ---
 
     -- Login message
-    LoginMsg = "Welcome to OTServ. For help visit http://otserv.org"
+    LoginMsg = "Welcome to Mintwall."
 
     -- Server name
-    ServerName = "OTServ"
+    ServerName = "Mintwall"
 
     -- World name
-    WorldName = "OpenTibia"
+    WorldName = "Mintwall"
 
     -- Server owner name
-    OwnerName = "Ferrus"
+    OwnerName = "Mintwall"
 
     -- Server owner email
     OwnerEmail = ""
@@ -186,8 +186,8 @@
 --- STATUS ---
 
     -- Message Of The Day box that you sometimes get before you choose characters)
-    MOTD = "Welcome to OTServ!"
-    MOTD_Num = "1"
+    MOTD = "Welcome to Mintwall!"
+    MOTD_Num = "2"
 
     -- Max number of players allowed
     MaxPlayers = "100"

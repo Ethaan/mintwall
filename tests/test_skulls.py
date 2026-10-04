@@ -1,0 +1,102 @@
+"""Skulls, logout block and protection zone block on a regular PvP world, as the tibia.com manual described them during
+7.4 (section 4.3, archived 2005-03-08: web.archive.org/web/20050308021836/http://www.tibia.com/guide/?subtopic=manual&section=combat):
+
+- secure mode refuses an attack on an unmarked character;
+- attacking an unmarked character gives a white skull, which "will stay as long as the logout block is active", and a
+  protection zone block that lasts as long as the logout block: 60 s after the last violence (PZLock = 60000);
+- the attacked character is free to flee into a protection zone;
+- "Player killers may not log out or enter protection zones for a full 15 minutes!" (WhiteSkullTime = 15).
+
+The red skull (3 a day / 5 a week / 10 a month, 30 days) is in test_death.py, Rookgaard's no-PvP rule in
+test_rookgaard.py (test_rookgaard_is_non_pvp)."""
+import time
+
+from tibia74 import Item, NORTH, RIGHT, SOUTH
+
+WHITE_SKULL, NO_SKULL = 3, 0
+KNIGHT = 4
+PZ_REFUSED = "can not enter a protection zone"
+
+# Outside the north door of the Thais temple: one step south is protection zone (x 32367-32371).
+THAIS_DOOR, INTO_THAIS = (32369, 32230, 7), SOUTH
+# Outside the south door of the Carlin temple: one step north is protection zone (x 32360-32361).
+CARLIN_DOOR, INTO_CARLIN = (32360, 31788, 7), NORTH
+
+
+def _me(c):
+    return c.wait_for(lambda: c.creatures.get(c.player_id), timeout=5)
+
+
+def _skull_of(viewer, c):
+    creature = viewer.creatures.get(c.player_id)
+    return creature.skull if creature else None
+
+
+def _victim(new_player, pos, level=50):
+    return new_player(pos=pos, level=level, vocation=KNIGHT, storage={30001: 1})   # a vocation: Rookgaard (none) is no-PvP
+
+
+def _refused_pz(c, direction):
+    """Try to step into the protection zone: True if refused with the PZ block message (and not moved)."""
+    start = len(c.text_messages)
+    before = c.pos
+    moved = c.step(direction)
+    if moved:
+        return False
+    return bool(c.wait_for(lambda: any(PZ_REFUSED in t for _, t in c.text_messages[start:]), timeout=3)) \
+        and c.pos == before
+
+
+def test_secure_mode_refuses_attacking_an_unmarked_player(new_player):
+    attacker = new_player(pos=(THAIS_DOOR[0] - 1, THAIS_DOOR[1] - 2, 7), level=20, vocation=KNIGHT, storage={30001: 1})
+    victim = _victim(new_player, (attacker.pos[0] + 1, attacker.pos[1], 7))
+    health = victim.wait_for(lambda: victim.stats.health, timeout=3)
+    attacker.set_fight_modes(fight=1, chase=0, safe=1)
+    attacker.attack(victim.player_id)
+    assert attacker.wait_for(lambda: attacker.messages("Turn secure mode off"), timeout=3), attacker.text_messages[-3:]
+    attacker.sleep(3)
+    assert _me(attacker).skull == NO_SKULL
+    assert victim.stats.health == health
+
+
+def test_pz_block_lasts_60_s_after_an_attack_and_15_min_after_a_kill(new_player):
+    """Two fights at once, to wait the 60 s only one time: an attack at the Thais temple door, a kill at Carlin's."""
+    # --- the kill (Carlin): the killer stays blocked for 15 minutes
+    killer = new_player(pos=CARLIN_DOOR, level=100, vocation=KNIGHT, inventory={RIGHT: Item(2400)},   # magic sword
+                        skills={2: 100}, storage={30001: 1})
+    dead = _victim(new_player, (CARLIN_DOOR[0] + 1, CARLIN_DOOR[1] + 1, 7), level=8)
+    assert killer.pos == CARLIN_DOOR, f"the killer logged in at {killer.pos}"
+    killer.set_fight_modes(fight=1, chase=0, safe=0)
+    killer.attack(dead.player_id)
+    assert killer.wait_for(lambda: dead.player_id in killer.removed_creatures or not dead.connected, timeout=30), \
+        f"the victim did not die: {killer.text_messages[-3:]}"
+    killer.attack(0)
+    assert killer.wait_for(lambda: killer.messages("was not justified"), timeout=3), killer.text_messages[-3:]
+    killer_attacked_at = time.time()
+
+    # --- the attack (Thais): an unarmed level 8 against a level 50 knight, one or two blows and no more
+    attacker = new_player(pos=THAIS_DOOR, level=8, vocation=KNIGHT, storage={30001: 1})
+    victim = _victim(new_player, (THAIS_DOOR[0] + 1, THAIS_DOOR[1], 7))
+    assert attacker.pos == THAIS_DOOR and victim.pos == (THAIS_DOOR[0] + 1, THAIS_DOOR[1], 7), (attacker.pos, victim.pos)
+    me = _me(attacker)
+    assert me.skull == NO_SKULL
+    attacker.set_fight_modes(fight=1, chase=0, safe=0)
+    attacker.attack(victim.player_id)
+    assert attacker.wait_for(lambda: me.skull == WHITE_SKULL, timeout=5), f"no white skull after attacking: {me.skull}"
+    attacker.attack(0)
+    attacked_at = time.time()
+    assert victim.wait_for(lambda: _skull_of(victim, attacker) == WHITE_SKULL, timeout=3), "others must see the skull"
+    assert _skull_of(victim, victim) == NO_SKULL, "the attacked character got a skull"
+
+    assert _refused_pz(attacker, INTO_THAIS), f"the attacker could enter the protection zone: {attacker.pos}"
+    assert victim.step(INTO_THAIS), "the attacked character must be free to flee into the protection zone"
+
+    # --- 60 s after the last violence: the attacker's skull and PZ block are gone, the killer's are not
+    assert attacker.wait_for(lambda: me.skull == NO_SKULL, timeout=75), f"the white skull is still on: {me.skull}"
+    gone_after = time.time() - attacked_at
+    assert 55 <= gone_after <= 70, f"the white skull lasted {gone_after:.0f} s, not the 60 s logout block"
+    assert attacker.step(INTO_THAIS), "60 s after the attack the attacker still may not enter the protection zone"
+
+    assert time.time() - killer_attacked_at > 60
+    assert _me(killer).skull == WHITE_SKULL, "the killer's white skull ended with the 60 s logout block, not 15 min"
+    assert _refused_pz(killer, INTO_CARLIN), "the killer may enter a protection zone before the 15 minutes are over"

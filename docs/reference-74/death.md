@@ -45,7 +45,7 @@ Notes on sources:
 - 10% and promoted 7%: **C2**. Sources: TW-Death-2005 ("10% loss of experience"), TW-Bless-2005 ("premium with 0 blessings is 7%"), TW-Bless-2008 ("promoted players only lose 7%"), OTL-Bless (emil92b: "10% … promotion 7%"), and TA-FAQ/TA-Prem (promotion "decreases death penalty", with no number).
 - Level formula only from 8.41: **C2**. TW-8.41 ("From level 24 and above the experience and skill loss will slowly decrease") and TW-Death.
 
-**Ours:** `player.h:783-785` gives `getLostExperience = experience * lossPercent[LOSS_EXPERIENCE]/100 * getDeathLossFactor()`, where `getDeathLossFactor()` (`player.h:780-782`) is 0.7 for vocations 5-8. `lossPercent` defaults to 10 (`player.cpp:148-150`) and is loaded per player from `loss_experience` (`ioplayer.cpp:161`, DB default 10 at `sql/schema.sqlite:54`). The loss is applied in `preSave()` (`player.cpp:2236-2250`). **MATCH.** One caveat: the per-player DB columns can override the 10 without any warning.
+**Ours:** `Player::getDeathLossPercent()` (`player.h:787-790`) returns 7.0 for vocations 5-8 (the promoted ones) and 10.0 otherwise, minus `getBlessingCount()` (`player.cpp:549-559`, one point per blessing held in storage `BLESSING_STORAGE+1..5`), floored at 0. `die()` (`player.cpp:2139`) stores this as `deathLossPercent` before removing the blessings. `getLostExperience()` (`player.h:793-795`) is `experience * currentDeathLossPercent() / 100`, truncated to a `uint64_t` (rounds down). The loss is applied in `preSave()` (`player.cpp:2270`). **MATCH.** `Player::getDeathLossFactor()` and the `DeathLosePercent` config entry no longer exist. The old `loss_experience` column is still written on save (`ioplayer.cpp:541`) but no longer read back (`ioplayer.cpp:173-174`), so it can no longer silently override anything.
 
 ## 2. Magic level (mana spent) and skill loss
 
@@ -53,7 +53,7 @@ Notes on sources:
 - Skills at 10% and 7%: **C2** (TW-Death-2005, TW-Bless-2008 "experience and skills", OTL-Bless).
 - Magic level uses the same percentage: **C1/INF**. Old pages only say "skills"; the current TW-Death says "skill tries, and spent mana"; TW-TalkDeath (2007) says "levels and magic levels".
 
-**Ours:** `die()` handles magic level at `player.cpp:2114-2133`: it sums `getReqMana(1..ML)` plus `manaSpent`, multiplies by `loss_mana`% times the factor, and can drop ML. Skills are handled at `player.cpp:2135-2166`: it sums the tries from level 11 up to the current level, plus current tries, multiplies by `loss_skills`% times the factor, and can drop levels down to a floor of 10. **MATCH.**
+**Ours:** `die()` (`player.cpp:2119`) records `deathLossPercent = getDeathLossPercent()` (`player.cpp:2139`, see §1) and only then removes all five blessings (`player.cpp:2140-2142`), so the percentage already reflects the blessings held at the moment of death. Magic level loss (`player.cpp:2145-2165`) sums `getReqMana(1..magLevel)` plus `manaSpent`; skill loss (`player.cpp:2167-2196`) sums the tries from level 11 up to the current level plus current tries. Both take `std::ceil(sum * deathLossPercent / 100)` — a share of everything ever gained, **rounded up** — and can drop magic/skill levels, down to a floor of 10 for skills. **MATCH** on the 10%/7% share-of-everything-gained shape. The rounding direction (up) is our own choice: 7.4's actual rounding is unverified by any source.
 
 ## 3. Level loss removes the level's HP, mana and capacity
 
@@ -113,9 +113,9 @@ Notes on sources:
 - It is **suspended while premium is inactive** and comes back free when premium returns. A suspended promotion also means the character loses 10% again. **C2** (TA-FAQ "promotion is deactivated … automatically granted back", TW-Promo, TW Premium_Account).
 
 **Ours:**
-- The 0.7 factor applies to vocation ids 5-8 (`player.h:780-782`). **MATCH.**
-- Rooking resets the vocation (`player.cpp:2017`). **MATCH.**
-- Nothing demotes a character, or cancels the 0.7 factor, when premium runs out. The code at `ioplayer.cpp:183-187` also uses a default-built `Account acc` whose `premEnd` is always 0, so that block never runs (and `FACCTempleID = 0` in `config.lua:239` disables it anyway). **MISMATCH:** a promoted free account keeps the 7% loss and the promoted regeneration.
+- `getDeathLossPercent()` (`player.h:787-790`) gives vocation ids 5-8 (the promoted ones) 7.0 instead of 10.0. **MATCH.**
+- Rooking resets the vocation to none (`sendToRook()`, `player.cpp:2038-2041`). **MATCH.**
+- A promotion without premium is suspended on load: `ioplayer.cpp:231-233` sets the player back to its base vocation id (`getVocationId() - 4`) and flags `promotionSuspended`, so `getDeathLossPercent()` sees the base vocation and the character loses the full 10% (and gets the base regeneration) until premium returns. The save still writes the promoted vocation id (`ioplayer.cpp:514`: `+4` whenever `promotionSuspended`), so the DB keeps the promotion and it comes back automatically once premium is active again. **MATCH.**
 
 ## 8. Respawn
 
@@ -126,10 +126,9 @@ Notes on sources:
 - **Blessings did exist in 7.4.** The five original blessings were added in **7.2 (Dec 2003)**. Each one cost 10k and cut the loss by **1 percentage point**, from 10 to 9 … 5%, or from 7 down to 2% when promoted. They did not protect items, and all of them are lost on death. This contradicts the brief's "no blessings in 7.4" (**C2**: TW-7.2, TW-Bless infobox, TW-Bless-2005 written during 7.4, TW-Bless-2008, OTL-Bless). We could not confirm whether Tibiantis has them.
 
 **Ours:**
-- `die()` sets `loginPosition = masterPos` (`player.cpp:2111`), which is the town temple (`ioplayer.cpp:170-173`). **MATCH.**
-- Full HP and mana are restored in `player.cpp:2248-2249`. **MATCH.**
-- Persistent conditions are cleared at `player.cpp:2097-2109`. **MATCH.**
-- Blessings: **not implemented.** The blessing NPCs (e.g. `npc/Edala.xml:8-10`, `npc/Humphrey.xml:9-10`) only reply with text, and `compat.lua:93-95` stubs return false. **MISMATCH** if blessings are wanted. It is a design choice if the owner decides 7.4 should have none.
+- `die()` clears persistent conditions first (`player.cpp:2120-2133`), then sets `loginPosition = masterPos` (`player.cpp:2135`), which is the town temple (`ioplayer.cpp:183`). **MATCH.**
+- Full HP and mana are restored in `preSave()` (`player.cpp:2279-2280`). **MATCH.**
+- Blessings: **implemented.** `compat.lua:104-111` keeps `BLESSING_STORAGE = 30010` with the five storage slots `+1..+5`, read by `Player::getBlessingCount()` (`player.cpp:549-559`) and `getDeathLossPercent()` (`player.h:787-790`, §1). Each blessing NPC sells its blessing for 10,000 gp via `doPlayerAddBlessing()` (e.g. `npc/scripts/edala.lua:12`, `npc/scripts/Humphrey.lua:13`, `npc/scripts/avar.lua` for the other three). They do not protect items, and `die()` (`player.cpp:2140-2142`) removes all five on every death, win or lose. **MATCH.**
 
 ## 9. Other death details
 
@@ -144,10 +143,8 @@ Notes on sources:
 ## Mismatches, ranked by player impact
 
 1. **Red skull limits and duration (§6).** Ours: 5 kills within about 24 h each, the skull fades with the frags, ban at 7. 7.4: red skull at 3/day, 5/week or 10/month, lasting 30 days; ban at 6/10/20. Because a red skull means losing every item, this decides how often PKers lose everything. (C2 limits, C1 duration)
-2. **Promotion is never suspended when premium ends (§7).** Promoted free accounts keep the 7% loss (and promoted regeneration). The premium-expiry temple code in `ioplayer.cpp:183-187` never runs. (C2)
-3. **Rooking drops the fresh starter kit into the mainland corpse (§9).** The rooked character arrives in Rook without a backpack. (bug)
-4. **No blessings (§8).** 7.4 had five blessings, each cutting 1 percentage point, down to 5% (2% promoted). The NPCs exist but do nothing. This mismatches only if the owner wants them; it contradicts the brief's assumption. (C2)
-5. **White skull lasts 3 min instead of 15 min (§6).** (C1)
-6. Minor: the `loss_*` DB columns can silently override 10% per player (`ioplayer.cpp:161-164`). The ammo-slot "always lost" claim is C1 and was withdrawn, so no change is needed.
+2. **Rooking drops the fresh starter kit into the mainland corpse (§9).** The rooked character arrives in Rook without a backpack. (bug)
+3. **White skull lasts 3 min instead of 15 min (§6).** (C1)
+4. Minor: the ammo-slot "always lost" claim is C1 and was withdrawn, so no change is needed. The old `loss_*` DB columns are no longer read (§1), so they can no longer override anything either.
 
-Confirmed matches: exp 10% and promoted 7% as a flat share of total experience (no 8.41 formula); magic level and skills 10%/7%; level loss removes its HP, mana and capacity; containers 100% with contents; 10% per other item; the AoL protects all items, is consumed, does not reduce exp/skill loss and fails under a red skull; red skull means all items lost; temple respawn at full HP and mana.
+Confirmed matches: exp 10% and promoted 7% as a flat share of total experience (no 8.41 formula), minus 1 point per blessing; magic level and skills 10%/7% as a share of everything gained, rounded up; level loss removes its HP, mana and capacity; containers 100% with contents; 10% per other item; the AoL protects all items, is consumed, does not reduce exp/skill loss and fails under a red skull; red skull means all items lost; temple respawn at full HP and mana; the five 7.4 blessings are implemented and cost 10,000 gp each; a promotion suspended for lack of premium plays at the base vocation (10% loss) while the DB keeps the promotion.

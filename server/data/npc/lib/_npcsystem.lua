@@ -5,7 +5,7 @@
 if(NpcSystem == nil) then
 	-- Loads the underlying classes of the npcsystem.
 	local dir = getDataDir() .. 'npc/lib/npcsystem/'
-	for _, file in ipairs({'keywordhandler.lua', 'modules.lua', 'modules1.lua', 'npchandler.lua', 'queue.lua'}) do
+	for _, file in ipairs({'keywordhandler.lua', 'modules.lua', 'npchandler.lua', 'queue.lua'}) do
 		dofile(dir .. file)
 	end
 

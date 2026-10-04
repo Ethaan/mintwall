@@ -37,6 +37,21 @@ def test_no_script_compares_a_function_result_with_TRUE_or_FALSE():
     assert not bad, "\n".join(bad)
 
 
+def test_no_script_compares_a_boolean_function_with_1_or_0():
+    """The same mistake with the number: `isPlayer(cid) == 1` is never true, `~= 1` always is. Boolean functions are
+    the engine's that push only booleans and the Lua ones that return only true/false (tibia74/luascan.py)."""
+    from tibia74.luascan import boolean_compared_with_number
+    bad = boolean_compared_with_number(SERVER_DIR)
+    assert not bad, "\n".join(bad)
+
+
+def test_the_boolean_scan_knows_engine_and_lua_functions():
+    from tibia74.luascan import boolean_functions
+    found = boolean_functions(SERVER_DIR)
+    assert {"isPlayer", "hasCondition", "doPlayerRemoveMoney", "isInArray", "getPlayerBlessing"} <= found
+    assert not {"getPlayerStorageValue", "getPlayerItemCount", "getTileHouseInfo", "djinnProgress"} & found
+
+
 def test_spell_scripts_return_a_boolean():
     """onCastSpell returning LUA_NO_ERROR (undefined here, so nil) logged "Expected boolean type parameter"."""
     bad = [str(f.relative_to(SERVER_DIR)) for f in (SERVER_DIR / "data" / "spells").rglob("*.lua")
@@ -145,15 +160,11 @@ def test_conjuring_makes_a_usable_rune(new_player, items, vocation, words, rune)
 # Calls to functions nothing defines (tibia74/luascan.py). Each is a task in task.md; this list may only
 # shrink - a new name here is a script that fails when that line runs.
 KNOWN_UNDEFINED = {
-    # death / kill broadcasts, raid announcements
-    "broadcastMessage",
-    # GM ban manager (talkactions/scripts/banmanager.lua)
+    # GM ban manager (talkactions/scripts/banmanager.lua, not registered in talkactions.xml)
     "addAccountBan", "addPlayerBan", "removeAccountBan", "removePlayerBan", "getAccountBanList",
     "getPlayersByAccountNumber",
-    # the banks (not 7.4): their NPCs are no longer spawned (bank.lua kept for reference)
+    # the banks (not 7.4): their NPCs are no longer spawned (bank.lua kept for reference); banmanager.lua
     "getPlayerByName",
-    # NPC system leftovers
-    "doNpcSellItem", "getPlayerPVPBlessing", "getPlayerLookDir",
 }
 
 

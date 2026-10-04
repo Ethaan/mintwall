@@ -156,36 +156,14 @@ if(Modules == nil) then
 
 		if(isPremium(cid) or not getBooleanFromString(getConfigValue('blessingsOnlyPremium')) or not parameters.premium) then
 
-			if(parameters.number > 0) then
-				if(getPlayerBlessing(cid, parameters.number)) then
-					npcHandler:say("Gods have already blessed you with this blessing!", cid)
-				elseif(not doPlayerRemoveMoney(cid, parameters.cost)) then
-					npcHandler:say("You don't have enough money for blessing.", cid)
-				else
-					npcHandler:say("You have been blessed by one of the five gods!", cid)
-					doPlayerAddBlessing(cid, parameters.number)
-				end
+			-- only the five gods' blessings (1-5): the PvP blessing (number 0) is 8.x
+			if(getPlayerBlessing(cid, parameters.number)) then
+				npcHandler:say("Gods have already blessed you with this blessing!", cid)
+			elseif(not doPlayerRemoveMoney(cid, parameters.cost)) then
+				npcHandler:say("You don't have enough money for blessing.", cid)
 			else
-				if(getPlayerPVPBlessing(cid)) then
-					npcHandler:say("Gods have already blessed you with this blessing!", cid)
-				elseif(not doPlayerRemoveMoney(cid, parameters.cost)) then
-					npcHandler:say("You don't have enough money for blessing.", cid)
-				else
-					local any = false
-					for i = 1, 5 do
-						if(getPlayerBlessing(cid, i)) then
-							any = true
-							break
-						end
-					end
-
-					if(any) then
-						npcHandler:say("You have been blessed by the god of war!", cid)
-						doPlayerSetPVPBlessing(cid)
-					else
-						npcHandler:say("You need to be blessed by at least one god to get this blessing.", cid)
-					end
-				end
+				npcHandler:say("You have been blessed by one of the five gods!", cid)
+				doPlayerAddBlessing(cid, parameters.number)
 			end
 		else
 			npcHandler:say('You need a premium account in order to be blessed.', cid)
@@ -1192,142 +1170,8 @@ if(Modules == nil) then
 		return true
 	end
 
-	-- Callback onBuy() function. If you wish, you can change certain Npc to use your onBuy().
-	function ShopModule:callbackOnBuy(cid, itemid, subType, amount, ignoreCap, inBackpacks)
-		local shopItem = nil
-		for _, item in ipairs(self.npcHandler.shopItems) do
-			if(item.id == itemid and item.subType == subType) then
-				shopItem = item
-				break
-			end
-		end
-
-		if(shopItem == nil) then
-			print('[Warning - ' .. getCreatureName(getNpcId()) .. '] NpcSystem:', 'ShopModule.onBuy - Item not found on shopItems list')
-			return false
-		end
-
-		if(shopItem.buy == -1) then
-			print('[Warning - ' .. getCreatureName(getNpcId()) .. '] NpcSystem:', 'ShopModule.onBuy - Attempt to purchase an item which only sellable')
-			return false
-		end
-
-		if(amount <= 0) then
-			print('[Warning - ' .. getCreatureName(getNpcId()) .. '] NpcSystem:', 'ShopModule.onBuy - Attempt to purchase ' .. amount .. ' items')
-			return false
-		end
-
-		local subType, count = shopItem.subType or 0, amount
-		local backpack, backpackPrice, totalCost = 1988, 20, amount * shopItem.buy
-		if(inBackpacks) then
-			totalCost = totalCost + (math.max(1, math.floor(count / getContainerCapById(backpack))) * backpackPrice)
-		end
-
-		local parseInfo = {
-			[TAG_PLAYERNAME] = getPlayerName(cid),
-			[TAG_ITEMCOUNT] = amount,
-			[TAG_TOTALCOST] = totalCost,
-			[TAG_ITEMNAME] = shopItem.name
-		}
-		if(getPlayerMoney(cid) < totalCost) then
-			local msg = self.npcHandler:getMessage(MESSAGE_NEEDMONEY)
-			doPlayerSendCancel(cid, self.npcHandler:parseMessage(msg, parseInfo))
-			return false
-		end
-
-		local a, b = doNpcSellItem(cid, itemid, count, subType, ignoreCap, inBackpacks, backpack)
-		if(a < amount) then
-			local msgId = MESSAGE_NEEDMORESPACE
-			if(a == 0) then
-				msgId = MESSAGE_NEEDSPACE
-			end
-
-			local msg = self.npcHandler:getMessage(msgId)
-			parseInfo[TAG_ITEMCOUNT] = a
-
-			doPlayerSendCancel(cid, self.npcHandler:parseMessage(msg, parseInfo))
-			if(NPCHANDLER_CONVBEHAVIOR ~= CONVERSATION_DEFAULT) then
-				self.npcHandler.talkStart[cid] = os.time()
-			else
-				self.npcHandler.talkStart = os.time()
-			end
-
-			if(a > 0) then
-				doPlayerRemoveMoney(cid, ((a * shopItem.buy) + (b * backpackPrice)))
-				return true
-			end
-
-			return false
-		end
-
-		local msg = self.npcHandler:getMessage(MESSAGE_BOUGHT)
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, self.npcHandler:parseMessage(msg, parseInfo))
-
-		doPlayerRemoveMoney(cid, totalCost)
-		if(NPCHANDLER_CONVBEHAVIOR ~= CONVERSATION_DEFAULT) then
-			self.npcHandler.talkStart[cid] = os.time()
-		else
-			self.npcHandler.talkStart = os.time()
-		end
-
-		return true
-	end
-
-	-- Callback onSell() function. If you wish, you can change certain Npc to use your onSell().
-	function ShopModule:callbackOnSell(cid, itemid, subType, amount, ignoreEquipped, dummy)
-		local shopItem = nil
-		for _, item in ipairs(self.npcHandler.shopItems) do
-			if(item.id == itemid and item.subType == subType) then
-				shopItem = item
-				break
-			end
-		end
-
-		if(shopItem == nil) then
-			print('[Warning - ' .. getCreatureName(getNpcId()) .. '] NpcSystem:', 'ShopModule.onSell - Item not found on shopItems list')
-			return false
-		end
-
-		if(shopItem.sell == -1) then
-			print('[Warning - ' .. getCreatureName(getNpcId()) .. '] NpcSystem:', 'ShopModule.onSell - Attempt to sell an item which is only buyable')
-			return false
-		end
-
-		local parseInfo = {
-			[TAG_PLAYERNAME] = getPlayerName(cid),
-			[TAG_ITEMCOUNT] = amount,
-			[TAG_TOTALCOST] = amount * shopItem.sell,
-			[TAG_ITEMNAME] = shopItem.name
-		}
-
-		if(subType < 1 or getItemInfo(itemid).stackable) then
-			subType = -1
-		end
-
-		if(doPlayerRemoveItem(cid, itemid, amount, subType, ignoreEquipped)) then
-			local msg = self.npcHandler:getMessage(MESSAGE_SOLD)
-			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, self.npcHandler:parseMessage(msg, parseInfo))
-
-			doPlayerAddMoney(cid, amount * shopItem.sell)
-			if(NPCHANDLER_CONVBEHAVIOR ~= CONVERSATION_DEFAULT) then
-				self.npcHandler.talkStart[cid] = os.time()
-			else
-				self.npcHandler.talkStart = os.time()
-			end
-
-			return true
-		end
-
-		local msg = self.npcHandler:getMessage(MESSAGE_NEEDITEM)
-		doPlayerSendCancel(cid, self.npcHandler:parseMessage(msg, parseInfo))
-		if(NPCHANDLER_CONVBEHAVIOR ~= CONVERSATION_DEFAULT) then
-			self.npcHandler.talkStart[cid] = os.time()
-		else
-			self.npcHandler.talkStart = os.time()
-		end
-
-		return false
-	end
+	-- No trade window in 7.4 (SHOPMODULE_MODE_TALK, openShopWindow is a stub in npc/lib/compat.lua): its
+	-- callbackOnBuy/callbackOnSell are gone - they sold through doNpcSellItem, which Avesta does not have.
 
 	-- Callback for requesting a trade window with the NPC.
 	function ShopModule.requestTrade(cid, message, keywords, parameters, node)

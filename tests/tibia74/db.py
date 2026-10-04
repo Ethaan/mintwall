@@ -20,6 +20,15 @@ VOCATION_GAINS = {
 }
 VOCATION_GAINS.update({v + 4: g for v, g in list(VOCATION_GAINS.items()) if v})
 
+
+def capacity(vocation: int, level: int) -> int:
+    """7.4 capacity (TibiaWiki "Formula" 2007-11, oldid 128170: (level - 8) x gain + 470 for a character that left
+    Rookgaard at level 8; tibiantis-notes "Classes": knight 25 x L + 270, paladin 20 x L + 310, mage 10 x L + 390).
+    Rookgaard (no vocation) gains 10 a level from 400 at level 1 - the same 470 at level 8."""
+    gain = VOCATION_GAINS[vocation][2]
+    return 400 + gain * (level - 1) if vocation == 0 else 470 + gain * (level - 8)
+
+
 TEST_ACCOUNT_BASE = 500000
 _counter = itertools.count(1)
 
@@ -98,10 +107,10 @@ class TestDatabase:
         name = name or f"Test{n:04d}"
         account = TEST_ACCOUNT_BASE + n
         password = "test"
-        hp_gain, mana_gain, cap_gain = VOCATION_GAINS[vocation]
+        hp_gain, mana_gain, _ = VOCATION_GAINS[vocation]
         healthmax = 150 + hp_gain * (level - 1)
         manamax = 0 + mana_gain * (level - 1)
-        cap = 400 + cap_gain * (level - 1)
+        cap = capacity(vocation, level)
         x, y, z = pos or (0, 0, 0)
 
         con = self._connect()

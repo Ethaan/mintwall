@@ -943,7 +943,10 @@ BlockType_t Creature::blockHit(Creature* attacker, CombatType_t combatType, int3
 			}
 		}
 
-		if(hasDefense && blockType != BLOCK_NONE){
+		// 7.4: every attack the shield faces is a shielding try - blood, spark or puff (TibiaWiki "Shielding"
+		// 2007-03 rev 88636: "All kind of hits are counted for shielding skill"; tibiantis-notes training.txt:
+		// "you dont need to take damage to train shielding"). Only the two attacks a turn it can face count.
+		if(checkDefense && hasDefense){
 			onBlockHit(blockType);
 		}
 	}
@@ -1064,7 +1067,17 @@ double Creature::getDamageRatio(Creature* attacker) const
 
 uint64_t Creature::getGainedExperience(Creature* attacker, bool useMultiplier /*= true*/) const
 {
-	uint64_t retValue = (int64_t)std::floor(getDamageRatio(attacker) * getLostExperience());
+	// 7.4: each attacker gets the monster's experience times its share of the damage dealt, rounded down; damage
+	// without an attacker (traps, ownerless fields) is not counted (tibiantis-notes trap.txt). Integer maths: the
+	// double ratio lost 1 point on exact shares (11 of 15 damage on a 150 exp monster gave 109, not 110).
+	uint64_t totalDamage = 0, attackerDamage = 0;
+	for(CountMap::const_iterator it = damageMap.begin(); it != damageMap.end(); ++it){
+		totalDamage += it->second.total;
+		if(it->first == attacker->getID()){
+			attackerDamage += it->second.total;
+		}
+	}
+	uint64_t retValue = (totalDamage > 0 ? attackerDamage * getLostExperience() / totalDamage : 0);
 
 	Player* player = attacker->getPlayer();
 	if (!player) {

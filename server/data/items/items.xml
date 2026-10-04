@@ -3423,7 +3423,7 @@
 		<attribute key="slotType" value="ring"/>
 	</item>
 	<item id="2128" article="a" name="crown">
-		<attribute key="weight" value="1500"/>
+		<attribute key="weight" value="1900"/>
 	</item>
 	<item id="2129" article="a" name="wolf tooth chain">
 		<attribute key="weight" value="330"/>
@@ -3466,7 +3466,7 @@
 		<attribute key="slotType" value="necklace"/>
 	</item>
 	<item id="2139" article="an" name="ancient tiara">
-		<attribute key="weight" value="450"/>
+		<attribute key="weight" value="820"/>
 		<attribute key="slotType" value="necklace"/>
 	</item>
 	<item id="2140" article="a" name="holy scarab">
@@ -4537,7 +4537,7 @@
 		<attribute key="weaponType" value="distance"/>
 		<attribute key="shootType" value="spear"/>
 		<attribute key="ammoAction" value="move"/>
-		<attribute key="range" value="5"/>
+		<attribute key="range" value="6"/>   <!-- TibiaWiki: 6 until the Christmas 2007 update (8.1) cut it to 3 -->
 	</item>
 	<item id="2390" article="a" name="magic longsword">
 		<attribute key="description" value="It is the magic Cyclopmania Sword."/>
@@ -4596,7 +4596,7 @@
 		<attribute key="weaponType" value="sword"/>
 	</item>
 	<item id="2398" article="a" name="mace">
-		<attribute key="weight" value="2800"/>
+		<attribute key="weight" value="3800"/>
 		<attribute key="defense" value="11"/>
 		<attribute key="attack" value="16"/>
 		<attribute key="weaponType" value="club"/>
@@ -4623,7 +4623,7 @@
 		<attribute key="slotType" value="two-handed"/>
 	</item>
 	<item id="2402" article="a" name="silver dagger">
-		<attribute key="weight" value="1019"/>
+		<attribute key="weight" value="1020"/>
 		<attribute key="defense" value="7"/>
 		<attribute key="attack" value="8"/>
 		<attribute key="weaponType" value="sword"/>
@@ -4635,7 +4635,7 @@
 		<attribute key="weaponType" value="sword"/>
 	</item>
 	<item id="2404" article="a" name="combat knife">
-		<attribute key="weight" value="869"/>
+		<attribute key="weight" value="870"/>
 		<attribute key="defense" value="6"/>
 		<attribute key="attack" value="8"/>
 		<attribute key="weaponType" value="sword"/>
@@ -4778,7 +4778,7 @@
 		<attribute key="slotType" value="two-handed"/>
 	</item>
 	<item id="2426" article="a" name="naginata">
-		<attribute key="weight" value="8000"/>
+		<attribute key="weight" value="7800"/>
 		<attribute key="defense" value="19"/>
 		<attribute key="attack" value="39"/>
 		<attribute key="weaponType" value="axe"/>
@@ -4877,14 +4877,14 @@
 		<attribute key="weaponType" value="axe"/>
 	</item>
 	<item id="2441" article="a" name="daramanian axe">
-		<attribute key="weight" value="5250"/>
+		<attribute key="weight" value="4100"/>
 		<attribute key="defense" value="10"/>
 		<attribute key="attack" value="15"/>
 		<attribute key="weaponType" value="axe"/>
 		<attribute key="slotType" value="two-handed"/>
 	</item>
 	<item id="2442" article="a" name="heavy machete">
-		<attribute key="weight" value="1839"/>
+		<attribute key="weight" value="1840"/>
 		<attribute key="defense" value="10"/>
 		<attribute key="attack" value="16"/>
 		<attribute key="weaponType" value="sword"/>
@@ -5177,7 +5177,7 @@
 		<attribute key="slotType" value="body"/>
 	</item>
 	<item id="2495" name="demon legs">
-		<attribute key="weight" value="5400"/>
+		<attribute key="weight" value="7000"/>
 		<attribute key="armor" value="9"/>
 		<attribute key="slotType" value="legs"/>
 	</item>
@@ -5208,7 +5208,7 @@
 		<attribute key="slotType" value="body"/>
 	</item>
 	<item id="2501" article="a" name="ceremonial mask">
-		<attribute key="weight" value="1200"/>
+		<attribute key="weight" value="4000"/>
 		<attribute key="armor" value="9"/>
 		<attribute key="slotType" value="head"/>
 	</item>
@@ -5223,7 +5223,7 @@
 		<attribute key="slotType" value="body"/>
 	</item>
 	<item id="2504" name="dwarven legs">
-		<attribute key="weight" value="4000"/>
+		<attribute key="weight" value="4900"/>
 		<attribute key="armor" value="6"/>
 		<attribute key="slotType" value="legs"/>
 	</item>
@@ -5239,11 +5239,12 @@
 		<attribute key="slotType" value="head"/>
 	</item>
 	<item id="2507" name="elven legs">
-		<attribute key="weight" value="4800"/>
+		<attribute key="weight" value="3300"/>
 		<attribute key="armor" value="10"/>
 		<attribute key="slotType" value="legs"/>
 	</item>
-	<item id="2508" article="a" name="native armor" editorsuffix=" (Unknown weight)">
+	<item id="2508" article="a" name="native armor">
+		<attribute key="weight" value="8000"/>
 		<attribute key="slotType" value="body"/>
 		<attribute key="armor" value="7"/>
 	</item>
@@ -5401,7 +5402,7 @@
 		<attribute key="weaponType" value="shield"/>
 	</item>
 	<item id="2538" article="an" name="eagle shield">
-		<attribute key="weight" value="6000"/>
+		<attribute key="weight" value="6200"/>
 		<attribute key="defense" value="30"/>
 		<attribute key="weaponType" value="shield"/>
 	</item>
@@ -5731,7 +5732,7 @@
 		<attribute key="slotType" value="feet"/>
 	</item>
 	<item id="2644" name="bunny slippers">
-		<attribute key="weight" value="1200"/>
+		<attribute key="weight" value="600"/>
 		<attribute key="slotType" value="feet"/>
 	</item>
 	<item id="2645" name="steel boots">
@@ -5775,7 +5776,7 @@
 		<attribute key="slotType" value="body"/>
 	</item>
 	<item id="2653" article="a" name="red tunic">
-		<attribute key="weight" value="3000"/>
+		<attribute key="weight" value="1400"/>
 		<attribute key="armor" value="2"/>
 		<attribute key="slotType" value="body"/>
 	</item>
