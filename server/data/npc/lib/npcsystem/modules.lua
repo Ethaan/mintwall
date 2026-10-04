@@ -1234,6 +1234,13 @@ if(Modules == nil) then
 				msg = module.npcHandler:parseMessage(msg, parseInfo)
 				module.npcHandler:say(msg, cid)
 			end
+		elseif((parentParameters.eventType == SHOPMODULE_BUY_ITEM or parentParameters.eventType == SHOPMODULE_BUY_ITEM_CONTAINER)
+			and not ShopModule.fits(cid, parentParameters, module.amount)) then
+			-- too heavy: refused before the money is taken, instead of dropping it at their feet with no word
+			-- (decided with the user 2026-10-04)
+			local msg = module.npcHandler:getMessage(MESSAGE_NEEDSPACE)
+			msg = module.npcHandler:parseMessage(msg, parseInfo)
+			module.npcHandler:say(msg, cid)
 		elseif(parentParameters.eventType == SHOPMODULE_BUY_ITEM) then
 			local ret = doPlayerBuyItem(cid, parentParameters.itemid, module.amount, ShopModule.price(cid, parentParameters) * module.amount, parentParameters.subType)
 			if(ret) then
@@ -1284,6 +1291,40 @@ if(Modules == nil) then
 		module.npcHandler:say(msg, cid)
 		module.npcHandler:resetNpc(cid)
 		return true
+	end
+
+	-- The weight in oz of one item as a shop hands it out (subType: a rune's charges, a fluid). getItemWeightById is
+	-- ours (luascript.cpp); a server built before it weighs a scratch item instead, as quests/system.lua does.
+	function ShopModule.unitWeight(itemid, subType)
+		local count = 1
+		if(not isItemStackable(itemid) and subType ~= nil and subType > 0) then
+			count = subType
+		end
+		if(getItemWeightById ~= nil) then
+			return getItemWeightById(itemid, count) or 0
+		end
+		local scratch = doCreateItemEx(itemid, count)
+		return scratch and getItemWeight(scratch) or 0
+	end
+
+	-- Whether `amount` of what this offer sells fits the player's free capacity: an item that weighs exactly the
+	-- free capacity fits (player.cpp hasCapacity), compared in hundredths of an oz, as items.xml has them
+	-- (decided with the user 2026-10-04). getPlayerFreeCap gives whole oz.
+	function ShopModule.fits(cid, parameters, amount)
+		if(getPlayerFlagValue(cid, 20)) then   -- PlayerFlag_HasInfiniteCapacity (const.h): a GM's free cap reads 0
+			return true
+		end
+		local oz
+		if(parameters.eventType == SHOPMODULE_BUY_ITEM_CONTAINER) then
+			oz = (ShopModule.unitWeight(parameters.container) + getContainerCapById(parameters.container)
+				* ShopModule.unitWeight(parameters.itemid, parameters.subType)) * amount
+		else
+			oz = ShopModule.unitWeight(parameters.itemid, parameters.subType) * amount
+			if(parameters.itemid == ITEM_PARCEL) then
+				oz = oz + ShopModule.unitWeight(ITEM_LABEL) * amount    -- a label comes with every parcel
+			end
+		end
+		return math.floor(oz * 100 + 0.5) <= getPlayerFreeCap(cid) * 100
 	end
 
 	-- What one item costs this player: a post officer charges an Assistant Postman less for parcels and letters

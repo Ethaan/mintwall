@@ -36,9 +36,9 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
 - [x] Q5 Daily server save (see "Daily server save"): the hour, warnings before it, kick + restart, what resets. - answered 2026-10-04: daily save like Tibiantis but at another hour (hour still to pick - configurable); warnings, kick, save, release houses, restart
       (recommended: 9:00 CET like Tibiantis... or a quiet hour for your players; broadcast at 5/3/1 minutes; kick +
       restart; nothing else resets until "refresh" squares are chosen)
-- [ ] Q6 Shop runes from NPCs (Shiriel, Fenech sold runes in the 2006 wiki - possibly 7.6): add rune sales or not?
+- [x] Q6 Shop runes from NPCs (Shiriel, Fenech sold runes in the 2006 wiki - possibly 7.6): add rune sales or not? - answered 2026-10-04: not yet - no pre-7.6 source
       (recommended: not yet - no pre-7.6 source)
-- [ ] Q7 The 30 monsters with no 7.4 combat data (tomb bosses, traps, assassin, bandit, dark monk, smuggler,
+- [x] Q7 The 30 monsters with no 7.4 combat data (tomb bosses, traps, assassin, bandit, dark monk, smuggler, - answered 2026-10-04: keep the current values
       chicken, yeti): keep their current values? (recommended: keep - no 7.4 source; the pharaohs were reviewed)
 - [x] Q8 Respawn (docs/reference-74/spawns.md): every spot is 60 s; with the engine's 60 s check a kill is back in - answered 2026-10-04: (c) Cip data per spot + randomisation + players-online scaling + a timer per slot + multi-floor blocking
       60-120 s, 5-10x faster than 7.x (Cip data: 600 s for 78% of spots, rare spots 1,800-20,000 s). (a) keep 60 s,
@@ -46,7 +46,7 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       (d) one value. Also: block respawn from other floors (one-line Spawn::findPlayer change), Cip values for the 77
       rare / quest-guardian spots anyway, overspawn at ~10 squares or a floor change instead of radius 1.
       (recommended: (c), multi-floor yes, rare spots yes, ~10 squares)
-- [ ] Q9 Using a rope on the rope spot you stand on is refused ("You can not use this object.", rope.lua refuses any
+- [x] Q9 Using a rope on the rope spot you stand on is refused ("You can not use this object.", rope.lua refuses any - answered 2026-10-04: keep it refused (step off first)
       creature on the spot, the user too); players step off first. 7.4 let a creature or a field block a rope spot
       (tibiantis notes, poison bomb). Keep, or let the user through when alone on it? (recommended: keep, unless you
       remember 7.4 allowing it)
@@ -57,14 +57,14 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       (rev 23930, no update note); ours 25; knife 30->25 and stone 20->10 same pattern. (b) throwing star / knife / small
       stone range: ours 5; rev 131557 says all hand-thrown weapons were 6 before 8.1 (later revisions name only spears).
       (recommended: (a) keep 25 - no second 7.4 source; (b) 6 for all, consistent with the one source)
-- [ ] Q12 Fished-out water comes back after 120 s here; TibiaWiki Training rev 158855 (May 2008, post-7.4) says about
+- [x] Q12 Fished-out water comes back after 120 s here; TibiaWiki Training rev 158855 (May 2008, post-7.4) says about - answered 2026-10-04: keep 120 s
       30 minutes; no 7.4 source. (recommended: keep 120 s until a 7.4 source turns up)
 - [x] Q13 Item weights that changed in the 2005-06 wiki (7.4 = Dec 2004): tower shield ours 82 (2005-06: 88, Tibiantis - answered 2026-10-04: 2005-06 wiki: tower shield 88, black shield 41.5 (done), the rest kept
       88), black shield 42 (2005-06: 41.5, Tibiantis 41.5), golden legs 54 (2005-06: 54, Tibiantis 56), pharaoh sword 190
       (2005-06: 190, Tibiantis 150), dragon scale helmet 60 (Tibiantis 32.5, later only), ornamented shield 67 (wiki
       always 67, Tibiantis 72), golden mace 50 (no page before 2009, today 41). Take the 2005-06 values or Tibiantis?
       (recommended: 2005-06 wiki - closest to 7.4 - i.e. tower 88, black 41.5, the rest as they are)
-- [ ] Q14 Capacity edge cases: (a) an item weighing exactly the free cap is refused (hasCapacity uses <); allow it
+- [x] Q14 Capacity edge cases: (a) an item weighing exactly the free cap is refused (hasCapacity uses <); allow it - answered 2026-10-04: (a) allow an item that fits the free cap exactly; (b) an NPC sale over the cap is refused with "You do not have enough capacity." and the money kept - in progress
       (<=, rebuild)? (b) an NPC sale over the cap drops the item on the floor with no message; 7.4? (recommended: (a)
       allow; (b) refuse with "You do not have enough capacity." - no 7.4 source for either, ask what you remember)
 - [x] Q15 Deathslicer (5 on floor 13): ours 320 exp, 2000 hp, attackable. Current TibiaWiki: exp 0, hp 8200, immune to - answered 2026-10-04: a trap: not attackable, immune to everything, 0 exp (done, deathslicer.xml)
@@ -81,10 +81,10 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       made up - take Tibiantis' house list (tibiantis.online/?page=houses) or a per-tile rent? (c) "alana sio" with no
       name: kick yourself (later servers) or nothing (ours)? (recommended: (a) yes / keep; (b) Tibiantis; (c) yourself)
 - [x] Q18 Server save hour (Q5): which hour (server time)? and the warnings at 5/3/1 minutes ok? - answered 2026-10-04: early morning - ServerSaveHour = 6 (config.lua)
-- [ ] Q19 Bans: (a) with enough GM warnings (WarningsToFinalBan) the "final" ban (FinalBanLength 7 days) or deletion
+- [x] Q19 Bans: (a) with enough GM warnings (WarningsToFinalBan) the "final" ban (FinalBanLength 7 days) or deletion - answered 2026-10-04: (a) the final ban is never shorter than the automatic one; (b) GM bans stay out of the count - in progress
       applies instead, and can be shorter than a repeat automatic ban (30/60...) - keep? (b) GM bans do not count toward
       the automatic ban length - intended? (recommended: (a) make the final ban at least the automatic length; (b) yes)
-- [ ] Q20 Houses: (a) Tibiantis allows one house AND one guildhall per account; ours one in total (as asked) - keep?
+- [x] Q20 Houses: (a) Tibiantis allows one house AND one guildhall per account; ours one in total (as asked) - keep? - answered 2026-10-04: one house AND one guildhall per account (like Tibiantis); "alana sio" with no name puts the caster out - in progress
       (b) "alana sio" with no name: put the caster out (later servers) or nothing (ours)? (c) is emptying the guest list
       enough as the "kick everyone", or a command too? (recommended: (a) keep one; (b) put the caster out; (c) enough)
 - [x] Q21 Distance details: (a) poison arrow attack - TibiaWiki 2006-07 says 20 ("less than an arrow"), tibiantis- - answered 2026-10-04: poison arrow attack 20; remove the minimum damage (distance and melee) - in progress (C++)
@@ -276,7 +276,7 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       so "hi bashira", "hi shiriel", "hi phillip" were refused - now a whole-word match). Orc King's guards are
       summoned beside a blocked tile. test_shops.py test_only_one_trader_of_a_shared_shop_answers,
       test_greeting_the_other_trader_by_name_hands_the_player_over; test_npc_talk greets each NPC by name
-- [ ] NPC rune sales (Shiriel, Fenech: TibiaWiki 2006) and Maryza's cookbook not added - runes from NPCs may be
+- [x] NPC rune sales (Shiriel, Fenech: TibiaWiki 2006) and Maryza's cookbook not added - runes from NPCs may be - decided 2026-10-04: not yet (no pre-7.6 source)
       7.6; ask when the magic shops are looked at
 
 ## Map / world
@@ -1019,7 +1019,7 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       Senja...) was lost - now refused (town.h/depot.cpp/mailbox.cpp, NEEDS REBUILD). tests/test_depots.py (19).
       Quest chests: Cip's "You have found a rapier. Weighing 15.00 oz it is too heavy." (Nostalrius chests.lua) in
       system.lua, postman.lua, paradox_tower.lua; getItemWeightById (luascript, rebuild; a Lua fallback works now).
-  - [ ] Live DB: items saved in depot 0 from Venore's main depot are now out of sight - move them to depot 8
+  - [x] Live DB: items saved in depot 0 from Venore's main depot are now out of sight - move them to depot 8 - answered 2026-10-04: no, leave them (test characters only)
         (player_depotitems) when the server is stopped? (ask the user)
 - [x] Teleports, ladders, holes, rope spots, shovel spots work
       Done 2026-10-03: tests/test_map_mechanics.py (48 cases: Rookgaard, Thais, Carlin, Kazordoon, Venore, Edron,
@@ -1488,7 +1488,7 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
         200 -> 125, demon 400 -> 514). Engine: exact 7.4 melee max (Weapons::getMaxMeleeDamage) and a
         skill-based block rolled 0..max for monsters with <defenses skill=> (Monster::getDefense).
         test_formulas.py (dwarf guard never above 125)
-  - [ ] 3c. 30 monsters have no 7.4 data in the source (bosses, traps, assassin, bandit, dark monk,
+  - [x] 3c. 30 monsters have no 7.4 data in the source (bosses, traps, assassin, bandit, dark monk, - decided 2026-10-04: keep their values
         smuggler, chicken, yeti) - keep their values or find another 7.4 source
   - [x] 4. Magic power floor P >= 100 (combat.cpp FORMULA_LEVELMAGIC + magicPower() in compat.lua for
         the Lua heal formulas). 7.4 values: energy beam 40-80, fire wave 20-40, poison storm 150-250,

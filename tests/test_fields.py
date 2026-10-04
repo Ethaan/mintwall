@@ -60,8 +60,8 @@ def _field(new_player, items, rune, row):
 
 
 def _step_through(target, tile, color, seconds):
-    """Step onto the field and straight back; every damage number of `color` over the target for `seconds`, as
-    (seconds since the step, damage)."""
+    """Step onto the field and straight back; every damage number of `color` over the target (on the field or back
+    home) for `seconds`, as (seconds since the step, damage)."""
     home = target.pos
     seen, hits = len(target.animated_texts), []
     t0 = time.time()
@@ -73,7 +73,8 @@ def _step_through(target, tile, color, seconds):
         now = time.time() - t0
         with target._lock:
             new, seen = target.animated_texts[seen:], len(target.animated_texts)
-        hits += [(round(now, 1), int(t)) for p, c, t in new if c == color and t.strip().isdigit()]
+        hits += [(round(now, 1), int(t)) for p, c, t in new
+                 if c == color and t.strip().isdigit() and tuple(p) in (tuple(home), tuple(tile))]
     return hits
 
 
@@ -109,8 +110,8 @@ def test_medium_fire_field_burns_20_then_10_five_times(new_player, items):
     field = items.by_server[MEDIUM_FIRE_FIELD].client_id
     assert target.wait_for(lambda: any(t.client_id == field for t in target.tile_items(tile)), timeout=3), \
         f"no medium fire field on {tile}: {target.tile_items(tile)}"
-    assert god.step(EAST), "the god could not step off the field"
-    hits = _step_through(target, tile, FIRE, 56)
+    assert god.step(EAST), "the god could not step off the field"       # it may burn as well: not over the target
+    hits = _step_through(target, tile, FIRE, 60)
     print(f"\nmedium fire field: {hits}, intervals {_intervals(hits)}")
     assert hits and hits[0][1] == 20 and hits[0][0] < 1.5, f"no 20 on entering: {hits}"
     assert [d for _, d in hits[1:]] == [10] * 5, f"not 10 five times: {hits}"

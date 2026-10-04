@@ -2496,7 +2496,9 @@ bool Player::hasCapacity(const Item* item, uint32_t count) const
 		else
 			itemWeight = item->getWeight();
 
-		return (itemWeight < getFreeCapacity());
+		// an item that weighs exactly the free capacity fits (decided with the user 2026-10-04); compared in
+		// hundredths of an oz (items.xml's unit), as the float weights (items.cpp: value / 100.f) are not exact
+		return (std::floor(itemWeight * 100.0 + 0.5) <= std::floor(getFreeCapacity() * 100.0 + 0.5));
 	}
 
 	return true;
@@ -3882,20 +3884,24 @@ void Player::addUnjustifiedDead(const Player* attacked)
 	{
 		Account account = IOAccount::instance()->loadAccount(getAccount());
 		bool success = false;
+		// like Tibiantis (decided 2026-10-04): 7 days the first time, 30 days the second, 30 more each time after
+		// (60, 90, ...). The earlier ones are the account's automatic banishments in `bans` (expired ones included;
+		// a gamemaster's bans have an admin_id and their own comment, so they are not counted).
+		uint32_t earlier = g_bans.getAutomaticBanishmentsCount(getAccount());
+		int64_t automaticLength = (earlier == 0 ? 7 : 30 * (int64_t)earlier) * 24 * 60 * 60;
 		if(account.warnings >= g_config.getNumber(ConfigManager::WARNINGS_TO_DELETION)){
 			g_bans.addDeletion(getName(), 0, "Unjustified player killing.", "Automatic Deletion.");
 			success = true;
 		}
 		else if(account.warnings >= g_config.getNumber(ConfigManager::WARNINGS_TO_FINALBAN)) {
-			g_bans.addBanishment(getName(), (time(NULL) + g_config.getNumber(ConfigManager::FINALBAN_LENGTH)), 0, "Unjustified player killing.", "Automatic Banishment.");
+			// the final ban (FinalBanLength) is never shorter than the automatic ban the account would get otherwise:
+			// the longer of the two (decided with the user 2026-10-04)
+			int64_t length = std::max((int64_t)g_config.getNumber(ConfigManager::FINALBAN_LENGTH), automaticLength);
+			g_bans.addBanishment(getName(), (uint32_t)(time(NULL) + length), 0, "Unjustified player killing.", AUTOMATIC_BANISHMENT_COMMENT);
 			success = true;
 		}
 		else {
-			// like Tibiantis (decided 2026-10-04): 7 days the first time, 30 days the second, 30 more each time after
-			// (60, 90, ...). The earlier ones are the account's automatic banishments in `bans` (expired ones included).
-			uint32_t earlier = g_bans.getAutomaticBanishmentsCount(getAccount());
-			int64_t days = (earlier == 0 ? 7 : 30 * (int64_t)earlier);
-			g_bans.addBanishment(getName(), (uint32_t)(time(NULL) + days * 24 * 60 * 60), 0, "Unjustified player killing.", AUTOMATIC_BANISHMENT_COMMENT);
+			g_bans.addBanishment(getName(), (uint32_t)(time(NULL) + automaticLength), 0, "Unjustified player killing.", AUTOMATIC_BANISHMENT_COMMENT);
 			success = true;
 		}
 

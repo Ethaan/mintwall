@@ -17,7 +17,7 @@ from tibia74.net import Writer
 SKIP_SET = {30001: 1}              # no beginner set: start with exactly what the test gives
 ROAD = (32091, 32194, 7)           # open ground north-west of the Rookgaard temple (test_death.py walks here too)
 
-MACE, PLATE_ARMOR, BACKPACK_ID, SWORD = 2398, 2463, 1988, 2376
+MACE, PLATE_ARMOR, BACKPACK_ID, SWORD, LEATHER_HELMET = 2398, 2463, 1988, 2376, 2461
 NONE, SORCERER, DRUID, PALADIN, KNIGHT, ELITE_KNIGHT = 0, 1, 2, 3, 4, 8
 TOO_HEAVY = "This object is too heavy."        # player.cpp RET_NOTENOUGHCAPACITY
 
@@ -144,6 +144,23 @@ def test_an_item_heavier_than_the_free_capacity_is_refused(new_player):
     _pick_up(p, mace)
     assert p.wait_for(lambda: RIGHT in p.inventory, timeout=3), p.text_messages[-2:]
     assert _free_cap(p, 104) == 104
+
+
+def test_an_item_that_weighs_exactly_the_free_capacity_fits(new_player):
+    """Exact fit is allowed (player.cpp hasCapacity: weight <= free cap; decided with the user 2026-10-04): 400 oz
+    carried 378 (plate armor worn, two in a backpack) and a 22 oz leather helmet on the ground - picked up, 0 left."""
+    inventory = {ARMOR: Item(PLATE_ARMOR), BACKPACK: Item(BACKPACK_ID, contents=[Item(PLATE_ARMOR), Item(PLATE_ARMOR)]),
+                 RIGHT: Item(LEATHER_HELMET)}
+    assert weight(LEATHER_HELMET) == 22 and 3 * weight(PLATE_ARMOR) + weight(BACKPACK_ID) == 400 - 22
+    p = new_player(pos=(ROAD[0], ROAD[1] + 9, ROAD[2]), storage=SKIP_SET, inventory=inventory)
+    assert _free_cap(p, 0) == 0
+    helmet = p.inventory[RIGHT].client_id
+    _drop(p, p.inventory_pos(RIGHT), helmet)
+    assert _free_cap(p, 22) == 22
+    start = len(p.text_messages)
+    _pick_up(p, helmet)
+    assert p.wait_for(lambda: RIGHT in p.inventory, timeout=3), p.text_messages[start:]
+    assert _free_cap(p, 0) == 0 and _stackpos(p, p.pos, helmet) is None
 
 
 def test_a_heavy_item_does_not_fit_into_a_carried_backpack_either(new_player):

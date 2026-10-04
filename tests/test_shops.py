@@ -8,7 +8,7 @@ import pytest
 import test_npcs_rookgaard as rook
 from test_npc_data import PENDING
 from test_npc_talk import GREETING
-from tibia74 import BACKPACK, Item, SERVER_DIR
+from tibia74 import ARMOR, BACKPACK, Item, SERVER_DIR
 from tibia74.db import BEGINNER_SET_GIVEN
 from tibia74.items import GROUP_FLUID
 from tibia74.npcs import load_npcs, rookgaard_pos
@@ -27,12 +27,12 @@ def _chunks(kind):
             for i in range(math.ceil(len(getattr(npc, kind)) / CHUNK))]
 
 
-def _visit(new_player, npc, inventory=None):
+def _visit(new_player, npc, inventory=None, level=100):
     """A strong premium character (some shops are premium) in talk range of the NPC, greeted."""
     spawn = npc.pos
     for dx, dy in ((2, 0), (0, 2), (-2, 0), (0, -2), (2, 1), (2, -1), (1, 2), (-1, 2),
                    (0, 0), (0, -1), (1, 0), (0, 1), (-1, 0)):
-        p = new_player(pos=(spawn[0] + dx, spawn[1] + dy, spawn[2]), level=100, inventory=inventory,
+        p = new_player(pos=(spawn[0] + dx, spawn[1] + dy, spawn[2]), level=level, inventory=inventory,
                        premium_days=30, storage={BEGINNER_SET_GIVEN: 1, 30001: 1}, group_id=TESTER_GROUP)
         if p.pos[2] == spawn[2] and max(abs(p.pos[0] - spawn[0]), abs(p.pos[1] - spawn[1])) <= 3:
             break
@@ -118,3 +118,23 @@ def test_greeting_the_other_trader_by_name_hands_the_player_over(new_player, db)
     rows = rook._saved(p, db)
     paid = 10000 - rook._money(rows)                         # paid with a crystal coin
     assert paid == 8 and any(r["itemtype"] == 2041 for r in rows), (said, paid)
+
+
+def test_an_item_over_the_free_capacity_is_not_sold(new_player, db):
+    """Too heavy to carry: the NPC says "You do not have enough capacity." and keeps the item - the money stays with
+    the buyer and nothing is put at their feet (it was dropped there with no word before; npc/lib/npcsystem/modules.lua
+    ShopModule.fits, decided with the user 2026-10-04). A level 1 (400 oz) wearing a plate armor (120) with a backpack
+    (18) of two more (240) and a crystal coin (0.1): 21.9 oz free, the mace weighs 38."""
+    npc = NPCS["Sam"]
+    plate, mace = 2463, 2398
+    p = _visit(new_player, npc, level=1, inventory={
+        ARMOR: Item(plate),
+        BACKPACK: Item(rook.BACKPACK_ID, contents=[Item(plate), Item(plate), Item(2160, 1)])})
+    said = p.talk("buy mace", "yes", npc="Sam")
+    assert any("You do not have enough capacity." in t for t in said), said
+    p.sleep(0.5)
+    at_feet = [i for i in p.tile_items(p.pos) if rook.ITEMS.client(i.client_id).server_id == mace]
+    assert not at_feet, "the mace was put at the buyer's feet"
+    rows = rook._saved(p, db)
+    assert not any(r["itemtype"] == mace for r in rows), "the mace was given"
+    assert rook._money(rows) == 10000, f"{rook._money(rows)} gp left of 10000"
