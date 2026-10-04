@@ -5,10 +5,10 @@ from quests.common import *  # noqa: F401,F403
 # TibiaWiki pre-8.0: down Cyclopolis past the level-30 gate; "You'll have to move some stones in order to reach the
 # quest room": in the small circular room lined with fire fields, "Use Destroy Field on one of these fields to discover
 # a lever. Push the lever"; then north across the Behemoth floor, up the stairs, through the level door, "The quest
-# boxes are at the north end of the room". The lever (quests/behemoth_lever.lua, placed where tibiaot74 has it) takes
+# boxes are at the north end of the room". The lever (quests/behemoth_lever.lua, the map's own at 33290,31715) takes
 # the stones away and puts them back. Level 60 (TibiaWiki 2005, Tibiantis, tibiaot74's gate) and one of each chest per
 # character - decided with the user. Rewards: quests/system.lua.
-BEHEMOTH = dict(lever=(33293, 31718, 12), stones=[(x, 31677, 15) for x in range(33295, 33300)],
+BEHEMOTH = dict(lever=(33290, 31715, 12), stones=[(x, 31677, 15) for x in range(33295, 33300)],
                 south_of_stones=(33297, 31679, 15), north_of_stones=(33297, 31676, 15),
                 gate=(33297, 31670, 14), gate_outside=(33297, 31671, 14),
                 chests=[((33294, 31658, 13), "a demon shield"), ((33295, 31658, 13), "a golden armor"),
@@ -34,8 +34,8 @@ def test_behemoth_quest(new_player, items, world_map):
     follow(p, items, world_map, B["south_of_stones"], **ability)
     assert p.wait_for(lambda: len(stones()) == 5, timeout=3), [p.tiles.get(s) for s in B["stones"]]
 
-    # the lever lies under a fire field and a dead wolf: "You may have to move corpses to find the lever" - move the
-    # wolf, destroy the field, pull the lever to the right
+    # the lever lies under a fire field and a dead orc: "You may have to move corpses to find the lever" - move the
+    # orc, destroy the field, pull the lever to the right
     walk_next_to(p, items, world_map, B["lever"], **ability)
     assert p.wait_for(lambda: has(B["lever"], FIRE_FIELD), timeout=3), p.tiles.get(B["lever"])
     clear_items(p, items, B["lever"])

@@ -2,8 +2,8 @@
 -- the quest room. Go to the southeastern corner of this multi-level cavern [...] and go up a level. [...] a small
 -- circular room with Fire Field in the border. Use Destroy Field on one of these fields to discover a lever. Push the
 -- lever"; current wiki: "You may have to move corpses to find the lever. When the lever is to the right, backtrack to
--- the rocks". The lever (action id 51021 at 33293,31718,12, under the fire field and the dead wolf - missing on our
--- map, placed where tibiaot74 has it) takes away the five stones across the Behemoth floor's passage north
+-- the rocks". The lever (action id 51021 at 33290,31715,12, the map's own, under a fire field and a dead orc; a second
+-- one we had placed at tibiaot74's spot 33293,31718 was removed 2026-10-03 - the user found it, a decoy) takes away the five stones across the Behemoth floor's passage north
 -- (33295-33299,31677,15) and puts them back when pulled again - positions and stone as tibiaot74's
 -- "edron-behemoth quest open.lua".
 local STONES = {{x=33295, y=31677, z=15}, {x=33296, y=31677, z=15}, {x=33297, y=31677, z=15},

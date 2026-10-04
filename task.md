@@ -783,9 +783,10 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       3 and a veteran refused; the pulled lever refuses the next team), test_annihilator_level_door, _rules
 - [x] Behemoth Quest - Edron, Cyclopolis (deep) (level 60 in 2004 (level door; raised to 80 in…; 1+ (team advised) player(s); premium)
       Done 2026-09-24: level 60 (decided with the user: TibiaWiki 2005, Tibiantis and tibiaot74's gate; our map's gate
-      said 80 - now aid 1060 at 33297,31670,14). The lever that moves the stones (33295-33299,31677,15) was missing:
-      placed at 33293,31718,12 under the fire field and the dead wolf (tibiaot74's spot; aid 51021,
-      quests/behemoth_lever.lua, both ways). The four chests had no ids: 51023 demon shield (2520 is the Demon
+      said 80 - now aid 1060 at 33297,31670,14). The lever that moves the stones (33295-33299,31677,15) had no script:
+      2026-10-03 the user found two levers - ours, placed at tibiaot74's 33293,31718,12, and the map's own (unscripted,
+      the one players find) at 33290,31715,12 under a fire field and a dead orc. The map's own got aid 51021
+      (quests/behemoth_lever.lua, both ways), ours was removed. The four chests had no ids: 51023 demon shield (2520 is the Demon
       Helmet's), 2466 golden armor, 2427 guardian halberd, 51022 bag (platinum amulet, life ring, crystal ring,
       3 small diamonds, 4 small sapphires) - TibiaWiki 2005 / tibiaot74; one of each per character (decided with the
       user). The lever lies under the dead wolf and the fire field ("move corpses"). tests/quests/edron/test_behemoth.py.

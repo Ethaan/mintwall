@@ -109,13 +109,13 @@ def _melee(new_player, attacker_pos, target_pos, armor, seconds=40):
     knight = new_player(pos=attacker_pos, level=60, vocation=4, skills={2: 50}, storage={30001: 1},
                         inventory={5: Item(2376)})          # sword, atk 14
     knight.set_fight_modes(fight=2, chase=1, safe=0)        # balanced
-    before = target.wait_for(lambda: target.stats.health, timeout=3)
     start = len(target.animated_texts)
     knight.attack(target.player_id)
     time.sleep(seconds)
     knight.attack(0)
     time.sleep(1)
-    return _hits(target, target.pos, start, PHYSICAL), before - target.stats.health
+    hits = _hits(target, target.pos, start, PHYSICAL)          # the numbers, not the health bar: its first value
+    return hits, sum(hits)                                     # can come in after the attack has begun
 
 
 def _expected_melee(skill, atk, armor, turns=20000):
@@ -143,3 +143,78 @@ def test_armor_takes_off_melee_damage(new_player):
           f"hits, mean {statistics.mean(armed_hits) if armed_hits else 0:.1f})")
     assert bare_lost > 0, "the bare target was never hit"
     assert armed_lost < bare_lost * 0.6, f"armor saved too little: {armed_lost} vs {bare_lost}"
+
+
+# --- distance and shield blocks ------------------------------------------------------------------------------------
+FIELD2 = (32328, 32290, 7)         # another Thais street block, far from monsters
+CROSSBOW, BOLT, DRAGON_SHIELD = 2455, 2543, 2516
+
+
+def _row2(r):
+    return (FIELD2[0], FIELD2[1] + r, FIELD2[2]), (FIELD2[0] + 3, FIELD2[1] + r, FIELD2[2])
+
+
+def test_crossbow_bolts_hit_as_the_melee_formula_with_the_ammo_attack(new_player):
+    """7.4: the bow's and ammunition's attack in the melee formula - distance 60, bolts (30): at most
+    (5 x 60 + 50) x 30 x 0.99 / 100 = 103, halved against a player; adjacent... at 3 tiles about 9 shots in 10 hit."""
+    at, to = _row2(0)
+    target = _target(new_player, to)
+    paladin = new_player(pos=at, level=60, vocation=3, skills={4: 60}, storage={30001: 1},
+                         inventory={5: Item(CROSSBOW), 10: Item(BOLT, 100)})
+    assert paladin.pos == at, paladin.pos
+    paladin.set_fight_modes(fight=2, chase=0, safe=0)         # balanced, stand still
+    start = len(target.animated_texts)
+    paladin.attack(target.player_id)
+    time.sleep(30)
+    paladin.attack(0)
+    time.sleep(1)
+    hits = _hits(target, target.pos, start, PHYSICAL)
+    top = int((5 * 60 + 50) * 30 * 0.99 / 100) // 2
+    print(f"\ncrossbow + bolts, distance 60, 30 s: max {top}, {len(hits)} hits {sorted(hits)}")
+    assert len(hits) >= 10, f"only {len(hits)} hits in 30 s (a shot every 2 s, ~90% hit): {hits}"
+    assert all(1 <= h <= top + 1 for h in hits), f"outside 1-{top}: {sorted(hits)}"
+    assert top * 0.3 <= statistics.mean(hits) <= top * 0.7, f"mean {statistics.mean(hits):.1f} of max {top}"
+
+
+def _expected_blocked(skill, atk, shield_skill, shield_def, turns=20000):
+    """7.4: the hit rolled as above, the block max (5 x shielding + 50) x def / 100 rolled the same way and taken
+    off; halved player against player."""
+    top = int((5 * skill + 50) * atk * 0.99 / 100)
+    block = int((5 * shield_skill + 50) * shield_def / 100)
+    total = 0
+    for _ in range(turns):
+        hit = (random.randint(0, top) + random.randint(0, top)) // 2
+        hit -= (random.randint(0, block) + random.randint(0, block)) // 2 if block else 0
+        total += max(0, hit) // 2
+    return total / turns
+
+
+def _hitter(new_player, attacker_pos, target, seconds=40):
+    knight = new_player(pos=attacker_pos, level=100, vocation=4, skills={2: 80}, storage={30001: 1},
+                        inventory={5: Item(MAGIC_SWORD)})
+    knight.set_fight_modes(fight=2, chase=1, safe=0)
+    start = len(target.animated_texts)
+    knight.attack(target.player_id)
+    time.sleep(seconds)
+    knight.attack(0)
+    time.sleep(1)
+    return sum(_hits(target, target.pos, start, PHYSICAL))
+
+
+def test_a_shield_blocks_melee_as_7_4(new_player):
+    """A magic sword (atk 48) in sword 80 hands against a knight with shielding 80 and a dragon shield (def 31) and
+    against the same knight with no shield: the shield takes off about what the 7.4 block formula says."""
+    a, b = _row2(2)
+    bare = new_player(pos=b, level=300, vocation=4, storage={30001: 1}, skills={5: 80})
+    bare_lost = _hitter(new_player, a, bare)
+    c, d = _row2(4)
+    shielded = new_player(pos=d, level=300, vocation=4, storage={30001: 1}, skills={5: 80},
+                          inventory={6: Item(DRAGON_SHIELD)})
+    shielded_lost = _hitter(new_player, c, shielded)
+    turns = 20
+    want_bare, want_shielded = _expected_melee(80, 48, 0) * turns, _expected_blocked(80, 48, 80, 31) * turns
+    print(f"\nmagic sword, sword 80, 40 s: bare lost {bare_lost} (7.4 ~{want_bare:.0f}), dragon shield / shielding 80 "
+          f"lost {shielded_lost} (7.4 ~{want_shielded:.0f})")
+    assert 0.6 * want_bare <= bare_lost <= 1.4 * want_bare
+    assert shielded_lost <= 0.6 * bare_lost, "the shield blocked too little"
+    assert 0.5 * want_shielded <= shielded_lost <= 1.6 * want_shielded
