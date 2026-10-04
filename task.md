@@ -977,13 +977,18 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 
 ### Magic level
 - [ ] Rookie (no vocation) magic level multiplier is 4.0; 7.4 used 3.0 (TW-Formulae, one source)
-- [ ] Mana needed per magic level: `1600 * multiplier^mlvl` with vocation multipliers
+- [x] Mana needed per magic level: `1600 * multiplier^mlvl` with vocation multipliers
+      2026-10-03 test_training.py: one cast short of the next level, the next cast levels it - ML 0->1 (1600, 80
+      utevo lux), knight ML 5 and 8 (8->9: 10.5 million), paladin ML 15 and 25 (25->26: 7.2 million), sorcerer ML 70
+      (1.26 million). The engine works in single precision (7 mana off at 7.2 million)
       (vocations.xml manamultiplier: sorcerer/druid 1.1, paladin 1.4, knight 3.0, none 4.0)
-- [ ] Mana spent counts toward magic level (spells and runes), RateMag applies
+- [x] Mana spent counts toward magic level (spells and runes), RateMag applies (test_training.py: utevo lux)
 - [ ] Magic level shown correctly in the client (stats packet mlvl + percent)
 
 ### Skills
-- [ ] Skill tries per level: `50 * multiplier^(skill-10)`-style formula per skill and vocation (vocations.xml)
+- [x] Skill tries per level: `50 * multiplier^(skill-10)`-style formula per skill and vocation (vocations.xml)
+      2026-10-03 test_training.py: a knight one try short of sword 100 (241,501 tries) and of 104 (353,582) levels
+      on the next hit
       2026-10-02: the multipliers are tibiantis-notes' "Skills" table (test_vocations.py); the formula not checked
 - [ ] Which actions train which skill: melee hits, shield blocks, distance, fishing; RateSkill applies
 - [ ] Fist fighting when no weapon; skills start at 10
@@ -1220,8 +1225,13 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
         test_formulas.py: skill 20 at 5 tiles hits under 55% of 20 bolts (old: 17 of 20)
         Melee with sword/club/axe: same formula as knights (vocations.xml multipliers all 1.0) - OK.
         Open: spear range (ours 5), spears stackable and breaking in 7.4?
-  - [ ] Tests for step 3 (melee, distance, stances, shield block): measure damage and blocks in game
+  - [x] Tests for step 3 (melee, distance, stances, shield block): measure damage and blocks in game
         against the 7.4 formulas - the formulas are built but not pinned by any test yet
+        2026-10-03 (asked by the user): test_combat_formulas.py reads every hit from the damage numbers over the
+        target (Thais street, no monsters near): HMM at magic power 100 hits 13-19 (7.4: 10-20 halved PvP) and at
+        380 38-75 (38-76); SD at power 410 284-304 (271-348), with a stone skin amulet 55-64 (1/5); a sword hitting
+        for at most 41 took 152-185 hp in 40 s off a bare target, 2-12 off one in 40 armor (7.4 armor formula
+        predicts ~198 and ~10). Distance and shield blocks not measured yet
 - [x] 7.4 formulas research (docs/reference-74/formulas.md): Berserk = level x 4 mana
       is the real 7.4 cost (TibiaWiki: until the 2007 summer update); monster healing rates; mana
       fluid 25-75 in 7.4 (ours 40-80); magic formula base x (mlv*3 + lv*2)/100 (tibiantis-notes).

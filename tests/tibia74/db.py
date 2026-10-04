@@ -87,7 +87,8 @@ class TestDatabase:
                          inventory: dict = None, group_id: int = 1,
                          health: int = None, mana: int = None, storage: dict = None,
                          premium_days: int = 0, maglevel: int = 0, skills: dict = None,
-                         experience: int = None, spells: list = None) -> Character:
+                         experience: int = None, spells: list = None, manaspent: int = 0,
+                         skill_tries: dict = None) -> Character:
         """New character on its own account. pos=None means 'spawn at the town temple'.
         storage: {key: value} player storage, e.g. {BEGINNER_SET_GIVEN: 1} to skip the first-login set.
         skills: {skill id: level}, 0 fist 1 club 2 sword 3 axe 4 distance 5 shielding 6 fishing.
@@ -123,6 +124,10 @@ class TestDatabase:
                 con.execute('UPDATE players SET maglevel = ? WHERE id = ?', (maglevel, guid))
             for skill, value in (skills or {}).items():
                 con.execute('UPDATE player_skills SET value = ? WHERE player_id = ? AND skillid = ?', (value, guid, skill))
+            for skill, count in (skill_tries or {}).items():     # tries already made towards the next skill level
+                con.execute('UPDATE player_skills SET count = ? WHERE player_id = ? AND skillid = ?', (count, guid, skill))
+            if manaspent:                                         # mana already spent towards the next magic level
+                con.execute('UPDATE players SET manaspent = ? WHERE id = ?', (manaspent, guid))
             if spells is None:
                 spells = learnable_spells(vocation) if vocation else []
             for spell in spells:
