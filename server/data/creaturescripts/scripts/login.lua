@@ -3,6 +3,7 @@
 -- whose premium ran out loses what premium gave it (premiumExpired below).
 
 dofile(getDataDir() .. 'creaturescripts/lib/premium_areas.lua')
+dofile(getDataDir() .. 'lib/houses.lua')
 
 local STORAGE_BEGINNER_SET = 30001
 
@@ -53,6 +54,7 @@ end
 
 function onLogin(cid)
 	premiumExpired(cid)
+	showHouseRequestResults(cid)       -- a house asked for with /buyhouse: handed over or cancelled at the server save
 
 	if getPlayerStorageValue(cid, STORAGE_BEGINNER_SET) > 0 then
 		return TRUE

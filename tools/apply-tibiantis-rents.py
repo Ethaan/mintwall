@@ -7,8 +7,9 @@ auction pays "the bid plus the first rent [...] to their depot of the correspond
 
 The list: https://tibiantis.online/?page=houses, world Ancestra, one page per town and type (house / guildhouse);
 Tibiantis has no Ankrahmun houses. A house matches by its town and its name (case, apostrophes and spaces evened out,
-plus the few spellings listed in ALIASES). A house without a match gets the median gold per house tile of the matched
-houses of its town (all matched houses for a town without any), times its house tiles on the map, rounded to 10 gold.
+plus the spellings in ALIASES - none needed so far). A house without a match gets the median gold per house tile of
+the matched houses of its town (all matched houses for a town without any), times its house tiles on the map, rounded
+to 10 gold.
 No house is left with rent 0.
 """
 import argparse
@@ -33,7 +34,8 @@ JSON = ROOT / "docs" / "reference-74" / "tibiantis" / "houses.json"
 URL = "https://tibiantis.online/?page=houses"
 TOWNS = ["Ab'Dendriel", "Carlin", "Darashia", "Edron", "Kazordoon", "Thais", "Venore"]
 
-# our name -> Tibiantis' name, for houses whose names differ by more than case, apostrophes and spaces (same town)
+# our name -> Tibiantis' name, for houses whose names differ by more than case, apostrophes and spaces (same town);
+# none so far: all 691 houses of the 7 towns Tibiantis has match as they are (2026-10-04)
 ALIASES = {
 }
 
@@ -49,8 +51,9 @@ def fetch():
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
             page = urllib.request.urlopen(req, timeout=60).read().decode("utf-8", "replace")
             rows = ROW.findall(page)
-            if page.count("menulink_hs") != len(rows):
-                raise SystemExit(f"{town} gh={gh}: {page.count('menulink_hs')} houses on the page, {len(rows)} parsed")
+            listed = page.count("page=HouseAuction&id=")          # each house's link (the page has other links)
+            if listed != len(rows):
+                raise SystemExit(f"{town} gh={gh}: {listed} houses on the page, {len(rows)} parsed")
             for hid, name, desc, rent, sqm, status in rows:
                 houses.append({"id": int(hid), "town": town, "guildhouse": bool(gh), "name": _html(name),
                                "description": _html(desc), "rent": int(rent), "sqm": int(sqm),
@@ -75,7 +78,7 @@ def key(name):
 
 
 def our_houses():
-    xml = HOUSES_XML.read_text("latin-1")
+    xml = HOUSES_XML.read_bytes().decode("latin-1")           # bytes: the line endings stay as they are
     houses = {}
     for m in re.finditer(r"<house\s([^>]*?)/>", xml):
         a = dict(re.findall(r'(\w+)="([^"]*)"', m.group(1)))
@@ -162,7 +165,7 @@ def main():
         hid = int(re.search(r'houseid="(\d+)"', m.group(0)).group(1))
         return re.sub(r'rent="\d*"', f'rent="{rents[hid]}"', m.group(0))
     new = re.sub(r"<house\s[^>]*?/>", repl, xml)
-    HOUSES_XML.write_text(new, "latin-1", newline="")
+    HOUSES_XML.write_bytes(new.encode("latin-1"))
     print(f"rents written to {HOUSES_XML.relative_to(ROOT)}")
 
 

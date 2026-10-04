@@ -28,6 +28,7 @@
 #include <string>
 #include <list>
 #include <map>
+#include <set>
 
 #include <boost/algorithm/string/predicate.hpp>
 
@@ -99,11 +100,17 @@ public:
 		return NULL;
 	}
 
+	// the towns a depot locker on the map opens (Depot::readAttr): only those take mail - the map has 47 towns
+	// (Fibula, Senja, ...), but in 7.4 only the 8 depot towns had a post office
+	void addDepotTown(uint32_t _townid) {depotTowns.insert(_townid);}
+	bool hasDepot(uint32_t _townid) const {return depotTowns.find(_townid) != depotTowns.end();}
+
 	TownMap::const_iterator getTownBegin() const{return townMap.begin();}
 	TownMap::const_iterator getTownEnd() const{return townMap.end();}
 
 private:
 	TownMap townMap;
+	std::set<uint32_t> depotTowns;
 };
 
 #endif

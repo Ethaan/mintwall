@@ -345,7 +345,7 @@ def test_mission_9_the_bag_needs_500_oz(new_player, items, world_map):
     use_map_item(p, items, KEVIN_LEFT_DOOR, "closed door")
     assert p.wait_for(lambda: p.pos == KEVIN_LEFT_DOOR, timeout=3), (p.pos, p.text_messages[-2:])
     use_map_item(p, items, BAG_CHEST, "chest")
-    assert p.wait_for(lambda: p.messages("You have found a letterbag. It weighs 500.00 oz. It is too heavy."),
+    assert p.wait_for(lambda: p.messages("You have found a letterbag. Weighing 500.00 oz it is too heavy."),
                       timeout=3), p.text_messages[-2:]
     assert not carries(p, "letterbag")
 

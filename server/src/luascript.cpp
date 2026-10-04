@@ -1895,6 +1895,9 @@ void LuaScriptInterface::registerFunctions()
 	//getItemWeight(uid)
 	lua_register(m_luaState, "getItemWeight", LuaScriptInterface::luaGetItemWeight);
 
+	//getItemWeightById(itemid, <optional> count)
+	lua_register(m_luaState, "getItemWeightById", LuaScriptInterface::luaGetItemWeightById);
+
 	//getItemIdByName(name)
 	lua_register(m_luaState, "getItemIdByName", LuaScriptInterface::luaGetItemIdByName);
 
@@ -7536,6 +7539,33 @@ int LuaScriptInterface::luaGetItemWeight(lua_State *L)
 	}
 
 	lua_pushnumber(L, item->getWeight());
+	return 1;
+}
+
+int LuaScriptInterface::luaGetItemWeightById(lua_State *L)
+{
+	//getItemWeightById(itemid, <optional> count)
+	//the weight in oz of an item that does not exist yet (Item::getWeight: a stackable item weighs its count times
+	//its type's weight, any other item - a rune whose "count" is its charges - its type's weight); a container's
+	//contents are not counted: the caller adds them (quests/system.lua)
+	uint32_t count = 1;
+	if(lua_gettop(L) > 1){
+		count = popNumber(L);
+	}
+	uint32_t itemId = popNumber(L);
+
+	const ItemType& it = Item::items[itemId];
+	if(it.id == 0){
+		reportErrorFunc(getErrorDesc(LUA_ERROR_ITEM_NOT_FOUND));
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	double weight = it.weight;
+	if(it.stackable){
+		weight *= std::max((uint32_t)1, count);
+	}
+	lua_pushnumber(L, weight);
 	return 1;
 }
 

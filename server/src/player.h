@@ -660,6 +660,8 @@ protected:
 	uint32_t actionTaskEvent;
 	uint32_t nextStepEvent;
 	uint32_t walkTaskEvent;
+	bool steppingByClient;   //Game::playerMove is moving us one step
+	bool teleportedOnStep;   //that step ran into a teleport (item or step-in script); cleared by the next move
 	SchedulerTask* walkTask;
 
 	uint32_t idleTime;

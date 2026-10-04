@@ -56,7 +56,8 @@ local function tree(cid)
 	end
 	local key = doPlayerAddItem(cid, COPPER_KEY, 1)
 	if key == nil or key == false or key == 0 then
-		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You have found a copper key, but you cannot carry it.")
+		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, string.format("You have found a copper key. Weighing %.2f oz it is too heavy.",
+			getItemWeightById ~= nil and getItemWeightById(COPPER_KEY, 1) or 1))   -- Cip's words (quests/system.lua)
 		return true
 	end
 	doSetItemActionId(key, KEY_3899)

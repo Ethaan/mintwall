@@ -127,61 +127,81 @@ All other instant/rune mana costs and magic-level requirements match TI-Spells, 
 
 ## 4. Fluids and healing spells/runes
 
-The 7.4 heal is `base × P / 100`, where **P = 2×level + 3×ML, with a floor of P = 100**. Source: TI-Calc `countHealing` (`if (power < 100) power = 100`). **C1** for the floor, but see §5, where TN-Classes shows the same floor for damage. The base min/max come from TN-Magic and TI-Calc. **C2** where both agree.
+Updated 2026-10-04: the per-spell values, sources and verdicts are in **`spell-formulas.md`** ("Healing spells and
+runes"); the rows below are the current state, checked against the scripts.
+
+The 7.4 heal is `base × P / 100`, where **P = 2×level + 3×ML, with a floor of P = 100**. Source: TI-Calc `countHealing` (`if (power < 100) power = 100`); TN-Magic and OTHire agree (spell-formulas.md). Ours: every healing script returns `magicPower(level, maglevel) × min .. × max` (`data/compat.lua:71` `magicPower` = `max(100, level*2 + mlvl*3)`), or `COMBAT_FORMULA_LEVELMAGIC`, which has the same floor (§5).
 
 | Item | 7.4 | Conf. | Ours | Match |
 |---|---|---|---|---|
-| Mana fluid | 25-75 mana (flat) | TI-Calc and TN-Magic **C2** (OTL-Mech: 20-75 before 7.6) | `actions/scripts/fluids.lua:41` `math.random(40, 80)` | **No**: avg 60 vs 50 |
-| Life fluid | 25-75 HP (flat) | TI-Calc **C1**; OTL-Mech "≈25-75" **C2** | `fluids.lua:52` `math.random(40, 80)` | **No** |
-| exura | 10-30 %P | TN-Magic, TI-Calc **C2** (OTL-Mech 8-33 %) | `healing/light_healing.lua:9-13`: 10-35 %P, min 15 | ~Yes (no P-floor) |
-| exura gran | 20-60 %P | **C2** | `intense_healing.lua:9-10`: 20-60 %P | **Yes** (no P-floor) |
-| exura vita | 200-300 %P | **C2** (TN-Magic, TI-Calc) | `ultimate_healing.lua:9-10`: 220-260 %P | Avg 240 vs 250; narrower spread |
-| exura sio | 7.4 "classic" 80-160 %P (Tibiantis buffed to 160-240) | TN-Magic **C1** | `heal_friend.lua:7`: 100 %P+30 … 135 %P | Roughly |
-| exura gran mas res | 160-240 %P | **C2** | `mass_healing.lua:6`: 120 %P+30 … 150 %P | **No** (about 30% weaker) |
-| IH rune (adura gran) | 40-100 %P | **C2** | `intense_healing_rune.lua:9-10`: 40-75 %P | **No** (avg 57 vs 70 %P) |
-| UH rune (adura vita) | fixed 250 %P (= 250 at P≤100) | **C2** | `ultimate_healing_rune.lua:10-14`: 210-250 %P, min 250 | Slightly low (avg 230 vs 250 %P) |
+| Mana fluid | 25-75 mana (flat) | TI-Calc and TN-Magic **C2** (OTL-Mech: 20-75 before 7.6) | `actions/scripts/fluids.lua:39` `math.random(25, 75)` | Yes |
+| Life fluid | 25-75 HP (flat) | TI-Calc **C1**; OTL-Mech "≈25-75" **C2** | `fluids.lua:48` `math.random(25, 75)` | Yes |
+| exura | 10-30 %P | TN-Magic, TI-Calc **C2** | `healing/light_healing.lua`: 10-30 %P | Yes |
+| exura gran | 20-60 %P | **C2** | `intense_healing.lua`: 20-60 %P | Yes |
+| exura vita | 200-300 %P | **C2** (TN-Magic, TI-Calc) | `ultimate_healing.lua`: 200-300 %P | Yes (measured, spell-formulas.md) |
+| exura sio | 7.4 "classic" 80-160 %P (Tibiantis buffed to 160-240) | TN-Magic **C1** | `heal_friend.lua`: 80-160 %P | Yes (fixed 2026-10-04) |
+| exura gran mas res | 160-240 %P | **C2** | `mass_healing.lua`: 160-240 %P | Yes |
+| IH rune (adura gran) | 40-100 %P | **C2** | `intense_healing_rune.lua`: 40-100 %P | Yes |
+| UH rune (adura vita) | fixed 250 %P (= 250 at P≤100) | **C2** | `ultimate_healing_rune.lua`: 250 %P, not random | Yes (measured) |
 
 Life ring (7.4): 1 HP and 1 mana per 3 s for 20 min. Ring of healing (7.4): 1 HP and 1 mana per 1 s for 7.5 min. Sources: TN-Magic, and OTL-Mech's "pre-7.6" values, **C2**. Our ring regeneration (`movement.cpp:824` item regen) was not checked.
 
 ## 5. Magic damage formula
+
+Updated 2026-10-04: the per-spell values, sources, the open questions (sudden death, force strike, berserk) and the
+measurements are in **`spell-formulas.md`** ("Attack spells and runes", "Fields and bombs", "Measured"). The table
+below is a summary of the current scripts.
 
 - 7.4: `damage = base × P / 100`, with `P = mlv×3 + lv×2` and a floor of **P = 100** (magic power ≥ 1). **C2**:
   - TN-Magic formula.
   - TN-Classes "magic power" table, which shows 1.00 for every low-power row.
   - TI-Calc P-floor.
   - OTL-Mech `MAGIC_FORMULA = level*2 + magiclevel*3`, "if below base value, base value is used".
-- Ours: `server/src/combat.cpp:80-84` `FORMULA_LEVELMAGIC`: `(lv*2 + ml*3) * a + b`. Same core (**match**), but **there is no P ≥ 100 floor**. For example, a level-8, ML-0 LMM does 1-3 damage here but 10-20 in 7.4.
-- Our range is `[|mina|×P + |minb|, |maxa|×P]`, from `combat.cpp:82-83`, with minb usually 0 or 30.
+- Ours: `server/src/combat.cpp:80-88` `FORMULA_LEVELMAGIC`: `P = max(100, lv*2 + ml*3)`, range `[|mina|×P + |minb|, |maxa|×P + |maxb|]`. **Match** (the floor was added 2026-09). Scripts with a callback use `magicPower()` (`data/compat.lua:71`), the same P.
+- Damage over time (poison storm, envenom, soulfire, fields) is not halved player against player; direct damage is (spell-formulas.md).
 
-| Spell | 7.4 base %P (TN-Magic) | Ours %P (`data/spells/scripts/attack/*.lua:4-5`) | Verdict |
+| Spell | 7.4 base %P | Ours %P (`data/spells/scripts/attack/*.lua`) | Verdict |
 |---|---|---|---|
 | Light Magic Missile | 10-20 | 10-20 | OK |
-| Heavy Magic Missile | 20-40 | 20-40 | OK |
-| Fireball | 15-25 | 16-33 | ours higher |
-| Great Fireball | 35-65 | 40 (+30) - 70 | ours higher |
-| Explosion | 20-100 | 15-90 | ~OK |
-| Sudden Death | 130-170 | 125 (+30) - 170 | OK |
-| Energy/Flame Strike | 35-55 (TN) / 25-55 (OTL) | 25-55 | OK per OTL; TN conflicts |
-| Force Strike | OTL 18(-30)-33 | 20-50 | ours higher (C1) |
-| Fire Wave | 20-40 | 25 (+30) - 60 | **ours ~50% higher** |
-| Energy Beam | 40-80 | 68-130 | **ours ~65% higher** |
-| Great Energy Beam | 40-200 | 130-170 | avg 150 vs 120, much less variance |
-| Energy Wave | 100-200 | 115-190 | OK |
-| Ultimate Explosion | 200-300 (OTL 230(-30)-300) | 192-300 | OK |
-| Poison Storm | 150-250 | 90-150 | **ours ~40% lower** |
+| Heavy Magic Missile | 20-40 | 20-40 | OK (measured, `test_combat_formulas.py`) |
+| Fireball | 15-25 | 15-25 | OK (fixed 2026-10-04) |
+| Great Fireball | 35-65 | 35-65 | OK (fixed) |
+| Explosion | 20-100 | 20-100 | OK (fixed) |
+| Sudden Death | 130-170 | 125 (+30) - 170 | open: spell-formulas.md Q1 |
+| Energy / Flame Strike | 35-55 (TN, OTHire) | 35-55 | OK (fixed) |
+| Force Strike | 35-55 ? (OTHire; OTL 18(-30)-33) | 20-50 | open: spell-formulas.md Q2 |
+| Fire Wave | 20-40 | 20-40 | OK |
+| Energy Beam | 40-80 | 40-80 | OK |
+| Great Energy Beam | 40-200 | 40-200 | OK |
+| Energy Wave | 100-200 | 100-200 | OK (fixed) |
+| Ultimate Explosion | 200-300 | 200-300 | OK (fixed) |
+| Poison Storm | no hit; poison of 150-250 %P, 5% of the rest every 4 s | the same (`poison_storm.lua`) | OK (fixed) |
+| Envenom | no hit; poison of 50-90 %P | the same (`envenom.lua`) | OK (fixed) |
+| Soulfire | no hit; burning of 100-140 %P, 10 a turn | the same, a turn every 10 s (`soulfire.lua`) | OK (turn length: spell-formulas.md Q4) |
+| Berserk | level-based (§2) | (2L+3ML) × 1.4..1.65 | open: §2, spell-formulas.md Q3 |
+| Burst arrow | 0-60 %P (§6.1) | 0-60 %P (`weapons/scripts/explosive_arrow.lua`) | OK |
+| Fields (fire, energy, poison) | see spell-formulas.md "Fields and bombs" | `items.xml` 1487-1504 | measured, `test_fields.py` |
 
 ## 6. Melee, distance, armor and defense
 
 ### 6.1 Players attacking
 
+Updated 2026-10-04 to the current code; distance measured in `tests/test_distance.py`.
+
 | Item | 7.4 | Conf. | Ours | Match |
 |---|---|---|---|---|
-| Melee max | `floor((5×skill+50) × atk' × 0.99 / 100)`, about 0.05·skill·atk + 0.5·atk | TN-DmgCalc **C1**. OTL-Mech gives "0.06×skill×atk×d" for ≤8.0 **C1** | `weapons.cpp:164-170` `ceil(skill/20*atk + atk/attackFactor)` = 0.05·skill·atk + **1.0**·atk | Ours adds a full atk instead of 0.5 atk (e.g. skill 70, atk 40: 180 vs 158) |
-| Roll distribution | average of two 0-99 rolls (triangular) | TN-DmgCalc **C1** | `random_range(0,max,DISTRO_NORMAL)` (`weapons.cpp:750`) | similar shape |
-| Stance multipliers | offensive atk ×1.2 / def ×0.6; balanced 1.0 / 1.0; defensive atk ×0.6 / def ×1.8. With no target, defense uses defensive stance | TN-Melee **C1**. OTL-Mech d = 1 / 0.7-0.75 / 0.5 **C1** | `player.cpp:529-548` attack factor 1.0/1.2/2.0 is a *divisor* applied only to the `+atk` term (operator precedence in `weapons.cpp:169`); defense factor 1.0/1.2/2.0 is a multiplier | **No**: offensive gets no ×1.2 and keeps full defense; balanced gets +20% defense |
-| Distance max | same formula as melee, with atk' = bow + ammo atk | TN-DmgCalc **C1** | `weapons.cpp:172-181` `((skill*atk)/20 + skill)/factor`: adds *skill*, not atk | **No** (formula shape differs) |
-| Distance min | none (0) in the TN calc; OTL-Mech gives level/5 | conflicting | `weapons.cpp:1003-1010` ceil(level×0.2) vs monsters, ×0.1 vs players | ? |
-| Distance hit chance | `min(skill / (15×d − 1), 1)`, where adjacent counts as d = 5 | TN distance_calculator **C1** | `weapons.cpp:869-915` TFS-style table per distance, capped at 75% (1-handed) or 90% (ammo) | **No** (different model) |
+| Melee max | `floor((5×skill+50) × atk × stance × 0.99 / 100)`, about 0.05·skill·atk + 0.5·atk | TN-DmgCalc **C1**. OTL-Mech gives "0.06×skill×atk×d" for ≤8.0 **C1** | `weapons.cpp:165-170` `getMaxMeleeWeaponDamage`: the same formula, stance from `Player::getAttackMultiplier` | Yes |
+| Roll distribution | average of two 0-99 rolls (triangular) | TN-DmgCalc **C1** | `random_range(0, max, DISTRO_NORMAL)` (`weapons.cpp:451, 751`) | similar shape |
+| Stance multipliers | offensive atk ×1.2 / def ×0.6; balanced 1.0 / 1.0; defensive atk ×0.6 / def ×1.8. With no target, defense uses defensive stance | TN-Melee **C1**. OTL-Mech d = 1 / 0.7-0.75 / 0.5 **C1** | `player.cpp:586-602` `getAttackMultiplier` 1.2 / 1.0 / 0.6, `getDefenseMultiplier` 0.6 / 1.0 / 1.8 | Yes (melee and distance) |
+| Distance max | the melee formula with atk = bow + ammunition atk; 7.4 bows and crossbows have **no attack** (TibiaWiki "attack = 0", 2006-2007), so it is the ammunition's | TN-DmgCalc **C1**, TibiaWiki | `weapons.cpp:172-182` `getMaxDistanceWeaponDamage` = the melee formula; `WeaponDistance::getWeaponDamage` (`weapons.cpp:985-1019`) adds the bow's attack, which is none: bow 2456 and crossbow 2455 have no `attack` in `items.xml` | Yes |
+| Ammunition attack | arrow 25, bolt 30, poison arrow 20, **power bolt 40** (TibiaWiki revs 55068 / 55062 / 93103 / 78528, before the summer 2007 update) | TibiaWiki **C1** (TN-Poison says poison arrows have 10 attack) | `items.xml`: arrow 25, bolt 30, poison arrow 20, power bolt 40 (was 50) | Yes; poison arrow 20 vs TN 10 open |
+| Distance min | none (0) in the TN calc; OTL-Mech gives level/5 | conflicting | `weapons.cpp:1008-1016` ceil(level×0.2) vs monsters, ×0.1 vs players | ? |
+| Distance hit chance | `91% × min(skill / (15×d − 1), 1)`, where adjacent counts as d = 5; a miss lands on a tile of the 3×3 around the target | TN distance_calculator **C1** | `weapons.cpp:869-917`: the ammunition table (`maxHitChance` 90, bows and crossbows): per distance `a × min(skill, cap)`, e.g. d 5 `1.2 × min(skill, 74) + 1`, d 2 `3.2 × min(skill, 28)`. Within 2 points of the 7.4 formula at every skill for d 1, 2, 4, 5, 6 (d 3: 3 points under at skill 44, 88 vs 91); caps 89-90 vs 91. d 7 is beyond the bow's range. Hand-thrown weapons (spears, stars, knives) use the one-handed table capped at 75%, not checked. A miss lands on a random tile of the 3×3, the target's included (`weapons.cpp:932-963`) | Yes for bows and crossbows (measured: skill 30 at d 5 and adjacent about 37%, at d 2 about 91%) |
+| Ammunition used up | arrows and bolts are used up, hit or miss; nothing lands on the floor | tibiantis-notes ("bolts used per hour") **C1** | used up | Yes (measured) |
+| Power bolt | atk 40, the bolt formula | TibiaWiki **C1** | atk 40 (`items.xml` 2547) | Yes (measured: skill 60 at most 138, halved 69) |
+| Burst arrow | 0-60% of magic power (P = 2×level + 3×ML, at least 100) on every creature in the 3×3 around the tile it lands on, physical; armor applies, shields do not | TN-Magic "Burst Arrow 0 60", TN distance_calculator, TibiaWiki rev 93104 **C2** | `weapons/scripts/explosive_arrow.lua`: `LEVELMAGIC 0, 0, -0.6, 0` (was 0-55%), 3×3, armor yes, shield no; a miss still bursts where it lands | Yes (measured) |
+| Poison arrow | an arrow hit (the distance formula, atk 20) that also poisons with power 50: 5% of the rest, rounded up, every 4 s | TN-Poison **C1** | `weapons/scripts/poison_arrow.lua`: a physical `COMBAT_FORMULA_SKILL` hit with the arrow's attack, then a delayed poison 3×4, 2×9, 1×20 = 50 every 4 s; a miss does nothing (it used to be poison damage from magic level) | Yes (measured) |
+| Shield vs distance | shields do not block distance attacks | TN distance_calculator ("Shielding does not reduce damage for PvE or PvP distance attacks") **C1** | `WeaponDistance` sets `blockedByArmor` only (`weapons.cpp:762`) | Yes |
 
 ### 6.2 Defense and armor (players receiving hits)
 
@@ -266,13 +286,13 @@ Measured on our server (tests/test_exhaustion.py): exura 1.09 s, exori vis 1.10 
 2. **Heal amount outliers:** Dwarf Geomancer 75-325 (7.4: 75-125, rolled every 1 s at 50%), and Hero 200-350 (7.4: 200-250).
 3. **Player shield blocking is about 3x weaker than in 7.4, and the stances are wrong** (§6.1-6.2). Knights take much more melee damage. Combined with monster melee maxima above the 7.4 formula (DL 250 vs 204), this makes melee creatures much deadlier.
    - Files: `server/src/player.cpp:497-548`, `server/src/weapons.cpp:164-181`, `server/src/creature.cpp:892-932`.
-4. **No magic-power floor (P ≥ 100)** for rune, spell and heal formulas. Low-level characters get tiny LMM/HMM/IH/exura values (for example, LMM at level 8 does 1-3 damage instead of 10-20). File: `server/src/combat.cpp:80-84`, or per-script callbacks.
-5. **Fluids give 40-80 instead of 25-75** (mana and life). File: `server/data/actions/scripts/fluids.lua:41,52`.
-6. **Spell damage bases off:**
+4. *(Fixed 2026-09: `combat.cpp` and `compat.lua` `magicPower()` floor P at 100, §4-5.)* **No magic-power floor (P ≥ 100)** for rune, spell and heal formulas. Low-level characters get tiny LMM/HMM/IH/exura values (for example, LMM at level 8 does 1-3 damage instead of 10-20). File: `server/src/combat.cpp:80-84`, or per-script callbacks.
+5. *(Fixed: `fluids.lua` 25-75, §4.)* **Fluids give 40-80 instead of 25-75** (mana and life). File: `server/data/actions/scripts/fluids.lua:41,52`.
+6. *(Fixed 2026-10-04 except sudden death, force strike and berserk: §5 and spell-formulas.md.)* **Spell damage bases off:**
    - Energy Beam about +65%, Fire Wave about +50%.
    - Poison Storm about −40%, Mass Healing about −30%, IH rune about −20%.
    - Great Energy Beam and Berserk have the wrong spread.
    - Files: `server/data/spells/scripts/attack/*.lua`, `server/data/spells/scripts/healing/*.lua`.
 7. **Promoted regeneration:** Elite Knight regenerates mana 2x and HP 1.33x too fast; Royal Paladin and Paladin are 11-14% too slow; Master Sorcerer and Elder Druid HP is 20% too fast. File: `server/data/vocations.xml` lines 33, 53, 63, 73, 83.
-8. **Distance formula** adds skill instead of attack and uses the TFS hit-chance table (`weapons.cpp:172-181, 869-915`). Monsters block only def/2..def with no skill scaling, so our monsters are easier for melee and distance damage.
+8. *(Distance fixed: the melee formula with the ammunition attack, a 7.4-like hit table, §6.1. Monster blocking is §6.3, not rechecked.)* **Distance formula** adds skill instead of attack and uses the TFS hit-chance table (`weapons.cpp:172-181, 869-915`). Monsters block only def/2..def with no skill scaling, so our monsters are easier for melee and distance damage.
 9. **Minor:** rookie ML constant 4.0 vs 3.0 (`vocations.xml:3`), and a few mana costs that differ from Tibiantis but are unconfirmed for real 7.4 (§3).

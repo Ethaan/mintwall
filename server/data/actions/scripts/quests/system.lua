@@ -508,6 +508,39 @@ local function copyInto(container, source)
 	end
 end
 
+-- The weight in oz of one reward with what comes inside it (REWARDS contents, or the map container it is copied from).
+-- getItemWeightById is ours (luascript.cpp); a server built before it weighs a scratch item instead.
+local function typeWeight(itemid, count)
+	if getItemWeightById ~= nil then
+		return getItemWeightById(itemid, count) or 0
+	end
+	local scratch = doCreateItemEx(itemid, count)
+	return scratch and getItemWeight(scratch) or 0
+end
+
+local function contentsWeight(contents)
+	local total = 0
+	for _, inner in ipairs(contents or {}) do
+		total = total + typeWeight(inner[1], inner[2] or 1)
+	end
+	return total
+end
+
+local function weight(reward)
+	if reward.source ~= nil then
+		return getItemWeight(reward.source.uid)            -- a map item: Container::getWeight counts its contents
+	end
+	return typeWeight(reward.itemid, reward.count) + contentsWeight(reward.contents)
+end
+
+-- Cip's words, as Nostalrius (the 7.7 server rebuilt from Cip's files, data/actions/scripts/misc/chests.lua) has
+-- them: "You have found %s. Weighing %d.%02d oz %s too heavy." - "they are" for a stack of more than one
+local function tooHeavy(reward, oz)
+	local stack = isItemStackable(reward.itemid) and reward.count > 1
+	return string.format("You have found %s. Weighing %.2f oz %s too heavy.", describe(reward.itemid, reward.count), oz,
+		stack and "they are" or "it is")
+end
+
 -- one reward: {itemid, count, source} (source = the map item to copy contents / action id from)
 local function give(cid, reward)
 	local uid = doPlayerAddItem(cid, reward.itemid, reward.count, false)
@@ -585,11 +618,17 @@ function onUse(cid, item, frompos, item2, topos)
 	for _, reward in ipairs(rewards) do
 		local uid = give(cid, reward)
 		if uid == nil then
+			local oz, free = weight(reward), getPlayerFreeCap(cid)   -- the cap left by the parts given so far
 			for _, g in ipairs(given) do
 				doRemoveItem(g.uid, g.count)   -- only what was given: gold may have joined a stack they had
 			end
-			doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You have found " .. describe(reward.itemid, reward.count)
-				.. ", but you cannot carry it.")
+			if oz > free then
+				doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, tooHeavy(reward, oz))
+			else
+				-- light enough, but no free slot or container room: no Cip text known for this
+				doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "You have found " .. describe(reward.itemid, reward.count)
+					.. ", but you have no room to take it.")
+			end
 			return true
 		end
 		table.insert(given, {uid = uid, count = reward.count})

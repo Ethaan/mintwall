@@ -7,16 +7,23 @@ list), "aleta grav" facing a door: who may open that door - and "alana sio <name
 Everyone else can neither open a house door nor step into the house.
 
 The engine: house.cpp (Door::canUse, House::getHouseAccessLevel, kickPlayer, setAccessList), housetile.cpp
-(__queryAdd: "You are not invited."), spells.cpp (the House* spells), commands.cpp (/owner, /gethouse, /buyhouse).
+(__queryAdd: "You are not invited."), spells.cpp (the House* spells), commands.cpp (/owner, /gethouse). Getting a
+house: /buyhouse (talkactions/scripts/buyhouse.lua, data/lib/houses.lua), handed over at the next server save.
 The houses used are the Sunset Homes flats in Thais (one door each; no other test uses them)."""
 import functools
+import json
 import re
+import socket
+import sqlite3
 import subprocess
 import time
 
 import pytest
 
-from tibia74 import BACKPACK, EAST, WEST, SOUTHWEST, GameClient, Item, RIGHT, SERVER_DIR
+from tibia74 import (BACKPACK, EAST, NORTH, NORTHWEST, SOUTHWEST, WEST, GameClient, Item, RIGHT, SERVER_DIR,
+                     ServerProcess)
+from tibia74.db import Character, TestDatabase as _Database      # (not Test*: pytest would try to collect it)
+from tibia74.server import ROOT, RUN_DIR
 from tibia74.otbm import read_tiles, read_towns
 
 WORLD = SERVER_DIR / "data" / "world"
@@ -27,7 +34,6 @@ NOT_USABLE = "You can not use this object."          # RET_CANNOTUSETHISOBJECT: 
 NOT_INVITED = "You are not invited."                # RET_PLAYERISNOTINVITED: a house tile you may not enter
 NOT_POSSIBLE = "Sorry, not possible."
 SWORD, GOLD = 2376, 2148
-TILE_PRICE = 100                                    # config.lua HousePrice: /buyhouse costs this per house tile
 
 
 class Flat:
@@ -405,36 +411,396 @@ def test_an_uninvited_player_logging_in_in_the_house_appears_at_the_entrance(new
 
 # ---------------------------------------------------------------------------------------------- owning
 
-def test_buyhouse_needs_premium_and_the_price(new_player, db, login, items):
-    """/buyhouse (commands.xml, access 0), said in front of the door facing it, is how a player gets a house today:
-    an OT command - in 7.4 houses were auctioned on tibia.com. Premium only; config.lua HousePrice gold a house tile,
-    taken from what the player carries."""
+def test_every_house_has_a_rent():
+    """Rents from Tibiantis' house list (tools/apply-tibiantis-rents.py, docs/reference-74/tibiantis/houses.json);
+    the houses it does not have (Ankrahmun) at its median gold per house tile. A rent of 0 would never be charged
+    (Houses::payHouses skips it) and /buyhouse would hand the house over for nothing."""
+    houses = _houses_xml()
+    free = [f"{hid} {h['name']}" for hid, h in houses.items() if int(h.get("rent") or 0) <= 0]
+    assert not free, f"{len(free)} houses without a rent: {free[:10]}"
+    tibiantis = {(h["town"], h["name"]): h["rent"]
+                 for h in json.loads((ROOT / "docs" / "reference-74" / "tibiantis" / "houses.json")
+                                     .read_text(encoding="utf-8"))["houses"]}
+    assert tibiantis[("Thais", "Sunset Homes, Flat 22")] == int(houses[FLAT_22.id]["rent"]) == FLAT_22_RENT
+    assert tibiantis[("Thais", "Sunset Homes, Flat 23")] == int(houses[FLAT_23.id]["rent"]) == FLAT_23_RENT
+    assert tibiantis[("Thais", "Spiritkeep")] == int(houses[SPIRITKEEP]["rent"]) == SPIRITKEEP_RENT
+    assert houses[SPIRITKEEP].get("guildhall") == "true" and not houses[FLAT_22.id].get("guildhall")
+
+
+def test_the_guildhall_list_of_the_scripts_matches_the_houses_file():
+    """data/lib/houses.lua keeps the guildhall ids itself (the engine ignores guildhall="true", scripts cannot read
+    files)."""
+    lua = (SERVER_DIR / "data" / "lib" / "houses.lua").read_text("latin-1")
+    listed = {int(i) for i in re.findall(r"\d+", re.search(r"GUILDHALLS = \{(.*?)\}", lua, re.S).group(1))}
+    assert listed == {hid for hid, h in _houses_xml().items() if h.get("guildhall") == "true"}
+
+
+def test_buyhouse_away_from_a_door_explains_itself(new_player):
+    p = new_player(pos=FLAT_01.beside, premium_days=30, storage=BEGINNER_SET)
+    assert any("Stand in front of the door" in t for t in _say_and_read(p, "/buyhouse", "door"))
+    assert any("has not asked for a house" in t for t in _say_and_read(p, "/cancelhouse", "house"))
+
+
+def test_a_new_owner_puts_everyone_out(new_player, db, login, items):
+    """House::setHouseOwner puts out everyone in the house (the old owner and his guests) when the owner changes."""
     flat = FLAT_22
-    price = flat.tiles * TILE_PRICE
-    assert price == 1300
+    owner = _owner(new_player, db, login, flat, pos=flat.inside)
+    guest = db.create_character(pos=FLAT_22_ROOM, town_id=THAIS, storage=BEGINNER_SET)
+    _set_house_list(owner, "aleta sio", [guest.name])
+    g = login(guest)
+    assert g.pos == FLAT_22_ROOM, g.pos
+    heir = db.create_character(pos=THAIS_ROAD, premium_days=30, town_id=THAIS, storage=BEGINNER_SET)
+    gm = new_player(pos=flat.further, group_id=3, storage=BEGINNER_SET)
+    gm.say(f"/owner {heir.name}")
+    assert owner.wait_for(lambda: owner.pos == flat.entry, timeout=5), f"the old owner is still at {owner.pos}"
+    assert g.wait_for(lambda: g.pos == flat.entry, timeout=5), f"his guest is still at {g.pos}"
+    assert gm.wait_for(lambda: flat.name in _house_of(gm, heir.name), timeout=5), _house_of(gm, heir.name)
 
-    free = new_player(pos=flat.entry, premium_days=0, storage=BEGINNER_SET, inventory={RIGHT: Item(GOLD, 100)})
-    free.turn(WEST)
-    time.sleep(0.3)
-    assert "You need a premium account." in _say_and_read(free, "/buyhouse", "premium")
-    free.logout()
 
-    poor = new_player(pos=flat.entry, premium_days=30, storage=BEGINNER_SET, inventory={RIGHT: Item(GOLD, 10)})
-    poor.turn(WEST)
-    time.sleep(0.3)
-    assert "You do not have enough money." in _say_and_read(poor, "/buyhouse", "money")
-    poor.logout()
+def _give_house(new_player, house_id, character):
+    """A GM standing on a bare tile of the house makes `character` its owner (/owner)."""
+    tiles, _, stacks = _map_houses()
+    spot = next(p for p in sorted(tiles[house_id]) if len(stacks[p]) == 1)
+    gm = new_player(pos=spot, group_id=3, storage=BEGINNER_SET)
+    assert gm.pos == spot, gm.pos
+    gm.say(f"/owner {character.name}")
+    house = _houses_xml()[house_id]["name"]
+    assert gm.wait_for(lambda: house in _house_of(gm, character.name), timeout=5), _house_of(gm, character.name)
+    gm.logout()
 
-    bag = Item(1988, contents=[Item(GOLD, 100)] * 12)            # 1200 + 100 in the hand
-    buyer = new_player(pos=flat.entry, premium_days=30, storage=BEGINNER_SET,
-                       inventory={RIGHT: Item(GOLD, 100), BACKPACK: bag})
-    buyer.turn(WEST)
+
+def test_sellhouse_keeps_one_house_per_account(new_player, db, login):
+    """/sellhouse <name> offers the house in a trade (Commands::sellHouse); talkactions/scripts/sellhouse.lua refuses
+    a receiver first by the rules of /buyhouse (data/lib/houses.lua houseTransferProblem): his account may not have
+    another house, he needs premium."""
+    seller_char = db.create_character(pos=THAIS_ROAD, premium_days=30, town_id=THAIS, storage=BEGINNER_SET)
+    _give_house(new_player, UPPER_SWAMP_LANE_4, seller_char)
+    landlord = db.create_character(pos=THAIS_ROAD, premium_days=30, town_id=THAIS, storage=BEGINNER_SET)
+    _give_house(new_player, UPPER_SWAMP_LANE_2, landlord)
+    # another character on the landlord's account (premium is the account's)
+    other = db.create_character(pos=(THAIS_ROAD[0] + 1, THAIS_ROAD[1], 7), town_id=THAIS, storage=BEGINNER_SET)
+    _sql(db.path, "UPDATE players SET account_id = ? WHERE id = ?", landlord.account, other.guid)
+    other = Character(other.guid, other.name, landlord.account, landlord.password)
+    seller = login(seller_char)
+    login(other)
+    replies = _say_and_read(seller, f"/sellhouse {other.name}", "house")
+    assert any(f"{other.name}'s account already has a house" in t for t in replies), replies
+
+    free = new_player(pos=(THAIS_ROAD[0], THAIS_ROAD[1] + 1, 7), premium_days=0, storage=BEGINNER_SET)
+    assert any("has no premium account" in t for t in _say_and_read(seller, f"/sellhouse {free.character.name}",
+                                                                      "premium"))
+
+    buyer = new_player(pos=(THAIS_ROAD[0] - 1, THAIS_ROAD[1], 7), premium_days=30, storage=BEGINNER_SET)
+    mark = len(seller.text_messages)
+    seller.say(f"/sellhouse {buyer.character.name}")              # allowed: the engine offers the trade
+    time.sleep(1.5)
+    said = [t for _, t in seller.text_messages[mark:]]
+    assert not any("account" in t or "premium" in t or "guild" in t for t in said), said
+
+
+# ---------------------------------------------------------------------------------------------- buying a house
+
+UPPER_SWAMP_LANE_2, UPPER_SWAMP_LANE_4 = 53, 54     # Thais houses no other test here uses
+
+THAIS_ROAD = (32369, 32245, 7)                      # just south of the Thais temple
+FLAT_22_RENT, FLAT_23_RENT = 520, 860               # Tibiantis' rents
+SPIRITKEEP, SPIRITKEEP_RENT = 1, 19210              # a Thais guildhall
+SPIRITKEEP_ENTRY = (32265, 32316, 7)                # its front door is north of it
+FLAT_22_ROOM = (32330, 32238, 5)                    # a free tile of Flat 22's room (south-west of `inside`)
+OWNER_SPOT = (32330, 32236, 5)                      # and another one (north-west of `inside`)
+GOLD, PLATINUM, CRYSTAL = 2148, 2152, 2160
+LOCKER, DEPOT_CHEST = 2589, 2594                    # Player::getDepot: a locker with the depot chest in it
+CARLIN = 3
+SAVE_IN, MINUTE = 150, 6                            # serversave.lua's test hooks (see test_server_save.py)
+WILL_BE_YOURS = "It will be yours after the next server save"
+
+
+def _put_in_depot(db_path, guid, depot, coins):
+    """Coins [(item id, count)] in the depot chest of the character's depot `depot` (= town id), saved the way the
+    engine saves a depot (player_depotitems: the locker's pid is the depot id)."""
+    con = sqlite3.connect(db_path)
+    try:
+        sid = (con.execute("SELECT MAX(sid) FROM player_depotitems WHERE player_id = ?", (guid,)).fetchone()[0]
+               or 1000) + 1
+        rows = [(guid, depot, sid, LOCKER, 1), (guid, sid, sid + 1, DEPOT_CHEST, 1)]
+        rows += [(guid, sid + 1, sid + 2 + i, item, count) for i, (item, count) in enumerate(coins)]
+        con.executemany("INSERT INTO player_depotitems (player_id, pid, sid, itemtype, count, attributes)"
+                        " VALUES (?, ?, ?, ?, ?, x'')", rows)
+        con.commit()
+    finally:
+        con.close()
+
+
+def _depot_money(db, guid, depot):
+    value = {GOLD: 1, PLATINUM: 100, CRYSTAL: 10000}
+    con = db._connect()
+    try:
+        rows = con.execute("SELECT pid, sid, itemtype, count FROM player_depotitems WHERE player_id = ?",
+                           (guid,)).fetchall()
+    finally:
+        con.close()
+    parent = {sid: pid for pid, sid, _, _ in rows}
+    money = 0
+    for pid, sid, itemtype, count in rows:
+        while pid in parent:
+            pid = parent[pid]
+        if pid == depot and itemtype in value:
+            money += value[itemtype] * max(1, count)
+    return money
+
+
+def _house_row(db, house_id):
+    con = db._connect()
+    try:
+        return con.execute("SELECT owner, paid FROM houses WHERE id = ?", (house_id,)).fetchone()
+    finally:
+        con.close()
+
+
+def _requests(db):
+    con = db._connect()
+    try:
+        return con.execute("SELECT house_id, player_id, state FROM house_requests ORDER BY id").fetchall()
+    finally:
+        con.close()
+
+
+def _sql(db_path, query, *args):
+    con = sqlite3.connect(db_path)
+    try:
+        con.execute(query, args)
+        con.commit()
+    finally:
+        con.close()
+
+
+def _buy(c, facing, expect):
+    """/buyhouse facing `facing` -> the answers (the reply comes once the character's save is written)."""
+    c.turn(facing)
     time.sleep(0.3)
-    replies = _say_and_read(buyer, "/buyhouse", "bought")
-    assert any("successfully bought" in t for t in replies), replies
-    _use_door(buyer, flat)
-    assert _door_is(buyer, flat, items, OPEN_DOOR), "the new owner cannot open the door"
-    assert any("already the owner" in t for t in _say_and_read(buyer, "/buyhouse", "owner"))
+    return _say_and_read(c, "/buyhouse", expect, timeout=8)
+
+
+class Cast:
+    """The characters of the end-to-end test, made in its server's fresh database."""
+
+
+def _cast_setup(cast):
+    def setup(db_path):
+        db = _Database(db_path)
+        mk = functools.partial(db.create_character, premium_days=30, town_id=THAIS, storage=BEGINNER_SET)
+        cast.buyer = mk(pos=FLAT_22.entry)
+        _put_in_depot(db_path, cast.buyer.guid, THAIS, [(PLATINUM, 5), (GOLD, 20), (GOLD, 100)])   # 620 gold
+        alt = mk(pos=FLAT_23.entry)                     # a second character on the buyer's account
+        _sql(db_path, "UPDATE players SET account_id = ? WHERE id = ?", cast.buyer.account, alt.guid)
+        cast.alt = Character(alt.guid, alt.name, cast.buyer.account, cast.buyer.password)
+        cast.rival = mk(pos=FLAT_22.entry)
+        _put_in_depot(db_path, cast.rival.guid, THAIS, [(CRYSTAL, 1)])
+        cast.landlord = mk(pos=THAIS_ROAD)
+        cast.taker = mk(pos=FLAT_21.entry)
+        _put_in_depot(db_path, cast.taker.guid, THAIS, [(CRYSTAL, 1)])
+        # the rent in another town's depot and in the backpack: neither counts
+        cast.poor = mk(pos=FLAT_23.entry, inventory={BACKPACK: Item(1988, contents=[Item(GOLD, 100)] * 10)})
+        _put_in_depot(db_path, cast.poor.guid, THAIS, [(GOLD, 100)])
+        _put_in_depot(db_path, cast.poor.guid, CARLIN, [(CRYSTAL, 1)])
+        cast.free = mk(pos=FLAT_23.entry, premium_days=0)
+        _put_in_depot(db_path, cast.free.guid, THAIS, [(CRYSTAL, 1)])
+        cast.member = mk(pos=SPIRITKEEP_ENTRY)
+        _put_in_depot(db_path, cast.member.guid, THAIS, [(CRYSTAL, 3)])
+        cast.leader = mk(pos=SPIRITKEEP_ENTRY)
+        _put_in_depot(db_path, cast.leader.guid, THAIS, [(CRYSTAL, 2)])                         # 20000 gold
+        cast.quitter = mk(pos=FLAT_24.entry)
+        _put_in_depot(db_path, cast.quitter.guid, THAIS, [(CRYSTAL, 1)])
+        cast.lapsed = mk(pos=FLAT_24.entry)
+        _put_in_depot(db_path, cast.lapsed.guid, THAIS, [(CRYSTAL, 1)])
+        con = sqlite3.connect(db_path)
+        con.execute("INSERT INTO houses (id, owner, paid, warnings, lastwarning) VALUES (?, ?, ?, 0, 0)",
+                    (FLAT_21.id, cast.landlord.guid, int(time.time()) + 20 * 86400))
+        con.execute("INSERT INTO guilds (id, name, ownerid, creationdata) VALUES (1, 'Spirits', ?, 0)",
+                    (cast.leader.guid,))
+        rank = dict(con.execute("SELECT level, id FROM guild_ranks WHERE guild_id = 1"))   # the schema's trigger:
+        con.execute("UPDATE players SET rank_id = ? WHERE id = ?", (rank[3], cast.leader.guid))  # Leader 3,
+        con.execute("UPDATE players SET rank_id = ? WHERE id = ?", (rank[1], cast.member.guid))  # Member 1
+        con.commit()
+        con.close()
+    return setup
+
+
+def _free_port():
+    with socket.socket() as s:
+        s.bind(("127.0.0.1", 0))
+        return s.getsockname()[1]
+
+
+def test_buying_a_house_end_to_end(items):
+    """The stand-in for the 7.4 auction (task.md Q17, data/lib/houses.lua): /buyhouse in front of the door asks for
+    the house, the next server save hands it over and Houses::payHouses takes the first month's rent from the depot of
+    the house's town. Then the house with its new owner: guests, a stranger, a kick, off the list, a mass kick.
+    Runs a server of its own (the save shuts it down; it comes back on the same database without the save)."""
+    cast = Cast()
+    srv = ServerProcess(port=_free_port(), run_dir=RUN_DIR / "house-save", setup=_cast_setup(cast),
+                        config={"ServerSaveEnabled": True, "ServerSaveTestIn": SAVE_IN,
+                                "ServerSaveTestMinute": MINUTE})
+    srv.start()
+    started = time.time()
+    db = _Database(srv.db_path)
+    clients = []
+
+    def login(character):
+        c = GameClient(items, port=srv.port)
+        c.login(character.account, character.password, character.name)
+        clients.append(c)
+        return c
+
+    def logout(c):
+        c.logout()
+        time.sleep(0.5)
+
+    try:
+        # --- before the save: the request and the refusals
+        buyer = login(cast.buyer)
+        assert buyer.pos == FLAT_22.entry, buyer.pos
+        replies = _buy(buyer, WEST, "house")
+        assert any(WILL_BE_YOURS in t and "Sunset Homes, Flat 22" in t for t in replies), replies
+        assert any("already asked for a house" in t for t in _buy(buyer, WEST, "house"))
+        replies = _buy(buyer, NORTH, "house")                  # not facing a door: the pending request
+        assert any("has asked for the house Sunset Homes, Flat 22" in t for t in replies), replies
+        logout(buyer)
+
+        alt = login(cast.alt)                                   # the same account, another house
+        assert any("Your account has already asked for a house: Sunset Homes, Flat 22" in t
+                   for t in _buy(alt, WEST, "house")), alt.text_messages[-3:]
+        logout(alt)
+
+        rival = login(cast.rival)                               # first come, first served
+        assert rival.pos == FLAT_22.entry, rival.pos
+        assert any("Someone has already asked for this house" in t for t in _buy(rival, WEST, "house"))
+        logout(rival)
+
+        taker = login(cast.taker)
+        assert any("This house already has an owner." in t for t in _buy(taker, WEST, "owner"))
+        logout(taker)
+
+        poor = login(cast.poor)
+        replies = _buy(poor, WEST, "gold")
+        assert any(f"You need the first month's rent of {FLAT_23_RENT} gold in your depot in Thais. You have 100"
+                   " gold there." in t for t in replies), replies
+        logout(poor)
+
+        free = login(cast.free)
+        assert any("You need a premium account." in t for t in _buy(free, WEST, "premium"))
+        logout(free)
+
+        member = login(cast.member)
+        assert member.pos == SPIRITKEEP_ENTRY, member.pos
+        assert any("Only the leader of a guild can rent a guildhall." in t for t in _buy(member, NORTH, "guild"))
+        logout(member)
+
+        leader = login(cast.leader)
+        assert any(WILL_BE_YOURS in t for t in _buy(leader, NORTH, "house")), leader.text_messages[-3:]
+        logout(leader)
+
+        quitter = login(cast.quitter)
+        assert any(WILL_BE_YOURS in t for t in _buy(quitter, WEST, "house"))
+        assert any("withdrawn the request for the house Sunset Homes, Flat 24" in t
+                   for t in _say_and_read(quitter, "/cancelhouse", "house"))
+        logout(quitter)
+
+        lapsed = login(cast.lapsed)                             # the house is free again
+        assert any(WILL_BE_YOURS in t for t in _buy(lapsed, WEST, "house"))
+        logout(lapsed)
+        _sql(srv.db_path, "UPDATE accounts SET premend = 0 WHERE id = ?", cast.lapsed.account)   # premium runs out
+
+        assert sorted(_requests(db)) == sorted([(FLAT_22.id, cast.buyer.guid, 0), (SPIRITKEEP, cast.leader.guid, 0),
+                                                (FLAT_24.id, cast.lapsed.guid, 0)]), _requests(db)
+        assert time.time() - started < SAVE_IN - 5 * MINUTE - 5, "too slow: the logins close before the save"
+
+        # --- the save
+        try:
+            code = srv.proc.wait(timeout=SAVE_IN + 120)
+        except subprocess.TimeoutExpired:
+            pytest.fail("the server did not exit after the save:\n" + srv.log_tail(20), pytrace=False)
+        assert code == 10, (code, srv.log_tail(20))
+        log = srv.log()
+        assert f"house Sunset Homes, Flat 22 handed over to {cast.buyer.name}" in log, srv.log_tail(30)
+        assert f"house Spiritkeep handed over to {cast.leader.name}" in log
+        assert f"request of {cast.lapsed.name} for house Sunset Homes, Flat 24 cancelled" in log
+        assert _house_row(db, FLAT_22.id)[0] == cast.buyer.guid
+        assert _house_row(db, FLAT_22.id)[1] > time.time() + 29 * 86400, "the first month is not paid"
+        assert _depot_money(db, cast.buyer.guid, THAIS) == 620 - FLAT_22_RENT
+        assert _house_row(db, SPIRITKEEP)[0] == cast.leader.guid
+        assert _depot_money(db, cast.leader.guid, THAIS) == 20000 - SPIRITKEEP_RENT
+        assert (_house_row(db, FLAT_24.id) or (0,))[0] == 0
+        assert _depot_money(db, cast.lapsed.guid, THAIS) == 10000
+
+        # --- after the save: the same database, no save this time
+        with open(srv.config_path, "a", encoding="latin-1") as f:
+            f.write("\nServerSaveEnabled = false\n")
+        _restart(srv)
+        since = srv.log_offset()
+
+        lapsed = login(cast.lapsed)
+        assert lapsed.wait_for(lambda: any("was cancelled at the server save: You need a premium account." in t
+                                           for _, t in lapsed.text_messages), timeout=5), lapsed.text_messages
+        logout(lapsed)
+
+        owner = login(cast.buyer)
+        assert owner.wait_for(lambda: any(f"The house Sunset Homes, Flat 22 is yours now. The first month's rent of"
+                                          f" {FLAT_22_RENT} gold was taken from your depot in Thais." in t
+                                          for _, t in owner.text_messages), timeout=5), owner.text_messages
+        assert _requests(db) == [(SPIRITKEEP, cast.leader.guid, 1)], _requests(db)   # shown once, then deleted
+
+        flat = FLAT_22
+        owner.turn(WEST)
+        time.sleep(0.3)
+        _use_door(owner, flat)
+        assert _door_is(owner, flat, items, OPEN_DOOR), owner.text_messages[-3:]
+        assert owner.step(WEST) and owner.step(WEST) and owner.pos == flat.inside, owner.pos
+        assert owner.step(NORTHWEST) and owner.pos == OWNER_SPOT, owner.pos     # out of the way
+
+        friend_char = db.create_character(pos=flat.beside, town_id=THAIS, storage=BEGINNER_SET)
+        guest_char = db.create_character(pos=FLAT_22_ROOM, town_id=THAIS, storage=BEGINNER_SET)
+        stranger_char = db.create_character(pos=flat.beside, town_id=THAIS, storage=BEGINNER_SET)
+        _set_house_list(owner, "aleta sio", [friend_char.name, guest_char.name])
+
+        friend = login(friend_char)                             # in through the open door
+        assert friend.pos == flat.beside, friend.pos
+        assert friend.step(SOUTHWEST) and friend.step(WEST) and friend.pos == flat.inside, friend.pos
+        guest = login(guest_char)                               # invited: may log in inside
+        assert guest.pos == FLAT_22_ROOM, guest.pos
+
+        stranger = login(stranger_char)
+        assert stranger.pos == flat.beside, stranger.pos
+        mark = len(stranger.text_messages)
+        assert not stranger.step(SOUTHWEST), "a stranger walked into the house"
+        assert _got(stranger, NOT_INVITED, mark)
+        logout(stranger)
+
+        _cast(owner, f'alana sio "{friend_char.name}')          # kick one
+        assert friend.wait_for(lambda: friend.pos == flat.entry, timeout=3), f"the friend is still at {friend.pos}"
+        assert guest.pos == FLAT_22_ROOM
+        assert friend.step(WEST) and friend.step(WEST) and friend.pos == flat.inside, friend.pos   # still invited
+
+        _set_house_list(owner, "aleta sio", [guest_char.name])   # off the list: out
+        assert friend.wait_for(lambda: friend.pos == flat.entry, timeout=3), f"the friend is still at {friend.pos}"
+        time.sleep(0.5)
+        assert guest.pos == FLAT_22_ROOM, "the guest still on the list was put out"
+
+        _set_house_list(owner, "aleta sio", [])                   # the mass kick: an empty guest list
+        assert guest.wait_for(lambda: guest.pos == flat.entry, timeout=3), f"the guest is still at {guest.pos}"
+        assert owner.pos == OWNER_SPOT, "the owner was put out"
+
+        errors = srv.lua_errors(since=since)
+        assert not errors, errors[:3]
+    finally:
+        for c in clients:
+            try:
+                c.logout()
+            except Exception:
+                pass
+        srv.stop()
+    errors = srv.lua_errors()
+    assert not errors, "server logged Lua errors:\n\n" + "\n\n".join(errors[:5])
 
 
 def _saved_house_items(db, house_id):

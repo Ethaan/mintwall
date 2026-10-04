@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tests"))
 
-from tibia74.otbm import (ATTR_ACTION_ID, ATTR_COUNT, ATTR_ITEM, ATTR_TELE_DEST, ATTR_TILE_FLAGS, ATTR_UNIQUE_ID,  # noqa: E402
+from tibia74.otbm import (ATTR_ACTION_ID, ATTR_COUNT, ATTR_DEPOT_ID, ATTR_ITEM, ATTR_TELE_DEST, ATTR_TILE_FLAGS, ATTR_UNIQUE_ID,  # noqa: E402
                           OTBM_HOUSETILE, OTBM_ITEM, OTBM_TILE, OTBM_TILE_AREA, _item_attrs_strict, read_tiles)
 
 NODE_START, NODE_END, ESCAPE = 0xFE, 0xFF, 0xFD
@@ -112,8 +112,10 @@ def inline_ground(tile: dict):
     return None
 
 
-def with_ids(props: bytes, aid, uid) -> bytes:
+def with_ids(props: bytes, aid, uid, depot=None) -> bytes:
     extra = b""
+    if depot is not None:
+        extra += bytes([ATTR_DEPOT_ID]) + struct.pack("<H", depot)     # a locker: the town whose depot it opens
     if aid is not None:
         extra += bytes([ATTR_ACTION_ID]) + struct.pack("<H", aid)
     if uid is not None:
@@ -128,6 +130,7 @@ def main():
     ap.add_argument("--id", type=int, required=True, help="the item's id")
     ap.add_argument("--aid", type=int)
     ap.add_argument("--uid", type=int)
+    ap.add_argument("--depot-id", type=int, help="a depot locker's depot id (= the town id whose depot it opens)")
     ap.add_argument("--teleport", help="x,y,z: the new destination of the teleport")
     ap.add_argument("--contents", default="",
                     help='with --add: items inside the new container, e.g. "2465,2460,2399x4,2088a3001" (id, idxcount, ida<action id>)')
@@ -150,7 +153,7 @@ def main():
                          "then only a check of the ground")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
-    if (args.aid is None and args.uid is None and args.teleport is None and not args.add and not args.new_tile
+    if (args.aid is None and args.uid is None and args.depot_id is None and args.teleport is None and not args.add and not args.new_tile
             and args.set_ground is None and args.tile_flags is None):
         ap.error("give --aid and/or --uid, or --teleport")
 
@@ -262,8 +265,8 @@ def main():
             if args.replace:                     # only ids on it: write them anew
                 item["props"] = item["props"][:2]
         start, end = item["start"] + 2, item["props_end"]
-        new = escape(with_ids(item["props"], args.aid, args.uid))
-        what = "item node"
+        new = escape(with_ids(item["props"], args.aid, args.uid, args.depot_id))
+        what = "item node" + ("" if args.depot_id is None else f", depot id {args.depot_id}")
     else:
         ground = inline_ground(tile)
         if ground is None or ground[1] != args.id:

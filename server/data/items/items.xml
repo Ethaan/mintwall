@@ -1875,7 +1875,7 @@
 		<attribute key="type" value="magicfield"/>
 		<attribute key="replaceable" value="0"/>
 		<attribute key="field" value="poison">
-			<attribute key="ticks" value="5000"/>
+			<attribute key="ticks" value="4000"/>
 			<attribute key="start" value="5"/>
 			<attribute key="damage" value="100"/>
 		</attribute>
@@ -1929,9 +1929,9 @@
 	<item id="1496" article="a" name="poison field">
 		<attribute key="type" value="magicfield"/>
 		<attribute key="decayTo" value="0"/>
-		<attribute key="duration" value="120"/>
+		<attribute key="duration" value="248"/>
 		<attribute key="field" value="poison">
-			<attribute key="ticks" value="5000"/>
+			<attribute key="ticks" value="4000"/>
 			<attribute key="start" value="5"/>
 			<attribute key="damage" value="100"/>
 		</attribute>
@@ -1981,7 +1981,7 @@
 		<attribute key="decayTo" value="0"/>
 		<attribute key="duration" value="10"/>
 		<attribute key="field" value="poison">
-			<attribute key="ticks" value="5000"/>
+			<attribute key="ticks" value="4000"/>
 			<attribute key="start" value="5"/>
 			<attribute key="damage" value="100"/>
 		</attribute>
@@ -5456,7 +5456,7 @@
 	</item>
 	<item id="2547" article="a" name="power bolt" plural="power bolts">
 		<attribute key="weight" value="80"/>
-		<attribute key="attack" value="50"/>
+		<attribute key="attack" value="40"/>   <!-- 7.4: 40 (TibiaWiki Power Bolt revs 78528-110577, 2007, before the summer 2007 update) -->
 		<attribute key="weaponType" value="ammunition"/>
 		<attribute key="ammoType" value="bolt"/>
 		<attribute key="shootType" value="powerbolt"/>

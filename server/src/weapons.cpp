@@ -1005,17 +1005,9 @@ int32_t WeaponDistance::getWeaponDamage(const Player* player, const Creature* ta
 		return -maxValue;
 	}
 
-	int32_t minValue = 0;
-	if(target){
-		if(target->getPlayer()){
-			minValue = (int32_t)std::ceil(player->getLevel() * 0.1);
-		}
-		else{
-			minValue = (int32_t)std::ceil(player->getLevel() * 0.2);
-		}
-	}
-
-	return -random_range(minValue, maxValue, DISTRO_NORMAL);
+	// 7.4: no minimum damage (decided with the user 2026-10-04). The engine used to roll from ceil(level x 0.2)
+	// against monsters and ceil(level x 0.1) against players; no 7.4 source has a minimum, and melee has none.
+	return -random_range(0, maxValue, DISTRO_NORMAL);
 }
 
 bool WeaponDistance::getSkillType(const Player* player, const Item* item,

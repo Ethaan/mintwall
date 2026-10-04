@@ -21,6 +21,7 @@
 
 #include "depot.h"
 #include "tools.h"
+#include "town.h"
 
 #include <sstream>
 
@@ -46,6 +47,7 @@ Attr_ReadValue Depot::readAttr(AttrTypes_t attr, PropStream& propStream)
 		}
 
 		setDepotId(_depotId);
+		Towns::getInstance().addDepotTown(_depotId);   // a locker on the map: that town takes mail
 		return ATTR_READ_CONTINUE;
 	}
 	else

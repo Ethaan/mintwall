@@ -241,7 +241,10 @@ bool Mailbox::getReceiver(const Item* item, std::string& name, uint32_t& dp) con
 	}
 
 	Town* town = Towns::getInstance().getTown(strTown);
-	if(town && town->getTownID() != g_config.getNumber(ConfigManager::ROOK_TEMPLE_ID)) {
+	// a town without a depot locker (Rookgaard, and the map's villages such as Fibula) would swallow the mail into a
+	// depot nobody can open: "Sorry, not possible." and the sender keeps it
+	if(town && town->getTownID() != g_config.getNumber(ConfigManager::ROOK_TEMPLE_ID)
+		&& Towns::getInstance().hasDepot(town->getTownID())) {
 		dp = town->getTownID();
 	}
 	else{

@@ -30,9 +30,9 @@ WARNINGS = ["Server is saving game in 5 minutes. Please come back in 10 minutes.
 GOING_DOWN = "The game is just going down."     # protocolgame.cpp, GAME_STATE_CLOSING
 
 THAIS_ROAD = (32369, 32245, 7)                   # just south of the Thais temple
-RENT_HOUSE = 53                                  # Upper Swamp Lane 2, Thais, rent 300 (Tibia74-houses.xml)
-PAID_HOUSE = 54                                  # Upper Swamp Lane 4, Thais, rent 300
-LOST_HOUSE, LOST_TILE = 474, (33208, 31798, 7)   # Castle Shop 2, Edron, rent 0
+RENT_HOUSE = 53                                  # Upper Swamp Lane 2, Thais, rent 4740 (Tibia74-houses.xml)
+PAID_HOUSE = 54                                  # Upper Swamp Lane 4, Thais, rent 4740
+LOST_HOUSE, LOST_TILE = 474, (33208, 31798, 7)   # Castle Shop 2, Edron, rent 1890
 SWORD = 2376
 LETTER = 2598                                    # ITEM_LETTER_STAMPED: the rent warning
 

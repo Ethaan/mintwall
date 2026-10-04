@@ -1,0 +1,7227 @@
+{
+ "source": "https://tibiantis.online/?page=houses",
+ "world": "Ancestra",
+ "fetched": "2026-10-04",
+ "houses": [
+  {
+   "id": 40101,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Underwood 1",
+   "description": "This house has two beds.",
+   "rent": 1495,
+   "sqm": 31,
+   "status": "Rented"
+  },
+  {
+   "id": 40102,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Underwood 2",
+   "description": "This house has two beds.",
+   "rent": 1495,
+   "sqm": 31,
+   "status": "Rented"
+  },
+  {
+   "id": 40103,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Underwood 3",
+   "description": "This house has three beds.",
+   "rent": 1685,
+   "sqm": 33,
+   "status": "Rented"
+  },
+  {
+   "id": 40104,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Underwood 4",
+   "description": "This house has four beds.",
+   "rent": 2235,
+   "sqm": 43,
+   "status": "Rented"
+  },
+  {
+   "id": 40105,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Underwood 5",
+   "description": "This house has three beds.",
+   "rent": 1370,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 40106,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Underwood 6",
+   "description": "This house has three beds.",
+   "rent": 1595,
+   "sqm": 31,
+   "status": "Rented"
+  },
+  {
+   "id": 40107,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Underwood 7",
+   "description": "This house has three beds.",
+   "rent": 1460,
+   "sqm": 28,
+   "status": "Rented"
+  },
+  {
+   "id": 40108,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Underwood 8",
+   "description": "This house has two beds.",
+   "rent": 865,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 40109,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Underwood 9",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 40110,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Underwood 10",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 40211,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 1a",
+   "description": "This house has one bed.",
+   "rent": 500,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40212,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 1b",
+   "description": "This house has one bed.",
+   "rent": 650,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40213,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 1c",
+   "description": "This house has one bed.",
+   "rent": 650,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40221,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 2a",
+   "description": "This house has one bed.",
+   "rent": 650,
+   "sqm": 13,
+   "status": "Auctioned (bid: 10 gp)"
+  },
+  {
+   "id": 40222,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 2b",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 9,
+   "status": "Rented"
+  },
+  {
+   "id": 40223,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 2c",
+   "description": "This house has one bed.",
+   "rent": 650,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 40224,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 2d",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40231,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 3a",
+   "description": "This house has one bed.",
+   "rent": 650,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 40232,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 3b",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 9,
+   "status": "Rented"
+  },
+  {
+   "id": 40233,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 3c",
+   "description": "This house has one bed.",
+   "rent": 650,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40234,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 3d",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40241,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 4a",
+   "description": "This house has two beds.",
+   "rent": 950,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 40242,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 4b",
+   "description": "This house has two beds.",
+   "rent": 950,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 40243,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 4c",
+   "description": "This house has two beds.",
+   "rent": 950,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 40244,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Great Willow 4d",
+   "description": "This house has one bed.",
+   "rent": 750,
+   "sqm": 15,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40301,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Mangrove 1",
+   "description": "This house has three beds.",
+   "rent": 1750,
+   "sqm": 31,
+   "status": "Rented"
+  },
+  {
+   "id": 40302,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Mangrove 2",
+   "description": "This house has two beds.",
+   "rent": 1350,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 40303,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Mangrove 3",
+   "description": "This house has two beds.",
+   "rent": 1150,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 40304,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Mangrove 4",
+   "description": "This house has two beds.",
+   "rent": 950,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 40401,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 1",
+   "description": "This house has one bed.",
+   "rent": 650,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 40402,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 2",
+   "description": "This house has one bed.",
+   "rent": 650,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40403,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 3 (Shop)",
+   "description": "This shop has one bed.",
+   "rent": 1250,
+   "sqm": 25,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40404,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 4 (Shop)",
+   "description": "This shop has one bed.",
+   "rent": 1250,
+   "sqm": 25,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40405,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 5 (Shop)",
+   "description": "This shop has one bed.",
+   "rent": 1350,
+   "sqm": 27,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40406,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 6",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40407,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 7",
+   "description": "This house has one bed.",
+   "rent": 800,
+   "sqm": 16,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40408,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 8",
+   "description": "This house has one bed.",
+   "rent": 800,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 40409,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 9",
+   "description": "This house has two beds.",
+   "rent": 1150,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 40410,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 10",
+   "description": "This house has two beds.",
+   "rent": 1150,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 40411,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 11",
+   "description": "This house has two beds.",
+   "rent": 900,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 40412,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 12 (Shop)",
+   "description": "This shop has one bed.",
+   "rent": 1350,
+   "sqm": 27,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40413,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Treetop 13",
+   "description": "This house has two beds.",
+   "rent": 1400,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 40501,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Coastwood 1",
+   "description": "This house has two beds.",
+   "rent": 980,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 40502,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Coastwood 2",
+   "description": "This house has two beds.",
+   "rent": 980,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 40503,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Coastwood 3",
+   "description": "This house has two beds.",
+   "rent": 1310,
+   "sqm": 22,
+   "status": "Rented"
+  },
+  {
+   "id": 40504,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Coastwood 4",
+   "description": "This house has two beds.",
+   "rent": 1145,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 40505,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Coastwood 5",
+   "description": "This house has two beds.",
+   "rent": 1530,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 40506,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Coastwood 6 (Shop)",
+   "description": "This shop has one bed.",
+   "rent": 1595,
+   "sqm": 29,
+   "status": "Rented"
+  },
+  {
+   "id": 40507,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Coastwood 7",
+   "description": "This house has one bed.",
+   "rent": 660,
+   "sqm": 12,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40508,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Coastwood 8",
+   "description": "This house has two beds.",
+   "rent": 1255,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 40509,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Coastwood 9",
+   "description": "This house has one bed.",
+   "rent": 935,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 40510,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Coastwood 10",
+   "description": "This house has three beds.",
+   "rent": 1630,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 40611,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 1",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 40612,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 2",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40613,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 3",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40614,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 4",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40621,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 11",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40622,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 12",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40623,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 13",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40624,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 14",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40625,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 15",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40626,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 16",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40627,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 17",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40628,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 18",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40631,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 21",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40632,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 22",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40633,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 23",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40634,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 24",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40635,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 25",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40636,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 26",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40637,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 27",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40638,
+   "town": "Ab'Dendriel",
+   "guildhouse": false,
+   "name": "Shadow Caves 28",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 40001,
+   "town": "Ab'Dendriel",
+   "guildhouse": true,
+   "name": "Shadow Towers",
+   "description": "This guildhall has eighteen beds.",
+   "rent": 21800,
+   "sqm": 402,
+   "status": "Rented"
+  },
+  {
+   "id": 40002,
+   "town": "Ab'Dendriel",
+   "guildhouse": true,
+   "name": "The Hideout",
+   "description": "This guildhall has twenty beds.",
+   "rent": 20800,
+   "sqm": 378,
+   "status": "Rented"
+  },
+  {
+   "id": 40111,
+   "town": "Ab'Dendriel",
+   "guildhouse": true,
+   "name": "Ab'Dendriel Clanhall",
+   "description": "This clanhall has ten beds.",
+   "rent": 14850,
+   "sqm": 310,
+   "status": "Rented"
+  },
+  {
+   "id": 40112,
+   "town": "Ab'Dendriel",
+   "guildhouse": true,
+   "name": "Castle of the Winds",
+   "description": "This guildhall has eighteen beds.",
+   "rent": 23885,
+   "sqm": 493,
+   "status": "Rented"
+  },
+  {
+   "id": 20004,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Druids Retreat A",
+   "description": "This house has two beds.",
+   "rent": 1340,
+   "sqm": 31,
+   "status": "Rented"
+  },
+  {
+   "id": 20005,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Druids Retreat B",
+   "description": "This house has two beds.",
+   "rent": 1260,
+   "sqm": 29,
+   "status": "Rented"
+  },
+  {
+   "id": 20006,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Druids Retreat C",
+   "description": "This house has two beds.",
+   "rent": 980,
+   "sqm": 22,
+   "status": "Rented"
+  },
+  {
+   "id": 20007,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Druids Retreat D",
+   "description": "This house has two beds.",
+   "rent": 1180,
+   "sqm": 27,
+   "status": "Rented"
+  },
+  {
+   "id": 20102,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Central Plaza 3",
+   "description": "This shop has no beds.",
+   "rent": 600,
+   "sqm": 12,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20103,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Central Plaza 2",
+   "description": "This shop has no beds.",
+   "rent": 600,
+   "sqm": 12,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20104,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Central Plaza 1",
+   "description": "This shop has no beds.",
+   "rent": 600,
+   "sqm": 12,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20201,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Park Lane 1a",
+   "description": "This house has two beds.",
+   "rent": 1220,
+   "sqm": 28,
+   "status": "Rented"
+  },
+  {
+   "id": 20202,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Park Lane 1b",
+   "description": "This house has two beds.",
+   "rent": 1380,
+   "sqm": 32,
+   "status": "Rented"
+  },
+  {
+   "id": 20203,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Park Lane 3b",
+   "description": "This house has two beds.",
+   "rent": 1100,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 20204,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Park Lane 3a",
+   "description": "This house has two beds.",
+   "rent": 1220,
+   "sqm": 28,
+   "status": "Rented"
+  },
+  {
+   "id": 20205,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Park Lane 4",
+   "description": "This house has two beds.",
+   "rent": 980,
+   "sqm": 22,
+   "status": "Rented"
+  },
+  {
+   "id": 20206,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Park Lane 2",
+   "description": "This house has two beds.",
+   "rent": 980,
+   "sqm": 22,
+   "status": "Rented"
+  },
+  {
+   "id": 20304,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 6a",
+   "description": "This house has two beds.",
+   "rent": 820,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 20305,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 6b",
+   "description": "This house has two beds.",
+   "rent": 820,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 20306,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 6c",
+   "description": "This house has one bed.",
+   "rent": 225,
+   "sqm": 5,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20307,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 6d",
+   "description": "This house has one bed.",
+   "rent": 225,
+   "sqm": 5,
+   "status": "Auction ended"
+  },
+  {
+   "id": 20308,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 6e",
+   "description": "This house has two beds.",
+   "rent": 820,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 20309,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 6f",
+   "description": "This house has two beds.",
+   "rent": 820,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 20310,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 5a",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20311,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 5b",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20312,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 5c",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20313,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 5d",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20314,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 8a",
+   "description": "This house has two beds.",
+   "rent": 1270,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 20315,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 8b",
+   "description": "This house has three beds.",
+   "rent": 1370,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 20316,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 7, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 315,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20317,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 7, Flat 02",
+   "description": "This house has one bed.",
+   "rent": 405,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20318,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 7, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 405,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20319,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 7, Flat 04",
+   "description": "This house has one bed.",
+   "rent": 495,
+   "sqm": 11,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20320,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 7, Flat 05",
+   "description": "This house has one bed.",
+   "rent": 405,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20321,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 7, Flat 06",
+   "description": "This house has one bed.",
+   "rent": 315,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20322,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 7, Flat 11",
+   "description": "This house has one bed.",
+   "rent": 495,
+   "sqm": 11,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20323,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 7, Flat 12",
+   "description": "This house has one bed.",
+   "rent": 405,
+   "sqm": 9,
+   "status": "Rented"
+  },
+  {
+   "id": 20324,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 7, Flat 13",
+   "description": "This house has one bed.",
+   "rent": 405,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20325,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 7, Flat 14",
+   "description": "This house has one bed.",
+   "rent": 495,
+   "sqm": 11,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20326,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 7, Flat 15",
+   "description": "This house has one bed.",
+   "rent": 405,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20327,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 7, Flat 16",
+   "description": "This house has one bed.",
+   "rent": 405,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20401,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 10",
+   "description": "This house has two beds.",
+   "rent": 1090,
+   "sqm": 22,
+   "status": "Rented"
+  },
+  {
+   "id": 20402,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 12",
+   "description": "This house has two beds.",
+   "rent": 955,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 20403,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 14 (Shop)",
+   "description": "This shop has one bed.",
+   "rent": 2115,
+   "sqm": 47,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20404,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 11a",
+   "description": "This house has two beds.",
+   "rent": 1405,
+   "sqm": 29,
+   "status": "Rented"
+  },
+  {
+   "id": 20405,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 11b",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20406,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Theater Avenue 11c",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 20501,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 1",
+   "description": "This house has two beds.",
+   "rent": 1050,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 20502,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 1a",
+   "description": "This house has two beds.",
+   "rent": 700,
+   "sqm": 12,
+   "status": "Rented"
+  },
+  {
+   "id": 20503,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 1b",
+   "description": "This house has two beds.",
+   "rent": 750,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 20504,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 1c",
+   "description": "This house has one bed.",
+   "rent": 500,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 20505,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 1d",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20507,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 5a",
+   "description": "This house has one bed.",
+   "rent": 350,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20508,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 5b",
+   "description": "This house has one bed.",
+   "rent": 500,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20509,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 5c",
+   "description": "This house has two beds.",
+   "rent": 1150,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 20510,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 5d",
+   "description": "This house has one bed.",
+   "rent": 500,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20511,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 5e",
+   "description": "This house has one bed.",
+   "rent": 500,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20512,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 5f",
+   "description": "This house has two beds.",
+   "rent": 1150,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 20513,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 4",
+   "description": "This house has four beds.",
+   "rent": 2750,
+   "sqm": 49,
+   "status": "Rented"
+  },
+  {
+   "id": 20514,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Magician's Alley 8",
+   "description": "This house has two beds.",
+   "rent": 1400,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 20601,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northern Street 1a",
+   "description": "This house has two beds.",
+   "rent": 940,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 20602,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northern Street 1b",
+   "description": "This house has two beds.",
+   "rent": 940,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 20603,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northern Street 1c",
+   "description": "This house has two beds.",
+   "rent": 740,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 20604,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northern Street 3a",
+   "description": "This house has two beds.",
+   "rent": 740,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 20605,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northern Street 3b",
+   "description": "This house has two beds.",
+   "rent": 780,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 20606,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northern Street 5",
+   "description": "This house has two beds.",
+   "rent": 1980,
+   "sqm": 47,
+   "status": "Rented"
+  },
+  {
+   "id": 20607,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northern Street 7",
+   "description": "This house has two beds.",
+   "rent": 1700,
+   "sqm": 40,
+   "status": "Rented"
+  },
+  {
+   "id": 20701,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Lane 1 (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 1040,
+   "sqm": 26,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20702,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Lane 3",
+   "description": "This house has three beds.",
+   "rent": 3560,
+   "sqm": 84,
+   "status": "Rented"
+  },
+  {
+   "id": 20703,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Lane 2a (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 680,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20704,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Lane 2b (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 680,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20705,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Flats, Flat 11",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20706,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Flats, Flat 12",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20707,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Flats, Flat 13",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20708,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Flats, Flat 14",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20709,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Flats, Flat 15",
+   "description": "This house has one bed.",
+   "rent": 360,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20710,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Flats, Flat 16",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20711,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Flats, Flat 17",
+   "description": "This house has one bed.",
+   "rent": 360,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20712,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Flats, Flat 18",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 20713,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Flats, Flat 21",
+   "description": "This house has two beds.",
+   "rent": 860,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 20714,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Flats, Flat 22",
+   "description": "This house has two beds.",
+   "rent": 980,
+   "sqm": 22,
+   "status": "Rented"
+  },
+  {
+   "id": 20715,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Harbour Flats, Flat 23",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 20801,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "East Lane 1a",
+   "description": "This house has two beds.",
+   "rent": 2260,
+   "sqm": 54,
+   "status": "Rented"
+  },
+  {
+   "id": 20802,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "East Lane 1b",
+   "description": "This house has two beds.",
+   "rent": 1700,
+   "sqm": 40,
+   "status": "Rented"
+  },
+  {
+   "id": 20803,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "East Lane 2",
+   "description": "This house has two beds.",
+   "rent": 4580,
+   "sqm": 112,
+   "status": "Rented"
+  },
+  {
+   "id": 20902,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Lonely Sea Side Hostel",
+   "description": "This hostel has eight beds.",
+   "rent": 12180,
+   "sqm": 287,
+   "status": "Rented"
+  },
+  {
+   "id": 22001,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northport Village 1",
+   "description": "This house has two beds.",
+   "rent": 1475,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 22002,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northport Village 2",
+   "description": "This house has two beds.",
+   "rent": 1475,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 22003,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northport Village 3",
+   "description": "This house has two beds.",
+   "rent": 5435,
+   "sqm": 97,
+   "status": "Rented"
+  },
+  {
+   "id": 22004,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northport Village 4",
+   "description": "This house has two beds.",
+   "rent": 2630,
+   "sqm": 46,
+   "status": "Rented"
+  },
+  {
+   "id": 22006,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northport Village 5",
+   "description": "This house has two beds.",
+   "rent": 1805,
+   "sqm": 31,
+   "status": "Rented"
+  },
+  {
+   "id": 22007,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Northport Village 6",
+   "description": "This house has two beds.",
+   "rent": 2135,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 24001,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 1a",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 24002,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 1b",
+   "description": "This house has two beds.",
+   "rent": 1630,
+   "sqm": 34,
+   "status": "Rented"
+  },
+  {
+   "id": 24003,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 2",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 24004,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 3",
+   "description": "This house has two beds.",
+   "rent": 1765,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 24005,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 4",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 24006,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 5",
+   "description": "This house has two beds.",
+   "rent": 1225,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 24007,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 6a",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 24008,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 6b",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 24009,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 7",
+   "description": "This house has two beds.",
+   "rent": 865,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 24010,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 8",
+   "description": "This house has two beds.",
+   "rent": 1675,
+   "sqm": 35,
+   "status": "Rented"
+  },
+  {
+   "id": 24011,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 9",
+   "description": "This house has two beds.",
+   "rent": 2575,
+   "sqm": 55,
+   "status": "Rented"
+  },
+  {
+   "id": 24012,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 10",
+   "description": "This house has one bed.",
+   "rent": 1485,
+   "sqm": 33,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 24013,
+   "town": "Carlin",
+   "guildhouse": false,
+   "name": "Senja Village 11",
+   "description": "This house has two beds.",
+   "rent": 2620,
+   "sqm": 56,
+   "status": "Rented"
+  },
+  {
+   "id": 20001,
+   "town": "Carlin",
+   "guildhouse": true,
+   "name": "Moonkeep",
+   "description": "This guildhall has sixteen beds.",
+   "rent": 13020,
+   "sqm": 288,
+   "status": "Rented"
+  },
+  {
+   "id": 20002,
+   "town": "Carlin",
+   "guildhouse": true,
+   "name": "House of Recreation",
+   "description": "This guildhall has sixteen beds. Becuase of its very luxury furnishing there is an additional charge on it.",
+   "rent": 22980,
+   "sqm": 412,
+   "status": "Rented"
+  },
+  {
+   "id": 20003,
+   "town": "Carlin",
+   "guildhouse": true,
+   "name": "Nordic Stronghold",
+   "description": "This guildhall has twenty beds.",
+   "rent": 18300,
+   "sqm": 410,
+   "status": "Rented"
+  },
+  {
+   "id": 20515,
+   "town": "Carlin",
+   "guildhouse": true,
+   "name": "Carlin Clanhall",
+   "description": "This clanhall has ten beds.",
+   "rent": 11800,
+   "sqm": 218,
+   "status": "Rented"
+  },
+  {
+   "id": 20901,
+   "town": "Carlin",
+   "guildhouse": true,
+   "name": "Suntower",
+   "description": "This guildhall has nine beds.",
+   "rent": 10080,
+   "sqm": 232,
+   "status": "Auctioned (bid: 10 gp)"
+  },
+  {
+   "id": 22005,
+   "town": "Carlin",
+   "guildhouse": true,
+   "name": "Seawatch",
+   "description": "This guildhall has nineteen beds.",
+   "rent": 25010,
+   "sqm": 422,
+   "status": "Rented"
+  },
+  {
+   "id": 22008,
+   "town": "Carlin",
+   "guildhouse": true,
+   "name": "Northport Clanhall",
+   "description": "This clanhall has ten beds.",
+   "rent": 9810,
+   "sqm": 162,
+   "status": "Rented"
+  },
+  {
+   "id": 24014,
+   "town": "Carlin",
+   "guildhouse": true,
+   "name": "Senja Clanhall",
+   "description": "This clanhall has ten beds.",
+   "rent": 10575,
+   "sqm": 215,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 61000,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 1, Flat 01",
+   "description": "This house has two beds.",
+   "rent": 1100,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61001,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 1, Flat 02",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Auctioned (bid: 10 gp)"
+  },
+  {
+   "id": 61002,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 1, Flat 03",
+   "description": "This house has four beds.",
+   "rent": 2660,
+   "sqm": 59,
+   "status": "Rented"
+  },
+  {
+   "id": 61003,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 1, Flat 04",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61004,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 1, Flat 05",
+   "description": "This house has two beds.",
+   "rent": 1100,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61005,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 1, Flat 11",
+   "description": "This house has two beds.",
+   "rent": 1100,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61006,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 1, Flat 12",
+   "description": "This house has two beds.",
+   "rent": 1780,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 61007,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 1, Flat 13",
+   "description": "This house has two beds.",
+   "rent": 1780,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 61008,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 1, Flat 14",
+   "description": "This house has five beds.",
+   "rent": 2760,
+   "sqm": 59,
+   "status": "Rented"
+  },
+  {
+   "id": 61009,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61010,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 02",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61011,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 1160,
+   "sqm": 29,
+   "status": "Rented"
+  },
+  {
+   "id": 61012,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 04",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 61013,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 05",
+   "description": "This house has two beds.",
+   "rent": 1260,
+   "sqm": 29,
+   "status": "Rented"
+  },
+  {
+   "id": 61014,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 06",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 61015,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 07",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61016,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 11",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61017,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 12",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 61018,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 13",
+   "description": "This house has one bed.",
+   "rent": 1160,
+   "sqm": 29,
+   "status": "Rented"
+  },
+  {
+   "id": 61019,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 14",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 61020,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 15",
+   "description": "This house has two beds.",
+   "rent": 1260,
+   "sqm": 29,
+   "status": "Rented"
+  },
+  {
+   "id": 61021,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 16",
+   "description": "This house has one bed.",
+   "rent": 680,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 61022,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 17",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61023,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 2, Flat 18",
+   "description": "This house has one bed.",
+   "rent": 680,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 61024,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 3, Flat 01",
+   "description": "This house has two beds.",
+   "rent": 1100,
+   "sqm": 25,
+   "status": "Auctioned (bid: 3000 gp)"
+  },
+  {
+   "id": 61025,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 3, Flat 02",
+   "description": "This house has two beds.",
+   "rent": 1620,
+   "sqm": 38,
+   "status": "Rented"
+  },
+  {
+   "id": 61026,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 3, Flat 03",
+   "description": "This house has two beds.",
+   "rent": 1100,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61027,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 3, Flat 04",
+   "description": "This house has two beds.",
+   "rent": 1620,
+   "sqm": 38,
+   "status": "Rented"
+  },
+  {
+   "id": 61028,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 3, Flat 05",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61029,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 3, Flat 11",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61030,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 3, Flat 12",
+   "description": "This house has five beds.",
+   "rent": 2600,
+   "sqm": 55,
+   "status": "Rented"
+  },
+  {
+   "id": 61031,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 3, Flat 13",
+   "description": "This house has two beds.",
+   "rent": 1100,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61032,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 3, Flat 14",
+   "description": "This house has three beds.",
+   "rent": 2400,
+   "sqm": 55,
+   "status": "Rented"
+  },
+  {
+   "id": 61033,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 4, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61034,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 4, Flat 02",
+   "description": "This house has two beds.",
+   "rent": 1780,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 61035,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 4, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61036,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 4, Flat 04",
+   "description": "This house has two beds.",
+   "rent": 1780,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 61037,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 4, Flat 05",
+   "description": "This house has two beds.",
+   "rent": 1100,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61038,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 4, Flat 11",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61039,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 4, Flat 12",
+   "description": "This house has three beds.",
+   "rent": 2560,
+   "sqm": 59,
+   "status": "Rented"
+  },
+  {
+   "id": 61040,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 4, Flat 13",
+   "description": "This house has two beds.",
+   "rent": 1780,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 61041,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 4, Flat 14",
+   "description": "This house has two beds.",
+   "rent": 1780,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 61042,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 5, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61043,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 5, Flat 02",
+   "description": "This house has two beds.",
+   "rent": 1620,
+   "sqm": 38,
+   "status": "Rented"
+  },
+  {
+   "id": 61044,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 5, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61045,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 5, Flat 04",
+   "description": "This house has two beds.",
+   "rent": 1620,
+   "sqm": 38,
+   "status": "Rented"
+  },
+  {
+   "id": 61046,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 5, Flat 05",
+   "description": "This house has one bed.",
+   "rent": 1000,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 61047,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 5, Flat 11",
+   "description": "This house has two beds.",
+   "rent": 1780,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 61048,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 5, Flat 12",
+   "description": "This house has two beds.",
+   "rent": 1620,
+   "sqm": 38,
+   "status": "Rented"
+  },
+  {
+   "id": 61049,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 5, Flat 13",
+   "description": "This house has two beds.",
+   "rent": 1780,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 61050,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 5, Flat 14",
+   "description": "This house has two beds.",
+   "rent": 1620,
+   "sqm": 38,
+   "status": "Rented"
+  },
+  {
+   "id": 62000,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 6a",
+   "description": "This house has two beds.",
+   "rent": 3115,
+   "sqm": 67,
+   "status": "Rented"
+  },
+  {
+   "id": 62001,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 6b",
+   "description": "This house has two beds.",
+   "rent": 3430,
+   "sqm": 74,
+   "status": "Rented"
+  },
+  {
+   "id": 62002,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 7, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 1125,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 62003,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 7, Flat 02",
+   "description": "This house has one bed.",
+   "rent": 1125,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 62004,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 7, Flat 03",
+   "description": "This house has four beds.",
+   "rent": 2955,
+   "sqm": 59,
+   "status": "Rented"
+  },
+  {
+   "id": 62005,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 7, Flat 04",
+   "description": "This house has one bed.",
+   "rent": 1125,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 62006,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 7, Flat 05",
+   "description": "This house has two beds.",
+   "rent": 1225,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 62007,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 7, Flat 11",
+   "description": "This house has one bed",
+   "rent": 1125,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 62008,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 7, Flat 12",
+   "description": "This house has four beds.",
+   "rent": 2955,
+   "sqm": 59,
+   "status": "Rented"
+  },
+  {
+   "id": 62009,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 7, Flat 13",
+   "description": "This house has one bed.",
+   "rent": 1125,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 62010,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 7, Flat 14",
+   "description": "This house has four beds.",
+   "rent": 2955,
+   "sqm": 59,
+   "status": "Rented"
+  },
+  {
+   "id": 62011,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 8, Flat 01",
+   "description": "This house has two beds.",
+   "rent": 2485,
+   "sqm": 53,
+   "status": "Rented"
+  },
+  {
+   "id": 62012,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 8, Flat 02",
+   "description": "This house has two beds.",
+   "rent": 3385,
+   "sqm": 73,
+   "status": "Rented"
+  },
+  {
+   "id": 62013,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 8, Flat 03",
+   "description": "This house has three beds.",
+   "rent": 4700,
+   "sqm": 100,
+   "status": "Rented"
+  },
+  {
+   "id": 62014,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 8, Flat 04",
+   "description": "This house has two beds.",
+   "rent": 2845,
+   "sqm": 61,
+   "status": "Rented"
+  },
+  {
+   "id": 62015,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 8, Flat 05",
+   "description": "This house has two beds.",
+   "rent": 2665,
+   "sqm": 57,
+   "status": "Rented"
+  },
+  {
+   "id": 62016,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia, Villa",
+   "description": "This wonderful villa has a luxury furnishing and four beds.",
+   "rent": 5385,
+   "sqm": 113,
+   "status": "Rented"
+  },
+  {
+   "id": 62019,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 8, Flat 11",
+   "description": "This house has two beds.",
+   "rent": 1990,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 62020,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 8, Flat 12",
+   "description": "This house has two beds.",
+   "rent": 1810,
+   "sqm": 38,
+   "status": "Rented"
+  },
+  {
+   "id": 62021,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 8, Flat 13",
+   "description": "This house has two beds.",
+   "rent": 1990,
+   "sqm": 42,
+   "status": "Auctioned (bid: 10 gp)"
+  },
+  {
+   "id": 62022,
+   "town": "Darashia",
+   "guildhouse": false,
+   "name": "Darashia 8, Flat 14",
+   "description": "This house has two beds.",
+   "rent": 1810,
+   "sqm": 38,
+   "status": "Rented"
+  },
+  {
+   "id": 62017,
+   "town": "Darashia",
+   "guildhouse": true,
+   "name": "Darashia, Western Guildhall",
+   "description": "This guildhall has fourteen beds.",
+   "rent": 10435,
+   "sqm": 203,
+   "status": "Rented"
+  },
+  {
+   "id": 62018,
+   "town": "Darashia",
+   "guildhouse": true,
+   "name": "Darashia, Eastern Guildhall",
+   "description": "This guildhall has sixteen beds.",
+   "rent": 12660,
+   "sqm": 248,
+   "status": "Rented"
+  },
+  {
+   "id": 50101,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle Shop 1",
+   "description": "This shop has one bed.",
+   "rent": 1890,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 50102,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle Shop 2",
+   "description": "This shop has one bed.",
+   "rent": 1890,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 50103,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle Shop 3",
+   "description": "This shop has one bed.",
+   "rent": 1890,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 50104,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 3rd Floor, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 50105,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 3rd Floor, Flat 02",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 50106,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 3rd Floor, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auction ended"
+  },
+  {
+   "id": 50107,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 3rd Floor, Flat 04",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 50108,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 3rd Floor, Flat 05",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 50109,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 3rd Floor, Flat 06",
+   "description": "This house has two beds.",
+   "rent": 1045,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 50110,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 3rd Floor, Flat 07",
+   "description": "This house has one bed.",
+   "rent": 720,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 50111,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 4th Floor, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 50112,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 4th Floor, Flat 02",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 50113,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 4th Floor, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 50114,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 4th Floor, Flat 04",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 50115,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 4th Floor, Flat 05",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 50116,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 4th Floor, Flat 06",
+   "description": "This house has one bed.",
+   "rent": 945,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 50117,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 4th Floor, Flat 07",
+   "description": "This house has one bed.",
+   "rent": 720,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 50118,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 4th Floor, Flat 08",
+   "description": "This house has one bed.",
+   "rent": 945,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 50119,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, 4th Floor, Flat 09",
+   "description": "This house has one bed.",
+   "rent": 720,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 50120,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, Basement, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 50121,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, Basement, Flat 02",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 50122,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, Basement, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 50123,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, Basement, Flat 04",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 50124,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, Basement, Flat 05",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 50125,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, Basement, Flat 06",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 50126,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, Basement, Flat 07",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 50127,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, Basement, Flat 08",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (bid: 10 gp)"
+  },
+  {
+   "id": 50128,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle, Basement, Flat 09",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 50201,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle Street 1",
+   "description": "This house has three beds.",
+   "rent": 2900,
+   "sqm": 60,
+   "status": "Rented"
+  },
+  {
+   "id": 50202,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle Street 2",
+   "description": "This house has two beds.",
+   "rent": 1495,
+   "sqm": 31,
+   "status": "Rented"
+  },
+  {
+   "id": 50203,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle Street 3",
+   "description": "This house has two beds.",
+   "rent": 1765,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 50204,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle Street 4",
+   "description": "This house has two beds.",
+   "rent": 1765,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 50205,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Castle Street 5",
+   "description": "This house has two beds.",
+   "rent": 1765,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 50301,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50302,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 02",
+   "description": "This house has two beds.",
+   "rent": 860,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 50303,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50304,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 04",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 50305,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 05",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 50306,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 06",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 50307,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 07",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 50308,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 08",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 50309,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 11",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50310,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 12",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 50311,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 13",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50312,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 14",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 50313,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 15",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50314,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 16",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50315,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 17",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50316,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 18",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50317,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 21",
+   "description": "This house has two beds.",
+   "rent": 860,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 50318,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 22",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50319,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 23",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50320,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 24",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50321,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 25",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (bid: 10 gp)"
+  },
+  {
+   "id": 50322,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 26",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50323,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 27",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50324,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Flat 28",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 50325,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Basement Flat 1",
+   "description": "This house has two beds.",
+   "rent": 1540,
+   "sqm": 36,
+   "status": "Rented"
+  },
+  {
+   "id": 50326,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Edron Flats, Basement Flat 2",
+   "description": "This house has two beds.",
+   "rent": 1540,
+   "sqm": 36,
+   "status": "Rented"
+  },
+  {
+   "id": 50401,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Central Circle 1",
+   "description": "This house has two beds.",
+   "rent": 3020,
+   "sqm": 73,
+   "status": "Rented"
+  },
+  {
+   "id": 50402,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Central Circle 2",
+   "description": "This house has two beds.",
+   "rent": 3300,
+   "sqm": 80,
+   "status": "Rented"
+  },
+  {
+   "id": 50403,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Central Circle 3",
+   "description": "This house has five beds.",
+   "rent": 4160,
+   "sqm": 94,
+   "status": "Rented"
+  },
+  {
+   "id": 50404,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Central Circle 4",
+   "description": "This house has five beds.",
+   "rent": 4160,
+   "sqm": 94,
+   "status": "Rented"
+  },
+  {
+   "id": 50405,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Central Circle 5",
+   "description": "This house has five beds.",
+   "rent": 4160,
+   "sqm": 94,
+   "status": "Rented"
+  },
+  {
+   "id": 50406,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Central Circle 6 (Shop)",
+   "description": "This shop has two beds.",
+   "rent": 3980,
+   "sqm": 97,
+   "status": "Rented"
+  },
+  {
+   "id": 50407,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Central Circle 7 (Shop)",
+   "description": "This shop has two beds.",
+   "rent": 3980,
+   "sqm": 97,
+   "status": "Rented"
+  },
+  {
+   "id": 50408,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Central Circle 8 (Shop)",
+   "description": "This shop has two beds.",
+   "rent": 3980,
+   "sqm": 97,
+   "status": "Rented"
+  },
+  {
+   "id": 50409,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Central Circle 9a",
+   "description": "This house has two beds.",
+   "rent": 940,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 50410,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Central Circle 9b",
+   "description": "This house has two beds.",
+   "rent": 940,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 50501,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 1",
+   "description": "This house has two beds.",
+   "rent": 1765,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 50502,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 2",
+   "description": "This house has two beds.",
+   "rent": 1765,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 50503,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 3",
+   "description": "This house has two beds.",
+   "rent": 1765,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 50504,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 4",
+   "description": "This house has two beds.",
+   "rent": 1765,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 50505,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 5",
+   "description": "This house has two beds.",
+   "rent": 1765,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 50506,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 6a",
+   "description": "This house has two beds.",
+   "rent": 1450,
+   "sqm": 30,
+   "status": "Rented"
+  },
+  {
+   "id": 50507,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 6b",
+   "description": "This house has two beds.",
+   "rent": 1450,
+   "sqm": 30,
+   "status": "Rented"
+  },
+  {
+   "id": 50508,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 7",
+   "description": "This house has three beds.",
+   "rent": 5960,
+   "sqm": 128,
+   "status": "Rented"
+  },
+  {
+   "id": 50509,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 8",
+   "description": "This house has three beds.",
+   "rent": 5960,
+   "sqm": 128,
+   "status": "Rented"
+  },
+  {
+   "id": 50510,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 9a",
+   "description": "This house has two beds.",
+   "rent": 1540,
+   "sqm": 32,
+   "status": "Rented"
+  },
+  {
+   "id": 50511,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 9b",
+   "description": "This house has two beds.",
+   "rent": 1495,
+   "sqm": 31,
+   "status": "Rented"
+  },
+  {
+   "id": 50512,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 10a",
+   "description": "This house has two beds.",
+   "rent": 1540,
+   "sqm": 32,
+   "status": "Rented"
+  },
+  {
+   "id": 50513,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 10b",
+   "description": "This house has three beds.",
+   "rent": 1595,
+   "sqm": 31,
+   "status": "Rented"
+  },
+  {
+   "id": 50514,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 11",
+   "description": "This house has six beds.",
+   "rent": 7205,
+   "sqm": 149,
+   "status": "Rented"
+  },
+  {
+   "id": 50515,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 4a",
+   "description": "This house has two beds.",
+   "rent": 1495,
+   "sqm": 31,
+   "status": "Rented"
+  },
+  {
+   "id": 50516,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 4b",
+   "description": "This house has two beds.",
+   "rent": 1495,
+   "sqm": 31,
+   "status": "Rented"
+  },
+  {
+   "id": 50517,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Wood Avenue 4c",
+   "description": "This house has two beds.",
+   "rent": 1765,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 50604,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Sky Lane, Sea Tower",
+   "description": "This house has six beds.",
+   "rent": 4775,
+   "sqm": 95,
+   "status": "Rented"
+  },
+  {
+   "id": 50702,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Magic Academy, Shop",
+   "description": "This shop has one bed.",
+   "rent": 1595,
+   "sqm": 29,
+   "status": "Rented"
+  },
+  {
+   "id": 50703,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Magic Academy, Flat 1",
+   "description": "This house has three beds.",
+   "rent": 1465,
+   "sqm": 23,
+   "status": "Rented"
+  },
+  {
+   "id": 50704,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Magic Academy, Flat 2",
+   "description": "This house has two beds.",
+   "rent": 1530,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 50705,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Magic Academy, Flat 3",
+   "description": "This house has one bed.",
+   "rent": 1430,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 50706,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Magic Academy, Flat 4",
+   "description": "This house has two beds.",
+   "rent": 1530,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 50707,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Magic Academy, Flat 5",
+   "description": "This house has one bed.",
+   "rent": 1430,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 52001,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Village 1",
+   "description": "This house has two beds.",
+   "rent": 1780,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 52002,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Village 2",
+   "description": "This house has one bed.",
+   "rent": 640,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 52003,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Village 3",
+   "description": "This house has one bed.",
+   "rent": 680,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 52004,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Village 4",
+   "description": "This house has two beds.",
+   "rent": 940,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 52005,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Village 5",
+   "description": "This house has two beds.",
+   "rent": 1140,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 52006,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Village 6",
+   "description": "This house has two beds.",
+   "rent": 1300,
+   "sqm": 30,
+   "status": "Rented"
+  },
+  {
+   "id": 52007,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Village 7",
+   "description": "This house has two beds.",
+   "rent": 1140,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 52008,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Village 8",
+   "description": "This house has one bed.",
+   "rent": 680,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 52009,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Village 9",
+   "description": "This house has one bed.",
+   "rent": 680,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 52010,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Flats, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 52011,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Flats, Flat 02",
+   "description": "This house has two beds.",
+   "rent": 740,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 52012,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Flats, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (bid: 10 gp)"
+  },
+  {
+   "id": 52013,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Flats, Flat 04",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 52014,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Flats, Flat 05",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 52015,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Flats, Flat 06",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 52016,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Flats, Flat 11",
+   "description": "This house has two beds.",
+   "rent": 740,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 52017,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Flats, Flat 12",
+   "description": "This house has two beds.",
+   "rent": 740,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 52018,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Flats, Flat 13",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 52019,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Flats, Flat 14",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 52020,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Flats, Flat 15",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 52021,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Stonehome Flats, Flat 16",
+   "description": "This house has one bed.",
+   "rent": 400,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 54001,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya Flats, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 54002,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya Flats, Flat 02",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 54003,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya Flats, Flat 03",
+   "description": "This house has two beds.",
+   "rent": 820,
+   "sqm": 16,
+   "status": "Auctioned (bid: 10 gp)"
+  },
+  {
+   "id": 54004,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya Flats, Flat 04",
+   "description": "This house has two beds.",
+   "rent": 820,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 54005,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya Flats, Flat 05",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 54006,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya Flats, Flat 06",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 54007,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya Flats, Flat 11",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 54008,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya Flats, Flat 12",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 54009,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya Flats, Flat 13",
+   "description": "This house has two beds.",
+   "rent": 820,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 54010,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya Flats, Flat 14",
+   "description": "This house has two beds.",
+   "rent": 820,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 54011,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya Flats, Flat 15",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 54012,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya Flats, Flat 16",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 54013,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 1",
+   "description": "This house has two beds.",
+   "rent": 1270,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 54014,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 2",
+   "description": "This house has three beds.",
+   "rent": 3710,
+   "sqm": 78,
+   "status": "Rented"
+  },
+  {
+   "id": 54015,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 3",
+   "description": "This house has two beds.",
+   "rent": 2035,
+   "sqm": 43,
+   "status": "Rented"
+  },
+  {
+   "id": 54016,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 4",
+   "description": "This house has two beds.",
+   "rent": 1720,
+   "sqm": 36,
+   "status": "Rented"
+  },
+  {
+   "id": 54017,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 5",
+   "description": "This house has three beds.",
+   "rent": 5600,
+   "sqm": 120,
+   "status": "Rented"
+  },
+  {
+   "id": 54018,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 6",
+   "description": "This house has two beds.",
+   "rent": 2395,
+   "sqm": 51,
+   "status": "Rented"
+  },
+  {
+   "id": 54019,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 7",
+   "description": "This house has two beds.",
+   "rent": 2395,
+   "sqm": 51,
+   "status": "Rented"
+  },
+  {
+   "id": 54020,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 8",
+   "description": "This house has two beds.",
+   "rent": 2710,
+   "sqm": 58,
+   "status": "Rented"
+  },
+  {
+   "id": 54021,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 9a",
+   "description": "This house has two beds.",
+   "rent": 1225,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 54022,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 9b",
+   "description": "This house has two beds.",
+   "rent": 2620,
+   "sqm": 56,
+   "status": "Rented"
+  },
+  {
+   "id": 54023,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 9c",
+   "description": "This house has two beds.",
+   "rent": 1225,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 54024,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 9d",
+   "description": "This house has two beds.",
+   "rent": 2620,
+   "sqm": 56,
+   "status": "Rented"
+  },
+  {
+   "id": 54025,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 10",
+   "description": "This house has three beds.",
+   "rent": 3800,
+   "sqm": 80,
+   "status": "Rented"
+  },
+  {
+   "id": 54026,
+   "town": "Edron",
+   "guildhouse": false,
+   "name": "Cormaya 11",
+   "description": "This house has two beds.",
+   "rent": 2035,
+   "sqm": 43,
+   "status": "Rented"
+  },
+  {
+   "id": 50601,
+   "town": "Edron",
+   "guildhouse": true,
+   "name": "Sky Lane, Guild 1",
+   "description": "This guildhall has twenty-three beds.",
+   "rent": 21145,
+   "sqm": 421,
+   "status": "Rented"
+  },
+  {
+   "id": 50602,
+   "town": "Edron",
+   "guildhouse": true,
+   "name": "Sky Lane, Guild 2",
+   "description": "This guildhall has fourteen beds.",
+   "rent": 19300,
+   "sqm": 400,
+   "status": "Rented"
+  },
+  {
+   "id": 50603,
+   "town": "Edron",
+   "guildhouse": true,
+   "name": "Sky Lane, Guild 3",
+   "description": "This guildhall has eighteen beds.",
+   "rent": 17315,
+   "sqm": 347,
+   "status": "Rented"
+  },
+  {
+   "id": 50701,
+   "town": "Edron",
+   "guildhouse": true,
+   "name": "Magic Academy, Guild",
+   "description": "This guildhall has fourteen beds.",
+   "rent": 12025,
+   "sqm": 195,
+   "status": "Rented"
+  },
+  {
+   "id": 52022,
+   "town": "Edron",
+   "guildhouse": true,
+   "name": "Stonehome Clanhall",
+   "description": "This clanhall has ten beds.",
+   "rent": 8580,
+   "sqm": 192,
+   "status": "Rented"
+  },
+  {
+   "id": 54027,
+   "town": "Edron",
+   "guildhouse": true,
+   "name": "Castle of the White Dragon",
+   "description": "This guildhall has nineteen beds.",
+   "rent": 24975,
+   "sqm": 515,
+   "status": "Rented"
+  },
+  {
+   "id": 30101,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "The Farms 1",
+   "description": "This house has three beds.",
+   "rent": 2510,
+   "sqm": 42,
+   "status": "Rented"
+  },
+  {
+   "id": 30102,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "The Farms 2",
+   "description": "This house has two beds.",
+   "rent": 1530,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 30103,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "The Farms 3",
+   "description": "This house has two beds.",
+   "rent": 1530,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 30104,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "The Farms 4",
+   "description": "This house has two beds.",
+   "rent": 1530,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 30105,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "The Farms 5",
+   "description": "This house has two beds.",
+   "rent": 1530,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 30106,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "The Farms 6, Fishing Hut",
+   "description": "This house has two beds.",
+   "rent": 1255,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 30201,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Nobility Quarter 1",
+   "description": "This house has three beds.",
+   "rent": 1865,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 30202,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Nobility Quarter 2",
+   "description": "This house has three beds.",
+   "rent": 1865,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 30203,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Nobility Quarter 3",
+   "description": "This house has three beds.",
+   "rent": 1865,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 30204,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Nobility Quarter 4",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 30205,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Nobility Quarter 5",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30206,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Nobility Quarter 6",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30207,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Nobility Quarter 7",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30208,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Nobility Quarter 8",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30209,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Nobility Quarter 9",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30301,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 1",
+   "description": "This house has one bed.",
+   "rent": 210,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30302,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 2",
+   "description": "This house has one bed.",
+   "rent": 210,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30303,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 3",
+   "description": "This house has one bed.",
+   "rent": 210,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30304,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 4",
+   "description": "This house has one bed.",
+   "rent": 210,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30305,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 5",
+   "description": "This house has one bed.",
+   "rent": 210,
+   "sqm": 7,
+   "status": "Rented"
+  },
+  {
+   "id": 30306,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 6",
+   "description": "This house has one bed.",
+   "rent": 210,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30307,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 7",
+   "description": "This house has one bed.",
+   "rent": 210,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30308,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 8",
+   "description": "This house has one bed.",
+   "rent": 210,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30309,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 9",
+   "description": "This house has one bed.",
+   "rent": 210,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30310,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 10",
+   "description": "This house has one bed.",
+   "rent": 210,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30311,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 11",
+   "description": "This house has one bed.",
+   "rent": 210,
+   "sqm": 7,
+   "status": "Rented"
+  },
+  {
+   "id": 30312,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 12",
+   "description": "This house has one bed.",
+   "rent": 210,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30313,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Upper Barracks 13",
+   "description": "This house has two beds.",
+   "rent": 580,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 30401,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "The Market 1 (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 650,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30402,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "The Market 2 (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 1100,
+   "sqm": 22,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30403,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "The Market 3 (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 1450,
+   "sqm": 29,
+   "status": "Rented"
+  },
+  {
+   "id": 30404,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "The Market 4 (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 1800,
+   "sqm": 36,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30501,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 1",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30502,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 2",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30503,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 3",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30504,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 4",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30505,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 5",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30506,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 6",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30507,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 7",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30508,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 8",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30509,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 9",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30510,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 10",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30511,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 11",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30512,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 12",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30513,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 13",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30514,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 14",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30515,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 15",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30516,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 16",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30517,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 17",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30518,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 18",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30519,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 19",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30520,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 20",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 30521,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 21",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30522,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 22",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30523,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 23",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30524,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Lower Barracks 24",
+   "description": "This house has one bed.",
+   "rent": 300,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30601,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Tunnel Gardens 1",
+   "description": "This house has three beds.",
+   "rent": 1820,
+   "sqm": 27,
+   "status": "Rented"
+  },
+  {
+   "id": 30602,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Tunnel Gardens 2",
+   "description": "This house has three beds.",
+   "rent": 1820,
+   "sqm": 27,
+   "status": "Rented"
+  },
+  {
+   "id": 30603,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Tunnel Gardens 3",
+   "description": "This house has three beds.",
+   "rent": 2000,
+   "sqm": 30,
+   "status": "Rented"
+  },
+  {
+   "id": 30604,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Tunnel Gardens 4",
+   "description": "This house has three beds.",
+   "rent": 2000,
+   "sqm": 30,
+   "status": "Rented"
+  },
+  {
+   "id": 30605,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Tunnel Gardens 5",
+   "description": "This house has two beds.",
+   "rent": 1360,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 30606,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Tunnel Gardens 6",
+   "description": "This house has two beds.",
+   "rent": 1360,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 30607,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Tunnel Gardens 7",
+   "description": "This house has two beds.",
+   "rent": 1360,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 30608,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Tunnel Gardens 8",
+   "description": "This house has two beds.",
+   "rent": 1360,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 30609,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Tunnel Gardens 9",
+   "description": "This house has two beds.",
+   "rent": 1000,
+   "sqm": 15,
+   "status": "Rented"
+  },
+  {
+   "id": 30610,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Tunnel Gardens 10",
+   "description": "This house has two beds.",
+   "rent": 1000,
+   "sqm": 15,
+   "status": "Rented"
+  },
+  {
+   "id": 30611,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Tunnel Gardens 11",
+   "description": "This house has two beds.",
+   "rent": 1060,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 30612,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Tunnel Gardens 12",
+   "description": "This house has two beds.",
+   "rent": 1060,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 32001,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 1",
+   "description": "This house has two beds.",
+   "rent": 1660,
+   "sqm": 39,
+   "status": "Rented"
+  },
+  {
+   "id": 32002,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 2",
+   "description": "This house has one bed.",
+   "rent": 280,
+   "sqm": 7,
+   "status": "Rented"
+  },
+  {
+   "id": 32003,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 3",
+   "description": "This house has two beds.",
+   "rent": 740,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 32004,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 4",
+   "description": "This house has one bed.",
+   "rent": 200,
+   "sqm": 5,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 32005,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 5",
+   "description": "This house has one bed.",
+   "rent": 200,
+   "sqm": 5,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 32006,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 6",
+   "description": "This house has one bed.",
+   "rent": 200,
+   "sqm": 5,
+   "status": "Rented"
+  },
+  {
+   "id": 32007,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 7",
+   "description": "This house has two beds.",
+   "rent": 780,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 32008,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 8",
+   "description": "This house has one bed.",
+   "rent": 280,
+   "sqm": 7,
+   "status": "Rented"
+  },
+  {
+   "id": 32009,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 9",
+   "description": "This house has one bed.",
+   "rent": 200,
+   "sqm": 5,
+   "status": "Rented"
+  },
+  {
+   "id": 32010,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 10",
+   "description": "This house has one bed.",
+   "rent": 200,
+   "sqm": 5,
+   "status": "Rented"
+  },
+  {
+   "id": 32011,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 11",
+   "description": "This house has one bed.",
+   "rent": 200,
+   "sqm": 5,
+   "status": "Rented"
+  },
+  {
+   "id": 32012,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 12 (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 280,
+   "sqm": 7,
+   "status": "Rented"
+  },
+  {
+   "id": 32013,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 13 (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 280,
+   "sqm": 7,
+   "status": "Rented"
+  },
+  {
+   "id": 32014,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Outlaw Camp 14 (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 640,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 33001,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 1",
+   "description": "This house has one bed.",
+   "rent": 2170,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 33002,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 2",
+   "description": "This house has one bed.",
+   "rent": 2170,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 33003,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 3",
+   "description": "This house has one bed.",
+   "rent": 2170,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 33004,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 4",
+   "description": "This house has one bed.",
+   "rent": 2170,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 33005,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 5",
+   "description": "This house has one bed.",
+   "rent": 2170,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 33006,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 6",
+   "description": "This house has one bed.",
+   "rent": 2170,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 33007,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 7",
+   "description": "This house has one bed.",
+   "rent": 1900,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 33008,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 8",
+   "description": "This house has one bed.",
+   "rent": 1900,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 33009,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 9",
+   "description": "This house has one bed.",
+   "rent": 1900,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 33010,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 10",
+   "description": "This house has one bed.",
+   "rent": 1900,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 33011,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 11",
+   "description": "This house has one bed.",
+   "rent": 1900,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 33012,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 12",
+   "description": "This house has one bed.",
+   "rent": 1900,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 33013,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 13",
+   "description": "This house has one bed.",
+   "rent": 1900,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 33014,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 14",
+   "description": "This house has one bed.",
+   "rent": 1900,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 33015,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 15",
+   "description": "This house has one bed.",
+   "rent": 1900,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 33016,
+   "town": "Kazordoon",
+   "guildhouse": false,
+   "name": "Aruthang Miners' Quarters 16",
+   "description": "This house has one bed.",
+   "rent": 1900,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 30001,
+   "town": "Kazordoon",
+   "guildhouse": true,
+   "name": "Wolftower",
+   "description": "This guildhall has twenty-three beds.",
+   "rent": 21550,
+   "sqm": 387,
+   "status": "Rented"
+  },
+  {
+   "id": 30002,
+   "town": "Kazordoon",
+   "guildhouse": true,
+   "name": "Hill Hideout",
+   "description": "This guildhall has fifteen beds.",
+   "rent": 13950,
+   "sqm": 251,
+   "status": "Rented"
+  },
+  {
+   "id": 30003,
+   "town": "Kazordoon",
+   "guildhouse": true,
+   "name": "Riverspring",
+   "description": "This guildhall has nineteen beds.",
+   "rent": 19450,
+   "sqm": 353,
+   "status": "Rented"
+  },
+  {
+   "id": 30701,
+   "town": "Kazordoon",
+   "guildhouse": true,
+   "name": "Marble Guildhall",
+   "description": "This guildhall has seventeen beds.",
+   "rent": 16810,
+   "sqm": 338,
+   "status": "Rented"
+  },
+  {
+   "id": 30702,
+   "town": "Kazordoon",
+   "guildhouse": true,
+   "name": "Iron Guildhall",
+   "description": "This guildhall has eighteen beds.",
+   "rent": 15560,
+   "sqm": 308,
+   "status": "Rented"
+  },
+  {
+   "id": 30703,
+   "town": "Kazordoon",
+   "guildhouse": true,
+   "name": "Granite Guildhall",
+   "description": "This guildhall has seventeen beds.",
+   "rent": 17845,
+   "sqm": 361,
+   "status": "Rented"
+  },
+  {
+   "id": 32015,
+   "town": "Kazordoon",
+   "guildhouse": true,
+   "name": "Outlaw Castle",
+   "description": "This guildhall has nine beds.",
+   "rent": 8000,
+   "sqm": 180,
+   "status": "Rented"
+  },
+  {
+   "id": 10101,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sunset Homes, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 10102,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sunset Homes, Flat 02",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10103,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sunset Homes, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10104,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sunset Homes, Flat 11",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10112,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sunset Homes, Flat 12",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 10113,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sunset Homes, Flat 13",
+   "description": "This house has two beds.",
+   "rent": 860,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 10114,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sunset Homes, Flat 14",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 10121,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sunset Homes, Flat 21",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 10122,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sunset Homes, Flat 22",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10123,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sunset Homes, Flat 23",
+   "description": "This house has two beds.",
+   "rent": 860,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 10124,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sunset Homes, Flat 24",
+   "description": "This house has one bed.",
+   "rent": 520,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10201,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Beach Home Apartments, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 715,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10202,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Beach Home Apartments, Flat 02",
+   "description": "This house has one bed.",
+   "rent": 715,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10203,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Beach Home Apartments, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 715,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10204,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Beach Home Apartments, Flat 04",
+   "description": "This house has one bed.",
+   "rent": 715,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10205,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Beach Home Apartments, Flat 05",
+   "description": "This house has one bed.",
+   "rent": 715,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10206,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Beach Home Apartments, Flat 06",
+   "description": "This house has two beds.",
+   "rent": 1145,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 10211,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Beach Home Apartments, Flat 11",
+   "description": "This house has one bed.",
+   "rent": 715,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10212,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Beach Home Apartments, Flat 12",
+   "description": "This house has one bed.",
+   "rent": 880,
+   "sqm": 16,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10213,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Beach Home Apartments, Flat 13",
+   "description": "This house has one bed.",
+   "rent": 880,
+   "sqm": 16,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10214,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Beach Home Apartments, Flat 14",
+   "description": "This house has one bed.",
+   "rent": 385,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10215,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Beach Home Apartments, Flat 15",
+   "description": "This house has one bed.",
+   "rent": 385,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10216,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Beach Home Apartments, Flat 16",
+   "description": "This house has two beds.",
+   "rent": 1145,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 10301,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 10302,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 02",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10303,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10304,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 04",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10305,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 05",
+   "description": "This house has two beds.",
+   "rent": 1225,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 10306,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 06",
+   "description": "This house has two beds.",
+   "rent": 1225,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 10307,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 07",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10308,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 08",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10311,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 11",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10312,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 12",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10313,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 13",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10314,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 14",
+   "description": "This house has one bed.",
+   "rent": 900,
+   "sqm": 20,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10315,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 15",
+   "description": "This house has two beds.",
+   "rent": 1450,
+   "sqm": 30,
+   "status": "Rented"
+  },
+  {
+   "id": 10316,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 16",
+   "description": "This house has two beds.",
+   "rent": 1450,
+   "sqm": 30,
+   "status": "Rented"
+  },
+  {
+   "id": 10317,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 17",
+   "description": "This house has one bed.",
+   "rent": 900,
+   "sqm": 20,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10318,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 18",
+   "description": "This house has one bed.",
+   "rent": 900,
+   "sqm": 20,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10319,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 22",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10320,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 21",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10321,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 23",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10322,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 24",
+   "description": "This house has one bed.",
+   "rent": 900,
+   "sqm": 20,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10323,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 25",
+   "description": "This house has two beds.",
+   "rent": 1450,
+   "sqm": 30,
+   "status": "Rented"
+  },
+  {
+   "id": 10324,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 26",
+   "description": "This house has two beds.",
+   "rent": 1450,
+   "sqm": 30,
+   "status": "Rented"
+  },
+  {
+   "id": 10325,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 27",
+   "description": "This house has one bed.",
+   "rent": 900,
+   "sqm": 20,
+   "status": "Rented"
+  },
+  {
+   "id": 10326,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Alai Flats, Flat 28",
+   "description": "This house has one bed.",
+   "rent": 900,
+   "sqm": 20,
+   "status": "Rented"
+  },
+  {
+   "id": 10401,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Upper Swamp Lane 2",
+   "description": "This house has four beds.",
+   "rent": 4740,
+   "sqm": 74,
+   "status": "Rented"
+  },
+  {
+   "id": 10402,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Upper Swamp Lane 4",
+   "description": "This house has four beds.",
+   "rent": 4740,
+   "sqm": 74,
+   "status": "Rented"
+  },
+  {
+   "id": 10403,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Lower Swamp Lane 1",
+   "description": "This house has four beds.",
+   "rent": 4740,
+   "sqm": 74,
+   "status": "Rented"
+  },
+  {
+   "id": 10404,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Lower Swamp Lane 3",
+   "description": "This house has four beds.",
+   "rent": 4740,
+   "sqm": 74,
+   "status": "Rented"
+  },
+  {
+   "id": 10405,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Upper Swamp Lane 8",
+   "description": "This house has three beds.",
+   "rent": 8120,
+   "sqm": 132,
+   "status": "Rented"
+  },
+  {
+   "id": 10407,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Upper Swamp Lane 10",
+   "description": "This house has three beds.",
+   "rent": 2060,
+   "sqm": 31,
+   "status": "Rented"
+  },
+  {
+   "id": 10408,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Upper Swamp Lane 12",
+   "description": "This house has three beds.",
+   "rent": 3800,
+   "sqm": 60,
+   "status": "Rented"
+  },
+  {
+   "id": 10501,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sorcerer's Avenue 1a",
+   "description": "This house has two beds.",
+   "rent": 1255,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 10502,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sorcerer's Avenue 1b",
+   "description": "This house has two beds.",
+   "rent": 1035,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 10503,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sorcerer's Avenue 1c",
+   "description": "This house has two beds.",
+   "rent": 1255,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 10504,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sorcerer's Avenue 5",
+   "description": "This shop has one bed.",
+   "rent": 2695,
+   "sqm": 49,
+   "status": "Rented"
+  },
+  {
+   "id": 10505,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sorcerer's Avenue Labs 2a",
+   "description": "This house has one bed. Only sorcerers can enter.",
+   "rent": 715,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10506,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sorcerer's Avenue Labs 2b",
+   "description": "This house has one bed. Only sorcerers can enter.",
+   "rent": 715,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10507,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sorcerer's Avenue Labs 2c",
+   "description": "This house has one bed. Only sorcerers can enter.",
+   "rent": 715,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10508,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sorcerer's Avenue Labs 2d",
+   "description": "This house has one bed. Only sorcerers can enter.",
+   "rent": 715,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10509,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sorcerer's Avenue Labs 2e",
+   "description": "This house has one bed. Only sorcerers can enter.",
+   "rent": 715,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10510,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Sorcerer's Avenue Labs 2f",
+   "description": "This house has one bed. Only sorcerers can enter.",
+   "rent": 715,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10602,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Harbour Street 4",
+   "description": "This house has one bed.",
+   "rent": 935,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10603,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Thais Hostel",
+   "description": "This hostel has twenty-four beds.",
+   "rent": 6980,
+   "sqm": 117,
+   "status": "Rented"
+  },
+  {
+   "id": 10701,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Farm Lane, Basement (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 945,
+   "sqm": 21,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10702,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Farm Lane, 1st floor (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 945,
+   "sqm": 21,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10703,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Farm Lane, 2nd Floor (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 945,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 10802,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Main Street 9, 1st floor (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 1440,
+   "sqm": 32,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10803,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Main Street 9a, 2nd floor (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10804,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Main Street 9b, 2nd floor (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 1260,
+   "sqm": 28,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10901,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Mill Avenue 1 (Shop)",
+   "description": "This shop has one bed.",
+   "rent": 1300,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 10902,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Mill Avenue 2 (Shop)",
+   "description": "This shop has two beds.",
+   "rent": 2350,
+   "sqm": 45,
+   "status": "Rented"
+  },
+  {
+   "id": 10903,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Mill Avenue 3",
+   "description": "This house has two beds.",
+   "rent": 1400,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 10904,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Mill Avenue 4",
+   "description": "This house has two beds.",
+   "rent": 1400,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 10905,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Mill Avenue 5",
+   "description": "This house has four beds.",
+   "rent": 3250,
+   "sqm": 59,
+   "status": "Rented"
+  },
+  {
+   "id": 11001,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 5a",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 11002,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 5b",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 11003,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 5c",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 11004,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 5d",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 11005,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 5e",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 11006,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 5f",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 11007,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 7a",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 11008,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 7b",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 11009,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 7c",
+   "description": "This house has two beds.",
+   "rent": 865,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 11010,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 7d",
+   "description": "This house has two beds.",
+   "rent": 865,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 11011,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 7e",
+   "description": "This house has two beds.",
+   "rent": 865,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 11012,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 7f",
+   "description": "This house has two beds.",
+   "rent": 865,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 11013,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 7g",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 11014,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 7h",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 11015,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 9",
+   "description": "This house has two beds.",
+   "rent": 955,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 11016,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 3a",
+   "description": "This house has two beds.",
+   "rent": 1045,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 11017,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 3b",
+   "description": "This house has two beds.",
+   "rent": 1045,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 11018,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 3c",
+   "description": "This house has two beds.",
+   "rent": 1045,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 11019,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 3d",
+   "description": "This house has two beds.",
+   "rent": 1045,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 11020,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 3e",
+   "description": "This house has two beds.",
+   "rent": 1045,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 11021,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 3f",
+   "description": "This house has two beds.",
+   "rent": 1045,
+   "sqm": 21,
+   "status": "Rented"
+  },
+  {
+   "id": 11022,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 1a",
+   "description": "This house has two beds.",
+   "rent": 1270,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 11023,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "The City Wall 1b",
+   "description": "This house has two beds.",
+   "rent": 1270,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 11401,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Harbour Place 2 (Shop)",
+   "description": "This shop has one bed.",
+   "rent": 1300,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 11404,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Harbour Place 1 (Shop)",
+   "description": "This shop has no beds.",
+   "rent": 1100,
+   "sqm": 22,
+   "status": "Rented"
+  },
+  {
+   "id": 12003,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Fibula Village 1",
+   "description": "This house has one bed.",
+   "rent": 845,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 12004,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Fibula Village 2",
+   "description": "This house has one bed.",
+   "rent": 845,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 12005,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Fibula Village 3",
+   "description": "This house has four beds.",
+   "rent": 3810,
+   "sqm": 54,
+   "status": "Rented"
+  },
+  {
+   "id": 12006,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Fibula Village 4",
+   "description": "This house has two beds.",
+   "rent": 1790,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 12007,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Fibula Village 5",
+   "description": "This house has two beds.",
+   "rent": 1790,
+   "sqm": 26,
+   "status": "Rented"
+  },
+  {
+   "id": 12008,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Fibula Village, Tower Flat",
+   "description": "This house has two beds.",
+   "rent": 5105,
+   "sqm": 77,
+   "status": "Rented"
+  },
+  {
+   "id": 12009,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Fibula Village, Bar",
+   "description": "This shop has two beds.",
+   "rent": 5235,
+   "sqm": 79,
+   "status": "Rented"
+  },
+  {
+   "id": 12100,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Fibula Village, Villa",
+   "description": "This wonderful villa has seven beds.",
+   "rent": 11490,
+   "sqm": 242,
+   "status": "Rented"
+  },
+  {
+   "id": 14003,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Greenshore Village, Villa",
+   "description": "This house has four beds.",
+   "rent": 10440,
+   "sqm": 169,
+   "status": "Rented"
+  },
+  {
+   "id": 14004,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Greenshore Village, Shop",
+   "description": "This shop has one bed.",
+   "rent": 1800,
+   "sqm": 30,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 14005,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Greenshore Village 1",
+   "description": "This house has three beds.",
+   "rent": 2420,
+   "sqm": 37,
+   "status": "Rented"
+  },
+  {
+   "id": 14006,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Greenshore Village 2",
+   "description": "This house has one bed.",
+   "rent": 780,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 14007,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Greenshore Village 3",
+   "description": "This house has one bed.",
+   "rent": 780,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 14008,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Greenshore Village 4",
+   "description": "This house has one bed.",
+   "rent": 780,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 14009,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Greenshore Village 5",
+   "description": "This house has one bed.",
+   "rent": 780,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 14010,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Greenshore Village 6",
+   "description": "This house has two beds.",
+   "rent": 4360,
+   "sqm": 71,
+   "status": "Rented"
+  },
+  {
+   "id": 14011,
+   "town": "Thais",
+   "guildhouse": false,
+   "name": "Greenshore Village 7",
+   "description": "This house has one bed.",
+   "rent": 1260,
+   "sqm": 21,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 10001,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Spiritkeep",
+   "description": "This guildhall has twenty-three beds.",
+   "rent": 19210,
+   "sqm": 378,
+   "status": "Rented"
+  },
+  {
+   "id": 10002,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Snake Tower",
+   "description": "This guildhall has twenty-one beds.",
+   "rent": 29720,
+   "sqm": 616,
+   "status": "Rented"
+  },
+  {
+   "id": 10003,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Halls of the Adventurers",
+   "description": "This guildhall has eighteen beds.",
+   "rent": 15380,
+   "sqm": 304,
+   "status": "Rented"
+  },
+  {
+   "id": 10004,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Dark Mansion",
+   "description": "This guildhall has seventeen beds.",
+   "rent": 17845,
+   "sqm": 361,
+   "status": "Rented"
+  },
+  {
+   "id": 10005,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Bloodhall",
+   "description": "This guildhall has sixteen beds.",
+   "rent": 15270,
+   "sqm": 306,
+   "status": "Rented"
+  },
+  {
+   "id": 10406,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Southern Thais Guildhall",
+   "description": "This guildhall has sixteen beds.",
+   "rent": 22260,
+   "sqm": 346,
+   "status": "Rented"
+  },
+  {
+   "id": 10601,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Thais Clanhall",
+   "description": "This clanhall has ten beds",
+   "rent": 8420,
+   "sqm": 188,
+   "status": "Rented"
+  },
+  {
+   "id": 10801,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Warriors Guildhall",
+   "description": "This guildhall has eleven beds.",
+   "rent": 14725,
+   "sqm": 305,
+   "status": "Rented"
+  },
+  {
+   "id": 12001,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Mercenary Tower",
+   "description": "This guildhall has twenty-six beds.",
+   "rent": 41955,
+   "sqm": 607,
+   "status": "Rented"
+  },
+  {
+   "id": 12002,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Guildhall of the Red Rose",
+   "description": "This guildhall has fifteen beds.",
+   "rent": 27725,
+   "sqm": 405,
+   "status": "Rented"
+  },
+  {
+   "id": 12010,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Fibula Clanhall",
+   "description": "This clanhall has ten beds.",
+   "rent": 11430,
+   "sqm": 162,
+   "status": "Rented"
+  },
+  {
+   "id": 14001,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "The Tibianic",
+   "description": "This guildhall has twenty-two beds.",
+   "rent": 26460,
+   "sqm": 406,
+   "status": "Rented"
+  },
+  {
+   "id": 14002,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Castle of Greenshore",
+   "description": "This guildhall has twelve beds.",
+   "rent": 18740,
+   "sqm": 294,
+   "status": "Rented"
+  },
+  {
+   "id": 14012,
+   "town": "Thais",
+   "guildhouse": true,
+   "name": "Greenshore Clanhall",
+   "description": "This Clanhall has ten beds.",
+   "rent": 10800,
+   "sqm": 165,
+   "status": "Rented"
+  },
+  {
+   "id": 35006,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Dagger Alley 1",
+   "description": "This house has two beds.",
+   "rent": 2665,
+   "sqm": 57,
+   "status": "Rented"
+  },
+  {
+   "id": 35007,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Iron Alley 1",
+   "description": "This house has four beds.",
+   "rent": 3450,
+   "sqm": 70,
+   "status": "Rented"
+  },
+  {
+   "id": 35008,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Iron Alley 2",
+   "description": "This house has four beds.",
+   "rent": 3450,
+   "sqm": 70,
+   "status": "Rented"
+  },
+  {
+   "id": 35009,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Dream Street 1 (Shop)",
+   "description": "This house has two beds.",
+   "rent": 4330,
+   "sqm": 94,
+   "status": "Rented"
+  },
+  {
+   "id": 35010,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Dream Street 2",
+   "description": "This house has two beds.",
+   "rent": 3340,
+   "sqm": 72,
+   "status": "Rented"
+  },
+  {
+   "id": 35011,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Dream Street 3",
+   "description": "This house has two beds.",
+   "rent": 2710,
+   "sqm": 58,
+   "status": "Rented"
+  },
+  {
+   "id": 35012,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Dream Street 4",
+   "description": "This house has four beds.",
+   "rent": 3765,
+   "sqm": 77,
+   "status": "Rented"
+  },
+  {
+   "id": 35013,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Elm Street 1",
+   "description": "This house has two beds.",
+   "rent": 2710,
+   "sqm": 58,
+   "status": "Rented"
+  },
+  {
+   "id": 35014,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Elm Street 2",
+   "description": "This house has two beds.",
+   "rent": 2665,
+   "sqm": 57,
+   "status": "Rented"
+  },
+  {
+   "id": 35015,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Elm Street 3",
+   "description": "This house has three beds.",
+   "rent": 2855,
+   "sqm": 59,
+   "status": "Rented"
+  },
+  {
+   "id": 35016,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Elm Street 4",
+   "description": "This house has two beds.",
+   "rent": 2620,
+   "sqm": 56,
+   "status": "Rented"
+  },
+  {
+   "id": 35017,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Seagull Walk 1",
+   "description": "This house has two beds.",
+   "rent": 5095,
+   "sqm": 111,
+   "status": "Rented"
+  },
+  {
+   "id": 35018,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Seagull Walk 2",
+   "description": "This house has three beds.",
+   "rent": 2765,
+   "sqm": 57,
+   "status": "Rented"
+  },
+  {
+   "id": 35019,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Lucky Lane 1 (Shop)",
+   "description": "This house has four beds.",
+   "rent": 6960,
+   "sqm": 148,
+   "status": "Rented"
+  },
+  {
+   "id": 35020,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 01",
+   "description": "This house has one bed.",
+   "rent": 405,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35021,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 02",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35022,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 03",
+   "description": "This house has one bed.",
+   "rent": 405,
+   "sqm": 9,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35023,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 04",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35024,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 05",
+   "description": "This house has one bed.",
+   "rent": 315,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35025,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 06",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35026,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 07",
+   "description": "This house has two beds.",
+   "rent": 685,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 35027,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 11",
+   "description": "This house has one bed.",
+   "rent": 315,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35028,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 12",
+   "description": "This house has two beds.",
+   "rent": 685,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 35029,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 13",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35030,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 14",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35031,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 15",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35032,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 16",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35033,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 17",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35034,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 18",
+   "description": "This house has one bed.",
+   "rent": 315,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35035,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 21",
+   "description": "This house has one bed.",
+   "rent": 315,
+   "sqm": 7,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35036,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 22",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35037,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 23",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 35038,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 24",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 35039,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 25",
+   "description": "This house has one bed.",
+   "rent": 585,
+   "sqm": 13,
+   "status": "Auctioned (no bids yet)"
+  },
+  {
+   "id": 35040,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 26",
+   "description": "This house has one bed.",
+   "rent": 450,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 35041,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 27",
+   "description": "This house has two beds.",
+   "rent": 685,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 35042,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 28",
+   "description": "This house has one bed.",
+   "rent": 315,
+   "sqm": 7,
+   "status": "Rented"
+  },
+  {
+   "id": 35043,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 31",
+   "description": "This house has one bed.",
+   "rent": 855,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 35044,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 32",
+   "description": "This house has two beds.",
+   "rent": 1135,
+   "sqm": 23,
+   "status": "Rented"
+  },
+  {
+   "id": 35045,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 33",
+   "description": "This house has one bed.",
+   "rent": 765,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 35046,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Paupers Palace, Flat 34",
+   "description": "This house has two beds.",
+   "rent": 1675,
+   "sqm": 35,
+   "status": "Rented"
+  },
+  {
+   "id": 35047,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Salvation Street 1 (Shop)",
+   "description": "This house has four beds.",
+   "rent": 6240,
+   "sqm": 132,
+   "status": "Rented"
+  },
+  {
+   "id": 35048,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Salvation Street 2",
+   "description": "This house has two beds.",
+   "rent": 3790,
+   "sqm": 82,
+   "status": "Rented"
+  },
+  {
+   "id": 35049,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Salvation Street 3",
+   "description": "This house has two beds.",
+   "rent": 3790,
+   "sqm": 82,
+   "status": "Rented"
+  },
+  {
+   "id": 35050,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Mystic Lane 1",
+   "description": "This house has three beds.",
+   "rent": 2945,
+   "sqm": 61,
+   "status": "Rented"
+  },
+  {
+   "id": 35051,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Mystic Lane 2",
+   "description": "This house has two beds.",
+   "rent": 2980,
+   "sqm": 64,
+   "status": "Rented"
+  },
+  {
+   "id": 35052,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Silver Street 1",
+   "description": "This house has one bed.",
+   "rent": 2565,
+   "sqm": 57,
+   "status": "Auctioned (bid: 11 gp)"
+  },
+  {
+   "id": 35053,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Silver Street 2",
+   "description": "This house has one bed.",
+   "rent": 1980,
+   "sqm": 44,
+   "status": "Rented"
+  },
+  {
+   "id": 35054,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Silver Street 3",
+   "description": "This house has one bed.",
+   "rent": 1980,
+   "sqm": 44,
+   "status": "Rented"
+  },
+  {
+   "id": 35055,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Silver Street 4",
+   "description": "This house has two beds.",
+   "rent": 3295,
+   "sqm": 71,
+   "status": "Rented"
+  },
+  {
+   "id": 35056,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Loot Lane 1 (Shop)",
+   "description": "This house has three beds.",
+   "rent": 4565,
+   "sqm": 97,
+   "status": "Rented"
+  },
+  {
+   "id": 35057,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Old Lighthouse",
+   "description": "This house has two beds.",
+   "rent": 3610,
+   "sqm": 78,
+   "status": "Rented"
+  },
+  {
+   "id": 35058,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Market Street 1",
+   "description": "This house has three beds.",
+   "rent": 6680,
+   "sqm": 144,
+   "status": "Rented"
+  },
+  {
+   "id": 35059,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Market Street 2",
+   "description": "This house has three beds.",
+   "rent": 4925,
+   "sqm": 105,
+   "status": "Rented"
+  },
+  {
+   "id": 35060,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Market Street 3",
+   "description": "This house has two beds.",
+   "rent": 3475,
+   "sqm": 75,
+   "status": "Rented"
+  },
+  {
+   "id": 35061,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Market Street 4 (Shop)",
+   "description": "This house has three beds.",
+   "rent": 5105,
+   "sqm": 109,
+   "status": "Rented"
+  },
+  {
+   "id": 35062,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Market Street 5 (Shop)",
+   "description": "This house has four beds.",
+   "rent": 6375,
+   "sqm": 135,
+   "status": "Rented"
+  },
+  {
+   "id": 35063,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Market Street 6",
+   "description": "This house has five beds.",
+   "rent": 5485,
+   "sqm": 113,
+   "status": "Rented"
+  },
+  {
+   "id": 35064,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Market Street 7",
+   "description": "This house has two beds.",
+   "rent": 2305,
+   "sqm": 49,
+   "status": "Rented"
+  },
+  {
+   "id": 39001,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 1",
+   "description": "This house has two beds.",
+   "rent": 4500,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 39002,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 2",
+   "description": "This house has two beds.",
+   "rent": 4500,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 39003,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 3",
+   "description": "This house has two beds.",
+   "rent": 4500,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 39004,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 4",
+   "description": "This house has two beds.",
+   "rent": 4500,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 39005,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 5",
+   "description": "This house has two beds.",
+   "rent": 4500,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 39006,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 6",
+   "description": "This house has two beds.",
+   "rent": 4500,
+   "sqm": 10,
+   "status": "Rented"
+  },
+  {
+   "id": 39007,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 7",
+   "description": "This house has two beds.",
+   "rent": 7650,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 39008,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 8",
+   "description": "This house has two beds.",
+   "rent": 7650,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 39009,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 9",
+   "description": "This house has two beds.",
+   "rent": 11250,
+   "sqm": 25,
+   "status": "Rented"
+  },
+  {
+   "id": 39010,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 7b",
+   "description": "This house has two beds.",
+   "rent": 7650,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 39011,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 7c",
+   "description": "This house has two beds.",
+   "rent": 7650,
+   "sqm": 17,
+   "status": "Rented"
+  },
+  {
+   "id": 39012,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 8b",
+   "description": "This house has two beds.",
+   "rent": 5850,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 39013,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 8c",
+   "description": "This house has two beds.",
+   "rent": 5850,
+   "sqm": 13,
+   "status": "Rented"
+  },
+  {
+   "id": 39014,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 10",
+   "description": "This house has two beds.",
+   "rent": 8550,
+   "sqm": 19,
+   "status": "Rented"
+  },
+  {
+   "id": 39015,
+   "town": "Venore",
+   "guildhouse": false,
+   "name": "Aruthang Village 11",
+   "description": "This house has two beds.",
+   "rent": 7200,
+   "sqm": 16,
+   "status": "Rented"
+  },
+  {
+   "id": 35001,
+   "town": "Venore",
+   "guildhouse": true,
+   "name": "Blessed Shield Guildhall",
+   "description": "This guildhall has nine beds.",
+   "rent": 8090,
+   "sqm": 162,
+   "status": "Rented"
+  },
+  {
+   "id": 35002,
+   "town": "Venore",
+   "guildhouse": true,
+   "name": "Steel Home",
+   "description": "This guildhall has thirteen beds.",
+   "rent": 13845,
+   "sqm": 281,
+   "status": "Rented"
+  },
+  {
+   "id": 35003,
+   "town": "Venore",
+   "guildhouse": true,
+   "name": "Swamp Watch",
+   "description": "This guildhall has twelve beds.",
+   "rent": 11090,
+   "sqm": 222,
+   "status": "Rented"
+  },
+  {
+   "id": 35004,
+   "town": "Venore",
+   "guildhouse": true,
+   "name": "Golden Axe Guildhall",
+   "description": "This guildhall has ten beds.",
+   "rent": 10485,
+   "sqm": 213,
+   "status": "Rented"
+  },
+  {
+   "id": 35005,
+   "town": "Venore",
+   "guildhouse": true,
+   "name": "Valorous Venore",
+   "description": "This guildhall has nine beds.",
+   "rent": 14435,
+   "sqm": 303,
+   "status": "Rented"
+  }
+ ]
+}

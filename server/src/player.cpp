@@ -125,6 +125,8 @@ Creature()
 	walkTaskEvent = 0;
 	actionTaskEvent = 0;
 	nextStepEvent = 0;
+	steppingByClient = false;
+	teleportedOnStep = false;
 
 	for(int32_t i = 0; i < 11; i++){
 		inventory[i] = NULL;
@@ -1547,6 +1549,17 @@ void Player::onCreatureMove(const Creature* creature, const Tile* newTile, const
 	Creature::onCreatureMove(creature, newTile, newPos, oldTile, oldPos, oldStackPos, teleport);
 
 	if(creature == this){
+		if(teleport){
+			//a step queued before the teleport must not run from where we land (Demon Helmet route: the
+			//teleport at 33286,31589,12 lands next to the portal back, one queued step east walked into it).
+			//Stairs, ramps and holes are not teleports (Game::internalMoveCreature) and keep the queued step.
+			setNextWalkTask(NULL);
+			teleportedOnStep = steppingByClient;
+		}
+		else{
+			teleportedOnStep = false;
+		}
+
 		if(tradeState != TRADE_TRANSFER){
 			//check if we should close trade
 			if(tradeItem){

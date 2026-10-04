@@ -88,6 +88,18 @@ CREATE TABLE "houses" (
     "lastwarning" INTEGER NOT NULL DEFAULT 0
 );
 
+-- /buyhouse requests, handed over at the next server save (data/lib/houses.lua; a website may write them too):
+-- state 0 pending, 1 handed over, 2 cancelled (1 and 2 are shown at the character's next login, then deleted)
+CREATE TABLE "house_requests" (
+    "id" INTEGER PRIMARY KEY,
+    "house_id" INTEGER NOT NULL,
+    "player_id" INTEGER NOT NULL,
+    "account_id" INTEGER NOT NULL,
+    "created" INTEGER NOT NULL,
+    "state" INTEGER NOT NULL DEFAULT 0,
+    "message" VARCHAR(255) NOT NULL DEFAULT ''
+);
+
 CREATE TABLE "house_lists" (
     "house_id" INTEGER NOT NULL,
     "listid" INTEGER NOT NULL,
@@ -253,6 +265,7 @@ BEGIN
     DELETE FROM "player_spells" WHERE "player_id" = OLD."id";
     DELETE FROM "bans" WHERE "type" = 2 AND "value" = OLD."id";
     UPDATE "houses" SET "owner" = 0 WHERE "owner" = OLD."id";
+    DELETE FROM "house_requests" WHERE "player_id" = OLD."id";
 END;
 
 CREATE TRIGGER "ondelete_guilds"

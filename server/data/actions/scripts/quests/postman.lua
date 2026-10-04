@@ -85,7 +85,7 @@ function onUse(cid, item, frompos, item2, topos)
 		if progress ~= POSTMAN_SANTA or getPlayerItemCount(cid, LETTER_BAG) > 0 then
 			found(cid, "The chest is empty.")
 		elseif getPlayerFreeCap(cid) < 500 then
-			found(cid, "You have found a letterbag. It weighs 500.00 oz. It is too heavy.")
+			found(cid, "You have found a letterbag. Weighing 500.00 oz it is too heavy.")
 		else
 			doPlayerAddItem(cid, LETTER_BAG, 1)
 			found(cid, "You have found a letterbag.")

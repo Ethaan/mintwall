@@ -12,9 +12,12 @@
 --      save") - setHouseOwner(house, 0) moves its items to the owner's depot in the house's town
 --      (House::transferToDepot), the same rule as creaturescripts/scripts/login.lua premiumExpired. Before the
 --      rent, so a lost house is not charged;
---   3. doSaveServer(1): everything saved + Houses::payHouses (the monthly rent from the depot of the house's town;
+--   3. hand over the houses asked for with /buyhouse (data/lib/houses.lua: the checks again, the owner set; the
+--      first month's rent is then taken by payHouses below) - 2 to 3 s after the kick, when the kicked characters'
+--      saves (written by a background thread) are in the database the checks read;
+--   4. doSaveServer(1): everything saved + Houses::payHouses (the monthly rent from the depot of the house's town;
 --      without the money a warning letter there, one a day, the house lost after 7) + temporary bans cleared;
---   4. shut down: GAME_STATE_SHUTDOWN saves once more, waits for the save writer and the process exits with
+--   5. shut down: GAME_STATE_SHUTDOWN saves once more, waits for the save writer and the process exits with
 --      EXIT_CODE so the supervisor restarts it (docs/production-plan.md "Restart"; until one exists the server
 --      stays down). A restart, not close-and-reopen: the "once per server save" quest states (the Annihilator
 --      lever, the Draconia keys, the Paradox Tower ladders...) come back only when the map loads again.
@@ -22,6 +25,8 @@
 --
 -- Tests only (tests/test_server_save.py): ServerSaveTestIn = N runs the save N seconds after the start instead of at
 -- the hour, ServerSaveTestMinute = N makes a warning "minute" N seconds long.
+
+dofile(getDataDir() .. 'lib/houses.lua')
 
 local GAME_STATE_CLOSED, GAME_STATE_SHUTDOWN, GAME_STATE_CLOSING = 3, 4, 5
 local EXIT_CODE = 10                   -- the process exit code after the save (otserv.cpp main): restart me
@@ -32,6 +37,7 @@ local ALWAYS_PREMIUM = 2 ^ 37          -- PlayerFlag_IsAlwaysPremium (const.h): 
 local due = nil                        -- os.time() of the next save, set at the first think
 local warned = {}
 local closed, done = false, false
+local kickedAt = nil                   -- os.time() of the kick: the rest of the save follows HOUSE_CHECK_DELAY later
 
 local function enabled()
 	local v = getConfigValue("ServerSaveEnabled")
@@ -93,14 +99,9 @@ local function releaseHousesWithoutPremium()
 	end
 end
 
-local function serverSave()
-	print("> Server save: kicking everyone.")
-	doSetGameState(GAME_STATE_CLOSED)
-	for _, cid in ipairs(getPlayersOnlineList()) do
-		doRemoveCreature(cid)
-	end
-
+local function saveAndShutDown()
 	releaseHousesWithoutPremium()
+	handOverRequestedHouses()          -- before the rent: payHouses takes the first month of a house handed over
 
 	if not doSaveServer(1) then        -- with the rent (Houses::payHouses)
 		print("> Server save: the save FAILED - the server stays up, closed (/openserver opens it).")
@@ -113,7 +114,23 @@ local function serverSave()
 	doSetGameState(GAME_STATE_SHUTDOWN)
 end
 
+local function serverSave()
+	print("> Server save: kicking everyone.")
+	doSetGameState(GAME_STATE_CLOSED)
+	for _, cid in ipairs(getPlayersOnlineList()) do
+		doRemoveCreature(cid)
+	end
+	kickedAt = os.time()               -- onThink goes on with saveAndShutDown (not from an addEvent: the shutdown
+end                                    -- frees the script environment the event still runs in)
+
 function onThink(interval)
+	if kickedAt ~= nil then
+		if os.time() >= kickedAt + math.ceil(HOUSE_CHECK_DELAY / 1000) + 1 then   -- whole seconds: at least the delay
+			kickedAt = nil
+			saveAndShutDown()
+		end
+		return true
+	end
 	if done or not enabled() then
 		return true
 	end

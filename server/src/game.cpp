@@ -1988,6 +1988,16 @@ bool Game::playerMove(uint32_t playerId, Direction dir)
 	int32_t delay = player->getWalkDelay(dir);
 
 	if(delay > 0){
+		// The step before this one ran into a teleport and its time is not over yet: this step was sent
+		// before the client saw where it landed (two arrow presses, a held key). Running it from the
+		// landing spot walked players straight into what is next to it (the portal back on the Demon
+		// Helmet route), so it is dropped; a step sent once the teleport's step time is over walks as usual.
+		if(player->teleportedOnStep){
+			player->setNextWalkTask(NULL);
+			player->sendCancelWalk();
+			return false;
+		}
+
 		// (a waiting step no longer blocks actions - see Player::onWalk)
 		SchedulerTask* task = createSchedulerTask( ((uint32_t)delay), boost::bind(&Game::playerMove, this,
 			playerId, dir));
@@ -1996,7 +2006,10 @@ bool Game::playerMove(uint32_t playerId, Direction dir)
 	}
 
 	player->onWalk(dir);
-	return (internalMoveCreature(player, dir) == RET_NOERROR);
+	player->steppingByClient = true;
+	ReturnValue ret = internalMoveCreature(player, dir);
+	player->steppingByClient = false;
+	return (ret == RET_NOERROR);
 }
 
 bool Game::internalBroadcastMessage(Player* player, const std::string& text)

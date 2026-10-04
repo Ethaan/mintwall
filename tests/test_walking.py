@@ -69,3 +69,24 @@ def test_fluid_used_while_walking_works_without_stopping(new_player, items):
             drank_at = n
     assert drank_at is not None, f"never drank while walking; mana {p.stats.mana}, {p.text_messages[-2:]}"
     assert drank_at <= 2, f"drank only after {drank_at} more steps"
+
+
+DH_TELEPORT_WEST = (33285, 31589, 12)  # west of the teleport 33286,31589,12 on the Demon Helmet route
+DH_LANDING = (33277, 31592, 11)        # where it lands, just west of the portal 33278,31592,11
+DH_ROOM = (33279, 31592, 12)           # where that portal sends you (back to the room)
+
+
+def test_step_sent_with_the_one_onto_a_teleport_does_not_run_after_landing(new_player):
+    """Two east steps back to back, the first onto a teleport: the second one used to run after the
+    teleport, from the landing spot, and walked straight into the portal next to it (Demon Helmet route,
+    found in game). A teleport ends the walk: the step waiting for its turn is dropped."""
+    from tibia74 import EAST
+    from tibia74.client import _WALK_OPCODE
+    from tibia74.net import Writer
+    p = new_player(pos=DH_TELEPORT_WEST, level=30, premium_days=30)   # premium area
+    assert p.pos == DH_TELEPORT_WEST, f"logged in at {p.pos}"
+    p._send(Writer().u8(_WALK_OPCODE[EAST]))
+    p._send(Writer().u8(_WALK_OPCODE[EAST]))
+    assert p.wait_for(lambda: p.pos != DH_TELEPORT_WEST, 3), "the first step was refused"
+    time.sleep(1.5)                                   # time for a second step to run, if it would
+    assert p.pos == DH_LANDING, f"ended on {p.pos}, expected to stay where the teleport lands {DH_LANDING}"

@@ -160,14 +160,20 @@ MagicField* Tile::getFieldItem() const
 		return NULL;
 	}
 
-	MagicField* field = NULL;
+	//A tile can hold a magic wall / wild growth on top of a damage field: return the damage field first
+	//(stepping damage, burning ticks, monster paths, destroy field), else the blocking one
+	MagicField* blockingField = NULL;
 	for(ItemVector::const_iterator iit = downItems.begin(); iit != downItems.end(); ++iit){
-		field = (*iit)->getMagicField();
-		if(field)
-			return field;
+		MagicField* field = (*iit)->getMagicField();
+		if(field){
+			if(!field->isBlocking())
+				return field;
+			if(!blockingField)
+				blockingField = field;
+		}
 	}
 
-	return NULL;
+	return blockingField;
 }
 
 TrashHolder* Tile::getTrashHolder() const
@@ -797,10 +803,23 @@ void Tile::__addThing(int32_t index, Thing* thing)
 			onAddTileItem(item);
 		}
 		else{
-			if(item->isMagicField()){
+			//7.4: "Magic Wall or wild growth will not remove fields" (tibiantis-notes poison.txt).
+			//A blocking field (magic wall, wild growth) goes on top of any field already on the tile, and a damage
+			//field never removes a magic wall or wild growth: it is not added under one (Tile::__queryAdd refuses
+			//it already, as the wall is solid; this covers the FLAG_NOLIMIT path).
+			MagicField* newField = item->getMagicField();
+			if(newField && !newField->isBlocking()){
 				//remove old field item if exists
 				MagicField* oldField = NULL;
 				ItemVector::iterator iit;
+				for(iit = downItems.begin(); iit != downItems.end(); ++iit){
+					if((oldField = (*iit)->getMagicField()) && oldField->isBlocking()){
+						item->setParent(NULL);
+						g_game.FreeThing(item);
+						return;
+					}
+				}
+
 				for(iit = downItems.begin(); iit != downItems.end(); ++iit){
 					if((oldField = (*iit)->getMagicField())){
 						if(oldField->isReplaceable()){
@@ -1342,10 +1361,19 @@ void Tile::updateTileFlags(Item* item, bool removing)
 			resetFlag(TILESTATE_POSITIONCHANGE);
 		}
 		if(item->getMagicField()){
-			// If transformItem is called on a field, this might not be true
-			//if(getFieldItem() == item) {
+			//keep the flag while another field is on the tile (a fire field under a decaying magic wall).
+			//The item may still be in downItems here (transform, or the update in __updateThing), so skip it.
+			bool otherField = false;
+			for(ItemVector::const_iterator iit = downItems.begin(); iit != downItems.end(); ++iit){
+				if(*iit != item && (*iit)->getMagicField()){
+					otherField = true;
+					break;
+				}
+			}
+
+			if(!otherField){
 				resetFlag(TILESTATE_MAGICFIELD);
-			//}
+			}
 		}
 
 		if(item->hasProperty(BLOCKSOLID) && !hasProperty(item, BLOCKSOLID)){

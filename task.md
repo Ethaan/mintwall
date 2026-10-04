@@ -70,11 +70,11 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
 - [x] Q15 Deathslicer (5 on floor 13): ours 320 exp, 2000 hp, attackable. Current TibiaWiki: exp 0, hp 8200, immune to - answered 2026-10-04: a trap: not attackable, immune to everything, 0 exp (done, deathslicer.xml)
       all damage (a trap, in since 7.4); no 7.4-era number. Make it a trap like the throwers - not attackable, 0 exp?
       (recommended: yes)
-- [ ] Q16 GM ban command: talkactions/scripts/banmanager.lua (TFS-style, unregistered) calls 6 functions our engine
+- [x] Q16 GM ban command: talkactions/scripts/banmanager.lua (TFS-style, unregistered) calls 6 functions our engine - answered 2026-10-04: delete banmanager.lua (GMs use the engine's player/IP bans) - in progress
       lacks. The engine has player-name and IP bans for Lua (addBan, addIPBan...), account bans only checked; /b is
       commented out in commands.cpp. Delete banmanager.lua and ban via the engine's player/IP bans (or restore /b), or
       wire it up (new C++ for account bans)? (recommended: delete it; restore /b if GMs need a command)
-- [x] Q17 Houses (7.4: website auction only, 7 days, bid + first month's rent from the house town's depot; one house per - answered 2026-10-04: stand-in /buyhouse: a request handed over at the next server save, one house per account, checks premium + the rent in the depot + the house free; Tibiantis rents; full end-to-end tests incl. house spells and a mass kick. The website can take this over later (the user: "if it make sense to do this on the website only thats okay") - in progress
+- [x] Q17 Houses (7.4: website auction only, 7 days, bid + first month's rent from the house town's depot; one house per - answered 2026-10-04: stand-in /buyhouse: a request handed over at the next server save, one house per account, checks premium + the rent in the depot + the house free; Tibiantis rents; full end-to-end tests incl. house spells and a mass kick. The website can take this over later (the user: "if it make sense to do this on the website only thats okay") - in progress - Done 2026-10-04: lib/houses.lua + table house_requests (a website can insert requests); /buyhouse at the door records a request, /buyhouse elsewhere shows it, /cancelhouse withdraws; checks free / premium / one per account / guildhall = guild leader / first rent in the house town's depot (carried gold does not count), again at the save, which hands over and payHouses takes the first rent; the result is told at the next login. Rents: Tibiantis (691 of 816 matched; Ankrahmun 45 gp/tile), no rent 0 left (tools/apply-tibiantis-rents.py). No kick-all spell in 7.4 (TibiaWiki House rev 78243): emptying the guest list puts everyone out. test_houses.py::test_buying_a_house_end_to_end (+19).
       account; rent monthly from that depot; tibia.com manual 2004-06). Ours: /buyhouse (premium, 100 gp per tile) and
       /sellhouse - not 7.4. (a) keep /buyhouse as a stand-in until a website, but one house per account, guildhalls for
       guild leaders, charging the first month's rent? keep /sellhouse? (b) rents: 416 houses have rent 0, the rest look
@@ -84,6 +84,31 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
 - [ ] Q19 Bans: (a) with enough GM warnings (WarningsToFinalBan) the "final" ban (FinalBanLength 7 days) or deletion
       applies instead, and can be shorter than a repeat automatic ban (30/60...) - keep? (b) GM bans do not count toward
       the automatic ban length - intended? (recommended: (a) make the final ban at least the automatic length; (b) yes)
+- [ ] Q20 Houses: (a) Tibiantis allows one house AND one guildhall per account; ours one in total (as asked) - keep?
+      (b) "alana sio" with no name: put the caster out (later servers) or nothing (ours)? (c) is emptying the guest list
+      enough as the "kick everyone", or a command too? (recommended: (a) keep one; (b) put the caster out; (c) enough)
+- [x] Q21 Distance details: (a) poison arrow attack - TibiaWiki 2006-07 says 20 ("less than an arrow"), tibiantis- - answered 2026-10-04: poison arrow attack 20; remove the minimum damage (distance and melee) - in progress (C++)
+      notes 10; ours 20. (b) its poison - tibiantis-notes power 50 (3 a tick first), TibiaWiki "2 HP per turn" (2006) / 1
+      (2005); ours 50 (a 25-50 roll fits both). (c) minimum damage: ours ceil(level x 0.2) vs monsters, x 0.1 vs players;
+      the 7.4 calculator has none. (recommended: (a) 20, (b) the 25-50 roll, (c) remove the minimum vs players and
+      monsters - no 7.4 source has one)
+- [x] Q22 Spells (docs/reference-74/spell-formulas.md): (a) sudden death - tibiantis-notes and OTHire 130-170 %P, ours - answered 2026-10-04: SD 130-170 %P, force strike 35-55, berserk level only - in progress
+      125 %P + 30 .. 170 %P (155-170 at the floor) - change? (b) force strike - OTHire 35-55, OTL-Mech 18-33, ours 20-50.
+      (c) berserk - level only (TI-Calc 2.4-4.0 x level) or also magic level (ours)? (d) burn tick 10 s (ours, like
+      fire fields) vs "9 s" / "2 turns" on the wiki. (e) damage roll: clipped normal (ours) - no source on 7.4's shape.
+      (recommended: (a) 130-170, (b) 35-55 like the other strikes, (c) level only, (d) keep 10 s, (e) keep)
+- [x] Q23 Fields (spell-formulas.md Q8-Q12): (a) medium fire field: ours 7 x 10 with no hit on stepping in; TibiaWiki - answered 2026-10-04: follow the 2005 text: medium fire 20 + 5 x 10, energy field 30 + 2 x 25 - in progress
+      2005-11 "20 initial, then 10 each 2 turns", 70 total - make it 20 + 5 x 10? (b) energy field: ours 30 + 25 (55);
+      TibiaWiki 2005-11/2006-10 30 + 2 x 25 (80), 2007 55 - count 2? (c) non-PvP fields last 10 s here; wiki 8 s fire
+      (2005), 3 s poison bomb (2006) - only matters on no-PvP tiles. (recommended: (a) yes, (b) yes - the only 7.4-era
+      text, (c) fire 8 s, poison/energy 3-8 s)
+  - [x] /sellhouse can give a house to an account that already has one - add the one-per-account and guild-leader checks
+        Done 2026-10-04: talkactions/scripts/sellhouse.lua + houses.lua houseTransferProblem (checked when the trade is
+        offered; a request made while the trade window is open slips through - closing it needs House::executeTransfer, C++)
+        - test_houses.py::test_sellhouse_keeps_one_house_per_account
+  - [ ] tests/tibia74/server.py: ServerProcess.start leaves the server running when its startup times out
+  - [ ] Engine clean-up (rebuild): remove Commands::buyHouse and HousePrice; read guildhall in loadHousesXML and fix
+        luaIsHouseGuildHall (then drop the id list in lib/houses.lua); depot money binding (drop the 1.5 s wait)
 
 ## New player journey (tests/test_rookgaard.py)
 
@@ -94,7 +119,7 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       Done 2026-10-01: removed (decided with the user: 7.4 had no starter kit). npc/lib/oracle.lua
 - [x] Oracle's "SO BE IT" is never seen (player is teleported first) - delay the teleport slightly?
       Done 2026-10-01: the player is teleported 1 s after it. test_oracle_turns_a_level_8_into_a_knight_of_thais
-- [ ] More journey tests: rookgaard shops buy/sell with money, sewers/ladders, death in Rookgaard, reaching level 8 via exp
+- [ ] More journey tests: rookgaard shops buy/sell with money, sewers/ladders, death in Rookgaard, reaching level 8 via exp - 2026-10-04: tests/test_rookgaard_journey.py written (hunt/sell/buy, sewers, death, level 8 + Oracle), not passing yet: test 1 hangs (likely the sewer rat spawn 32097,32211,8 is unreachable for walk_near) - debug
 
 ## NPCs
 
@@ -987,7 +1012,15 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       the 7.4 state. 2026-10-03: kept - the user remembers none, and the source map has none on the whole island
       (ours and the JS engine's copy: 0 of 121,586 tiles; the Thais temple 176). test_temples.py
       test_rookgaard_temple_is_no_protection_zone
-- [ ] Depots and mailboxes (mailboxes weren't in 7.4 - check the map)
+- [x] Depots and mailboxes (mailboxes weren't in 7.4 - check the map)
+      Done 2026-10-04: mail is from 4.0 (TibiaWiki Updates/4.0), so mailboxes belong; Rookgaard has no depot (right).
+      Lockers per town match the wiki (Thais 50 vs 46 in 2011 - kept). Fixed: Venore's main depot house (20 lockers) had
+      no depot id (opened depot 0) - now 8 (tools/map-set-attrs.py --depot-id). Mail to a town without a locker (Fibula,
+      Senja...) was lost - now refused (town.h/depot.cpp/mailbox.cpp, NEEDS REBUILD). tests/test_depots.py (19).
+      Quest chests: Cip's "You have found a rapier. Weighing 15.00 oz it is too heavy." (Nostalrius chests.lua) in
+      system.lua, postman.lua, paradox_tower.lua; getItemWeightById (luascript, rebuild; a Lua fallback works now).
+  - [ ] Live DB: items saved in depot 0 from Venore's main depot are now out of sight - move them to depot 8
+        (player_depotitems) when the server is stopped? (ask the user)
 - [x] Teleports, ladders, holes, rope spots, shovel spots work
       Done 2026-10-03: tests/test_map_mechanics.py (48 cases: Rookgaard, Thais, Carlin, Kazordoon, Venore, Edron,
       Ab'Dendriel/Hellgate, Ankrahmun, Darashia): ladders, sewer grates, stairs up/down (incl. landing shifted off a ramp),
@@ -1166,7 +1199,16 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
       2026-10-03 test_combat_formulas.py test_crossbow_bolts_hit_as_the_melee_formula_with_the_ammo_attack: bolts
       at 3 tiles 82-93% hit (7.4 90%), a bolt used per shot, damage the melee formula with the bolt's atk 30;
       test_formulas.py: hit chance at 5 tiles. Range (out of range) not tested
-- [ ] Spell and rune damage formulas (level + magic level) per spell
+- [x] Spell and rune damage formulas (level + magic level) per spell
+      Done 2026-10-04: docs/reference-74/spell-formulas.md (every 7.4 attack/healing spell and rune, ours vs 7.4, sources).
+      P = max(100, 2 x level + 3 x ML). Fixed: fireball 15-25 %P, GFB 35-65, explosion 20-100, energy/flame strike 35-55,
+      energy wave 100-200, ultimate explosion 200-300, heal friend 80-160; poison storm = poison only (150-250 %P total),
+      envenom = poison 50-90 %P (was a fixed fire burn 79), soulfire = burn 100-140 %P (was fixed 80). Conjure counts and
+      all 32 rune charges already match pre-7.5. tests/test_spell_damage.py (18). global.lua condition params renumbered
+      to match enums.h (MINVALUE and later were 2 too low). Open: Q22. (OTHire's "leaked files" formulas used only as
+      corroboration - they agree with tibiantis-notes where both exist.)
+  - [x] formulas.md §4-5 (spells) and §6.1 (distance) are out of date - point them to spell-formulas.md / refresh - Done 2026-10-04 (checked against the code)
+  - [x] Fields: poison field ticks every 5 s here, 4 s in 7.4; medium fire field does 70 here, 60 per TibiaWiki - check and fix - Done 2026-10-04: poison field ticks every 4 s (1490/1496/1503) and lasts 248 s (tibiantis-notes poison.txt); medium fire is 70 in the 7.4-era wiki (60 only in 2007) - kept; fire 20 + 7 x 10 and energy 30 + 25 measured. tests/test_fields.py (3). Open: Q23
 - [x] Attack speed (vocations.xml attackspeed 2000 ms) and exhaustion (exhaustion done 2026-09-23, §9)
 
 ### Regeneration, food, soul
@@ -1185,7 +1227,7 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
       (tools/compare-item-weights.py: 0 open). tests/test_capacity.py (18). Open: Q13, Q14.
   - [ ] tests/tibia74/db.py creates characters with HP/mana 150 + gain x (level-1), not 7.4 (knight 15L+65...) - many
         combat tests depend on it; fix with care
-  - [ ] Quest chests say "You have found X, but you cannot carry it." (quests/system.lua); use the Postman chest's
+  - [x] Quest chests say "You have found X, but you cannot carry it." (quests/system.lua); use the Postman chest's - Done 2026-10-04 (see Depots and mailboxes)
         7.4-style "It weighs X oz. It is too heavy." everywhere
 
 ### Death and PvP
@@ -1340,8 +1382,13 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       and one per tile were already right; the machete could not cut anything (machete.lua called an
       undefined isIntegerInArray with undefined tables) - rewritten: cuts rush wood and jungle grass.
       Mana: kept at 220 (Tibiantis charges 150) - decided 2026-09-23
-- [ ] Royal paladin: bolts / crossbow and arrows / bow distance (range, hit chance - see 5b in the
+- [x] Royal paladin: bolts / crossbow and arrows / bow distance (range, hit chance - see 5b in the
       formulas list), damage with the 7.4 formula; test with Legolas (6 / 6)
+      Done 2026-10-04: bow range 6, crossbow 5, no attack of their own (TibiaWiki 2006-07); ammo arrow 25, bolt 30,
+      poison arrow 20, power bolt 40 (was 50); used up per shot, never dropped; hit chance 91% x min(skill/(15d-1),1)
+      (tibiantis-notes) - our table within 2%. Burst arrow 0-60% of magic power on the 3x3 (was 55%), no shield block;
+      poison arrow now a skill-based arrow hit + 7.4 poison (power 50). tests/test_distance.py (8). formulas.md §6.1
+      still describes the old distance code - refresh. Open: Q21.
 - [x] Spears: range, breaking/dropping on the ground, stacking, damage vs 7.4
       Done 2026-10-03: 7.4 (TibiaWiki Spear revs 6579/10893, 2005; tibiantis-notes "spears never break"): spears drop
       under/around the target and can be picked up, no breaking (3% came Christmas 2005); stackable (7.4 Tibia.dat flag,
@@ -1349,9 +1396,10 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       around the target, centre included (TN distance_calculator): weapons.cpp - NEEDS REBUILD. tests/test_spears.py
       (stack, land/no break, range 6 vs 7). Open: Q11.
 
-- [ ] Spell values the research lists as higher than 7.4 but did not rank: fireball (16-33 vs 15-25 %P),
+- [x] Spell values the research lists as higher than 7.4 but did not rank: fireball (16-33 vs 15-25 %P),
       great fireball (40+30..70 vs 35-65), force strike (20-50 vs 18..33, one source), exura sio
       (100+30..135 vs 80-160, one source). docs/reference-74/formulas.md §5
+      Done 2026-10-04 with the spell formulas (spell-formulas.md)
 - [x] Life ring / ring of healing regeneration not checked against 7.4 (1 per 3 s for 20 min / 1 per 1 s
       for 7.5 min) - 2026-10-02: they gave 4 mana a tick; fixed, test_vocations.py test_regeneration_ring
 
@@ -1384,6 +1432,18 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       already on its new tile while drawn sliding from the old one). Plan: measure misses with
       walk-trace, then a click assist in mintwall.dll (move a right-click onto the creature drawn
       under the cursor; needs the game view rect and the client's creature list in memory)
+- [x] A step queued before a teleport runs after it (found by the user 2026-10-04, Demon Helmet: the teleport
+      33286,31589,12 lands west of the portal 33278,31592,11, a queued east step walks into it -> back in the room).
+      Creature::onCreatureMove stops the auto-walk on teleport but not Player::nextStepEvent.
+      Done 2026-10-04 (NEEDS REBUILD): a teleport drops the queued step, and a step that arrives within the landing's
+      step time after a teleport-on-step is dropped with a walk cancel (game.cpp playerMove, player.cpp/h); stairs,
+      ramps and holes unchanged. test_walking.py::test_step_sent_with_the_one_onto_a_teleport_does_not_run_after_landing
+- [x] Magic wall / wild growth on a map field (1487/1488/1491, replaceable=0) does nothing (found by the user
+      2026-10-04). 7.4 (tibiantis-notes poison.txt): "Magic Wall or wild growth will not remove fields" - the wall
+      goes on top, the field stays; a fire bomb must not remove a wall
+      Done 2026-10-04 (NEEDS REBUILD): tile.cpp - a wall goes on top of any field, no damage field under a wall, the
+      field flag stays when the wall goes (getFieldItem prefers the damage field); destroy field reaches the fire only
+      after the wall decays. tests/test_magic_wall.py (4)
 - [ ] A step pressed while another is queued replaces it (Player::setNextWalkTask) - dropped steps when
       tapping back and forth (seen in the stairs trace); queue one step instead?
 - [ ] Re-trace with the real client on the new server (walk-trace summary: steps more than 50 ms late)
