@@ -9,7 +9,7 @@ import time
 
 import pytest
 
-from test_combat_formulas import CREATURE, ENERGY, PHYSICAL, _hits, _shoot
+from test_combat_formulas import CREATURE, ENERGY, PHYSICAL, SD, _hits, _shoot
 from tibia74 import BACKPACK, GameClient, Item
 
 FIRE, POISON = 198, 30            # const.h TEXTCOLOR_ORANGE / TEXTCOLOR_LIGHTGREEN
@@ -17,14 +17,15 @@ BAG = 1988
 FIREBALL, GFB, EXPLOSION, UH, ENVENOM = 2302, 2304, 2313, 2273, 2292
 LOW, HIGH = (20, 10), (100, 60)   # (level, magic level): P 100 (the floor: 70) and P 380
 EAST = 1
+KNIGHT = 4
 
 # Thais streets far from monster spawns, off the protection zone; every test has tiles of its own (a player who hit
 # another stays logged in a while), and the area spells reach no other test's tiles while it runs.
 RUNE_ROWS = {name: 32296 + i for i, name in enumerate(
-    ["fireball-low", "fireball-high", "gfb-low", "gfb-high", "explosion-low", "explosion-high"])}
+    ["fireball-low", "fireball-high", "gfb-low", "gfb-high", "explosion-low", "explosion-high", "sd-low", "sd-high"])}
 RUNE_X, RUNE_TARGET_X = 32326, 32329          # 3 tiles apart
 SPELL_ROWS = {name: 32296 + i for i, name in enumerate(
-    ["wave-low", "wave-high", "beam-low", "beam-high", "flame-low", "flame-high"])}
+    ["wave-low", "wave-high", "beam-low", "beam-high", "flame-low", "flame-high", "force-low", "force-high"])}
 SPELL_X = 32334                               # the target stands in front (east): strikes reach only that tile
 
 
@@ -82,17 +83,21 @@ RUNES = [  # (row, rune, colour, 7.4 min and max share of P)
     ("fireball", FIREBALL, FIRE, 0.15, 0.25),
     ("gfb", GFB, FIRE, 0.35, 0.65),
     ("explosion", EXPLOSION, PHYSICAL, 0.20, 1.00),
+    ("sd", SD, PHYSICAL, 1.30, 1.70),          # decided with the user 2026-10-04 (was 125 %P + 30 .. 170 %P)
 ]
+# sudden death needs magic level 15: level 20 / ML 15 is P 85, so 100
+RUNE_LOW = {"sd": (20, 15)}
 
 
 @pytest.mark.parametrize("name, rune, color, mina, maxa", RUNES, ids=[r[0] for r in RUNES])
 @pytest.mark.parametrize("which, stats", [("low", LOW), ("high", HIGH)], ids=["P 100", "P 380"])
 def test_rune_damage_grows_with_magic_power(player, items, name, rune, color, mina, maxa, which, stats):
-    """Fireball 15-25, great fireball 35-65, explosion 20-100 % of magic power (tibiantis-notes Magic, OTHire,
-    formulas.md §5); they were 16-33, 40 + 30 .. 70 and 15-90 %P."""
+    """Fireball 15-25, great fireball 35-65, explosion 20-100, sudden death 130-170 % of magic power
+    (tibiantis-notes Magic, OTHire, formulas.md §5); they were 16-33, 40 + 30 .. 70, 15-90 and 125 + 30 .. 170 %P
+    (sudden death decided with the user 2026-10-04)."""
     y = RUNE_ROWS[f"{name}-{which}"]
     target = _target(player, (RUNE_TARGET_X, y, 7))
-    level, maglevel = stats
+    level, maglevel = RUNE_LOW.get(name, stats) if which == "low" else stats
     caster = player(pos=(RUNE_X, y, 7), level=level, vocation=5, maglevel=maglevel, manamax=5000,
                     inventory={BACKPACK: Item(BAG, contents=[Item(rune, 3)] * 5)})
     caster.set_fight_modes(fight=1, chase=0, safe=0)
@@ -107,16 +112,18 @@ SPELLS = [  # (row, words, colour, 7.4 min and max share of P, exhaustion)
     ("wave", "exevo mort hur", ENERGY, 1.00, 2.00, 2.1),
     ("beam", "exevo vis lux", ENERGY, 0.40, 0.80, 2.1),
     ("flame", "exori flam", FIRE, 0.35, 0.55, 1.1),
+    ("force", "exori mort", PHYSICAL, 0.35, 0.55, 1.1),   # decided with the user 2026-10-04 (was 20-50 %P)
 ]
 # the floor needs magic level 20 for energy wave: level 15 / ML 20 is P 90, so 100
-SPELL_LOW = {"wave": (15, 20), "beam": LOW, "flame": LOW}
+SPELL_LOW = {"wave": (15, 20), "beam": LOW, "flame": LOW, "force": LOW}
 
 
 @pytest.mark.parametrize("name, words, color, mina, maxa, exhaust", SPELLS, ids=[s[0] for s in SPELLS])
 @pytest.mark.parametrize("which", ["low", "high"], ids=["P 100", "P 380"])
 def test_spell_damage_grows_with_magic_power(player, name, words, color, mina, maxa, exhaust, which):
-    """Energy wave 100-200, energy beam 40-80, flame strike 35-55 % of magic power (tibiantis-notes Magic, OTHire);
-    energy wave was 115-190 and the strikes 25-55 %P. The target stands in front of the caster."""
+    """Energy wave 100-200, energy beam 40-80, flame strike and force strike 35-55 % of magic power
+    (tibiantis-notes Magic, OTHire); energy wave was 115-190, flame strike 25-55 and force strike 20-50 %P (force
+    strike decided with the user 2026-10-04). The target stands in front of the caster."""
     y = SPELL_ROWS[f"{name}-{which}"]
     target = _target(player, (SPELL_X + 1, y, 7))
     level, maglevel = SPELL_LOW[name] if which == "low" else HIGH
@@ -133,6 +140,28 @@ def test_spell_damage_grows_with_magic_power(player, name, words, color, mina, m
     hits = _hits(target, target.pos, start, color)
     lo, hi = _halved(power(level, maglevel), mina, maxa)
     _check(f"{words} level {level} ML {maglevel}", hits, shots, lo, hi)
+
+
+# --- berserk: level only ------------------------------------------------------------------------------------------
+@pytest.mark.parametrize("level, maglevel, y", [(30, 5, 32298), (100, 60, 32301)], ids=["level 30", "level 100"])
+def test_berserk_hits_by_level_only(player, level, maglevel, y):
+    """Berserk (exori): 2.4-4.0 x level, no magic level term (TI-Calc level/25 x 60..100, formulas.md §2; decided
+    with the user 2026-10-04); halved against a player: level 30 72-120, halved 36-60, level 100 with
+    magic level 60 240-400 halved 120-200. It was (2L + 3ML) x 1.4..1.65: 70-82 and 266-313 halved."""
+    knight_pos = (32321, y, 7)                    # the 3x3 around it reaches only the target (west of the rune rows)
+    target = _target(player, (knight_pos[0] + 1, y, 7))
+    knight = player(pos=knight_pos, level=level, vocation=KNIGHT, maglevel=maglevel, manamax=5000)
+    knight.set_fight_modes(fight=1, chase=0, safe=0)
+    time.sleep(0.5)
+    shots = 10
+    start = len(target.animated_texts)
+    for _ in range(shots):
+        knight.say("exori")
+        time.sleep(2.1)
+    time.sleep(0.5)
+    hits = _hits(target, target.pos, start, PHYSICAL)
+    lo, hi = int(level * 2.4) // 2, int(level * 4.0) // 2
+    _check(f"exori level {level} ML {maglevel}", hits, shots, lo, hi)
 
 
 # --- healing -------------------------------------------------------------------------------------------------------

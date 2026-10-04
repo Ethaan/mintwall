@@ -92,7 +92,7 @@ def test_stone_skin_amulet_takes_80_percent_of_a_sudden_death(new_player, items,
     assert armed.pos == beside, armed.pos
     shielded = _shoot(caster, items, SD, armed, 5, PHYSICAL)
     power = 100 * 2 + 70 * 3
-    lo, hi = _range(power, 1.25, 30, 1.7)
+    lo, hi = _range(power, 1.3, 0, 1.7)
     print(f"\nSD power {power}: expected {lo}-{hi}; bare {sorted(bare)}; with the amulet {sorted(shielded)}")
     assert bare and all(lo - 1 <= h <= hi + 1 for h in bare), f"bare SD outside {lo}-{hi}: {bare}"
     assert len(shielded) == 5, shielded

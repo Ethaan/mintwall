@@ -105,7 +105,7 @@ Our other monster timings:
 |---|---|---|---|---|
 | Mana | level × 4 | TW-Berserk history ("Before the Summer Update 2007 … mana equal to the character level times four"); TI-Spells ("mana = level * 4"); TI-Calc `countExori` **C2** | `spells.xml:105` `lvpercent="400"`, and `spells.cpp:935-938` gives level×400/100 | **Yes** |
 | Requirement | magic level 5, knights only (7.4 spells were gated by magic level; the level-35 requirement is from a later version) | TI-Spells (mlvl 5) **C1**; TW-Berserk shows the current level 35 | `spells.xml:105` `maglv="5"`, Knight/Elite Knight | Yes |
-| Damage | level/25 × [60..100] = **2.4×L … 4.0×L** (no skill or ML term) | TI-Calc `countExori` **C1**. OTL-Mech gives 2.2×L … 3.85×L **C1**. The two are close, so the shape (level only) is **C2** | `attack/berserk.lua:4` `LEVELMAGIC -1.4, 0, -1.65, 0` gives (2L+3ML)×1.4 … ×1.65 = 2.8L+4.2ML … 3.3L+4.95ML | Close but different shape. L60/ML5: ours 189-222 (avg 205), 7.4 144-240 (avg 192). Ours has a narrower spread and scales with ML |
+| Damage | level/25 × [60..100] = **2.4×L … 4.0×L** (no skill or ML term) | TI-Calc `countExori` **C1**. OTL-Mech gives 2.2×L … 3.85×L **C1**. The two are close, so the shape (level only) is **C2** | `attack/berserk.lua` `onGetFormulaValues`: 2.4×L … 4.0×L (was `LEVELMAGIC -1.4, 0, -1.65, 0` = (2L+3ML)×1.4 … ×1.65) | Was close but a different shape (L60/ML5: 189-222, 7.4 144-240). **Fixed 2026-10-04** (decided with the user): `berserk.lua` now uses a callback, 2.4×L … 4.0×L, no ML term |
 | Damage type / area | physical, 3×3 around caster | TW-Berserk | `berserk.lua` physical, 3×3 | Yes |
 
 ## 3. Other spells with level-based mana in 7.4
@@ -148,8 +148,8 @@ Life ring (7.4): 1 HP and 1 mana per 3 s for 20 min. Ring of healing (7.4): 1 HP
 
 ## 5. Magic damage formula
 
-Updated 2026-10-04: the per-spell values, sources, the open questions (sudden death, force strike, berserk) and the
-measurements are in **`spell-formulas.md`** ("Attack spells and runes", "Fields and bombs", "Measured"). The table
+Updated 2026-10-04: the per-spell values, sources, the decisions (sudden death, force strike, berserk: decided with
+the user 2026-10-04) and the measurements are in **`spell-formulas.md`** ("Attack spells and runes", "Fields and bombs", "Measured"). The table
 below is a summary of the current scripts.
 
 - 7.4: `damage = base × P / 100`, with `P = mlv×3 + lv×2` and a floor of **P = 100** (magic power ≥ 1). **C2**:
@@ -167,9 +167,9 @@ below is a summary of the current scripts.
 | Fireball | 15-25 | 15-25 | OK (fixed 2026-10-04) |
 | Great Fireball | 35-65 | 35-65 | OK (fixed) |
 | Explosion | 20-100 | 20-100 | OK (fixed) |
-| Sudden Death | 130-170 | 125 (+30) - 170 | open: spell-formulas.md Q1 |
+| Sudden Death | 130-170 | 130-170 | OK (fixed 2026-10-04, spell-formulas.md Q1) |
 | Energy / Flame Strike | 35-55 (TN, OTHire) | 35-55 | OK (fixed) |
-| Force Strike | 35-55 ? (OTHire; OTL 18(-30)-33) | 20-50 | open: spell-formulas.md Q2 |
+| Force Strike | 35-55 (OTHire; OTL 18(-30)-33) | 35-55 | OK (fixed 2026-10-04, spell-formulas.md Q2) |
 | Fire Wave | 20-40 | 20-40 | OK |
 | Energy Beam | 40-80 | 40-80 | OK |
 | Great Energy Beam | 40-200 | 40-200 | OK |
@@ -178,7 +178,7 @@ below is a summary of the current scripts.
 | Poison Storm | no hit; poison of 150-250 %P, 5% of the rest every 4 s | the same (`poison_storm.lua`) | OK (fixed) |
 | Envenom | no hit; poison of 50-90 %P | the same (`envenom.lua`) | OK (fixed) |
 | Soulfire | no hit; burning of 100-140 %P, 10 a turn | the same, a turn every 10 s (`soulfire.lua`) | OK (turn length: spell-formulas.md Q4) |
-| Berserk | level-based (§2) | (2L+3ML) × 1.4..1.65 | open: §2, spell-formulas.md Q3 |
+| Berserk | level only, 2.4-4.0 × level (§2) | 2.4-4.0 × level | OK (fixed 2026-10-04, spell-formulas.md Q3) |
 | Burst arrow | 0-60 %P (§6.1) | 0-60 %P (`weapons/scripts/explosive_arrow.lua`) | OK |
 | Fields (fire, energy, poison) | see spell-formulas.md "Fields and bombs" | `items.xml` 1487-1504 | measured, `test_fields.py` |
 
@@ -195,7 +195,7 @@ Updated 2026-10-04 to the current code; distance measured in `tests/test_distanc
 | Stance multipliers | offensive atk ×1.2 / def ×0.6; balanced 1.0 / 1.0; defensive atk ×0.6 / def ×1.8. With no target, defense uses defensive stance | TN-Melee **C1**. OTL-Mech d = 1 / 0.7-0.75 / 0.5 **C1** | `player.cpp:586-602` `getAttackMultiplier` 1.2 / 1.0 / 0.6, `getDefenseMultiplier` 0.6 / 1.0 / 1.8 | Yes (melee and distance) |
 | Distance max | the melee formula with atk = bow + ammunition atk; 7.4 bows and crossbows have **no attack** (TibiaWiki "attack = 0", 2006-2007), so it is the ammunition's | TN-DmgCalc **C1**, TibiaWiki | `weapons.cpp:172-182` `getMaxDistanceWeaponDamage` = the melee formula; `WeaponDistance::getWeaponDamage` (`weapons.cpp:985-1019`) adds the bow's attack, which is none: bow 2456 and crossbow 2455 have no `attack` in `items.xml` | Yes |
 | Ammunition attack | arrow 25, bolt 30, poison arrow 20, **power bolt 40** (TibiaWiki revs 55068 / 55062 / 93103 / 78528, before the summer 2007 update) | TibiaWiki **C1** (TN-Poison says poison arrows have 10 attack) | `items.xml`: arrow 25, bolt 30, poison arrow 20, power bolt 40 (was 50) | Yes; poison arrow 20 vs TN 10 open |
-| Distance min | none (0) in the TN calc; OTL-Mech gives level/5 | conflicting | `weapons.cpp:1008-1016` ceil(level×0.2) vs monsters, ×0.1 vs players | ? |
+| Distance min | none (0) in the TN calc; OTL-Mech gives level/5 | conflicting | `WeaponDistance::getWeaponDamage` rolls from 0 (it rolled from ceil(level×0.2) vs monsters, ×0.1 vs players; removed 2026-10-04, decided with the user: no 7.4 source has a minimum; melee never had one). Needs the server rebuilt | Yes (after the rebuild) |
 | Distance hit chance | `91% × min(skill / (15×d − 1), 1)`, where adjacent counts as d = 5; a miss lands on a tile of the 3×3 around the target | TN distance_calculator **C1** | `weapons.cpp:869-917`: the ammunition table (`maxHitChance` 90, bows and crossbows): per distance `a × min(skill, cap)`, e.g. d 5 `1.2 × min(skill, 74) + 1`, d 2 `3.2 × min(skill, 28)`. Within 2 points of the 7.4 formula at every skill for d 1, 2, 4, 5, 6 (d 3: 3 points under at skill 44, 88 vs 91); caps 89-90 vs 91. d 7 is beyond the bow's range. Hand-thrown weapons (spears, stars, knives) use the one-handed table capped at 75%, not checked. A miss lands on a random tile of the 3×3, the target's included (`weapons.cpp:932-963`) | Yes for bows and crossbows (measured: skill 30 at d 5 and adjacent about 37%, at d 2 about 91%) |
 | Ammunition used up | arrows and bolts are used up, hit or miss; nothing lands on the floor | tibiantis-notes ("bolts used per hour") **C1** | used up | Yes (measured) |
 | Power bolt | atk 40, the bolt formula | TibiaWiki **C1** | atk 40 (`items.xml` 2547) | Yes (measured: skill 60 at most 138, halved 69) |
@@ -288,7 +288,7 @@ Measured on our server (tests/test_exhaustion.py): exura 1.09 s, exori vis 1.10 
    - Files: `server/src/player.cpp:497-548`, `server/src/weapons.cpp:164-181`, `server/src/creature.cpp:892-932`.
 4. *(Fixed 2026-09: `combat.cpp` and `compat.lua` `magicPower()` floor P at 100, §4-5.)* **No magic-power floor (P ≥ 100)** for rune, spell and heal formulas. Low-level characters get tiny LMM/HMM/IH/exura values (for example, LMM at level 8 does 1-3 damage instead of 10-20). File: `server/src/combat.cpp:80-84`, or per-script callbacks.
 5. *(Fixed: `fluids.lua` 25-75, §4.)* **Fluids give 40-80 instead of 25-75** (mana and life). File: `server/data/actions/scripts/fluids.lua:41,52`.
-6. *(Fixed 2026-10-04 except sudden death, force strike and berserk: §5 and spell-formulas.md.)* **Spell damage bases off:**
+6. *(Fixed 2026-10-04, sudden death, force strike and berserk included: §5 and spell-formulas.md.)* **Spell damage bases off:**
    - Energy Beam about +65%, Fire Wave about +50%.
    - Poison Storm about −40%, Mass Healing about −30%, IH rune about −20%.
    - Great Energy Beam and Berserk have the wrong spread.

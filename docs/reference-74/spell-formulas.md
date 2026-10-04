@@ -37,10 +37,10 @@ poison spells").
 | Fireball (adori flam) | 15-25 | TN, OTHire 20/5 | 16-33 | **15-25** (`fireball.lua`) | fixed |
 | Great fireball (adori gran flam) | 35-65 | TN, OTHire 50/15 | 40 + 30 .. 70 | **35-65** (`great_fireball.lua`) | fixed |
 | Explosion (adevo mas hur), physical | 20-100 | TN, OTHire 60/40; TW 83953 "the damage is very random" | 15-90 | **20-100** (`explosion.lua`) | fixed |
-| Sudden death (adori vita vis), physical | 130-170 | TN, OTHire 150/20 | 125 + 30 .. 170 | unchanged | **Q1** |
+| Sudden death (adori vita vis), physical | 130-170 | TN, OTHire 150/20 | 125 + 30 .. 170 | **130-170** (`sudden_death.lua`) | fixed (Q1, decided with the user 2026-10-04) |
 | Energy strike (exori vis) | 35-55 | TN, OTHire 45/10 (OTL-Mech 25-55) | 25-55 | **35-55** (`energy_strike.lua`) | fixed |
 | Flame strike (exori flam) | 35-55 | OTHire 45/10 (same as energy strike; TN lists only energy strike; OTL-Mech 25-55) | 25-55 | **35-55** (`flame_strike.lua`) | fixed |
-| Force strike (exori mort), physical | 35-55 ? | OTHire 45/10; OTL-Mech 18 (-30) .. 33 | 20-50 | unchanged | **Q2** |
+| Force strike (exori mort), physical | 35-55 | OTHire 45/10; OTL-Mech 18 (-30) .. 33 | 20-50 | **35-55** (`force_strike.lua`) | fixed (Q2, decided with the user 2026-10-04) |
 | Fire wave (exevo flam hur) | 20-40 | TN, OTHire 30/10; TW 89085 "about half the damage of a GFB" | 20-40 | same | OK |
 | Energy beam (exevo vis lux) | 40-80 | TN, OTHire 60/20 | 40-80 | same | OK |
 | Great energy beam (exevo gran vis lux) | 40-200 | TN, OTHire 120/80; TW 89045 "its damage range is quite random" | 40-200 | same | OK |
@@ -49,7 +49,7 @@ poison spells").
 | Poison storm (exevo gran mas pox) | **no hit**; poison of 150-250 in total, 5% of what is left every 4 s | TN (Magic, poison: "A level 200 druid with magic level 80 will cause up to 1600 damage, start at 80 damage"), TW 8830/108058 "poisons the enemy with 200+/-50 ... it won't make full damage as you attack", OTHire 200/50 | a hit of 150-250 %P **plus** a poison of 100 | **poison of 150-250 %P**, no hit, 4 s ticks starting at ceil(total/20) (`poison_storm.lua`) | fixed |
 | Envenom (adevo res pox) | no hit; poison of 50-90 in total | TN (Magic, poison), OTHire 70/20 | a fire burn (!) of a fixed 79, any P | **poison of 50-90 %P** as poison storm (`envenom.lua`) | fixed |
 | Soulfire (adevo res flam) | no hit; burning of 100-140 in total, 10 a turn | TN, TW 8876 "120+/-20", TW 99343 "10 damage for a number of turns ... depends upon your level and magic level", OTHire 120/20 | a fixed 80 (3×10 + 10×5) | **100-140 %P in 10s**, a turn every 10 s (`soulfire.lua`) | fixed (tick: Q4) |
-| Berserk (exori), physical | level-based, see formulas.md §2 | TI-Calc level/25 × 60..100; OTL-Mech 2.2..3.85 × level; OTHire 80/20 "complex formula, not added" | (2L+3ML) × 1.4..1.65 | unchanged | **Q3** |
+| Berserk (exori), physical | level only, 2.4-4.0 × level (formulas.md §2) | TI-Calc level/25 × 60..100; OTL-Mech 2.2..3.85 × level; OTHire 80/20 "complex formula, not added" | (2L+3ML) × 1.4..1.65 | **2.4-4.0 × level**, a callback, no magic level term (`berserk.lua`) | fixed (Q3, decided with the user 2026-10-04) |
 
 How the damage-over-time spells work now: a condition's damage is fixed when a script loads (Avesta), so
 `poison_storm.lua` and `envenom.lua` build one combat per magic power step of 5 (P 100..1500), each with a poison
@@ -79,10 +79,10 @@ Fire Field rune 8837 (2005-05), 72254 (2006-12), 85637 (2007-02); Energy Field r
 | Field | 7.4 | Sources | Ours before | Ours now (items.xml) | Verdict |
 |---|---|---|---|---|---|
 | Fire field (1492, big; map 1487) | 20 on stepping in, then 10 × 7 (90 in all) | TW 72254 / 85637 Fire Field ("20 fire damage ... then 10 fire damage for 7 times", 2007: "each 9 seconds"); TW Fire 23177 (2005-11) "Large: 7 turns, 90 damage" | 20, then 7 × 10 every 10 s | same; measured 20 at once, 10 at +10.8, +20.9, +31.0 s | OK (tick 10 s vs "9 s" / "2 turns": soulfire's Q4) |
-| Fire field, medium (1493; map 1488) | 70 (TW Fire 23177, 2005-11 and 55965, 2006-09: "5 turns, 70 damage", the page's "20 ... initial hit ... then 10 each 2 turns" = 20 + 5 × 10); 60 in 2007 (TW 107239: "6 turns, 60") | TW Fire | 7 × 10 = 70, no hit on stepping in | unchanged | **Q8** |
+| Fire field, medium (1493; map 1488; non-PvP 1501) | 70 (TW Fire 23177, 2005-11 and 55965, 2006-09: "5 turns, 70 damage", the page's "20 ... initial hit ... then 10 each 2 turns" = 20 + 5 × 10); 60 in 2007 (TW 107239: "6 turns, 60") | TW Fire | 7 × 10 = 70, no hit on stepping in | **20 on stepping in, then 5 × 10 every 10 s** (1493, 1488, 1501) | fixed (Q8, decided with the user 2026-10-04) |
 | Fire field, small (1494; map 1489) | no damage | TW Fire (all) | no damage | same | OK |
 | Fire field stage times | big + medium last longer than 248 s (TN-Poison: the poison field's 248 s "is less than the first two stages of a fire field") | TN | 120 + 120 + 120 s | unchanged | **Q9** |
-| Energy field (1495; map 1491) | 30, then 25 (55) per 2007; 30, then 25 twice (80) per 2005-2006 | TW Energy 23178 (2005-11) and 60466 (2006-10): "30 HP of initial damage, and then two additional hits for 25 HP each ... Total Damage: 80"; TW 99685 (2007-05) "an additional hit for 25 ... Total Damage: 55"; TW Energy Field rune 85636 (2007-02) "30 and later 25 ... 55 hp in 10 seconds" | 30, then 25 after 10 s | unchanged; measured 30 at once, 25 at +10.8 s | **Q10** |
+| Energy field (1495; map 1491) | 30, then 25 (55) per 2007; 30, then 25 twice (80) per 2005-2006 | TW Energy 23178 (2005-11) and 60466 (2006-10): "30 HP of initial damage, and then two additional hits for 25 HP each ... Total Damage: 80"; TW 99685 (2007-05) "an additional hit for 25 ... Total Damage: 55"; TW Energy Field rune 85636 (2007-02) "30 and later 25 ... 55 hp in 10 seconds" | 30, then 25 after 10 s | **30, then 2 × 25 10 s apart** (`count 2` on 1495, 1491, 1504) | fixed (Q10, decided with the user 2026-10-04) |
 | Poison field (1496; map 1490) | poison of 100, first hit 5, a hit every 4 s; lasts 248 s | TN-Poison ("Poison fields do 100 periodic poison damage. Damage cycles start at 5. The fields lasts for 248 seconds"; "Damage starts after 4 seconds and at 4 second intervals"); TW 55636 / 91945 "initial damage of 5 per hit ... 103 hp" | 100 from 5, **every 5 s**, **120 s** | **every 4 s** (1490, 1496, 1503), **248 s** (1496); measured 5 at once, then 5, 5, 5, 4, 4 at +4.8, +8.8, +12.9, +16.9, +20.9 s | fixed |
 | Poison hit sequence | 5% of what is left, rounded up: 5 ×4, 4 ×5, 3 ×7, 2 ×10, 1 ×19 (45 hits) | TN-Poison | the engine's `generateDamageList(100, 5)`: 5 ×4, 4 ×5, 3 ×7, then 2 ×9 and 1 ×21 (or 2 ×10, 1 ×19: a float tie at 79 of 80), 100 in all | unchanged (engine code, every poison) | ~OK (note) |
 | First poison hit | TN: "Damage starts after 4 seconds" (said of periodic poison in general) | TN-Poison | at once on stepping in (`ConditionDamage::startCondition`, not delayed) | unchanged | **Q11** |
@@ -135,18 +135,23 @@ Player against player (damage halved), at P 100 (the floor) and P 380 (level 100
 | Poison storm, first tick (not halved) | 8-13 / 10, 12, 13 | - |
 | Envenom, first tick (not halved) | - | 10-18 / 11, 12, 15 |
 
-Light and heavy magic missile and sudden death: `test_combat_formulas.py`.
+Light and heavy magic missile: `test_combat_formulas.py`; sudden death (130-170 %P, also the stone skin amulet test
+there), force strike (35-55 %P) and berserk (2.4-4.0 × level) are measured in `test_spell_damage.py` as well
+(added 2026-10-04).
 
 ## Questions
 
-- **Q1 Sudden death**: 7.4 130-170 %P (TN; OTHire 150/20), ours 125 %P + 30 .. 170 %P. Ours is 155-170 at the floor
+- **Q1 Sudden death** - *decided with the user 2026-10-04: 130-170 %P (`sudden_death.lua` `-1.3, 0, -1.7, 0`,
+  `test_combat_formulas.py` `_range(power, 1.3, 0, 1.7)`; measured in `test_spell_damage.py`).* 7.4 130-170 %P (TN; OTHire 150/20), ours 125 %P + 30 .. 170 %P. Ours is 155-170 at the floor
   instead of 130-170, and a little higher at the low end above it. `test_combat_formulas.py`
   `test_stone_skin_amulet_takes_80_percent_of_a_sudden_death` asserts our current formula
   (`_range(power, 1.25, 30, 1.7)`), so changing the script alone would break it. Recommendation: `sudden_death.lua`
   `-1.3, 0, -1.7, 0` and that test's `_range(power, 1.3, 0, 1.7)`.
-- **Q2 Force strike**: OTHire 45/10 (35-55, like the other strikes) against OTL-Mech's 18 (-30) .. 33; TN does not list
+- **Q2 Force strike** - *decided with the user 2026-10-04: 35-55 %P (`force_strike.lua`; measured in
+  `test_spell_damage.py`).* OTHire 45/10 (35-55, like the other strikes) against OTL-Mech's 18 (-30) .. 33; TN does not list
   it. Ours 20-50. Recommendation: 35-55 like energy and flame strike (OTHire is the only source with real data).
-- **Q3 Berserk**: see formulas.md §2: ours scales with magic level, the 7.4 sources say level only (TI-Calc
+- **Q3 Berserk** - *decided with the user 2026-10-04: level only, 2.4-4.0 × level (`berserk.lua` callback;
+  measured in `test_spell_damage.py`).* See formulas.md §2: ours scales with magic level, the 7.4 sources say level only (TI-Calc
   level/25 × 60..100 = 2.4-4.0 × level). Recommendation: a callback `level * 2.4 .. level * 4.0` if TI-Calc is taken.
 - **Q4 Soulfire / burning tick**: 7.4 burns 10 a turn; how long a turn is is unclear (TibiaWiki: "each 9 seconds" on
   Fire Field, "10 HP each 2 turns" on Fire). Ours uses 10 s like the fire fields.
@@ -157,14 +162,16 @@ Light and heavy magic missile and sudden death: `test_combat_formulas.py`.
   melee only).
 - **Q7 global.lua condition params**: renumber `CONDITION_PARAM_MINVALUE` .. `CONDITION_PARAM_SKILL_FISHINGPERCENT` to
   `src/enums.h` (MINVALUE 14, MAXVALUE 15, STARTVALUE 16, TICKINTERVAL 17, ... SKILL_FISHINGPERCENT 43). Unused today.
-- **Q8 Medium fire field**: ours 7 × 10 = 70 with no hit on stepping in. TibiaWiki Fire in 2005-11 (7.4) and 2006-09:
+- **Q8 Medium fire field** - *decided with the user 2026-10-04: 20 on stepping in, then 5 × 10 (1493, 1488 and the
+  non-PvP 1501; measured in `test_fields.py`).* Ours was 7 × 10 = 70 with no hit on stepping in. TibiaWiki Fire in 2005-11 (7.4) and 2006-09:
   "Medium Fire Fields: 5 turns, 70 damage", with "20 HP as an initial hit for stepping in the fire, and then 10 HP each
   2 turns" = 20 + 5 × 10; in 2007-06 (8.0 era): "6 turns, 60 damage". Recommendation: 20 on stepping in, then 5 × 10
   (the 2005 text; the total 70 stays), i.e. `damage 20` before `ticks` and `count 5` on 1493 and 1488.
 - **Q9 Fire field stage times**: ours 120 s each stage. TN-Poison says the poison field's 248 s "is less than the
   first two stages of a fire field", so big + medium > 248 s in 7.4 (ours 240). No source gives the stage times.
   Recommendation: leave 120 s each (8 s short at most) unless a source turns up.
-- **Q10 Energy field**: ours 30 then 25 (55). TibiaWiki in 2005-11 (7.4) and 2006-10: 30 then two hits of 25 (80);
+- **Q10 Energy field** - *decided with the user 2026-10-04: 30, then 2 × 25 (80; 1495, 1491, 1504; measured in
+  `test_fields.py`).* Ours was 30 then 25 (55). TibiaWiki in 2005-11 (7.4) and 2006-10: 30 then two hits of 25 (80);
   from 2007: 30 then 25 (55). Recommendation: 30, then 25 twice 10 s apart (`count 2` on 1495, 1491, 1504), the only
   7.4-era text; keep 55 if the 2007 text is preferred.
 - **Q11 First poison hit**: on our server the first 5 comes at once on stepping in; TN says periodic poison "starts

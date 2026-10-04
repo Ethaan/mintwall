@@ -31,7 +31,9 @@ def _key_3899():
 @pytest.mark.parametrize("npc, needs, words, sets", MISSIONS, ids=[m[0] for m in MISSIONS])
 def test_paradox_tower_missions(new_player, db, npc, needs, words, sets):
     from tibia74.quest import next_to, talk_to
-    p = next_to(new_player, npc_pos(npc), storage={30001: 1, **needs}, group_id=TESTER_GROUP)
+    # premium: Zoltan lives in Edron, a premium area - a free character logs in at Thais (decided with the user
+    # 2026-10-04, the premium login rule)
+    p = next_to(new_player, npc_pos(npc), storage={30001: 1, **needs}, group_id=TESTER_GROUP, premium_days=30)
     said = talk_to(p, npc, "hi", *words)
     assert len(said) >= len(words), said
     p.logout()
@@ -41,7 +43,8 @@ def test_paradox_tower_missions(new_player, db, npc, needs, words, sets):
 def test_paradox_tower_missions_come_in_order(new_player, db):
     """Zoltan tells anyone about Yenny, but only who has heard Oldrak's part has learned something."""
     from tibia74.quest import next_to, talk_to
-    p = next_to(new_player, npc_pos("Zoltan"), storage={30001: 1}, group_id=TESTER_GROUP)
+    p = next_to(new_player, npc_pos("Zoltan"), storage={30001: 1}, group_id=TESTER_GROUP,
+                premium_days=30)       # Edron is premium: a free character would log in at Thais
     said = talk_to(p, "Zoltan", "hi", "yenny the gentle", "crunors caress")
     assert any("Crunors Caress" in s for s in said), said
     p.logout()

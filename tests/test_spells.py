@@ -160,10 +160,7 @@ def test_conjuring_makes_a_usable_rune(new_player, items, vocation, words, rune)
 # Calls to functions nothing defines (tibia74/luascan.py). Each is a task in task.md; this list may only
 # shrink - a new name here is a script that fails when that line runs.
 KNOWN_UNDEFINED = {
-    # GM ban manager (talkactions/scripts/banmanager.lua, not registered in talkactions.xml)
-    "addAccountBan", "addPlayerBan", "removeAccountBan", "removePlayerBan", "getAccountBanList",
-    "getPlayersByAccountNumber",
-    # the banks (not 7.4): their NPCs are no longer spawned (bank.lua kept for reference); banmanager.lua
+    # the banks (not 7.4): their NPCs are no longer spawned (bank.lua, evabank.lua kept for reference)
     "getPlayerByName",
 }
 

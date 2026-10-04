@@ -1860,9 +1860,12 @@
 	<item id="1488" article="a" name="fire field" editorsuffix=" (Not decaying)">
 		<attribute key="type" value="magicfield"/>
 		<attribute key="replaceable" value="0"/>
+		<!-- 7.4 medium fire field: 20 on stepping in, then 5 x 10 every 10 s, 70 in all (TibiaWiki Fire 2005-11
+		     "20 initial hit, then 10 each 2 turns"; decided with the user 2026-10-04) -->
 		<attribute key="field" value="fire">
+			<attribute key="damage" value="20"/>
 			<attribute key="ticks" value="10000"/>
-			<attribute key="count" value="7"/>
+			<attribute key="count" value="5"/>
 			<attribute key="damage" value="10"/>
 		</attribute>
 	</item>
@@ -1883,9 +1886,12 @@
 	<item id="1491" article="an" name="energy field" editorsuffix=" (Not decaying)">
 		<attribute key="type" value="magicfield"/>
 		<attribute key="replaceable" value="0"/>
+		<!-- 7.4 energy field: 30, then 2 x 25 10 s apart, 80 in all (TibiaWiki Energy 2005-11; decided with the user
+		     2026-10-04) -->
 		<attribute key="field" value="energy">
 			<attribute key="damage" value="30"/>
 			<attribute key="ticks" value="10000"/>
+			<attribute key="count" value="2"/>
 			<attribute key="damage" value="25"/>
 		</attribute>
 	</item>
@@ -1904,9 +1910,12 @@
 		<attribute key="type" value="magicfield"/>
 		<attribute key="decayTo" value="1494"/>
 		<attribute key="duration" value="120"/>
+		<!-- 7.4 medium fire field: 20 on stepping in, then 5 x 10 every 10 s, 70 in all (TibiaWiki Fire 2005-11
+		     "20 initial hit, then 10 each 2 turns"; decided with the user 2026-10-04) -->
 		<attribute key="field" value="fire">
+			<attribute key="damage" value="20"/>
 			<attribute key="ticks" value="10000"/>
-			<attribute key="count" value="7"/>
+			<attribute key="count" value="5"/>
 			<attribute key="damage" value="10"/>
 		</attribute>
 	</item>
@@ -1920,9 +1929,12 @@
 		<attribute key="type" value="magicfield"/>
 		<attribute key="decayTo" value="0"/>
 		<attribute key="duration" value="120"/>
+		<!-- 7.4 energy field: 30, then 2 x 25 10 s apart, 80 in all (TibiaWiki Energy 2005-11; decided with the user
+		     2026-10-04) -->
 		<attribute key="field" value="energy">
 			<attribute key="damage" value="30"/>
 			<attribute key="ticks" value="10000"/>
+			<attribute key="count" value="2"/>
 			<attribute key="damage" value="25"/>
 		</attribute>
 	</item>
@@ -1964,9 +1976,12 @@
 		<attribute key="type" value="magicfield"/>
 		<attribute key="decayTo" value="1502"/>
 		<attribute key="duration" value="10"/>
+		<!-- 7.4 medium fire field: 20 on stepping in, then 5 x 10 every 10 s, 70 in all (TibiaWiki Fire 2005-11
+		     "20 initial hit, then 10 each 2 turns"; decided with the user 2026-10-04) -->
 		<attribute key="field" value="fire">
+			<attribute key="damage" value="20"/>
 			<attribute key="ticks" value="10000"/>
-			<attribute key="count" value="7"/>
+			<attribute key="count" value="5"/>
 			<attribute key="damage" value="10"/>
 		</attribute>
 	</item>
@@ -1990,9 +2005,12 @@
 		<attribute key="type" value="magicfield"/>
 		<attribute key="decayTo" value="0"/>
 		<attribute key="duration" value="10"/>
+		<!-- 7.4 energy field: 30, then 2 x 25 10 s apart, 80 in all (TibiaWiki Energy 2005-11; decided with the user
+		     2026-10-04) -->
 		<attribute key="field" value="energy">
 			<attribute key="damage" value="30"/>
 			<attribute key="ticks" value="10000"/>
+			<attribute key="count" value="2"/>
 			<attribute key="damage" value="25"/>
 		</attribute>
 	</item>
