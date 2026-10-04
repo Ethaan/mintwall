@@ -1,7 +1,7 @@
 -- /sellhouse <name>: the engine's house transfer (Commands::sellHouse offers the house document in a trade; the house
 -- changes hands when the trade completes, House::executeTransfer). This runs first and refuses a receiver who may not
--- have the house (data/lib/houses.lua houseTransferProblem: premium, one house per account, guildhalls for guild
--- leaders); otherwise it lets the engine's command go on (return true).
+-- have the house (data/lib/houses.lua houseTransferProblem: premium, one house and one guildhall per account,
+-- guildhalls for guild leaders); otherwise it lets the engine's command go on (return true).
 
 dofile(getDataDir() .. 'lib/houses.lua')
 

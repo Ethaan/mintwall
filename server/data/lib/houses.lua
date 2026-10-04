@@ -2,8 +2,8 @@
 -- winner paid the bid plus the first month's rent from the depot of the house's town (no banks before 7.9), one house
 -- per account, guildhalls for guild leaders only. Tibiantis' houses page: "Each account can only rent one house and
 -- one guildhouse, but guildhouses are restricted only to the leaders of active guilds [...] the winner will have the
--- bid plus the first rent debited to their depot of the corresponding town during the next server start". Ours: one
--- house of any kind per account (the user, 2026-10-04).
+-- bid plus the first rent debited to their depot of the corresponding town during the next server start". Ours, like
+-- Tibiantis: one house and one guildhall per account (decided with the user 2026-10-04; it was one of any kind).
 --
 -- Until there is a website, /buyhouse (talkactions/scripts/buyhouse.lua) is the auction's stand-in: said in front of
 -- a house door it records a REQUEST in the table house_requests; the next daily server save
@@ -13,7 +13,8 @@
 -- The rules, checked when the request is made and again at the save:
 --   - the house has no owner and no other pending request;
 --   - the character has a premium account;
---   - no character of the account owns a house or has a pending request;
+--   - no character of the account owns a house of the same kind (house or guildhall) or has a pending request for
+--     one: an account may have one house and one guildhall;
 --   - a guildhall: the character is the leader of a guild (guild rank level 3, the engine's "Leader" rank);
 --   - the depot of the house's town holds the first month's rent in coins (only the depot, as in 7.4: carried gold
 --     does not count). The save does not take it here: setHouseOwner leaves the house unpaid, so Houses::payHouses
@@ -123,22 +124,36 @@ function getDepotMoney(guid, depot)
 	return money
 end
 
--- the house a character of this account owns: house id, owner guid
-local function accountHouse(account)
+-- "house" or "guildhall": an account may have one of each (decided with the user 2026-10-04)
+local function kindOf(house)
+	return isGuildhall(house) and "guildhall" or "house"
+end
+
+-- SQL: the requests (`house_id`) for a house of the same kind as `house`
+local function sameKind(house)
+	return "`house_id` " .. (isGuildhall(house) and "IN" or "NOT IN") .. " (" .. table.concat(GUILDHALLS, ", ") .. ")"
+end
+
+-- the house of the same kind as `house` (house or guildhall) a character of this account owns: house id, owner guid.
+-- Every house is looked at: getHouseByPlayerGUID gives one house a character owns, and one may own both kinds.
+local function accountHouse(account, house)
 	local res = query("SELECT `id` FROM `players` WHERE `account_id` = " .. account)
 	if res == nil then
 		return nil
 	end
-	local found, owner = nil, nil
+	local mine = {}
 	repeat
-		local guid = result.getDataInt(res, "id")
-		local house = getHouseByPlayerGUID(guid)
-		if found == nil and house ~= nil and house ~= false then
-			found, owner = house, guid
-		end
+		mine[result.getDataInt(res, "id")] = true
 	until not result.next(res)
 	result.free(res)
-	return found, owner
+	local guildhall = isGuildhall(house)
+	for _, id in pairs(getHouseList() or {}) do
+		local owner = getHouseOwner(id)
+		if owner ~= false and owner ~= 0 and mine[owner] and isGuildhall(id) == guildhall then
+			return id, owner
+		end
+	end
+	return nil
 end
 
 -- pending request of this account / for this house: {id, house, guid, account} or nil
@@ -157,6 +172,22 @@ end
 function getAccountHouseRequest(account)
 	houseRequestsTable()
 	return pendingRequest("`account_id` = " .. account)
+end
+
+-- every pending request of the account, oldest first: a house and a guildhall at most
+function getAccountHouseRequests(account)
+	houseRequestsTable()
+	local requests = {}
+	local res = query("SELECT `id`, `house_id`, `player_id`, `account_id` FROM `house_requests` WHERE `state` = "
+		.. HOUSE_REQUEST_PENDING .. " AND `account_id` = " .. account .. " ORDER BY `id`")
+	if res ~= nil then
+		repeat
+			table.insert(requests, {id = result.getDataInt(res, "id"), house = result.getDataInt(res, "house_id"),
+				guid = result.getDataInt(res, "player_id"), account = result.getDataInt(res, "account_id")})
+		until not result.next(res)
+		result.free(res)
+	end
+	return requests
 end
 
 local function townName(house)
@@ -180,15 +211,17 @@ function houseRequestProblem(guid, house, request)
 	if not hasPremium(guid) then
 		return "You need a premium account."
 	end
-	local owned, ownedBy = accountHouse(account)
+	local kind = kindOf(house)
+	local owned, ownedBy = accountHouse(account, house)
 	if owned ~= nil then
-		return "Your account already has a house: " .. getHouseName(owned) .. " (" .. (getPlayerNameByGUID(ownedBy)
-			or "?") .. "). Each account can have one house."
+		return "Your account already has a " .. kind .. ": " .. getHouseName(owned) .. " (" .. (getPlayerNameByGUID(ownedBy)
+			or "?") .. "). Each account can have one house and one guildhall."
 	end
-	local mine = pendingRequest("`account_id` = " .. account .. (request and (" AND `id` <> " .. request) or ""))
+	local mine = pendingRequest("`account_id` = " .. account .. " AND " .. sameKind(house)
+		.. (request and (" AND `id` <> " .. request) or ""))
 	if mine ~= nil then
-		return "Your account has already asked for a house: " .. getHouseName(mine.house) .. ". Each account can have"
-			.. " one house."
+		return "Your account has already asked for a " .. kind .. ": " .. getHouseName(mine.house) .. ". Each account"
+			.. " can have one house and one guildhall."
 	end
 	local other = pendingRequest("`house_id` = " .. house .. (request and (" AND `id` <> " .. request) or ""))
 	if other ~= nil then
@@ -206,8 +239,8 @@ function houseRequestProblem(guid, house, request)
 end
 
 -- /sellhouse (the engine's house transfer, a trade of the house document): nil if the character `guid` may take
--- `house` from its owner, else why not - the same rules as a request: premium, one house per account (the house
--- itself excepted: a transfer between two characters of one account), a guildhall only to a guild leader
+-- `house` from its owner, else why not - the same rules as a request: premium, one house and one guildhall per account
+-- (the house itself excepted: a transfer between two characters of one account), a guildhall only to a guild leader
 function houseTransferProblem(guid, house)
 	local account = accountOf(guid)
 	if account == nil then
@@ -217,12 +250,14 @@ function houseTransferProblem(guid, house)
 	if not hasPremium(guid) then
 		return name .. " has no premium account."
 	end
-	local owned = accountHouse(account)
+	local kind = kindOf(house)
+	local owned = accountHouse(account, house)
 	if owned ~= nil and owned ~= house then
-		return name .. "'s account already has a house. Each account can have one house."
+		return name .. "'s account already has a " .. kind .. ". Each account can have one house and one guildhall."
 	end
-	if pendingRequest("`account_id` = " .. account) ~= nil then
-		return name .. "'s account has asked for a house already. Each account can have one house."
+	if pendingRequest("`account_id` = " .. account .. " AND " .. sameKind(house)) ~= nil then
+		return name .. "'s account has asked for a " .. kind .. " already. Each account can have one house and one"
+			.. " guildhall."
 	end
 	if isGuildhall(house) and not isGuildLeader(guid) then
 		return "Only the leader of a guild can rent a guildhall."
@@ -250,14 +285,16 @@ function describeHouseRequest(r)
 		.. " over at the next server save. Say /cancelhouse to withdraw."
 end
 
-function cancelHouseRequest(account)
-	houseRequestsTable()
-	local r = pendingRequest("`account_id` = " .. account)
-	if r == nil then
+-- withdraw the account's pending requests (a house and a guildhall at most): true and the list, or false
+function cancelHouseRequests(account)
+	local requests = getAccountHouseRequests(account)
+	if #requests == 0 then
 		return false
 	end
-	db.query("DELETE FROM `house_requests` WHERE `id` = " .. r.id)
-	return true, r
+	for _, r in ipairs(requests) do
+		db.query("DELETE FROM `house_requests` WHERE `id` = " .. r.id)
+	end
+	return true, requests
 end
 
 local function finish(r, state, message)

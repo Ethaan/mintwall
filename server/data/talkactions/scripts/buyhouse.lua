@@ -1,5 +1,6 @@
 -- /buyhouse said in front of a house door, facing it: asks for the house, handed over at the next server save.
--- /buyhouse anywhere else: shows the account's pending request. /cancelhouse: withdraws it.
+-- /buyhouse anywhere else: shows the account's pending requests. /cancelhouse: withdraws them. An account may have one
+-- house and one guildhall, so up to two requests (decided with the user 2026-10-04).
 -- The rules and the request table: data/lib/houses.lua.
 
 dofile(getDataDir() .. 'lib/houses.lua')
@@ -47,9 +48,11 @@ function onSay(cid, words, param)
 	local account = getPlayerAccountId(cid)
 
 	if words == "/cancelhouse" then
-		local ok, r = cancelHouseRequest(account)
+		local ok, requests = cancelHouseRequests(account)
 		if ok then
-			info(cid, "You have withdrawn the request for the house " .. getHouseName(r.house) .. ".")
+			for _, r in ipairs(requests) do
+				info(cid, "You have withdrawn the request for the house " .. getHouseName(r.house) .. ".")
+			end
 		else
 			cancel(cid, "Your account has not asked for a house.")
 		end
@@ -58,9 +61,11 @@ function onSay(cid, words, param)
 
 	local house = houseInFront(cid)
 	if house == nil then
-		local r = getAccountHouseRequest(account)
-		if r ~= nil then
-			info(cid, describeHouseRequest(r))
+		local requests = getAccountHouseRequests(account)
+		if #requests > 0 then
+			for _, r in ipairs(requests) do
+				info(cid, describeHouseRequest(r))
+			end
 		else
 			cancel(cid, "Stand in front of the door of the house you want, facing it, and say /buyhouse. The house"
 				.. " is handed over at the next server save.")

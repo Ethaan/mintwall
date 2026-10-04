@@ -40,6 +40,44 @@ def _in_sewer(world):
     return world.nearest_spawn("Rat", (ROOKGAARD_TEMPLE[0], ROOKGAARD_TEMPLE[1], 8))
 
 
+# The room under the grate is cut off from the rats by water: a switch on each side lowers a drawbridge
+# (test_rookgaard.py::test_sewer_switch_lowers_the_bridge_and_raises_it_again). Without it the only way into this
+# sewer is the long way round from the west (stairs at 32046,32221).
+WEST_SWITCH, EAST_SWITCH = (32098, 32204, 8), (32104, 32204, 8)
+BRIDGE = [(32100, 32205, 8), (32101, 32205, 8)]
+DRAWBRIDGE = 1284                            # client id of the lowered bridge
+EAST_OF_BRIDGE = (32103, 32205, 8)
+
+
+def _bridge_down(p):
+    return all(p.tile_items(b) and p.tile_items(b)[0].client_id == DRAWBRIDGE for b in BRIDGE)
+
+
+def _lower_the_bridge(p, switch):
+    assert p.wait_for(lambda: p.tile_items(switch), timeout=5), f"switch {switch} not in view from {p.pos}"
+    if not _bridge_down(p):
+        top = p.tile_items(switch)[-1]
+        p.use_item(switch, top.client_id, len(p.tile_items(switch)) - 1)
+        assert p.wait_for(lambda: _bridge_down(p), timeout=5), \
+            f"the switch at {switch} did not lower the bridge: {[p.tile_items(b) for b in BRIDGE]}"
+
+
+def _down_to_the_rats(p, items, world_map):
+    """Temple -> the grate -> the switch lowers the bridge -> across it, among the rats."""
+    walk_next_to(p, items, world_map, SEWER_GRATE)
+    use_map_item(p, items, SEWER_GRATE, GRATE)
+    assert p.wait_for(lambda: p.pos == SEWER_LADDER, timeout=3), f"used the grate: at {p.pos}, not {SEWER_LADDER}"
+    _lower_the_bridge(p, WEST_SWITCH)
+    follow(p, items, world_map, EAST_OF_BRIDGE, open_tiles=BRIDGE)
+
+
+def _up_to_the_temple(p, items, world_map):
+    """Back over the bridge (lowered again from this side if it was raised) and up the ladder."""
+    follow(p, items, world_map, EAST_OF_BRIDGE, open_tiles=BRIDGE)
+    _lower_the_bridge(p, EAST_SWITCH)
+    follow(p, items, world_map, ROOKGAARD_TEMPLE, open_tiles=BRIDGE)
+
+
 def _corpse_near(p, items, server_id, radius=2):
     """The closest tile around the character with this corpse on it."""
     x, y, z = p.pos
@@ -49,17 +87,27 @@ def _corpse_near(p, items, server_id, radius=2):
     return min(found)[1] if found else None
 
 
-def _kill_a_rat(p, timeout=120):
-    """Attack the nearest rat and chase it (rats run at 5 hp) until it dies; returns the experience it gave."""
-    rat = p.wait_for(lambda: p.nearest("Rat"), timeout=60)
-    assert rat, f"no rat in view at {p.pos}"
-    exp = p.stats.experience
+def _close_rat(p, radius=5):
+    """The nearest rat on our floor within radius (the sewer has rats behind walls and water too)."""
+    rats = [r for r in p.creatures_named("Rat") if p.pos and r.pos[2] == p.pos[2]
+            and max(abs(r.pos[0] - p.pos[0]), abs(r.pos[1] - p.pos[1])) <= radius]
+    return min(rats, key=lambda r: max(abs(r.pos[0] - p.pos[0]), abs(r.pos[1] - p.pos[1])), default=None)
+
+
+def _kill_a_rat(p, tries=5):
+    """Attack the nearest close rat and chase it (rats run at 5 hp) until it dies; one we cannot get at in 40 s
+    (behind water) is given up for the next. Returns the experience the kill gave."""
     p.set_fight_modes(fight=1, chase=1)
-    p.attack(rat.id)
-    assert p.wait_for(lambda: rat.id in p.removed_creatures and p.stats.experience > exp, timeout=timeout), \
-        f"the rat was not killed: {rat}, we are at {p.pos} with {p.stats.health} hp"
-    p.attack(0)
-    return p.stats.experience - exp
+    for _ in range(tries):
+        rat = p.wait_for(lambda: _close_rat(p), timeout=60)
+        assert rat, f"no rat near {p.pos}"
+        exp = p.stats.experience
+        p.attack(rat.id)
+        if p.wait_for(lambda: p.stats.experience > exp, timeout=40):
+            p.attack(0)
+            return p.stats.experience - exp
+        p.attack(0)
+    raise AssertionError(f"no rat killed in {tries} tries at {p.pos}, {p.stats.health} hp")
 
 
 def _saved(p, db):
@@ -85,8 +133,8 @@ def test_a_new_player_hunts_sewer_rats_sells_them_and_buys_a_dagger(new_player, 
     assert bag, "the bag did not open"
     assert _gold(p) == 0, "a new player starts without money"
 
-    walk_near(p, items, world_map, _in_sewer(world))
-    assert p.pos[2] == 8, f"not down in the sewer: {p.pos}"
+    _down_to_the_rats(p, items, world_map)
+    walk_near(p, items, world_map, _in_sewer(world), open_tiles=BRIDGE)
 
     killed = 0
     while _gold(p) + RAT_PRICE * _rats(p) < DAGGER_PRICE:
@@ -103,6 +151,7 @@ def test_a_new_player_hunts_sewer_rats_sells_them_and_buys_a_dagger(new_player, 
         pick_up(p, items, corpse, "dead rat")
     gold, rats = _gold(p), _rats(p)
 
+    _up_to_the_temple(p, items, world_map)
     seymour = npc_pos("Seymour")
     walk_near(p, items, world_map, seymour)
     assert p.pos[2] == seymour[2], f"not back up from the sewer: {p.pos}"
@@ -140,18 +189,26 @@ def test_down_the_sewer_grate_and_up_the_ladder(new_player, items, world_map):
     follow(p, items, world_map, ROOKGAARD_TEMPLE)          # and back to the temple, all on foot
 
 
-def test_the_route_from_the_temple_to_the_sewer_rats_and_back_uses_the_grate_and_the_ladder(new_player, items,
-                                                                                            world, world_map):
-    from tibia74.route import plan
+def test_the_rats_below_the_grate_are_across_the_drawbridge(world, world_map):
+    """On the map the room under the grate has no way to the rats but the drawbridge (the planner's own way in is
+    the long one from the west); with the bridge lowered they are a short walk away."""
+    from tibia74.quest import assert_way
     rats = _in_sewer(world)
-    down = [s.kind for s in plan(world_map, ROOKGAARD_TEMPLE, rats) if s.kind != "walk"]
-    up = [s.kind for s in plan(world_map, rats, ROOKGAARD_TEMPLE) if s.kind != "walk"]
-    assert "grate" in down and "ladder" in up, (down, up)
+    across = assert_way(world_map, SEWER_LADDER, rats, open_tiles=BRIDGE)
+    without = assert_way(world_map, SEWER_LADDER, rats)
+    assert any(s.arrive[2] != 8 for s in without), "a way to the rats without the bridge, staying in this sewer"
+    assert len(across) < 50 and len(without) > 2 * len(across), (len(across), len(without))
+
+
+def test_down_to_the_rats_over_the_drawbridge_and_back_up(new_player, items, world, world_map):
+    """The way every Rookgaard player first goes to the rats and back: grate, west switch, bridge, rats - then back
+    over the bridge (the east switch if someone raised it) and up the ladder to the temple."""
     p = new_player(storage={30001: 1}, group_id=TESTER_GROUP)     # rats leave testers alone: just the walk
-    walk_near(p, items, world_map, rats)
+    _down_to_the_rats(p, items, world_map)
+    walk_near(p, items, world_map, _in_sewer(world), open_tiles=BRIDGE)
     assert p.pos[2] == 8, p.pos
-    follow(p, items, world_map, ROOKGAARD_TEMPLE)
-    assert p.pos == ROOKGAARD_TEMPLE
+    _up_to_the_temple(p, items, world_map)
+    assert p.pos == ROOKGAARD_TEMPLE, p.pos
 
 
 # ----------------------------------------------------------------------------- death
@@ -224,7 +281,8 @@ def test_a_rat_takes_a_rookgaarder_to_level_8_and_he_walks_to_the_oracle(new_pla
     assert p.wait_for(lambda: p.stats.max_health == 150 + 6 * hp, timeout=5), p.stats
     assert (p.stats.max_mana, p.stats.capacity) == (6 * mana, capacity(NONE, 7)), p.stats
 
-    walk_near(p, items, world_map, _in_sewer(world))
+    _down_to_the_rats(p, items, world_map)
+    walk_near(p, items, world_map, _in_sewer(world), open_tiles=BRIDGE)
     _kill_a_rat(p)
     assert p.wait_for(lambda: p.stats.level == 8, timeout=3), f"level {p.stats.level}, exp {p.stats.experience}"
     assert p.messages("You advanced from Level 7 to Level 8"), p.text_messages[-3:]
@@ -232,6 +290,7 @@ def test_a_rat_takes_a_rookgaarder_to_level_8_and_he_walks_to_the_oracle(new_pla
     assert (p.stats.max_health, p.stats.max_mana, p.stats.capacity) == (185, 35, 470) == \
         (150 + 7 * hp, 7 * mana, capacity(NONE, 8)), p.stats
 
+    _up_to_the_temple(p, items, world_map)
     oracle = npc_pos("The Oracle")
     walk_near(p, items, world_map, oracle)
     replies = talk_to(p, "The Oracle", "hi")

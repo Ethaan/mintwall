@@ -238,8 +238,9 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       - Test characters know their vocation's spells unless spells=[] (tests/tibia74/db.py).
       tests: test_spell_teachers.py (learning rules, all 24 teachers list their spells), test_spells.py
       test_a_knight_shoots_sudden_death_from_magic_level_15.
-- [ ] Existing characters on the live database know no spell now (spell buying is new) - grant them their
+- [x] Existing characters on the live database know no spell now (spell buying is new) - grant them their
       vocation's spells once, or let them buy (decided: they buy - "Must buy, as 7.4"); tell the players
+      Done 2026-10-04: nothing to grant - a dry run on a copy of the live DB shows the 11 player characters already know exactly their spells (players buy them, as decided); only 4 GM/test characters (Centurion, Gandalf, Radagast, Legolas) would get spells. tools/grant-learned-spells.py (--dry-run, --backup, refuses while 7171 listens) + tests/test_grant_spells.py, if ever needed.
 - [x] Shop prices: audit buy/sell lists against 7.4 (tibiaot74 data may include 7.72 items)
       Done 2026-10-01 (decided with the user): Tibiantis first (docs/reference-74/tibiantis/, tools/fetch-tibiantis.py:
       EQSELL = what NPCs pay, MARKET_COST = the cheapest buy anywhere), then each NPC's own TibiaWiki page, then the

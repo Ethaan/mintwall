@@ -386,6 +386,16 @@ def test_a_guest_puts_himself_out_but_not_another_guest(new_player, db, login, i
     assert a.wait_for(lambda: a.pos == flat.entry, timeout=3), f"the guest could not leave: {a.pos}"
 
 
+def test_alana_sio_alone_puts_the_caster_out(new_player, db, login, items):
+    """"alana sio" with no name puts the one who says it out, as later servers do (House::kickPlayer; decided with the
+    user 2026-10-04). Needs the rebuild."""
+    flat = FLAT_24
+    owner = _owner(new_player, db, login, flat, pos=flat.inside)
+    assert owner.pos == flat.inside, owner.pos
+    _cast(owner, "alana sio")
+    assert owner.wait_for(lambda: owner.pos == flat.entry, timeout=3), f"the owner is still at {owner.pos}"
+
+
 def test_taking_a_guest_off_the_list_puts_him_out(new_player, db, login, items):
     """House::setAccessList puts out everyone the new list no longer invites (tibia.com manual, 2004). Needs the
     game.cpp internalTeleport fix (rebuild): it checked the tile the player stood on - in the house he was no longer
@@ -498,9 +508,46 @@ def test_sellhouse_keeps_one_house_per_account(new_player, db, login):
     assert not any("account" in t or "premium" in t or "guild" in t for t in said), said
 
 
+def test_a_house_owner_who_leads_a_guild_may_also_ask_for_a_guildhall(new_player, db, login):
+    """One house and one guildhall per account, like Tibiantis (data/lib/houses.lua, decided with the user
+    2026-10-04): a guild leader who owns a house may ask for a guildhall, but his account may not ask for a second
+    house. The request is withdrawn at the end (/cancelhouse)."""
+    leader_char = db.create_character(pos=SPIRITKEEP_ENTRY, premium_days=30, town_id=THAIS, storage=BEGINNER_SET)
+    _give_house(new_player, LOWER_SWAMP_LANE_1, leader_char)
+    _put_in_depot(db.path, leader_char.guid, THAIS, [(CRYSTAL, 2)])                   # 20000: Spiritkeep's rent
+    con = sqlite3.connect(db.path)
+    try:
+        guild = con.execute("INSERT INTO guilds (name, ownerid, creationdata) VALUES (?, ?, 0)",
+                            (f"Keepers {leader_char.guid}", leader_char.guid)).lastrowid
+        rank = dict(con.execute("SELECT level, id FROM guild_ranks WHERE guild_id = ?", (guild,)))
+        con.execute("UPDATE players SET rank_id = ? WHERE id = ?", (rank[3], leader_char.guid))   # Leader
+        con.commit()
+    finally:
+        con.close()
+    alt_char = db.create_character(pos=FLAT_23.entry, town_id=THAIS, storage=BEGINNER_SET)   # the same account
+    _sql(db.path, "UPDATE players SET account_id = ? WHERE id = ?", leader_char.account, alt_char.guid)
+    alt_char = Character(alt_char.guid, alt_char.name, leader_char.account, leader_char.password)
+
+    leader = login(leader_char)
+    assert leader.pos == SPIRITKEEP_ENTRY, leader.pos
+    replies = _buy(leader, NORTH, "house")
+    assert any(WILL_BE_YOURS in t and "Spiritkeep" in t for t in replies), replies
+    leader.logout()
+    time.sleep(0.5)
+
+    alt = login(alt_char)
+    assert alt.pos == FLAT_23.entry, alt.pos
+    replies = _buy(alt, WEST, "house")
+    assert any("Your account already has a house: Lower Swamp Lane 1" in t for t in replies), replies
+    assert any("Spiritkeep" in t for t in _buy(alt, NORTH, "house")), "the pending guildhall request is not shown"
+    said = _say_and_read(alt, "/cancelhouse", "withdrawn")
+    assert any("withdrawn the request for the house Spiritkeep" in t for t in said), said
+
+
 # ---------------------------------------------------------------------------------------------- buying a house
 
 UPPER_SWAMP_LANE_2, UPPER_SWAMP_LANE_4 = 53, 54     # Thais houses no other test here uses
+LOWER_SWAMP_LANE_1 = 55
 
 THAIS_ROAD = (32369, 32245, 7)                      # just south of the Thais temple
 FLAT_22_RENT, FLAT_23_RENT = 520, 860               # Tibiantis' rents

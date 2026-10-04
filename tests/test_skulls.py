@@ -164,3 +164,53 @@ def test_sixth_unjustified_kill_in_a_day_bans_7_days_then_30_then_60(new_player,
     expires, added, comment = rows[-1]
     assert comment == AUTOMATIC
     assert abs((expires - added) - days * DAY) <= 5, f"banished for {(expires - added) / DAY:.2f} days, not {days}"
+
+
+def _seed_gm(db, account, warnings, gm_bans):
+    """The account's gamemaster warnings (accounts.warnings) and earlier, expired bans by a gamemaster (an admin_id,
+    the gamemaster's own comment: Game::violationWindow)."""
+    now = int(time.time())
+    con = sqlite3.connect(db.path, timeout=10)
+    try:
+        con.execute('UPDATE accounts SET warnings = ? WHERE id = ?', (warnings, account))
+        for n in range(gm_bans):
+            added = now - (300 - 50 * n) * DAY
+            con.execute('INSERT INTO bans (type, value, active, expires, added, admin_id, reason, comment)'
+                        ' VALUES (?, ?, 1, ?, ?, 1, ?, ?)',
+                        (BANISHMENT, account, added + DAY, added, "offensive name", "insulting the gamemaster"))
+        con.commit()
+    finally:
+        con.close()
+
+
+@pytest.mark.parametrize("earlier_bans, days", [(1, 30), (2, 60)])
+def test_a_final_ban_for_unjustified_kills_is_never_shorter_than_the_automatic_one(new_player, db, earlier_bans,
+                                                                                   days):
+    """An account with the gamemaster warnings for the final ban (WarningsToFinalBan 4) gets the longer of the final
+    ban (FinalBanLength, 7 days) and the automatic ban it would get otherwise (7 / 30 / 60 ... days) - decided with
+    the user 2026-10-04. Two earlier bans by a gamemaster are seeded too: they do not count as automatic ones (the
+    count is of admin_id 0 "Automatic Banishment." rows, BanManager::getAutomaticBanishmentsCount)."""
+    killer = new_player(pos=CARLIN_DOOR, level=100, vocation=KNIGHT, inventory={RIGHT: Item(2400)},   # magic sword
+                        skills={2: 100}, storage={30001: 1})
+    if killer.pos != CARLIN_DOOR:
+        killer.wait_for(lambda: killer.walk_to(CARLIN_DOOR, max_steps=3), timeout=15)
+    assert killer.pos == CARLIN_DOOR, f"the killer is at {killer.pos}, not at the door {CARLIN_DOOR}"
+    account = killer.character.account
+    _seed(db, killer.character.guid, account, kills_today=5, earlier_bans=earlier_bans)
+    _seed_gm(db, account, warnings=4, gm_bans=2)
+    victim = _victim(new_player, (CARLIN_DOOR[0] + 1, CARLIN_DOOR[1] + 1, 7), level=8)
+    killer.set_fight_modes(fight=1, chase=0, safe=0)
+    killer.attack(victim.player_id)
+    assert killer.wait_for(lambda: victim.player_id in killer.removed_creatures or not victim.connected, timeout=30), \
+        f"the victim did not die: {killer.text_messages[-3:]}"
+    assert killer.wait_for(lambda: not killer.connected, timeout=10), "the banished killer was not kicked"
+
+    seeded = earlier_bans + 2
+    deadline = time.time() + 10
+    while len(_ban_rows(db, account)) <= seeded and time.time() < deadline:
+        time.sleep(0.5)
+    rows = _ban_rows(db, account)
+    assert len(rows) == seeded + 1, f"banishments of the account: {rows}"
+    expires, added, comment = rows[-1]
+    assert comment == AUTOMATIC
+    assert abs((expires - added) - days * DAY) <= 5, f"banished for {(expires - added) / DAY:.2f} days, not {days}"

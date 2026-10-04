@@ -163,7 +163,8 @@ AccessHouseLevel_t House::getHouseAccessLevel(const Player* player)
 
 bool House::kickPlayer(Player* player, const std::string& name)
 {
-	Player* kickingPlayer = g_game.getPlayerByName(name);
+	// "alana sio" with no name puts the caster out, as later servers do (decided with the user 2026-10-04)
+	Player* kickingPlayer = (name.find_first_not_of(" \"") == std::string::npos ? player : g_game.getPlayerByName(name));
 	if(kickingPlayer){
 		HouseTile* houseTile = kickingPlayer->getTile()->getHouseTile();
 
