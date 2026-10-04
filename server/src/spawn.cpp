@@ -34,7 +34,6 @@ extern Monsters g_monsters;
 extern Game g_game;
 
 #define MINSPAWN_INTERVAL 10000
-#define DEFAULTSPAWN_INTERVAL 60000
 
 Spawns::Spawns()
 {
@@ -272,19 +271,46 @@ bool Spawns::isInZone(const Position& centerPos, int32_t radius, const Position&
 			(pos.y >= centerPos.y - radius) && (pos.y <= centerPos.y + radius));
 }
 
+// Respawn as in CipSoft's world (docs/reference-74/spawns.md, decided 2026-10-04), with the rules of Nostalrius'
+// src/spawn.cpp (a 7.7 server built on CipSoft's files) and tibiantis.info's trivia (7.4):
+//  - every slot (one monster of the spawn file) has its own timer: it respawns getRespawnDelay(spawntime) after its
+//    monster died, not on a check tick of the whole block;
+//  - a player near the spot when it is due (findPlayer) blocks it: the slot waits a whole new delay;
+//  - overspawn: a monster that goes more than OVERSPAWN_DISTANCE squares from its spot, or to another floor, frees
+//    its slot (it stays in the world until it dies or despawns) and the slot's timer starts.
+// RateSpawn (config.lua) divides every delay: 1 = Cip's times; the test server uses it to shorten them.
+#define OVERSPAWN_DISTANCE 10
+#define RESPAWN_RETRY 10000        // the spot was taken (placeCreature failed): try again after this
+
 void Spawn::startSpawnCheck()
 {
-	if(checkSpawnEvent == 0){
-		checkSpawnEvent = Scheduler::getScheduler().addEvent(createSchedulerTask(getInterval(), boost::bind(&Spawn::checkSpawn, this)));
+	//a monster of this block disappeared (died, despawned): checkSpawn starts its slot's timer
+	scheduleCheck(OTSYS_TIME());
+}
+
+void Spawn::scheduleCheck(int64_t when)
+{
+	if(checkSpawnEvent != 0){
+		if(checkSpawnTime <= when){
+			return;
+		}
+		stopEvent();
 	}
+
+	int64_t delay = when - OTSYS_TIME();
+	if(delay < SCHEDULER_MINTICKS){
+		delay = SCHEDULER_MINTICKS;
+	}
+	checkSpawnTime = OTSYS_TIME() + delay;
+	checkSpawnEvent = Scheduler::getScheduler().addEvent(createSchedulerTask((uint32_t)delay, boost::bind(&Spawn::checkSpawn, this)));
 }
 
 Spawn::Spawn(const Position& _pos, int32_t _radius)
 {
 	centerPos = _pos;
 	radius = _radius;
-	interval = DEFAULTSPAWN_INTERVAL;
 	checkSpawnEvent = 0;
+	checkSpawnTime = 0;
 }
 
 Spawn::~Spawn()
@@ -306,18 +332,64 @@ Spawn::~Spawn()
 	stopEvent();
 }
 
+uint32_t Spawn::getRespawnDelay(uint32_t interval)
+{
+	//Nostalrius Spawn::getInterval: a spawntime over 500 s is shortened only with many players online (not up to
+	//200, 200*t/(players/2+100) up to 800, 0.4*t above) and then randomised between half and all of it (a normal
+	//distribution around 3/4, cut at both ends); shorter spawntimes are exact
+	uint64_t delay = interval;
+	if(delay > 500000){
+		uint64_t playersOnline = g_game.getPlayersOnline();
+		if(playersOnline > 800){
+			delay = 2 * delay / 5;
+		}
+		else if(playersOnline > 200){
+			delay = 200 * delay / (playersOnline / 2 + 100);
+		}
+		delay = random_range((int32_t)(delay / 2), (int32_t)delay, DISTRO_NORMAL);
+	}
+
+	int32_t rate = g_config.getNumber(ConfigManager::RATE_SPAWN);
+	if(rate > 1){
+		delay /= rate;
+	}
+	if(delay < 1000){
+		delay = 1000;
+	}
+	return (uint32_t)delay;
+}
+
+void Spawn::startRespawnTimer(spawnBlock_t& sb, int64_t now)
+{
+	if(sb.nextSpawn == 0){
+		sb.nextSpawn = now + getRespawnDelay(sb.interval);
+	}
+}
+
 bool Spawn::findPlayer(const Position& pos)
 {
+	//7.4 (tibiantis.info trivia; Nostalrius uses the multi-floor spectators): a player blocks a respawn from 2 floors
+	//above and below underground, and from every floor above (and its own) on the surface
 	SpectatorVec list;
-	SpectatorVec::iterator it;
-
-	g_game.getSpectators(list, pos);
+	g_game.getSpectators(list, pos, false, true);
 
 	Player* tmpPlayer = NULL;
-	for(it = list.begin(); it != list.end(); ++it) {
-		if((tmpPlayer = (*it)->getPlayer()) && !tmpPlayer->hasFlag(PlayerFlag_IgnoredByMonsters)){
-			return true;
+	for(SpectatorVec::iterator it = list.begin(); it != list.end(); ++it) {
+		if(!(tmpPlayer = (*it)->getPlayer()) || tmpPlayer->hasFlag(PlayerFlag_IgnoredByMonsters)){
+			continue;
 		}
+
+		const Position& playerPos = tmpPlayer->getPosition();
+		if(pos.z <= 7){
+			if(playerPos.z > pos.z){
+				continue;
+			}
+		}
+		else if(std::abs((int32_t)playerPos.z - (int32_t)pos.z) > 2){
+			continue;
+		}
+
+		return true;
 	}
 
 	return false;
@@ -326,6 +398,38 @@ bool Spawn::findPlayer(const Position& pos)
 bool Spawn::isInSpawnZone(const Position& pos)
 {
 	return Spawns::getInstance()->isInZone(centerPos, radius, pos);
+}
+
+static bool isOverspawned(const Position& spot, const Position& pos)
+{
+	return pos.z != spot.z || std::abs((int32_t)pos.x - (int32_t)spot.x) > OVERSPAWN_DISTANCE ||
+		std::abs((int32_t)pos.y - (int32_t)spot.y) > OVERSPAWN_DISTANCE;
+}
+
+void Spawn::onMonsterMove(Monster* monster, const Position& newPos)
+{
+	for(SpawnedMap::iterator it = spawnedMap.begin(); it != spawnedMap.end(); ++it){
+		if(it->second != monster){
+			continue;
+		}
+
+		uint32_t spawnId = it->first;
+		if(spawnId == 0){
+			return;
+		}
+
+		spawnBlock_t& sb = spawnMap[spawnId];
+		if(!isOverspawned(sb.pos, newPos)){
+			return;
+		}
+
+		//the monster is let go (spawn id 0): it is no longer the slot's
+		spawnedMap.erase(it);
+		spawnedMap.insert(spawned_pair(0, monster));
+		startRespawnTimer(sb, OTSYS_TIME());
+		scheduleCheck(sb.nextSpawn);
+		return;
+	}
 }
 
 bool Spawn::spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& pos, Direction dir, bool startup /*= false*/)
@@ -356,16 +460,21 @@ bool Spawn::spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& p
 
 	spawnedMap.insert(spawned_pair(spawnId, monster));
 	spawnMap[spawnId].lastSpawn = OTSYS_TIME();
+	spawnMap[spawnId].nextSpawn = 0;
 	return true;
 }
 
 void Spawn::startup()
 {
+	int64_t now = OTSYS_TIME();
 	for(SpawnMap::iterator it = spawnMap.begin(); it != spawnMap.end(); ++it){
 		uint32_t spawnId = it->first;
 		spawnBlock_t& sb = it->second;
 
-		spawnMonster(spawnId, sb.mType, sb.pos, sb.direction, true);
+		if(!spawnMonster(spawnId, sb.mType, sb.pos, sb.direction, true)){
+			sb.nextSpawn = now + RESPAWN_RETRY;
+			scheduleCheck(sb.nextSpawn);
+		}
 	}
 }
 
@@ -375,7 +484,9 @@ void Spawn::checkSpawn()
 	std::cout << "[Notice] Spawn::checkSpawn " << this << std::endl;
 #endif
 	checkSpawnEvent = 0;
+	checkSpawnTime = 0;
 
+	int64_t now = OTSYS_TIME();
 	Monster* monster;
 	uint32_t spawnId;
 
@@ -384,14 +495,16 @@ void Spawn::checkSpawn()
 		monster = it->second;
 
 		if(monster->isRemoved()) {
+			//died or despawned: its slot's timer starts now
 			if(spawnId != 0) {
-				spawnMap[spawnId].lastSpawn = OTSYS_TIME();
+				startRespawnTimer(spawnMap[spawnId], now);
 			}
 
 			monster->releaseThing2();
 			spawnedMap.erase(it++);
 		}
-		else if(!isInSpawnZone(monster->getPosition()) && spawnId != 0) {
+		else if(spawnId != 0 && isOverspawned(spawnMap[spawnId].pos, monster->getPosition())) {
+			startRespawnTimer(spawnMap[spawnId], now);
 			spawnedMap.insert(spawned_pair(0, monster));
 			spawnedMap.erase(it++);
 		}
@@ -399,32 +512,34 @@ void Spawn::checkSpawn()
 			++it;
 		}
 	}
-	
-	uint32_t spawnCount = 0;
+
+	int64_t nextCheck = 0;
 	for(SpawnMap::iterator it = spawnMap.begin(); it != spawnMap.end(); ++it) {
 		spawnId = it->first;
 		spawnBlock_t& sb = it->second;
 
-		if(spawnedMap.count(spawnId) == 0){
-			if(OTSYS_TIME() >= sb.lastSpawn + sb.interval){
+		if(spawnedMap.count(spawnId) != 0){
+			continue;
+		}
 
-				if(findPlayer(sb.pos)){
-					sb.lastSpawn = OTSYS_TIME();
-					continue;
-				}
-
-				spawnMonster(spawnId, sb.mType, sb.pos, sb.direction);
-
-				++spawnCount;
-				if(spawnCount >= (uint32_t)g_config.getNumber(ConfigManager::RATE_SPAWN)){
-					break;
-				}
+		startRespawnTimer(sb, now);
+		if(now >= sb.nextSpawn){
+			if(findPlayer(sb.pos)){
+				//blocked: the slot waits a whole new delay
+				sb.nextSpawn = now + getRespawnDelay(sb.interval);
 			}
+			else if(!spawnMonster(spawnId, sb.mType, sb.pos, sb.direction)){
+				sb.nextSpawn = now + RESPAWN_RETRY;
+			}
+		}
+
+		if(sb.nextSpawn != 0 && (nextCheck == 0 || sb.nextSpawn < nextCheck)){
+			nextCheck = sb.nextSpawn;
 		}
 	}
 
-	if(spawnedMap.size() < spawnMap.size()){
-		checkSpawnEvent = Scheduler::getScheduler().addEvent(createSchedulerTask(getInterval(), boost::bind(&Spawn::checkSpawn, this)));
+	if(nextCheck != 0){
+		scheduleCheck(nextCheck);
 	}
 #ifdef __DEBUG_SPAWN__
 	else{
@@ -440,10 +555,6 @@ bool Spawn::addMonster(const std::string& _name, const Position& _pos, Direction
 		std::cout << "[Spawn::addMonster] Can not find " << _name << std::endl;
 		return false;
 	}
-	
-	if(_interval < interval){
-		interval = _interval;
-	}
 
 	spawnBlock_t sb;
 	sb.mType = mType;
@@ -451,6 +562,7 @@ bool Spawn::addMonster(const std::string& _name, const Position& _pos, Direction
 	sb.direction = _dir;
 	sb.interval = _interval;
 	sb.lastSpawn = 0;
+	sb.nextSpawn = 0;
 
 	uint32_t spawnId = (int)spawnMap.size() + 1;
 	spawnMap[spawnId] = sb;
@@ -460,10 +572,18 @@ bool Spawn::addMonster(const std::string& _name, const Position& _pos, Direction
 
 void Spawn::removeMonster(Monster* monster)
 {
+	//convinced (it became a player's summon): the slot is free and its timer starts
 	for(SpawnedMap::iterator it = spawnedMap.begin(); it != spawnedMap.end(); ++it){
 		if(it->second == monster){
+			uint32_t spawnId = it->first;
 			monster->releaseThing2();
 			spawnedMap.erase(it);
+
+			if(spawnId != 0){
+				spawnBlock_t& sb = spawnMap[spawnId];
+				startRespawnTimer(sb, OTSYS_TIME());
+				scheduleCheck(sb.nextSpawn);
+			}
 			break;
 		}
 	}
@@ -474,5 +594,6 @@ void Spawn::stopEvent()
 	if(checkSpawnEvent != 0){
 		Scheduler::getScheduler().stopEvent(checkSpawnEvent);
 		checkSpawnEvent = 0;
+		checkSpawnTime = 0;
 	}
 }

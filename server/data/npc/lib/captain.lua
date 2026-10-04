@@ -11,7 +11,7 @@ HARBOURS = {
 	["Ab'Dendriel"] = {x = 32734, y = 31669, z = 7},
 	["Venore"] = {x = 32954, y = 32022, z = 7},
 	["Edron"] = {x = 33176, y = 31764, z = 7},
-	["Darashia"] = {x = 33290, y = 32481, z = 7},
+	["Darashia"] = {x = 33290, y = 32480, z = 7},   -- not 33290,32481: a wooden pillar stands there (the Ghost Ship's forcefield lands here too)
 	["Ankrahmun"] = {x = 33092, y = 32884, z = 7},
 	["Cormaya"] = {x = 33288, y = 31956, z = 7},
 }

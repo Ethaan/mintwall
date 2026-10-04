@@ -223,7 +223,8 @@ def assert_level_door(new_player, items, door, outside, level, *, vocation=4, ga
     is refused ("Only the worthy may pass.") and stays; one of exactly `level` passes into the doorway.
     Testers (monsters leave them alone) with no GM access - access skips the check (gateofexp_closed.lua)."""
     from .server import TESTER_GROUP
-    below = new_player(pos=outside, level=level - 1, vocation=vocation, group_id=TESTER_GROUP, storage={30001: 1})
+    below = new_player(pos=outside, level=level - 1, vocation=vocation, group_id=TESTER_GROUP, storage={30001: 1},
+                       premium_days=30)      # a free character in a premium area is sent to Thais at login
     if below.pos != tuple(outside):          # a monster stood there: logged in beside it - step over once it moves
         below.wait_for(lambda: below.walk_to(tuple(outside), max_steps=3), timeout=15)
     assert below.pos == tuple(outside), f"level {level - 1} did not start at {outside}: {below.pos}"
@@ -234,7 +235,8 @@ def assert_level_door(new_player, items, door, outside, level, *, vocation=4, ga
     assert below.pos == tuple(outside), f"level {level - 1} got through {door}: {below.pos}"
     below.logout()
 
-    worthy = new_player(pos=outside, level=level, vocation=vocation, group_id=TESTER_GROUP, storage={30001: 1})
+    worthy = new_player(pos=outside, level=level, vocation=vocation, group_id=TESTER_GROUP, storage={30001: 1},
+                        premium_days=30)
     use_map_item(worthy, items, door, gate)
     assert worthy.wait_for(lambda: worthy.pos == tuple(door), timeout=3), \
         f"level {level} did not pass {door}: at {worthy.pos}, {worthy.text_messages[-2:]}"

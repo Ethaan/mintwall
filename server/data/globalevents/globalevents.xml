@@ -16,4 +16,6 @@
 	-->
 	<!-- checks every 10 s, saves every SaveInterval seconds (config.lua) -->
 	<globalevent name="save" interval="10000" script="save.lua"/>
+	<!-- the daily server save at config.lua ServerSaveHour: warnings, kick, save, rent, restart -->
+	<globalevent name="serversave" interval="1000" script="serversave.lua"/>
 </globalevents>

@@ -36,6 +36,7 @@ def _beside(world_map, target):
 
 def _player_beside(new_player, world_map, target, **kwargs):
     start = _beside(world_map, target)
+    kwargs.setdefault("premium_days", 30)      # a free character in Edron, Darashia... is sent to Thais at login
     p = new_player(pos=start, level=20, group_id=TESTER_GROUP, storage={30001: 1}, **kwargs)
     assert p.pos == start, f"logged in at {p.pos}, not at {start} (next to {target})"
     return p

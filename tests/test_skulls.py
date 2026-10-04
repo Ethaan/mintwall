@@ -8,12 +8,21 @@
 - "Player killers may not log out or enter protection zones for a full 15 minutes!" (WhiteSkullTime = 15).
 
 The red skull (3 a day / 5 a week / 10 a month, 30 days) is in test_death.py, Rookgaard's no-PvP rule in
-test_rookgaard.py (test_rookgaard_is_non_pvp)."""
+test_rookgaard.py (test_rookgaard_is_non_pvp).
+
+The automatic banishment at 6 unjustified kills a day (10 a week, 20 a month) lasts 7 days the first time, 30 days the
+second and 30 more each time after (60, 90, ...), like Tibiantis (decided 2026-10-04; Player::addUnjustifiedDead)."""
+import sqlite3
 import time
+
+import pytest
 
 from tibia74 import Item, NORTH, RIGHT, SOUTH
 
 WHITE_SKULL, NO_SKULL = 3, 0
+BANISHMENT = 3                     # bans.type (server/src/ban.h BANTYPE_BANISHMENT)
+AUTOMATIC = "Automatic Banishment."
+DAY = 86400
 KNIGHT = 4
 PZ_REFUSED = "can not enter a protection zone"
 
@@ -100,3 +109,58 @@ def test_pz_block_lasts_60_s_after_an_attack_and_15_min_after_a_kill(new_player)
     assert time.time() - killer_attacked_at > 60
     assert _me(killer).skull == WHITE_SKULL, "the killer's white skull ended with the 60 s logout block, not 15 min"
     assert _refused_pz(killer, INTO_CARLIN), "the killer may enter a protection zone before the 15 minutes are over"
+
+
+def _ban_rows(db, account):
+    con = sqlite3.connect(db.path, timeout=10)
+    try:
+        return con.execute('SELECT expires, added, comment FROM bans WHERE type = ? AND value = ? ORDER BY id',
+                           (BANISHMENT, account)).fetchall()
+    finally:
+        con.close()
+
+
+def _seed(db, guid, account, kills_today, earlier_bans):
+    """Unjustified kills already made today (player_kills, IOPlayer::addUnjustifiedKill) and earlier, expired
+    automatic banishments of the account."""
+    now = int(time.time())
+    con = sqlite3.connect(db.path, timeout=10)
+    try:
+        con.execute('CREATE TABLE IF NOT EXISTS player_kills (player_id INTEGER NOT NULL, time INTEGER NOT NULL)')
+        for n in range(kills_today):
+            con.execute('INSERT INTO player_kills (player_id, time) VALUES (?, ?)', (guid, now - 3600 + n))
+        for n in range(earlier_bans):
+            added = now - (400 - 100 * n) * DAY
+            con.execute('INSERT INTO bans (type, value, active, expires, added, admin_id, reason, comment)'
+                        ' VALUES (?, ?, 1, ?, ?, 0, ?, ?)',
+                        (BANISHMENT, account, added + 7 * DAY, added, "Unjustified player killing.", AUTOMATIC))
+        con.commit()
+    finally:
+        con.close()
+
+
+@pytest.mark.parametrize("earlier_bans, days", [(0, 7), (1, 30), (2, 60)])
+def test_sixth_unjustified_kill_in_a_day_bans_7_days_then_30_then_60(new_player, db, earlier_bans, days):
+    """The 6th unjustified kill of the day bans the account: 7 days the first time, 30 the second, 60 the third.
+    5 kills are seeded in the database, the 6th is a real one."""
+    killer = new_player(pos=CARLIN_DOOR, level=100, vocation=KNIGHT, inventory={RIGHT: Item(2400)},   # magic sword
+                        skills={2: 100}, storage={30001: 1})
+    if killer.pos != CARLIN_DOOR:            # the door tile was taken at login: pushed aside, maybe into the temple
+        killer.wait_for(lambda: killer.walk_to(CARLIN_DOOR, max_steps=3), timeout=15)
+    assert killer.pos == CARLIN_DOOR, f"the killer is at {killer.pos}, not at the door {CARLIN_DOOR}"
+    account = killer.character.account
+    _seed(db, killer.character.guid, account, kills_today=5, earlier_bans=earlier_bans)
+    victim = _victim(new_player, (CARLIN_DOOR[0] + 1, CARLIN_DOOR[1] + 1, 7), level=8)
+    killer.set_fight_modes(fight=1, chase=0, safe=0)
+    killer.attack(victim.player_id)
+    assert killer.wait_for(lambda: victim.player_id in killer.removed_creatures or not victim.connected, timeout=30),         f"the victim did not die: {killer.text_messages[-3:]}"
+    assert killer.wait_for(lambda: not killer.connected, timeout=10), "the banished killer was not kicked"
+
+    deadline = time.time() + 10
+    while len(_ban_rows(db, account)) <= earlier_bans and time.time() < deadline:
+        time.sleep(0.5)
+    rows = _ban_rows(db, account)
+    assert len(rows) == earlier_bans + 1, f"banishments of the account: {rows}"
+    expires, added, comment = rows[-1]
+    assert comment == AUTOMATIC
+    assert abs((expires - added) - days * DAY) <= 5, f"banished for {(expires - added) / DAY:.2f} days, not {days}"

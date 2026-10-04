@@ -655,6 +655,7 @@ protected:
 	static int luaIsPzLocked(lua_State *L);
 	static int luaDoSaveServer(lua_State *L);
 	static int luaDoSetGameState(lua_State *L);
+	static int luaDoSetExitCode(lua_State *L);
 	static int luaDoReloadInfo(lua_State *L);
 	static int luaDoRefreshMap(lua_State *L);
 	//

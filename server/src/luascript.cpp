@@ -1967,6 +1967,9 @@ void LuaScriptInterface::registerFunctions()
 	//doSetGameState(gameState)
 	lua_register(m_luaState, "doSetGameState", LuaScriptInterface::luaDoSetGameState);
 
+	//doSetExitCode(code)
+	lua_register(m_luaState, "doSetExitCode", LuaScriptInterface::luaDoSetExitCode);
+
 	//doReloadInfo(info)
 	lua_register(m_luaState, "doReloadInfo", LuaScriptInterface::luaDoReloadInfo);
 
@@ -7716,6 +7719,15 @@ int LuaScriptInterface::luaDoSetGameState(lua_State *L)
 		g_game.setGameState((GameState_t)gameState);
 		lua_pushboolean(L, true);
 	}
+	return 1;
+}
+
+int LuaScriptInterface::luaDoSetExitCode(lua_State *L)
+{
+	//doSetExitCode(code): what the process returns once it shuts down (the daily server save sets it, then
+	//doSetGameState(GAME_STATE_SHUTDOWN))
+	g_game.setExitCode((int32_t)popNumber(L));
+	lua_pushboolean(L, true);
 	return 1;
 }
 

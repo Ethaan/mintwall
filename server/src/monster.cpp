@@ -174,6 +174,11 @@ void Monster::onCreatureMove(const Creature* creature, const Tile* newTile, cons
 			isMasterInRange = canSee(getMaster()->getPosition());
 		}
 
+		if(spawn){
+			//overspawn: far from its spot or on another floor, it frees its slot
+			spawn->onMonsterMove(this, newPos);
+		}
+
 		updateTargetList();
 		activate();
 

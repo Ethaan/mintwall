@@ -7,7 +7,7 @@ from quests.common import *  # noqa: F401,F403
 # the ship's forcefield takes you on to Darashia (decided with the user; our map sent you back to Venore). Nothing sent
 # players to the ship, the coffin had no quest id.
 ARRIVAL, COFFIN, EXIT = (33319, 32172, 6), (33327, 32180, 8), (33328, 32181, 6)
-DARASHIA_DOCK = (33290, 32481, 7)
+DARASHIA_DOCK = (33290, 32480, 7)   # where the boats land (npc/lib/captain.lua); 33290,32481 has a wooden pillar
 
 
 def test_ghost_ship_plate_armor(new_player, items, world_map):

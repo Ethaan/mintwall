@@ -33,14 +33,14 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       until changed (Tibiantis)? moved to the Thais temple or the nearest free town? house items to the depot of
       the house's town or Thais? (recommended: Tibiantis' rules - outfit kept until changed, moved to the Thais
       temple, house items to the house town's depot)
-- [ ] Q5 Daily server save (see "Daily server save"): the hour, warnings before it, kick + restart, what resets.
+- [x] Q5 Daily server save (see "Daily server save"): the hour, warnings before it, kick + restart, what resets. - answered 2026-10-04: daily save like Tibiantis but at another hour (hour still to pick - configurable); warnings, kick, save, release houses, restart
       (recommended: 9:00 CET like Tibiantis... or a quiet hour for your players; broadcast at 5/3/1 minutes; kick +
       restart; nothing else resets until "refresh" squares are chosen)
 - [ ] Q6 Shop runes from NPCs (Shiriel, Fenech sold runes in the 2006 wiki - possibly 7.6): add rune sales or not?
       (recommended: not yet - no pre-7.6 source)
 - [ ] Q7 The 30 monsters with no 7.4 combat data (tomb bosses, traps, assassin, bandit, dark monk, smuggler,
       chicken, yeti): keep their current values? (recommended: keep - no 7.4 source; the pharaohs were reviewed)
-- [ ] Q8 Respawn (docs/reference-74/spawns.md): every spot is 60 s; with the engine's 60 s check a kill is back in
+- [x] Q8 Respawn (docs/reference-74/spawns.md): every spot is 60 s; with the engine's 60 s check a kill is back in - answered 2026-10-04: (c) Cip data per spot + randomisation + players-online scaling + a timer per slot + multi-floor blocking
       60-120 s, 5-10x faster than 7.x (Cip data: 600 s for 78% of spots, rare spots 1,800-20,000 s). (a) keep 60 s,
       (b) Nostalrius' value per spot, (c) (b) + Cip's randomisation, players-online scaling and a timer per slot,
       (d) one value. Also: block respawn from other floors (one-line Spawn::findPlayer change), Cip values for the 77
@@ -50,13 +50,40 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       creature on the spot, the user too); players step off first. 7.4 let a creature or a field block a rope spot
       (tibiantis notes, poison bomb). Keep, or let the user through when alone on it? (recommended: keep, unless you
       remember 7.4 allowing it)
-- [ ] Q10 Automatic ban length (6/10/20 unjustified kills a day/week/month): ours BanLength 1 day. The 7.4 manual only
+- [x] Q10 Automatic ban length (6/10/20 unjustified kills a day/week/month): ours BanLength 1 day. The 7.4 manual only - answered 2026-10-04: like Tibiantis: 7 days, then 30, then +30 each time - Done 2026-10-04: player.cpp addUnjustifiedDead + ban.cpp (counts earlier automatic bans; isBanished now sees a running ban behind an expired one) - NEEDS REBUILD; test_skulls.py::test_sixth_unjustified_kill_in_a_day_bans_7_days_then_30_then_60
       says "banished automatically"; Tibiantis: 7 days the first time, 30 the second, +30 each after. (recommended:
       Tibiantis - the only source with numbers; needs a small change to count earlier bans)
-- [ ] Q11 Thrown weapons: (a) spear attack - 7.4-era wiki (revs 6760/19275, May-June 2005) says 30, 25 from Nov 2005
+- [x] Q11 Thrown weapons: (a) spear attack - 7.4-era wiki (revs 6760/19275, May-June 2005) says 30, 25 from Nov 2005 - answered 2026-10-04: spear attack stays 25; throwing star/knife/small stone range 6 (done, items.xml)
       (rev 23930, no update note); ours 25; knife 30->25 and stone 20->10 same pattern. (b) throwing star / knife / small
       stone range: ours 5; rev 131557 says all hand-thrown weapons were 6 before 8.1 (later revisions name only spears).
       (recommended: (a) keep 25 - no second 7.4 source; (b) 6 for all, consistent with the one source)
+- [ ] Q12 Fished-out water comes back after 120 s here; TibiaWiki Training rev 158855 (May 2008, post-7.4) says about
+      30 minutes; no 7.4 source. (recommended: keep 120 s until a 7.4 source turns up)
+- [x] Q13 Item weights that changed in the 2005-06 wiki (7.4 = Dec 2004): tower shield ours 82 (2005-06: 88, Tibiantis - answered 2026-10-04: 2005-06 wiki: tower shield 88, black shield 41.5 (done), the rest kept
+      88), black shield 42 (2005-06: 41.5, Tibiantis 41.5), golden legs 54 (2005-06: 54, Tibiantis 56), pharaoh sword 190
+      (2005-06: 190, Tibiantis 150), dragon scale helmet 60 (Tibiantis 32.5, later only), ornamented shield 67 (wiki
+      always 67, Tibiantis 72), golden mace 50 (no page before 2009, today 41). Take the 2005-06 values or Tibiantis?
+      (recommended: 2005-06 wiki - closest to 7.4 - i.e. tower 88, black 41.5, the rest as they are)
+- [ ] Q14 Capacity edge cases: (a) an item weighing exactly the free cap is refused (hasCapacity uses <); allow it
+      (<=, rebuild)? (b) an NPC sale over the cap drops the item on the floor with no message; 7.4? (recommended: (a)
+      allow; (b) refuse with "You do not have enough capacity." - no 7.4 source for either, ask what you remember)
+- [x] Q15 Deathslicer (5 on floor 13): ours 320 exp, 2000 hp, attackable. Current TibiaWiki: exp 0, hp 8200, immune to - answered 2026-10-04: a trap: not attackable, immune to everything, 0 exp (done, deathslicer.xml)
+      all damage (a trap, in since 7.4); no 7.4-era number. Make it a trap like the throwers - not attackable, 0 exp?
+      (recommended: yes)
+- [ ] Q16 GM ban command: talkactions/scripts/banmanager.lua (TFS-style, unregistered) calls 6 functions our engine
+      lacks. The engine has player-name and IP bans for Lua (addBan, addIPBan...), account bans only checked; /b is
+      commented out in commands.cpp. Delete banmanager.lua and ban via the engine's player/IP bans (or restore /b), or
+      wire it up (new C++ for account bans)? (recommended: delete it; restore /b if GMs need a command)
+- [x] Q17 Houses (7.4: website auction only, 7 days, bid + first month's rent from the house town's depot; one house per - answered 2026-10-04: stand-in /buyhouse: a request handed over at the next server save, one house per account, checks premium + the rent in the depot + the house free; Tibiantis rents; full end-to-end tests incl. house spells and a mass kick. The website can take this over later (the user: "if it make sense to do this on the website only thats okay") - in progress
+      account; rent monthly from that depot; tibia.com manual 2004-06). Ours: /buyhouse (premium, 100 gp per tile) and
+      /sellhouse - not 7.4. (a) keep /buyhouse as a stand-in until a website, but one house per account, guildhalls for
+      guild leaders, charging the first month's rent? keep /sellhouse? (b) rents: 416 houses have rent 0, the rest look
+      made up - take Tibiantis' house list (tibiantis.online/?page=houses) or a per-tile rent? (c) "alana sio" with no
+      name: kick yourself (later servers) or nothing (ours)? (recommended: (a) yes / keep; (b) Tibiantis; (c) yourself)
+- [x] Q18 Server save hour (Q5): which hour (server time)? and the warnings at 5/3/1 minutes ok? - answered 2026-10-04: early morning - ServerSaveHour = 6 (config.lua)
+- [ ] Q19 Bans: (a) with enough GM warnings (WarningsToFinalBan) the "final" ban (FinalBanLength 7 days) or deletion
+      applies instead, and can be shorter than a repeat automatic ban (30/60...) - keep? (b) GM bans do not count toward
+      the automatic ban length - intended? (recommended: (a) make the final ban at least the automatic length; (b) yes)
 
 ## New player journey (tests/test_rookgaard.py)
 
@@ -275,7 +302,7 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       vocation stays promoted, back with premium (current TibiaWiki; the 2005 page only says buying needs premium).
       test_death.py::test_promotion_only_works_with_premium, test_promotion_is_suspended_without_premium_and_back_with_it
       (master sorcerer). Premium is checked at login only - by design, as real Tibia (context.md "Gotchas")
-- [ ] Premium runs out -> free (today: only the promotion is suspended; nothing else happens). What the user wants
+- [x] Premium runs out -> free (today: only the promotion is suspended; nothing else happens). What the user wants
       (2026-09-24), to check against sources before building:
       - at the next login a character standing in a premium area goes to the Thais temple (and Thais becomes its
         home town?)
@@ -287,7 +314,17 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       be used until it is changed." Open questions: outfit (noob at once vs kept until changed, as Tibiantis)?
       moved where exactly (Thais temple, or the nearest free town)? house items: to the depot of the house's town
       or always Thais (7.4 rule)? which areas count as premium (map premium tiles / towns)? Tests for each rule
-- [ ] Daily server save. Today only the 10-minute background save exists (nobody kicked) - so premium never ends
+      Done 2026-10-03 (decided with the user: Tibiantis rules). At login, a character without premium
+      (creaturescripts/scripts/login.lua premiumExpired): [2026-10-04: the house is now lost at the next server save,
+      serversave.lua, as Tibiantis - not at login]; a citizen of Edron/Darashia/Ankrahmun becomes a Thais citizen; standing in a premium area -> Thais temple
+      (Rookgaard premium side -> Rookgaard temple). Premium areas: flood-filled from the map (ships, carpets and King's
+      Bridge are premium-only), tools/premium-areas.py -> creaturescripts/lib/premium_areas.lua (4 mainland boxes, 56
+      Rookgaard). Outfit: the worn premium outfit stays (new colours ok) until changed - protocolgame.cpp parseSetOutfit
+      (was: a refused outfit became look type 0 = invisible) - NEEDS REBUILD. tests/test_premium_expiry.py (16; 3 outfit
+      tests wait on the rebuild). test_temples/test_map_mechanics testers now premium.
+      Open: houses of players who never log in again are never released (needs the daily server save, Q5); Femor Hills
+      and the Paradox Tower count as free (walkable from Kazordoon on our map).
+- [x] Daily server save. Today only the 10-minute background save exists (nobody kicked) - so premium never ends
       for someone who never logs out (idle kick aside), and "respawns at server save" never happens.
       Tibiantis (7.4 server, FAQ): every day 9:00 CET, ~10 minutes offline, no login in the last 5 minutes before;
       never reset the world. Its trivia: only map squares with the "refresh" flag are reset (daily respawns); other
@@ -301,6 +338,16 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       Safety: scheduled by the server itself (config: hour), NOT a GM command (too risky, per the user); if a
       manual trigger is ever needed, console / admin-only with a confirmation. Tests: kicked at the hour, refresh
       tiles reset, other tiles untouched, expired premium applied, no login in the last minutes
+      Done 2026-10-04 (decided with the user: like Tibiantis, hour to pick - Q18): globalevents/scripts/serversave.lua,
+      config ServerSaveEnabled / ServerSaveHour (local time; 9 for now). Warnings at 5/3/1 min ("Server is saving game in
+      5 minutes. Please come back in 10 minutes." - TibiaWiki Server Save), logins closed for the last 5 min (Tibiantis),
+      then kick all, release houses of owners without premium (DB, so also owners who never log in), save with rent
+      (payHouses), shut down with exit code 10 (game.cpp/otserv.cpp/luascript doSetExitCode - NEEDS REBUILD). A restart,
+      not a reopen: quest states (Annihilator lever, Draconia keys, Paradox ladders...) reset on map load. No "refresh"
+      reset: the map has no refresh tiles. Test servers run with ServerSaveEnabled = false. tests/test_server_save.py (8;
+      the exit code waits on the rebuild).
+  - [ ] Restart supervisor (NSSM / systemd, restart on exit) - without it the server stays down after the save; until
+        then ServerSaveEnabled = false on an unwatched machine (production-plan §3)
 - [x] Quest objects audit (tools/quest-audit.py, 2026-09-24): of tibiaot74's 166 quest objects our map has 8 scripted,
       62 standing there without a quest id (e.g. the 4 Annihilator chests 33227-33233,31656,13), 96 missing (the
       Battle Axe skeleton and the Dead Archer body were two of them). Our map (= the JS engine's) lost many quest
@@ -921,9 +968,17 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
   - [x] dalbrect.lua: the "blood stains" check never blocks (hasCondition(...) ~= 1: the engine returns
         true/false); talk_state is a global shared by every player talking to him
         Done 2026-09-25 with the White Raven Monastery Quest part 1 (see there); Captain Jack had the same two bugs
-  - [ ] Widen tests/test_spells.py's script scan: also `== 1` / `~= 1` / `== 0` on functions that return
+  - [x] Widen tests/test_spells.py's script scan: also `== 1` / `~= 1` / `== 0` on functions that return
         true/false (the same bug class as isInArray(...) == TRUE)
-- [ ] Houses: confirm `Tibia74-houses.xml` loads, rent, doors, ownership commands
+        Done 2026-10-03: luascan.boolean_functions (143) + test_no_script_compares_a_boolean_function_with_1_or_0 - none found
+- [x] Houses: confirm `Tibia74-houses.xml` loads, rent, doors, ownership commands
+      Done 2026-10-04: 816 houses in file and map, no warnings; doors, aleta sio/som/grav, alana sio, items kept over
+      relog and restart - tests/test_houses.py (15). Fixed (NEEDS REBUILD): game.cpp internalTeleport checked the source
+      tile for the house rule (a removed guest stayed inside); house.cpp kickPlayer let a guest kick other guests.
+      Rent is never charged (payHouses only on /closeserver serversave) - with the daily save (Q5). Open: Q17.
+  - [x] 92 houses share a door number between two doors (aleta grav on the second edits the first) - renumber (map tool)
+        Done 2026-10-04: tools/renumber-house-doors.py - 352 doors in 92 houses renumbered (backup in the scratchpad);
+        test_houses.py::test_no_house_has_two_doors_with_one_door_number
 - [x] Temples: log in to each of the 47 towns' temple positions, confirm walkable
       Done 2026-10-03: test_temples.py - all 47 temples (towns read from the map): a character logs in right on
       the temple and steps off and back; a town_id character at 0,0,0 starts there; the 8 mainland temples are
@@ -944,14 +999,21 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       (tools/map-remove-item.py)
 - [x] Removed the teleport next to the Thais temple (32366,32235,7) that sent players to the
       Rookgaard temple; a full-map scan found no other mainland teleport into Rookgaard. test_travel.py
-- [ ] Audit every teleport on the map against 7.4 (two wrong ones so far, both to/from Rookgaard)
+- [x] Audit every teleport on the map against 7.4 (two wrong ones so far, both to/from Rookgaard)
+      Done 2026-10-04: tools/teleport-audit.py, tests/test_teleports.py. 165 forcefields; none crosses Rookgaard/mainland,
+      lands in rock, on a teleport or a hole; 21 lead into closed areas, each checked (pharaoh portals, Paradox switches,
+      Senja boat...). Fixed: Morguthis floor-14 forcefield 33238,32644,14 sent players into rock (original map too) - now
+      the altar room 33161,32652,14 (tibiaot74 sends it to the level-75 doors instead: a second way in, not taken).
+  - [x] Darashia boat landing 33290,32481,7 (all captains + the Ghost Ship forcefield) is a wooden pillar - move it to a
+        free deck tile (e.g. 33290,32480,7) and drop test_teleports.py's exception
+        Done 2026-10-04: captain.lua HARBOURS Darashia and the Ghost Ship forcefield -> 33290,32480,7; exception dropped
 - [x] King's Bridge (Rookgaard, 32057,32192-32193,7): action id 50003 = premium-only ground, nothing
       handled it; movements/scripts/premium_tile.lua sends free accounts back. test_rookgaard.py
 - [x] Locked doors without a key (action id 0) opened for anyone (door_locked.lua: "impossible to
       happen") - e.g. 32042,32205,6, the way onto Rookgaard's premium side around King's Bridge. Now
       only house doors open that way (the engine checks house access first). Item 1210 (the unlocked
       closed door) was described as "It is locked." test_rookgaard.py
-- [ ] House doors: test that owners/invited players can open them and others cannot (Houses task)
+- [x] House doors: test that owners/invited players can open them and others cannot (Houses task) - Done 2026-10-04: test_houses.py
 - [x] Rookgaard sewer bridge levers (action id 50001, 32098/32104,32204,8): ported upstream's
       rat bridge as `rook_rat_bridge.lua`; covered by test_rookgaard.py
 - [x] Other map action ids with no script behind them (50001 had none) - list and port them
@@ -1030,6 +1092,14 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       7.7) almost 1:1, but every spawntime is the map editor's 60 s (7.x: 600 s for most spots, randomised and scaled by
       players online; Black Knight about 12 min per the 2006 wiki). Fixed: the 8 tomb pharaohs 60 -> 600 s, the Black
       Knight 60 -> 720 s. Open: Q8 in the questions at the top (global respawn speed, multi-floor blocking, rare spots, overspawn, timers).
+      Done 2026-10-04 (Q8, decided with the user: (c)): tools/apply-cip-spawntimes.py gives each entry its Nostalrius twin's
+      time (18,636 twins + 9 decided; 21 without a twin -> 600 s; data in docs/reference-74/nostalrius-spawns.csv).
+      spawn.cpp/h + monster.cpp (NEEDS REBUILD): a timer per slot from the monster's death, t/2..t random above 500 s and
+      shortened only above 200 players (Nostalrius getInterval), a player in view blocks it (underground +-2 floors, on the
+      surface its floor and all above), overspawn beyond 10 squares or a floor change. RateSpawn now divides the delays
+      (1 live; the test server uses 20). tests/test_spawns.py (6 data tests pass; 2 live tests wait on the rebuild).
+  - [ ] Live tests for overspawn (10 squares / floor change) and the players-online scaling; after the rebuild check the
+        hunting and quest tests still behave with RateSpawn 20
 
 ## Game rules and formulas
 
@@ -1044,7 +1114,12 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [x] Experience per level: confirm `(50*(L-1)^3 - 150*(L-1)^2 + 400*(L-1)) / 3` (Player::getExpForLevel)
       2026-10-02: the same as Tibiantis' experience table (tibiantis.online ?page=exptable: 8 = 4,200, 50 = 1,847,300)
 - [x] Experience rate: keep 1x, pick a multiplier, or enable stages (7.4 had no stages) - Done 2026-10-03: decided with the user - stays 1x, no stages (RateExp 1)
-- [ ] Monster experience: exp from each monster matches 7.4, including exp split when several players attack
+- [x] Monster experience: exp from each monster matches 7.4, including exp split when several players attack
+      Done 2026-10-03: all 91 Tibiantis monsters match; fixed Ashmunrah 5000 -> 3100 and Mahrdis 2800 -> 3050 (every
+      wiki revision from May-June 2005). Split by damage share, no shared party exp (came in 8.10); trap damage does not
+      count; a summon's share is halved for its master; players give no exp (WorldType pvp, 7.4 only on PvP-enforced).
+      creature.cpp getGainedExperience: integer maths (lost 1 exp on exact shares) - NEEDS REBUILD.
+      tests/test_monster_experience.py (static per monster + solo kills + a two-player split). Open: Q15.
 - [x] Level-up gains per vocation: HP / mana / capacity (data/vocations.xml: none 5/5/5, knight 15/5/25...)
       2026-10-02, tibiantis-notes "Classes": knight 15/5/25, paladin 10/15/20, mage 5/30/10 and their base hp/mana
       as ours; capacity is 470 at level 8 for all - Rookgaard (no vocation) gives 10 cap a level, not 5 (fixed).
@@ -1068,8 +1143,15 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
       2026-10-03 test_training.py: a knight one try short of sword 100 (241,501 tries) and of 104 (353,582) levels
       on the next hit
       2026-10-02: the multipliers are tibiantis-notes' "Skills" table (test_vocations.py); the formula not checked
-- [ ] Which actions train which skill: melee hits, shield blocks, distance, fishing; RateSkill applies
-- [ ] Fist fighting when no weapon; skills start at 10
+- [x] Which actions train which skill: melee hits, shield blocks, distance, fishing; RateSkill applies
+      Done 2026-10-03 (TibiaWiki Training revs 28743/158855, Shielding rev 88636, tibiantis-notes training.txt):
+      one try per swing/shot while you drew blood within the last 30 tries (attacks made and attacks the shield faces
+      share the 30), a bleeding distance shot counts 2, a miss 1; shielding trains on every attack the shield faces
+      (2 a turn, blood or not; not PvP ranged, not weapon blocks); fishing: every cast on water with fish, no worms
+      (worms came in 7.5, Updates/7.5). RateSkill/RateMag 1. C++ (creature.cpp blockHit, player.cpp/h onBlockHit,
+      onAttackMissed, getDefense; weapons.cpp miss branch) - NEEDS REBUILD; 5 tests in test_training.py wait on it.
+      Open: Q12 (fished-out water).
+- [x] Fist fighting when no weapon; skills start at 10 - Done 2026-10-03: fist atk 7, def 5 with no weapon and no shield (training.txt; def needs the rebuild); new characters have every skill 10, ML 0 - test_training.py
 
 ### Combat formulas
 - [x] Melee damage: attack, skill, level, fight mode (offensive/balanced/defensive)
@@ -1095,7 +1177,16 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
       1200 s (tibiantis-notes) - not checked yet
 - [x] Soul points: did 7.4 have them? (soul came in 7.5 - probably disable)
       2026-10-03: no (TibiaWiki 7.5 update); ours: soul is compiled only under __PROTOCOL_76__, off (formulas.md §7)
-- [ ] Capacity: item weights and cap limit
+- [x] Capacity: item weights and cap limit
+      Done 2026-10-03: cap = 470 + (level-8) x gain (knight 25, paladin 20, mage 10), Rookgaard 400 + (level-1) x 10
+      (TibiaWiki Formula oldid 128170, tibiantis-notes Classes) - the engine was right; the test helper db.py was not
+      (now capacity()). "This object is too heavy." on pick-up; trades "You do not have enough capacity to carry this
+      object. It weighs X oz.". 16 weights fixed in items.xml where Tibiantis and every pre-8.0 wiki revision agree
+      (tools/compare-item-weights.py: 0 open). tests/test_capacity.py (18). Open: Q13, Q14.
+  - [ ] tests/tibia74/db.py creates characters with HP/mana 150 + gain x (level-1), not 7.4 (knight 15L+65...) - many
+        combat tests depend on it; fix with care
+  - [ ] Quest chests say "You have found X, but you cannot carry it." (quests/system.lua); use the Postman chest's
+        7.4-style "It weighs X oz. It is too heavy." everywhere
 
 ### Death and PvP
 - [ ] Revisit the death rules (not a bug - make sure every 7.4 rule is applied), research first like
@@ -1205,10 +1296,15 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 - [ ] Undefined functions still called (KNOWN_UNDEFINED in tests/test_spells.py):
   - [x] getPlayerPromotionLevel - the NPC promotion module: promotion probably fails (see Promotion NPCs)
         Done 2026-09-30 (compat.lua)
-  - [ ] broadcastMessage - raid announcements, death/kill broadcast scripts
-  - [ ] GM ban manager: addAccountBan, addPlayerBan, removeAccountBan, removePlayerBan, getAccountBanList,
+  - [x] broadcastMessage - raid announcements, death/kill broadcast scripts
+        Done 2026-10-03: only in unregistered samples (die2.lua, kill.lua, raidevent.lua + testraid.xml) - deleted;
+        a raid XML's <announce> covers raids
+  - [ ] (Q16) GM ban manager: addAccountBan, addPlayerBan, removeAccountBan, removePlayerBan, getAccountBanList,
         getPlayersByAccountNumber
-  - [ ] doNpcSellItem, getPlayerPVPBlessing, getPlayerLookDir (NPC system / functions.lua leftovers)
+  - [x] doNpcSellItem, getPlayerPVPBlessing, getPlayerLookDir (NPC system / functions.lua leftovers)
+        Done 2026-10-03: trade-window callbacks removed (no trade window in 7.4), the 8.x PvP-blessing branch removed,
+        dead modules1.lua deleted, getPlayerLookPos uses getCreatureLookDir; global.lua no longer overrides the engine's
+        getPlayerByAccountNumber
   - [x] marriage + banks (not 7.4): remove with the "non-7.4 NPC features" task
         Done 2026-10-01
 

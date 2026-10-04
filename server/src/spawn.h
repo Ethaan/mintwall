@@ -67,8 +67,9 @@ struct spawnBlock_t{
 	MonsterType* mType;
 	Direction direction;
 	Position pos;
-	uint32_t interval;
+	uint32_t interval;      // the spot's spawntime (ms) from the spawn file
 	int64_t lastSpawn;
+	int64_t nextSpawn;      // when the empty slot respawns (0: not counting - the slot is filled)
 };
 
 class Spawn{
@@ -79,13 +80,15 @@ public:
 	bool addMonster(const std::string& _name, const Position& _pos, Direction _dir, uint32_t _interval);
 	void removeMonster(Monster* monster);
 
-	uint32_t getInterval() {return interval;}
 	void startup();
 
 	void startSpawnCheck();
 	void stopEvent();
 
 	bool isInSpawnZone(const Position& pos);
+	void onMonsterMove(Monster* monster, const Position& newPos);
+
+	static uint32_t getRespawnDelay(uint32_t interval);
 
 private:
 	Position centerPos;
@@ -102,11 +105,13 @@ private:
 	typedef SpawnedMap::value_type spawned_pair;
 	SpawnedMap spawnedMap;
 
-	uint32_t interval;
 	uint32_t checkSpawnEvent;
+	int64_t checkSpawnTime;
 
 	bool findPlayer(const Position& pos);
 	bool spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& pos, Direction dir, bool startup = false);
+	void startRespawnTimer(spawnBlock_t& sb, int64_t now);
+	void scheduleCheck(int64_t when);
 	void checkSpawn();
 };
 

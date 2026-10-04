@@ -80,6 +80,7 @@ extern GlobalEvents* g_globalEvents;
 Game::Game()
 {
 	gameState = GAME_STATE_NORMAL;
+	exitCode = 0;
 	map = NULL;
 	worldType = WORLD_TYPE_PVP;
 
@@ -1943,8 +1944,10 @@ ReturnValue Game::internalTeleport(Thing* thing, const Position& newPos, uint32_
 		if(Creature* creature = thing->getCreature()){
 			// checks if player is being teleported to a house: if yes and if he doesn't have
 			// the necessary flag and is not the owner of the house returns error
+			// (it checked the tile the player stood on: a player put out of a house he was no longer
+			// invited to - House::setAccessList, alana sio - was refused and stayed inside)
 			if(Player* player = creature->getPlayer()){
-				HouseTile* houseTile = player->getTile()->getHouseTile();
+				HouseTile* houseTile = toTile->getHouseTile();
 				if(houseTile){
 					House* house = houseTile->getHouse();
 					if(house && !house->isInvited(player)){

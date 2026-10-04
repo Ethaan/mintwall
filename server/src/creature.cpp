@@ -899,8 +899,10 @@ BlockType_t Creature::blockHit(Creature* attacker, CombatType_t combatType, int3
 		blockType = BLOCK_IMMUNITY;
 	}
 	else if(checkDefense || checkArmor){
+		// 7.4: the shield faces two attacks a turn; attacks it does not face (player ranged attacks, spells) neither
+		// use them up nor train shielding (tibiantis-notes Melee_and_Distance.txt, training.txt)
 		bool hasDefense = false;
-		if(blockCount > 0){
+		if(checkDefense && blockCount > 0){
 			--blockCount;
 			hasDefense = true;
 		}

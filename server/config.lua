@@ -7,7 +7,7 @@
     NotationsToBan = 3
     WarningsToFinalBan = 4
     WarningsToDeletion = 5
-    BanLength = 1 * 24 * 60 * 60
+    BanLength = 1 * 24 * 60 * 60   -- bans by a gamemaster; the automatic ban for unjustified kills is 7 / 30 / 60 / 90... days (Player::addUnjustifiedDead)
     FinalBanLength = 7 * 24 * 60 * 60
     IPBanishmentLength = 24 * 60 * 60
     KillsToBan = 7   -- no longer used: 7.4 rules in Player::addUnjustifiedDead (ban at 6 a day / 10 a week / 20 a month)
@@ -171,6 +171,8 @@
     RateSkill = 1
     RateMag = 1
     RateLoot = 1
+    -- Respawn speed: each spawn spot's time (data/world/Tibia74-spawns.xml, CipSoft's) is divided by it.
+    -- 1 = 7.x respawn (src/spawn.cpp); the test server uses 20 (tests/tibia74/server.py).
     RateSpawn = 1
 
 
@@ -214,6 +216,15 @@
     -- Seconds between timed saves of players, houses and the map (data/globalevents/scripts/save.lua).
     -- Without it a crash lost everything since each player logged in.
     SaveInterval = 600
+
+    -- Daily server save (data/globalevents/scripts/serversave.lua; decided with the user 2026-10-04: like
+    -- Tibiantis, 9:00 CET with about 10 minutes offline, but at an hour of our own). At ServerSaveHour:00 (the
+    -- machine's local time) everyone is kicked, everything saved, house rents collected, houses of owners without
+    -- premium released (items to the depot of the house's town), then the server exits with code 10 so the
+    -- supervisor restarts it (docs/production-plan.md, "Restart" - without one it stays down). Warnings 5, 3 and 1
+    -- minutes before; no logins in the last 5 minutes.
+    ServerSaveEnabled = true
+    ServerSaveHour = 6          -- decided with the user 2026-10-04: early morning (5 or 6); local time of the server machine
 
     -- Max number of messages a player can say before getting muted (default 4), set to 0 to disable muting
     MaxMessageBuffer = 4

@@ -178,3 +178,23 @@ back t after its own death; RateSpawn is then only a safety cap.
       randomised and players-online scaled; Black Knight about 12 min per the 2006 wiki). Fixed: the 8 tomb
       pharaohs 60 -> 600 s, the Black Knight 60 -> 720 s. Open: Q1 global respawn speed (ours 5-10x faster), Q2 multi-floor
       respawn blocking, Q3 rare/quest-guardian spots, Q4 radius-1 overspawn, Q5 refill/timer.
+
+## Decided 2026-10-04: option (c), with Q2, Q3, Q4 (c) and Q5
+
+- **Data:** `tools/apply-cip-spawntimes.py` sets every monster's spawntime from its Nostalrius twin (same name,
+  same floor, nearest within 8 tiles; the Nostalrius entries are kept in `docs/reference-74/nostalrius-spawns.csv`,
+  `--fetch` downloads them again). 18,636 twins, 9 kept (the 8 pharaohs 600 s, the Black Knight 720 s), 21 without
+  a twin get 600 s. 60 s is left only on Cip's own 60 s spots (112, the tomb traps etc.). NPC entries are untouched.
+- **Engine** (`server/src/spawn.cpp`, rules from Nostalrius `src/spawn.cpp` and TI-trivia):
+  - one timer per slot, from its monster's death (or overspawn / convince);
+  - delay: spawntime over 500 s: shortened only above 200 players online (`200*t/(players/2+100)` up to 800, `0.4*t`
+    above), then random between t/2 and t (normal distribution, cut at both ends); 500 s or less: exactly t;
+  - a player in view when the slot is due blocks it (a new delay): same floor and +-2 floors underground; on the
+    surface its own floor and every floor above (TI-trivia; Nostalrius' multi-floor check also counts the surface
+    floors below);
+  - overspawn: a monster more than 10 squares from its spot or on another floor frees its slot (checked on every
+    step of the monster, `Monster::onCreatureMove`); the block radius no longer decides it;
+  - `RateSpawn` (config.lua) now divides every delay (1 = Cip's times). The old meaning (at most N respawns per
+    block per check tick) has no use with per-slot timers. The test server uses 20.
+- Tests: `tests/test_spawns.py` (data rules; live: a rotworm's respawn window, blocking by a player next to it and
+  one floor up).

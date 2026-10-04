@@ -14,15 +14,20 @@ SERVER_DIR = ROOT / "server"
 RUN_DIR = Path(os.environ["MINTWALL_TEST_RUN"]) if os.environ.get("MINTWALL_TEST_RUN") else ROOT / "tests" / ".run"
 TEST_PORT = int(os.environ.get("MINTWALL_TEST_PORT", "7181"))   # 7171: watch in your client (tibia74/watch.py)
 TESTER_GROUP = 2   # see prepare()
+SPAWN_RATE = 20    # RateSpawn of the test server, see prepare()
 
 
 class ServerProcess:
-    def __init__(self, port: int = TEST_PORT):
+    def __init__(self, port: int = TEST_PORT, run_dir: Path = RUN_DIR, config: dict = None, setup=None):
+        """config: extra config.lua values (appended, so they win); setup(db_path): called on the fresh database
+        before the server starts (test_server_save.py puts its houses there)."""
         self.port = port
-        self.run_dir = RUN_DIR
-        self.db_path = RUN_DIR / "test.db3"
-        self.config_path = RUN_DIR / "config.lua"
-        self.log_path = RUN_DIR / "server.log"
+        self.run_dir = Path(run_dir)
+        self.db_path = self.run_dir / "test.db3"
+        self.config_path = self.run_dir / "config.lua"
+        self.log_path = self.run_dir / "server.log"
+        self.config = config or {}
+        self.setup = setup
         self.proc = None
         self.started_at = None
         self._log_file = None
@@ -52,7 +57,17 @@ class ServerProcess:
         # every test character logs in from 127.0.0.1, many within seconds (next_to tries up to eight tiles): the
         # brute-force guard (LoginTries logins less than RetryTimeout apart disable the IP) would lock the tests out
         cfg = re.sub(r'(\bLoginTries\s*=\s*)\d+', lambda m: f'{m.group(1)}0', cfg)
+        # respawn 20x faster than CipSoft's times (src/spawn.cpp divides every spot's delay by it): 600 s spots come
+        # back after 15-30 s, close to the old 60 s test world; test_spawns.py measures with it
+        cfg = re.sub(r'(\bRateSpawn\s*=\s*)\d+', lambda m: f'{m.group(1)}{SPAWN_RATE}', cfg)
+        # the daily server save (globalevents/scripts/serversave.lua) would shut a test server down at its hour;
+        # test_server_save.py turns it on for its own server
+        cfg = re.sub(r'(\bServerSaveEnabled\s*=\s*)\w+', lambda m: f'{m.group(1)}false', cfg)
+        for key, value in self.config.items():
+            cfg += f"\n{key} = {_lua(value)}\n"
         self.config_path.write_text(cfg, encoding="latin-1")
+        if self.setup:
+            self.setup(self.db_path)
 
     # --- lifecycle ---------------------------------------------------------
     def start(self, timeout: float = 120.0):
@@ -110,6 +125,14 @@ class ServerProcess:
             if "Lua Script Error" in line:
                 errors.append("\n".join(lines[i:i + 5]))
         return errors
+
+
+def _lua(value) -> str:
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, str):
+        return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
+    return str(value)
 
 
 def _port_open(port: int) -> bool:

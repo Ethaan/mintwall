@@ -25,10 +25,10 @@ Looked at by hand 2026-10-02: "reviewed" lines are kept on purpose (REVIEWED in 
 
 - **TibiaWiki** (rev 105279, 2007-06-15): Melee, Summons 0-3 Green Djinns and 0-2 Ancient Scarabs, appears as an Ancient Scarab, Invisible, Self-Healing. - max damage 1600+
 - **ours**: melee attack None skill None, poison 55; melee poisons 55; lifedrain 100-700 (range 1), chance 7% every 3000 ms; poison 100-500 (range 7), chance 12% every 2000 ms; physical 120-750 (range 7), chance 12% every 3000 ms; speed (range 7), chance 25% every 3000 ms, speed -650 for 50000 ms; lifedrain 50-550 (length 8, spread 3), chance 18% every 2000 ms; healing 200-400, chance 20% every 1000 ms; invisible, chance 7% every 1000 ms; outfit, chance 3% every 1000 ms; summons ancient scarab (max 4); summons green djinn (max 4)
+  - (reviewed) ours has lifedrain, the 7.4 list does not
+  - (reviewed) ours has outfit, the 7.4 list does not
   - (reviewed) ours has poison, the 7.4 list does not
   - (reviewed) ours has physical, the 7.4 list does not
-  - (reviewed) ours has outfit, the 7.4 list does not
-  - (reviewed) ours has lifedrain, the 7.4 list does not
   - reviewed: tomb pharaoh: the wiki lists only melee and summons but 'max damage 1600+' - its page is incomplete
 
 ## banshee
@@ -385,9 +385,9 @@ Looked at by hand 2026-10-02: "reviewed" lines are kept on purpose (REVIEWED in 
 
 - **TibiaWiki** (rev 105282, 2007-06-15): Melee (0-1000), Sudden Death Berserk (300-500), Berserk (~400), Summons 0-3 Heroes, Invisible, Self-Healing. - max damage 1600
 - **ours**: melee attack None skill None, poison 65; melee poisons 65; lifedrain 55-550 (range 1), chance 7% every 3000 ms; speed (range 7), chance 25% every 1000 ms, speed -650 for 50000 ms; physical 40-400 (radius 3, target 0), chance 20% every 1000 ms; physical 50-500 (radius 3, target 0), chance 7% every 3000 ms; healing 200-300, chance 13% every 1000 ms; speed, chance 7% every 1000 ms, speed 1201 for 5000 ms; invisible, chance 10% every 2000 ms; summons hero (max 3)
-  - (reviewed) ours has physical, the 7.4 list does not
-  - (reviewed) ours has poison, the 7.4 list does not
   - (reviewed) ours has lifedrain, the 7.4 list does not
+  - (reviewed) ours has poison, the 7.4 list does not
+  - (reviewed) ours has physical, the 7.4 list does not
   - reviewed: tomb pharaoh: page incomplete ('Sudden Death Berserk', 'Berserk (~400)')
 
 ## mummy
@@ -408,8 +408,8 @@ Looked at by hand 2026-10-02: "reviewed" lines are kept on purpose (REVIEWED in 
 - **ours**: melee attack None skill None, poison 65; melee poisons 65; lifedrain 100-250 (range 1), chance 20% every 5000 ms; poison 200-500, chance 20% every 2000 ms; fire 120-450 (range 3), chance 20% every 1000 ms; melee attack None skill None; speed (range 7), chance 25% every 1000 ms, speed -900 for 50000 ms; healing 100-200, chance 17% every 1000 ms; invisible, chance 14% every 2000 ms; summons stalkers (max 4)
   - (reviewed) 7.4 has 'Arrows (100-500)', ours has no physical attack
   - (reviewed) 7.4 has 'Burst Arrows (100-500)', ours has no physical attack
-  - (reviewed) ours has fire, the 7.4 list does not
   - (reviewed) ours has lifedrain, the 7.4 list does not
+  - (reviewed) ours has fire, the 7.4 list does not
   - reviewed: tomb pharaoh: his arrows are our physical/fire distance attacks; page incomplete
 
 ## orc
@@ -504,9 +504,9 @@ Looked at by hand 2026-10-02: "reviewed" lines are kept on purpose (REVIEWED in 
 
 - **TibiaWiki** (rev 105284, 2007-06-15): Melee (0-750), Energy Attack (200-600), Sudden Death (0-500), Summons 0-1 Demon, Makes you Drunk, Poisons (starting with upto 3 hp per turn), Paralysis, Appears as a Demon, Turns you into a Pig, Self-Healing. - max damage 1300
 - **ours**: melee attack None skill None, poison 65; melee poisons 65; lifedrain 75-750 (range 1), chance 7% every 3000 ms; energy 60-600 (range 7), chance 20% every 2000 ms; physical 60-600 (range 7), chance 20% every 3000 ms; speed (radius 6, target 0), chance 12% every 1000 ms, speed -650 for 60000 ms; drunk (range 7), chance 8% every 1000 ms; outfit (range 7), chance 15% every 1000 ms; healing 200-500, chance 20% every 1000 ms; outfit, chance 5% every 1000 ms; summons demon (max 1)
+  - (reviewed) ours has lifedrain, the 7.4 list does not
   - (reviewed) ours has physical, the 7.4 list does not
   - (reviewed) ours has outfit, the 7.4 list does not
-  - (reviewed) ours has lifedrain, the 7.4 list does not
   - reviewed: tomb pharaoh: 'Energy Attack (200-600), Sudden Death (0-500)' are ours; page incomplete
 
 ## rat

@@ -37,14 +37,15 @@ class _Any(set):
         return True
 
 
-def _fill(world, start, avoid=frozenset(), keys=_Any()):
+def _fill(world, start, avoid=frozenset(), keys=_Any(), known=frozenset()):
+    """Every tile reachable from start; tiles in `known` (already filled) are not entered again."""
     seen, queue = {start}, collections.deque([start])
     while queue:
         p = queue.popleft()
         for _, step in route._neighbours(world, p, 1000, 0, keys, keys, True, avoid=avoid, scythe=True,
                                          shovel=True, pick=True, machete=True):
             a = step.arrive
-            if a not in seen and a not in avoid:
+            if a not in seen and a not in avoid and a not in known:
                 seen.add(a)
                 queue.append(a)
     return seen
@@ -62,12 +63,12 @@ def areas(world, server_dir: Path):
     for name in FREE_STARTS:
         if temples[name] not in free:
             # Rookgaard: the free side ends at the bridge (with every key the two sides meet behind locked doors)
-            free |= _fill(world, temples[name], bridge | frozenset(rook_premium) if name == "Rookgaard" else
-                          frozenset())
+            avoid = bridge | frozenset(rook_premium) if name == "Rookgaard" else frozenset()
+            free |= _fill(world, temples[name], avoid, known=free)
     mainland = set()
     for name in PREMIUM_STARTS["mainland"]:
         if temples[name] not in mainland:
-            mainland |= _fill(world, temples[name])
+            mainland |= _fill(world, temples[name], known=mainland | free)
     mainland -= free                     # the Ghost Ship sails on to Darashia, Mists/KingsIsle teleport out
     return free, {"mainland": mainland, "rookgaard": rook_premium - free}
 
@@ -95,7 +96,8 @@ def cover(premium, free):
                 b = [p for p in points if p[axis] > cut]
                 if not a or not b:
                     continue
-                score = sum(1 for part in (a, b) for f in frees if _inside(f, *_bbox(part)))
+                boxes = [_bbox(a), _bbox(b)]
+                score = sum(1 for box in boxes for f in frees if _inside(f, *box))
                 if best is None or score < best[0]:
                     best = (score, a, b)
         return split(best[1], frees) + split(best[2], frees)

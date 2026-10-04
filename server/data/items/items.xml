@@ -1555,7 +1555,7 @@
 		<attribute key="attack" value="5"/>
 		<attribute key="weaponType" value="distance"/>
 		<attribute key="shootType" value="smallstone"/>
-		<attribute key="range" value="5"/>
+		<attribute key="range" value="6"/>   <!-- 6 for all hand-thrown weapons before 8.1 (TibiaWiki Spear rev 131557); decided with the user 2026-10-04 -->
 	</item>
 	<item id="1295" article="a" name="stone">
 		<attribute key="weight" value="3000"/>
@@ -4606,7 +4606,7 @@
 		<attribute key="attack" value="30"/>
 		<attribute key="weaponType" value="distance"/>
 		<attribute key="shootType" value="throwingstar"/>
-		<attribute key="range" value="5"/>
+		<attribute key="range" value="6"/>   <!-- 6 for all hand-thrown weapons before 8.1 (TibiaWiki Spear rev 131557); decided with the user 2026-10-04 -->
 	</item>
 	<item id="2400" article="a" name="magic sword">
 		<attribute key="description" value="It is the Sword of Valor."/>
@@ -4678,7 +4678,7 @@
 		<attribute key="attack" value="25"/>
 		<attribute key="weaponType" value="distance"/>
 		<attribute key="shootType" value="throwingknife"/>
-		<attribute key="range" value="5"/>
+		<attribute key="range" value="6"/>   <!-- 6 for all hand-thrown weapons before 8.1 (TibiaWiki Spear rev 131557); decided with the user 2026-10-04 -->
 	</item>
 	<item id="2411" article="a" name="poison dagger">
 		<attribute key="weight" value="880"/>
@@ -5350,13 +5350,13 @@
 		<attribute key="weaponType" value="shield"/>
 	</item>
 	<item id="2528" article="a" name="tower shield">
-		<attribute key="weight" value="8200"/>
+		<attribute key="weight" value="8800"/>
 		<attribute key="defense" value="32"/>
 		<attribute key="weaponType" value="shield"/>
 	</item>
 	<item id="2529" article="a" name="black shield">
 		<attribute key="description" value="An unholy creature covers the shield."/>
-		<attribute key="weight" value="4200"/>
+		<attribute key="weight" value="4150"/>
 		<attribute key="defense" value="18"/>
 		<attribute key="weaponType" value="shield"/>
 	</item>

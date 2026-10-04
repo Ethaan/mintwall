@@ -47,6 +47,8 @@ enum BanType_t{
 	BANTYPE_DELETION = 5
 };
 
+#define AUTOMATIC_BANISHMENT_COMMENT "Automatic Banishment."
+
 struct Ban {
 	BanType_t type;
 	uint32_t id, added, expires, adminid;
@@ -84,6 +86,7 @@ public:
 	void addLoginAttempt(uint32_t clientip, bool isSuccess);
 
 	uint32_t getNotationsCount(uint32_t account);
+	uint32_t getAutomaticBanishmentsCount(uint32_t account);
 
 	std::vector<Ban> getBans(BanType_t type) const;
 protected:

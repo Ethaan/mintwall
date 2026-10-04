@@ -502,7 +502,7 @@ bool ProtocolGame::parseFirstPacket(NetworkMessage& msg)
 		return false;
 	}
 
-	// PBKDF2 costs a few hundred ms: not on this (network) thread - docs/production-plan.md §2
+	// PBKDF2 costs a few hundred ms: not on this (network) thread - docs/production-plan.md ï¿½2
 	Connection* connection = getConnection();
 	connection->addRef();
 	if(!authpool::post(boost::bind(&ProtocolGame::checkPassword, this, accnumber, name, password, acc_pass, isSetGM))){
@@ -1219,12 +1219,16 @@ void ProtocolGame::parseSetOutfit(NetworkMessage& msg)
 	else if (player->getSex() == PLAYERSEX_MALE && player->isPremium())
 		lastMaleOutfit = 0x86;
 	
-	if ((player->getSex() == PLAYERSEX_FEMALE && 
-		lookType >= PLAYER_FEMALE_1 && 
-		lookType <= lastFemaleOutfit) || 
+	// Premium ran out (Tibiantis FAQ, decided with the user 2026-10-03): "The selected premium outfit can still be
+	// used until it is changed" - the outfit worn now stays allowed (new colours, or OK without a change), any
+	// other premium one is refused. Was: a refused outfit still went through as look type 0 (invisible).
+	bool keptOutfit = (lookType == player->getDefaultOutfit().lookType);
+	if ((player->getSex() == PLAYERSEX_FEMALE &&
+		lookType >= PLAYER_FEMALE_1 &&
+		(lookType <= lastFemaleOutfit || keptOutfit)) ||
 		(player->getSex() == PLAYERSEX_MALE &&
 		lookType >= PLAYER_MALE_1 &&
-		lookType <= lastMaleOutfit))
+		(lookType <= lastMaleOutfit || keptOutfit)))
 	{
 		newOutfit.lookType = lookType;
 		newOutfit.lookHead = msg.GetByte();
@@ -1232,7 +1236,10 @@ void ProtocolGame::parseSetOutfit(NetworkMessage& msg)
 		newOutfit.lookLegs = msg.GetByte();
 		newOutfit.lookFeet = msg.GetByte();
 	}
-    
+	else{
+		return;
+	}
+
     addGameTask(&Game::playerChangeOutfit, player->getID(), newOutfit);
 }
 

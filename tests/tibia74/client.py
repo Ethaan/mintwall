@@ -96,6 +96,7 @@ class GameClient:
         self.creatures: dict[int, Creature] = {}
         self.tiles: dict[tuple, list] = {}      # pos -> stack of Item | Creature(id reference)
         self.text_messages: list[tuple] = []    # (class, text)
+        self.house_windows: list[tuple] = []    # house access lists the server opened (aleta sio/som/grav)
         self.speech: list[tuple] = []           # (name, type, text)
         self.animated_texts: list[tuple] = []   # (pos, color, text)
         self.effects: list[tuple] = []          # (pos, type)
@@ -271,6 +272,10 @@ class GameClient:
     def move_item(self, from_pos: tuple, client_id: int, stackpos: int, to_pos: tuple, count: int = 1):
         self._send(Writer().u8(0x78).position(from_pos).u16(client_id).u8(stackpos)
                    .position(to_pos).u8(count))
+
+    def edit_house_list(self, window_id: int, text: str):
+        """Answer a house list window (0x8A): the new list, one name per line."""
+        self._send(Writer().u8(0x8A).u8(0).u32(window_id).string(text))
 
     def open_container(self, slot: int, timeout: float = 3.0):
         """Open the container worn in `slot` (like right-clicking it) and return it once known."""
@@ -699,7 +704,7 @@ def _h_text_window(c, r):
 
 
 def _h_house_window(c, r):
-    r.u8(); r.u32(); r.string()
+    c.house_windows.append((r.u8(), r.u32(), r.string()))     # (list id, window id, the list's text)
 
 
 def _h_stats(c, r):

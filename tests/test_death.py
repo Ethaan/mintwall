@@ -366,7 +366,8 @@ def test_a_red_skull_drops_everything_amulet_of_loss_or_not(new_player, db, serv
 
 def test_respawn_in_the_home_town_temple_with_full_health_and_mana(new_player, db, server, items):
     """Killed in Rookgaard, a character of Ankrahmun comes back in Ankrahmun's temple, at full health and mana."""
-    guid, row = _kill_on(new_player, db, 12, level=30, mana=0, town_id=ANKRAHMUN_TOWN)
+    guid, row = _kill_on(new_player, db, 12, level=30, mana=0, town_id=ANKRAHMUN_TOWN,
+                         premium_days=30)     # without premium an Ankrahmun citizen becomes a Thais one at login
     assert (row["posx"], row["posy"], row["posz"]) == ANKRAHMUN_TEMPLE, (row["posx"], row["posy"], row["posz"])
     assert (row["health"], row["mana"]) == (row["healthmax"], row["manamax"]), \
         {k: row[k] for k in ("health", "healthmax", "mana", "manamax")}

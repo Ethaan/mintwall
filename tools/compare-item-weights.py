@@ -35,10 +35,8 @@ NOT_THE_SAME = {2566}   # knife: the kitchen knife (the weapon is 2403)
 KEPT = {
     "dragon scale helmet": "TibiaWiki 2006-09..2007 say 60.00 oz; 32.50 only appears later",
     "ornamented shield": "TibiaWiki 2005-06..2007 say 67 oz; never 72",
-    "black shield": "open: TibiaWiki 2005-06 says 41.5 (as Tibiantis), 2006-04 on says 42",
-    "tower shield": "open: TibiaWiki 2005-06 says 88 (as Tibiantis), 2006-04 'updated weight' to 82",
-    "golden legs": "open: TibiaWiki 2005-06 says 54, 2005-12 on says 56 (as Tibiantis)",
-    "pharao sword": "open: TibiaWiki 2005-06 says 190, 2006-11 says 150 (as Tibiantis), 2008 on 52",
+    "golden legs": "decided 2026-10-04 (closest wiki to 7.4): TibiaWiki 2005-06 says 54, 2005-12 on says 56 (as Tibiantis)",
+    "pharao sword": "decided 2026-10-04 (closest wiki to 7.4): TibiaWiki 2005-06 says 190, 2006-11 says 150 (as Tibiantis), 2008 on 52",
 }
 
 

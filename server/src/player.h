@@ -356,6 +356,7 @@ public:
 	virtual void onGainExperience(uint64_t gainExp);
 	virtual void onAttackedCreatureBlockHit(Creature* target, BlockType_t blockType);
 	virtual void onBlockHit(BlockType_t blockType);
+	void onAttackMissed();
 	virtual void onChangeZone(ZoneType_t zone);
 	virtual void onAttackedCreatureChangeZone(ZoneType_t zone);
 	virtual void onIdleStatus();
@@ -673,8 +674,7 @@ protected:
 
 	bool pzLocked;
 	bool isConnecting;
-	int32_t bloodHitCount;
-	int32_t shieldBlockCount;
+	int32_t bloodHitCount;      // 7.4: combat tries (attacks made or faced by the shield) left before blood is due
 	BlockType_t lastAttackBlockType;
 	bool addAttackSkillPoint;
 	uint64_t lastAttack;

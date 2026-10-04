@@ -168,7 +168,12 @@ bool House::kickPlayer(Player* player, const std::string& name)
 		HouseTile* houseTile = kickingPlayer->getTile()->getHouseTile();
 
 		if(houseTile && houseTile->getHouse() == this){
-			if(getHouseAccessLevel(player) >= getHouseAccessLevel(kickingPlayer) && !kickingPlayer->hasFlag(PlayerFlag_CanEditHouses)){
+			// tibia.com manual (2004): owners and subowners can kick guests, guests can only kick themselves
+			// (a guest could put any other guest out)
+			AccessHouseLevel_t level = getHouseAccessLevel(player);
+			bool allowed = (player == kickingPlayer) ||
+				(level >= HOUSE_SUBOWNER && level >= getHouseAccessLevel(kickingPlayer));
+			if(allowed && !kickingPlayer->hasFlag(PlayerFlag_CanEditHouses)){
 				if(g_game.internalTeleport(kickingPlayer, getEntryPosition()) == RET_NOERROR){
 					g_game.addMagicEffect(getEntryPosition(), NM_ME_ENERGY_AREA);
 				}

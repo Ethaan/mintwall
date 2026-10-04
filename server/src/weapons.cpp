@@ -958,6 +958,7 @@ bool WeaponDistance::useWeapon(Player* player, Item* item, Creature* target) con
 			}
 		}
 
+		player->onAttackMissed();
 		Weapon::internalUseWeapon(player, item, destTile);
 	}
 

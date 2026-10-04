@@ -453,6 +453,10 @@ public:
 
 	GameState_t getGameState();
 	void setGameState(GameState_t newState);
+	// the process exit code once the server shuts down (main returns it): 0, or the daily server save's
+	// (globalevents/scripts/serversave.lua, doSetExitCode) so a supervisor can tell a planned restart from a crash
+	int32_t getExitCode() const {return exitCode;}
+	void setExitCode(int32_t code) {exitCode = code;}
 	// changedHousesOnly: the timed save writes only houses whose items changed (every 6th time all of them)
 	bool saveServer(bool globalSave, bool changedHousesOnly = false);
 	void saveGameState();
@@ -567,6 +571,7 @@ protected:
 	uint16_t lastPlayersRecord;
 
 	GameState_t gameState;
+	int32_t exitCode;
 	WorldType_t worldType;
 
 	Map* map;

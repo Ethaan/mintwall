@@ -108,7 +108,6 @@ Creature()
 
 	pzLocked = false;
 	bloodHitCount = 0;
-	shieldBlockCount = 0;
 	lastAttackBlockType = BLOCK_NONE;
 	addAttackSkillPoint = false;
 	lastAttack = 0;
@@ -518,6 +517,13 @@ int32_t Player::getDefense() const
 	if(shield && shield->getDefense() >= defenseValue){
 		defenseValue = shield->getDefense() + extraDef;
 		defenseSkill = getSkill(SKILL_SHIELD, SKILL_LEVEL);
+	}
+
+	if(!weapon && !shield){
+		// 7.4: bare hands block like a weapon of def 5 with the fist skill ("Fist fighting is atk 7, def 5",
+		// tibiantis-notes training.txt)
+		defenseValue = 5;
+		defenseSkill = getSkill(SKILL_FIST, SKILL_LEVEL);
 	}
 
 	defenseValue += baseDefense;
@@ -1924,14 +1930,32 @@ uint32_t Player::getPercentLevel(uint64_t count, uint32_t nextLevelCount)
 	return 0;
 }
 
+// 7.4: one counter of 30 combat tries for attacks made and attacks the shield faces - draw blood on your target
+// once in 30 or neither skill advances; with two attackers that is once every 10 turns (TibiaWiki "Training"
+// 2008-05 rev 158855, "Shielding" 2007-03 rev 88636, tibiantis-notes training.txt). Blocking with a weapon trains
+// nothing and uses none of the allowance.
 void Player::onBlockHit(BlockType_t blockType)
 {
-	if(shieldBlockCount > 0){
-		--shieldBlockCount;
+	if(!hasShield()){
+		return;
+	}
 
-		if(hasShield()){
-			addSkillAdvance(SKILL_SHIELD, 1);
-		}
+	if(bloodHitCount > 0){
+		--bloodHitCount;
+		addSkillAdvance(SKILL_SHIELD, 1);
+	}
+}
+
+// A distance shot that misses the target is a try like a blocked one (7.4: only a bloody hit counts double)
+void Player::onAttackMissed()
+{
+	lastAttackBlockType = BLOCK_DEFENSE;
+	if(bloodHitCount > 0){
+		addAttackSkillPoint = true;
+		--bloodHitCount;
+	}
+	else{
+		addAttackSkillPoint = false;
 	}
 }
 
@@ -1946,7 +1970,6 @@ void Player::onAttackedCreatureBlockHit(Creature* target, BlockType_t blockType)
 		{
 			addAttackSkillPoint = true;
 			bloodHitCount = 30;
-			shieldBlockCount = 30;
 
 			break;
 		}
@@ -3855,7 +3878,11 @@ void Player::addUnjustifiedDead(const Player* attacked)
 			success = true;
 		}
 		else {
-			g_bans.addBanishment(getName(), (time(NULL) + g_config.getNumber(ConfigManager::BAN_LENGTH)), 0, "Unjustified player killing.", "Automatic Banishment.");
+			// like Tibiantis (decided 2026-10-04): 7 days the first time, 30 days the second, 30 more each time after
+			// (60, 90, ...). The earlier ones are the account's automatic banishments in `bans` (expired ones included).
+			uint32_t earlier = g_bans.getAutomaticBanishmentsCount(getAccount());
+			int64_t days = (earlier == 0 ? 7 : 30 * (int64_t)earlier);
+			g_bans.addBanishment(getName(), (uint32_t)(time(NULL) + days * 24 * 60 * 60), 0, "Unjustified player killing.", AUTOMATIC_BANISHMENT_COMMENT);
 			success = true;
 		}
 

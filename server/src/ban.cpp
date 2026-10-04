@@ -108,16 +108,16 @@ bool BanManager::isBanished(uint32_t account) const
 	DBResult* result;
 	DBQuery query;
 
-	query << "SELECT `expires` FROM `bans` WHERE `value` = " << account << " AND `type` = " << BANTYPE_BANISHMENT << " AND `active` = 1";
+	// any active banishment still running (expires 0 or below: until removed); an account can have older, expired
+	// banishments still marked active, so the first row alone does not tell
+	query << "SELECT COUNT(`id`) AS `count` FROM `bans` WHERE `value` = " << account << " AND `type` = " << BANTYPE_BANISHMENT
+		<< " AND `active` = 1 AND (`expires` <= 0 OR `expires` >= " << (int64_t)time(NULL) << ")";
 	if(!(result = db->storeQuery(query.str())))
 		return false;
 
-	uint64_t expires = result->getDataInt("expires");
+	int32_t count = result->getDataInt("count");
 	db->freeResult(result);
-	if(expires == 0 || (uint64_t)time(NULL) <= expires)
-		return true;
-
-	return false;
+	return count > 0;
 }
 
 bool BanManager::isDeleted(uint32_t account) const
@@ -394,6 +394,24 @@ uint32_t BanManager::getNotationsCount(uint32_t account)
 	DBQuery query;
 
 	query << "SELECT COUNT(`id`) AS `count` FROM `bans` WHERE `value` = " << account << " AND `type` = " << BANTYPE_NOTATION << " AND `active` = 1";
+	if(!(result = db->storeQuery(query.str())))
+		return 0;
+
+	const uint32_t count = result->getDataInt("count");
+	db->freeResult(result);
+	return count;
+}
+
+uint32_t BanManager::getAutomaticBanishmentsCount(uint32_t account)
+{
+	// the automatic banishments for unjustified killing the account already had (Player::addUnjustifiedDead),
+	// expired or lifted ones included
+	Database* db = Database::instance();
+	DBResult* result;
+	DBQuery query;
+
+	query << "SELECT COUNT(`id`) AS `count` FROM `bans` WHERE `value` = " << account << " AND `type` = " << BANTYPE_BANISHMENT
+		<< " AND `admin_id` = 0 AND `comment` = " << db->escapeString(AUTOMATIC_BANISHMENT_COMMENT);
 	if(!(result = db->storeQuery(query.str())))
 		return 0;
 

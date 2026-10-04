@@ -58,9 +58,11 @@ def test_the_next_skill_level_takes_base_times_b_tries(new_player, skill, b, bas
 
 # --- which actions train which skill (task.md "Which actions train which skill", "Fist fighting ... skills start at
 # 10"). 7.4: a melee or distance swing is a try, a shot that draws blood counts double for distance; a try counts
-# only while you drew blood on your target within the last 30 tries (attacks made or received); every attack your
-# shield faces (two a turn at most) is a shielding try, blood, spark or puff, and only with a shield - never a
-# weapon; every cast on water that still has a fish is a fishing try, a catch counts double (TibiaWiki "Training"
+# only while you drew blood on your target within the last 30 tries - one allowance for attacks made, missed
+# shots included, and attacks the shield faces; every attack your shield faces (two a turn at most, never a player's
+# ranged attack) is a shielding try, blood, spark or puff, and only with a shield - never a weapon; bare hands block
+# as defense 5; every cast on water that still has a fish is a fishing try, a catch counts double, and 7.4 needs no
+# worm (worms came with 7.5, August 2005: TibiaWiki "Updates/7.5", "Fishing Rod" rev 19808) (TibiaWiki "Training"
 # 2006-02 rev 28743 and 2008-05 rev 158855, "Shielding" 2007-03 rev 88636, "Fishing" 2006-01 rev 25585;
 # docs/reference-74/tibiantis-notes/training.txt). Every skill starts at 10, magic level at 0 ("Skills" 2007-01
 # rev 77912).
@@ -68,7 +70,7 @@ FIST, CLUB, SWORD_SKILL, AXE, DISTANCE, SHIELDING, FISHING = range(7)
 SKILL_NAMES = ("fist", "club", "sword", "axe", "distance", "shielding", "fishing")
 SWORD, MAGIC_SWORD, CROSSBOW, BOLT, DRAGON_SHIELD, FISHING_ROD = 2376, 2400, 2455, 2543, 2516, 2580
 FISH_WATER = 490                   # 491 no fish, 492 fished out (back to 490 after 120 s)
-SHORE = (32320, 32226, 7)          # FIELD's street runs along the water at x 32319
+SHORE = (32320, 32220, 7)          # two tiles north of FIELD, water with fish at x 32319
 SKILL_BASE = {FIST: 50, DISTANCE: 30, SHIELDING: 100, FISHING: 20}   # tries for skill 10 -> 11, any vocation
 
 
@@ -90,12 +92,14 @@ def _one_try_short(new_player, pos, vocation, skill, **kwargs):
 
 
 def _draw_blood(fighter, target, timeout=15):
-    """`fighter` hits `target` until it bleeds: a try only counts within 30 tries of drawing blood."""
-    fighter.set_fight_modes(fight=1, chase=0, safe=0)
+    """`fighter` follows and hits `target` until it bleeds (a try only counts within 30 tries of drawing blood);
+    following: a passer-by can take the tile next to it at login."""
+    fighter.set_fight_modes(fight=1, chase=1, safe=0)
     fighter.attack(target.player_id)
     bled = target.wait_for(lambda: target.stats.max_health and target.stats.health < target.stats.max_health,
                            timeout=timeout)
-    assert bled, f"{fighter.name} drew no blood on {target.name} in {timeout} s"
+    assert bled, (f"{fighter.name} at {fighter.pos} drew no blood on {target.name} at {target.pos} in {timeout} s: "
+                  f"{target.stats}, {fighter.text_messages[-3:]}")
 
 
 def test_a_new_character_has_every_skill_at_10_and_magic_level_0(new_player):
@@ -117,7 +121,7 @@ def test_a_fist_hit_with_no_weapon_trains_fist_fighting(new_player):
     target = new_player(pos=_at(3, 4), level=300, vocation=KNIGHT, storage={30001: 1})
     p, name = _one_try_short(new_player, _at(2, 4), KNIGHT, FIST)
     assert 5 not in p.inventory and 6 not in p.inventory, p.inventory
-    p.set_fight_modes(fight=1, chase=0, safe=0)
+    p.set_fight_modes(fight=1, chase=1, safe=0)
     p.attack(target.player_id)
     advanced = p.wait_for(lambda: _skill(p, name) == 11, timeout=15)
     p.attack(0)
@@ -142,7 +146,7 @@ def test_a_blocked_attack_trains_shielding(new_player):
     p, name = _one_try_short(new_player, _at(2, 8), KNIGHT, SHIELDING, inventory={6: Item(DRAGON_SHIELD)})
     attacker = new_player(pos=_at(3, 8), level=100, vocation=KNIGHT, storage={30001: 1})
     _draw_blood(p, attacker)
-    attacker.set_fight_modes(fight=1, chase=0, safe=0)
+    attacker.set_fight_modes(fight=1, chase=1, safe=0)
     attacker.attack(p.player_id)
     advanced = p.wait_for(lambda: _skill(p, name) == 11, timeout=10)
     attacker.attack(0)
@@ -156,9 +160,11 @@ def test_an_attack_that_draws_blood_through_the_shield_still_trains_shielding(ne
     p, name = _one_try_short(new_player, _at(2, 10), KNIGHT, SHIELDING, inventory={6: Item(DRAGON_SHIELD)})
     attacker = new_player(pos=_at(3, 10), level=100, vocation=KNIGHT, storage={30001: 1}, skills={SWORD_SKILL: 80},
                           inventory={5: Item(MAGIC_SWORD)})
-    _draw_blood(p, attacker)
+    bleeder = new_player(pos=_at(1, 10), level=100, vocation=KNIGHT, storage={30001: 1})
+    _draw_blood(p, bleeder)                            # the magic sword (def 35) would block its fists
+    p.attack(0)
     full = p.stats.health
-    attacker.set_fight_modes(fight=1, chase=0, safe=0)
+    attacker.set_fight_modes(fight=1, chase=1, safe=0)
     attacker.attack(p.player_id)
     bled = p.wait_for(lambda: p.stats.health < full, timeout=10)
     advanced = p.wait_for(lambda: _skill(p, name) == 11, timeout=1)   # the try comes before the damage
@@ -173,7 +179,7 @@ def test_blocking_with_a_weapon_trains_no_shielding(new_player):
     p, name = _one_try_short(new_player, _at(2, 12), KNIGHT, SHIELDING, inventory={5: Item(SWORD)})
     attacker = new_player(pos=_at(3, 12), level=100, vocation=KNIGHT, storage={30001: 1})
     _draw_blood(p, attacker)
-    attacker.set_fight_modes(fight=1, chase=0, safe=0)
+    attacker.set_fight_modes(fight=1, chase=1, safe=0)
     attacker.attack(p.player_id)
     time.sleep(8)                                                    # four attacks
     attacker.attack(0)
@@ -182,7 +188,7 @@ def test_blocking_with_a_weapon_trains_no_shielding(new_player):
 
 
 def test_fishing_on_water_with_fish_trains_fishing(new_player, items):
-    """One cast on water that still has a fish is a try (a catch two)."""
+    """One cast on water that still has a fish is a try (a catch two) - with no worm: 7.4 fished without."""
     water = (SHORE[0] - 1, SHORE[1], SHORE[2])
     p, name = _one_try_short(new_player, SHORE, KNIGHT, FISHING, inventory={5: Item(FISHING_ROD)})
     assert p.wait_for(lambda: p.tile_items(water), timeout=3), "the water tile is not in view"
@@ -190,3 +196,100 @@ def test_fishing_on_water_with_fish_trains_fishing(new_player, items):
     assert ground.client_id == items.by_server[FISH_WATER].client_id, f"{water} is {ground}, not water with fish"
     p.use_item_with(p.inventory_pos(5), items.by_server[FISHING_ROD].client_id, 0, water, ground.client_id, 0)
     assert p.wait_for(lambda: _skill(p, name) == 11, timeout=3), f"fishing: still {p.skills[name]}"
+
+
+# --- the 30-try allowance, ranged attacks, misses and bare hands --------------------------------------------------
+ARMOR_SET = {1: Item(2496), 4: Item(2472), 7: Item(2470), 8: Item(2645)}   # armor 11 + 17 + 9 + 3 = 40: takes 19-37
+PUFF = 2                           # the effect of an attack blocked to nothing by the shield, weapon or bare hands
+
+
+def _wall(new_player, pos):
+    """A knight no fist or bolt of a skill-10 attacker can bleed: dragon shield and shielding 80, armor 40."""
+    return new_player(pos=pos, level=300, vocation=KNIGHT, storage={30001: 1}, skills={SHIELDING: 80},
+                      inventory={6: Item(DRAGON_SHIELD), **ARMOR_SET})
+
+
+def test_attacks_made_and_attacks_blocked_share_one_allowance_of_30(new_player):
+    """7.4: one counter of 30 combat tries - attacks you make and attacks your shield faces - between blood hits
+    ("reduced by 10 for every attack you absorb", TibiaWiki "Training" rev 158855). A knight bleeds one attacker,
+    then swings at a target it cannot bleed while that attacker hits its shield: each turn uses two tries, so its
+    shielding gets about 15 tries before it stops (two separate counters would give 30)."""
+    wall = _wall(new_player, _at(1, 15))
+    p = new_player(pos=_at(2, 15), level=100, vocation=KNIGHT, storage={30001: 1}, inventory={6: Item(DRAGON_SHIELD)})
+    attacker = new_player(pos=_at(3, 15), level=100, vocation=KNIGHT, storage={30001: 1})
+    assert p.wait_for(lambda: p.skills.get("shielding") == (10, 0), timeout=3), p.skills
+    _draw_blood(p, attacker)
+    p.set_fight_modes(fight=1, chase=0, safe=0)
+    p.attack(wall.player_id)
+    attacker.set_fight_modes(fight=1, chase=0, safe=0)
+    attacker.attack(p.player_id)
+    time.sleep(50)                                     # 25 turns: the allowance runs out after about 15
+    attacker.attack(0)
+    p.attack(0)
+    tries = p.skills["shielding"][1]                   # shielding 10 -> 11 takes 100 tries: the percent is the tries
+    assert p.skills["shielding"][0] == 10, p.skills
+    assert 10 <= tries <= 20, f"{tries} shielding tries in 25 turns of one swing and one block (7.4: about 15)"
+
+
+def test_a_ranged_attack_is_no_shielding_try(new_player):
+    """7.4: player ranged attacks are not blocked by the shield, use none of its two blocks a turn and train no
+    shielding (tibiantis-notes Melee_and_Distance.txt, training.txt). Bolts on a shielded knight in armor 40: the
+    armor stops many, the shield trains nothing."""
+    p, name = _one_try_short(new_player, _at(1, 16), KNIGHT, SHIELDING,
+                             inventory={6: Item(DRAGON_SHIELD), **ARMOR_SET})
+    bleeder = new_player(pos=_at(0, 16), level=100, vocation=KNIGHT, storage={30001: 1})
+    paladin = new_player(pos=_at(3, 16), level=100, vocation=PALADIN, storage={30001: 1}, skills={DISTANCE: 28},
+                         inventory={5: Item(CROSSBOW), 10: Item(BOLT, 100)})
+    _draw_blood(p, bleeder)                            # the allowance is full: only the kind of attack matters
+    p.attack(0)
+    paladin.set_fight_modes(fight=3, chase=0, safe=0)
+    start = len(p.effects)
+    paladin.attack(p.player_id)
+    time.sleep(12)
+    paladin.attack(0)
+    shots = 100 - (paladin.inventory[10].count if 10 in paladin.inventory else 0)
+    assert shots >= 4, f"only {shots} bolts shot"
+    assert p.skills[name] == (10, 99), f"{shots} bolts trained shielding: {p.skills[name]}, {p.effects[start:]}"
+
+
+def test_a_distance_miss_is_one_try_and_uses_the_allowance(new_player):
+    """A paladin (distance 10) bleeds one target with a bolt (2 tries), then shoots one 5 tiles off that its bolts
+    cannot hurt (defensive stance, max 18 against armor 19+): 13% hits, the rest miss. Each shot, hit or miss, is
+    one try until the 30 of the allowance are gone: 2 + 30 = 32 tries is distance 11 (30) and 2 of 33 - not more."""
+    p = new_player(pos=_at(0, 13), level=20, vocation=PALADIN, storage={30001: 1},
+                   inventory={5: Item(CROSSBOW), 10: Item(BOLT, 100)})
+    target = new_player(pos=_at(2, 13), level=100, vocation=KNIGHT, storage={30001: 1})
+    wall = _wall(new_player, _at(5, 13))
+    assert p.wait_for(lambda: p.skills.get("distance") == (10, 0), timeout=3), p.skills
+    assert (wall.pos[0] - p.pos[0], wall.pos[1] - p.pos[1]) == (5, 0), (p.pos, wall.pos)
+    p.set_fight_modes(fight=3, chase=0, safe=0)
+    p.attack(target.player_id)
+    bled = target.wait_for(lambda: target.stats.health < target.stats.max_health, timeout=40)
+    p.attack(wall.player_id)
+    assert bled, "no bolt hit the target 2 tiles off in 40 s"
+    assert p.wait_for(lambda: _skill(p, "distance") == 11, timeout=90), \
+        f"the misses did not count: distance {p.skills['distance']} after 90 s"
+    time.sleep(16)                                     # 8 more shots: none may count once the 30 are used
+    p.attack(0)
+    assert p.skills["distance"][0] == 11 and p.skills["distance"][1] <= 15, \
+        f"distance {p.skills['distance']}: the misses went on counting past the 30 (2 + 30 tries = 11 and 6%)"
+
+
+def test_bare_hands_block_like_a_weapon_of_defense_5(new_player):
+    """7.4: no weapon and no shield, the fists block as defense 5 with the fist skill ("Fist fighting is atk 7,
+    def 5", tibiantis-notes training.txt). Fist 120 in defensive stance blocks up to (5 x 120 + 50) x 5 x 1.8 / 100 =
+    58 - nearly every fist (max 8) of a skill-10 attacker ends in a puff."""
+    p = new_player(pos=_at(5, 15), level=100, vocation=KNIGHT, storage={30001: 1}, skills={FIST: 120})
+    attacker = new_player(pos=_at(6, 15), level=100, vocation=KNIGHT, storage={30001: 1})
+    p.set_fight_modes(fight=3, chase=0, safe=0)
+    time.sleep(0.5)
+    start = len(p.effects)
+    attacker.set_fight_modes(fight=1, chase=0, safe=0)
+    attacker.attack(p.player_id)
+    time.sleep(12)                                     # six attacks
+    attacker.attack(0)
+    time.sleep(0.5)
+    effects = [e for pos, e in p.effects[start:] if tuple(pos) == tuple(p.pos)]
+    puffs = effects.count(PUFF)
+    assert puffs >= 4, f"bare hands blocked {puffs} of the fists: effects {effects}, lost " \
+                       f"{p.stats.max_health - p.stats.health}"

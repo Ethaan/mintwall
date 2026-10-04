@@ -261,6 +261,7 @@ int main(int argc, char *argv[])
 #if defined __EXCEPTION_TRACER__
     mainExceptionHandler.RemoveHandler();
 #endif
+	return g_game.getExitCode();   // 0, or the daily server save's code (serversave.lua): restart me
 }
 
 bool parseCommandLine(CommandLineOptions& opts, std::vector<std::string> args)

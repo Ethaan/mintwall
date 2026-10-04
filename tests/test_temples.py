@@ -21,7 +21,9 @@ OPPOSITE = {NORTH: SOUTH, SOUTH: NORTH, EAST: WEST, WEST: EAST,
             NORTHEAST: SOUTHWEST, SOUTHWEST: NORTHEAST, NORTHWEST: SOUTHEAST, SOUTHEAST: NORTHWEST}
 
 # A vocation-less character: a premium-expired vocation character is sent to the TEMPLE_TP_ID town instead
-PLAYER = dict(level=8, vocation=0, group_id=TESTER_GROUP, storage={BEGINNER_SET_GIVEN: 1})
+# Premium: a free character logging in in a premium area (Edron, Darashia, ...) is moved to the Thais temple
+# (test_premium_expiry.py)
+PLAYER = dict(level=8, vocation=0, group_id=TESTER_GROUP, storage={BEGINNER_SET_GIVEN: 1}, premium_days=30)
 
 
 def _step_off_and_back(p, temple):
