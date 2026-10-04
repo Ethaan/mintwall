@@ -130,8 +130,9 @@ bool IOPlayer::loadPlayer(Player* player, const std::string& name, bool preload 
 #ifdef __SKULLSYSTEM__
 	int32_t redSkullSeconds = result->getDataInt("redskulltime") - std::time(NULL);
 	if(redSkullSeconds > 0){
-		//ensure that we round up the number of ticks
-		player->redSkullTicks = (redSkullSeconds + 2)*1000;
+		//ensure that we round up the number of ticks; in 64 bits: more than ~24.8 days (a fresh red skull
+		//lasts 30) overflowed int32, went negative and the skull was taken off at the first think
+		player->redSkullTicks = (int64_t)(redSkullSeconds + 2)*1000;
 
 		if(result->getDataInt("redskull") == 1){
 			player->skull = SKULL_RED;

@@ -249,3 +249,132 @@ def test_death_loss_is_10_percent_minus_blessings(new_player, db, vocation, bles
     after = db.character(guid)["experience"]
     assert after == before - before * percent // 100, f"lost {(before - after) / before:.2%}, expected {percent}%"
     assert all(_storage(db, guid, key) in (None, 0) for key in ALL_BLESSINGS), "blessings survived the death"
+
+
+# ----------------------------------------------------------------------------- levels, items, amulet of loss, respawn
+
+from tibia74 import HEAD, NECKLACE, ARMOR, LEFT, LEGS, FEET, RING, AMMO   # noqa: E402
+from tibia74.db import VOCATION_GAINS                                    # noqa: E402
+
+AMULET_OF_LOSS = 2173
+ANKRAHMUN_TEMPLE, ANKRAHMUN_TOWN = (33194, 32853, 8), 9   # a home town far from where the victim dies
+GOLD = 2148
+ROPE, SHOVEL = 2120, 2554
+WORN = {HEAD: 2457, NECKLACE: 2661, ARMOR: 2463, RIGHT: 2376, LEFT: 2525,   # steel helmet, scarf, plate armor,
+        LEGS: 2647, FEET: 2643, RING: 2179, AMMO: 2544}                        # sword, dwarven shield, plate legs,
+                                                                               # leather boots, gold ring, arrows
+
+
+def _gear(necklace=None):
+    """A backpack (rope, shovel, 50 gold) and something in every other slot."""
+    gear = {slot: Item(item, 10 if slot == AMMO else 1) for slot, item in WORN.items()}
+    gear[BACKPACK] = Item(1988, contents=[Item(ROPE), Item(SHOVEL), Item(GOLD, 50)])
+    if necklace:
+        gear[NECKLACE] = Item(necklace)
+    return gear
+
+
+def _after_death(db, guid, before):
+    """Wait for the save that follows the death (the experience changes), then return the saved row."""
+    deadline = time.time() + 5
+    while time.time() < deadline and db.character(guid)["experience"] == before:
+        time.sleep(0.2)
+    row = db.character(guid)
+    assert row["experience"] < before, "no save after the death"
+    return row
+
+
+def _kill_on(new_player, db, row, **victim):
+    """A knight (100 hp: a quick kill) killed on its own ROAD row; returns (guid, saved row after the death)."""
+    killer = _killer(new_player, (ROAD[0], ROAD[1] + row, ROAD[2]))
+    p = new_player(pos=(ROAD[0], ROAD[1] + row + 1, ROAD[2]), vocation=KNIGHT, health=100,
+                   storage={30001: 1}, **victim)
+    guid = p.character.guid
+    before = db.character(guid)["experience"]
+    _kill(killer, p)
+    return guid, _after_death(db, guid, before)
+
+
+def _slots(db, guid):
+    """{slot: item type} of what the saved character wears."""
+    return {r["pid"]: r["itemtype"] for r in db.items(guid) if r["pid"] <= AMMO}
+
+
+def test_lost_levels_take_their_hp_mana_and_cap_and_respawn_full(new_player, db):
+    """Level 50 knight -10%: 1,662,570 exp is level 48, so two knight levels go: 2 x 15 hp, 5 mana, 25 cap.
+    He comes back with full health and mana (killed at 100 hp and 0 mana)."""
+    guid, row = _kill_on(new_player, db, 2, level=50, mana=0)
+    assert row["experience"] == 1847300 - 184730 and row["level"] == 48, (row["experience"], row["level"])
+    hp, mana, cap = VOCATION_GAINS[KNIGHT]
+    assert (row["healthmax"], row["manamax"], row["cap"]) == (150 + 47 * hp, 47 * mana, 400 + 47 * cap), \
+        {k: row[k] for k in ("healthmax", "manamax", "cap")}
+    assert (row["health"], row["mana"]) == (row["healthmax"], row["manamax"]), \
+        {k: row[k] for k in ("health", "healthmax", "mana", "manamax")}
+
+
+def test_the_backpack_always_drops_other_items_10_percent_each(new_player, db):
+    """The backpack goes into the corpse with its contents; each of the 9 other items drops at 10% - losing 6 or
+    more of them would happen about once in 15,000 deaths."""
+    guid, _ = _kill_on(new_player, db, 4, level=20, inventory=_gear())
+    left = _slots(db, guid)
+    assert BACKPACK not in left, f"the backpack stayed: {left}"
+    assert not any(r["itemtype"] in (ROPE, SHOVEL, GOLD) for r in db.items(guid)), "the backpack's contents stayed"
+    lost = [slot for slot in WORN if left.get(slot) != WORN[slot]]
+    assert len(lost) <= 5, f"lost {len(lost)} of 9 equipped items (10% each): {lost}"
+
+
+def test_amulet_of_loss_keeps_every_item_and_is_used_up(new_player, db):
+    """Nothing drops, not even the backpack; the amulet is gone (not in the corpse either). The experience is
+    still lost: the amulet protects items only."""
+    guid, row = _kill_on(new_player, db, 6, level=20, inventory=_gear(necklace=AMULET_OF_LOSS))
+    assert row["experience"] == 98800 - 9880, row["experience"]
+    worn = {slot: item for slot, item in WORN.items() if slot != NECKLACE}
+    left = _slots(db, guid)
+    assert {slot: left.get(slot) for slot in worn} == worn and left.get(BACKPACK) == 1988, f"items dropped: {left}"
+    assert sorted(r["itemtype"] for r in db.items(guid) if r["pid"] > AMMO) == sorted((ROPE, SHOVEL, GOLD)), \
+        "the backpack lost its contents"
+    assert NECKLACE not in left and not any(r["itemtype"] == AMULET_OF_LOSS for r in db.items(guid)), \
+        "the amulet of loss was not used up"
+
+
+def _red_skulled(db):
+    """Mark the character just created as red skulled for 30 days (as Player::addUnjustifiedDead saves it)."""
+    con = db._connect()
+    con.execute("UPDATE players SET redskull = 1, redskulltime = strftime('%s', 'now') + 30 * 86400"
+                " WHERE id = (SELECT MAX(id) FROM players)")
+    con.commit()
+    con.close()
+
+
+@pytest.mark.parametrize("necklace, row", [(None, 8), (AMULET_OF_LOSS, 10)])
+def test_a_red_skull_drops_everything_amulet_of_loss_or_not(new_player, db, server, items, necklace, row):
+    """With a red skull all items go into the corpse; an amulet of loss does not help and is used up anyway."""
+    character = db.create_character(level=20, vocation=KNIGHT, health=100, storage={30001: 1},
+                                    pos=(ROAD[0], ROAD[1] + row + 1, ROAD[2]), inventory=_gear(necklace))
+    _red_skulled(db)
+    killer = _killer(new_player, (ROAD[0], ROAD[1] + row, ROAD[2]))
+    p = GameClient(items, port=server.port).login(character.account, character.password, character.name)
+    me = p.wait_for(lambda: p.creatures.get(p.player_id), timeout=5)
+    time.sleep(2)   # a think or two: 30 days of red skull read back as ticks overflowed int32 and were dropped
+    assert me and me.skull == RED_SKULL, f"the red skull is gone after logging in: {me}"
+    before = db.character(character.guid)["experience"]
+    _kill(killer, p)
+    _after_death(db, character.guid, before)
+    left = db.items(character.guid)
+    assert not left, f"kept {[(r['pid'], r['itemtype']) for r in left]}"
+
+
+def test_respawn_in_the_home_town_temple_with_full_health_and_mana(new_player, db, server, items):
+    """Killed in Rookgaard, a character of Ankrahmun comes back in Ankrahmun's temple, at full health and mana."""
+    guid, row = _kill_on(new_player, db, 12, level=30, mana=0, town_id=ANKRAHMUN_TOWN)
+    assert (row["posx"], row["posy"], row["posz"]) == ANKRAHMUN_TEMPLE, (row["posx"], row["posy"], row["posz"])
+    assert (row["health"], row["mana"]) == (row["healthmax"], row["manamax"]), \
+        {k: row[k] for k in ("health", "healthmax", "mana", "manamax")}
+    con = db._connect()
+    account, name = con.execute("SELECT account_id, name FROM players WHERE id = ?", (guid,)).fetchone()
+    con.close()
+    again = GameClient(items, port=server.port).login(account, "test", name)
+    try:
+        assert again.wait_for(lambda: again.pos == ANKRAHMUN_TEMPLE, timeout=5), f"logged in at {again.pos}"
+    finally:
+        again.logout()

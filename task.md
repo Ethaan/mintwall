@@ -883,7 +883,14 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
   - [ ] Widen tests/test_spells.py's script scan: also `== 1` / `~= 1` / `== 0` on functions that return
         true/false (the same bug class as isInArray(...) == TRUE)
 - [ ] Houses: confirm `Tibia74-houses.xml` loads, rent, doors, ownership commands
-- [ ] Temples: log in to each of the 47 towns' temple positions, confirm walkable
+- [x] Temples: log in to each of the 47 towns' temple positions, confirm walkable
+      Done 2026-10-03: test_temples.py - all 47 temples (towns read from the map): a character logs in right on
+      the temple and steps off and back; a town_id character at 0,0,0 starts there; the 8 mainland temples are
+      protection zone. Isle of Solitude and Home (towns 10/21) share 32316,31942,7
+- [x] Rookgaard has no protection zone tile at all in the map (temple 32097,32219,7, depot included) - confirm
+      the 7.4 state. 2026-10-03: kept - the user remembers none, and the source map has none on the whole island
+      (ours and the JS engine's copy: 0 of 121,586 tiles; the Thais temple 176). test_temples.py
+      test_rookgaard_temple_is_no_protection_zone
 - [ ] Depots and mailboxes (mailboxes weren't in 7.4 - check the map)
 - [ ] Teleports, ladders, holes, rope spots, shovel spots work
 - [ ] Reduce server memory (~2.5 GB with full map)
@@ -945,6 +952,24 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       summons. Kept on purpose, with reasons, in the tool's REVIEWED list: the tomb pharaohs (their wiki pages
       are incomplete), the witch's frog and djinn's cancel invisibility (nothing in 7.4 / the engine to do them
       with). test_monsters.py test_monster_attacks_agree_with_74_or_are_reviewed
+- [ ] Duplicate quest objects (found 2026-10-03 through the Behemoth lever): the quest audit placed missing objects at
+      tibiaot74's spot without looking for the map's own unscripted one nearby - the Behemoth room had the map's
+      lever (fixed: it is the quest lever now, ours removed). An audit of everything scripted we added against
+      look-alikes (lever/chest/box/body ids) within 6 tiles in the original map (Tibia74.otbm.bak) flags, to look at:
+      - Deeper Fibula: the original map has ONE body at 32239,32476,10; we put tibiaot74's two reward bodies at
+        32239,32471 (tower shield) and 32478 (warrior helmet) - three bodies now
+        Reviewed 2026-10-03, kept (decided with the user): ours are where TibiaWiki puts them - the tower shield "in a
+        skeleton under a fire field" (the map had the field, not the body), the helmet "in a skeleton behind a rock"
+        (rocks at 32238-32241,32478-32479); the map's own body at 32476 is in the open - decoration
+      - Alawar's Vault: chest 32031,31686,8 (key 4503) beside three plain chests of the map
+      - boxes among crates (probably storerooms): 32172,31602,10 (key 4501), 32455,32048,8 (uid 10042),
+        32507,32270,9 (uid 2170); chest 33078,31656,11 (uid 1019) near the map's chest 33081,31658
+      Then: make tools/quest-audit.py report an unscripted look-alike near a "missing" object - done 2026-10-03:
+      it lists under each object the map's look-alikes within 6 tiles, same floor ("near:", same id or same kind:
+      switch, chest/box/crate/coffin, body/skeleton, key; unscripted = "probably that one", scripted = "probably
+      done there"), prints "done" objects that have an unscripted look-alike near (a second one?), also checks
+      objects with a uid/aid their actions.xml scripts (the Behemoth lever had no aid 8000), and takes
+      --map server\data\world\Tibia74.otbm.bak to compare with the original map
 - [ ] Flaky in the full run, pass alone (2026-10-03): test_npc_talk for Hardek (wanders 20 tiles), A Wrinkled
       Beholder, Jimbin - probably a character an earlier test left standing or talking there
 - [ ] Flaky quest tests (seen 2026-10-02; Rahemos failed the same way before the monster change, the deathslicer
@@ -974,7 +999,8 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
       2026-10-02, tibiantis-notes "Classes": knight 15/5/25, paladin 10/15/20, mage 5/30/10 and their base hp/mana
       as ours; capacity is 470 at level 8 for all - Rookgaard (no vocation) gives 10 cap a level, not 5 (fixed).
       test_vocations.py
-- [ ] Level-down on death: losing enough exp removes levels and their HP/mana/cap
+- [x] Level-down on death: losing enough exp removes levels and their HP/mana/cap
+      2026-10-03: test_death.py test_lost_levels_take_their_hp_mana_and_cap_and_respawn_full
 
 ### Magic level
 - [ ] Rookie (no vocation) magic level multiplier is 4.0; 7.4 used 3.0 (TW-Formulae, one source)
@@ -1014,12 +1040,23 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 - [ ] Revisit the death rules (not a bug - make sure every 7.4 rule is applied), research first like
       the formulas (docs/reference-74), then pin each rule with a test:
   - [ ] Experience / magic level / skills: 10%, promoted characters 7% (Player::getDeathLossFactor)
-  - [ ] Levels lost with their HP / mana / capacity
-  - [ ] Items: which slots can drop and how likely; the backpack/containers; what stays in the corpse
-  - [ ] Amulet of loss: keeps all items, is used up; does it also apply to exp/skills? (7.4: items only?)
-  - [ ] Skulls: red skull (and white?) - does the amulet of loss still work, are all items lost?
+  - [x] Levels lost with their HP / mana / capacity
+        2026-10-03: test_death.py test_lost_levels_take_their_hp_mana_and_cap_and_respawn_full (level 50 knight
+        -> 48: 2 x 15 hp / 5 mana / 25 cap gone, back at full health and mana)
+  - [x] Items: which slots can drop and how likely; the backpack/containers; what stays in the corpse
+        2026-10-03: test_death.py test_the_backpack_always_drops_other_items_10_percent_each (the backpack and
+        its contents always go, at most 5 of the 9 other items)
+  - [x] Amulet of loss: keeps all items, is used up; does it also apply to exp/skills? (7.4: items only?)
+        2026-10-03: test_death.py test_amulet_of_loss_keeps_every_item_and_is_used_up (backpack and contents
+        kept, the amulet gone, 10% experience still lost)
+  - [x] Skulls: red skull (and white?) - does the amulet of loss still work, are all items lost?
+        2026-10-03: test_death.py test_a_red_skull_drops_everything_amulet_of_loss_or_not (white skull: no
+        change, death.md). Found: a red skull with more than ~24.8 days left was lost at login (redskulltime
+        read back as int32 milliseconds overflowed, IOPlayer::loadPlayer) - fixed, needs the rebuild
   - [ ] Promotion kept or lost on death; premium ending while promoted
-  - [ ] Where you respawn (home town temple), with what health/mana
+  - [x] Where you respawn (home town temple), with what health/mana
+        2026-10-03: test_death.py test_respawn_in_the_home_town_temple_with_full_health_and_mana (an Ankrahmun
+        character killed in Rookgaard logs in at Ankrahmun's temple)
   - Research done: docs/reference-74/death.md. Already right: 10% / 7% promoted, level loss, containers
     100%, other items 10%, amulet of loss (items only, used up, fails under red skull), respawn full hp/mana.
     To fix, ranked:
@@ -1041,7 +1078,9 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
         and gone after death, 10/5/7/2% loss
   - [x] 5. White skull 15 min instead of 3 (WhiteSkullTime = 15)
   - [x] 6. Per-character loss_* columns are no longer read (IOPlayer::loadPlayer)
-- [ ] Respawn at home town temple (town_id), bag/items drop rules
+- [x] Respawn at home town temple (town_id), bag/items drop rules
+      2026-10-03: test_death.py test_respawn_in_the_home_town_temple_with_full_health_and_mana,
+      test_the_backpack_always_drops_other_items_10_percent_each, test_amulet_of_loss_keeps_every_item_and_is_used_up
 - [ ] Skulls and PZ: PZLock 60 s, KillsToRedSkull 5, KillsToBan 7 - confirm 7.4 values
 - [ ] Rookgaard: no PvP on the island (non-pvp zone or protection level)
 
@@ -1057,7 +1096,12 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 ### Spells, runes, items
 - [ ] Verify 7.4 spell list, words, mana, level, vocation, premium (remove post-7.4 spells)
 - [ ] Runes: charges, magic level required, soul (7.4 had none)
-- [ ] Remove leftover warnings: "Unknown command /invisible, /serverdiag", items.otb minor-version warning
+- [x] Remove leftover warnings: "Unknown command /invisible, /serverdiag", items.otb minor-version warning
+      Done 2026-10-03: removed /invisible (never in the engine) and /serverdiag (only built with
+      __ENABLE_SERVER_DIAGNOSTIC__) from commands.xml. Left: "[OTBM loader] This map needs an updated items
+      OTB file" - harmless, Tibia74.otbm's header says items minor 3 (RME), items.otb is minor 2 (iomapotbm.cpp
+      only warns); byte 20 of Tibia74.otbm set from 03 to 02 (the user agreed, 2026-10-03) - the map loads, no
+      warning. Saving the map again in RME with a minor-3 items.otb brings it back.
 
 ## Branding and client texts
 

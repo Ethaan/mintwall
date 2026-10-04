@@ -9,7 +9,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SERVER_DIR = ROOT / "server"
-RUN_DIR = ROOT / "tests" / ".run"
+# MINTWALL_TEST_RUN / MINTWALL_TEST_PORT: a folder and a port of its own for each pytest session running at the same
+# time (several agents at once); the default is the one session tests/.run on 7181
+RUN_DIR = Path(os.environ["MINTWALL_TEST_RUN"]) if os.environ.get("MINTWALL_TEST_RUN") else ROOT / "tests" / ".run"
 TEST_PORT = int(os.environ.get("MINTWALL_TEST_PORT", "7181"))   # 7171: watch in your client (tibia74/watch.py)
 TESTER_GROUP = 2   # see prepare()
 

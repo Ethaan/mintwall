@@ -22,6 +22,7 @@ server/npctest.log
 server/maptest.log
 tests/.venv/
 tests/.run/
+tests/.run-*/
 __pycache__/
 .pytest_cache/
 *.otbm.bak
