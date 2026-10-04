@@ -22,7 +22,7 @@ DEAD_RAT = 2813                              # the corpse a rat leaves (rat.xml)
 GOLD = 2148
 DAGGER, DAGGER_PRICE = 2379, 5               # Obi (rook_items.lua; npc-shops.md: no difference to TibiaWiki)
 RAT_PRICE = 2                                # Seymour, Tom: a fresh dead rat
-ROOK_FIELD = (32082, 32210, 7)               # open grass west of the village, not a protection zone
+ROOK_FIELD = (32085, 32191, 7)               # open ground north-west of the temple, not a protection zone
 MALE_CORPSE = 3058                           # ITEM_MALE_CORPSE (const.h)
 NONE = 0                                     # no vocation
 
@@ -94,6 +94,23 @@ def _close_rat(p, radius=5):
     return min(rats, key=lambda r: max(abs(r.pos[0] - p.pos[0]), abs(r.pos[1] - p.pos[1])), default=None)
 
 
+def _towards_the_rats(p, world, world_map, tries=3):
+    """Walk on towards the rat spawn, step by step, and stop as soon as a rat is close - a hunter does not walk
+    past them (the route helper would wait for a rat in a corridor to step aside, and a hostile one never does)."""
+    from tibia74.route import DIRECTIONS, plan
+    goal = _in_sewer(world)
+    for _ in range(tries):
+        if _close_rat(p) or p.pos == goal:
+            return
+        for s in plan(world_map, p.pos, goal, open_tiles=BRIDGE):
+            if _close_rat(p):
+                return
+            delta = (s.target[0] - p.pos[0], s.target[1] - p.pos[1])
+            if s.kind != "walk" or s.target[2] != p.pos[2] or delta not in DIRECTIONS or not p.step(DIRECTIONS[delta]):
+                break                                  # something in the way: look again, plan again
+    assert p.wait_for(lambda: _close_rat(p), timeout=60), f"no rat comes near {p.pos}"
+
+
 def _kill_a_rat(p, tries=5):
     """Attack the nearest close rat and chase it (rats run at 5 hp) until it dies; one we cannot get at in 40 s
     (behind water) is given up for the next. Returns the experience the kill gave."""
@@ -111,11 +128,13 @@ def _kill_a_rat(p, tries=5):
 
 
 def _saved(p, db):
-    """Log out and wait for the save; the saved row."""
+    """Log out and wait for the logout's own save; the saved row. Not just "lastlogout is set": a periodic save
+    while the character played may already have written one."""
     guid = p.character.guid
+    logout = int(time.time())
     p.logout()
-    deadline = time.time() + 5
-    while time.time() < deadline and not db.character(guid)["lastlogout"]:
+    deadline = time.time() + 10
+    while time.time() < deadline and (db.character(guid)["lastlogout"] or 0) < logout:
         time.sleep(0.2)
     return db.character(guid)
 
@@ -134,11 +153,11 @@ def test_a_new_player_hunts_sewer_rats_sells_them_and_buys_a_dagger(new_player, 
     assert _gold(p) == 0, "a new player starts without money"
 
     _down_to_the_rats(p, items, world_map)
-    walk_near(p, items, world_map, _in_sewer(world), open_tiles=BRIDGE)
 
     killed = 0
     while _gold(p) + RAT_PRICE * _rats(p) < DAGGER_PRICE:
         assert killed < 6, f"6 rats and still only {_gold(p)} gp and {_rats(p)} corpses"
+        _towards_the_rats(p, world, world_map)
         assert _kill_a_rat(p) == 5, "a rat gives 5 experience"
         killed += 1
         corpse = p.wait_for(lambda: _corpse_near(p, items, DEAD_RAT), timeout=3)
@@ -170,7 +189,8 @@ def test_a_new_player_hunts_sewer_rats_sells_them_and_buys_a_dagger(new_player, 
     guid = p.character.guid
     _saved(p, db)
     saved = db.items(guid)
-    assert any(r["itemtype"] == DAGGER for r in saved), "the dagger was not saved"
+    assert any(r["itemtype"] == DAGGER for r in saved), \
+        f"the dagger was not saved: {[(r['pid'], r['itemtype'], r['count']) for r in saved]}"
     assert sum(r["count"] for r in saved if r["itemtype"] == GOLD) == money - DAGGER_PRICE
 
 
@@ -205,8 +225,8 @@ def test_down_to_the_rats_over_the_drawbridge_and_back_up(new_player, items, wor
     over the bridge (the east switch if someone raised it) and up the ladder to the temple."""
     p = new_player(storage={30001: 1}, group_id=TESTER_GROUP)     # rats leave testers alone: just the walk
     _down_to_the_rats(p, items, world_map)
-    walk_near(p, items, world_map, _in_sewer(world), open_tiles=BRIDGE)
-    assert p.pos[2] == 8, p.pos
+    _towards_the_rats(p, world, world_map)
+    assert p.pos[2] == 8 and (p.pos[0] > BRIDGE[1][0] or p.pos[1] > 32207), f"still in the room under the grate: {p.pos}"
     _up_to_the_temple(p, items, world_map)
     assert p.pos == ROOKGAARD_TEMPLE, p.pos
 
@@ -214,7 +234,7 @@ def test_down_to_the_rats_over_the_drawbridge_and_back_up(new_player, items, wor
 # ----------------------------------------------------------------------------- death
 
 def test_death_in_rookgaard_costs_10_percent_and_the_bag_back_in_the_temple(new_player, items, server, db):
-    """A level 6 rookgaarder (no vocation) killed by a wolf on the grass west of the village:
+    """A level 6 rookgaarder (no vocation) killed by a wolf on open ground north-west of the temple:
     - 10% of the experience (1600 -> 1440: level 5), with level 6's 5 hp, 5 mana and 10 cap (vocations.xml, 0)
     - no vocation, so he is not "rooked" (that is for a mainland character falling to level 5, player.cpp): he
       stays level 5, not 1, and keeps his skills' vocation
@@ -270,7 +290,7 @@ def test_death_in_rookgaard_costs_10_percent_and_the_bag_back_in_the_temple(new_
 
 # ----------------------------------------------------------------------------- level 8, the Oracle
 
-def test_a_rat_takes_a_rookgaarder_to_level_8_and_he_walks_to_the_oracle(new_player, items, world, world_map):
+def test_a_rat_takes_a_rookgaarder_to_level_8_and_he_walks_to_the_oracle(new_player, items, world, world_map, db):
     """Level 7, 3 experience short of level 8 (4200): from the temple down to the rats, one rat (5 exp), level 8 -
     "You advanced from Level 7 to Level 8." and level 8's gains for no vocation: 5 hp, 5 mana, 10 cap (185 hp,
     35 mana, 470 cap). Then on foot to the Oracle, who now talks to him (the choice itself:
@@ -279,16 +299,17 @@ def test_a_rat_takes_a_rookgaarder_to_level_8_and_he_walks_to_the_oracle(new_pla
                    inventory={RIGHT: Item(2382), BACKPACK: Item(1987)})                   # club, bag
     hp, mana, _ = VOCATION_GAINS[NONE]
     assert p.wait_for(lambda: p.stats.max_health == 150 + 6 * hp, timeout=5), p.stats
-    assert (p.stats.max_mana, p.stats.capacity) == (6 * mana, capacity(NONE, 7)), p.stats
+    assert p.stats.max_mana == 6 * mana, p.stats
+    free = p.stats.capacity                    # the client shows the free capacity: 460 less the club and the bag
 
     _down_to_the_rats(p, items, world_map)
-    walk_near(p, items, world_map, _in_sewer(world), open_tiles=BRIDGE)
+    _towards_the_rats(p, world, world_map)
     _kill_a_rat(p)
     assert p.wait_for(lambda: p.stats.level == 8, timeout=3), f"level {p.stats.level}, exp {p.stats.experience}"
     assert p.messages("You advanced from Level 7 to Level 8"), p.text_messages[-3:]
     assert p.stats.experience == exp_for_level(8) + 2, p.stats.experience
-    assert (p.stats.max_health, p.stats.max_mana, p.stats.capacity) == (185, 35, 470) == \
-        (150 + 7 * hp, 7 * mana, capacity(NONE, 8)), p.stats
+    assert (p.stats.max_health, p.stats.max_mana) == (185, 35) == (150 + 7 * hp, 7 * mana), p.stats
+    assert p.stats.capacity == free + 10, f"free capacity {free} -> {p.stats.capacity}, not +10"
 
     _up_to_the_temple(p, items, world_map)
     oracle = npc_pos("The Oracle")
@@ -296,3 +317,6 @@ def test_a_rat_takes_a_rookgaarder_to_level_8_and_he_walks_to_the_oracle(new_pla
     replies = talk_to(p, "The Oracle", "hi")
     assert replies and not any("COME BACK WHEN YOU HAVE GROWN UP" in r for r in replies), replies
     assert any("PREPARED" in r.upper() or "DESTINY" in r.upper() for r in replies), replies
+    row = _saved(p, db)
+    assert (row["level"], row["healthmax"], row["manamax"], row["cap"]) == (8, 185, 35, 470) == \
+        (8, 150 + 7 * hp, 7 * mana, capacity(NONE, 8)), {k: row[k] for k in ("level", "healthmax", "manamax", "cap")}

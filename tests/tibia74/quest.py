@@ -4,6 +4,7 @@ player takes on the way - use things on the map, open quest containers, check wh
 Walking itself is tibia74/route.py (plan on the real map + follow it, re-planning on surprises).
 """
 import re
+import time
 
 from . import BACKPACK, RIGHT, Item, watch
 
@@ -91,18 +92,136 @@ def carries(p, name):
     return any(i.name == name for i in p.all_items())
 
 
+TALK_RANGE = 3          # an NPC hears within 4 (npchandler talkRadius); one tile spare for its next step
+
+
+def _dist(a, b):
+    """Tiles between two positions (the way NPCs measure talk range), or a huge number on another floor."""
+    if not a or not b or a[2] != b[2]:
+        return 1 << 20
+    return max(abs(a[0] - b[0]), abs(a[1] - b[1]))
+
+
+def seen_npc(p, npc):
+    """The creature named `npc` (any case) nearest to us on our floor and inside the view - a creature on a tile the
+    client saw earlier but no longer sees keeps an old position, so that one does not count."""
+    if not p.pos:
+        return None
+    cands = [c for c in p.creatures_named(npc) if c.pos[2] == p.pos[2]
+             and abs(c.pos[0] - p.pos[0]) <= 8 and abs(c.pos[1] - p.pos[1]) <= 6]
+    return min(cands, key=lambda c: _dist(c.pos, p.pos), default=None)
+
+
+def approach(p, npc, within=TALK_RANGE, timeout=30):
+    """Get within `within` tiles of the NPC wherever it has wandered, like a player: the server's follow (it finds
+    the way around counters and other people), else straight at it. Returns the NPC, or None if it never was
+    that close within `timeout` seconds."""
+    deadline = time.time() + timeout
+    while True:
+        c = p.wait_for(lambda: seen_npc(p, npc), timeout=max(0.1, min(2.0, deadline - time.time())))
+        if c and _dist(c.pos, p.pos) <= within:
+            return c
+        if time.time() >= deadline:
+            return None
+        if not c:
+            continue                                   # out of view: it wanders back
+        before = len(p.text_messages)
+        p.follow(c.id)
+        p.wait_for(lambda: (_dist(c.pos, p.pos) <= max(1, within - 1))
+                   or any("There is no way" in t for _, t in p.text_messages[before:]), timeout=6)
+        p.follow(0)
+        if c.pos and _dist(c.pos, p.pos) > within:
+            p.walk_to(c.pos, max_steps=8)              # no way round (across a counter): as far as it goes
+
+
+def near_npc(new_player, npc, see=3, spawn=None, **kwargs):
+    """A new character logged in where it sees the NPC (a tibia74.npcs.Npc), however far it has wandered from its
+    spawn by now (Hardek: up to 20 tiles) and whoever stands around it (characters an earlier test left there, the
+    NPC itself: a taken login tile puts the character on a free one beside it, or in the temple). In front of the
+    spawn first (shop NPCs walk behind their counter: 2 away is still in talk range), then all over its walking
+    area. `see`: seconds to wait at each spot for the NPC to show; `spawn`: which of its spawns (default: the first)."""
+    spawn = tuple(spawn or npc.pos)
+    radius = npc.radii[npc.positions.index(spawn)] if spawn in npc.positions and npc.radii else npc.radius
+    spots = [(2, 0), (0, 2), (-2, 0), (0, -2), (2, 1), (2, -1), (1, 2), (-1, 2), (0, 0), (0, -1), (1, 0), (0, 1),
+             (-1, 0)]
+
+    def axis(step):                                  # the view is 8 tiles to each side and 6 up / down
+        out = [0]
+        k = step
+        while k - step < radius:
+            out += [min(k, radius), -min(k, radius)]
+            k += step
+        return out
+    spots += sorted({(dx, dy) for dx in axis(14) for dy in axis(10)} - {(0, 0)}, key=lambda d: max(map(abs, d)))
+    where = []
+    logged_in = False
+    for dx, dy in spots:
+        spot = (spawn[0] + dx, spawn[1] + dy, spawn[2])
+        if logged_in and max(abs(dx), abs(dy)) <= 2:
+            continue                                 # one good login near the spawn is enough to look there
+        p = new_player(pos=spot, **kwargs)
+        if p.pos[2] == spot[2] and _dist(p.pos, spot) <= 3:
+            logged_in = logged_in or max(abs(dx), abs(dy)) <= 2
+            if p.wait_for(lambda: seen_npc(p, npc.name), timeout=see):
+                return _beside(new_player, p, npc.name, **kwargs)
+        where.append(p.pos)
+        p.logout()
+    raise AssertionError(f"{npc.name} not seen anywhere around its spawn {spawn} (radius {radius}); "
+                         f"looked from {where}")
+
+
+def _beside(new_player, p, name, **kwargs):
+    """p sees the NPC: if it is out of talk range, log in again right beside where it stands now - the way there
+    may be long (around a counter, out of a house), or none (a balcony)."""
+    for _ in range(3):
+        c = seen_npc(p, name)
+        if c is None or _dist(c.pos, p.pos) <= TALK_RANGE:
+            return p
+        at = tuple(c.pos)
+        for dx, dy in ((1, 0), (0, 1), (-1, 0), (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1),
+                       (2, 0), (0, 2), (-2, 0), (0, -2)):
+            q = new_player(pos=(at[0] + dx, at[1] + dy, at[2]), **kwargs)
+            if q.pos[2] == at[2] and _dist(q.pos, at) <= 2 and q.wait_for(lambda: seen_npc(q, name), timeout=2):
+                break
+            q.logout()
+        else:
+            return p                                 # no free tile beside it: walk from where we are
+        p.logout()
+        p = q
+    return p
+
+
+def say_to(p, npc, line, tries=4):
+    """Say a line to an NPC in talk range and return its answer. Unanswered while the NPC is out of range (it
+    walked off before it heard us, or we never got close): get close again and repeat. Unanswered within range
+    the whole time: it heard and has nothing to say to that (said once only: a line may do something)."""
+    replies = []
+    for _ in range(tries):
+        if not approach(p, npc, timeout=30):
+            return replies
+        heard = seen_npc(p, npc)
+        replies = _say_unmuted(p, line, npc)
+        if replies:
+            return replies
+        now = seen_npc(p, npc)
+        if heard and now and _dist(heard.pos, p.pos) <= TALK_RANGE and _dist(now.pos, p.pos) <= TALK_RANGE:
+            return replies
+    return replies
+
+
 def talk_to(p, npc, *lines, stay=False, find=5):
     """Say lines to an NPC while following it (NPCs wander and leave talk range); returns its replies.
     stay: keep talking to it (no "bye") - for an answer it gives line by line, seconds apart.
     find: seconds to wait for it to come into view (Hardek wanders 20 tiles from his spawn)."""
-    target = p.wait_for(lambda: next((c for c in p.creatures.values() if c.name == npc), None), timeout=find)
+    target = p.wait_for(lambda: seen_npc(p, npc), timeout=find)
     assert target, f"{npc} is not in view from {p.pos}"
-    p.follow(target.id)
-    p.wait_for(lambda: target.pos and p.pos and target.pos[2] == p.pos[2]
-               and max(abs(target.pos[0] - p.pos[0]), abs(target.pos[1] - p.pos[1])) <= 1, timeout=8)
+    # the first line (the greeting) until it is heard: an NPC walks until someone talks to it
+    first = say_to(p, npc, lines[0]) if lines else []
+    target = seen_npc(p, npc) or target
+    p.follow(target.id)                     # an NPC talking to us stands still; stay close if it does not
     try:
-        replies = []
-        for line in lines:
+        replies = list(first)
+        for line in lines[1:]:
             replies += _say_unmuted(p, line, npc)
         return replies
     finally:

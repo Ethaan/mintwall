@@ -15,7 +15,7 @@ GFB, UH, PARALYZE, MANA_FLUID = 2304, 2273, 2278, 7
 
 def _mage(new_player, items=(), **kwargs):
     kwargs.setdefault("pos", SPOT)
-    return new_player(level=100, vocation=2, maglevel=60, mana=2000, health=100, group_id=TESTER_GROUP,
+    return new_player(level=100, vocation=2, maglevel=60, mana=2000, health=100, group_id=TESTER_GROUP, premium_days=30,
                       inventory={BACKPACK: Item(1988, contents=list(items))}, **kwargs)
 
 

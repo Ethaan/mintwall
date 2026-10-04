@@ -40,6 +40,7 @@ def player(server, db, items):
     clients = []
 
     def make(healthmax=None, manamax=None, **kwargs) -> GameClient:
+        kwargs.setdefault("premium_days", 30)  # Energy Strike, Berserk, Poison Storm: premium spells
         char = db.create_character(storage={30001: 1}, **kwargs)
         con = db._connect()
         try:

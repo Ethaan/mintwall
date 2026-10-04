@@ -29,6 +29,7 @@ class ServerProcess:
         self.config = config or {}
         self.setup = setup
         self.proc = None
+        self._job = None
         self.started_at = None
         self._log_file = None
 
@@ -83,6 +84,7 @@ class ServerProcess:
             cwd=SERVER_DIR, stdout=self._log_file, stderr=subprocess.STDOUT,
             stdin=subprocess.DEVNULL,
         )
+        self._job = _dies_with_us(self.proc)
         deadline = time.time() + timeout
         while time.time() < deadline:
             if self.proc.poll() is not None:
@@ -125,6 +127,43 @@ class ServerProcess:
             if "Lua Script Error" in line:
                 errors.append("\n".join(lines[i:i + 5]))
         return errors
+
+
+def _dies_with_us(proc):
+    """Windows: put the server into a job object that kills it when this process ends, however it ends - a pytest
+    stopped by a timeout (or killed) takes its server along instead of leaving it running on the port. Returns the
+    job handle (kept open as long as we live), or None where that is not possible."""
+    if os.name != "nt":
+        return None
+    try:
+        import ctypes
+        from ctypes import wintypes
+
+        class Basic(ctypes.Structure):
+            _fields_ = [("PerProcessUserTimeLimit", ctypes.c_int64), ("PerJobUserTimeLimit", ctypes.c_int64),
+                        ("LimitFlags", wintypes.DWORD), ("MinimumWorkingSetSize", ctypes.c_size_t),
+                        ("MaximumWorkingSetSize", ctypes.c_size_t), ("ActiveProcessLimit", wintypes.DWORD),
+                        ("Affinity", ctypes.c_size_t), ("PriorityClass", wintypes.DWORD),
+                        ("SchedulingClass", wintypes.DWORD)]
+
+        class Extended(ctypes.Structure):
+            _fields_ = [("BasicLimitInformation", Basic), ("IoInfo", ctypes.c_uint64 * 6),
+                        ("ProcessMemoryLimit", ctypes.c_size_t), ("JobMemoryLimit", ctypes.c_size_t),
+                        ("PeakProcessMemoryUsed", ctypes.c_size_t), ("PeakJobMemoryUsed", ctypes.c_size_t)]
+
+        k32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        k32.CreateJobObjectW.restype = wintypes.HANDLE
+        k32.CreateJobObjectW.argtypes = (ctypes.c_void_p, wintypes.LPCWSTR)
+        k32.SetInformationJobObject.argtypes = (wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD)
+        k32.AssignProcessToJobObject.argtypes = (wintypes.HANDLE, wintypes.HANDLE)
+        job = k32.CreateJobObjectW(None, None)
+        info = Extended()
+        info.BasicLimitInformation.LimitFlags = 0x2000          # JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
+        if not job or not k32.SetInformationJobObject(job, 9, ctypes.byref(info), ctypes.sizeof(info))                 or not k32.AssignProcessToJobObject(job, int(proc._handle)):
+            return None
+        return job
+    except (OSError, AttributeError):
+        return None
 
 
 def _lua(value) -> str:

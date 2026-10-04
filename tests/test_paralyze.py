@@ -49,7 +49,8 @@ def test_speed_items_still_count_while_paralyzed(new_player):
 
 @pytest.mark.parametrize("words", ["exura", "utani hur"])
 def test_healing_or_haste_removes_paralyze(new_player, words):
-    caster, target, seen, normal = _paralyze(new_player, vocation=2, maglevel=20, mana=500)
+    # Haste is premium (spells.xml prem)
+    caster, target, seen, normal = _paralyze(new_player, vocation=2, maglevel=20, mana=500, premium_days=30)
     target.say(words)
     assert caster.wait_for(lambda: seen.speed >= normal, timeout=3), f"'{words}' left speed at {seen.speed}"
 

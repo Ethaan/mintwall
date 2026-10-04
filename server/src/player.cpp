@@ -2433,9 +2433,13 @@ bool Player::addVIP(uint32_t _guid, std::string& name, bool isOnline, bool inter
 		return false;
 	}
 
-	if(VIPList.size() > maxVipLimit){
-		if(!internal)
-			sendTextMessage(MSG_STATUS_SMALL, "You cannot add more buddies.");
+	// 7.4 (tibia.com manual "Communication" 2004: "VIP lists can contain up to 20 names. Note, however, premium players
+	// have their VIP lists extended to a total of 50 names."; docs/reference-74/premium.md): 20 without premium, the
+	// group's maxviplist (50 for players) with it. Was: 51 for everyone (">" let one more in). A list loaded at login
+	// (internal) is kept whole - a character whose premium ran out keeps its names but cannot add more.
+	uint32_t limit = isPremium() ? maxVipLimit : std::min<uint32_t>(maxVipLimit, 20);
+	if(!internal && VIPList.size() >= limit){
+		sendTextMessage(MSG_STATUS_SMALL, "You cannot add more buddies.");
 		return false;
 	}
 

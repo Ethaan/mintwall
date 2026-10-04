@@ -73,22 +73,18 @@ TalkActionResult_t Spells::playerSaySpell(Player* player, SpeakClasses type, con
 		std::string paramText = str_words.substr(spellLen, paramLen);
 
 		if(!paramText.empty() && paramText[0] == ' '){
+			// `words "param"` or `words "param` -> between the quotes; `words param` (no quote) -> the rest
 			size_t loc1 = paramText.find('"', 0);
-			size_t loc2 = std::string::npos;
-
-			// if found first apostrophe
 			if(loc1 != std::string::npos){
-				// search for ending apostrophe
-				loc2 = paramText.find('"', loc1 + 1);
+				size_t loc2 = paramText.find('"', loc1 + 1);
+				if(loc2 == std::string::npos){
+					loc2 = paramText.length();
+				}
+				param = paramText.substr(loc1 + 1, loc2 - loc1 - 1);
 			}
-
-			// if ending apostrophe not found
-			if(loc2 == std::string::npos){
-				// rest of the text is param
-				loc2 = paramText.length();
+			else{
+				param = paramText;
 			}
-
-			param = paramText.substr(loc1 + 1, loc2 - loc1 - 1);
 
 			trim_left(param, " ");
 			trim_right(param, " ");
@@ -220,7 +216,14 @@ InstantSpell* Spells::getInstantSpell(const std::string words)
 			size_t paramLen = words.length() - spellLen;
 			std::string paramText = words.substr(spellLen, paramLen);
 
-			if(paramText.substr(0, 1) != " " || (paramText.length() >= 2 && paramText.substr(0, 2) != " \"")){
+			// the words must end before a space. A spell with a parameter takes the rest, quoted or not: 7.4's
+			// `exani hur up` / `exani hur down`, `exiva Name`, `exura sio Name`, `utevo res rat` (and the quoted
+			// `exani hur "up`, `exiva "Name"`). A spell without one only allows a quote after it, as before (so
+			// `exura please` stays plain speech).
+			if(paramText.substr(0, 1) != " "){
+				return NULL;
+			}
+			if(!result->getHasParam() && paramText.length() >= 2 && paramText.substr(0, 2) != " \""){
 				return NULL;
 			}
 		}
@@ -715,10 +718,13 @@ bool Spell::playerSpellCheck(Player* player) const
 			}
 		}
 		
+		// spells.xml prem="1": the spells taught only in premium areas (decided with the user 2026-10-04). The rune a
+		// premium conjure makes is a <rune> without prem, usable by anyone.
 		if(isPremium() && !player->isPremium()){
-            player->sendCancelMessage(RET_YOUNEEDPREMIUMACCOUNT);
-            return false;
-        }
+			player->sendCancel("You need a premium account to use this spell.");
+			g_game.addMagicEffect(player->getPosition(), NM_ME_PUFF);
+			return false;
+		}
 	}
 
 	return true;

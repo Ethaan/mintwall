@@ -183,20 +183,23 @@ def _blocker(client, pos):
 def _clear(client, pos, timeout=30):
     """Kill the monster standing on pos (the character is strong; players / NPCs are waited for)."""
     c = _blocker(client, pos)
-    if c is None or c.id == client.player_id:
+    if c is None or c.id == client.player_id or c.id in immovable(client):
         return
     if 0x40000000 <= c.id < 0x80000000:              # monsters (Creature::idRange: players 0x10000000, NPCs 0x80000000)
         gone = lambda: c.id in client.removed_creatures or _blocker(client, pos) is not c   # noqa: E731
         start = time.monotonic()
         unhurt = lambda: (_blocker(client, pos) or c).health >= 100   # noqa: E731
+        before = len(client.text_messages)
+        # a trap nobody may attack (a deathslicer: "You may not attack this creature."): no fight, push it
+        refused = lambda: any("may not attack" in t for _, t in client.text_messages[before:])   # noqa: E731
         client.attack(c.id)
         # a monster nothing hurts stays at full health: stop trying after a while
-        client.wait_for(lambda: gone() or (unhurt() and time.monotonic() - start > 8), timeout)
+        client.wait_for(lambda: gone() or refused() or (unhurt() and time.monotonic() - start > 8), timeout)
         client.attack(0)
         # a monster the weapon cannot hurt (a ghost is immune to physical damage): runes, like a player - heavy
         # magic missiles (energy) first: a sudden death rune is physical damage in 7.4
         runes = lambda n: n in ("heavy magic missile rune", "sudden death rune")   # noqa: E731
-        rune = None if gone() else carried(client, client.items, runes)
+        rune = None if gone() or refused() else carried(client, client.items, runes)
         for tries in range(20):
             if gone() or rune is None or (tries >= 3 and unhurt()):
                 break
@@ -208,8 +211,8 @@ def _clear(client, pos, timeout=30):
             client.use_item_with(*rune, tuple(pos), 0x63, at)
             client.wait_for(gone, 2.1)               # rune exhaustion
             rune = carried(client, client.items, runes)
-        if not gone():
-            _push_creature(client, pos, c, gone)     # nothing hurts it (a deathslicer): push it out of the way
+        if not gone() and not _push_creature(client, pos, c, gone) and refused() and not gone():
+            immovable(client).add(c.id)              # no attack, and no push (no free tile beside it): wait it out
     else:
         client.sleep(1)
 
@@ -221,6 +224,7 @@ def _push_creature(client, pos, c, gone):
     from where it stands now."""
     world = getattr(client, "world", None)
     tried = set()
+    refusals = 0
     for _ in range(10):
         if gone():
             return True
@@ -239,9 +243,23 @@ def _push_creature(client, pos, c, gone):
         client.move_item(tuple(pos), 0x63, at, spots[0])
         if client.wait_for(gone, timeout=2.5):         # a push waits for the last action's exhaustion
             return True
-        if any("not enough room" in t or "not possible" in t for _, t in client.text_messages[before:]):
-            tried.add(spots[0])                        # that tile will not take it; "cannot move": it had moved
+        said = [t for _, t in client.text_messages[before:]]
+        if any("not enough room" in t or "not possible" in t for t in said):
+            tried.add(spots[0])                        # that tile will not take it
+        elif any("cannot move this object" in t for t in said) and not gone():
+            refusals += 1                              # it had moved just then - or nobody may push it: a monster
+            if refusals >= 2:                          # that pushes others (canpushcreatures) is never pushed
+                immovable(client).add(c.id)
+                return False
     return gone()
+
+
+def immovable(client):
+    """Ids of the creatures in the way that neither a weapon, a rune nor a push moves (a deathslicer: not attackable,
+    and a monster that pushes others is never pushed itself, monsters.cpp) - they are waited out."""
+    if not hasattr(client, "immovable"):
+        client.immovable = set()
+    return client.immovable
 
 
 def _walk_to(client, target, arrive, timeout=5.0):
@@ -385,7 +403,40 @@ def _rope(client, items, spot, arrive, timeout=5.0):
     return client.wait_for(lambda: client.pos == arrive, timeout=timeout)
 
 
-def follow(client, items, world: WorldMap, goal, *, replans=6, **ability):
+def _cheb(a, b):
+    return max(abs(a[0] - b[0]), abs(a[1] - b[1])) if a[2] == b[2] else 1 << 20
+
+
+def _let_pass(client, items, world, c, ahead, ability):
+    """A creature nothing moves stands on the way (a deathslicer in a one-tile corridor of Morguthis's tomb): like a
+    player, step off the way and away from it, so it can come out, and wait until it has walked off the tiles ahead."""
+    ahead = [tuple(t) for t in ahead]
+    if c.pos is None or tuple(c.pos) not in ahead:
+        return
+    end, ahead = ahead[-1], set(ahead)
+    me = client.pos
+    spots = sorted((max(abs(dx), abs(dy)), (me[0] + dx, me[1] + dy, me[2]))
+                   for dx in range(-6, 7) for dy in range(-6, 7) if dx or dy)
+    for _, q in spots:
+        if (q in ahead or not world.walkable(q) or world.arrival(q) or _blocker(client, q)
+                or c.pos is None or _cheb(q, tuple(c.pos)) < 3):
+            continue
+        try:
+            if len(plan(world, me, q, margins=(10,), avoid={tuple(c.pos)}, **ability)) > 10:
+                continue
+            follow(client, items, world, q, replans=1, wait_out=0, avoid={tuple(c.pos)}, **ability)
+            break
+        except RouteError:
+            continue
+    try:                                             # the way back from here too: it may come our way
+        way = ahead | {s.target for s in plan(world, client.pos, end, margins=(20,), **ability)}
+    except RouteError:
+        way = ahead
+    client.wait_for(lambda: c.pos is None or tuple(c.pos) not in way and _cheb(tuple(c.pos), client.pos) >= 2,
+                    timeout=45)
+
+
+def follow(client, items, world: WorldMap, goal, *, replans=6, wait_out=8, **ability):
     """Walk the character from where it stands to goal. `ability`: level, vocation, keys, storages, rope,
     open_tiles (became walkable), avoid (tiles not to step on). The map changes during quests - a hole
     opened with a pick, say: a step that lands somewhere the plan did not expect adds that tile to avoid."""
@@ -395,13 +446,28 @@ def follow(client, items, world: WorldMap, goal, *, replans=6, **ability):
     avoid = {tuple(t) for t in ability.pop("avoid", ())}
     last = None
     blocked = {}                                      # tile -> times a creature on it refused the step
+    around = set()                                    # tiles avoided only because a creature stood there
+    tried_round = set()                               # tiles a creature nothing moves stood on: way round tried
+    stalled = None                                    # since when such a creature keeps us from going on
+    patience = time.time() + 600                      # how long we wait for such creatures, all in all
     slow_start = 0
     interruptions = 60                                # auto-walks cut short by monsters: not a failed plan
     attempt = 0
     while attempt <= replans:
         attempt += 1
         interrupted = False
-        steps = plan(world, client.pos, goal, avoid=avoid, **ability)
+        try:
+            steps = plan(world, client.pos, goal, avoid=avoid, **ability)
+        except RouteError:
+            if not around:
+                raise
+            # no way around the creature (a deathslicer in a one-tile corridor): through it after all - it moves
+            # on, or is pushed along ahead of us
+            avoid -= around
+            around.clear()
+            blocked.clear()
+            client.sleep(1)
+            steps = plan(world, client.pos, goal, avoid=avoid, **ability)
         i, slow = 0, slow_start
         slow_start = 3                               # after any re-plan: the first tiles one by one
         while i < len(steps):
@@ -424,16 +490,44 @@ def follow(client, items, world: WorldMap, goal, *, replans=6, **ability):
             if step.kind == "walk":
                 before = client.pos
                 ok = _walk_to(client, step.target, step.arrive)
+                if ok:
+                    stalled = None
                 if not ok and client.pos != step.target and client.pos[2] != step.target[2]:
                     avoid.add(step.target)           # it took us to another floor: a hole the map does not know
                 elif not ok and client.pos == before and not _blocker(client, step.target):
-                    avoid.add(step.target)           # refused with nobody on it: the map is wrong about this tile
+                    avoid.add(step.target)           # refused with nobody on it: the map is wrong about this tile -
+                    around.add(step.target)          # or a creature stood there and has just moved on
+                elif not ok and client.pos == before and (
+                        (stuck := _blocker(client, step.target)) is not None and stuck.id in immovable(client)):
+                    # nothing moves it (a deathslicer: no attack, no push), but it walks about. A short way round
+                    # it if there is one; else close behind it: it can only go on ahead or turn off the way. In a
+                    # dead end (it cannot come out past us) step back and let it out
+                    stalled = stalled or time.time()
+                    detour = None
+                    if step.target not in tried_round:
+                        tried_round.add(step.target)
+                        try:
+                            detour = plan(world, client.pos, goal, avoid=avoid | {step.target}, **ability)
+                        except RouteError:
+                            pass
+                    if detour is not None and len(detour) <= len(steps) - i + 20:
+                        avoid.add(step.target)
+                        around.add(step.target)
+                    elif client.wait_for(lambda: _blocker(client, step.target) is not stuck, timeout=5):
+                        pass                         # it moved on: after it
+                    elif time.time() - stalled > 20 and wait_out > 0:
+                        wait_out -= 1
+                        stalled = None
+                        _let_pass(client, items, world, stuck,
+                                  [s.target for s in steps[i - 1:i + 9] if s.target[2] == client.pos[2]], ability)
+                    interrupted = time.time() < patience     # waiting for it is no failed plan - for a while
                 elif not ok and client.pos == before:
                     # a creature in the way usually moves on; one that blocks the same tile twice does not (a
                     # thrower in its wall slot, Ashmunrah's hall): go around it
                     blocked[step.target] = blocked.get(step.target, 0) + 1
                     if blocked[step.target] >= 2 and step.target != goal:
                         avoid.add(step.target)
+                        around.add(step.target)
             elif step.kind == "door":
                 info = world.info(step.target)
                 if _stack_item(client, items, step.target, {info["door_id"]})[0] is None:

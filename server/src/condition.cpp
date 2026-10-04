@@ -1292,7 +1292,11 @@ bool ConditionDamage::executeCondition(Creature* creature, int32_t interval)
 		}
 	}
 
-	return Condition::executeCondition(creature, interval);
+	// The game counts 1000 ms per think but thinks run 1.02-1.09 s apart, so the wall-clock endTime came
+	// before the last hit or two of a long chain (medium fire field 20 + 4 x 10 instead of 5): a damage
+	// condition lasts until its list is dealt (approved by the user 2026-10-04; tests/test_fields.py)
+	bool alive = Condition::executeCondition(creature, interval);
+	return alive || (getTicks() != -1 && !damageList.empty());
 }
 
 bool ConditionDamage::getNextDamage(int32_t& damage)

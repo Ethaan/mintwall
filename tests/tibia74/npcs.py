@@ -26,6 +26,7 @@ class Npc:
     xml: Path
     script: str = ""       # "" for <interaction> NPCs
     positions: list = field(default_factory=list)  # every spawn of this NPC in the world's spawns file
+    radii: list = field(default_factory=list)      # how far it may wander from each of them (the spawn's radius)
     keywords: dict = field(default_factory=dict)   # "job" -> reply
     buyable: list = field(default_factory=list)    # the player can buy these
     sellable: list = field(default_factory=list)   # the player can sell these
@@ -33,6 +34,10 @@ class Npc:
     @property
     def pos(self):
         return self.positions[0] if self.positions else None
+
+    @property
+    def radius(self):
+        return self.radii[0] if self.radii else 0
 
     @property
     def is_interaction(self) -> bool:
@@ -104,8 +109,9 @@ def load_npcs(server_dir: Path) -> dict:
             cx, cy = int(spawn.get("centerx")), int(spawn.get("centery"))
             for n in spawn.iter("npc"):
                 if n.get("name").lower() in by_lower:
-                    by_lower[n.get("name").lower()].positions.append(
-                        (cx + int(n.get("x")), cy + int(n.get("y")), int(n.get("z"))))
+                    npc = by_lower[n.get("name").lower()]
+                    npc.positions.append((cx + int(n.get("x")), cy + int(n.get("y")), int(n.get("z"))))
+                    npc.radii.append(int(spawn.get("radius") or 0))
     return npcs
 
 

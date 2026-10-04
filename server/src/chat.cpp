@@ -251,6 +251,13 @@ ChatChannel* Chat::createChannel(Player* player, uint16_t channelId)
 		return newChannel;
 	}
 	else if(channelId == CHANNEL_PRIVATE){
+		// 7.4: only premium players open a private chat channel (tibia.com premium page 2004: "Premium players are
+		// allowed to open up private chat channels"). The channel list offers it to premium players only
+		// (getChannelList); this refuses the packet itself (0xAA) from a free account.
+		if(!player->isPremium()){
+			return NULL;
+		}
+
 		// Only 1 private channel for each player
 		if(getPrivateChannel(player)){
 			return NULL;

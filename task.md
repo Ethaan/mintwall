@@ -64,13 +64,13 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       (2005-06: 190, Tibiantis 150), dragon scale helmet 60 (Tibiantis 32.5, later only), ornamented shield 67 (wiki
       always 67, Tibiantis 72), golden mace 50 (no page before 2009, today 41). Take the 2005-06 values or Tibiantis?
       (recommended: 2005-06 wiki - closest to 7.4 - i.e. tower 88, black 41.5, the rest as they are)
-- [x] Q14 Capacity edge cases: (a) an item weighing exactly the free cap is refused (hasCapacity uses <); allow it - answered 2026-10-04: (a) allow an item that fits the free cap exactly; (b) an NPC sale over the cap is refused with "You do not have enough capacity." and the money kept - in progress
+- [x] Q14 Capacity edge cases: (a) an item weighing exactly the free cap is refused (hasCapacity uses <); allow it - answered 2026-10-04: (a) allow an item that fits the free cap exactly; (b) an NPC sale over the cap is refused with "You do not have enough capacity." and the money kept - Done 2026-10-04: Player::hasCapacity compares in hundredths (exact fit allowed, NEEDS REBUILD); ShopModule.onConfirm checks the weight before the money (test_shops.py::test_an_item_over_the_free_capacity_is_not_sold)
       (<=, rebuild)? (b) an NPC sale over the cap drops the item on the floor with no message; 7.4? (recommended: (a)
       allow; (b) refuse with "You do not have enough capacity." - no 7.4 source for either, ask what you remember)
 - [x] Q15 Deathslicer (5 on floor 13): ours 320 exp, 2000 hp, attackable. Current TibiaWiki: exp 0, hp 8200, immune to - answered 2026-10-04: a trap: not attackable, immune to everything, 0 exp (done, deathslicer.xml)
       all damage (a trap, in since 7.4); no 7.4-era number. Make it a trap like the throwers - not attackable, 0 exp?
       (recommended: yes)
-- [x] Q16 GM ban command: talkactions/scripts/banmanager.lua (TFS-style, unregistered) calls 6 functions our engine - answered 2026-10-04: delete banmanager.lua (GMs use the engine's player/IP bans) - in progress
+- [x] Q16 GM ban command: talkactions/scripts/banmanager.lua (TFS-style, unregistered) calls 6 functions our engine - answered 2026-10-04: delete banmanager.lua (GMs use the engine's player/IP bans) - Done 2026-10-04: banmanager.lua deleted, 6 names off KNOWN_UNDEFINED
       lacks. The engine has player-name and IP bans for Lua (addBan, addIPBan...), account bans only checked; /b is
       commented out in commands.cpp. Delete banmanager.lua and ban via the engine's player/IP bans (or restore /b), or
       wire it up (new C++ for account bans)? (recommended: delete it; restore /b if GMs need a command)
@@ -81,27 +81,36 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       made up - take Tibiantis' house list (tibiantis.online/?page=houses) or a per-tile rent? (c) "alana sio" with no
       name: kick yourself (later servers) or nothing (ours)? (recommended: (a) yes / keep; (b) Tibiantis; (c) yourself)
 - [x] Q18 Server save hour (Q5): which hour (server time)? and the warnings at 5/3/1 minutes ok? - answered 2026-10-04: early morning - ServerSaveHour = 6 (config.lua)
-- [x] Q19 Bans: (a) with enough GM warnings (WarningsToFinalBan) the "final" ban (FinalBanLength 7 days) or deletion - answered 2026-10-04: (a) the final ban is never shorter than the automatic one; (b) GM bans stay out of the count - in progress
+- [x] Q19 Bans: (a) with enough GM warnings (WarningsToFinalBan) the "final" ban (FinalBanLength 7 days) or deletion - answered 2026-10-04: (a) the final ban is never shorter than the automatic one; (b) GM bans stay out of the count - Done 2026-10-04: the final ban takes the longer of FinalBanLength and the automatic length (NEEDS REBUILD); GM bans confirmed out of the count
       applies instead, and can be shorter than a repeat automatic ban (30/60...) - keep? (b) GM bans do not count toward
       the automatic ban length - intended? (recommended: (a) make the final ban at least the automatic length; (b) yes)
-- [x] Q20 Houses: (a) Tibiantis allows one house AND one guildhall per account; ours one in total (as asked) - keep? - answered 2026-10-04: one house AND one guildhall per account (like Tibiantis); "alana sio" with no name puts the caster out - in progress
+- [x] Q20 Houses: (a) Tibiantis allows one house AND one guildhall per account; ours one in total (as asked) - keep? - answered 2026-10-04: one house AND one guildhall per account (like Tibiantis); "alana sio" with no name puts the caster out - Done 2026-10-04: lib/houses.lua per kind (house / guildhall), /cancelhouse withdraws all; house.cpp kickPlayer: alana sio alone puts the caster out (NEEDS REBUILD). Engine /sellhouse still refuses a buyer who owns any house (C++).
       (b) "alana sio" with no name: put the caster out (later servers) or nothing (ours)? (c) is emptying the guest list
       enough as the "kick everyone", or a command too? (recommended: (a) keep one; (b) put the caster out; (c) enough)
-- [x] Q21 Distance details: (a) poison arrow attack - TibiaWiki 2006-07 says 20 ("less than an arrow"), tibiantis- - answered 2026-10-04: poison arrow attack 20; remove the minimum damage (distance and melee) - in progress (C++)
+- [x] Q21 Distance details: (a) poison arrow attack - TibiaWiki 2006-07 says 20 ("less than an arrow"), tibiantis- - answered 2026-10-04: poison arrow attack 20; remove the minimum damage (distance and melee) (C++) - Done 2026-10-04: weapons.cpp distance rolls from 0 (melee never had a minimum) - NEEDS REBUILD
       notes 10; ours 20. (b) its poison - tibiantis-notes power 50 (3 a tick first), TibiaWiki "2 HP per turn" (2006) / 1
       (2005); ours 50 (a 25-50 roll fits both). (c) minimum damage: ours ceil(level x 0.2) vs monsters, x 0.1 vs players;
       the 7.4 calculator has none. (recommended: (a) 20, (b) the 25-50 roll, (c) remove the minimum vs players and
       monsters - no 7.4 source has one)
-- [x] Q22 Spells (docs/reference-74/spell-formulas.md): (a) sudden death - tibiantis-notes and OTHire 130-170 %P, ours - answered 2026-10-04: SD 130-170 %P, force strike 35-55, berserk level only - in progress
+- [x] Q22 Spells (docs/reference-74/spell-formulas.md): (a) sudden death - tibiantis-notes and OTHire 130-170 %P, ours - answered 2026-10-04: SD 130-170 %P, force strike 35-55, berserk level only - Done 2026-10-04: sudden_death -1.3..-1.7, force_strike -0.35..-0.55, berserk 2.4-4.0 x level; test_spell_damage.py
       125 %P + 30 .. 170 %P (155-170 at the floor) - change? (b) force strike - OTHire 35-55, OTL-Mech 18-33, ours 20-50.
       (c) berserk - level only (TI-Calc 2.4-4.0 x level) or also magic level (ours)? (d) burn tick 10 s (ours, like
       fire fields) vs "9 s" / "2 turns" on the wiki. (e) damage roll: clipped normal (ours) - no source on 7.4's shape.
       (recommended: (a) 130-170, (b) 35-55 like the other strikes, (c) level only, (d) keep 10 s, (e) keep)
-- [x] Q23 Fields (spell-formulas.md Q8-Q12): (a) medium fire field: ours 7 x 10 with no hit on stepping in; TibiaWiki - answered 2026-10-04: follow the 2005 text: medium fire 20 + 5 x 10, energy field 30 + 2 x 25 - in progress
+- [x] Q23 Fields (spell-formulas.md Q8-Q12): (a) medium fire field: ours 7 x 10 with no hit on stepping in; TibiaWiki - answered 2026-10-04: follow the 2005 text: medium fire 20 + 5 x 10, energy field 30 + 2 x 25 - Done 2026-10-04 in items.xml (1493/1488/1501, 1495/1491/1504); the last hit or two of a long damage chain is lost - see the condition bug below
       2005-11 "20 initial, then 10 each 2 turns", 70 total - make it 20 + 5 x 10? (b) energy field: ours 30 + 25 (55);
       TibiaWiki 2005-11/2006-10 30 + 2 x 25 (80), 2007 55 - count 2? (c) non-PvP fields last 10 s here; wiki 8 s fire
       (2005), 3 s poison bomb (2006) - only matters on no-PvP tiles. (recommended: (a) yes, (b) yes - the only 7.4-era
       text, (c) fire 8 s, poison/energy 3-8 s)
+- [x] Q24 Premium (docs/reference-74/premium.md): (a) how players get premium - 7.4: bought on tibia.com; ours: only by - answered 2026-10-04: (a) website only (no GM command); (b) every spell taught only in Edron / on Eremo's isle needs premium to cast (a player whose premium ran out loses them until renewed) - in progress; (c) keep the waiting-list priority; (d) keep the VIP list whole
+      hand in the DB. A GM command /premium <name>, <days> now, the website later? (b) every Edron spell premium to cast, or
+      only Levitate (ours, TibiaWiki 2005)? (c) premium logs in past MaxPlayers (7.4 text) or keep the waiting-list
+      priority? (d) premium runs out: cut the VIP list to 20 or keep it (no new names)? (recommended: (a) GM command
+      now, (b) only Levitate, (c) keep, (d) keep)
+- [x] Engine: a long damage condition (fields, poison) loses its last hit(s): executeConditions counts 1000 ms per
+      think but thinks run 1.02-1.09 s apart, and the condition ends on a wall-clock endTime. Measured: medium fire 20 + 4
+      x 10 (not 5), energy 30 + 25 (not 2). Proposed fix in condition.cpp ConditionDamage::executeCondition: keep the
+      condition alive while damageList is not empty. test_fields.py (2) wait on it. Done 2026-10-04 (approved by the user): condition.cpp - NEEDS REBUILD
   - [x] /sellhouse can give a house to an account that already has one - add the one-per-account and guild-leader checks
         Done 2026-10-04: talkactions/scripts/sellhouse.lua + houses.lua houseTransferProblem (checked when the trade is
         offered; a request made while the trade window is open slips through - closing it needs House::executeTransfer, C++)
@@ -119,7 +128,9 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       Done 2026-10-01: removed (decided with the user: 7.4 had no starter kit). npc/lib/oracle.lua
 - [x] Oracle's "SO BE IT" is never seen (player is teleported first) - delay the teleport slightly?
       Done 2026-10-01: the player is teleported 1 s after it. test_oracle_turns_a_level_8_into_a_knight_of_thais
-- [ ] More journey tests: rookgaard shops buy/sell with money, sewers/ladders, death in Rookgaard, reaching level 8 via exp - 2026-10-04: tests/test_rookgaard_journey.py written (hunt/sell/buy, sewers, death, level 8 + Oracle), not passing yet: test 1 hangs (likely the sewer rat spawn 32097,32211,8 is unreachable for walk_near) - debug
+- [x] More journey tests: rookgaard shops buy/sell with money, sewers/ladders, death in Rookgaard, reaching level 8 via exp - 2026-10-04: tests/test_rookgaard_journey.py written (hunt/sell/buy, sewers, death, level 8 + Oracle), not passing yet: test 1 hangs (likely the sewer rat spawn 32097,32211,8 is unreachable for walk_near) - debug - Done 2026-10-04: all 6 pass twice (the sewer rats are behind a drawbridge: the test pulls its switch); test_rookgaard_journey.py
+  - [ ] test_rookgaard.py ROOK_FIELD (32082,32210,7) is not walkable: test_rookgaard_is_non_pvp logs in at the temple (PZ) and may pass for the wrong reason - use (32085,32191,7)
+  - [ ] _saved helpers in test_npcs_rookgaard.py / test_death.py wait for lastlogout only - a periodic save can set it first; wait for lastlogout >= the logout time (as test_rookgaard_journey.py does)
 
 ## NPCs
 
@@ -1298,7 +1309,9 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
       still idle." (was "minutes , you will be"; player.cpp, needs a rebuild)
 
 ### Premium
-- [ ] What premium unlocks in 7.4 (towns, promotion, spells, houses) and how players get it
+- [x] What premium unlocks in 7.4 (towns, promotion, spells, houses) and how players get it
+      Done 2026-10-04: docs/reference-74/premium.md (tibia.com "Features of Premium Accounts", 30 Nov 2004). Already enforced: premium areas (ships, carpets, King's Bridge), Edron/Eremo spells taught only there, promotion, houses, beds, 3 outfits. Fixed: VIP list 20 free / 50 premium (was 51), a free account can no longer open a private channel by packet (player.cpp, chat.cpp - NEEDS REBUILD); Humphrey's blessing is free (blessings were for anyone). tests/test_premium.py (30; 3 wait on the rebuild). Open: Q24.
+  - [ ] Levitate: spells.cpp getInstantSpell rejects `exani hur up` (the 7.4 words), only `exani hur "up` works - fix (rebuild)
 
 ### Spells, runes, items
 - [x] Verify 7.4 spell list, words, mana, level, vocation, premium (remove post-7.4 spells)

@@ -5,7 +5,7 @@ import pytest
 
 from tibia74 import SERVER_DIR
 from tibia74.npcs import load_npcs
-from tibia74.quest import talk_to
+from tibia74.quest import near_npc, talk_to
 from tibia74.server import TESTER_GROUP
 
 NPCS = load_npcs(SERVER_DIR)
@@ -49,10 +49,10 @@ SILENT = {"A Ghostly Woman", "A Lost Soul", "A Tainted Soul", "A Tortured Soul",
 def test_npc_answers(new_player, name):
     # by name, like a player between two NPCs: a player talks to one NPC at a time (npchandler.lua)
     word, storage = GREETING.get(name, (f"hi {name.lower()}", {}))
-    p = near(new_player, NPCS[name].positions[0], level=100, premium_days=30, group_id=TESTER_GROUP,
-                storage={30001: 1, **storage})
-    # follow the NPC (they wander, some ten tiles from their spawn) and talk
-    replies = talk_to(p, name, word, "job", "bye", find=60)
+    # where the NPC is now: they wander, Hardek 20 tiles from his spawn; in a long run far from where they started
+    p = near_npc(new_player, NPCS[name], level=100, premium_days=30, group_id=TESTER_GROUP,
+                 storage={30001: 1, **storage})
+    replies = talk_to(p, name, word, "job", "bye", find=10)
     if name in SILENT:
         assert not replies, f"{name} is silent in 7.4: {replies}"
     else:

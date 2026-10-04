@@ -1,7 +1,0 @@
-============================= test session starts =============================
-platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\mintwall\tests\.venv\Scripts\python.exe
-rootdir: C:\mintwall\tests
-configfile: pytest.ini
-collecting ... collected 6 items
-
-test_rookgaard_journey.py::test_a_new_player_hunts_sewer_rats_sells_them_and_buys_a_dagger 

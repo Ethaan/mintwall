@@ -100,6 +100,8 @@ SQLite shell: `server\build\vcpkg_installed\x64-windows-static\tools\sqlite3.exe
   which is what runs `data/creaturescripts/scripts/login.lua` (beginner set + classic outfit)
 - Data: `TRUE`/`FALSE` defined in global.lua; antidote rune constant typo; `Demongoblin` monster;
   spawns: Bonebeast->Bone Beast, Cobra/Demon Skeleton were tagged as NPCs
+- Premium (docs/reference-74/premium.md): VIP list 20 free / maxviplist with premium (`Player::addVIP`, was 51
+  for all); a free account cannot open a private chat channel (`Chat::createChannel`)
 
 ## Script compatibility layer
 

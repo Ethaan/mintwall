@@ -10,7 +10,7 @@ ROPE_SPOT = (32077, 32151, 8)        # Rookgaard, ground 384; the way up comes o
 
 
 def test_magic_rope_pulls_you_up_a_rope_spot(new_player):
-    p = new_player(pos=ROPE_SPOT, level=20, vocation=1, mana=100, maglevel=5)
+    p = new_player(pos=ROPE_SPOT, level=20, vocation=1, mana=100, maglevel=5, premium_days=30)   # Magic Rope: premium
     assert p.pos == ROPE_SPOT, p.pos
     p.say("exani tera")
     assert p.wait_for(lambda: p.pos == (ROPE_SPOT[0], ROPE_SPOT[1] + 1, ROPE_SPOT[2] - 1), timeout=3), p.pos
@@ -18,7 +18,7 @@ def test_magic_rope_pulls_you_up_a_rope_spot(new_player):
 
 def test_magic_rope_does_nothing_off_a_rope_spot(new_player):
     start = (ROPE_SPOT[0], ROPE_SPOT[1] + 1, ROPE_SPOT[2] - 1)
-    p = new_player(pos=start, level=20, vocation=1, mana=100, maglevel=5)
+    p = new_player(pos=start, level=20, vocation=1, mana=100, maglevel=5, premium_days=30)   # Magic Rope: premium
     start = p.pos                    # the rope test above may still be standing there
     p.say("exani tera")
     assert p.wait_for(lambda: p.messages("not possible"), timeout=3), p.text_messages[-3:]

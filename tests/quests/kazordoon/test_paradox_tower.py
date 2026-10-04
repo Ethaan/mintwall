@@ -279,7 +279,7 @@ def test_paradox_tower_levitate_is_premium(new_player):
     from tibia74.quest import strong
     p = strong(new_player, LEDGES[0], level=50, vocation=1, maglevel=20, premium_days=0, group_id=TESTER_GROUP)
     assert not _levitate_up(p), p.pos
-    assert p.messages("You need a premium account."), p.text_messages[-3:]
+    assert p.messages("You need a premium account"), p.text_messages[-3:]   # "... to use this spell." after the rebuild
     assert p.pos == LEDGES[0], p.pos
 
 

@@ -10,6 +10,7 @@ from tibia74 import BACKPACK, Item, Items, SERVER_DIR
 from tibia74.db import BEGINNER_SET_GIVEN
 from tibia74.items import GROUP_FLUID
 from tibia74.npcs import load_npcs, rookgaard_pos
+from tibia74.quest import near_npc, say_to, seen_npc
 from tibia74.server import TESTER_GROUP
 
 NPCS = {name: npc for name, npc in load_npcs(SERVER_DIR).items() if rookgaard_pos(npc) and not npc.is_interaction}
@@ -30,24 +31,14 @@ def _chunks(kind):
 
 def _visit(new_player, npc, inventory=None):
     """A strong character (for capacity) next to the NPC, greeted and in talk range. It talks faster
-    than a player may (the server mutes after a few quick lines), so it is in the unmutable test group."""
-    spawn = rookgaard_pos(npc)
-    # A blocked login tile makes the server use a neighbour - or the temple if none is free. Shop NPCs
-    # walk behind their counter, so try in front of it (2 away, still in talk range) before next to them
-    for dx, dy in ((2, 0), (0, 2), (-2, 0), (0, -2), (2, 1), (2, -1), (1, 2), (-1, 2),
-                   (0, 0), (0, -1), (1, 0), (0, 1), (-1, 0)):
-        p = new_player(pos=(spawn[0] + dx, spawn[1] + dy, spawn[2]), level=100, inventory=inventory,
-                       storage={BEGINNER_SET_GIVEN: 1}, group_id=TESTER_GROUP,
-                       premium_days=30 if npc.name in PREMIUM_TRADERS else 0)
-        if p.pos[2] == spawn[2] and max(abs(p.pos[0] - spawn[0]), abs(p.pos[1] - spawn[1])) <= 3:
-            break
-        p.logout()
-    me = p.wait_for(lambda: p.nearest(npc.name), timeout=5)
-    assert me, f"{npc.name} is not near its spawn {spawn} (we are at {p.pos})"
-    if max(abs(me.pos[0] - p.pos[0]), abs(me.pos[1] - p.pos[1])) > 3:
-        p.walk_to(me.pos)
-    p.greeting = p.talk(f"hi {npc.name.lower()}", npc=npc.name)    # by name: a neighbour would take a plain "hi"
-    assert p.greeting, f"{npc.name} does not answer hi"
+    than a player may (the server mutes after a few quick lines), so it is in the unmutable test group.
+    Found where the NPC has walked to by now, past whoever an earlier test left beside it."""
+    p = near_npc(new_player, npc, spawn=rookgaard_pos(npc), level=100, inventory=inventory,
+                 storage={BEGINNER_SET_GIVEN: 1}, group_id=TESTER_GROUP,
+                 premium_days=30 if npc.name in PREMIUM_TRADERS else 0)
+    p.greeting = say_to(p, npc.name, f"hi {npc.name.lower()}")    # by name: a neighbour would take a plain "hi"
+    me = seen_npc(p, npc.name)
+    assert p.greeting, f"{npc.name} does not answer hi: it is at {me and me.pos}, we are at {p.pos}"
     return p
 
 

@@ -12,6 +12,7 @@ RUSH_WOOD, MACHETE = 1499, 2420
 
 def _druid(new_player, level=100, **kwargs):
     kwargs.setdefault("pos", FIELD)
+    kwargs.setdefault("premium_days", 30)          # Haste and Strong Haste are premium (spells.xml prem)
     return new_player(level=level, vocation=2, maglevel=30, mana=1000, group_id=TESTER_GROUP, **kwargs)
 
 
@@ -57,7 +58,7 @@ def test_haste_lasts_66_and_strong_haste_44_seconds(new_player):
 
 def _wild_growth(new_player, vocation=6):   # elder druids only (Eremo teaches it to the promoted)
     p = new_player(pos=FIELD, level=100, vocation=vocation, maglevel=30, mana=1000, group_id=TESTER_GROUP,
-                   inventory={RIGHT: Item(MACHETE)})
+                   premium_days=30, inventory={RIGHT: Item(MACHETE)})
     target = (p.pos[0] + 1, p.pos[1], p.pos[2])
     p.turn(EAST)
     p.sleep(0.3)
