@@ -32,6 +32,13 @@ PRESENT_CHEST, BAG_CHEST = (32569, 32024, 6), (32567, 32024, 6)
 WALDO_DOOR, WALDO_BODY = (32515, 32248, 8), (32514, 32248, 8)
 SANTA_MAILBOX = (31948, 31711, 6)
 ROYAL_MAILBOX = (32423, 32095, 15)          # Mintwallin's
+# "Four locations in Kazordoon Dwarf Mines, all surrounding the Mine Hub; you can also find one on the surface"
+# (TibiaWiki 2006 Mailbox, oldid 72704: tibianews xcor=-304 ycor=-171 = about 32535,31970 by the other mailboxes' links;
+# the current wiki's Mapper Coords 127.23|124.227|7 = 32535,31971): the map's mailbox in a brick nook west of Kazordoon
+SURFACE_ROYAL_MAILBOX = (32535, 31969, 7)
+# every royal (locked) mailbox of the 7.4 map: TibiaWiki 2006 Mailbox, the ones in 7.4 (task.md, Postman)
+ROYAL_MAILBOXES = [(33307, 32292, 7), (32448, 31964, 10), (32454, 31975, 10), (32459, 31964, 10), (32995, 32446, 7),
+                   ROYAL_MAILBOX, (33271, 31656, 8), (33083, 32184, 8), (32970, 31778, 7), SURFACE_ROYAL_MAILBOX]
 ABILITY = dict(level=2000, vocation=4, rope=True, shovel=True, floors=12)
 
 
@@ -434,12 +441,25 @@ def test_grand_postmen_sail_for_10_gp_less(new_player, db):
     assert money == 200 - 100, f"paid {200 - money} gp"
 
 
+def test_the_royal_mailboxes_are_locked_on_the_map():
+    """Game::playerMoveItem refuses a non-Arch Postman on a mailbox with action id 51199."""
+    from tibia74 import SERVER_DIR
+    from tibia74.otbm import read_tiles
+    xs, ys, zs = zip(*ROYAL_MAILBOXES)
+    found = {t.pos: [i.attrs.get("action_id") for i in t.items if i.id == 2593]
+             for t in read_tiles(SERVER_DIR / "data" / "world" / "Tibia74.otbm",
+                                 area=((min(xs), min(ys), min(zs)), (max(xs), max(ys), max(zs))))
+             if t.pos in ROYAL_MAILBOXES}
+    assert {pos: found.get(pos) for pos in ROYAL_MAILBOXES} == {pos: [51199] for pos in ROYAL_MAILBOXES}
+
+
+@pytest.mark.parametrize("mailbox", [ROYAL_MAILBOX, SURFACE_ROYAL_MAILBOX], ids=["mintwallin", "kazordoon-surface"])
 @pytest.mark.parametrize("progress, refused", [(MARKWIN_DONE, True), (RANK_ARCH, False)], ids=["not-yet", "archpostman"])
-def test_royal_mailboxes_are_for_archpostmen(new_player, items, progress, refused):
+def test_royal_mailboxes_are_for_archpostmen(new_player, items, progress, refused, mailbox):
     storage = {30001: 1, POSTMAN: progress}
-    # the mailbox stands in a small brick room: open its door and post from the doorway
-    door = (ROYAL_MAILBOX[0], ROYAL_MAILBOX[1] + 1, 15)
-    p = new_player(pos=(door[0], door[1] + 1, 15), level=50, group_id=TESTER_GROUP, storage=storage,
+    # both stand in a small brick room with the door south of them: open it and post from the doorway
+    door = (mailbox[0], mailbox[1] + 1, mailbox[2])
+    p = new_player(pos=(door[0], door[1] + 1, door[2]), level=50, group_id=TESTER_GROUP, storage=storage,
                    inventory={3: Item(1988, contents=[Item(LETTER)])})
     p.open_container(3)
     if any(getattr(t, "client_id", None) == items.by_server[1225].client_id for t in p.tiles.get(door, [])):
@@ -448,6 +468,6 @@ def test_royal_mailboxes_are_for_archpostmen(new_player, items, progress, refuse
     step_onto(p, door)
     letter = items.by_server[LETTER].client_id
     cid, n = next((cid, n) for cid, c in p.containers.items() for n, i in enumerate(c.items) if i.client_id == letter)
-    p.move_item(p.container_pos(cid, n), letter, n, ROYAL_MAILBOX, 1)
+    p.move_item(p.container_pos(cid, n), letter, n, mailbox, 1)
     p.sleep(1.5)
     assert bool(p.messages("Only archpostmen may use this mailbox.")) == refused, p.text_messages[-2:]

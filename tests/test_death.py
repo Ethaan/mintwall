@@ -124,12 +124,9 @@ def _storage(db, guid, key):
 
 
 def _saved(p, db):
-    guid = p.character.guid
-    p.logout()
-    deadline = time.time() + 5
-    while time.time() < deadline and not db.character(guid)["lastlogout"]:
-        time.sleep(0.2)
-    return guid
+    """Log out and wait for the logout's own save (TestDatabase.logout_and_saved); the guid."""
+    db.logout_and_saved(p)
+    return p.character.guid
 
 
 def _login_at(server, items, db, character, pos):
@@ -254,7 +251,7 @@ def test_death_loss_is_10_percent_minus_blessings(new_player, db, vocation, bles
 # ----------------------------------------------------------------------------- levels, items, amulet of loss, respawn
 
 from tibia74 import HEAD, NECKLACE, ARMOR, LEFT, LEGS, FEET, RING, AMMO   # noqa: E402
-from tibia74.db import VOCATION_GAINS, capacity                          # noqa: E402
+from tibia74.db import capacity, max_health, max_mana                    # noqa: E402
 
 AMULET_OF_LOSS = 2173
 ANKRAHMUN_TEMPLE, ANKRAHMUN_TOWN = (33194, 32853, 8), 9   # a home town far from where the victim dies
@@ -305,8 +302,9 @@ def test_lost_levels_take_their_hp_mana_and_cap_and_respawn_full(new_player, db)
     He comes back with full health and mana (killed at 100 hp and 0 mana)."""
     guid, row = _kill_on(new_player, db, 2, level=50, mana=0)
     assert row["experience"] == 1847300 - 184730 and row["level"] == 48, (row["experience"], row["level"])
-    hp, mana, _ = VOCATION_GAINS[KNIGHT]
-    assert (row["healthmax"], row["manamax"], row["cap"]) == (150 + 47 * hp, 47 * mana, capacity(KNIGHT, 48)), \
+    # created with the level 50 values (tibia74/db.py), the death takes two knight levels' gains off them
+    assert (row["healthmax"], row["manamax"], row["cap"]) == \
+        (max_health(KNIGHT, 48), max_mana(KNIGHT, 48), capacity(KNIGHT, 48)) == (785, 235, 1470), \
         {k: row[k] for k in ("healthmax", "manamax", "cap")}
     assert (row["health"], row["mana"]) == (row["healthmax"], row["manamax"]), \
         {k: row[k] for k in ("health", "healthmax", "mana", "manamax")}

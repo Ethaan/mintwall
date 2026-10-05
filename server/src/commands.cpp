@@ -98,7 +98,6 @@ s_defcommands Commands::defined_commands[] = {
 	{"/owner",&Commands::setHouseOwner},
 	{"/sellhouse",&Commands::sellHouse},
 	{"/gethouse",&Commands::getHouse},
-	{"/buyhouse",&Commands::buyHouse},
 	{"/town",&Commands::teleportToTown},
 	{"/serverinfo",&Commands::serverInfo},
 	{"/raid",&Commands::forceRaid},
@@ -810,17 +809,72 @@ bool Commands::setHouseOwner(Creature* creature, const std::string& cmd, const s
 	return false;
 }
 
+// the house a player owns on this tile, or NULL
+static House* ownHouseAt(Player* player, const Position& pos)
+{
+	Tile* tile = g_game.getTile(pos.x, pos.y, pos.z);
+	HouseTile* houseTile = (tile ? tile->getHouseTile() : NULL);
+	House* house = (houseTile ? houseTile->getHouse() : NULL);
+	if(house && house->getHouseOwner() == player->getGUID()){
+		return house;
+	}
+	return NULL;
+}
+
+// /sellhouse <player>[, <house>]: offers a house of the player in a trade to <player>. A character may own a house and
+// a guildhall (one of each per account, data/lib/houses.lua): the house named, else the one he stands in or faces,
+// else the only one he owns.
 bool Commands::sellHouse(Creature* creature, const std::string& cmd, const std::string& param)
 {
 	Player* player = creature->getPlayer();
 	if(player){
-		House* house = Houses::getInstance().getHouseByPlayerId(player->getGUID());
-		if(!house){
+		std::string partnerName = param, houseName;
+		std::string::size_type comma = param.find(',');
+		if(comma != std::string::npos){
+			partnerName = param.substr(0, comma);
+			houseName = param.substr(comma + 1);
+		}
+		trim_left(partnerName, " ");
+		trim_right(partnerName, " ");
+		trim_left(houseName, " ");
+		trim_right(houseName, " ");
+
+		House* owned = Houses::getInstance().getHouseByPlayerId(player->getGUID(), false);
+		House* ownedHall = Houses::getInstance().getHouseByPlayerId(player->getGUID(), true);
+		if(!owned && !ownedHall){
 			player->sendCancel("You do not own any house.");
 			return false;
 		}
 
-		Player* tradePartner = g_game.getPlayerByName(param);
+		House* house = NULL;
+		if(!houseName.empty()){
+			if(owned && boost::algorithm::iequals(owned->getName(), houseName)){
+				house = owned;
+			}
+			else if(ownedHall && boost::algorithm::iequals(ownedHall->getName(), houseName)){
+				house = ownedHall;
+			}
+			else{
+				player->sendCancel("You do not own a house of that name.");
+				return false;
+			}
+		}
+		else{
+			house = ownHouseAt(player, player->getPosition());
+			if(!house){
+				house = ownHouseAt(player, getNextPosition(player->direction, player->getPosition()));
+			}
+			if(!house){
+				if(owned && ownedHall){
+					player->sendCancel("You own a house and a guildhall. Stand in the one you want to sell, or name it:"
+						" /sellhouse <player>, <house>.");
+					return false;
+				}
+				house = (owned ? owned : ownedHall);
+			}
+		}
+
+		Player* tradePartner = g_game.getPlayerByName(partnerName);
 		if(!(tradePartner && tradePartner != player)){
 			player->sendCancel("Trade player not found.");
 			return false;
@@ -831,8 +885,10 @@ bool Commands::sellHouse(Creature* creature, const std::string& cmd, const std::
 			return false;
 		}
 
-		if(Houses::getInstance().getHouseByPlayerId(tradePartner->getGUID())){
-			player->sendCancel("Trade player already owns a house.");
+		// one house and one guildhall per account (was: no house of any kind)
+		std::string reason;
+		if(!house->canTransferTo(tradePartner, reason)){
+			player->sendCancel(reason);
 			return false;
 		}
 
@@ -1135,70 +1191,6 @@ bool Commands::playerKills(Creature* creature, const std::string& cmd, const std
 		}
 	}
 
-	return false;
-}
-
-bool Commands::buyHouse(Creature* creature, const std::string& cmd, const std::string& param)
-{
-	Player* player = creature->getPlayer();
-	if (player) {
-		Position pos = player->getPosition();
-		pos = getNextPosition(player->direction, pos);
-		for(HouseMap::iterator it = Houses::getInstance().getHouseBegin(); it != Houses::getInstance().getHouseEnd(); it++)
-		{
-			if (it->second->getHouseOwner() == player->guid) {
-				player->sendCancel("You are already the owner of a house.");
-				return false;
-			}
-		}
-		if (Tile* tile = g_game.getTile(pos.x, pos.y, pos.z)) {
-			if (HouseTile* houseTile = dynamic_cast<HouseTile*>(tile)) {
-				if (House* house = houseTile->getHouse()) {
-					if (house->getDoorByPosition(pos)) {
-						if (!house->getHouseOwner()) {
-							if (player->isPremium()) {
-								uint32_t price = 0;
-								for (HouseTileList::iterator it = house->getHouseTileBegin(); it != house->getHouseTileEnd(); it++) {
-									price += g_config.getNumber(ConfigManager::HOUSE_PRICE);
-								}
-								if (price) {
-									uint32_t money = g_game.getMoney(player);
-									if (money >= price && g_game.removeMoney(player, price)) {
-										house->setHouseOwner(player->guid);
-										player->sendTextMessage(MSG_INFO_DESCR, "You have successfully bought this house, be sure to have the money for the rent in your depot of this city.");
-										return true;
-									}
-									else {
-										player->sendCancel("You do not have enough money.");
-									}
-								}
-								else {
-									player->sendCancel("That house doesn't contain any house tile.");
-								}
-							}
-							else {
-								player->sendCancelMessage(RET_YOUNEEDPREMIUMACCOUNT);
-							}
-						}
-						else {
-							player->sendCancel("This house already has an owner.");
-						}
-					}
-					else {
-						player->sendCancel("You have to be in front of door of the house you would like to buy.");
-					}
-				}
-				else {
-					player->sendCancel("You have to be in front of door of the house you would like to buy.");
-				}
-			}
-			else
-				player->sendCancel("You have to be in front of door of the house you would like to buy.");
-		}
-		else {
-			player->sendCancel("You have to be in front of door of the house you would like to buy.");
-		}
-	}
 	return false;
 }
 

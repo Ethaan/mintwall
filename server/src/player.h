@@ -662,6 +662,8 @@ protected:
 	uint32_t walkTaskEvent;
 	bool steppingByClient;   //Game::playerMove is moving us one step
 	bool teleportedOnStep;   //that step ran into a teleport (item or step-in script); cleared by the next move
+	std::list<Direction> queuedSteps;   //client steps waiting for the one before to end, oldest first (nextStepEvent walks them)
+	static const uint32_t MAX_QUEUED_STEPS = 4;
 	SchedulerTask* walkTask;
 
 	uint32_t idleTime;

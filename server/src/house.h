@@ -131,6 +131,9 @@ public:
 	House* getHouse(){return house;}
 	virtual bool canTransform() const {return false;}
 
+	// a trade item going to `receiver`: false (and why) if it is a house transfer document he may not take
+	static bool canTradeTo(Item* item, Player* receiver, std::string& reason);
+
 protected:
 	House* house;
 };
@@ -181,6 +184,16 @@ public:
 
 	uint32_t getHouseId() const {return houseid;}
 
+	// guildhall="true" in the houses file: an account may have one house and one guildhall (data/lib/houses.lua)
+	void setGuildHall(bool _guildHall) {guildHall = _guildHall;}
+	bool isGuildHall() const {return guildHall;}
+
+	// may `receiver` take this house from its owner (/sellhouse, the trade of the transfer document)? The rules of
+	// data/lib/houses.lua houseTransferProblem: premium, one house and one guildhall per account (this house
+	// excepted), no pending /buyhouse request of the account for one of the same kind, a guildhall only to a guild
+	// leader. false and why not in `reason`.
+	bool canTransferTo(const Player* receiver, std::string& reason) const;
+
 	// items on its tiles changed since the last save (HouseTile marks it; the save takes it) - only changed
 	// houses are written by the timed save (IOMapSerialize::saveMapBinary)
 	void markItemsChanged() {itemsChanged = true;}
@@ -212,6 +225,7 @@ public:
 
 private:
 	bool itemsChanged;
+	bool guildHall;
 	void updateDoorDescription();
 	bool transferToDepot();
 
@@ -278,6 +292,8 @@ public:
 	}
 
 	House* getHouseByPlayerId(uint32_t playerId);
+	// the house of this kind (house or guildhall) the player owns, or NULL: a player may own one of each
+	House* getHouseByPlayerId(uint32_t playerId, bool guildHall);
 
 	bool loadHousesXML(std::string filename);
 

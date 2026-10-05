@@ -25,8 +25,28 @@ def capacity(vocation: int, level: int) -> int:
     """7.4 capacity (TibiaWiki "Formula" 2007-11, oldid 128170: (level - 8) x gain + 470 for a character that left
     Rookgaard at level 8; tibiantis-notes "Classes": knight 25 x L + 270, paladin 20 x L + 310, mage 10 x L + 390).
     Rookgaard (no vocation) gains 10 a level from 400 at level 1 - the same 470 at level 8."""
-    gain = VOCATION_GAINS[vocation][2]
-    return 400 + gain * (level - 1) if vocation == 0 else 470 + gain * (level - 8)
+    return _by_level(vocation, level, 400, 470, 2)
+
+
+def _by_level(vocation: int, level: int, rook_base: int, base_at_8: int, index: int) -> int:
+    """7.4 stat growth: no vocation: rook_base at level 1 plus its gain (5 hp / 5 mana / 10 cap) a level - the same for
+    everyone up to level 8; a vocation: the level 8 value plus the vocation's gain (data/vocations.xml) a level from 8.
+    Below level 8 with a vocation (lost by dying) the engine takes the gain off a level at a time, not below 0
+    (Player::onDie, player.cpp)."""
+    gain = VOCATION_GAINS[vocation][index]
+    return rook_base + gain * (level - 1) if vocation == 0 else max(0, base_at_8 + gain * (level - 8))
+
+
+def max_health(vocation: int, level: int) -> int:
+    """7.4 hit points (TibiaWiki "Formula" 2007-11, oldid 128170; tibiantis-notes "Classes"): 150 + 5 x (L - 1) up to
+    level 8 (185), then 185 + gain x (L - 8): knight 15 x L + 65, paladin 10 x L + 105, mage 5 x L + 145."""
+    return _by_level(vocation, level, 150, 185, 0)
+
+
+def max_mana(vocation: int, level: int) -> int:
+    """7.4 mana: 0 + 5 x (L - 1) up to level 8 (35), then 35 + gain x (L - 8): mage 30 x L - 205, paladin
+    15 x L - 85, knight 5 x L - 5."""
+    return _by_level(vocation, level, 0, 35, 1)
 
 
 TEST_ACCOUNT_BASE = 500000
@@ -94,11 +114,14 @@ class TestDatabase:
     def create_character(self, name: str = None, *, level: int = 1, vocation: int = 0,
                          town_id: int = 1, pos: tuple = None, sex: int = 1,
                          inventory: dict = None, group_id: int = 1,
-                         health: int = None, mana: int = None, storage: dict = None,
+                         health: int = None, mana: int = None, healthmax: int = None, manamax: int = None,
+                         storage: dict = None,
                          premium_days: int = 0, maglevel: int = 0, skills: dict = None,
                          experience: int = None, spells: list = None, manaspent: int = 0,
                          skill_tries: dict = None) -> Character:
         """New character on its own account. pos=None means 'spawn at the town temple'.
+        healthmax / manamax: default the 7.4 values of its vocation and level (max_health, max_mana); health / mana:
+        default full. A test that needs a particular amount of hit points passes it.
         storage: {key: value} player storage, e.g. {BEGINNER_SET_GIVEN: 1} to skip the first-login set.
         skills: {skill id: level}, 0 fist 1 club 2 sword 3 axe 4 distance 5 shielding 6 fishing.
         spells: the spells it has learned (spells.xml names); None: every spell of its vocation (spells must be
@@ -107,9 +130,8 @@ class TestDatabase:
         name = name or f"Test{n:04d}"
         account = TEST_ACCOUNT_BASE + n
         password = "test"
-        hp_gain, mana_gain, _ = VOCATION_GAINS[vocation]
-        healthmax = 150 + hp_gain * (level - 1)
-        manamax = 0 + mana_gain * (level - 1)
+        healthmax = max_health(vocation, level) if healthmax is None else healthmax
+        manamax = max_mana(vocation, level) if manamax is None else manamax
         cap = capacity(vocation, level)
         x, y, z = pos or (0, 0, 0)
 
@@ -193,6 +215,25 @@ class TestDatabase:
             return None if row is None else row[0]
         finally:
             con.close()
+
+    def logout_and_saved(self, client, timeout: float = 90.0) -> dict:
+        """Log the client's character (client.character, from the new_player fixture) out and wait for the save of
+        that logout; the saved players row. Not just "lastlogout is set": a periodic save while the character played
+        may already have written one, so it waits for lastlogout >= the logout time (Player::onCreatureDisappear sets
+        it at the logout only). A character that fought within the last minute may not log out ("You may not logout
+        during or immediately after a fight!", the 60 s logout block): the client goes, the character stays in the
+        game until the block is over and is saved then - hence the 90 s."""
+        guid = client.character.guid
+        logout = int(time.time())
+        client.logout()
+        deadline = time.time() + timeout
+        while time.time() < deadline and (self.character(guid)["lastlogout"] or 0) < logout:
+            time.sleep(0.5)
+        row = self.character(guid)
+        assert (row["lastlogout"] or 0) >= logout, (f"no logout save within {timeout:.0f} s (lastlogout"
+                                                    f" {row['lastlogout']}, logout at {logout}):"
+                                                    f" {client.text_messages[-2:]}")
+        return row
 
     def town_after_logout(self, guid: int, expected, timeout: float = 30.0):
         """The character's home town (town_id) once the server has saved it after logout."""

@@ -258,7 +258,22 @@ def test_keyless_locked_door_stays_locked(new_player, premium_days):
     assert p.tile_items(PREMIUM_SIDE_DOOR)[-1].client_id == LOCKED_DOOR, "the locked door opened"
 
 
-ROOK_FIELD = (32082, 32210, 7)       # open grass west of the village, not a protection zone
+# the village street north of the temple, two walkable tiles without the protection zone flag (checked below): a
+# player placed on a tile he cannot stand on lands on the temple, a protection zone, where no attack works anyway
+ROOK_FIELD = (32085, 32191, 7)
+ROOK_FIELD_EAST = (32086, 32191, 7)
+PROTECTION_ZONE = 1                  # OTBM tile flag (tile.h TILESTATE_PROTECTIONZONE)
+
+
+def test_rook_field_is_walkable_and_no_protection_zone(world_map):
+    from tibia74 import SERVER_DIR
+    from tibia74.otbm import read_tiles
+    tiles = {t.pos: t for t in read_tiles(SERVER_DIR / "data" / "world" / "Tibia74.otbm",
+                                          area=(ROOK_FIELD, ROOK_FIELD_EAST))}
+    for pos in (ROOK_FIELD, ROOK_FIELD_EAST):
+        assert world_map.walkable(pos), f"{pos} is not walkable"
+        assert pos in tiles and not tiles[pos].flags & PROTECTION_ZONE, f"{pos} is protection zone"
+        assert not tiles[pos].house_id, f"{pos} is a house tile"
 
 
 @pytest.mark.parametrize("attacker_vocation, target_vocation", [(0, 0), (4, 0), (0, 4)],
@@ -268,8 +283,9 @@ def test_rookgaard_is_non_pvp(new_player, attacker_vocation, target_vocation):
     from tibia74 import RIGHT, Item
     attacker = new_player(pos=ROOK_FIELD, level=50, vocation=attacker_vocation, skills={1: 80, 2: 80},
                           inventory={RIGHT: Item(2382)})                       # club
-    target = new_player(pos=(attacker.pos[0] + 1, attacker.pos[1], attacker.pos[2]), level=50,
-                        vocation=target_vocation, storage={30001: 1})
+    target = new_player(pos=ROOK_FIELD_EAST, level=50, vocation=target_vocation, storage={30001: 1})
+    # both stand where they were put, off the protection zone (test above): the attack fails for the Rookgaard rule
+    assert attacker.pos == ROOK_FIELD and target.pos == ROOK_FIELD_EAST, (attacker.pos, target.pos)
     health = target.wait_for(lambda: target.stats.health, timeout=3)
     attacker.set_fight_modes(fight=1, chase=1, safe=0)
     attacker.attack(target.player_id)

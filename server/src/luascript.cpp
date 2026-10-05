@@ -1661,6 +1661,12 @@ void LuaScriptInterface::registerFunctions()
 	//isHouseGuildHall(houseid)
 	lua_register(m_luaState, "isHouseGuildHall", LuaScriptInterface::luaIsHouseGuildHall);
 
+	//getPlayerDepotMoney(cid, depotid)
+	lua_register(m_luaState, "getPlayerDepotMoney", LuaScriptInterface::luaGetPlayerDepotMoney);
+
+	//getDepotMoneyByGUID(guid, depotid)
+	lua_register(m_luaState, "getDepotMoneyByGUID", LuaScriptInterface::luaGetDepotMoneyByGUID);
+
 	//setHouseAccessList(houseid, listid, listtext)
 	lua_register(m_luaState, "setHouseAccessList", LuaScriptInterface::luaSetHouseAccessList);
 
@@ -4928,12 +4934,63 @@ int LuaScriptInterface::luaIsHouseGuildHall(lua_State *L)
 
 	House* house = Houses::getInstance().getHouse(houseid);
 	if(house){
-		//lua_pushboolean(L, (house->isGuildHall() ? true : false)); fix me
+		lua_pushboolean(L, house->isGuildHall());   // guildhall="true" in the houses file (Houses::loadHousesXML)
 	}
 	else{
 		reportErrorFunc(getErrorDesc(LUA_ERROR_HOUSE_NOT_FOUND));
 		lua_pushboolean(L, false);
 	}
+	return 1;
+}
+
+int LuaScriptInterface::luaGetPlayerDepotMoney(lua_State *L)
+{
+	//getPlayerDepotMoney(cid, depotid)
+	// the coins in the player's depot `depotid` (= town id) as they are now, not as last saved
+	uint32_t depotid = popNumber(L);
+	uint32_t cid = popNumber(L);
+
+	Player* player = getScriptEnv()->getPlayerByUID(cid);
+	if(!player){
+		reportErrorFunc(getErrorDesc(LUA_ERROR_PLAYER_NOT_FOUND));
+		lua_pushboolean(L, false);
+		return 1;
+	}
+	lua_pushnumber(L, g_game.getMoney(player->getDepot(depotid, false)));
+	return 1;
+}
+
+int LuaScriptInterface::luaGetDepotMoneyByGUID(lua_State *L)
+{
+	//getDepotMoneyByGUID(guid, depotid)
+	// the coins in the character's depot `depotid` (= town id): online from memory, offline loaded from the
+	// database once its pending saves are written (IOPlayer::loadPlayer waits for the save writer), as
+	// Houses::payHouses loads it
+	uint32_t depotid = popNumber(L);
+	uint32_t guid = popNumber(L);
+
+	std::string name;
+	if(!IOPlayer::instance()->getNameByGuid(guid, name)){
+		reportErrorFunc(getErrorDesc(LUA_ERROR_PLAYER_NOT_FOUND));
+		lua_pushboolean(L, false);
+		return 1;
+	}
+
+	Player* player = g_game.getPlayerByName(name);
+	if(player){
+		lua_pushnumber(L, g_game.getMoney(player->getDepot(depotid, false)));
+		return 1;
+	}
+
+	player = new Player(name, NULL);
+	if(!IOPlayer::instance()->loadPlayer(player, name)){
+		delete player;
+		reportErrorFunc(getErrorDesc(LUA_ERROR_PLAYER_NOT_FOUND));
+		lua_pushboolean(L, false);
+		return 1;
+	}
+	lua_pushnumber(L, g_game.getMoney(player->getDepot(depotid, false)));
+	delete player;
 	return 1;
 }
 

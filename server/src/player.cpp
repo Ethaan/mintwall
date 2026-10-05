@@ -1550,7 +1550,7 @@ void Player::onCreatureMove(const Creature* creature, const Tile* newTile, const
 
 	if(creature == this){
 		if(teleport){
-			//a step queued before the teleport must not run from where we land (Demon Helmet route: the
+			//steps queued before the teleport must not run from where we land (Demon Helmet route: the
 			//teleport at 33286,31589,12 lands next to the portal back, one queued step east walked into it).
 			//Stairs, ramps and holes are not teleports (Game::internalMoveCreature) and keep the queued step.
 			setNextWalkTask(NULL);
@@ -1708,6 +1708,9 @@ void Player::setNextWalkTask(SchedulerTask* task)
 	if(task){
 		nextStepEvent = Scheduler::getScheduler().addEvent(task);
 		resetIdle();
+	}
+	else{
+		queuedSteps.clear();   //no task: the client steps waiting their turn are dropped (Game::playerWalkQueuedSteps)
 	}
 }
 

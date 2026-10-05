@@ -23,6 +23,7 @@ import pytest
 from tibia74 import (BACKPACK, EAST, NORTH, NORTHWEST, SOUTHWEST, WEST, GameClient, Item, RIGHT, SERVER_DIR,
                      ServerProcess)
 from tibia74.db import Character, TestDatabase as _Database      # (not Test*: pytest would try to collect it)
+from tibia74.net import Writer
 from tibia74.server import ROOT, RUN_DIR
 from tibia74.otbm import read_tiles, read_towns
 
@@ -437,11 +438,20 @@ def test_every_house_has_a_rent():
     assert houses[SPIRITKEEP].get("guildhall") == "true" and not houses[FLAT_22.id].get("guildhall")
 
 
-def test_the_guildhall_list_of_the_scripts_matches_the_houses_file():
-    """data/lib/houses.lua keeps the guildhall ids itself (the engine ignores guildhall="true", scripts cannot read
-    files)."""
+def test_the_engine_reads_the_guildhalls_of_the_houses_file(server):
+    """Houses::loadHousesXML reads guildhall="true" (isHouseGuildHall, House::isGuildHall: one house and one guildhall
+    per account) and logs the ids it read. Needs the rebuild (older builds ignored the attribute)."""
+    line = re.search(r"^> Guildhalls:(.*)$", server.log(), re.M)
+    assert line, "no '> Guildhalls:' line in the log: an older build"
+    assert {int(i) for i in line.group(1).split()} == \
+        {hid for hid, h in _houses_xml().items() if h.get("guildhall") == "true"}
+
+
+def test_the_old_build_guildhall_list_of_the_scripts_matches_the_houses_file():
+    """data/lib/houses.lua keeps the guildhall ids for builds whose isHouseGuildHall was a stub (OLD_BUILD_GUILDHALLS;
+    remove both once no server runs such a build)."""
     lua = (SERVER_DIR / "data" / "lib" / "houses.lua").read_text("latin-1")
-    listed = {int(i) for i in re.findall(r"\d+", re.search(r"GUILDHALLS = \{(.*?)\}", lua, re.S).group(1))}
+    listed = {int(i) for i in re.findall(r"\d+", re.search(r"OLD_BUILD_GUILDHALLS = \{(.*?)\}", lua, re.S).group(1))}
     assert listed == {hid for hid, h in _houses_xml().items() if h.get("guildhall") == "true"}
 
 
@@ -544,10 +554,100 @@ def test_a_house_owner_who_leads_a_guild_may_also_ask_for_a_guildhall(new_player
     assert any("withdrawn the request for the house Spiritkeep" in t for t in said), said
 
 
+def _make_guild_leader(db_path, guid, name):
+    con = sqlite3.connect(db_path)
+    try:
+        guild = con.execute("INSERT INTO guilds (name, ownerid, creationdata) VALUES (?, ?, 0)",
+                            (name, guid)).lastrowid
+        rank = dict(con.execute("SELECT level, id FROM guild_ranks WHERE guild_id = ?", (guild,)))
+        con.execute("UPDATE players SET rank_id = ? WHERE id = ?", (rank[3], guid))      # Leader
+        con.commit()
+    finally:
+        con.close()
+
+
+def _trade_house(seller, buyer):
+    """After /sellhouse: the buyer offers his right-hand item for the house document, both accept."""
+    buyer._send(Writer().u8(0x7D).position(buyer.inventory_pos(RIGHT)).u16(buyer.inventory[RIGHT].client_id).u8(0)
+                .u32(seller.player_id))
+    time.sleep(0.5)
+    seller._send(Writer().u8(0x7F))
+    time.sleep(0.3)
+    buyer._send(Writer().u8(0x7F))
+    time.sleep(1)
+
+
+def test_a_house_owner_gets_a_guildhall_through_sellhouse(new_player, db, login):
+    """One house and one guildhall per account: Commands::sellHouse refused every receiver who owned a house ("Trade
+    player already owns a house."), now only one whose account has one of the same kind (House::canTransferTo). The
+    seller owns a house and a guildhall: /sellhouse sells the house he stands in or faces, else the one named after a
+    comma (with neither it asks which). Needs the rebuild."""
+    seller_char = db.create_character(pos=THAIS_ROAD, premium_days=30, town_id=THAIS, storage=BEGINNER_SET)
+    _give_house(new_player, SORCERERS_AVENUE_1A, seller_char)       # (/gethouse names the lowest id: this one first)
+    _give_house(new_player, HALLS_OF_THE_ADVENTURERS, seller_char)
+    buyer_char = db.create_character(pos=(THAIS_ROAD[0] + 1, THAIS_ROAD[1], 7), premium_days=30, town_id=THAIS,
+                                     storage=BEGINNER_SET, inventory={RIGHT: Item(SWORD)})
+    _give_house(new_player, LOWER_SWAMP_LANE_3, buyer_char)
+    _make_guild_leader(db.path, buyer_char.guid, f"Adventurers {buyer_char.guid}")
+    seller, buyer = login(seller_char), login(buyer_char)
+
+    replies = _say_and_read(seller, f"/sellhouse {buyer_char.name}", "house")
+    assert any("You own a house and a guildhall" in t for t in replies), replies
+
+    mark = len(seller.text_messages)
+    seller.say(f"/sellhouse {buyer_char.name}, Halls of the Adventurers")
+    time.sleep(1)
+    said = [t for _, t in seller.text_messages[mark:]]
+    assert not any("own" in t or "account" in t or "guild" in t or "For now" in t for t in said), said
+    _trade_house(seller, buyer)
+
+    gm = new_player(pos=(THAIS_ROAD[0], THAIS_ROAD[1] + 1, 7), group_id=3, storage=BEGINNER_SET)
+    assert gm.wait_for(lambda: "Halls of the Adventurers" in _house_of(gm, buyer_char.name), timeout=5), \
+        (_house_of(gm, buyer_char.name), buyer.text_messages[-3:])          # /gethouse: the lowest id he owns
+    assert "Sorcerer's Avenue 1a" in _house_of(gm, seller_char.name)
+
+
+def test_a_house_request_made_during_the_trade_stops_the_sale(new_player, db, login, items):
+    """/sellhouse checks the receiver when the trade is offered; his account may ask for a house (/buyhouse, or a
+    website row in house_requests) while the trade window is open. The engine checks again when the trade is accepted
+    (Game::playerAcceptTrade, House::canTransferTo; House::executeTransfer once more): refused, nobody's items move.
+    Needs the rebuild."""
+    seller_char = db.create_character(pos=THAIS_ROAD, premium_days=30, town_id=THAIS, storage=BEGINNER_SET)
+    _give_house(new_player, UPPER_SWAMP_LANE_8, seller_char)
+    buyer_char = db.create_character(pos=(THAIS_ROAD[0] - 1, THAIS_ROAD[1], 7), premium_days=30, town_id=THAIS,
+                                     storage=BEGINNER_SET, inventory={RIGHT: Item(SWORD)})
+    seller, buyer = login(seller_char), login(buyer_char)
+
+    mark = len(seller.text_messages)
+    seller.say(f"/sellhouse {buyer_char.name}")
+    time.sleep(1)
+    said = [t for _, t in seller.text_messages[mark:]]
+    assert not any("account" in t or "premium" in t or "own" in t for t in said), said
+
+    _sql(db.path, "INSERT INTO house_requests (house_id, player_id, account_id, created, state) VALUES (?, ?, ?, ?, 0)",
+         UPPER_SWAMP_LANE_10, buyer_char.guid, buyer_char.account, int(time.time()))
+    try:
+        mark = len(buyer.text_messages)
+        _trade_house(seller, buyer)
+        assert _got(buyer, f"{buyer_char.name}'s account has asked for a house already", mark), \
+            buyer.text_messages[-3:]
+        sword = items.by_server[SWORD].client_id
+        assert buyer.inventory.get(RIGHT) and buyer.inventory[RIGHT].client_id == sword, buyer.inventory
+        assert not any(i.client_id == sword for i in seller.inventory.values()), seller.inventory
+        gm = new_player(pos=(THAIS_ROAD[0], THAIS_ROAD[1] + 1, 7), group_id=3, storage=BEGINNER_SET)
+        assert "Upper Swamp Lane 8" in _house_of(gm, seller_char.name)
+        assert "does not own any house" in _house_of(gm, buyer_char.name)
+    finally:
+        _sql(db.path, "DELETE FROM house_requests WHERE account_id = ?", buyer_char.account)
+
+
 # ---------------------------------------------------------------------------------------------- buying a house
 
 UPPER_SWAMP_LANE_2, UPPER_SWAMP_LANE_4 = 53, 54     # Thais houses no other test here uses
-LOWER_SWAMP_LANE_1 = 55
+LOWER_SWAMP_LANE_1, LOWER_SWAMP_LANE_3 = 55, 56
+UPPER_SWAMP_LANE_8, UPPER_SWAMP_LANE_10 = 57, 59
+SORCERERS_AVENUE_1A = 61
+HALLS_OF_THE_ADVENTURERS = 3                        # a Thais guildhall
 
 THAIS_ROAD = (32369, 32245, 7)                      # just south of the Thais temple
 FLAT_22_RENT, FLAT_23_RENT = 520, 860               # Tibiantis' rents

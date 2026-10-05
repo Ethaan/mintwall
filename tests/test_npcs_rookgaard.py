@@ -2,7 +2,6 @@
 every keyword gets its reply, every item they sell can be bought and every item they buy can be sold
 for the listed price. Trades are checked in the saved character (money and items) after logout."""
 import math
-import time
 
 import pytest
 
@@ -46,12 +45,8 @@ def _visit(new_player, npc, inventory=None):
 
 def _saved(p, db):
     """Items of the character as saved on logout: {(itemtype, count): rows}."""
-    guid = p.character.guid
-    p.logout()
-    deadline = time.time() + 5
-    while time.time() < deadline and not db.character(guid)["lastlogout"]:
-        time.sleep(0.2)
-    return db.items(guid)
+    db.logout_and_saved(p)
+    return db.items(p.character.guid)
 
 
 def _money(rows):

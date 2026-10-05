@@ -107,6 +107,9 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       only Levitate (ours, TibiaWiki 2005)? (c) premium logs in past MaxPlayers (7.4 text) or keep the waiting-list
       priority? (d) premium runs out: cut the VIP list to 20 or keep it (no new names)? (recommended: (a) GM command
       now, (b) only Levitate, (c) keep, (d) keep)
+- [ ] Q25 Clicking a monster mid-step misses - real 7.4 behaved the same (the battle window was the answer). Fix it in
+      mintwall.dll (reverse-engineer the 7.40 client's creature list and view layout, rewrite the click), or keep it
+      as 7.4? (recommended: keep it - authentic, and the DLL work is large)
 - [x] Engine: a long damage condition (fields, poison) loses its last hit(s): executeConditions counts 1000 ms per
       think but thinks run 1.02-1.09 s apart, and the condition ends on a wall-clock endTime. Measured: medium fire 20 + 4
       x 10 (not 5), energy 30 + 25 (not 2). Proposed fix in condition.cpp ConditionDamage::executeCondition: keep the
@@ -116,8 +119,14 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
         offered; a request made while the trade window is open slips through - closing it needs House::executeTransfer, C++)
         - test_houses.py::test_sellhouse_keeps_one_house_per_account
   - [ ] tests/tibia74/server.py: ServerProcess.start leaves the server running when its startup times out
-  - [ ] Engine clean-up (rebuild): remove Commands::buyHouse and HousePrice; read guildhall in loadHousesXML and fix
+  - [x] Engine clean-up (rebuild): remove Commands::buyHouse and HousePrice; read guildhall in loadHousesXML and fix
         luaIsHouseGuildHall (then drop the id list in lib/houses.lua); depot money binding (drop the 1.5 s wait)
+        Done 2026-10-05 (NEEDS REBUILD): Commands::buyHouse and HousePrice gone; loadHousesXML reads guildhall="true"
+        (isHouseGuildHall works); getPlayerDepotMoney / getDepotMoneyByGUID (no DB wait); House::canTransferTo checks the
+        receiver in sellHouse, at playerAcceptTrade (trade cancelled, items kept) and in executeTransfer; /sellhouse
+        <player>, <house> picks the house. Lua keeps the old paths while the old exe runs (HOUSE_ENGINE_CHECKS).
+  - [ ] After the rebuild: drop the /buyhouse line from commands.xml; once no server runs the old exe, delete
+        OLD_BUILD_GUILDHALLS in lib/houses.lua and its test
 
 ## New player journey (tests/test_rookgaard.py)
 
@@ -992,8 +1001,9 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       (Game::playerMoveItem) refuses non-Arch Postmen. Letters at Benjamin/Chrystal 10 -> 8 gp (TibiaWiki 2006).
       Decided with the user: 10 gp off a passage, royal mailboxes locked, Markwin wants his guards dead, Noodles any
       order / keeps nothing. tests/quests/postman/test_postman.py.
-- [ ] Postman: the "surface" royal mailbox near the Kazordoon mines (2006 wiki, no usable coordinate) is not locked
+- [x] Postman: the "surface" royal mailbox near the Kazordoon mines (2006 wiki, no usable coordinate) is not locked
       (the captains' quoted price: done 2026-09-30 - StdModule.say quotes the travel node's travelCost)
+      Done 2026-10-05: 32535,31969,7 (2006 wiki tibianews link calibrated on three known mailboxes; current wiki 32535,31971) - aid 51199 like the other royal mailboxes; test_postman.py checks all ten. The 2006 wiki speaks of four Mine Hub mailboxes, the map has three - not added.
 - [-] Iron Ore Quest - Dwarf Mines near Kazordoon (no level; — player(s); —)
       Probably not 7.4 (wiki page from 2011, no version, not on Tibiantis) - left out unless a 7.4 source turns up
 - [x] Minotaur Leather Quest - raft south of Thais - NOT 7.4 (checked 2026-09-24): the item "minotaur leather" is not
@@ -1105,7 +1115,7 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       summons. Kept on purpose, with reasons, in the tool's REVIEWED list: the tomb pharaohs (their wiki pages
       are incomplete), the witch's frog and djinn's cancel invisibility (nothing in 7.4 / the engine to do them
       with). test_monsters.py test_monster_attacks_agree_with_74_or_are_reviewed
-- [ ] Duplicate quest objects (found 2026-10-03 through the Behemoth lever): the quest audit placed missing objects at
+- [x] Duplicate quest objects (found 2026-10-03 through the Behemoth lever): the quest audit placed missing objects at
       tibiaot74's spot without looking for the map's own unscripted one nearby - the Behemoth room had the map's
       lever (fixed: it is the quest lever now, ours removed). An audit of everything scripted we added against
       look-alikes (lever/chest/box/body ids) within 6 tiles in the original map (Tibia74.otbm.bak) flags, to look at:
@@ -1123,6 +1133,7 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       done there"), prints "done" objects that have an unscripted look-alike near (a second one?), also checks
       objects with a uid/aid their actions.xml scripts (the Behemoth lever had no aid 8000), and takes
       --map server\data\world\Tibia74.otbm.bak to compare with the original map
+      Reviewed 2026-10-05, all kept: Alawar's chest and the 4501 box stand where the original map left their keys (aid 4503 / 4501) after losing the containers; the 10042 box is the second of the two chests the quest needs; Silver Amulet 2170 = the spoiler's Mapper Coords exactly; Fire Axe 1019 = "3 east, 5 north of the pick hole" (the map's 33081,31658 is the spoiler's "other chest"); Vampire Shield 1032 and the Draconia key 3005 checked too.
 - [x] Flaky in the full run, pass alone (2026-10-03): test_npc_talk for Hardek (wanders 20 tiles), A Wrinkled
       Beholder, Jimbin - probably a character an earlier test left standing or talking there
       Done 2026-10-04: NPCs drift from their spawn in long runs - near_npc/approach/say_to/talk_to find the NPC where it is (quest.py, npcs.py); route.py goes around or behind creatures it can't attack; test servers die with pytest (Windows job object). NPC talk 302/302, shops 234/234, 8 NPCs x10 = 120/120. Deathslicer made pushable (canpushcreatures 0, TibiaWiki 2006) - Morguthis route was 3/8 before that; Loui/Zerbrus/Billy testers get premium (Rookgaard premium side, tibia74.premium.in_premium_area).
@@ -1145,8 +1156,9 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       shortened only above 200 players (Nostalrius getInterval), a player in view blocks it (underground +-2 floors, on the
       surface its floor and all above), overspawn beyond 10 squares or a floor change. RateSpawn now divides the delays
       (1 live; the test server uses 20). tests/test_spawns.py (6 data tests pass; 2 live tests wait on the rebuild).
-  - [ ] Live tests for overspawn (10 squares / floor change) and the players-online scaling; after the rebuild check the
+  - [x] Live tests for overspawn (10 squares / floor change) and the players-online scaling; after the rebuild check the
         hunting and quest tests still behave with RateSpawn 20
+        Done 2026-10-05: test_spawns.py (16 pass): a scorpion lured past 10 squares frees its slot (not at 10), a rat roped up a floor frees its slot (monsters never take stairs - 7.4, TI trivia "respawns after being roped up"), wandering beyond the spawn radius, players-online scaling checked against Nostalrius getInterval, RateSpawn. The random draw now puts out-of-range values in the middle as Nostalrius (spawn.cpp normalRandom, NEEDS REBUILD; test_the_random_part_is_nostalrius)
 
 ## Game rules and formulas
 
@@ -1351,14 +1363,14 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 - [x] rope, shovel, pick, keys (key.lua), bread, instruments, decaying items called isIntegerInArray, which did not
       exist - every use failed. Defined in compat.lua. tests/test_spells.py now fails on any call to a function
       nothing defines (tibia74/luascan.py), with the known ones listed below (the list may only shrink)
-- [ ] Undefined functions still called (KNOWN_UNDEFINED in tests/test_spells.py):
+- [x] Undefined functions still called (KNOWN_UNDEFINED in tests/test_spells.py):
   - [x] getPlayerPromotionLevel - the NPC promotion module: promotion probably fails (see Promotion NPCs)
         Done 2026-09-30 (compat.lua)
   - [x] broadcastMessage - raid announcements, death/kill broadcast scripts
         Done 2026-10-03: only in unregistered samples (die2.lua, kill.lua, raidevent.lua + testraid.xml) - deleted;
         a raid XML's <announce> covers raids
-  - [ ] (Q16) GM ban manager: addAccountBan, addPlayerBan, removeAccountBan, removePlayerBan, getAccountBanList,
-        getPlayersByAccountNumber
+  - [x] (Q16) GM ban manager: addAccountBan, addPlayerBan, removeAccountBan, removePlayerBan, getAccountBanList,
+        getPlayersByAccountNumber - Done 2026-10-04: banmanager.lua deleted (decided with the user), names off KNOWN_UNDEFINED; getPlayerByName stays for the unspawned bank NPCs
   - [x] doNpcSellItem, getPlayerPVPBlessing, getPlayerLookDir (NPC system / functions.lua leftovers)
         Done 2026-10-03: trade-window callbacks removed (no trade window in 7.4), the 8.x PvP-blessing branch removed,
         dead modules1.lua deleted, getPlayerLookPos uses getCreatureLookDir; global.lua no longer overrides the engine's
@@ -1444,10 +1456,11 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 - [~] Using runes/fluids while walking never happened until you stopped: every step set the next
       action to the step's end and cancelled a pending one (Player::onWalk, Game::playerMove).
       Removed; actions keep their own delays. test_walking.py (fails on the old build; rebuild pending)
-- [ ] Target box: clicking a monster mid-step misses (the client picks by tile, the monster is
+- [x] Target box: clicking a monster mid-step misses (the client picks by tile, the monster is
       already on its new tile while drawn sliding from the old one). Plan: measure misses with
       walk-trace, then a click assist in mintwall.dll (move a right-click onto the creature drawn
       under the cursor; needs the game view rect and the client's creature list in memory)
+      Done 2026-10-05: this is how 7.4 felt - a creature is on its new tile as soon as the step starts (tibiantis-notes speed.txt), the attack packet carries only an id, so the server cannot help. A fix would be in mintwall.dll (rewrite the click onto the creature's logical tile; needs the 7.40 creature list / view layout reverse-engineered) - Q25
 - [x] A step queued before a teleport runs after it (found by the user 2026-10-04, Demon Helmet: the teleport
       33286,31589,12 lands west of the portal 33278,31592,11, a queued east step walks into it -> back in the room).
       Creature::onCreatureMove stops the auto-walk on teleport but not Player::nextStepEvent.
@@ -1460,8 +1473,9 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       Done 2026-10-04 (NEEDS REBUILD): tile.cpp - a wall goes on top of any field, no damage field under a wall, the
       field flag stays when the wall goes (getFieldItem prefers the damage field); destroy field reaches the fire only
       after the wall decays. tests/test_magic_wall.py (4)
-- [ ] A step pressed while another is queued replaces it (Player::setNextWalkTask) - dropped steps when
+- [x] A step pressed while another is queued replaces it (Player::setNextWalkTask) - dropped steps when
       tapping back and forth (seen in the stairs trace); queue one step instead?
+      Done 2026-10-05 (NEEDS REBUILD): steps wait in a queue of up to 4 (game.cpp playerMove/playerWalkQueuedSteps, player.h queuedSteps) and are all walked in order; a teleport, autowalk, Escape or a refused step drop the queue; the teleport-step rule kept. The real client keeps one step in flight (walk-trace: 337 of 338), so this only matters with lag bursts. test_walking.py::test_steps_sent_back_to_back_are_all_walked
 - [x] Full suite on the engine rebuilt 2026-10-04: 2382 passed, 13 failed; 4 passed alone, 9 were test bugs, fixed
       2026-10-05: ban tests blocked by a killer still PZ-locked on the Carlin door (own spots now); a logout during the
       60 s fight block saves only when it ends (journey _saved waits 90 s); Rahemos is energy-immune and out-heals melee

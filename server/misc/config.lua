@@ -110,8 +110,6 @@
     -- Options: daily, weekly, monthly
     HouseRentPeriod = "monthly"
 
-    -- Price for a tile
-    HousePrice = 100
 	
 	-- Beds only for premium players
     PremOnlyBeds = true

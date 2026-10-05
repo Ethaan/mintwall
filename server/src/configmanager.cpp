@@ -164,7 +164,6 @@ bool ConfigManager::loadFile(const std::string& _filename)
 	m_confInteger[KILLS_TO_RED] = getGlobalNumber(L, "KillsToRedSkull", 3);
 	m_confInteger[KILLS_TO_BAN] = getGlobalNumber(L, "KillsToBan", 6);
 	m_confInteger[STORE_DEATHS] = getGlobalBoolean(L, "StorePlayerDeaths", false);
-	m_confInteger[HOUSE_PRICE] = getGlobalNumber(L, "HousePrice", 100);
 	m_confInteger[TEMPLE_TP_ID] = getGlobalNumber(L, "FACCTempleID", 0);
 
 	m_confInteger[REMOVE_AMMUNITION] = getGlobalBoolean(L, "RemoveAmmunition", true);

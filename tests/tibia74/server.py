@@ -85,15 +85,21 @@ class ServerProcess:
             stdin=subprocess.DEVNULL,
         )
         self._job = _dies_with_us(self.proc)
-        deadline = time.time() + timeout
-        while time.time() < deadline:
-            if self.proc.poll() is not None:
-                raise RuntimeError(f"server exited during startup:\n{self.log_tail()}")
-            if "Server Running" in self.log() and _port_open(self.port):
-                self.started_at = time.time()      # the map is loaded: its items' timers start from here
-                return
-            time.sleep(0.5)
-        raise RuntimeError(f"server did not start within {timeout}s:\n{self.log_tail()}")
+        # a failed start stops the server it started: a fixture whose setup raised gets no teardown, and the job
+        # object only ends the server with pytest - until then it would run on, holding its port and run folder
+        try:
+            deadline = time.time() + timeout
+            while time.time() < deadline:
+                if self.proc.poll() is not None:
+                    raise RuntimeError(f"server exited during startup:\n{self.log_tail()}")
+                if "Server Running" in self.log() and _port_open(self.port):
+                    self.started_at = time.time()      # the map is loaded: its items' timers start from here
+                    return
+                time.sleep(0.5)
+            raise RuntimeError(f"server did not start within {timeout}s:\n{self.log_tail()}")
+        except BaseException:      # also a Ctrl+C while the map loads
+            self.stop()
+            raise
 
     def stop(self):
         if self.proc and self.proc.poll() is None:
@@ -102,6 +108,7 @@ class ServerProcess:
                 self.proc.wait(10)
             except subprocess.TimeoutExpired:
                 self.proc.kill()
+                self.proc.wait(10)
         if self._log_file:
             self._log_file.close()
             self._log_file = None

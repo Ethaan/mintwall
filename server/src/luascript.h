@@ -451,6 +451,8 @@ protected:
 	static int luaGetHouseDoorCount(lua_State *L);
 	static int luaGetHouseBedCount(lua_State *L);
 	static int luaIsHouseGuildHall(lua_State *L);
+	static int luaGetPlayerDepotMoney(lua_State *L);
+	static int luaGetDepotMoneyByGUID(lua_State *L);
 	static int luaSetHouseOwner(lua_State *L);
 	static int luaSetHouseAccessList(lua_State *L);
 	static int luaGetHouseList(lua_State *L);

@@ -1985,31 +1985,74 @@ bool Game::playerMove(uint32_t playerId, Direction dir)
 		return false;
 
 	player->stopWalk();
-	int32_t delay = player->getWalkDelay(dir);
 
-	if(delay > 0){
-		// The step before this one ran into a teleport and its time is not over yet: this step was sent
-		// before the client saw where it landed (two arrow presses, a held key). Running it from the
-		// landing spot walked players straight into what is next to it (the portal back on the Demon
-		// Helmet route), so it is dropped; a step sent once the teleport's step time is over walks as usual.
-		if(player->teleportedOnStep){
+	// Every step packet is walked, in the order sent: a step that arrives while another still waits
+	// for its turn goes in line behind it. It used to replace the waiting one, so two steps sent back to
+	// back (keys tapped quickly, packets bunched up by lag) walked only the second. The 7.4 client
+	// itself has at most one step on its way (it sends the next after the server answered the last -
+	// tools/walk-trace.py), so the line is short; MAX_QUEUED_STEPS bounds what a lag burst replays.
+	if(player->queuedSteps.size() >= Player::MAX_QUEUED_STEPS)
+		return false;
+
+	player->queuedSteps.push_back(dir);
+	if(player->nextStepEvent != 0)
+		return false;   //the waiting step walks this one when its turn comes
+
+	return playerWalkQueuedSteps(playerId);
+}
+
+// Walks the player's queued client steps: each one as soon as the step before it is over.
+bool Game::playerWalkQueuedSteps(uint32_t playerId)
+{
+	Player* player = getPlayerByID(playerId);
+	if(!player || player->isRemoved())
+		return false;
+
+	player->nextStepEvent = 0;   //we are that event (or none was waiting)
+
+	bool walked = false;
+	while(!player->queuedSteps.empty()){
+		Direction dir = player->queuedSteps.front();
+		int32_t delay = player->getWalkDelay(dir);
+
+		if(delay > 0){
+			// The step before this one ran into a teleport and its time is not over yet: this step was sent
+			// before the client saw where it landed (two arrow presses, a held key). Running it from the
+			// landing spot walked players straight into what is next to it (the portal back on the Demon
+			// Helmet route), so it is dropped; a step sent once the teleport's step time is over walks as usual.
+			// (A step already queued when the teleport happens is dropped by Player::onCreatureMove.)
+			if(player->teleportedOnStep){
+				player->setNextWalkTask(NULL);
+				player->sendCancelWalk();
+				return false;
+			}
+
+			// (a waiting step no longer blocks actions - see Player::onWalk)
+			SchedulerTask* task = createSchedulerTask( ((uint32_t)delay), boost::bind(&Game::playerWalkQueuedSteps, this,
+				playerId));
+			player->setNextWalkTask(task);
+			return walked;
+		}
+
+		player->queuedSteps.pop_front();
+		player->onWalk(dir);
+		player->steppingByClient = true;
+		ReturnValue ret = internalMoveCreature(player, dir);
+		player->steppingByClient = false;
+
+		if(player->isRemoved())
+			return false;
+
+		if(ret != RET_NOERROR){
+			//refused: the client was sent a walk cancel and redraws where it stands, the steps after go too
 			player->setNextWalkTask(NULL);
-			player->sendCancelWalk();
 			return false;
 		}
 
-		// (a waiting step no longer blocks actions - see Player::onWalk)
-		SchedulerTask* task = createSchedulerTask( ((uint32_t)delay), boost::bind(&Game::playerMove, this,
-			playerId, dir));
-		player->setNextWalkTask(task);
-		return false;
+		walked = true;
 	}
 
-	player->onWalk(dir);
-	player->steppingByClient = true;
-	ReturnValue ret = internalMoveCreature(player, dir);
-	player->steppingByClient = false;
-	return (ret == RET_NOERROR);
+	return walked;
 }
 
 bool Game::internalBroadcastMessage(Player* player, const std::string& text)
@@ -2243,6 +2286,7 @@ bool Game::playerStopAutoWalk(uint32_t playerId)
 		return false;
 
 	player->stopWalk();
+	player->setNextWalkTask(NULL);   //Escape also drops the arrow-key steps still waiting their turn
 	return true;
 }
 
@@ -2788,10 +2832,26 @@ bool Game::playerAcceptTrade(uint32_t playerId)
 
 		bool isSuccess = false;
 
-		ReturnValue ret1 = internalAddItem(tradePartner, tradeItem1, INDEX_WHEREEVER, 0, true);
-		ReturnValue ret2 = internalAddItem(player, tradeItem2, INDEX_WHEREEVER, 0, true);
+		// a house transfer document (/sellhouse): the receiver checked again before anything changes hands - his
+		// account may have got a house of the kind since the offer (House::canTransferTo)
+		std::string houseRefusal;
+		bool houseAllowed = HouseTransferItem::canTradeTo(tradeItem1, tradePartner, houseRefusal) &&
+			HouseTransferItem::canTradeTo(tradeItem2, player, houseRefusal);
 
-		if(ret1 == RET_NOERROR && ret2 == RET_NOERROR){
+		ReturnValue ret1 = RET_NOTPOSSIBLE;
+		ReturnValue ret2 = RET_NOTPOSSIBLE;
+		if(houseAllowed){
+			ret1 = internalAddItem(tradePartner, tradeItem1, INDEX_WHEREEVER, 0, true);
+			ret2 = internalAddItem(player, tradeItem2, INDEX_WHEREEVER, 0, true);
+		}
+
+		if(!houseAllowed){
+			player->sendTextMessage(MSG_INFO_DESCR, houseRefusal);
+			tradePartner->sendTextMessage(MSG_INFO_DESCR, houseRefusal);
+			tradePartner->tradeItem->onTradeEvent(ON_TRADE_CANCEL, tradePartner);
+			player->tradeItem->onTradeEvent(ON_TRADE_CANCEL, player);
+		}
+		else if(ret1 == RET_NOERROR && ret2 == RET_NOERROR){
 			ret1 = internalRemoveItem(tradeItem1, tradeItem1->getItemCount(), true);
 			ret2 = internalRemoveItem(tradeItem2, tradeItem2->getItemCount(), true);
 
@@ -2809,7 +2869,7 @@ bool Game::playerAcceptTrade(uint32_t playerId)
 			}
 		}
 
-		if(!isSuccess){
+		if(!isSuccess && houseAllowed){
 			std::string errorDescription = getTradeErrorDescription(ret1, tradeItem1);
 			tradePartner->sendTextMessage(MSG_INFO_DESCR, errorDescription);
 			tradePartner->tradeItem->onTradeEvent(ON_TRADE_CANCEL, tradePartner);

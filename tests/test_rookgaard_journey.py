@@ -128,20 +128,8 @@ def _kill_a_rat(p, tries=5):
 
 
 def _saved(p, db):
-    """Log out and wait for the logout's own save; the saved row. Not just "lastlogout is set": a periodic save
-    while the character played may already have written one. A character that fought within the last minute may not
-    log out ("You may not logout during or immediately after a fight!", the 60 s logout block): the client goes,
-    the character stays in the game until the block is over and is saved then - wait for that, not 10 s."""
-    guid = p.character.guid
-    logout = int(time.time())
-    p.logout()
-    deadline = time.time() + 90                 # the logout block (60 s) and the save writer's time
-    while time.time() < deadline and (db.character(guid)["lastlogout"] or 0) < logout:
-        time.sleep(0.5)
-    row = db.character(guid)
-    assert (row["lastlogout"] or 0) >= logout, \
-        f"no logout save within 90 s (lastlogout {row['lastlogout']}, logout at {logout}): {p.text_messages[-2:]}"
-    return row
+    """Log out and wait for the logout's own save (TestDatabase.logout_and_saved); the saved row."""
+    return db.logout_and_saved(p)
 
 
 # ----------------------------------------------------------------------------- hunt, sell, buy

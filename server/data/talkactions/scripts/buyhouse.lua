@@ -77,11 +77,15 @@ function onSay(cid, words, param)
 		cancel(cid, "You are already the owner of this house.")
 		return false
 	end
-	if not isPremium(cid) then                  -- answered at once; the rest needs the depot as saved
+	if not isPremium(cid) then
 		cancel(cid, "You need a premium account.")
 		return false
 	end
-	-- the depot is read from the database: save the character, read it when the save is written
+	if HOUSE_ENGINE_CHECKS then                 -- the engine counts the depot in memory: answered at once
+		ask(cid, getPlayerGUID(cid), house)
+		return false
+	end
+	-- older builds: the depot is read from the database - save the character, read it when the save is written
 	doSavePlayer(cid)
 	addEvent(ask, HOUSE_CHECK_DELAY, cid, getPlayerGUID(cid), house)
 	return false

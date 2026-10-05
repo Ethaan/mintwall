@@ -2,7 +2,8 @@
 
 <talkactions>
 	<!-- getting a house until there is a website: a request handed over at the next server save (data/lib/houses.lua);
-	     it replaces the engine's /buyhouse (commands.cpp, still listed in commands.xml but no longer reached) -->
+	     it replaced the engine's /buyhouse (Commands::buyHouse, removed from the source; its commands.xml line goes
+	     once the running build has no such command) -->
 	<talkaction words="/buyhouse" filter="first word" script="buyhouse.lua"/>
 	<talkaction words="/cancelhouse" filter="first word" script="buyhouse.lua"/>
 	<!-- the receiver's checks before the engine's /sellhouse (commands.cpp) offers the house in a trade -->

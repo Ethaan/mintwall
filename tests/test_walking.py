@@ -71,6 +71,30 @@ def test_fluid_used_while_walking_works_without_stopping(new_player, items):
     assert drank_at <= 2, f"drank only after {drank_at} more steps"
 
 
+def test_steps_sent_back_to_back_are_all_walked(new_player):
+    """Keys tapped faster than a step lasts (or steps bunched up by lag): each step waits its turn and
+    all of them are walked, in order. A step that arrived while another waited used to replace it, so
+    tapping back and forth lost steps (south, north, south, north, south ended two squares south)."""
+    from tibia74.client import _WALK_OPCODE
+    from tibia74.net import Writer
+    p = new_player(pos=ROAD, level=20, group_id=TESTER_GROUP)
+    x, y, z = start = p.pos
+    sent = [SOUTH, NORTH, SOUTH, NORTH, SOUTH]
+    for d in sent:
+        p._send(Writer().u8(_WALK_OPCODE[d]))
+    seen = [start]
+
+    def moved():
+        if p.pos != seen[-1]:
+            seen.append(p.pos)
+        return len(seen) > len(sent)
+    p.wait_for(moved, 6)
+    time.sleep(1)                                     # a step too many would come by now
+    moved()
+    expected = [start] + [(x, y + 1, z), (x, y, z)] * 2 + [(x, y + 1, z)]
+    assert seen == expected, f"walked {seen[1:]}, sent {sent}; cancels {p.cancel_walks}"
+
+
 DH_TELEPORT_WEST = (33285, 31589, 12)  # west of the teleport 33286,31589,12 on the Demon Helmet route
 DH_LANDING = (33277, 31592, 11)        # where it lands, just west of the portal 33278,31592,11
 DH_ROOM = (33279, 31592, 12)           # where that portal sends you (back to the room)

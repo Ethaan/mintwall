@@ -188,7 +188,9 @@ back t after its own death; RateSpawn is then only a safety cap.
 - **Engine** (`server/src/spawn.cpp`, rules from Nostalrius `src/spawn.cpp` and TI-trivia):
   - one timer per slot, from its monster's death (or overspawn / convince);
   - delay: spawntime over 500 s: shortened only above 200 players online (`200*t/(players/2+100)` up to 800, `0.4*t`
-    above), then random between t/2 and t (normal distribution, cut at both ends); 500 s or less: exactly t;
+    above), then random between t/2 and t (Nostalrius' `normal_random`: a normal draw, mean 0.5, deviation 0.25,
+    over the range, and a draw outside it goes to the middle - `normalRandom` in spawn.cpp since 2026-10-05;
+    `random_range`'s clamp had put about 2.3 % each on t/2 and t); 500 s or less: exactly t;
   - a player in view when the slot is due blocks it (a new delay): same floor and +-2 floors underground; on the
     surface its own floor and every floor above (TI-trivia; Nostalrius' multi-floor check also counts the surface
     floors below);
@@ -197,4 +199,8 @@ back t after its own death; RateSpawn is then only a safety cap.
   - `RateSpawn` (config.lua) now divides every delay (1 = Cip's times). The old meaning (at most N respawns per
     block per check tick) has no use with per-slot timers. The test server uses 20.
 - Tests: `tests/test_spawns.py` (data rules; live: a rotworm's respawn window, blocking by a player next to it and
-  one floor up).
+  one floor up; overspawn: the desert scorpion at 33303,32420,7 led to 10 squares (no second one) and to 11 (a new
+  one after its time), the cellar rat at 32450,32110,8 roped up one floor through the trapdoor (monsters never step
+  onto floor changes themselves, so a rope is the game's way to take one to another floor); wandering past the block
+  radius; the players-online scaling checked against Nostalrius' `getInterval` from spawn.cpp's own expressions, as a
+  live test would need over 200 players online).

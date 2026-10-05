@@ -373,6 +373,7 @@ public:
 	bool playerMoveItem(uint32_t playerId, const Position& fromPos,
 		uint16_t spriteId, uint8_t fromStackPos, const Position& toPos, uint8_t count);
 	bool playerMove(uint32_t playerId, Direction dir);
+	bool playerWalkQueuedSteps(uint32_t playerId);
 	bool playerCreatePrivateChannel(uint32_t playerId);
 	bool playerChannelInvite(uint32_t playerId, const std::string& name);
 	bool playerChannelExclude(uint32_t playerId, const std::string& name);

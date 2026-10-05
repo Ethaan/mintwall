@@ -285,22 +285,48 @@ def test_paradox_tower_levitate_is_premium(new_player):
 
 def test_paradox_tower_the_ghoul_pushes_the_crate(new_player, items):
     """The ghoul itself: "Wait until the ghoul pushes the box into the north-west corner of his area, and a ladder will
-    appear". A player it can see but not reach (not a tester - testers are left alone) makes it move, and moving it
-    pushes the crate; sooner or later into the corner. Up to five minutes."""
+    appear". A player it can see but not reach (not a tester - testers are left alone) makes it move about its whole
+    room (well past its spawn radius of 1: the walls hold it, Monster::isInSpawnRange is the despawn radius), and
+    stepping onto the crate pushes it to a random free square around (Monster::pushItem) - so sooner or later into
+    the corner. Sooner or later is long: a random walk of the crate, measured at a push every ~18 s (a step every
+    ~1.4 s), in the corner after a median 6-7 minutes from the switch's spot and only 90% within 21 (40% within the 5
+    minutes this test once waited; it passed in whole runs only when the walkthrough above had left the crate by the
+    corner). So the test waits for what is sure - the ghoul goes over the whole room and keeps pushing the crate - and
+    checks the ladder against every crate position it sees: there exactly while the crate is in the corner. The
+    crate into the corner making the ladder is the walkthrough's part (a tester pushes it there)."""
     import time
     from tibia74.quest import strong
     p = strong(new_player, (32479, 31905, 5), level=100, storage={30001: 1})       # an ordinary player: the ghoul's target
     ghoul_room = [(x, y, 5) for x in range(32476, 32482) for y in (31900, 31901)]
-    assert p.wait_for(lambda: any(c.name.lower() == "ghoul" for c in p.creatures.values()), timeout=5), \
-        ("no ghoul", [(c.name, c.pos) for c in p.creatures.values()])
-    if not any(_on(p, items, t, 1739) for t in ghoul_room):
+    corner, ladder = (32476, 31900, 5), (32478, 31904, 5)
+
+    def ghoul():
+        return next((c.pos for c in p.creatures.values() if c.name.lower() == "ghoul"), None)
+
+    def crate():
+        return next((t for t in ghoul_room if _on(p, items, t, 1739)), None)
+
+    def ladder_agrees():
+        return _on(p, items, ladder, 1386) == (crate() == corner)
+
+    assert p.wait_for(lambda: ghoul() is not None, timeout=5), ("no ghoul", [(c.name, c.pos) for c in p.creatures.values()])
+    if crate() is None:
         use_map_item(p, items, (32481, 31904, 5), "switch")
-    assert p.wait_for(lambda: any(_on(p, items, t, 1739) for t in ghoul_room), timeout=3), "no crate"
-    deadline = time.time() + 300
-    while time.time() < deadline and not _on(p, items, (32478, 31904, 5), 1386):
-        p.sleep(1)
-    crate_at = [t for t in ghoul_room if _on(p, items, t, 1739)]
-    assert _on(p, items, (32478, 31904, 5), 1386), f"no ladder after 5 minutes; the crate is at {crate_at}"
+    assert p.wait_for(lambda: crate() is not None, timeout=3), "no crate"
+    ghoul_was, crate_was, pushes = {ghoul()}, [crate()], 0
+    deadline = time.time() + 180
+    while time.time() < deadline and (pushes < 3 or min(g[0] for g in ghoul_was if g) > 32478):
+        p.sleep(0.25)
+        ghoul_was.add(ghoul())
+        now = crate()
+        assert now is not None, f"the crate is gone (from {crate_was[-1]})"
+        if now != crate_was[-1]:
+            pushes += 1
+            crate_was.append(now)
+        # the ladder and the crate come in one server turn; a second for the client to have both
+        assert ladder_agrees() or p.wait_for(ladder_agrees, timeout=1),             (f"ladder {_on(p, items, ladder, 1386)} with the crate at {crate()}", crate_was)
+    assert pushes >= 3, f"the ghoul pushed the crate {pushes} times in 3 minutes: {crate_was}, it stood on {ghoul_was}"
+    assert min(g[0] for g in ghoul_was if g) <= 32478, f"the ghoul kept by its spawn: {ghoul_was}"
 
 
 def test_paradox_tower_parcels_climb(new_player, items, world_map):

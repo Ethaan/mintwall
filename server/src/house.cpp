@@ -21,6 +21,7 @@
 
 #include <sstream>
 #include <algorithm>
+#include <set>
 
 #include "house.h"
 #include "ioplayer.h"
@@ -28,6 +29,7 @@
 #include "town.h"
 #include "configmanager.h"
 #include "tools.h"
+#include "database.h"
 //[ added for beds system
 #include "beds.h"
 //]
@@ -39,6 +41,7 @@ House::House(uint32_t _houseid) :
 transfer_container(ITEM_LOCKER1)
 {
 	itemsChanged = false;
+	guildHall = false;
 	isLoaded = false;
 	houseName = "OTServ headquarter (Flat 1, Area 42)";
 	houseOwner = 0;
@@ -505,15 +508,106 @@ bool HouseTransferItem::onTradeEvent(TradeEvents_t event, Player* owner)
 	return true;
 }
 
+bool House::canTransferTo(const Player* receiver, std::string& reason) const
+{
+	const std::string& name = receiver->getName();
+	const char* kind = (guildHall ? "guildhall" : "house");
+	if(!receiver->isPremium()){
+		reason = name + " has no premium account.";
+		return false;
+	}
+
+	Database* db = Database::instance();
+	DBQuery query;
+	DBResult* result;
+
+	// the account's characters: none may own another house of this kind
+	std::set<uint32_t> characters;
+	characters.insert(receiver->getGUID());
+	query << "SELECT `id` FROM `players` WHERE `account_id` = " << receiver->getAccount();
+	if((result = db->storeQuery(query.str()))){
+		do{
+			characters.insert(result->getDataInt("id"));
+		}while(result->next());
+		db->freeResult(result);
+	}
+	query.str("");
+
+	for(HouseMap::iterator it = Houses::getInstance().getHouseBegin(); it != Houses::getInstance().getHouseEnd(); ++it){
+		const House* other = it->second;
+		if(other != this && other->getHouseOwner() != 0 && other->isGuildHall() == guildHall &&
+			characters.find(other->getHouseOwner()) != characters.end()){
+			reason = name + "'s account already has a " + kind + ". Each account can have one house and one guildhall.";
+			return false;
+		}
+	}
+
+	// nor have asked for one with /buyhouse (house_requests, state 0: pending; the table may not exist yet)
+	bool asked = false;
+	query << "SELECT `house_id` FROM `house_requests` WHERE `state` = 0 AND `account_id` = " << receiver->getAccount();
+	if((result = db->storeQuery(query.str()))){
+		do{
+			House* requested = Houses::getInstance().getHouse(result->getDataInt("house_id"));
+			if(requested && requested->isGuildHall() == guildHall){
+				asked = true;
+			}
+		}while(result->next());
+		db->freeResult(result);
+	}
+	query.str("");
+	if(asked){
+		reason = name + "'s account has asked for a " + kind + " already. Each account can have one house and one guildhall.";
+		return false;
+	}
+
+	if(guildHall){
+		// guild_ranks.level 3: the leader (as data/lib/houses.lua isGuildLeader reads it)
+		int32_t level = 0;
+		query << "SELECT `guild_ranks`.`level` AS `level` FROM `players` JOIN `guild_ranks` ON `guild_ranks`.`id` = "
+			"`players`.`rank_id` WHERE `players`.`id` = " << receiver->getGUID();
+		if((result = db->storeQuery(query.str()))){
+			level = result->getDataInt("level");
+			db->freeResult(result);
+		}
+		if(level < 3){
+			reason = "Only the leader of a guild can rent a guildhall.";
+			return false;
+		}
+	}
+	return true;
+}
+
 bool House::executeTransfer(HouseTransferItem* item, Player* newOwner)
 {
 	if(transferItem != item){
 		return false;
 	}
 
+	// checked when the trade was offered (/sellhouse) and when it was accepted (Game::playerAcceptTrade), and once
+	// more here: the receiver's account may have got a house of this kind in between
+	std::string reason;
+	if(!canTransferTo(newOwner, reason)){
+		newOwner->sendTextMessage(MSG_INFO_DESCR, reason);
+		Player* owner = (houseOwner != 0 ? g_game.getPlayerByName(houseOwnerName) : NULL);
+		if(owner && owner != newOwner){
+			owner->sendTextMessage(MSG_INFO_DESCR, reason);
+		}
+		transferItem = NULL;            // the document is removed by HouseTransferItem::onTradeEvent
+		return false;
+	}
+
 	setHouseOwner(newOwner->getGUID());
 	transferItem = NULL;
 	return true;
+}
+
+bool HouseTransferItem::canTradeTo(Item* item, Player* receiver, std::string& reason)
+{
+	HouseTransferItem* transfer = dynamic_cast<HouseTransferItem*>(item);
+	if(!transfer || !transfer->getHouse()){
+		return true;
+	}
+	return transfer->getHouse()->canTransferTo(receiver, reason);
 }
 
 AccessList::AccessList()
@@ -828,6 +922,17 @@ House* Houses::getHouseByPlayerId(uint32_t playerId)
 	return NULL;
 }
 
+House* Houses::getHouseByPlayerId(uint32_t playerId, bool guildHall)
+{
+	for(HouseMap::iterator it = houseMap.begin(); it != houseMap.end(); ++it){
+		House* house = it->second;
+		if(house->getHouseOwner() == playerId && house->isGuildHall() == guildHall){
+			return house;
+		}
+	}
+	return NULL;
+}
+
 bool Houses::loadHousesXML(std::string filename)
 {
 	xmlDocPtr doc = xmlParseFile(filename.c_str());
@@ -842,6 +947,7 @@ bool Houses::loadHousesXML(std::string filename)
 
 		int intValue;
 		std::string strValue;
+		std::stringstream guildHalls;
 
 		houseNode = root->children;
 		while(houseNode){
@@ -893,6 +999,12 @@ bool Houses::loadHousesXML(std::string filename)
 					house->setTownId(intValue);
 				}
 
+				house->setGuildHall(readXMLString(houseNode, "guildhall", strValue) &&
+					asLowerCaseString(strValue) == "true");
+				if(house->isGuildHall()){
+					guildHalls << " " << _houseid;
+				}
+
 				house->setHouseOwner(0);
 			}
 
@@ -900,6 +1012,8 @@ bool Houses::loadHousesXML(std::string filename)
 		}
 
 		xmlFreeDoc(doc);
+		// tests/test_houses.py compares this line with the houses file
+		std::cout << "> Guildhalls:" << guildHalls.str() << std::endl;
 		return true;
 	}
 

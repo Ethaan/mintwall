@@ -22,11 +22,15 @@
 -- A request whose checks fail at the save is cancelled. The outcome stays in the table (state 1 done, 2 cancelled)
 -- until the character's next login shows it (creaturescripts/scripts/login.lua).
 --
--- The depot is read from the database (player_depotitems), so the character is saved first: /buyhouse answers after
--- CHECK_DELAY, and the server save waits as long after kicking everyone (saves are written by a background thread).
+-- The depot: getDepotMoneyByGUID (the engine) counts it in memory for a character online and loads a character
+-- offline once his pending saves are written - so /buyhouse answers at once and the server save goes on right after
+-- the kick. Older builds have no getDepotMoneyByGUID (nor a working isHouseGuildHall): there the depot is read from
+-- the database (player_depotitems), so the character is saved first, /buyhouse answers after HOUSE_CHECK_DELAY and
+-- the server save waits as long after kicking everyone (saves are written by a background thread).
 
 HOUSE_REQUEST_PENDING, HOUSE_REQUEST_DONE, HOUSE_REQUEST_CANCELLED = 0, 1, 2
-HOUSE_CHECK_DELAY = 1500               -- ms between saving a character and reading its depot from the database
+HOUSE_ENGINE_CHECKS = getDepotMoneyByGUID ~= nil   -- the engine reads guildhall="true" and counts depots in memory
+HOUSE_CHECK_DELAY = HOUSE_ENGINE_CHECKS and 0 or 1500   -- ms between saving a character and reading its depot
 
 local GUILD_LEADER = 3                 -- guild_ranks.level of a guild's leader (Leader 3, Vice-Leader 2, Member 1)
 local COINS = {[2148] = 1, [2152] = 100, [2160] = 10000}   -- gold, platinum, crystal coin
@@ -46,19 +50,45 @@ function houseRequestsTable()
 		.. " `state` INTEGER NOT NULL DEFAULT 0, `message` VARCHAR(255) NOT NULL DEFAULT '')")
 end
 
--- The guildhalls: the houses with guildhall="true" in Tibia74-houses.xml (Tibiantis' 46 guildhouses and Ankrahmun's 4). The engine does not read that attribute (isHouseGuildHall is a stub) and scripts have no io
--- library to read the file, so the ids are here; tests/test_houses.py checks them against the file.
-GUILDHALLS = {1, 2, 3, 4, 5, 58, 71, 77, 111, 112, 120, 122, 123, 133, 134, 135, 136, 194, 220, 226, 229, 243, 244,
-	245, 246, 315, 316, 317, 332, 333, 334, 335, 336, 337, 397, 398, 409, 410, 559, 560, 561, 563, 591, 618, 666, 687,
-	734, 744, 813, 814}
+-- The guildhalls: the houses with guildhall="true" in Tibia74-houses.xml (Tibiantis' 46 guildhouses and Ankrahmun's
+-- 4), read by Houses::loadHousesXML (isHouseGuildHall). OLD_BUILD_GUILDHALLS only serves builds older than that, whose
+-- isHouseGuildHall was a stub: delete it (and its test in tests/test_houses.py) once every server runs a newer build.
+local OLD_BUILD_GUILDHALLS = {1, 2, 3, 4, 5, 58, 71, 77, 111, 112, 120, 122, 123, 133, 134, 135, 136, 194, 220, 226,
+	229, 243, 244, 245, 246, 315, 316, 317, 332, 333, 334, 335, 336, 337, 397, 398, 409, 410, 559, 560, 561, 563, 591,
+	618, 666, 687, 734, 744, 813, 814}
 
-local guildhalls = {}
-for _, id in ipairs(GUILDHALLS) do
-	guildhalls[id] = true
+local guildhalls = nil                 -- {house id = true}, built at the first use
+
+local function guildhallSet()
+	if guildhalls == nil then
+		guildhalls = {}
+		if HOUSE_ENGINE_CHECKS then
+			for _, id in pairs(getHouseList() or {}) do
+				if isHouseGuildHall(id) == true then
+					guildhalls[id] = true
+				end
+			end
+		else
+			for _, id in ipairs(OLD_BUILD_GUILDHALLS) do
+				guildhalls[id] = true
+			end
+		end
+	end
+	return guildhalls
 end
 
 function isGuildhall(house)
-	return guildhalls[house] == true
+	return guildhallSet()[house] == true
+end
+
+-- the guildhalls' ids
+function guildhallIds()
+	local ids = {}
+	for id in pairs(guildhallSet()) do
+		table.insert(ids, id)
+	end
+	table.sort(ids)
+	return ids
 end
 
 local function accountOf(guid)
@@ -95,8 +125,16 @@ local function isGuildLeader(guid)
 	return level >= GUILD_LEADER
 end
 
--- the coins in a character's depot of one town, as last saved
+-- the coins in a character's depot of one town: as they are (the engine), else as last saved (older builds)
 function getDepotMoney(guid, depot)
+	if HOUSE_ENGINE_CHECKS then
+		return tonumber(getDepotMoneyByGUID(guid, depot)) or 0
+	end
+	return getSavedDepotMoney(guid, depot)
+end
+
+-- the coins in a character's depot of one town, as last saved (player_depotitems)
+function getSavedDepotMoney(guid, depot)
 	local res = query("SELECT `pid`, `sid`, `itemtype`, `count` FROM `player_depotitems` WHERE `player_id` = " .. guid)
 	if res == nil then
 		return 0
@@ -131,7 +169,8 @@ end
 
 -- SQL: the requests (`house_id`) for a house of the same kind as `house`
 local function sameKind(house)
-	return "`house_id` " .. (isGuildhall(house) and "IN" or "NOT IN") .. " (" .. table.concat(GUILDHALLS, ", ") .. ")"
+	return "`house_id` " .. (isGuildhall(house) and "IN" or "NOT IN") .. " (" .. table.concat(guildhallIds(), ", ")
+		.. ")"
 end
 
 -- the house of the same kind as `house` (house or guildhall) a character of this account owns: house id, owner guid.

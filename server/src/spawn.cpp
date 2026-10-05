@@ -27,7 +27,10 @@
 #include "configmanager.h"
 
 #include <libxml/xmlmemory.h>
-#include <libxml/parser.h> 
+#include <libxml/parser.h>
+
+#include <algorithm>
+#include <cmath> 
 
 extern ConfigManager g_config;
 extern Monsters g_monsters;
@@ -282,6 +285,34 @@ bool Spawns::isInZone(const Position& centerPos, int32_t radius, const Position&
 #define OVERSPAWN_DISTANCE 10
 #define RESPAWN_RETRY 10000        // the spot was taken (placeCreature failed): try again after this
 
+float box_muller(float m, float s);  // tools.cpp: a normal variate, mean m, standard deviation s
+
+static int32_t normalRandom(int32_t minNumber, int32_t maxNumber)
+{
+	//Nostalrius tools.cpp normal_random: a normal draw (mean 0.5, deviation 0.25) over [min, max]; a draw outside
+	//[0, 1] goes to the middle, not to the ends (tools.cpp random_range DISTRO_NORMAL puts it on the ends)
+	if(minNumber == maxNumber){
+		return minNumber;
+	}
+	else if(minNumber > maxNumber){
+		std::swap(minNumber, maxNumber);
+	}
+
+	int32_t increment;
+	const int32_t diff = maxNumber - minNumber;
+	const float v = box_muller(0.5f, 0.25f);
+	if(v < 0.0f){
+		increment = diff / 2;
+	}
+	else if(v > 1.0f){
+		increment = (diff + 1) / 2;
+	}
+	else{
+		increment = (int32_t)std::floor(v * diff + 0.5f);     //round(v * diff)
+	}
+	return minNumber + increment;
+}
+
 void Spawn::startSpawnCheck()
 {
 	//a monster of this block disappeared (died, despawned): checkSpawn starts its slot's timer
@@ -336,7 +367,7 @@ uint32_t Spawn::getRespawnDelay(uint32_t interval)
 {
 	//Nostalrius Spawn::getInterval: a spawntime over 500 s is shortened only with many players online (not up to
 	//200, 200*t/(players/2+100) up to 800, 0.4*t above) and then randomised between half and all of it (a normal
-	//distribution around 3/4, cut at both ends); shorter spawntimes are exact
+	//distribution around 3/4; normalRandom: a draw outside the range goes to the middle); shorter spawntimes are exact
 	uint64_t delay = interval;
 	if(delay > 500000){
 		uint64_t playersOnline = g_game.getPlayersOnline();
@@ -346,7 +377,7 @@ uint32_t Spawn::getRespawnDelay(uint32_t interval)
 		else if(playersOnline > 200){
 			delay = 200 * delay / (playersOnline / 2 + 100);
 		}
-		delay = random_range((int32_t)(delay / 2), (int32_t)delay, DISTRO_NORMAL);
+		delay = normalRandom((int32_t)(delay / 2), (int32_t)delay);
 	}
 
 	int32_t rate = g_config.getNumber(ConfigManager::RATE_SPAWN);

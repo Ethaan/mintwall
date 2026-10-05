@@ -13,8 +13,9 @@
 --      (House::transferToDepot), the same rule as creaturescripts/scripts/login.lua premiumExpired. Before the
 --      rent, so a lost house is not charged;
 --   3. hand over the houses asked for with /buyhouse (data/lib/houses.lua: the checks again, the owner set; the
---      first month's rent is then taken by payHouses below) - 2 to 3 s after the kick, when the kicked characters'
---      saves (written by a background thread) are in the database the checks read;
+--      first month's rent is then taken by payHouses below) - at the next think after the kick (getDepotMoneyByGUID
+--      loads a kicked character once his save is written); on older builds 2 to 3 s after it, when the kicked
+--      characters' saves (written by a background thread) are in the database the checks read;
 --   4. doSaveServer(1): everything saved + Houses::payHouses (the monthly rent from the depot of the house's town;
 --      without the money a warning letter there, one a day, the house lost after 7) + temporary bans cleared;
 --   5. shut down: GAME_STATE_SHUTDOWN saves once more, waits for the save writer and the process exits with
@@ -125,7 +126,10 @@ end                                    -- frees the script environment the event
 
 function onThink(interval)
 	if kickedAt ~= nil then
-		if os.time() >= kickedAt + math.ceil(HOUSE_CHECK_DELAY / 1000) + 1 then   -- whole seconds: at least the delay
+		-- older builds read the depots from the database: wait for the kicked characters' saves (whole seconds, at
+		-- least the delay); getDepotMoneyByGUID waits for them itself, so the next think goes on
+		local wait = HOUSE_ENGINE_CHECKS and 0 or math.ceil(HOUSE_CHECK_DELAY / 1000) + 1
+		if os.time() >= kickedAt + wait then
 			kickedAt = nil
 			saveAndShutDown()
 		end
