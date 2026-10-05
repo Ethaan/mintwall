@@ -353,7 +353,7 @@ def test_mission_9_the_bag_needs_500_oz(new_player, items, world_map):
 # --- mission 10: Markwin ---------------------------------------------------------------------------------------------
 
 def test_mission_10_markwin(new_player, items, world_map):
-    from tibia74.route import _clear, walk_near
+    from tibia74.route import walk_near
     p = at_kevin(new_player, SANTA_DONE)
     replies = talk_to(p, "Kevin", "hi", "mission", "yes")
     assert said(replies, "It's a letter from the mother of Markwin, the king of Mintwallin."), replies
@@ -367,23 +367,32 @@ def test_mission_10_markwin(new_player, items, world_map):
     assert said(replies, "Intruder! Guards, take him down!"), replies
     names = ("minotaur guard", "minotaur archer", "minotaur mage")
     # his bodyguards: the minotaurs his "hi" called (Mintwallin's own stay out of it)
-    assert p.wait_for(lambda: len([c for c in p.creatures.values() if c.id not in before
-                                   and c.name.lower() in names]) >= 4, timeout=3), [c.name for c in p.creatures.values()]
-    called = {c.id for c in p.creatures.values() if c.id not in before and c.name.lower() in names}
-    guards = lambda: [p.creatures[i] for i in called  # noqa: E731
-                      if i not in p.removed_creatures and i in p.creatures and p.creatures[i].health > 0]
+    new_guards = lambda: {c.id for c in p.creatures.values()  # noqa: E731
+                          if c.id not in before and c.name.lower() in names}
+    assert p.wait_for(lambda: len(new_guards()) >= 4, timeout=3), [c.name for c in p.creatures.values()]
+    p.sleep(1)                                                  # all of them: up to 6 show (a taken tile gets none)
+    called = new_guards()
+    # alive until the client saw its health drop to 0 - not "removed from view": a guard that wanders (a tester is
+    # left alone) off the screen is removed from view too, and Markwin counts it ("Guards! Take him down!")
+    guards = lambda: [p.creatures[i] for i in called if i in p.creatures and p.creatures[i].health > 0]  # noqa: E731
     assert not said(talk_to(p, "Markwin", "hi", "letter", "yes"), "Uhm, well thank you")   # not while they live
     for _ in range(40):                                         # kill them, one after the other
         alive = guards()
         if not alive:
             break
-        spots = [tuple(g.pos) for g in alive if g.pos]           # they move: where each one stands now
-        if not spots:
-            p.sleep(0.5)
+        seen = [g for g in alive if g.pos]                      # they wander (a tester is left alone): in view now
+        if not seen:                                            # out of view: back to Markwin, they stay near him
+            walk_near(p, items, world_map, npc_pos("Markwin"), radius=2, **ABILITY)
+            p.wait_for(lambda: any(g.pos for g in guards()), timeout=5)
             continue
-        spot = min(spots, key=lambda q: max(abs(q[0] - p.pos[0]), abs(q[1] - p.pos[1])))
-        walk_near(p, items, world_map, spot, radius=1, **ABILITY)
-        _clear(p, spot)
+        guard = min(seen, key=lambda g: max(abs(g.pos[0] - p.pos[0]), abs(g.pos[1] - p.pos[1])))
+        walk_near(p, items, world_map, tuple(guard.pos), radius=1, **ABILITY)
+        # after it, not at the tile it stood on: archers and mages keep moving (and keep their distance)
+        p.set_fight_modes(fight=1, chase=1, safe=1)
+        p.attack(guard.id)
+        p.wait_for(lambda: guard.health == 0 or not guard.pos, timeout=15)
+        p.attack(0)
+        p.set_fight_modes(fight=1, chase=0, safe=1)
     assert not guards(), guards()
     walk_near(p, items, world_map, npc_pos("Markwin"), radius=2, **ABILITY)
     replies = talk_to(p, "Markwin", "hi", "letter", "yes")

@@ -336,11 +336,16 @@ def step_onto(p, pos):
     from .route import DIRECTIONS, _blocker, _clear
     d = DIRECTIONS[(pos[0] - p.pos[0], pos[1] - p.pos[1])]
     before = p.pos
-    for _ in range(3):
+    for tries in range(3):
         p.step(d)
         if p.wait_for(lambda: p.pos != before, timeout=3):
             return
         if not _blocker(p, pos):
+            if tries == 0:
+                # just teleported (a forcefield sent us back here): the server drops a step sent before the
+                # teleporting step's time is over (Game::playerMove, teleportedOnStep) - once more, a moment later
+                p.sleep(1)
+                continue
             break
         _clear(p, pos)                  # a monster stands on it (a summon on a portal only players use)
     raise AssertionError(f"could not step from {before} onto {pos}: {p.tiles.get(tuple(pos))}")

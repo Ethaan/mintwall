@@ -26,9 +26,9 @@ Looked at by hand 2026-10-02: "reviewed" lines are kept on purpose (REVIEWED in 
 - **TibiaWiki** (rev 105279, 2007-06-15): Melee, Summons 0-3 Green Djinns and 0-2 Ancient Scarabs, appears as an Ancient Scarab, Invisible, Self-Healing. - max damage 1600+
 - **ours**: melee attack None skill None, poison 55; melee poisons 55; lifedrain 100-700 (range 1), chance 7% every 3000 ms; poison 100-500 (range 7), chance 12% every 2000 ms; physical 120-750 (range 7), chance 12% every 3000 ms; speed (range 7), chance 25% every 3000 ms, speed -650 for 50000 ms; lifedrain 50-550 (length 8, spread 3), chance 18% every 2000 ms; healing 200-400, chance 20% every 1000 ms; invisible, chance 7% every 1000 ms; outfit, chance 3% every 1000 ms; summons ancient scarab (max 4); summons green djinn (max 4)
   - (reviewed) ours has lifedrain, the 7.4 list does not
+  - (reviewed) ours has physical, the 7.4 list does not
   - (reviewed) ours has outfit, the 7.4 list does not
   - (reviewed) ours has poison, the 7.4 list does not
-  - (reviewed) ours has physical, the 7.4 list does not
   - reviewed: tomb pharaoh: the wiki lists only melee and summons but 'max damage 1600+' - its page is incomplete
 
 ## banshee
@@ -56,8 +56,8 @@ Looked at by hand 2026-10-02: "reviewed" lines are kept on purpose (REVIEWED in 
 - **TibiaWiki** (rev 105009, 2007-06-14): Melee, Fire attacks 0-45 damage, HMM 0-45 damage, Poison attacks 0-45 damage, SDs 0-40 damage, Life Drain 0-45 damage, Mana Drain 0-25 mana, Summon 0-6 Skeletons. - max damage 80
 - **tibiantis-notes**: no melee poison; strategy (100, 0, 0, 0), changes target 50
 - **ours**: melee attack 12 skill 35; energy 15-45 (range 7), chance 7% every 1000 ms; fire 25-45 (range 7), chance 7% every 2000 ms; physical 30-50 (range 7), chance 8% every 2000 ms; poison 5-45 (range 7), chance 8% every 2000 ms; lifedrain 35-45 (range 7), chance 6% every 3000 ms; manadrain 5-25 (range 7), chance 5% every 1000 ms; summons skeleton (max 6)
-  - (reviewed) ours has physical, the 7.4 list does not
   - (reviewed) ours has energy, the 7.4 list does not
+  - (reviewed) ours has physical, the 7.4 list does not
   - reviewed: its HMM is our energy, its SDs our physical (SD did physical damage in 7.4)
 
 ## black knight
@@ -490,8 +490,8 @@ Looked at by hand 2026-10-02: "reviewed" lines are kept on purpose (REVIEWED in 
 - **TibiaWiki** (rev 107477, 2007-06-21): Melee (0-75), SDs (0-120), Mana Drain (10-170), Summons Ghouls, Self-Healing - max damage 195
 - **tibiantis-notes**: melee poison 250; strategy (100, 0, 0, 0), changes target 50
 - **ours**: melee attack 20 skill 25, poison 250; melee poisons 250; physical 0-120 (range 7), chance 25% every 2000 ms; manadrain 10-170 (range 7), chance 25% every 1000 ms; healing 34-56, chance 15% every 1000 ms; summons ghoul (max 2)
-  - (reviewed) ours has physical, the 7.4 list does not
   - (reviewed) ours has poison, the 7.4 list does not
+  - (reviewed) ours has physical, the 7.4 list does not
   - reviewed: her SDs are our physical attack; melee poison 250 as tibiantis-notes
 
 ## rabbit
@@ -505,8 +505,8 @@ Looked at by hand 2026-10-02: "reviewed" lines are kept on purpose (REVIEWED in 
 - **TibiaWiki** (rev 105284, 2007-06-15): Melee (0-750), Energy Attack (200-600), Sudden Death (0-500), Summons 0-1 Demon, Makes you Drunk, Poisons (starting with upto 3 hp per turn), Paralysis, Appears as a Demon, Turns you into a Pig, Self-Healing. - max damage 1300
 - **ours**: melee attack None skill None, poison 65; melee poisons 65; lifedrain 75-750 (range 1), chance 7% every 3000 ms; energy 60-600 (range 7), chance 20% every 2000 ms; physical 60-600 (range 7), chance 20% every 3000 ms; speed (radius 6, target 0), chance 12% every 1000 ms, speed -650 for 60000 ms; drunk (range 7), chance 8% every 1000 ms; outfit (range 7), chance 15% every 1000 ms; healing 200-500, chance 20% every 1000 ms; outfit, chance 5% every 1000 ms; summons demon (max 1)
   - (reviewed) ours has lifedrain, the 7.4 list does not
-  - (reviewed) ours has physical, the 7.4 list does not
   - (reviewed) ours has outfit, the 7.4 list does not
+  - (reviewed) ours has physical, the 7.4 list does not
   - reviewed: tomb pharaoh: 'Energy Attack (200-600), Sudden Death (0-500)' are ours; page incomplete
 
 ## rat

@@ -30,6 +30,15 @@ PZ_REFUSED = "can not enter a protection zone"
 THAIS_DOOR, INTO_THAIS = (32369, 32230, 7), SOUTH
 # Outside the south door of the Carlin temple: one step north is protection zone (x 32360-32361).
 CARLIN_DOOR, INTO_CARLIN = (32360, 31788, 7), NORTH
+# The banishment tests need no protection zone: each case kills on a street spot of its own south of the Carlin temple,
+# since the killer of the PZ block test may not log out for 15 minutes and still stands on CARLIN_DOOR.
+BAN_SPOTS = {("6th", 0): 32352, ("6th", 1): 32355, ("6th", 2): 32358, ("final", 1): 32363, ("final", 2): 32366}
+
+
+def _ban_spots(case):
+    """The killer's spot (on the street, y 31790) and its victim's, diagonally north-east of it (y 31789)."""
+    x = BAN_SPOTS[case]
+    return (x, 31790, 7), (x + 1, 31789, 7)
 
 
 def _me(c):
@@ -143,17 +152,17 @@ def _seed(db, guid, account, kills_today, earlier_bans):
 def test_sixth_unjustified_kill_in_a_day_bans_7_days_then_30_then_60(new_player, db, earlier_bans, days):
     """The 6th unjustified kill of the day bans the account: 7 days the first time, 30 the second, 60 the third.
     5 kills are seeded in the database, the 6th is a real one."""
-    killer = new_player(pos=CARLIN_DOOR, level=100, vocation=KNIGHT, inventory={RIGHT: Item(2400)},   # magic sword
+    spot, victim_spot = _ban_spots(("6th", earlier_bans))
+    killer = new_player(pos=spot, level=100, vocation=KNIGHT, inventory={RIGHT: Item(2400)},   # magic sword
                         skills={2: 100}, storage={30001: 1})
-    if killer.pos != CARLIN_DOOR:            # the door tile was taken at login: pushed aside, maybe into the temple
-        killer.wait_for(lambda: killer.walk_to(CARLIN_DOOR, max_steps=3), timeout=15)
-    assert killer.pos == CARLIN_DOOR, f"the killer is at {killer.pos}, not at the door {CARLIN_DOOR}"
+    assert killer.pos == spot, f"the killer is at {killer.pos}, not at {spot}"
     account = killer.character.account
     _seed(db, killer.character.guid, account, kills_today=5, earlier_bans=earlier_bans)
-    victim = _victim(new_player, (CARLIN_DOOR[0] + 1, CARLIN_DOOR[1] + 1, 7), level=8)
+    victim = _victim(new_player, victim_spot, level=8)
     killer.set_fight_modes(fight=1, chase=0, safe=0)
     killer.attack(victim.player_id)
-    assert killer.wait_for(lambda: victim.player_id in killer.removed_creatures or not victim.connected, timeout=30),         f"the victim did not die: {killer.text_messages[-3:]}"
+    assert killer.wait_for(lambda: victim.player_id in killer.removed_creatures or not victim.connected, timeout=30), \
+        f"the victim did not die: {killer.text_messages[-3:]}"
     assert killer.wait_for(lambda: not killer.connected, timeout=10), "the banished killer was not kicked"
 
     deadline = time.time() + 10
@@ -190,15 +199,14 @@ def test_a_final_ban_for_unjustified_kills_is_never_shorter_than_the_automatic_o
     ban (FinalBanLength, 7 days) and the automatic ban it would get otherwise (7 / 30 / 60 ... days) - decided with
     the user 2026-10-04. Two earlier bans by a gamemaster are seeded too: they do not count as automatic ones (the
     count is of admin_id 0 "Automatic Banishment." rows, BanManager::getAutomaticBanishmentsCount)."""
-    killer = new_player(pos=CARLIN_DOOR, level=100, vocation=KNIGHT, inventory={RIGHT: Item(2400)},   # magic sword
+    spot, victim_spot = _ban_spots(("final", earlier_bans))
+    killer = new_player(pos=spot, level=100, vocation=KNIGHT, inventory={RIGHT: Item(2400)},   # magic sword
                         skills={2: 100}, storage={30001: 1})
-    if killer.pos != CARLIN_DOOR:
-        killer.wait_for(lambda: killer.walk_to(CARLIN_DOOR, max_steps=3), timeout=15)
-    assert killer.pos == CARLIN_DOOR, f"the killer is at {killer.pos}, not at the door {CARLIN_DOOR}"
+    assert killer.pos == spot, f"the killer is at {killer.pos}, not at {spot}"
     account = killer.character.account
     _seed(db, killer.character.guid, account, kills_today=5, earlier_bans=earlier_bans)
     _seed_gm(db, account, warnings=4, gm_bans=2)
-    victim = _victim(new_player, (CARLIN_DOOR[0] + 1, CARLIN_DOOR[1] + 1, 7), level=8)
+    victim = _victim(new_player, victim_spot, level=8)
     killer.set_fight_modes(fight=1, chase=0, safe=0)
     killer.attack(victim.player_id)
     assert killer.wait_for(lambda: victim.player_id in killer.removed_creatures or not victim.connected, timeout=30), \

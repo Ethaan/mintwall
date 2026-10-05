@@ -83,10 +83,11 @@ def _intervals(hits):
 
 
 def _every(hits, tick):
-    """The first gap is the tick plus the time on the field (up to 2.5 s), the others the tick +-0.6 s (so a 5 s
-    poison tick fails)."""
+    """The first gap is the tick plus the time on the field (up to 2.5 s), the others the tick, -0.6 s .. +12%: the
+    engine counts 1000 ms per think but thinks run 1.02-1.09 s apart, so 10 ticks take up to ~11 s (a 5 s poison
+    tick still fails the 4 s check)."""
     gaps = _intervals(hits)
-    return bool(gaps) and tick - 1 <= gaps[0] <= tick + 2.5 and all(tick - 0.6 <= g <= tick + 0.6 for g in gaps[1:])
+    return bool(gaps) and tick - 1 <= gaps[0] <= tick * 1.12 + 2.5 and         all(tick - 0.6 <= g <= tick * 1.12 for g in gaps[1:])
 
 
 def test_fire_field_burns_20_then_10_every_10_seconds(new_player, items):

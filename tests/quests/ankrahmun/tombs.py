@@ -4,7 +4,8 @@ the basin, killing a pharaoh and taking his pass item from the body."""
 from quests.common import *  # noqa: F401,F403
 
 SCARAB_COIN = 2159
-HMM = 2311                                # heavy magic missile rune: energy, what hurts every pharaoh
+HMM = 2311                                # heavy magic missile rune: energy, what hurts the pharaohs ...
+SD = 2268                                 # ... but Rahemos (energy immune): sudden death, physical damage in 7.4
 GROUP_CONTAINER = 2
 
 
@@ -53,12 +54,24 @@ MORGUTHIS = Tomb(entrance=(33233, 32704, 7), flame=(33234, 32692, 13), basin=(33
 
 
 def tomb_player(new_player, items=(), coins=1, **kwargs):
-    """A strong premium tester at the Ankrahmun temple with a shovel, scarab coins and heavy magic missile runes (a
-    pharaoh heals faster than a sword hurts him)."""
+    """A strong premium tester at the Ankrahmun temple with a shovel, scarab coins, heavy magic missile runes and
+    sudden death runes (a pharaoh heals faster than a sword hurts him; melee does not count the level in 7.4)."""
     from tibia74 import Item
     kwargs.setdefault("maglevel", 100)
-    return ankrahmun_player(new_player, items=[Item(SHOVEL), Item(SCARAB_COIN, coins), *[Item(HMM, 100)] * 3, *items],
-                            **kwargs)
+    return ankrahmun_player(new_player, items=[Item(SHOVEL), Item(SCARAB_COIN, coins), *[Item(HMM, 100)] * 3,
+                                               Item(SD, 100), *items], **kwargs)
+
+
+def _rune_for(name):
+    """The rune that hurts the creature: heavy magic missiles (energy), or sudden death (physical) for a creature
+    immune to energy (Rahemos) - its monster file says which."""
+    import re
+    from tibia74 import SERVER_DIR
+    path = SERVER_DIR / "data" / "monster" / f"{name.lower()}.xml"
+    text = path.read_text(encoding="utf-8", errors="replace") if path.exists() else ""
+    if re.search(r'<immunity\s+energy="1"', text):
+        return "sudden death rune"
+    return "heavy magic missile rune"
 
 
 def sacrifice_coin(p, items, tomb):
@@ -87,6 +100,7 @@ def kill(p, items, name, timeout=120, lair=None, world_map=None, ability=None):
     assert creature, f"no {name} in view from {p.pos}: {list(p.creatures.values())}"
     bodies_before = set(_bodies(p, items))
     last = [creature.pos]
+    rune_name = _rune_for(name)
 
     def body():
         new = [pos for pos in _bodies(p, items) if pos not in bodies_before]
@@ -109,7 +123,7 @@ def kill(p, items, name, timeout=120, lair=None, world_map=None, ability=None):
             p.wait_for(lambda: body() or seen(), 2.1)
             continue
         p.attack(creature.id)
-        rune = carried(p, p.items, lambda n: n == "heavy magic missile rune")
+        rune = carried(p, p.items, lambda n: n == rune_name)
         stack = p.tiles.get(tuple(c.pos), [])
         at = next((n for n, t in enumerate(stack)
                    if (t if isinstance(t, int) else getattr(t, "id", None)) == creature.id), None)

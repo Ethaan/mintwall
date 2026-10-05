@@ -1462,6 +1462,12 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       after the wall decays. tests/test_magic_wall.py (4)
 - [ ] A step pressed while another is queued replaces it (Player::setNextWalkTask) - dropped steps when
       tapping back and forth (seen in the stairs trace); queue one step instead?
+- [x] Full suite on the engine rebuilt 2026-10-04: 2382 passed, 13 failed; 4 passed alone, 9 were test bugs, fixed
+      2026-10-05: ban tests blocked by a killer still PZ-locked on the Carlin door (own spots now); a logout during the
+      60 s fight block saves only when it ends (journey _saved waits 90 s); Rahemos is energy-immune and out-heals melee
+      under the 7.4 formulas (tomb kill() uses SD runes on energy-immune monsters); a step right after a forcefield
+      teleport is dropped by the 2026-10-04 teleport-step fix (step_onto retries once); Markwin's guards counted dead
+      when off-screen (tracked by health now).
 - [ ] Re-trace with the real client on the new server (walk-trace summary: steps more than 50 ms late)
 
 ## Travel and combat feel

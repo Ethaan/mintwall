@@ -7,7 +7,7 @@ long theres nothing blocking the path", TibiaWiki Destroy Field, 2008-02 revisio
 Found in game: in the Demon Helmet fire corridor (Edron, 33210-33212,31620-31629,13) a magic wall thrown on the
 map's fire fields (1487/1488, not replaceable) did nothing - the engine refused to put a field on a field it
 could not replace, and threw the wall away."""
-from tibia74 import BACKPACK, WEST, NORTHWEST, Item
+from tibia74 import BACKPACK, EAST, WEST, NORTHWEST, Item
 from tibia74.server import TESTER_GROUP
 
 MAGIC_WALL_RUNE, FIRE_BOMB_RUNE, FIRE_FIELD_RUNE, DESTROY_FIELD_RUNE = 2293, 2305, 2301, 2261
@@ -19,6 +19,7 @@ INFINITE = bytes([4]) + (64000).to_bytes(2, "little")     # action id 64000: a t
 # the Demon Helmet fire corridor, ground 407 (tests/tibia74/otbm.py read_tiles); no protection zone
 CORRIDOR_FIRE = (33211, 31627, 13)          # map fire field 1487 (20 damage on entering)
 CORRIDOR_FIRE_EAST = (33212, 31628, 13)     # free, south-east of it
+CORRIDOR_FIRE_WEST = (33210, 31627, 13)     # free, west of it: the burn test starts here (the caster leaves the east one)
 GROWTH_SPOT, GROWTH_FIRE = (33211, 31629, 13), (33210, 31629, 13)   # free; map fire field 1488 west of it
 BOMB_SPOT, BOMB_WALL, BOMB_TARGET = (33212, 31631, 13), (33211, 31631, 13), (33211, 31632, 13)   # all free
 FIELD_SPOT, FIELD_TILE = (33212, 31618, 13), (33211, 31618, 13)    # free, north of the fires
@@ -64,10 +65,10 @@ def test_a_magic_wall_goes_on_a_map_fire_field_which_burns_again_after_it(new_pl
     p.logout()
 
     # and it burns: a normal character steps on it
-    b = new_player(pos=CORRIDOR_FIRE_EAST, level=100, vocation=4, premium_days=30, storage={30001: 1})
-    assert b.pos == CORRIDOR_FIRE_EAST, b.pos
+    b = new_player(pos=CORRIDOR_FIRE_WEST, level=100, vocation=4, premium_days=30, storage={30001: 1})
+    assert b.pos == CORRIDOR_FIRE_WEST, b.pos
     before = b.wait_for(lambda: b.stats.health, timeout=3) and b.stats.health
-    assert b.step(NORTHWEST), f"could not step onto the fire field from {b.pos}"
+    assert b.step(EAST), f"could not step onto the fire field from {b.pos}"
     assert b.wait_for(lambda: b.stats.health < before, timeout=3), "the fire field did not burn"
 
 
