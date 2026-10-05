@@ -20,6 +20,8 @@ BACKPACK_ID = 1988
 COINS = {2148: 1, 2152: 100, 2160: 10000}          # gold, platinum, crystal coin
 CHUNK = 12                                         # trades per character: fits one backpack with the change
 GREETINGS = {"hi", "hello", "bye", "farewell"}
+from tibia74.premium import in_premium_area   # Loui, Zerbrus, Billy: the premium side of Rookgaard
+
 PREMIUM_TRADERS = {"Lee'Delle", "Norma"}            # trade with premium accounts only (npc/lib/premiumshop.lua)
 
 
@@ -35,7 +37,7 @@ def _visit(new_player, npc, inventory=None):
     Found where the NPC has walked to by now, past whoever an earlier test left beside it."""
     p = near_npc(new_player, npc, spawn=rookgaard_pos(npc), level=100, inventory=inventory,
                  storage={BEGINNER_SET_GIVEN: 1}, group_id=TESTER_GROUP,
-                 premium_days=30 if npc.name in PREMIUM_TRADERS else 0)
+                 premium_days=30 if npc.name in PREMIUM_TRADERS or in_premium_area(rookgaard_pos(npc)) else 0)
     p.greeting = say_to(p, npc.name, f"hi {npc.name.lower()}")    # by name: a neighbour would take a plain "hi"
     me = seen_npc(p, npc.name)
     assert p.greeting, f"{npc.name} does not answer hi: it is at {me and me.pos}, we are at {p.pos}"

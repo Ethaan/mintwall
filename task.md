@@ -1123,15 +1123,17 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       done there"), prints "done" objects that have an unscripted look-alike near (a second one?), also checks
       objects with a uid/aid their actions.xml scripts (the Behemoth lever had no aid 8000), and takes
       --map server\data\world\Tibia74.otbm.bak to compare with the original map
-- [ ] Flaky in the full run, pass alone (2026-10-03): test_npc_talk for Hardek (wanders 20 tiles), A Wrinkled
+- [x] Flaky in the full run, pass alone (2026-10-03): test_npc_talk for Hardek (wanders 20 tiles), A Wrinkled
       Beholder, Jimbin - probably a character an earlier test left standing or talking there
-- [ ] Flaky quest tests (seen 2026-10-02; Rahemos failed the same way before the monster change, the deathslicer
+      Done 2026-10-04: NPCs drift from their spawn in long runs - near_npc/approach/say_to/talk_to find the NPC where it is (quest.py, npcs.py); route.py goes around or behind creatures it can't attack; test servers die with pytest (Windows job object). NPC talk 302/302, shops 234/234, 8 NPCs x10 = 120/120. Deathslicer made pushable (canpushcreatures 0, TibiaWiki 2006) - Morguthis route was 3/8 before that; Loui/Zerbrus/Billy testers get premium (Rookgaard premium side, tibia74.premium.in_premium_area).
+- [x] Flaky quest tests (seen 2026-10-02; Rahemos failed the same way before the monster change, the deathslicer
       in Morguthis's tomb was not changed):
       test_tomb_rahemos (Rahemos heals 200-500 on 20% of his turns and summons a demon; the test's sword + heavy
       magic missiles sometimes do not outpace it in 120 s), test_tomb_morguthis (a deathslicer - unkillable,
       walks, pushable one square, as TibiaWiki 2006 - stands in the corridor at 33263,32679,13 and the router's
       push loses to it). Make the fights/route more robust (stronger runes for the pharaoh, push the deathslicer
       off the path before walking)
+      Done 2026-10-04: NPCs drift from their spawn in long runs - near_npc/approach/say_to/talk_to find the NPC where it is (quest.py, npcs.py); route.py goes around or behind creatures it can't attack; test servers die with pytest (Windows job object). NPC talk 302/302, shops 234/234, 8 NPCs x10 = 120/120. Deathslicer made pushable (canpushcreatures 0, TibiaWiki 2006) - Morguthis route was 3/8 before that; Loui/Zerbrus/Billy testers get premium (Rookgaard premium side, tibia74.premium.in_premium_area).
 - [x] Check spawn times/radius are sane for 7.4
       Done 2026-10-03: docs/reference-74/spawns.md. Our 18,666 monster positions match CipSoft-derived data (Nostalrius
       7.7) almost 1:1, but every spawntime is the map editor's 60 s (7.x: 600 s for most spots, randomised and scaled by

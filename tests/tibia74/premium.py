@@ -118,3 +118,17 @@ def read_lua_boxes(path: Path):
     """The boxes premium_areas.lua holds: [((x1, y1, z1), (x2, y2, z2), area)]"""
     return [((int(m[0]), int(m[1]), int(m[2])), (int(m[3]), int(m[4]), int(m[5])), m[6])
             for m in LUA_BOX.findall(path.read_text(encoding="utf-8"))]
+
+
+def in_premium_area(pos, server_dir: Path = None) -> bool:
+    """True when pos lies in a box of creaturescripts/lib/premium_areas.lua - where a free character is moved
+    out of at login (so a test needs premium_days to stand there)."""
+    global _BOXES
+    if _BOXES is None:
+        from . import SERVER_DIR
+        base = server_dir or SERVER_DIR
+        _BOXES = read_lua_boxes(base / "data" / "creaturescripts" / "lib" / "premium_areas.lua")
+    return any(_inside(tuple(pos), lo, hi) for lo, hi, _ in _BOXES)
+
+
+_BOXES = None
