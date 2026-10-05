@@ -1351,9 +1351,9 @@ Server-side (config.lua) - editable, current values are Avesta defaults:
 
 Client-side (Tibia.exe) - only by patching strings in the copy we hand out, never longer than the original:
 - [x] Decide if we patch client texts at all (besides the IP patch and loading mintwall.dll) - decided 2026-10-05: yes, the tibia.com references point to www.mintwalling.com
-- [ ] Info button text ("Copyright (C) 2002-2004 CipSoft GmbH" - keep CipSoft's copyright)
-- [ ] "Check www.tibia.com" references (login servers offline message, hints) -> our website
-- [ ] If yes: extend tools/patch-client.ps1 with a text table, plus a test that the patched exe still has the original size
+- [x] Info button text ("Copyright (C) 2002-2004 CipSoft GmbH" - keep CipSoft's copyright) - Done 2026-10-05: both CipSoft copyright strings untouched (test checks them byte for byte)
+- [x] "Check www.tibia.com" references (login servers offline message, hints) -> our website - Done 2026-10-05: every tibia.com string in Tibia.exe -> mintwalling.com (help/account links -> http://www.mintwalling.com home page; connection errors reworded shorter, fixed-length copies; bug report -> the website)
+- [x] If yes: extend tools/patch-client.ps1 with a text table, plus a test that the patched exe still has the original size - Done 2026-10-05: text + pointer tables, every row verified before writing; tests/test_patch_client.py (9). Re-run patch-client.ps1 to get them into Tibia-mintwall.exe; check the Info label fits in game
 
 ## Spells and runes (found while making the Centurion test character)
 

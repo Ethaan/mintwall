@@ -1,5 +1,7 @@
 # Makes a copy of the original 7.4 Tibia.exe whose login servers point at $Ip and which loads
-# mintwall.dll (client-mod\, smooth keyboard walking) at start-up. The original Tibia.exe is never modified.
+# mintwall.dll (client-mod\, smooth keyboard walking) at start-up, with its www.tibia.com texts and
+# links pointing at www.mintwalling.com. The original Tibia.exe is never modified.
+# Test: tests\test_patch_client.py (patches a copy in a temp folder).
 #   client-mod\build.bat
 #   powershell -ExecutionPolicy Bypass -File tools\patch-client.ps1 [-Ip 127.0.0.1]
 param(
@@ -26,6 +28,70 @@ foreach ($h in $hosts) {
     for ($i = 0; $i -lt $h.Length; $i++) { $bytes[$idx + $i] = if ($i -lt $new.Length) { $new[$i] } else { 0 } }
     Write-Host "patched $h -> $Ip (offset $idx)"
 }
+
+# --- www.tibia.com -> www.mintwalling.com -----------------------------------------------------
+# Every entry is patched in place (the file size never changes) and only after ALL original bytes
+# matched, so a different Tibia.exe is refused before anything is written.
+# Text rows: the file holds Old + NUL (+ zero padding when New is longer, checked to be zero) and
+# gets New + NUL, the rest of the old slot zeroed. New is never longer than Old where the client
+# copies the text with a fixed-length inline strcat (rep movsd sized for the original), so those
+# messages were reworded to fit. CipSoft's copyright texts (0x7bcd8, 0x7c1ec) are not touched.
+$site = "http://www.mintwalling.com"
+$textTable = @(
+    # .rdata URLs the help/account buttons open (pointer tables in .data; consumers use strlen)
+    @(0x7B588, "http://www.tibia.com/home/?subtopic=signup", $site),
+    @(0x7B5B4, "http://www.tibia.com/home/?subtopic=account", $site),
+    @(0x7B5E0, "http://www.tibia.com/guide/?subtopic=manual&section=options#networkoptions", $site),
+    @(0x7B62C, "http://www.tibia.com/guide/?subtopic=manual-options#console", $site),
+    @(0x7B668, "http://www.tibia.com/guide/?subtopic=manual-options#graphics", $site),
+    @(0x7B6A8, "http://www.tibia.com/guide/?subtopic=manual-options#general", $site),
+    @(0x7B6E4, "http://www.tibia.com/guide/?subtopic=faq", $site),
+    @(0x7B710, "http://www.tibia.com/guide/?subtopic=manual", $site),
+    # "Official Website" URL: its 15 pointers are moved to 0x7B588 below; the old slot (21 chars,
+    # 23 with padding) can't hold the www form and keeps a short fallback
+    @(0x7B73C, "http://www.tibia.com/", "http://mintwalling.com/"),
+    # Info dialog label, pushed once (0x2C690); repointed to 0x7B588+7 below, fallback in place
+    @(0x81204, "www.tibia.com", "mintwalling.com"),
+    # end of the first-login welcome hint (returned by pointer, strlen consumer)
+    @(0x88A1A, "on our offical website www.tibia.com.", "on our website www.mintwalling.com."),
+    # connection error pieces, appended with fixed-length inline copies: never longer
+    @(0x8940C, "`nguide section at www.tibia.com.", "`nguide at www.mintwalling.com."),
+    @(0x89468, "`n`nThe game server is offline. Check www.tibia.com", "`n`nGame server offline. Check www.mintwalling.com"),
+    @(0x894E0, "`n`nAll login server are offline. Check www.tibia.com", "`n`nLogin servers offline. Check www.mintwalling.com"),
+    @(0x895BC, "`n`nCheck www.tibia.com for more information on ", "`n`nSee www.mintwalling.com for information on "),
+    @(0x89618, "`n`nThe test server is offline. Check www.tibia.com", "`n`nTest server offline. Check www.mintwalling.com"),
+    # error dialog (returned by pointer)
+    @(0x8A91C, "Please submit a detailed bugreport to cip@tibia.com.", "Please submit a bug report at www.mintwalling.com.")
+)
+# Pointer rows (offset, old VA, new VA): the image has no relocations, so these are plain VAs
+$siteVa = 0x47B588
+$ptrTable = @(, @(0x2C690, 0x481204, ($siteVa + 7)))    # push "www.tibia.com" -> "www.mintwalling.com"
+foreach ($o in 0x95308, 0x95520, 0x95744, 0x95968, 0x95B8C, 0x95DD4, 0x95FEC, 0x96210,
+               0x96434, 0x96674, 0x968B8, 0x96AF0, 0x96D14, 0x96F38, 0x972E0) {
+    $ptrTable += , @($o, 0x47B73C, $siteVa)              # .data tables: "http://www.tibia.com/"
+}
+
+$patches = @()   # (offset, original bytes, new bytes)
+foreach ($t in $textTable) {
+    $old = $ascii.GetBytes($t[1]); $newText = $ascii.GetBytes($t[2])
+    $n = [math]::Max($old.Length, $newText.Length) + 1
+    $orig = New-Object byte[] $n; $old.CopyTo($orig, 0)
+    $repl = New-Object byte[] $n; $newText.CopyTo($repl, 0)
+    $patches += , @($t[0], $orig, $repl)
+}
+foreach ($p in $ptrTable) {
+    $patches += , @($p[0], [BitConverter]::GetBytes([uint32]$p[1]), [BitConverter]::GetBytes([uint32]$p[2]))
+}
+foreach ($p in $patches) {
+    $o = $p[0]; $orig = $p[1]
+    for ($i = 0; $i -lt $orig.Length; $i++) {
+        if ($bytes[$o + $i] -ne $orig[$i]) {
+            throw ("Text patch at 0x{0:X}: unexpected byte at +{1} - is this the original 7.4 Tibia.exe?" -f $o, $i)
+        }
+    }
+}
+foreach ($p in $patches) { $p[2].CopyTo($bytes, $p[0]) }
+Write-Host "patched $($textTable.Count) texts and $($ptrTable.Count) pointers (tibia.com -> mintwalling.com)"
 
 # --- Import mintwall.dll ------------------------------------------------------------------------
 # A new read/write section ".mintw" holds a copy of the import descriptors plus one for

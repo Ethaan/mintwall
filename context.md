@@ -37,11 +37,17 @@ C:\mintwall                 (outside OneDrive on purpose: no syncing of build/db
   client\Tibia740\          (ignored, proprietary) original client + Tibia-mintwall.exe
   client-mod\
     mintwall.cpp, build.bat mintwall.dll: WH_GETMESSAGE hook on the client's UI thread that drops
-                            Windows' key repeats for movement keys and posts its own (33 ms, no initial
-                            delay; last held key wins). Loaded via an extra import in Tibia-mintwall.exe
+                            Windows' key repeats for movement keys and posts one of its own per step,
+                            ~60 ms before the step ends (step time learned from the client's send();
+                            last held key wins). Loaded via an extra import in Tibia-mintwall.exe.
+                            MINTWALL_WALK_LOG=<file> logs keys/repeats/steps
+    walk_pacer.h            when to repeat (no Win32); test.bat runs test_walk_pacer.cpp against a
+                            model of the 7.4 client (taps, holds, corners, haste, mud)
   tools\
     patch-client.ps1        writes Tibia-mintwall.exe: IP patch + new ".mintw" section with an import
                             table that adds mintwall.dll!MintwallInit; copies mintwall.dll next to it
+                            + in-place text table: www.tibia.com -> www.mintwalling.com (copyright kept;
+                            tests	est_patch_client.py)
     walk-trace.py           proxy on 7171 -> own server on 7172; logs step requests/moves/cancels
                             with expected step times (mise run walk-trace)
     talk-test.ps1           scripted 7.4 login + chat, prints server text (NPC testing)
@@ -125,6 +131,8 @@ when the engine is wrong.
 - Port 7171 is also used by another local server `C:\ot\server\tfs.exe` (separate 7.6 project);
   Windows lets both bind and routes connections unpredictably - keep it stopped
 - The 7.4 client has no RSA/XTEA; login hosts are 4 fixed strings in Tibia.exe (max 16 chars)
+- The client appends its connection-error texts with fixed-length inline strcat (rep movsd sized for
+  the original), so a replacement for those strings may never be longer than the original
 - Items: our items.otb (Avesta, v1.2) and the map's (v1.3) have identical server->client ids
 - Full map server uses ~2.5 GB RAM
 - Edit a character in db.db3 only while it is logged out: the server keeps an online character in
