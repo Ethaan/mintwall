@@ -462,8 +462,10 @@ public:
 	bool saveServer(bool globalSave, bool changedHousesOnly = false);
 	void saveGameState();
 	void loadGameState();
-	void refreshMap(Map::TileMap::iterator* begin = NULL, int clean_max = 0);
-	void proceduralRefresh(Map::TileMap::iterator* begin = NULL);
+	// index: the next Map::refreshTiles entry (an index, not an iterator: a field cast on a position without a
+	// tile adds one - Game::setTile - while proceduralRefresh walks the list)
+	void refreshMap(size_t* index = NULL, int clean_max = 0);
+	void proceduralRefresh(size_t* index = NULL);
 
 	//Events
 	void checkCreatureWalk(uint32_t creatureId);

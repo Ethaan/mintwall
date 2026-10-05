@@ -288,13 +288,11 @@ protected:
 	// Root node of the quad tree
 	QTreeNode root;
 	
-	struct RefreshBlock_t{
-		ItemVector list;
-		uint64_t lastRefresh;
-	};
-
-	typedef std::map<Tile*, RefreshBlock_t> TileMap;
-	TileMap refreshTileMap;
+	// Every tile of the map, for Game::refreshMap (/refreshmap, doRefreshMap), which removes the cleanable items.
+	// It was a std::map<Tile*, {clones of the tile's down items, time}> with an entry per tile: ~80 bytes x 7.3
+	// million tiles (~0.6 GB) for a clone list nothing read (its restore code was commented out) - docs/memory.md
+	typedef std::vector<Tile*> TileList;
+	TileList refreshTiles;
 
 	friend class Game;
 

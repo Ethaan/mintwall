@@ -107,7 +107,7 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       only Levitate (ours, TibiaWiki 2005)? (c) premium logs in past MaxPlayers (7.4 text) or keep the waiting-list
       priority? (d) premium runs out: cut the VIP list to 20 or keep it (no new names)? (recommended: (a) GM command
       now, (b) only Levitate, (c) keep, (d) keep)
-- [ ] Q25 Clicking a monster mid-step misses - real 7.4 behaved the same (the battle window was the answer). Fix it in
+- [x] Q25 Clicking a monster mid-step misses - real 7.4 behaved the same (the battle window was the answer). Fix it in - answered 2026-10-05: fix it in the DLL, as a separate task ("we want a great experience ... 7.4 is 20 years old")
       mintwall.dll (reverse-engineer the 7.40 client's creature list and view layout, rewrite the click), or keep it
       as 7.4? (recommended: keep it - authentic, and the DLL work is large)
 - [x] Engine: a long damage condition (fields, poison) loses its last hit(s): executeConditions counts 1000 ms per
@@ -1050,6 +1050,7 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       after 60 s). No bugs. Always-open holes left alone: Elvenbane 32579,31679,7 (decided), pitfall 32371,32149,7,
       unreachable loose ice 32491,32245,11. Open: Q9 (rope on the spot you stand on).
 - [ ] Reduce server memory (~2.5 GB with full map)
+      2026-10-05: docs/memory.md. 2.47 GB = the map (7.3 M tiles, 7.66 M items; 95% ground only): Tile ~1.1 GB, Item ~0.58 GB, Map::refreshTileMap ~0.56 GB (an entry + item clones for EVERY tile - the refresh-flag check was commented out). Fix written (map.cpp/h, game.cpp/h: a vector of tiles placed, no clones) - NEEDS REBUILD, expected ~1.9 GB; then re-measure, full suite, /refreshmap by hand. Proposals: lazy tile item lists (~0.45 GB, medium risk).
 - [x] Removed the teleport in Rookgaard temple that sent new players to Thais
       (tools/map-remove-item.py)
 - [x] Removed the teleport next to the Thais temple (32366,32235,7) that sent players to the
@@ -1257,7 +1258,7 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
         7.4-style "It weighs X oz. It is too heavy." everywhere
 
 ### Death and PvP
-- [ ] Revisit the death rules (not a bug - make sure every 7.4 rule is applied), research first like
+- [x] Revisit the death rules (not a bug - make sure every 7.4 rule is applied), research first like  [all parts done 2026-10-03/04]
       the formulas (docs/reference-74), then pin each rule with a test:
   - [x] Experience / magic level / skills: 10%, promoted characters 7% (Player::getDeathLossFactor)
         Done 2026-10-03: already 7.4 (Player::getDeathLossPercent: 10%, promoted 7%, -1 per blessing - blessings existed
@@ -1349,7 +1350,7 @@ Server-side (config.lua) - editable, current values are Avesta defaults:
 - [x] First-login "Welcome to <ServerName>. Please choose an outfit." (protocolgame.cpp sendAddCreature) - Done 2026-10-03: uses ServerName - now "Welcome to Mintwall. Please choose an outfit."
 
 Client-side (Tibia.exe) - only by patching strings in the copy we hand out, never longer than the original:
-- [ ] Decide if we patch client texts at all (besides the IP patch and loading mintwall.dll)
+- [x] Decide if we patch client texts at all (besides the IP patch and loading mintwall.dll) - decided 2026-10-05: yes, the tibia.com references point to www.mintwalling.com
 - [ ] Info button text ("Copyright (C) 2002-2004 CipSoft GmbH" - keep CipSoft's copyright)
 - [ ] "Check www.tibia.com" references (login servers offline message, hints) -> our website
 - [ ] If yes: extend tools/patch-client.ps1 with a text table, plus a test that the patched exe still has the original size
@@ -1482,6 +1483,11 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       under the 7.4 formulas (tomb kill() uses SD runes on energy-immune monsters); a step right after a forcefield
       teleport is dropped by the 2026-10-04 teleport-step fix (step_onto retries once); Markwin's guards counted dead
       when off-screen (tracked by health now).
+- [ ] mintwall.dll: clicking a monster mid-step misses - rewrite the click onto the creature's logical tile (find the
+      7.40 client's creature list and game-view layout; walk direction/offset). Wanted by the user for a better experience
+      even though 7.4 behaved the same (2026-10-05)
+- [ ] mintwall.dll walking: arrow-key navigation feels "extra hard and fast" with the DLL (the user, 2026-10-05) -
+      reproduce with walk-trace, compare with the plain client, fix
 - [ ] Re-trace with the real client on the new server (walk-trace summary: steps more than 50 ms late)
 
 ## Travel and combat feel

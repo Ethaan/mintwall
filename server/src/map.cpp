@@ -76,6 +76,8 @@ bool Map::loadMap(const std::string& identifier, const std::string& type)
         std::cout << "FATAL: [OTBM loader] " << loader->getLastErrorString() << std::endl;
         return false;
     }
+	// the loader grew it tile by tile (up to 1.5x the 7.3 million pointers it needs)
+	refreshTiles.shrink_to_fit();
 
 	if(!loader->loadSpawns(this)){
 		std::cout << "WARNING: could not load spawn data." << std::endl;
@@ -188,19 +190,12 @@ void Map::setTile(uint16_t x, uint16_t y, uint16_t z, Tile* newtile)
 	if(!floor->tiles[offsetX][offsetY]){
 		floor->tiles[offsetX][offsetY] = newtile;
 		newtile->qt_node = leaf;
+		// every tile, not only TILESTATE_REFRESH ones: /refreshmap cleans the whole map (see map.h)
+		refreshTiles.push_back(newtile);
 	}
 	else{
 		std::cout << "Error: Map::setTile() already exists." << std::endl;
 	}
-	
-	//if(newtile->hasFlag(TILESTATE_REFRESH)){
-        RefreshBlock_t rb;
-        rb.lastRefresh = OTSYS_TIME();
-        for(ItemVector::iterator it = newtile->downItems.begin(); it != newtile->downItems.end(); ++it){
-            rb.list.push_back((*it)->clone());
-        }
-        refreshTileMap[newtile] = rb;
-    //}
 }
 
 bool Map::placeCreature(const Position& centerPos, Creature* creature, bool extendedPos /*=false*/, bool forceLogin /*=false*/)
