@@ -723,25 +723,54 @@ bool IOMapSerialize::loadHouseInfo(Map* map)
 	return true;
 }
 
-bool IOMapSerialize::saveHouseInfo(Map* map)
+bool IOMapSerialize::saveHouseInfo(Map* map, bool full /*= true*/, uint32_t* housesSaved /*= NULL*/)
 {
 	Database* db = Database::instance();
 	DBQuery query;
-	DBTransaction transaction(db);
 
+	// a full save rewrites the whole table; a timed one only the houses whose info changed (House::isInfoChanged).
+	// Their marks are cleared only once all of it is captured: a failed try (Map::saveMap tries again) keeps them
+	std::vector<House*> houses;
+	for(HouseMap::iterator it = Houses::getInstance().getHouseBegin(); it != Houses::getInstance().getHouseEnd(); ++it){
+		if(full || it->second->isInfoChanged()){
+			houses.push_back(it->second);
+		}
+	}
+
+	if(housesSaved){
+		*housesSaved = 0;
+	}
+	if(houses.empty()){
+		return true;
+	}
+
+	DBTransaction transaction(db);
 	if(!transaction.begin())
 		return false;
 
-	if(!db->executeQuery("DELETE FROM `houses`")){
-		return false;
+	if(full){
+		if(!db->executeQuery("DELETE FROM `houses`")){
+			return false;
+		}
+	}
+	else{
+		// the `houses` delete trigger drops their `house_lists` rows too; said here as well, for any schema
+		std::ostringstream ids;
+		for(size_t i = 0; i < houses.size(); ++i){
+			ids << (i ? ", " : "") << houses[i]->getHouseId();
+		}
+		if(!db->executeQuery("DELETE FROM `house_lists` WHERE `house_id` IN (" + ids.str() + ")") ||
+			!db->executeQuery("DELETE FROM `houses` WHERE `id` IN (" + ids.str() + ")")){
+			return false;
+		}
 	}
 
 	DBInsert stmt(db);
 
 	stmt.setQuery("INSERT INTO `houses` (`id`, `owner`, `paid`, `warnings`, `lastwarning`) VALUES ");
 
-	for(HouseMap::iterator it = Houses::getInstance().getHouseBegin(); it != Houses::getInstance().getHouseEnd(); ++it){
-		House* house = it->second;
+	for(std::vector<House*>::iterator it = houses.begin(); it != houses.end(); ++it){
+		House* house = *it;
 
 		query << house->getHouseId() << ", " << house->getHouseOwner() << ", "
 		<< house->getPaidUntil() << ", " << house->getPayRentWarnings() << ", " << house->getLastWarning();
@@ -757,8 +786,8 @@ bool IOMapSerialize::saveHouseInfo(Map* map)
 
 	stmt.setQuery("INSERT INTO `house_lists` (`house_id`, `listid`, `list`) VALUES ");
 
-	for(HouseMap::iterator it = Houses::getInstance().getHouseBegin(); it != Houses::getInstance().getHouseEnd(); ++it){
-		House* house = it->second;
+	for(std::vector<House*>::iterator hit = houses.begin(); hit != houses.end(); ++hit){
+		House* house = *hit;
 
 		std::string listText;
 		if(house->getAccessList(GUEST_LIST, listText) && listText != ""){
@@ -792,5 +821,22 @@ bool IOMapSerialize::saveHouseInfo(Map* map)
 		return false;
 	}
 
-	return transaction.commit();
+	if(!transaction.commit()){
+		return false;
+	}
+
+	for(std::vector<House*>::iterator it = houses.begin(); it != houses.end(); ++it){
+		(*it)->clearInfoChanged();
+	}
+	if(housesSaved){
+		*housesSaved = houses.size();
+	}
+	return true;
+}
+
+void IOMapSerialize::clearHouseInfoChanged()
+{
+	for(HouseMap::iterator it = Houses::getInstance().getHouseBegin(); it != Houses::getInstance().getHouseEnd(); ++it){
+		it->second->clearInfoChanged();
+	}
 }

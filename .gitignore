@@ -29,3 +29,7 @@ __pycache__/
 tools/.run/
 tools/.venv/
 client-mod/build/
+
+# supervisor logs (tools/install-service.ps1) and local database backups (tools/backup-db.py)
+logs/
+backups/

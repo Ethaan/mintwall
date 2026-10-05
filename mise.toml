@@ -36,7 +36,7 @@ run = [
 
 [tasks.test-client]
 description = "Test mintwall.dll's walking logic against a model of the 7.4 client (no client needed)"
-run = "client-mod\test.bat"
+run = "client-mod\\test.bat"
 
 [tasks.walk-trace]
 description = "Stop the dev server first. Logging proxy on 7171 that times every step of the real client"

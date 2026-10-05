@@ -1,0 +1,59 @@
+# systemd unit for the Mintwall server on the plan's Linux host (docs/production-plan.md "3b. Restart").
+# Not installed by anything in the repo. On the host:
+#   sudo useradd --system --home /opt/mintwall --shell /usr/sbin/nologin mintwall   # the server refuses to run as root
+#   sudo cp deploy/mintwall.service /etc/systemd/system/ && sudo systemctl daemon-reload
+#   sudo systemctl enable --now mintwall
+#   journalctl -u mintwall -f                                                         # its output and the exit notes
+# Paths assume the deploy layout /opt/mintwall/server (avesta74 binary, config.lua, data/, db.db3); the Linux build
+# of the server does not exist yet (production plan: "Linux vs Windows on AWS").
+#
+# Exits: 10 is the daily server save (data/globalevents/scripts/serversave.lua) - a success, restarted after
+# RestartSec like any other exit. Anything else is a crash: restarted too, with a growing delay (systemd >= 254;
+# older versions ignore RestartSteps/RestartMaxDelaySec with a warning and keep RestartSec), and more than
+# StartLimitBurst starts in StartLimitIntervalSec put the unit in "failed" so a crash loop stops and alerts.
+# ExecStopPost writes one line per exit to the journal: "planned restart", "clean exit" or "CRASH".
+
+[Unit]
+Description=Mintwall (Avesta Tibia 7.4 server)
+Documentation=file:///opt/mintwall/docs/production-plan.md
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=900
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=mintwall
+Group=mintwall
+WorkingDirectory=/opt/mintwall/server
+ExecStart=/opt/mintwall/server/avesta74
+ExecStopPost=/bin/sh -c 'if [ "$$SERVICE_RESULT" = success ] && [ "$$EXIT_STATUS" = 10 ]; then echo "mintwall: exit 10, planned restart (daily server save)"; elif [ "$$SERVICE_RESULT" = success ]; then echo "mintwall: clean exit ($$EXIT_CODE $$EXIT_STATUS)"; else echo "mintwall: CRASH ($$SERVICE_RESULT, $$EXIT_CODE $$EXIT_STATUS)"; fi'
+
+Restart=always
+RestartSec=5
+RestartSteps=5
+RestartMaxDelaySec=300
+SuccessExitStatus=10
+
+# stop: SIGTERM, then SIGKILL after TimeoutStopSec (log players out first with /closeserver: see the plan)
+KillSignal=SIGTERM
+TimeoutStopSec=60
+
+# no console input (an engine error that waits for a key must not hang); output to the journal
+StandardInput=null
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=mintwall
+
+LimitNOFILE=65536
+LimitCORE=infinity
+
+# hardening: only the server directory is writable
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/mintwall/server
+
+[Install]
+WantedBy=multi-user.target

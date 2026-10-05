@@ -117,7 +117,7 @@
 --- INFO ---
 
     -- Login message
-    LoginMsg = "Welcome to Mintwall."
+    LoginMsg = "Welcome to Mintwall! Tibia 7.4 sends passwords unencrypted - use one you use nowhere else."
 
     -- Server name
     ServerName = "Mintwall"
@@ -186,8 +186,9 @@
 --- STATUS ---
 
     -- Message Of The Day box that you sometimes get before you choose characters)
-    MOTD = "Welcome to Mintwall!"
-    MOTD_Num = "2"
+    -- (the same password warning as LoginMsg and tools/create-account.py; bump MOTD_Num when it changes)
+    MOTD = "Welcome to Mintwall!\n\nTibia 7.4 sends your password unencrypted.\nPlease use a password you use nowhere else."
+    MOTD_Num = "3"
 
     -- Max number of players allowed
     MaxPlayers = "100"
@@ -205,7 +206,7 @@
 
     -- Accounts password type
     -- options: plain, md5, sha1
-    -- pbkdf2: salted PBKDF2-HMAC-SHA256 (docs/production-plan.md §2). Rows still stored as typed (seed.sql,
+    -- pbkdf2: salted PBKDF2-HMAC-SHA256 (docs/production-plan.md ï¿½2). Rows still stored as typed (seed.sql,
     -- tests) log in and are rehashed on their first login. plain / md5 / sha1 are the old unsalted modes.
     PasswordType = "pbkdf2"
     -- PBKDF2 iterations for new hashes (OWASP 2023: 600000); older entries are rehashed on login

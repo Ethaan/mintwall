@@ -183,7 +183,9 @@ public:
 	* \param identifier file/database to save to
 	* \return true if the map was saved successfully
 	*/
-	bool saveMap(bool full = true, uint32_t* housesSaved = NULL);
+	// full: every house; else only the changed ones. housesSaved: houses whose items were written,
+	// infosSaved: houses whose info (owner, rent, lists) was written
+	bool saveMap(bool full = true, uint32_t* housesSaved = NULL, uint32_t* infosSaved = NULL);
 
 	/**
 	* Get a single tile.

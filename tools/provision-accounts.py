@@ -19,8 +19,6 @@ The server must be stopped (it rewrites players on logout and on every save). Th
 to itself first. Running it again is safe: accounts are updated, not duplicated.
 """
 import argparse
-import base64
-import hashlib
 import json
 import os
 import secrets
@@ -30,8 +28,10 @@ import sys
 import time
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from accountlib import ITERATIONS, pbkdf2, random_account_number  # noqa: E402,F401 - the shared code
+
 REPO = Path(__file__).resolve().parent.parent
-ITERATIONS = 600_000                 # = config.lua PasswordIterations (tests/test_provision.py checks it)
 SEED_ACCOUNTS = [1, 2, 3, 4, 5, 6, 9, 111111, 222222]
 PREMIUM_END = 2_000_000_000          # like seed.sql: premium until 2033
 GOD_GROUP = 3
@@ -42,13 +42,6 @@ ROLES = {
     "rook_premium": {"premium": True, "characters": ["Premium Tester", "Oracle Tester"]},
     "rook_free": {"premium": False, "characters": ["Free Tester", "Rook Tester"]},
 }
-
-
-def pbkdf2(password: str) -> str:
-    """The server's format (server/src/passwords.cpp)."""
-    salt = os.urandom(16)
-    digest = hashlib.pbkdf2_hmac("sha256", password.encode("latin-1"), salt, ITERATIONS)
-    return f"pbkdf2_sha256${ITERATIONS}${base64.b64encode(salt).decode()}${base64.b64encode(digest).decode()}"
 
 
 def inside_repo(path: Path) -> bool:
@@ -63,10 +56,7 @@ def generate(path: Path, con: sqlite3.Connection):
     taken = {row[0] for row in con.execute("SELECT id FROM accounts")}
     creds = {}
     for role in ROLES:
-        while True:
-            number = secrets.randbelow(9_000_000) + 1_000_000      # 7 digits, never sequential
-            if number not in taken:
-                break
+        number = random_account_number(taken)                      # 7 digits, never sequential
         taken.add(number)
         # 24 characters of [A-Za-z0-9_-]: typable in the 7.4 client (check the length once in the real client)
         creds[role] = {"account": number, "password": secrets.token_urlsafe(18)}

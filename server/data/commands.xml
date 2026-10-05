@@ -37,7 +37,6 @@
 
 -- Players
     <command cmd="/sellhouse"    access="0" />		-- Sell your house to a player
-    <command cmd="/buyhouse"     access="0" />		-- Buy house
     <command cmd="!online"       access="0" />		-- List of players online
     <command cmd="!frags"        access="0" />		-- Frags
 </commands>

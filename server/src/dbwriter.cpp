@@ -52,7 +52,8 @@ namespace {
 		}
 		else if(batch->serverSave){
 			std::cout << "> Server saved in " << batch->captureMs << " ms (" << batch->guids.size() << " players, "
-				<< batch->houses << (batch->allHouses ? " houses (all)" : " changed houses") << " in " << batch->mapMs
+				<< batch->houses << (batch->allHouses ? " houses (all)" : " changed houses") << ", "
+				<< batch->houseInfos << " house infos in " << batch->mapMs
 				<< " ms; written in " << (OTSYS_TIME() - start) << " ms)" << std::endl;
 		}
 	}

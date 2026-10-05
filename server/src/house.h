@@ -167,16 +167,16 @@ public:
 	void setHouseOwner(uint32_t guid);
 	uint32_t getHouseOwner() const {return houseOwner;}
 
-	void setPaidUntil(uint32_t paid){paidUntil = paid;}
+	void setPaidUntil(uint32_t paid){if(paid != paidUntil){paidUntil = paid; infoChanged = true;}}
 	uint32_t getPaidUntil() const {return paidUntil;}
 
 	void setRent(uint32_t _rent){rent = _rent;}
 	uint32_t getRent() const {return rent;}
 
-	void setLastWarning(time_t _lastWarning) {lastWarning = _lastWarning;}
+	void setLastWarning(time_t _lastWarning) {if(_lastWarning != lastWarning){lastWarning = _lastWarning; infoChanged = true;}}
 	time_t getLastWarning() {return lastWarning;}
 
-	void setPayRentWarnings(uint32_t warnings) {rentWarnings = warnings;}
+	void setPayRentWarnings(uint32_t warnings) {if(warnings != rentWarnings){rentWarnings = warnings; infoChanged = true;}}
 	uint32_t getPayRentWarnings() const {return rentWarnings;}
 
 	void setTownId(uint32_t _town){townid = _town;}
@@ -198,6 +198,13 @@ public:
 	// houses are written by the timed save (IOMapSerialize::saveMapBinary)
 	void markItemsChanged() {itemsChanged = true;}
 	bool takeItemsChanged() {bool changed = itemsChanged; itemsChanged = false; return changed;}
+
+	// its row in `houses` or its rows in `house_lists` (owner, paid, rent warnings, guest / subowner / door lists)
+	// changed since the last save: the timed save writes only these (IOMapSerialize::saveHouseInfo). Set by the
+	// setters, cleared once the save has captured the house (and after loading, when memory equals the database)
+	void markInfoChanged() {infoChanged = true;}
+	bool isInfoChanged() const {return infoChanged;}
+	void clearInfoChanged() {infoChanged = false;}
 
 	void addDoor(Door* door);
 	void removeDoor(Door* door);
@@ -225,6 +232,7 @@ public:
 
 private:
 	bool itemsChanged;
+	bool infoChanged;
 	bool guildHall;
 	void updateDoorDescription();
 	bool transferToDepot();

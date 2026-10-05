@@ -92,12 +92,14 @@ bool Map::loadMap(const std::string& identifier, const std::string& type)
 	IOMapSerialize* IOMapSerialize = IOMapSerialize::getInstance();
 	IOMapSerialize->loadHouseInfo(this);
 	IOMapSerialize->loadMap(this);
+	// loading went through the setters that mark a house's info as changed; the database holds it already
+	IOMapSerialize->clearHouseInfoChanged();
 
 	return true;
 }
 
 
-bool Map::saveMap(bool full /*= true*/, uint32_t* housesSaved /*= NULL*/)
+bool Map::saveMap(bool full /*= true*/, uint32_t* housesSaved /*= NULL*/, uint32_t* infosSaved /*= NULL*/)
 {
 	IOMapSerialize* IOMapSerialize = IOMapSerialize::getInstance();
 	bool saved = false;
@@ -113,7 +115,7 @@ bool Map::saveMap(bool full /*= true*/, uint32_t* housesSaved /*= NULL*/)
 
 	saved = false;
 	for(uint32_t tries = 0; tries < 3; tries++){
-		if(IOMapSerialize->saveHouseInfo(this)){
+		if(IOMapSerialize->saveHouseInfo(this, full, infosSaved)){
 			saved = true;
 			break;
 		}

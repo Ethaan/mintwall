@@ -5,7 +5,16 @@
 Stop the dev server first. This starts its own copy on port 7172 (same db.db3, so your characters
 work) and listens on 7171 in its place, relaying bytes unchanged except the character list's port.
 Log in, walk around (hold keys, change direction), then press Ctrl+C for a summary.
-Every event is written to tools/.run/walk-trace.csv:
+
+Several runs at once (or one next to the dev server) each need their own folder and ports:
+
+    walk-trace.py [--run-dir DIR] [--port PROXY] [--server-port SERVER] [--db FILE]
+    walk-trace.py PROXY SERVER            (the old form: just the two ports)
+
+or the environment: WALKTRACE_RUN, WALKTRACE_PORT, WALKTRACE_SERVER_PORT, WALKTRACE_DB (the options win).
+Defaults: tools/.run, 7171, 7172, server/db.db3. A port already in use stops it before it writes anything
+(another walk-trace, the dev server or a test server is there), instead of overwriting that run's files.
+Every event is written to <run dir>/walk-trace.csv:
 
     ms            time since the proxy started
     event         step-request (client asked to walk), step-ok (server moved us), cancel-walk
@@ -13,6 +22,7 @@ Every event is written to tools/.run/walk-trace.csv:
     detail        direction / from -> to / message
     expected_step_ms   for step-ok: how long that step takes (1000 * ground speed / our speed)
 """
+import argparse
 import asyncio
 import csv
 import os
@@ -26,14 +36,18 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SERVER_DIR = ROOT / "server"
-RUN_DIR = ROOT / "tools" / ".run"
-PROXY_PORT, SERVER_PORT = 7171, 7172
-DB = Path(os.environ.get("WALKTRACE_DB", SERVER_DIR / "db.db3")).resolve()
+DEFAULT_RUN_DIR = ROOT / "tools" / ".run"
+DEFAULT_PROXY_PORT, DEFAULT_SERVER_PORT = 7171, 7172
+# set by configure() from the options (main); these are the defaults
+RUN_DIR = DEFAULT_RUN_DIR
+PROXY_PORT, SERVER_PORT = DEFAULT_PROXY_PORT, DEFAULT_SERVER_PORT
+DB = (SERVER_DIR / "db.db3").resolve()
 
 sys.path.insert(0, str(ROOT / "tests"))
 from tibia74.client import GameClient   # noqa: E402  (the test suite's full 7.4 protocol parser)
 from tibia74.items import Items         # noqa: E402
 from tibia74.net import Reader          # noqa: E402
+from tibia74.server import _dies_with_us, _port_open   # noqa: E402
 
 ITEMS = Items(SERVER_DIR / "data")
 STEP_OPS = {0x65: "N", 0x66: "E", 0x67: "S", 0x68: "W", 0x6A: "NE", 0x6B: "SE", 0x6C: "SW", 0x6D: "NW"}
@@ -176,6 +190,79 @@ async def handle(c_reader, c_writer):
     )
 
 
+def parse_args(argv=None, env=None) -> argparse.Namespace:
+    """Options from the command line, then the environment (WALKTRACE_*), then the defaults."""
+    env = os.environ if env is None else env
+    ap = argparse.ArgumentParser(prog="walk-trace.py", description="Logging proxy that times every step.")
+    ap.add_argument("ports", nargs="*", type=int, metavar="PORT", help="old form: PROXY SERVER")
+    ap.add_argument("--run-dir", type=Path, default=Path(env["WALKTRACE_RUN"]) if env.get("WALKTRACE_RUN")
+                    else DEFAULT_RUN_DIR, help="config, server log and csv of this run (default tools/.run)")
+    ap.add_argument("--port", type=int, default=int(env.get("WALKTRACE_PORT") or DEFAULT_PROXY_PORT),
+                    help="where the client connects: the proxy (default 7171)")
+    ap.add_argument("--server-port", type=int,
+                    default=int(env.get("WALKTRACE_SERVER_PORT") or DEFAULT_SERVER_PORT),
+                    help="the walk-trace server behind the proxy (default 7172)")
+    ap.add_argument("--db", type=Path, default=Path(env.get("WALKTRACE_DB") or SERVER_DIR / "db.db3"),
+                    help="SQLite database the server uses (default server/db.db3)")
+    opts = ap.parse_args(argv)
+    if opts.ports:
+        if len(opts.ports) != 2:
+            ap.error("give both ports: PROXY SERVER")
+        opts.port, opts.server_port = opts.ports
+    del opts.ports
+    for name in ("port", "server_port"):
+        if not 0 < getattr(opts, name) < 65536:
+            ap.error(f"--{name.replace('_', '-')} {getattr(opts, name)}: not a port")
+    if opts.port == opts.server_port:
+        ap.error(f"the proxy and the server cannot both use port {opts.port}")
+    opts.run_dir = opts.run_dir.resolve()
+    opts.db = opts.db.resolve()
+    return opts
+
+
+def ports_in_use(opts) -> list:
+    """The ports of this run something already listens on (another walk-trace, the dev or a test server)."""
+    return [p for p in (opts.port, opts.server_port) if _port_open(p)]
+
+
+def lock_run_dir(run_dir: Path):
+    """Holds <run dir>/walk-trace.lock until this process ends (the OS drops the lock then, even after a crash);
+    None if another walk-trace holds it - it uses this folder, and its config and log must not be overwritten."""
+    run_dir.mkdir(parents=True, exist_ok=True)
+    f = open(run_dir / "walk-trace.lock", "a+b")
+    try:
+        if os.name == "nt":
+            import msvcrt
+            f.seek(0)
+            msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+        else:
+            import fcntl
+            fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        f.close()
+        return None
+    return f
+
+
+def reserve_port(port: int):
+    """The proxy's listening socket, bound now: a second run started while our server still loads the map finds
+    the port taken."""
+    import socket
+    s = socket.socket()
+    try:
+        s.bind(("127.0.0.1", port))
+    except OSError:
+        s.close()
+        return None
+    s.listen(16)
+    return s
+
+
+def configure(opts):
+    global RUN_DIR, PROXY_PORT, SERVER_PORT, DB
+    RUN_DIR, PROXY_PORT, SERVER_PORT, DB = opts.run_dir, opts.port, opts.server_port, opts.db
+
+
 def start_server():
     RUN_DIR.mkdir(parents=True, exist_ok=True)
     cfg = (SERVER_DIR / "config.lua").read_text(encoding="latin-1")
@@ -186,10 +273,11 @@ def start_server():
     log_file = open(RUN_DIR / "walk-trace.server.log", "wb")
     proc = subprocess.Popen([str(SERVER_DIR / "avesta74.exe"), "-c", str(config)], cwd=SERVER_DIR,
                             stdout=log_file, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL)
+    proc.job = _dies_with_us(proc)     # the server goes with us, however we end
     print(f"starting server on {SERVER_PORT} (map load takes a few seconds)...")
     while b"Server Running" not in (RUN_DIR / "walk-trace.server.log").read_bytes():
         if proc.poll() is not None:
-            sys.exit("server exited - is the dev server still running? see tools/.run/walk-trace.server.log")
+            sys.exit(f"server exited - see {RUN_DIR / 'walk-trace.server.log'}")
         time.sleep(0.5)
     return proc
 
@@ -203,27 +291,38 @@ def summary():
     # How much later than its expected duration did each step end (next step started)?
     late = [b[0] - a[0] - a[3] for a, b in zip(oks, oks[1:]) if a[3] and b[0] - a[0] < 2000]
     print(f"\n{reqs} step requests, {len(oks)} steps, {cancels} cancel-walks, "
-          f"{reqs - len(oks) - cancels} requests with no answer -> tools/.run/walk-trace.csv")
+          f"{reqs - len(oks) - cancels} requests with no answer -> {RUN_DIR / 'walk-trace.csv'}")
     if late:
         late.sort()
         print(f"step end vs expected: median {late[len(late) // 2]:+.0f} ms, worst {late[-1]:+.0f} ms, "
               f"{sum(x > 50 for x in late)} of {len(late)} steps more than 50 ms late")
 
 
-async def main():
-    server = await asyncio.start_server(handle, "127.0.0.1", PROXY_PORT)
+async def main(sock=None):
+    server = await (asyncio.start_server(handle, sock=sock) if sock
+                    else asyncio.start_server(handle, "127.0.0.1", PROXY_PORT))
     print(f"proxy on {PROXY_PORT} -> {SERVER_PORT}. Log in with the client and walk; Ctrl+C to stop.")
     async with server:
         await server.serve_forever()
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 3:            # other ports, e.g. to try it while the dev server runs
-        PROXY_PORT, SERVER_PORT = int(sys.argv[1]), int(sys.argv[2])
+    options = parse_args()
+    busy = ports_in_use(options)
+    if busy:
+        sys.exit(f"port {', '.join(map(str, busy))} already in use (another walk-trace, the dev server or a test"
+                 f" server?) - nothing written; pick others: --port / --server-port, and --run-dir")
+    lock = lock_run_dir(options.run_dir)
+    if lock is None:
+        sys.exit(f"another walk-trace uses {options.run_dir} - nothing written; give this one --run-dir")
+    listener = reserve_port(options.port)
+    if listener is None:
+        sys.exit(f"port {options.port} already in use - nothing written")
+    configure(options)
     proc = start_server()
     threading.Thread(target=_worker, daemon=True).start()
     try:
-        asyncio.run(main())
+        asyncio.run(main(listener))
     except KeyboardInterrupt:
         pass
     finally:

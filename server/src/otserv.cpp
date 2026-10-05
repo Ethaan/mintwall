@@ -34,9 +34,13 @@
 
 #include <boost/thread.hpp>
 #include <boost/asio.hpp>
+#include <atomic>
 
 #if defined(__WINDOWS__)
 #include <mmsystem.h>   // timeBeginPeriod
+#else
+#include <signal.h>
+#include <semaphore.h>
 #endif
 
 #if !defined(__WINDOWS__)
@@ -126,6 +130,103 @@ CommandLineOptions g_command_opts;
 
 bool parseCommandLine(CommandLineOptions& opts, std::vector<std::string> args);
 void mainLoader(const CommandLineOptions& command_opts);
+
+// Closing the console window, Ctrl+C / Ctrl+Break, logoff and system shutdown (Windows), SIGTERM / SIGINT / SIGHUP
+// (Linux): a clean shutdown, as the daily server save's - players kicked and saved, the map saved, the save writer
+// flushed (Game::setGameState(GAME_STATE_SHUTDOWN), run on the dispatcher thread like any game change). These used
+// to end the process at once, losing what the writer still held and everything since the last timed save.
+// Installed once the world is loaded: until then there is nothing to save, and they end the process as before.
+namespace {
+	std::atomic<bool> g_shutdownRequested(false);
+
+	// queue the shutdown on the dispatcher, once. A shutdown already under way (the daily save, a GM) is not run
+	// twice: setGameState(GAME_STATE_SHUTDOWN) does nothing the second time, and a stopping dispatcher drops tasks
+	void requestShutdown(const char* why)
+	{
+		if(g_shutdownRequested.exchange(true)){
+			return;
+		}
+		std::cout << "> " << why << ": saving and shutting down" << std::endl;
+		Dispatcher::getDispatcher().addTask(createTask(
+			boost::bind(&Game::setGameState, &g_game, GAME_STATE_SHUTDOWN)));
+	}
+
+#if defined(__WINDOWS__)
+	BOOL WINAPI onConsoleEvent(DWORD type)
+	{
+		switch(type){
+			case CTRL_C_EVENT:
+				requestShutdown("Ctrl+C");
+				return TRUE;   // the process goes on and ends by itself once saved (main returns)
+
+			case CTRL_BREAK_EVENT:
+				requestShutdown("Ctrl+Break");
+				return TRUE;
+
+			case CTRL_LOGOFF_EVENT:
+			{
+				// a service (session 0, e.g. under NSSM) gets every user's logoff: not ours to stop for
+				DWORD session = 0;
+				if(ProcessIdToSessionId(GetCurrentProcessId(), &session) && session == 0){
+					return TRUE;
+				}
+			}
+			// fall through
+			case CTRL_CLOSE_EVENT:
+			case CTRL_SHUTDOWN_EVENT:
+				requestShutdown(type == CTRL_CLOSE_EVENT ? "Console closed" :
+					type == CTRL_LOGOFF_EVENT ? "Logoff" : "System shutdown");
+				// Windows ends the process as soon as this returns, and after ~5 s anyway: wait for the save.
+				// Only this thread waits (the game thread never waits for it), so it cannot deadlock
+				if(!Game::waitForShutdownSave(4500)){
+					std::cout << "> The shutdown save did not finish in time" << std::endl;
+				}
+				return TRUE;
+
+			default:
+				return FALSE;
+		}
+	}
+#else
+	sem_t g_signalPosted;
+	volatile sig_atomic_t g_signalNumber = 0;
+
+	void onSignal(int signal)
+	{
+		g_signalNumber = signal;
+		sem_post(&g_signalPosted);   // async-signal-safe; the work is done by signalWatcher
+	}
+
+	void signalWatcher()
+	{
+		while(sem_wait(&g_signalPosted) != 0){
+			// EINTR
+		}
+		int signal = g_signalNumber;
+		requestShutdown(signal == SIGTERM ? "SIGTERM" : signal == SIGINT ? "SIGINT" : "SIGHUP");
+		// later signals only post the semaphore again: one shutdown is enough
+	}
+#endif
+
+	void installShutdownHandlers()
+	{
+#if defined(__WINDOWS__)
+		SetConsoleCtrlHandler(NULL, FALSE);   // Ctrl+C may come in ignored from the parent (it is inherited)
+		SetConsoleCtrlHandler(onConsoleEvent, TRUE);
+#else
+		sem_init(&g_signalPosted, 0, 0);
+		struct sigaction action;
+		action.sa_handler = onSignal;
+		action.sa_flags = SA_RESTART;
+		sigemptyset(&action.sa_mask);
+		sigaction(SIGTERM, &action, NULL);
+		sigaction(SIGINT, &action, NULL);
+		sigaction(SIGHUP, &action, NULL);
+		boost::thread watcher(&signalWatcher);
+		watcher.detach();
+#endif
+	}
+}
 
 #if !defined(__WINDOWS__)
 // Runfile, for running OT as daemon in the background. If the server is shutdown by internal
@@ -256,6 +357,7 @@ int main(int argc, char *argv[])
 	Server server(INADDR_ANY, port);
 	std::cout << "[done]" << std::endl << ":: OpenTibia Server Running..." << std::endl;
 	g_server = &server;
+	installShutdownHandlers();
 	server.run();
     
 #if defined __EXCEPTION_TRACER__

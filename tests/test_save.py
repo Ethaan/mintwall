@@ -86,3 +86,47 @@ def test_a_timed_save_writes_only_houses_that_changed(new_player, server, db, it
     finally:
         con.close()
     assert sword.to_bytes(2, "little") in bytes(blob), "the sword is not in the house's saved items"
+
+
+INFO_LINE = re.compile(r"> Server saved in \d+ ms \(\d+ players, \d+ (changed houses|houses \(all\)), (\d+) house infos")
+OLD_LINE = re.compile(r"> Server saved in \d+ ms \((?:(?!house infos)[^\n])*\n")     # a whole line without the count
+
+
+def _next_info_save(server, since, timeout=40):
+    """(house infos written, full?) of the first timed save logged after the log offset `since`."""
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        log = server.log()[since:]
+        m = INFO_LINE.search(log)
+        if m:
+            return int(m.group(2)), m.group(1) != "changed houses", since + m.end()
+        assert not OLD_LINE.search(log), \
+            "the save line has no 'N house infos' count - an old avesta74.exe? (server\\build.bat)"
+        time.sleep(0.5)
+    raise AssertionError("no timed save logged")
+
+
+def test_a_timed_save_writes_only_the_house_infos_that_changed(new_player, server, db):
+    """The houses table (owner, rent) and house_lists (guest, subowner and door lists) used to be rewritten for every
+    house on each save; now only for houses whose info changed (House::isInfoChanged), all of them at a full save."""
+    heir = db.create_character(storage={30001: 1})
+    gm = new_player(pos=HOUSE_TILE, group_id=3, storage={30001: 1})    # God: may stand in any house
+    assert gm.pos == HOUSE_TILE, gm.pos
+    since = server.log_offset()
+    gm.say(f"/owner {heir.name}")
+
+    infos, full, since = _next_info_save(server, since)
+    while full:                                      # the hourly full save: look at the next one
+        infos, full, since = _next_info_save(server, since)
+    assert infos >= 1, "the house with a new owner was not saved"
+    con = db._connect()
+    try:
+        row = con.execute("SELECT owner FROM houses WHERE id = ?", (HOUSE_ID,)).fetchone()
+    finally:
+        con.close()
+    assert row and row[0] == heir.guid, f"houses row of house {HOUSE_ID}: {row}, the owner is {heir.guid}"
+
+    infos, full, since = _next_info_save(server, since)
+    if full:
+        infos, full, since = _next_info_save(server, since)
+    assert not full and infos == 0, f"{infos} house infos written although none changed"

@@ -1,7 +1,8 @@
 # Production plan: accounts, passwords, backups, restart, observability
 
 Status 2026-09-23: §1 accounts, §2 PBKDF2 and the timed save (§3) are implemented and tested; backups,
-restart supervision, observability and Terraform wait for deployment. Gameplay work (Rookgaard PvP etc.) continues in the meantime.
+restart supervision, observability and Terraform wait for deployment (the restart and backup tools exist
+since 2026-10-05, §3b, but nothing is installed). Gameplay work (Rookgaard PvP etc.) continues in the meantime.
 
 ## Facts this plan is built on
 
@@ -95,6 +96,92 @@ Either way:
 - **Windows**: run it as a service (NSSM or `sc.exe` with failure actions "restart after 5 s").
 - Graceful stop: the service stop sends the server a clean shutdown (save first), not a kill.
 - Every restart is logged and counted (metric `ServerRestarts`).
+
+### 3b. Restart and backup tooling (built 2026-10-05, nothing installed)
+
+Restart supervision. The daily server save (`serversave.lua`) ends the process with **exit code 10** = "restart me";
+any other code except a clean 0 is a crash.
+- **Windows: `tools/install-service.ps1`** (NSSM, not in the repo: `winget install NSSM.NSSM`, or nssm.cc/download →
+  `win64\nssm.exe` in PATH or `tools\nssm\nssm.exe`, or `-NssmPath`).
+  - `-DryRun` (or `-WhatIf`) prints every `nssm` command and changes nothing. Without it: elevated PowerShell,
+    installs service `mintwall` (auto start; `-Start` also starts it now). `-Uninstall` stops and removes it.
+  - The service runs `tools/service-run.ps1`, which starts `server\avesta74.exe` and writes to `logs\supervisor.log`:
+    - exit 10: "planned restart (daily server save)", back at once;
+    - exit 0: "clean shutdown", back at once;
+    - anything else: "CRASH", then a back-off of 5 s doubling per crash in the last 15 min, at most 5 min.
+  - NSSM restarts on every exit. The server's output goes to `logs\server-stdout.log` / `server-stderr.log`,
+    rotated at 10 MB (the newest 20 rotated files are kept). Stdin is NUL, so an engine error that waits for a key
+    cannot hang the service.
+  - `-ServiceAccount` runs it as a dedicated user (default LocalSystem); that user needs write access to `server\`
+    and `logs\`.
+- **Linux: `deploy/mintwall.service`** (systemd; paths assume `/opt/mintwall/server`, user `mintwall` because the
+  server refuses root). Install steps are in the file's header.
+  - `Restart=always`, `RestartSec=5`, `SuccessExitStatus=10`, plus `RestartSteps`/`RestartMaxDelaySec`: a back-off
+    up to 5 min on systemd 254 or newer; older versions ignore those two with a warning.
+  - `StartLimitBurst=5` in 15 min: the unit goes "failed" so a crash loop stops and alerts.
+  - `ExecStopPost` writes "planned restart" / "clean exit" / "CRASH" to the journal (`journalctl -u mintwall`).
+- **Graceful stop.** A service stop sends Ctrl+C (NSSM) or SIGTERM (systemd). The engine's handler for them
+  (otserv.cpp, in progress 2026-10-05) does the shutdown save. NSSM waits 30 s and systemd 60 s before killing.
+  `service-run.ps1` waits for the server with a .NET wait, so the Ctrl+C does not end the wrapper before the save.
+  Until that build runs, a stop ends the server **without the save** (it loses up to `SaveInterval` of progress).
+  Until then:
+  1. a GM types `/closeserver` (kicks everyone and saves);
+  2. then stop the service.
+
+Backups (`tools/backup-db.py`, standard-library Python 3.9+, safe while the server runs):
+- It uses SQLite's online backup API in one read transaction, so the copy is one consistent snapshot. The server's
+  WAL writes go on meanwhile.
+- The copy is switched to a self-contained file, checked with `PRAGMA integrity_check`, gzipped, and renamed
+  atomically to `<dest>/db-hourly-<UTC>.db3.gz`. The day's first run also writes `db-daily-<UTC>.db3.gz`
+  (`--kind hourly|daily` forces one kind).
+- Rotation keeps the newest `--keep-hourly 48` and `--keep-daily 14`. It deletes only files named like its own backups.
+- `--dest` defaults to `backups/` in the repo (gitignored), or set `MINTWALL_BACKUP_DIR`. On production, use a
+  directory on the data volume, outside the server directory.
+- Upload hook: `--upload-cmd` or `MINTWALL_BACKUP_UPLOAD` is a shell command run once per new file, with `{path}`,
+  `{name}` and `{kind}` filled in. A failed upload exits with code 3 and keeps the local file. For S3, per the
+  bucket rules above (lifecycle by the `hourly/` and `daily/` prefixes):
+  `aws s3 cp "{path}" "s3://BUCKET/mintwall/{kind}/{name}" --sse aws:kms --only-show-errors`
+- Scheduling (not installed by anything; run hourly at :05):
+  - Windows (elevated):
+    `setx /M MINTWALL_BACKUP_UPLOAD "aws s3 cp \"{path}\" \"s3://BUCKET/mintwall/{kind}/{name}\" --only-show-errors"`
+    then
+    `schtasks /Create /TN "mintwall\db backup" /SC HOURLY /ST 00:05 /RU SYSTEM /TR "\"C:\Program Files\Python312\python.exe\" C:\mintwall\tools\backup-db.py --dest D:\mintwall-backups"`
+  - Linux, `/etc/cron.d/mintwall-backup` (Amazon Linux 2023 needs `dnf install cronie`, or use a systemd timer):
+    `5 * * * * mintwall /usr/bin/python3 /opt/mintwall/tools/backup-db.py --dest /var/backups/mintwall --upload-cmd 'aws s3 cp "{path}" "s3://BUCKET/mintwall/{kind}/{name}" --only-show-errors' >> /var/log/mintwall/backup.log 2>&1`
+
+Restore (`tools/restore-db.py BACKUP` or `--latest [--dest DIR]`; `--db` picks the target, default `server/db.db3`):
+- It refuses while anything answers on the server's port (`config.lua` Port/IP, or `--port`). On Windows, moving
+  the database aside also fails while a process holds it open.
+- It unpacks the backup next to the database and runs `integrity_check` on it. A bad backup changes nothing.
+- It moves the current database **and its -wal/-shm** aside as `db.db3.pre-restore-<UTC>` (+ `-wal`/`-shm`, still
+  openable), then moves the restored copy into place.
+- It asks you to type `restore`; `--yes` skips the question.
+
+Restore drill (monthly, and once before launch; a backup never restored counts as missing):
+1. Take the newest backup, from S3 (`aws s3 cp s3://BUCKET/mintwall/hourly/<newest> .`) or with `--latest`.
+   Check its age: it should be under 1 h (RPO).
+2. Restore it into a scratch place, not the live server: a scratch instance, or locally
+   `python tools/restore-db.py <file> --db C:\scratch\server\db.db3 --port 7191 --yes`.
+3. Start a server on that copy (scratch instance, or a test config with its own port and `SQL_DB`). Check that it
+   loads without database errors.
+4. Log in with a test character. Check its level, items and position against the live server (they differ by at
+   most the backup's age). Check that a house owner and their house items are there.
+5. Time steps 1-4 against the RTO (30 min). Write down the date, the backup used, the time taken and any problems
+   in the ops log.
+6. Delete the scratch copy. If anything failed, fix it before trusting the backups again.
+
+Real restore after data loss: stop the service (after `/closeserver` if the server still runs), run
+`tools/restore-db.py --latest --yes` (or an S3 file), start the service, and do the step-4 checks. The
+`pre-restore` files are kept until someone decides they are not needed.
+
+Tests: `tests/test_backup.py` (20, no game server). It covers:
+- a backup taken while a writer commits is consistent;
+- rotation and the daily backup;
+- the upload hook;
+- restore refuses while a dummy socket listens, works otherwise and keeps the WAL aside, and rejects a corrupt backup;
+- the NSSM dry run;
+- service-run's exit labels, back-off and output pass-through;
+- static checks of the systemd unit.
 
 **Decision needed: Linux or Windows on AWS.** Linux (Amazon Linux 2023 / Ubuntu) is cheaper, systemd and the
 CloudWatch agent are simpler, but the build needs porting (Avesta builds on gcc; our Windows-only bits such as

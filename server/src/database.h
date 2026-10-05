@@ -81,12 +81,13 @@ enum DBParam_t{
  */
 struct DBBatch
 {
-	DBBatch() : captureMs(0), mapMs(0), houses(0), allHouses(false), serverSave(false) {}
+	DBBatch() : captureMs(0), mapMs(0), houses(0), houseInfos(0), allHouses(false), serverSave(false) {}
 	std::vector<std::string> queries;
 	std::vector<uint32_t> guids;     // players in it: their next login waits for this write
 	int64_t captureMs;               // how long the game thread spent building it
 	int64_t mapMs;                   // of which the houses / map part
 	uint32_t houses;                 // houses written
+	uint32_t houseInfos;             // houses whose info (owner, rent, lists) was written
 	bool allHouses;                  // a full house save
 	bool serverSave;                 // the timed / GM save (logged), not a single logout
 };

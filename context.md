@@ -49,8 +49,11 @@ C:\mintwall                 (outside OneDrive on purpose: no syncing of build/db
                             + in-place text table: www.tibia.com -> www.mintwalling.com (copyright kept;
                             tests	est_patch_client.py)
     walk-trace.py           proxy on 7171 -> own server on 7172; logs step requests/moves/cancels
-                            with expected step times (mise run walk-trace)
-    talk-test.ps1           scripted 7.4 login + chat, prints server text (NPC testing)
+                            with expected step times (mise run walk-trace); parallel runs:
+                            --run-dir / --port / --server-port (or WALKTRACE_*), a taken port refuses
+    talk-test.ps1           scripted 7.4 login + chat on a test server (refuses 7171 unless -Force);
+                            -Npc <name>: GM /goto, or -Via db moves the character in the test db;
+                            -StartServer runs its own isolated server
     otb-ids.ps1             dumps server->client id pairs from an items.otb
 ```
 

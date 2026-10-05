@@ -427,6 +427,9 @@ public:
 
 	void cleanup();
 	void shutdown();
+	// for the console close / signal handler (otserv.cpp): blocks until a shutdown has flushed the save writer
+	// (Game::shutdown), or timeoutMs passed; true if flushed
+	static bool waitForShutdownSave(int64_t timeoutMs);
 	void FreeThing(Thing* thing);
 
 	bool canThrowObjectTo(const Position& fromPos, const Position& toPos, bool checkLineOfSight = true,

@@ -118,14 +118,14 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
         Done 2026-10-04: talkactions/scripts/sellhouse.lua + houses.lua houseTransferProblem (checked when the trade is
         offered; a request made while the trade window is open slips through - closing it needs House::executeTransfer, C++)
         - test_houses.py::test_sellhouse_keeps_one_house_per_account
-  - [ ] tests/tibia74/server.py: ServerProcess.start leaves the server running when its startup times out
+  - [x] tests/tibia74/server.py: ServerProcess.start leaves the server running when its startup times out - Done 2026-10-05: start() stops its server on any startup failure
   - [x] Engine clean-up (rebuild): remove Commands::buyHouse and HousePrice; read guildhall in loadHousesXML and fix
         luaIsHouseGuildHall (then drop the id list in lib/houses.lua); depot money binding (drop the 1.5 s wait)
         Done 2026-10-05 (NEEDS REBUILD): Commands::buyHouse and HousePrice gone; loadHousesXML reads guildhall="true"
         (isHouseGuildHall works); getPlayerDepotMoney / getDepotMoneyByGUID (no DB wait); House::canTransferTo checks the
         receiver in sellHouse, at playerAcceptTrade (trade cancelled, items kept) and in executeTransfer; /sellhouse
         <player>, <house> picks the house. Lua keeps the old paths while the old exe runs (HOUSE_ENGINE_CHECKS).
-  - [ ] After the rebuild: drop the /buyhouse line from commands.xml; once no server runs the old exe, delete
+  - [ ] (/buyhouse line dropped from commands.xml 2026-10-05) Once no server runs the old exe, delete
         OLD_BUILD_GUILDHALLS in lib/houses.lua and its test
 
 ## New player journey (tests/test_rookgaard.py)
@@ -138,8 +138,9 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
 - [x] Oracle's "SO BE IT" is never seen (player is teleported first) - delay the teleport slightly?
       Done 2026-10-01: the player is teleported 1 s after it. test_oracle_turns_a_level_8_into_a_knight_of_thais
 - [x] More journey tests: rookgaard shops buy/sell with money, sewers/ladders, death in Rookgaard, reaching level 8 via exp - 2026-10-04: tests/test_rookgaard_journey.py written (hunt/sell/buy, sewers, death, level 8 + Oracle), not passing yet: test 1 hangs (likely the sewer rat spawn 32097,32211,8 is unreachable for walk_near) - debug - Done 2026-10-04: all 6 pass twice (the sewer rats are behind a drawbridge: the test pulls its switch); test_rookgaard_journey.py
-  - [ ] test_rookgaard.py ROOK_FIELD (32082,32210,7) is not walkable: test_rookgaard_is_non_pvp logs in at the temple (PZ) and may pass for the wrong reason - use (32085,32191,7)
-  - [ ] _saved helpers in test_npcs_rookgaard.py / test_death.py wait for lastlogout only - a periodic save can set it first; wait for lastlogout >= the logout time (as test_rookgaard_journey.py does)
+  - [ ] Journey tests after the respawn change: sewer rats come back fast (test RateSpawn 20) - a fresh character was killed routing, and the level-8 test killed two rats (4207 exp, not 4202); make the tests robust (fight only the target, keep HP up, or stop at one kill)
+  - [x] test_rookgaard.py ROOK_FIELD (32082,32210,7) is not walkable: test_rookgaard_is_non_pvp logs in at the temple (PZ) and may pass for the wrong reason - use (32085,32191,7) - Done 2026-10-05: (32085/32086,32191,7), walkable, no PZ; the test asserts the positions
+  - [x] _saved helpers in test_npcs_rookgaard.py / test_death.py wait for lastlogout only - a periodic save can set it first; wait for lastlogout >= the logout time (as test_rookgaard_journey.py does) - Done 2026-10-05: TestDatabase.logout_and_saved shared by the three files
 
 ## NPCs
 
@@ -392,7 +393,7 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       not a reopen: quest states (Annihilator lever, Draconia keys, Paradox ladders...) reset on map load. No "refresh"
       reset: the map has no refresh tiles. Test servers run with ServerSaveEnabled = false. tests/test_server_save.py (8;
       the exit code waits on the rebuild).
-  - [ ] Restart supervisor (NSSM / systemd, restart on exit) - without it the server stays down after the save; until
+  - [ ] Restart supervisor (NSSM / systemd, restart on exit) - without it the server stays down after the save; until - Built 2026-10-05 (not installed): tools/install-service.ps1 (NSSM, -DryRun, -Uninstall) + tools/service-run.ps1 (logs planned restart / clean / CRASH with back-off), deploy/mintwall.service (systemd, SuccessExitStatus=10, crash-loop stop). Install at deploy.
         then ServerSaveEnabled = false on an unwatched machine (production-plan §3)
 - [x] Quest objects audit (tools/quest-audit.py, 2026-09-24): of tibiaot74's 166 quest objects our map has 8 scripted,
       62 standing there without a quest id (e.g. the 4 Annihilator chests 33227-33233,31656,13), 96 missing (the
@@ -1049,8 +1050,9 @@ One per quest (rules from quests.md; each: research check -> map/script work -> 
       holes, trapdoors, pitfall, rope spots, teleports, shovel on stone piles and loose stone piles (the dug hole closes
       after 60 s). No bugs. Always-open holes left alone: Elvenbane 32579,31679,7 (decided), pitfall 32371,32149,7,
       unreachable loose ice 32491,32245,11. Open: Q9 (rope on the spot you stand on).
-- [ ] Reduce server memory (~2.5 GB with full map)
+- [x] Reduce server memory (~2.5 GB with full map)
       2026-10-05: docs/memory.md. 2.47 GB = the map (7.3 M tiles, 7.66 M items; 95% ground only): Tile ~1.1 GB, Item ~0.58 GB, Map::refreshTileMap ~0.56 GB (an entry + item clones for EVERY tile - the refresh-flag check was commented out). Fix written (map.cpp/h, game.cpp/h: a vector of tiles placed, no clones) - NEEDS REBUILD, expected ~1.9 GB; then re-measure, full suite, /refreshmap by hand. Proposals: lazy tile item lists (~0.45 GB, medium risk).
+      Built and measured 2026-10-05: working set 2472 -> 1960 MB, private 2557 -> 2014 MB, peak 2786 -> 2270 MB (~0.5 GB saved). Further: lazy tile item lists (~0.45 GB, medium risk) in docs/memory.md, not done.
 - [x] Removed the teleport in Rookgaard temple that sent new players to Thais
       (tools/map-remove-item.py)
 - [x] Removed the teleport next to the Thais temple (32366,32235,7) that sent players to the
@@ -1252,7 +1254,7 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
       (now capacity()). "This object is too heavy." on pick-up; trades "You do not have enough capacity to carry this
       object. It weighs X oz.". 16 weights fixed in items.xml where Tibiantis and every pre-8.0 wiki revision agree
       (tools/compare-item-weights.py: 0 open). tests/test_capacity.py (18). Open: Q13, Q14.
-  - [ ] tests/tibia74/db.py creates characters with HP/mana 150 + gain x (level-1), not 7.4 (knight 15L+65...) - many
+  - [x] tests/tibia74/db.py creates characters with HP/mana 150 + gain x (level-1), not 7.4 (knight 15L+65...) - many - Done 2026-10-05: max_health/max_mana (7.4: 185 + gain x (L-8)...), healthmax=/manamax= overrides; only test_death's lost-levels test had encoded the old numbers
         combat tests depend on it; fix with care
   - [x] Quest chests say "You have found X, but you cannot carry it." (quests/system.lua); use the Postman chest's - Done 2026-10-04 (see Depots and mailboxes)
         7.4-style "It weighs X oz. It is too heavy." everywhere
@@ -1483,11 +1485,13 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       under the 7.4 formulas (tomb kill() uses SD runes on energy-immune monsters); a step right after a forcefield
       teleport is dropped by the 2026-10-04 teleport-step fix (step_onto retries once); Markwin's guards counted dead
       when off-screen (tracked by health now).
-- [ ] mintwall.dll: clicking a monster mid-step misses - rewrite the click onto the creature's logical tile (find the
+- [ ] LAST TASK (the user, 2026-10-05: leave the DLL for the very end) - mintwall.dll: clicking a monster mid-step misses - rewrite the click onto the creature's logical tile (find the
       7.40 client's creature list and game-view layout; walk direction/offset). Wanted by the user for a better experience
       even though 7.4 behaved the same (2026-10-05)
-- [ ] mintwall.dll walking: arrow-key navigation feels "extra hard and fast" with the DLL (the user, 2026-10-05) -
+- [ ] LAST TASK (with the click fix) - mintwall.dll walking: arrow-key navigation feels "extra hard and fast" with the DLL (the user, 2026-10-05) -
       reproduce with walk-trace, compare with the plain client, fix
+      2026-10-05: the running client still loads the FIRST DLL (9/22 13:30: a fake key-repeat every 33 ms - a tap walks 2 squares, letting go walks one too many); the fixed one was never deployed. New client-mod/walk_pacer.h (one repeat per step, learned step time, catches up after haste, corner taps, mid-step presses) + 39 tests (client-mod/test.bat, mise run test-client); DLL built. To do: the user closes the client, runs `mise run build-client`, tries the checklist (taps, holds, corners, diagonals, haste), optional MINTWALL_WALK_LOG.
+      Tried by the user 2026-10-05 after build-client: "now the char dont feel to fast but its better". Still not the best - "feels laggy" - reopened, to finish at the end with the other DLL work.
 - [ ] Re-trace with the real client on the new server (walk-trace summary: steps more than 50 ms late)
 
 ## Travel and combat feel
@@ -1608,32 +1612,32 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
           the House on any item change, container contents included; text writes too); every 6th timed save,
           GM saves and shutdown write all. Now 2-7 ms. A clean shutdown did not save houses at all - fixed.
           tests/test_save.py (1 changed house after a drop, 0 when nothing changed, the item in map_store)
-    - [ ] House info (owner, rent, access lists) is still rewritten for every house each save (the 2-7 ms)
-    - [ ] A hard kill (closing the console) skips the shutdown flush: loses what is queued (ms) plus
+    - [x] House info (owner, rent, access lists) is still rewritten for every house each save (the 2-7 ms) - Done 2026-10-05 (NEEDS REBUILD): a house is flagged when its info really changes; timed saves write only flagged houses, full saves all (iomapserialize/house/map); "H changed houses" in the save log. test_save.py::test_a_timed_save_writes_only_the_house_infos_that_changed
+    - [x] A hard kill (closing the console) skips the shutdown flush: loses what is queued (ms) plus - Done 2026-10-05 (NEEDS REBUILD): Ctrl+C/Break/Close/Shutdown (Windows) and SIGTERM/INT/HUP (Linux, not compiled here) run the normal shutdown save once; close waits up to 4.5 s for the flush. tests/test_save_on_close.py. Caveats: a Windows machine shutdown may still kill a user32 process; tools/dev-server.ps1 stop uses Stop-Process -Force (no save) - send Ctrl+Break instead
           progress since the last timed save - by design (SaveInterval)
-  - [ ] 3b. Backups (hourly SQLite snapshot to S3, daily EBS, restore drill) and restart supervision - at deploy
+  - [ ] 3b. Backups (hourly SQLite snapshot to S3, daily EBS, restore drill) and restart supervision - at deploy - Built 2026-10-05: tools/backup-db.py (online backup API while the server runs, integrity_check, gzip, 48 hourly / 14 daily, upload hook for S3), tools/restore-db.py (refuses while the server listens, keeps the old DB), restore drill in production-plan.md §3b; tests/test_backup.py (20). Schedule + S3 at deploy.
   - [ ] 4. Observability (CloudWatch agent, status-protocol health check, alarms to Slack) - at deploy
 - [ ] Passwords travel unencrypted (7.4 protocol, encryption came in 7.7):
-  - [ ] Tell players: MOTD / login message / website - use a password you use nowhere else
+  - [x] Tell players: MOTD / login message / website - use a password you use nowhere else - Done 2026-10-05: MOTD (MOTD_Num 3) and LoginMsg warn that 7.4 sends passwords unencrypted; create-account.py prints it too. Check the MOTD box in the real client
   - [ ] TLS through mintwall.dll (hook connect/send/recv, SChannel) + TLS terminator in front of the server
         (stunnel locally, AWS NLB TLS listener in production); spike first: does hooking the 7.4 client's
         Winsock calls from the DLL work, and what latency does it add
 
 - [ ] Change the God account password before anyone else can connect
-- [ ] Switch `PasswordType` from plain to sha1 (and seed accordingly)
-- [ ] Account creation for players (7.4 had no in-client creation - website or script)
-- [ ] Run as a service / auto-restart; backups of db.db3
+- [x] Switch `PasswordType` from plain to sha1 (and seed accordingly) - superseded: PasswordType = "pbkdf2" (production plan step 2)
+- [x] Account creation for players (7.4 had no in-client creation - website or script) - Done 2026-10-05 (until the website): tools/create-account.py + tools/accountlib.py create_account() (the website can call it): random 7-digit number, generated or given password (PBKDF2 like the engine), premium days, e-mail, optional level 1 Rookgaard character; safe while the server runs (accounts are read at every login, WAL). tests/test_create_account.py
+- [ ] Run as a service / auto-restart; backups of db.db3 - tools built 2026-10-05 (see 3b); install at deploy
 - [ ] Hosting: public IP, patched client for players (`patch-client.ps1 -Ip ...`)
 
 ## Tooling
 
-- [ ] Commit today's work (nothing from 2026-09-22 is committed yet): client walking DLL, server walking /
+- [x] Commit today's work (nothing from 2026-09-22 is committed yet): client walking DLL, server walking / - done long since (committed; the user commits after each task)
       stairs / diagonals / runes-while-walking, NPC fixes and tests, King's Bridge, doors, Gatekeeper,
       travel, mail, monster death, formulas, test accounts, idle, mise/dev-server
-- [ ] walk-trace and the test suite both write tools/.run/walk-trace.config.lua / tests/.run - two
+- [x] walk-trace and the test suite both write tools/.run/walk-trace.config.lua / tests/.run - two - Done 2026-10-05: walk-trace --run-dir/--port/--server-port/--db (or WALKTRACE_* env), refuses a taken port, a lock file per run folder, its server dies with it. tests/test_tools.py
       parallel walk-trace runs overwrite each other's config
 
-- [ ] `talk-test.ps1`: support walking/teleporting (GM) so any NPC can be tested without editing the DB
+- [x] `talk-test.ps1`: support walking/teleporting (GM) so any NPC can be tested without editing the DB - Done 2026-10-05: -Npc <name> via the God /goto (default) or the test DB position, -StartServer for an isolated server, refuses 7171 and server\db.db3 unless -Force. tests/test_tools.py
 - [x] Smoke test runner: tests\run-tests.bat
 - [x] mise tasks (`mise.toml`): build, seed, reseed, start/stop/restart-server, test
 - [x] God group sees ID / action id / Position on look (flag bit 42; enable "Show Info Messages

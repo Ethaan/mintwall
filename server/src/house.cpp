@@ -41,6 +41,7 @@ House::House(uint32_t _houseid) :
 transfer_container(ITEM_LOCKER1)
 {
 	itemsChanged = false;
+	infoChanged = false;
 	guildHall = false;
 	isLoaded = false;
 	houseName = "OTServ headquarter (Flat 1, Area 42)";
@@ -74,6 +75,7 @@ void House::setHouseOwner(uint32_t guid)
 		return;
 
 	isLoaded = true;
+	infoChanged = true;
 
 	if(houseOwner){
 		//send items to depot
@@ -190,11 +192,14 @@ bool House::kickPlayer(Player* player, const std::string& name)
 
 void House::setAccessList(uint32_t listId, const std::string& textlist)
 {
-	if(listId == GUEST_LIST){
-		guestList.parseList(textlist);
-	}
-	else if(listId == SUBOWNER_LIST){
-		subOwnerList.parseList(textlist);
+	if(listId == GUEST_LIST || listId == SUBOWNER_LIST){
+		AccessList& accessList = (listId == GUEST_LIST ? guestList : subOwnerList);
+		std::string before;
+		accessList.getList(before);
+		accessList.parseList(textlist);
+		if(before != textlist){
+			infoChanged = true;
+		}
 	}
 	else{
 		Door* door = getDoorByNumber(listId);
@@ -375,12 +380,22 @@ void House::addDoor(Door* door)
 	doorList.push_back(door);
 	door->setHouse(this);
 	updateDoorDescription();
+
+	// a door with a list (a door item replaced by another one, copyAttributes) adds a row to `house_lists`
+	std::string list;
+	if(door->getAccessList(list) && !list.empty()){
+		infoChanged = true;
+	}
 }
 
 void House::removeDoor(Door* door)
 {
 	HouseDoorList::iterator it = std::find(doorList.begin(), doorList.end(), door);
 	if(it != doorList.end()){
+		std::string list;
+		if((*it)->getAccessList(list) && !list.empty()){
+			infoChanged = true;
+		}
 		(*it)->releaseThing2();
 		doorList.erase(it);
 	}
@@ -851,7 +866,12 @@ void Door::setAccessList(const std::string& textlist)
 		accessList = new AccessList();
 	}
 
+	std::string before;
+	accessList->getList(before);
 	accessList->parseList(textlist);
+	if(house && before != textlist){
+		house->markInfoChanged();
+	}
 }
 
 bool Door::getAccessList(std::string& list) const

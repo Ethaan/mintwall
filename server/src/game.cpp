@@ -62,6 +62,7 @@ extern boost::recursive_mutex maploadlock;
 
 #include <boost/config.hpp>
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 extern ConfigManager g_config;
 extern Server* g_server;
@@ -210,9 +211,10 @@ bool Game::saveServer(bool globalSave, bool changedHousesOnly /*= false*/)
 	// was not marked (e.g. an item decaying inside a chest does not reach the tile)
 	static uint32_t timedSaves = 0;
 	bool full = !changedHousesOnly || (++timedSaves % 6 == 0);
-	uint32_t houses = 0;
-	bool saved = map->saveMap(full, &houses);
+	uint32_t houses = 0, houseInfos = 0;
+	bool saved = map->saveMap(full, &houses, &houseInfos);
 	batch->houses = houses;
+	batch->houseInfos = houseInfos;
 	batch->allHouses = full;
 	batch->mapMs = OTSYS_TIME() - mapStart;
 	Database::endCapture(outer);
@@ -4377,9 +4379,32 @@ void Game::resetCommandTag()
 	commandTags.clear();
 }
 
+namespace {
+	boost::mutex shutdownSaveLock;
+	boost::condition_variable shutdownSaveDone;
+	bool shutdownSaved = false;
+}
+
+bool Game::waitForShutdownSave(int64_t timeoutMs)
+{
+	boost::mutex::scoped_lock l(shutdownSaveLock);
+	boost::system_time until = boost::get_system_time() + boost::posix_time::milliseconds(timeoutMs);
+	while(!shutdownSaved){
+		if(!shutdownSaveDone.timed_wait(l, until)){
+			return shutdownSaved;
+		}
+	}
+	return true;
+}
+
 void Game::shutdown()
 {
 	dbwriter::flush();   // the players just kicked are queued for writing
+	{
+		boost::mutex::scoped_lock l(shutdownSaveLock);
+		shutdownSaved = true;
+	}
+	shutdownSaveDone.notify_all();   // a console close may end the process from here on (otserv.cpp)
 	std::cout << "Shutting down server...";
 	
 	Scheduler::getScheduler().shutdown();

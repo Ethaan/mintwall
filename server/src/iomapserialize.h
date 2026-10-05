@@ -65,7 +65,11 @@ public:
 	  * \param map pointer to the Map class
 	  * \return Returns true if the house access list was saved successfully
 	*/
-	bool saveHouseInfo(Map* map);
+	// full: every house; else only houses whose owner, rent or lists changed (House::isInfoChanged).
+	// housesSaved: how many were written
+	bool saveHouseInfo(Map* map, bool full = true, uint32_t* housesSaved = NULL);
+	// after loading: memory equals the database, nothing to write yet
+	void clearHouseInfoChanged();
 
 protected:
 	// Relational storage uses a row for each item/tile
