@@ -102,7 +102,7 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
       TibiaWiki 2005-11/2006-10 30 + 2 x 25 (80), 2007 55 - count 2? (c) non-PvP fields last 10 s here; wiki 8 s fire
       (2005), 3 s poison bomb (2006) - only matters on no-PvP tiles. (recommended: (a) yes, (b) yes - the only 7.4-era
       text, (c) fire 8 s, poison/energy 3-8 s)
-- [x] Q24 Premium (docs/reference-74/premium.md): (a) how players get premium - 7.4: bought on tibia.com; ours: only by - answered 2026-10-04: (a) website only (no GM command); (b) every spell taught only in Edron / on Eremo's isle needs premium to cast (a player whose premium ran out loses them until renewed) - in progress; (c) keep the waiting-list priority; (d) keep the VIP list whole
+- [x] Q24 Premium (docs/reference-74/premium.md): (a) how players get premium - 7.4: bought on tibia.com; ours: only by - answered 2026-10-04: (a) website only (no GM command); (b) every spell taught only in Edron / on Eremo's isle needs premium to cast (a player whose premium ran out loses them until renewed); (c) keep the waiting-list priority; (d) keep the VIP list whole - Done 2026-10-04: 28 spells prem="1" (derived from the teachers on premium ground; drift test in test_premium.py); "You need a premium account to use this spell." (spells.cpp, NEEDS REBUILD)
       hand in the DB. A GM command /premium <name>, <days> now, the website later? (b) every Edron spell premium to cast, or
       only Levitate (ours, TibiaWiki 2005)? (c) premium logs in past MaxPlayers (7.4 text) or keep the waiting-list
       priority? (d) premium runs out: cut the VIP list to 20 or keep it (no new names)? (recommended: (a) GM command
@@ -1311,7 +1311,7 @@ experience stages script (`creaturescripts/scripts/stages.lua`) exists but is no
 ### Premium
 - [x] What premium unlocks in 7.4 (towns, promotion, spells, houses) and how players get it
       Done 2026-10-04: docs/reference-74/premium.md (tibia.com "Features of Premium Accounts", 30 Nov 2004). Already enforced: premium areas (ships, carpets, King's Bridge), Edron/Eremo spells taught only there, promotion, houses, beds, 3 outfits. Fixed: VIP list 20 free / 50 premium (was 51), a free account can no longer open a private channel by packet (player.cpp, chat.cpp - NEEDS REBUILD); Humphrey's blessing is free (blessings were for anyone). tests/test_premium.py (30; 3 wait on the rebuild). Open: Q24.
-  - [ ] Levitate: spells.cpp getInstantSpell rejects `exani hur up` (the 7.4 words), only `exani hur "up` works - fix (rebuild)
+  - [x] Levitate: spells.cpp getInstantSpell rejects `exani hur up` (the 7.4 words), only `exani hur "up` works - fix (rebuild) - Done 2026-10-04: a spell with a parameter takes the rest of the text, quoted or not (exani hur up, exiva Name, exura sio Name, utevo res rat) - NEEDS REBUILD
 
 ### Spells, runes, items
 - [x] Verify 7.4 spell list, words, mana, level, vocation, premium (remove post-7.4 spells)

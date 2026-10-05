@@ -4,7 +4,7 @@
     <!-- prem="1": every spell taught only in premium areas (Puffels, Ursula, Gundralph, Zoltan in Edron; Eremo on his
          isle) - no free-area teacher in npc/lib/spells74.lua teaches it to any vocation - needs premium to cast, so a
          character whose premium ran out loses it until renewed (decided with the user 2026-10-04; tibia.com 2004
-         "premium players simply have more spells to cast"). The runes (<rune>) have no prem: a rune made with a
+         "premium players simply have more spells to cast"). The rune spells have no prem: a rune made with a
          premium conjure spell is usable by anyone. tests/test_premium.py
          test_the_premium_spells_are_the_ones_taught_in_premium_areas_only keeps this in step with the teachers. -->
     <!-- Rune Spells -->

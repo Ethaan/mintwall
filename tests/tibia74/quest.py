@@ -216,7 +216,16 @@ def talk_to(p, npc, *lines, stay=False, find=5):
     target = p.wait_for(lambda: seen_npc(p, npc), timeout=find)
     assert target, f"{npc} is not in view from {p.pos}"
     # the first line (the greeting) until it is heard: an NPC walks until someone talks to it
+    before = len(p.speech)
     first = say_to(p, npc, lines[0]) if lines else []
+    if not first and lines and lines[0].lower() in ("hi", "hello"):
+        # a neighbour took the plain greeting (Perac beside Legola; a player talks to one NPC at a time): leave
+        # him and greet ours by name, like a player would
+        npcs = {c.name for c in p.creatures.values() if c.id >= 0x80000000}
+        other = next((n for n, _, _ in reversed(p.speech[before:]) if n != npc and n in npcs), None)
+        if other:
+            _say_unmuted(p, "bye", other)
+            first = say_to(p, npc, f"{lines[0]} {npc.lower()}")
     target = seen_npc(p, npc) or target
     p.follow(target.id)                     # an NPC talking to us stands still; stay close if it does not
     try:

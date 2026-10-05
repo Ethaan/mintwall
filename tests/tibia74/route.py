@@ -407,33 +407,81 @@ def _cheb(a, b):
     return max(abs(a[0] - b[0]), abs(a[1] - b[1])) if a[2] == b[2] else 1 << 20
 
 
+def _room(world, start, without, way, radius=10, enough=6):
+    """How many tiles off `way` a creature at `start` can reach without passing `without`, walking at most `radius`
+    from where it stands (counted up to `enough`). A monster strolls straight steps only (Monster::getRandomStep)."""
+    seen, todo, off = {start}, [start], 0
+    while todo and off < enough:
+        x, y, z = todo.pop(0)
+        for dx, dy in ((0, -1), (1, 0), (0, 1), (-1, 0)):
+            n = (x + dx, y + dy, z)
+            if n in seen or n == without or _cheb(n, start) > radius or not world.walkable(n) or world.arrival(n):
+                continue
+            seen.add(n)
+            todo.append(n)
+            off += n not in way
+    return off
+
+
+def _round(world, client, goal, at, avoid, remaining, ability):
+    """The tiles to keep clear of to go round a creature nothing moves, standing on `at`: as much of the ground it
+    walks about as leaves a way (a trap guards its corridor - another way past it beats waiting for it to walk off),
+    or None when there is no way round that is not far longer."""
+    for r in (4, 3, 2, 1, 0):
+        zone = {(at[0] + dx, at[1] + dy, at[2]) for dx in range(-r, r + 1) for dy in range(-r, r + 1)}
+        zone = {t for t in zone if _cheb(t, client.pos) >= 1}
+        try:
+            detour = plan(world, client.pos, goal, avoid=avoid | zone, margins=(60, 150), **ability)
+        except RouteError:
+            continue
+        if len(detour) <= 2 * remaining + 40:
+            return zone
+    return None
+
+
 def _let_pass(client, items, world, c, ahead, ability):
-    """A creature nothing moves stands on the way (a deathslicer in a one-tile corridor of Morguthis's tomb): like a
-    player, step off the way and away from it, so it can come out, and wait until it has walked off the tiles ahead."""
+    """A creature nothing moves stands on the way (a deathslicer in a one-tile corridor of Morguthis's tomb, likely
+    a dead end we walked it into): like a player, step aside - to a spot from where it can get off our way without
+    passing us - and wait until it has walked off the way."""
     ahead = [tuple(t) for t in ahead]
     if c.pos is None or tuple(c.pos) not in ahead:
         return
-    end, ahead = ahead[-1], set(ahead)
-    me = client.pos
-    spots = sorted((max(abs(dx), abs(dy)), (me[0] + dx, me[1] + dy, me[2]))
-                   for dx in range(-6, 7) for dy in range(-6, 7) if dx or dy)
-    for _, q in spots:
-        if (q in ahead or not world.walkable(q) or world.arrival(q) or _blocker(client, q)
-                or c.pos is None or _cheb(q, tuple(c.pos)) < 3):
-            continue
+    ends = [t for t in ahead if world.walkable(t) and not world.arrival(t)]   # a plan cannot end on a teleport
+    end = ends[-1] if ends else ahead[0]
+    me, it = client.pos, tuple(c.pos)
+
+    def way_from(q):
         try:
-            if len(plan(world, me, q, margins=(10,), avoid={tuple(c.pos)}, **ability)) > 10:
-                continue
-            follow(client, items, world, q, replans=1, wait_out=0, avoid={tuple(c.pos)}, **ability)
-            break
+            return {s.target for s in plan(world, q, end, margins=(20,), **ability)} | {q}
+        except RouteError:
+            return None
+    spots = sorted((max(abs(dx), abs(dy)), (me[0] + dx, me[1] + dy, me[2]))
+                   for dx in range(-8, 9) for dy in range(-8, 9) if dx or dy)
+    best, tried = None, 0                            # the spot that leaves it the most room, nearest first
+    for _, q in spots:
+        if (q in ahead or not world.walkable(q) or world.arrival(q) or _blocker(client, q) or _cheb(q, it) < 3
+                or tried >= 60):
+            continue
+        tried += 1
+        try:
+            there = plan(world, me, q, margins=(10,), avoid={it}, **ability)
         except RouteError:
             continue
-    try:                                             # the way back from here too: it may come our way
-        way = ahead | {s.target for s in plan(world, client.pos, end, margins=(20,), **ability)}
+        way = way_from(q)
+        if len(there) > 16 or way is None:
+            continue
+        room = _room(world, it, q, way)
+        if best is None or room > best[0]:
+            best = (room, q, way)
+    if best is None:
+        return
+    _, q, way = best
+    try:
+        follow(client, items, world, q, replans=1, wait_out=0, avoid={it}, **ability)
     except RouteError:
-        way = ahead
+        way = way_from(client.pos) or set(ahead)
     client.wait_for(lambda: c.pos is None or tuple(c.pos) not in way and _cheb(tuple(c.pos), client.pos) >= 2,
-                    timeout=45)
+                    timeout=60)
 
 
 def follow(client, items, world: WorldMap, goal, *, replans=6, wait_out=8, **ability):
@@ -503,16 +551,11 @@ def follow(client, items, world: WorldMap, goal, *, replans=6, wait_out=8, **abi
                     # it if there is one; else close behind it: it can only go on ahead or turn off the way. In a
                     # dead end (it cannot come out past us) step back and let it out
                     stalled = stalled or time.time()
-                    detour = None
-                    if step.target not in tried_round:
-                        tried_round.add(step.target)
-                        try:
-                            detour = plan(world, client.pos, goal, avoid=avoid | {step.target}, **ability)
-                        except RouteError:
-                            pass
-                    if detour is not None and len(detour) <= len(steps) - i + 20:
-                        avoid.add(step.target)
-                        around.add(step.target)
+                    zone = _round(world, client, goal, step.target, avoid, len(steps) - i, ability)                         if step.target not in tried_round else None
+                    tried_round.add(step.target)
+                    if zone:                         # keep clear of where it walks about
+                        avoid |= zone
+                        around |= zone
                     elif client.wait_for(lambda: _blocker(client, step.target) is not stuck, timeout=5):
                         pass                         # it moved on: after it
                     elif time.time() - stalled > 20 and wait_out > 0:
