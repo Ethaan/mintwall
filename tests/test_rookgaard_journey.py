@@ -47,6 +47,16 @@ WEST_SWITCH, EAST_SWITCH = (32098, 32204, 8), (32104, 32204, 8)
 BRIDGE = [(32100, 32205, 8), (32101, 32205, 8)]
 DRAWBRIDGE = 1284                            # client id of the lowered bridge
 EAST_OF_BRIDGE = (32103, 32205, 8)
+# The room side of the bridge, one step short of it. The bridge is a one-tile crossing over water (the map above),
+# so a character who holds this tile faces the rats single file - only ever one can stand next to him - and a fresh
+# level-1 player is never swarmed. The way to hunt here safely: lure a rat out of the sewer, fall back to this tile,
+# kill it as it follows across, loot, fall back again (RateSpawn 20 keeps the sewer full, so they keep coming).
+HUNT_SPOT = (32099, 32205, 8)
+# The tiles we may fight from: the choke and the bridge itself (plus the one tile just east of it), a one-tile
+# corridor over water where at most one rat is ever next to us. We never step east of it into the open sewer - a
+# chase that would is broken off (a fresh level-1 character that followed a fleeing rat into the open was swarmed
+# there and died).
+SAFE_FIGHT = {HUNT_SPOT, BRIDGE[0], BRIDGE[1], (32102, 32205, 8)}
 
 
 def _bridge_down(p):
@@ -127,6 +137,46 @@ def _kill_a_rat(p, tries=5):
     raise AssertionError(f"no rat killed in {tries} tries at {p.pos}, {p.stats.health} hp")
 
 
+def _back_to_the_choke(p, items, world_map):
+    """Step back to the room side of the bridge (HUNT_SPOT), out of the open sewer, between fights."""
+    if p.pos != HUNT_SPOT:
+        follow(p, items, world_map, HUNT_SPOT, open_tiles=BRIDGE)
+
+
+def _lure_a_rat_to_the_choke(p, items, world, world_map):
+    """Draw a rat out of the sewer (step towards the spawn only until one is close), then fall back to the choke so
+    it follows across the one-tile bridge and fights us there alone - never a swarm on a level-1 character."""
+    if not _close_rat(p, radius=4):
+        _towards_the_rats(p, world, world_map)
+    _back_to_the_choke(p, items, world_map)
+
+
+def _kill_a_rat_at_the_choke(p, items, world_map, tries=10):
+    """Kill a rat without ever chasing it into the open sewer: attack one that has come adjacent, follow it only
+    along the one-tile bridge, and break off the moment a chase would carry us off SAFE_FIGHT - a level-1 player
+    is never swarmed. Returns the experience of a kill, or None if every rat fled across before it dropped (the
+    caller lures again). It is only ever one rat in reach here, so a kill is always 5 experience."""
+    p.set_fight_modes(fight=1, chase=1)
+    for _ in range(tries):
+        if p.pos not in SAFE_FIGHT:
+            _back_to_the_choke(p, items, world_map)
+        rat = p.wait_for(lambda: _close_rat(p, radius=1), timeout=15)
+        if not rat:
+            return None
+        exp = p.stats.experience
+        p.attack(rat.id)
+        deadline = time.time() + 20
+        while time.time() < deadline:
+            if p.wait_for(lambda: p.stats.experience > exp, timeout=0.5):
+                p.attack(0)
+                return p.stats.experience - exp
+            if p.pos not in SAFE_FIGHT:           # a chase is pulling us off the choke: break off, fall back
+                p.attack(0)
+                _back_to_the_choke(p, items, world_map)
+                break
+    return None
+
+
 def _saved(p, db):
     """Log out and wait for the logout's own save (TestDatabase.logout_and_saved); the saved row."""
     return db.logout_and_saved(p)
@@ -147,20 +197,29 @@ def test_a_new_player_hunts_sewer_rats_sells_them_and_buys_a_dagger(new_player, 
 
     _down_to_the_rats(p, items, world_map)
 
-    killed = 0
+    # Hunt at the bridge choke, not out among the spawn: with RateSpawn 20 the sewer refills in seconds, and a fresh
+    # level-1 player who fought and looted among the rats was swarmed and killed. From HUNT_SPOT only one rat can
+    # reach him at a time, so lure one out, fall back, kill it as it crosses, loot on the bridge, and fall back.
+    killed, attempts = 0, 0
     while _gold(p) + RAT_PRICE * _rats(p) < DAGGER_PRICE:
-        assert killed < 6, f"6 rats and still only {_gold(p)} gp and {_rats(p)} corpses"
-        _towards_the_rats(p, world, world_map)
-        assert _kill_a_rat(p) == 5, "a rat gives 5 experience"
+        attempts += 1
+        assert attempts < 25 and killed < 12, \
+            f"{killed} rats, {_gold(p)} gp and {_rats(p)} corpses after {attempts} tries"
+        _lure_a_rat_to_the_choke(p, items, world, world_map)
+        exp = _kill_a_rat_at_the_choke(p, items, world_map)
+        if exp is None:
+            continue                              # every rat fled across before it dropped: lure another
+        assert exp == 5, "a rat gives 5 experience"
         killed += 1
         corpse = p.wait_for(lambda: _corpse_near(p, items, DEAD_RAT), timeout=3)
         assert corpse, f"no dead rat around {p.pos}"
         if max(abs(corpse[0] - p.pos[0]), abs(corpse[1] - p.pos[1])) > 1:
-            walk_next_to(p, items, world_map, corpse)
+            walk_next_to(p, items, world_map, corpse, open_tiles=BRIDGE)
         loot = open_map_container(p, items, corpse, DEAD_RAT)
         if any(i.name == "gold coin" for i in loot.items):
             take(p, items, loot, "gold coin")
         pick_up(p, items, corpse, "dead rat")
+        _back_to_the_choke(p, items, world_map)
     gold, rats = _gold(p), _rats(p)
 
     _up_to_the_temple(p, items, world_map)
@@ -300,7 +359,9 @@ def test_a_rat_takes_a_rookgaarder_to_level_8_and_he_walks_to_the_oracle(new_pla
     _kill_a_rat(p)
     assert p.wait_for(lambda: p.stats.level == 8, timeout=3), f"level {p.stats.level}, exp {p.stats.experience}"
     assert p.messages("You advanced from Level 7 to Level 8"), p.text_messages[-3:]
-    assert p.stats.experience == exp_for_level(8) + 2, p.stats.experience
+    # The kill at the spawn crosses the level-8 line (4200). With the sped-up respawn a second rat may fall in the
+    # same breath, so assert he reached level 8's experience, not an exact total (a rat is 5 exp either way).
+    assert p.stats.experience >= exp_for_level(8), f"did not reach level 8: {p.stats.experience}"
     assert (p.stats.max_health, p.stats.max_mana) == (185, 35) == (150 + 7 * hp, 7 * mana), p.stats
     assert p.stats.capacity == free + 10, f"free capacity {free} -> {p.stats.capacity}, not +10"
 
