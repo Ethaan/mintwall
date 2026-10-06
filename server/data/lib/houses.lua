@@ -51,25 +51,14 @@ function houseRequestsTable()
 end
 
 -- The guildhalls: the houses with guildhall="true" in Tibia74-houses.xml (Tibiantis' 46 guildhouses and Ankrahmun's
--- 4), read by Houses::loadHousesXML (isHouseGuildHall). OLD_BUILD_GUILDHALLS only serves builds older than that, whose
--- isHouseGuildHall was a stub: delete it (and its test in tests/test_houses.py) once every server runs a newer build.
-local OLD_BUILD_GUILDHALLS = {1, 2, 3, 4, 5, 58, 71, 77, 111, 112, 120, 122, 123, 133, 134, 135, 136, 194, 220, 226,
-	229, 243, 244, 245, 246, 315, 316, 317, 332, 333, 334, 335, 336, 337, 397, 398, 409, 410, 559, 560, 561, 563, 591,
-	618, 666, 687, 734, 744, 813, 814}
-
+-- 4), read by Houses::loadHousesXML and exposed as isHouseGuildHall.
 local guildhalls = nil                 -- {house id = true}, built at the first use
 
 local function guildhallSet()
 	if guildhalls == nil then
 		guildhalls = {}
-		if HOUSE_ENGINE_CHECKS then
-			for _, id in pairs(getHouseList() or {}) do
-				if isHouseGuildHall(id) == true then
-					guildhalls[id] = true
-				end
-			end
-		else
-			for _, id in ipairs(OLD_BUILD_GUILDHALLS) do
+		for _, id in pairs(getHouseList() or {}) do
+			if isHouseGuildHall(id) == true then
 				guildhalls[id] = true
 			end
 		end

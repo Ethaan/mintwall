@@ -1,3 +1,8 @@
+# Secrets for tools/provision-from-env.py - never committed (.env.example documents the keys and IS tracked)
+.env
+*.env
+!.env.example
+
 # Original CipSoft client files are proprietary - kept locally, not committed
 client/
 

@@ -447,14 +447,6 @@ def test_the_engine_reads_the_guildhalls_of_the_houses_file(server):
         {hid for hid, h in _houses_xml().items() if h.get("guildhall") == "true"}
 
 
-def test_the_old_build_guildhall_list_of_the_scripts_matches_the_houses_file():
-    """data/lib/houses.lua keeps the guildhall ids for builds whose isHouseGuildHall was a stub (OLD_BUILD_GUILDHALLS;
-    remove both once no server runs such a build)."""
-    lua = (SERVER_DIR / "data" / "lib" / "houses.lua").read_text("latin-1")
-    listed = {int(i) for i in re.findall(r"\d+", re.search(r"OLD_BUILD_GUILDHALLS = \{(.*?)\}", lua, re.S).group(1))}
-    assert listed == {hid for hid, h in _houses_xml().items() if h.get("guildhall") == "true"}
-
-
 def test_buyhouse_away_from_a_door_explains_itself(new_player):
     p = new_player(pos=FLAT_01.beside, premium_days=30, storage=BEGINNER_SET)
     assert any("Stand in front of the door" in t for t in _say_and_read(p, "/buyhouse", "door"))

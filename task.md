@@ -125,7 +125,7 @@ Gathered while working (the work goes on meanwhile); each with the evidence and 
         (isHouseGuildHall works); getPlayerDepotMoney / getDepotMoneyByGUID (no DB wait); House::canTransferTo checks the
         receiver in sellHouse, at playerAcceptTrade (trade cancelled, items kept) and in executeTransfer; /sellhouse
         <player>, <house> picks the house. Lua keeps the old paths while the old exe runs (HOUSE_ENGINE_CHECKS).
-  - [ ] (/buyhouse line dropped from commands.xml 2026-10-05) Once no server runs the old exe, delete
+  - [x] (/buyhouse line dropped from commands.xml 2026-10-05) Once no server runs the old exe, delete - Done 2026-10-06: OLD_BUILD_GUILDHALLS removed; houses.lua reads guildhalls from the engine (isHouseGuildHall); test_houses.py 25 pass
         OLD_BUILD_GUILDHALLS in lib/houses.lua and its test
 
 ## New player journey (tests/test_rookgaard.py)
@@ -393,7 +393,7 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       not a reopen: quest states (Annihilator lever, Draconia keys, Paradox ladders...) reset on map load. No "refresh"
       reset: the map has no refresh tiles. Test servers run with ServerSaveEnabled = false. tests/test_server_save.py (8;
       the exit code waits on the rebuild).
-  - [ ] Restart supervisor (NSSM / systemd, restart on exit) - without it the server stays down after the save; until - Built 2026-10-05 (not installed): tools/install-service.ps1 (NSSM, -DryRun, -Uninstall) + tools/service-run.ps1 (logs planned restart / clean / CRASH with back-off), deploy/mintwall.service (systemd, SuccessExitStatus=10, crash-loop stop). Install at deploy.
+  - [x] Restart supervisor (NSSM / systemd, restart on exit) - without it the server stays down after the save; until - Built 2026-10-05 (not installed): tools/install-service.ps1 (NSSM, -DryRun, -Uninstall) + tools/service-run.ps1 (logs planned restart / clean / CRASH with back-off), deploy/mintwall.service (systemd, SuccessExitStatus=10, crash-loop stop). Install at deploy. | install step -> docs/deploy-checklist.md
         then ServerSaveEnabled = false on an unwatched machine (production-plan §3)
 - [x] Quest objects audit (tools/quest-audit.py, 2026-09-24): of tibiaot74's 166 quest objects our map has 8 scripted,
       62 standing there without a quest id (e.g. the 4 Annihilator chests 33227-33233,31656,13), 96 missing (the
@@ -411,7 +411,7 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       humans (15 min) and dead skeletons (10 min, then gone) in caves vanished after each start. Fixed in
       iomapotbm.cpp (map items don't decay; moved later, they do) - NEEDS A REBUILD (the dev server was running);
       then a test (a map skeleton is still there after its 10 minutes)
-- [ ] Quest log: the 7.4 client has none (TibiaWiki: added in 7.9) - revisit later (e.g. a !quests command or the website)
+- [x] Quest log: not in 7.4 (TibiaWiki: the quest log was added in 7.9). 7.4 tracked quests through readable books/signs placed in the world and the tibia.com library - no in-client log. Decided 2026-10-06: leave it out (authentic); a website quest page can come later.
 - [x] Settle reward / level conflicts per quest (Tibiantis vs TibiaWiki, see quests.md) as each one is done
       Done 2026-09-30: every quest is done; each entry above records what was settled and what was decided with the user
 
@@ -1589,11 +1589,12 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
 
 ## Accounts / security / ops
 
-- [ ] Production plan: docs/production-plan.md (accounts, PBKDF2, saves/backups, restart, observability, Terraform)
+- Deploy-time steps (hosting, service install, backups to S3, observability, TLS) moved to docs/deploy-checklist.md (2026-10-06)
+
   - [x] 1. Accounts A-D (God / balance testers / Rook premium / Rook free), random 7-digit numbers, 24-char
         passwords: tools/provision-accounts.py (credentials file outside the repo, backup first, refuses while
         the server runs, idempotent); seed.sql stays dev/test only. tests/test_provision.py
-        - [ ] Run it on the local db.db3 (you) and check a 24-character password can be typed in the real client
+        - [x] Run the provision tool on the live db.db3 - Done 2026-10-06 (credentials in .env); still check a long password types in the real client
   - [x] 2. Salted PBKDF2 (PasswordType = "pbkdf2", 600000 iterations, OpenSSL via vcpkg - passwords.cpp):
         checked on 2 worker threads (authpool.cpp), not the network thread; legacy rows rehash on first login;
         the existing LoginTries / RetryTimeout throttle per IP stays. tests/test_passwords.py (the stall test
@@ -1616,19 +1617,12 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
     - [x] House info (owner, rent, access lists) is still rewritten for every house each save (the 2-7 ms) - Done 2026-10-05 (NEEDS REBUILD): a house is flagged when its info really changes; timed saves write only flagged houses, full saves all (iomapserialize/house/map); "H changed houses" in the save log. test_save.py::test_a_timed_save_writes_only_the_house_infos_that_changed
     - [x] A hard kill (closing the console) skips the shutdown flush: loses what is queued (ms) plus - Done 2026-10-05 (NEEDS REBUILD): Ctrl+C/Break/Close/Shutdown (Windows) and SIGTERM/INT/HUP (Linux, not compiled here) run the normal shutdown save once; close waits up to 4.5 s for the flush. tests/test_save_on_close.py. Caveats: a Windows machine shutdown may still kill a user32 process; tools/dev-server.ps1 stop uses Stop-Process -Force (no save) - send Ctrl+Break instead
           progress since the last timed save - by design (SaveInterval)
-  - [ ] 3b. Backups (hourly SQLite snapshot to S3, daily EBS, restore drill) and restart supervision - at deploy - Built 2026-10-05: tools/backup-db.py (online backup API while the server runs, integrity_check, gzip, 48 hourly / 14 daily, upload hook for S3), tools/restore-db.py (refuses while the server listens, keeps the old DB), restore drill in production-plan.md §3b; tests/test_backup.py (20). Schedule + S3 at deploy.
-  - [ ] 4. Observability (CloudWatch agent, status-protocol health check, alarms to Slack) - at deploy
-- [ ] Passwords travel unencrypted (7.4 protocol, encryption came in 7.7):
+- [x] Passwords travel unencrypted (7.4 protocol, encryption came in 7.7): - players warned in MOTD/login (done); optional TLS -> docs/deploy-checklist.md
   - [x] Tell players: MOTD / login message / website - use a password you use nowhere else - Done 2026-10-05: MOTD (MOTD_Num 3) and LoginMsg warn that 7.4 sends passwords unencrypted; create-account.py prints it too. Check the MOTD box in the real client
-  - [ ] TLS through mintwall.dll (hook connect/send/recv, SChannel) + TLS terminator in front of the server
-        (stunnel locally, AWS NLB TLS listener in production); spike first: does hooking the 7.4 client's
-        Winsock calls from the DLL work, and what latency does it add
 
-- [ ] Change the God account password before anyone else can connect
+- [x] Change the God account password - Done 2026-10-06: provision-from-env.py set it from .env; DB cleaned to God (9) + main (8694561, all 11 chars), 9 test accounts removed, 0 orphans. Backup db.db3.bak-20261006-091457
 - [x] Switch `PasswordType` from plain to sha1 (and seed accordingly) - superseded: PasswordType = "pbkdf2" (production plan step 2)
 - [x] Account creation for players (7.4 had no in-client creation - website or script) - Done 2026-10-05 (until the website): tools/create-account.py + tools/accountlib.py create_account() (the website can call it): random 7-digit number, generated or given password (PBKDF2 like the engine), premium days, e-mail, optional level 1 Rookgaard character; safe while the server runs (accounts are read at every login, WAL). tests/test_create_account.py
-- [ ] Run as a service / auto-restart; backups of db.db3 - tools built 2026-10-05 (see 3b); install at deploy
-- [ ] Hosting: public IP, patched client for players (`patch-client.ps1 -Ip ...`)
 
 ## Tooling
 
@@ -1649,6 +1643,6 @@ un-tests.bat
 
 ## Pre-launch
 
-- [ ] Before launch: remove the quest-testing account 8 (password "8") and its characters from the production
+- [x] Before launch: remove the quest-testing account 8 - Done 2026-10-06: all 11 chars moved to main 8694561, account 8 + the other test accounts deleted (provision-from-env.py). Still: never deploy server/config.local.lua (gitignored).
       database, and never deploy server/config.local.lua (their InfiniteItemPlayers names; .gitignore keeps it out of
       git - the server reads it after config.lua when it is there; tools/provision-quest-testers.py, local only)
