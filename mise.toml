@@ -45,3 +45,10 @@ run = "tests\\.venv\\Scripts\\python.exe tools\\walk-trace.py"
 [tasks.test]
 description = "Gameplay tests on an isolated server (port 7181); extra args go to pytest, e.g. -k oracle"
 run = "tests\\run-tests.bat"
+
+[tasks.test-parallel]
+# Parallel suite: one server per worker (ports 7300+, run dirs tests/.run-gwN). 4 workers because each server
+# loads the full map at ~2 GB RAM, so -n auto (one per core) would exhaust memory. Raise/lower -n to roughly
+# (free RAM in GB / 2); extra args go to pytest, e.g. mise run test-parallel -- -k oracle.
+description = "Gameplay tests across 4 workers, each its own server (~2 GB RAM each); extra args go to pytest"
+run = "tests\\run-tests.bat -n 4"

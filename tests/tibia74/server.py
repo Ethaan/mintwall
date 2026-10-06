@@ -10,9 +10,28 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SERVER_DIR = ROOT / "server"
 # MINTWALL_TEST_RUN / MINTWALL_TEST_PORT: a folder and a port of its own for each pytest session running at the same
-# time (several agents at once); the default is the one session tests/.run on 7181
-RUN_DIR = Path(os.environ["MINTWALL_TEST_RUN"]) if os.environ.get("MINTWALL_TEST_RUN") else ROOT / "tests" / ".run"
-TEST_PORT = int(os.environ.get("MINTWALL_TEST_PORT", "7181"))   # 7171: watch in your client (tibia74/watch.py)
+# time (several agents at once); the default is the one session tests/.run on 7181.
+#
+# Under pytest-xdist each worker runs its own session in its own process, so every worker needs its OWN server on its
+# OWN port and run folder or they collide. xdist sets PYTEST_XDIST_WORKER ("gw0", "gw1", ...) in each worker; from it
+# we derive port = base (7300, or MINTWALL_TEST_PORT) + worker index and run dir tests/.run-gwN (or a per-worker
+# subfolder of MINTWALL_TEST_RUN when that is set). Base 7300 keeps workers clear of the dev server on 7171. Without
+# xdist (PYTEST_XDIST_WORKER unset) behaviour is exactly as before: MINTWALL_TEST_PORT / .run, default 7181 / tests/.run.
+_WORKER = os.environ.get("PYTEST_XDIST_WORKER")   # "gw0", "gw1", ... when running under pytest-xdist, else None
+
+
+def _worker_index(worker: str) -> int:
+    m = re.search(r"\d+", worker)
+    return int(m.group()) if m else 0
+
+
+if _WORKER:
+    TEST_PORT = int(os.environ.get("MINTWALL_TEST_PORT", "7300")) + _worker_index(_WORKER)
+    RUN_DIR = (Path(os.environ["MINTWALL_TEST_RUN"]) / _WORKER if os.environ.get("MINTWALL_TEST_RUN")
+               else ROOT / "tests" / f".run-{_WORKER}")
+else:
+    RUN_DIR = Path(os.environ["MINTWALL_TEST_RUN"]) if os.environ.get("MINTWALL_TEST_RUN") else ROOT / "tests" / ".run"
+    TEST_PORT = int(os.environ.get("MINTWALL_TEST_PORT", "7181"))   # 7171: watch in your client (tibia74/watch.py)
 TESTER_GROUP = 2   # see prepare()
 SPAWN_RATE = 20    # RateSpawn of the test server, see prepare()
 

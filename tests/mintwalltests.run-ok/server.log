@@ -1,0 +1,8 @@
+:: Avesta Version 0.6.5
+:: Compilation date: Oct  5 2026 14:32:17
+:: ==============================================
+::
+:: Initializing the random numbers... [done]
+:: Loading lua script C:mintwalltests.run-ok\config.lua... 
+
+Error: Unable to load C:mintwalltests.run-ok\config.lua

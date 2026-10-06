@@ -49,8 +49,11 @@ djinnNpc{
 			local pos = getCreaturePosition(getNpcCid())
 			for _, guard in ipairs(GUARDS) do
 				local at = {x = pos.x + guard[2], y = pos.y + guard[3], z = pos.z}
-				if getTopCreature(at).uid == 0 then    -- the guards another player's "hi" called may still stand there
-					doSummonCreature(guard[1], at, true)   -- a free tile beside it when that one is blocked
+				-- only on a free, walkable tile (getTopCreature: the guards another player's "hi" called may still
+				-- stand there) - the king wanders (radius 3), so a tile beside him can be a wall, and summoning onto
+				-- one made placeCreature fail ("Can not summon monster"). Without extendedPos it matches Markwin.lua.
+				if getTopCreature(at).uid == 0 and queryTileAddThing(getNpcCid(), at) == RETURNVALUE_NOERROR then
+					doSummonCreature(guard[1], at)
 				end
 			end
 			return nil

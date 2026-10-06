@@ -91,13 +91,17 @@ def _every(hits, tick):
 
 
 def test_fire_field_burns_20_then_10_every_10_seconds(new_player, items):
+    # The big fire field burns 20 on entering, then 10 every 10 s, 7 times. A think is ~1.05-1.1 s, so each 10 s tick
+    # takes ~11 s and the first three 10s land at ~0, ~11, ~22, ~33 s; measure for 45 s so the third is well inside the
+    # window (like test_medium_fire_field_... / test_energy_field_...), and assert only the first three with the
+    # drift-tolerant _every, so a fourth tick slipping into the window would not fail the exact-match.
     target, tile = _field(new_player, items, FIRE_FIELD_RUNE, 0)
-    hits = _step_through(target, tile, FIRE, 33)
+    hits = _step_through(target, tile, FIRE, 45)
     print(f"\nfire field: {hits}, intervals {_intervals(hits)}")
     assert hits and hits[0][1] == 20 and hits[0][0] < 1.5, f"no 20 on entering: {hits}"
-    burns = hits[1:]
+    burns = hits[1:4]
     assert [d for _, d in burns] == [10, 10, 10], f"not 10 every 10 s: {hits}"
-    assert _every(hits, 10), f"not every 10 s: {_intervals(hits)}"
+    assert _every(hits[:4], 10), f"not every 10 s: {_intervals(hits[:4])}"
 
 
 def test_medium_fire_field_burns_20_then_10_five_times(new_player, items):

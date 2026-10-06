@@ -323,7 +323,7 @@ helpers: route walking across floors (stairs, ladders, holes, rope spots), pulli
       rules, cached), tibia74/route.py (A* across floors: stairs, holes, ramps, ladders, rope, doors a character
       may pass; walks it, kills blockers, re-plans), tibia74/quest.py (strong character, use map items like a
       player - the server uses the TOP item, so things lying on top are moved off first). tests/test_route.py
-  - [ ] Parallel runs later (pytest-xdist, one server per worker)
+  - [x] Parallel runs later (pytest-xdist, one server per worker) - Done 2026-10-06: pytest-xdist, each worker its own server (port 7300+index, run dir .run-gwN; --dist loadscope keeps a module on one worker; worldmap cache shared, written atomically). `pytest -n 4` or `mise run test-parallel`. ~2 GB RAM per worker: -n ~= free GB / 2. Subset: 49 tests 551 s serial -> 297 s at -n 2 (1.85x).
 - [x] Rookgaard Academy training arena: four levers (aid 50005-50008, 32088-32094,32148,9) under the sign "Pull a
       lever to fight a monster of your choice" had no script. Done 2026-09-23: quests/rook_academy_arena.lua opens
       the cage gate (1037 at x,32149,10; tibiaot74's train monster1-4.lua) and, as the sign says, only one gate at
@@ -1485,6 +1485,7 @@ Client-side (Tibia.exe) - only by patching strings in the copy we hand out, neve
       under the 7.4 formulas (tomb kill() uses SD runes on energy-immune monsters); a step right after a forcefield
       teleport is dropped by the 2026-10-04 teleport-step fix (step_onto retries once); Markwin's guards counted dead
       when off-screen (tracked by health now).
+- [x] Full suite on the 2026-10-05 rebuild: 2472 passed, 3 failed + 1 error; 2 flaky (pass alone), 2 fixed: the Orc King summoned guards with an extended-position flag and failed near a wall (orc_king.lua now pre-checks the tile, like Markwin); the fire-field test window was too short for the ~11 s server tick (widened to 45 s, checks the first three burns).
 - [ ] LAST TASK (the user, 2026-10-05: leave the DLL for the very end) - mintwall.dll: clicking a monster mid-step misses - rewrite the click onto the creature's logical tile (find the
       7.40 client's creature list and game-view layout; walk direction/offset). Wanted by the user for a better experience
       even though 7.4 behaved the same (2026-10-05)

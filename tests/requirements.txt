@@ -1,1 +1,3 @@
 pytest>=8
+# Parallel runs: pytest -n N starts N workers, each with its own server/port/run dir (see conftest.py, server.py).
+pytest-xdist==3.8.0

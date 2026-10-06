@@ -35,6 +35,9 @@ def db(server):
 def world_map():
     """Walkability and floor changes of the whole map, for route planning (tibia74/worldmap.py; cached)."""
     from tibia74.worldmap import WorldMap
+    # Shared cache dir (tests/.run) across all xdist workers: the pickle is a pure function of the map sources, so
+    # every worker would build the same bytes. Workers read it in common; WorldMap.load writes it atomically, so a
+    # stale-cache rebuild by several workers at once cannot corrupt it (one 37 s build, not one per worker).
     return WorldMap.load(SERVER_DIR, Path(__file__).parent / ".run")
 
 

@@ -18,6 +18,7 @@ actions.xml change). Every rule comes from the server, not from guesses:
   down after a shovel opens it (hole: down, like any hole)
 - a tile blocked only by movable things (a barrel, a crate) is passable after pushing them aside ("push")
 """
+import os
 import pickle
 import re
 from pathlib import Path
@@ -153,8 +154,12 @@ class WorldMap:
                 pass
         world = cls.build(server_dir)
         cache_dir.mkdir(parents=True, exist_ok=True)
-        with open(cache, "wb") as f:
+        # Write atomically: several pytest-xdist workers may rebuild a stale cache at once and share this one file.
+        # A unique temp + os.replace means a reader never sees a half-written pickle (last writer wins; same bytes).
+        tmp = cache.with_suffix(f".pickle.{os.getpid()}.tmp")
+        with open(tmp, "wb") as f:
             pickle.dump((stamp, world.walk, world.special), f, protocol=pickle.HIGHEST_PROTOCOL)
+        os.replace(tmp, cache)
         return world
 
     @classmethod
